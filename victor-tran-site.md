@@ -2,6 +2,14 @@
 
 Victor Tran's portfolio site. Plain HTML / CSS / JS — no framework, no build step. Edit files directly and reload the browser.
 
+## Hosting & deployment
+
+- **GitHub:** [victortran794-ux/victor-tran-site](https://github.com/victortran794-ux/victor-tran-site) (public)
+- **Hosting:** Vercel — auto-deploys on push to `main`
+- **Live URL:** `victor-tran-site-2vxf.vercel.app`
+- **Config:** `vercel.json` (static site, clean URLs)
+- **Stack:** HTML5, CSS3, JavaScript — no framework, no build step
+
 ## Layout
 
 ```
@@ -90,6 +98,13 @@ When pulling assets from Figma:
 - `/v1/images/:file_id?ids=...` is **rate-limited** (429s within minutes)
 - `/v1/files/:file_id/images` returns **pre-signed S3 URLs for every imageRef in the file** with no rate limit — much better
 - Pattern: walk the file tree (`/v1/files/:id?depth=N`) → collect `imageRef` from `RECTANGLE`/`FRAME` fills → look up S3 URL → download
+
+## Optional next steps
+
+- **Custom domain** — add via Vercel dashboard → DNS records in Squarespace
+- **Analytics** — enable Vercel Analytics for visitor tracking
+- **SEO** — add meta tags and structured data to each page
+- **Performance** — monitor with Vercel Speed Insights
 
 ## Token-saving tips for future sessions
 
