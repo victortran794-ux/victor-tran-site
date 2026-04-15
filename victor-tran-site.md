@@ -106,6 +106,19 @@ When pulling assets from Figma:
 - **SEO** — add meta tags and structured data to each page
 - **Performance** — monitor with Vercel Speed Insights
 
+## Image review safety (Claude Code)
+
+When reviewing source images in Claude Code conversations:
+
+- **Never read more than 3 images into a single conversation.** The API has a 2000px dimension limit per image when many images are in context, and once an oversized image enters the history, the conversation is permanently frozen.
+- **Resize before reading.** If a source PNG/JPG might exceed 2000px, create a preview first:
+  ```bash
+  sips -Z 1800 "path/to/large.png" --out "/tmp/preview.png"
+  ```
+  Then read the resized copy.
+- **Prefer listing files by name/size** (`ls -lhS`) and letting Victor pick, rather than opening images speculatively.
+- **If the conversation freezes** with the "dimension limit" error, it cannot recover — export context and start a new session.
+
 ## Token-saving tips for future sessions
 
 - `css/style.css` is huge. Use `Grep` for the selector you need instead of `Read`-ing the whole file.

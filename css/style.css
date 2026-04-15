@@ -932,6 +932,50 @@ button:focus-visible,
 .gallery-grid img:hover { opacity: 0.88; }
 
 
+/* ── Series Carousel (scroll-snap) ── */
+.series-carousel {
+  max-width: var(--max-w);
+  margin: var(--space-8) auto var(--space-12);
+  padding: 0 var(--page-x);
+}
+
+.series-carousel-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  /* hide scrollbar but keep scrollable */
+  scrollbar-width: none;           /* Firefox  */
+  -ms-overflow-style: none;        /* IE / old Edge */
+}
+.series-carousel-track::-webkit-scrollbar { display: none; } /* Chrome / Safari */
+
+.series-carousel-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.series-carousel-item img {
+  display: block;
+  height: 420px;
+  width: auto;
+  border-radius: 3px;
+  transition: opacity 0.25s;
+}
+
+.series-carousel-item img:hover { opacity: 0.88; }
+
+@media (max-width: 900px) {
+  .series-carousel-item img { height: 340px; }
+}
+@media (max-width: 600px) {
+  .series-carousel-item img { height: 260px; }
+}
+
+
 /* ══════════════════════════════════════════════
    AWARD BADGE
 ══════════════════════════════════════════════ */
