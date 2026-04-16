@@ -931,6 +931,77 @@ button:focus-visible,
 
 .gallery-grid img:hover { opacity: 0.88; }
 
+/* ── Gallery: trio override (3 equal columns) ── */
+.gallery-grid--trio { columns: 3; }
+
+/* ── Gallery: hero pair (two large images side-by-side) ── */
+.gallery-hero-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: var(--space-6) var(--page-x) var(--space-8);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.gallery-hero-pair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  transition: opacity 0.25s;
+}
+.gallery-hero-pair img:hover { opacity: 0.88; }
+
+@media (max-width: 600px) {
+  .gallery-hero-pair { grid-template-columns: 1fr; }
+}
+
+/* ── Gallery: traditional work layout (2 stacked + 1 tall) ── */
+.gallery-hero-trad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: var(--space-6) var(--page-x) var(--space-8);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.gallery-hero-trad-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gallery-hero-trad-stack img {
+  width: 100%;
+  border-radius: 3px;
+  transition: opacity 0.25s;
+}
+.gallery-hero-trad-tall {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  transition: opacity 0.25s;
+}
+.gallery-hero-trad img:hover,
+.gallery-hero-trad-tall:hover { opacity: 0.88; }
+
+@media (max-width: 600px) {
+  .gallery-hero-trad { grid-template-columns: 1fr; }
+}
+
+/* ── Gallery: grouped sections ── */
+.gallery-group-chicago,
+.gallery-group-traditional {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--space-12) var(--page-x) var(--space-6);
+}
+.gallery-group-chicago .gallery-grid,
+.gallery-group-traditional .gallery-hero-trad {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 
 /* ── Series Carousel (scroll-snap) ── */
 .series-carousel {
