@@ -934,59 +934,29 @@ button:focus-visible,
 /* ── Gallery: trio override (3 equal columns) ── */
 .gallery-grid--trio { columns: 3; }
 
-/* ── Gallery: hero pair (two large images side-by-side) ── */
-.gallery-hero-pair {
+/* ── Gallery: flat row (equal-width images side by side) ── */
+.gallery-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   padding: var(--space-6) var(--page-x) var(--space-8);
   max-width: var(--max-w);
   margin: 0 auto;
 }
-.gallery-hero-pair img {
+.gallery-row img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 3px;
   transition: opacity 0.25s;
 }
-.gallery-hero-pair img:hover { opacity: 0.88; }
+.gallery-row img:hover { opacity: 0.88; }
 
-@media (max-width: 600px) {
-  .gallery-hero-pair { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+  .gallery-row { grid-template-columns: repeat(2, 1fr); }
 }
-
-/* ── Gallery: traditional work layout (2 stacked + 1 tall) ── */
-.gallery-hero-trad {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: var(--space-6) var(--page-x) var(--space-8);
-  max-width: var(--max-w);
-  margin: 0 auto;
-}
-.gallery-hero-trad-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.gallery-hero-trad-stack img {
-  width: 100%;
-  border-radius: 3px;
-  transition: opacity 0.25s;
-}
-.gallery-hero-trad-tall {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 3px;
-  transition: opacity 0.25s;
-}
-.gallery-hero-trad img:hover,
-.gallery-hero-trad-tall:hover { opacity: 0.88; }
-
-@media (max-width: 600px) {
-  .gallery-hero-trad { grid-template-columns: 1fr; }
+@media (max-width: 500px) {
+  .gallery-row { grid-template-columns: 1fr; }
 }
 
 /* ── Gallery: grouped sections ── */
@@ -997,7 +967,7 @@ button:focus-visible,
   padding: var(--space-12) var(--page-x) var(--space-6);
 }
 .gallery-group-chicago .gallery-grid,
-.gallery-group-traditional .gallery-hero-trad {
+.gallery-group-traditional .gallery-row {
   padding-left: 0;
   padding-right: 0;
 }
