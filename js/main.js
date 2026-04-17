@@ -158,6 +158,117 @@ if (hero && !prefersReducedMotion) {
 }
 
 
+// ── Art & Illustration Lightbox ───────────────────
+(function () {
+  const pageImgs = Array.from(document.querySelectorAll(
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img'
+  ));
+  if (!pageImgs.length) return;
+
+  let current = 0;
+
+  // Build DOM
+  const lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Image viewer');
+  lb.innerHTML = `
+    <header class="lb-header">
+      <div>
+        <p class="lb-title">Art &amp; Illustration</p>
+        <p class="lb-count"></p>
+      </div>
+      <div class="lb-header-actions">
+        <button class="lb-btn lb-close" aria-label="Close lightbox">✕</button>
+      </div>
+    </header>
+    <div class="lb-stage">
+      <button class="lb-arrow lb-arrow--prev" aria-label="Previous image">&#8249;</button>
+      <div class="lb-img-wrap">
+        <img class="lb-img" src="" alt="">
+      </div>
+      <button class="lb-arrow lb-arrow--next" aria-label="Next image">&#8250;</button>
+    </div>
+    <div class="lb-strip"></div>
+  `;
+  document.body.appendChild(lb);
+
+  const lbImg   = lb.querySelector('.lb-img');
+  const lbCount = lb.querySelector('.lb-count');
+  const lbStrip = lb.querySelector('.lb-strip');
+  const lbClose = lb.querySelector('.lb-close');
+  const lbPrev  = lb.querySelector('.lb-arrow--prev');
+  const lbNext  = lb.querySelector('.lb-arrow--next');
+
+  // Build thumbnails
+  pageImgs.forEach((img, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'lb-thumb';
+    btn.setAttribute('aria-label', `Go to image ${i + 1}`);
+    const ti = document.createElement('img');
+    ti.src = img.src;
+    ti.alt = img.alt;
+    ti.loading = 'lazy';
+    btn.appendChild(ti);
+    btn.addEventListener('click', () => goTo(i));
+    lbStrip.appendChild(btn);
+  });
+
+  const thumbEls = Array.from(lbStrip.querySelectorAll('.lb-thumb'));
+
+  function goTo(idx) {
+    current = (idx + pageImgs.length) % pageImgs.length;
+    const src = pageImgs[current].src;
+    const alt = pageImgs[current].alt;
+
+    lbImg.classList.add('is-fading');
+    setTimeout(() => {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lbImg.classList.remove('is-fading');
+    }, 180);
+
+    lbCount.textContent = `${current + 1} / ${pageImgs.length}`;
+    thumbEls.forEach((t, i) => t.classList.toggle('is-active', i === current));
+    thumbEls[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  function open(idx) {
+    goTo(idx);
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  // Wire gallery images
+  pageImgs.forEach((img, i) => {
+    img.addEventListener('click', () => open(i));
+  });
+
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', () => goTo(current - 1));
+  lbNext.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  // Expand cursor ring on lightbox buttons
+  lb.querySelectorAll('.lb-btn, .lb-arrow, .lb-thumb').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
+  });
+})();
+
+
 // ── Split text reveal on hero ─────────────────────
 const heroTitle = document.querySelector('.hero-title');
 if (heroTitle) {
