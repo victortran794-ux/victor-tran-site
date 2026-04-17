@@ -70,7 +70,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   color: var(--text);
   background: var(--bg);
   line-height: 1.6;
@@ -246,7 +246,7 @@ button:focus-visible,
   border-radius: 100px;
   padding: 5px 13px;
   font-size: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow', sans-serif;
   color: var(--text-2);
   letter-spacing: 0.04em;
   display: flex;
@@ -306,7 +306,7 @@ button:focus-visible,
   transition: opacity 0.2s;
 }
 
-.footer-cta:hover { opacity: 0.65; }
+.footer-cta:hover { color: var(--text); border-bottom-color: var(--text); }
 
 .footer-bottom {
   display: flex;
@@ -376,7 +376,6 @@ button:focus-visible,
       hsla(calc(var(--hue) + 140), 70%, 45%, 0.25) 80%,
       transparent 100%
     );
-  will-change: background;
 }
 
 [data-theme="dark"] .hero-wash { mix-blend-mode: screen; }
@@ -443,8 +442,8 @@ button:focus-visible,
 }
 
 @keyframes hero-cue-bob {
-  0%, 100% { transform: translate(-50%, 0); opacity: 0.75; }
-  50%      { transform: translate(-50%, 6px); opacity: 1; }
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.4; }
+  50%      { transform: translate(-50%, 7px); opacity: 0.9; }
 }
 
 
@@ -543,7 +542,7 @@ button:focus-visible,
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-card:hover img { transform: scale(1.05); }
+/* hover guard applied in @media (hover: hover) block below */
 
 .project-card-overlay {
   position: relative;
@@ -552,7 +551,8 @@ button:focus-visible,
   background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, transparent 100%);
 }
 
-.project-card-overlay .section-label { color: rgba(255,255,255,0.55); }
+.project-card-overlay .section-label { opacity: 0.8; }
+.project-card-overlay .section-label:not([class*="label-"]) { color: rgba(255,255,255,0.7); }
 
 .project-card-title {
   font-family: 'DM Serif Display', serif;
@@ -616,7 +616,7 @@ button:focus-visible,
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.featured-item:hover .featured-item-img img { transform: scale(1.04); }
+/* hover guard applied in @media (hover: hover) block below */
 
 .featured-item-content {
   padding: 52px;
@@ -648,12 +648,17 @@ button:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.2s, gap 0.2s;
+  transition: color 0.2s;
   letter-spacing: 0.02em;
 }
 
-.view-link:hover { gap: 16px; color: var(--text); }
-.view-link::after { content: '→'; }
+.view-link:hover { color: var(--text); }
+.view-link::after {
+  content: '→';
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.view-link:hover::after { transform: translateX(6px); }
 
 
 /* ══════════════════════════════════════════════
@@ -929,7 +934,7 @@ button:focus-visible,
   transition: opacity 0.25s;
 }
 
-.gallery-grid img:hover { opacity: 0.88; }
+/* hover guard applied in @media (hover: hover) block below */
 
 /* ── Gallery: trio override (3 equal columns) ── */
 .gallery-grid--trio { columns: 3; }
@@ -950,7 +955,7 @@ button:focus-visible,
   border-radius: 3px;
   transition: opacity 0.25s;
 }
-.gallery-row img:hover { opacity: 0.88; }
+/* hover guard applied in @media (hover: hover) block below */
 
 @media (max-width: 900px) {
   .gallery-row { grid-template-columns: repeat(2, 1fr); }
@@ -1007,7 +1012,7 @@ button:focus-visible,
   transition: opacity 0.25s;
 }
 
-.series-carousel-item img:hover { opacity: 0.88; }
+/* hover guard applied in @media (hover: hover) block below */
 
 @media (max-width: 900px) {
   .series-carousel-item img { height: 340px; }
@@ -1058,6 +1063,21 @@ button:focus-visible,
   .gallery-section-title { padding-bottom: 8px; }
   .gallery-section { padding: 48px 0 16px; }
 }
+
+/* ══════════════════════════════════════════════
+   HOVER — only fire on devices that support true hover
+   (prevents stuck hover states on iOS/Android tap)
+══════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  /* Image zoom — guards against stuck hover state on touch tap */
+  .project-card:hover img                      { transform: scale(1.05); }
+  .featured-item:hover .featured-item-img img  { transform: scale(1.04); }
+  /* Gallery fades — not layout-critical but cleaner without on touch */
+  .gallery-grid img:hover                      { opacity: 0.88; }
+  .gallery-row img:hover                       { opacity: 0.88; }
+  .series-carousel-item img:hover              { opacity: 0.88; }
+}
+
 
 /* ══════════════════════════════════════════════
    REDUCED MOTION

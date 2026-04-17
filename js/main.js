@@ -120,6 +120,9 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Hero: cursor-reactive color wash ──────────────
 const hero = document.querySelector('.hero');
 if (hero && !prefersReducedMotion) {
+  // Target wash directly — setting vars on `.hero` cascades to all its
+  // children, triggering a style recalc subtree on every mousemove frame.
+  const heroWash = hero.querySelector('.hero-wash');
   let rafPending = false;
   let lastX = 0, lastY = 0;
 
@@ -130,9 +133,9 @@ if (hero && !prefersReducedMotion) {
     const py = ((lastY - rect.top)  / rect.height) * 100;
     // Hue shifts with horizontal position (260° → 360°, magenta → pink sweep)
     const hue = 260 + (px / 100) * 100;
-    hero.style.setProperty('--mx',  `${px}%`);
-    hero.style.setProperty('--my',  `${py}%`);
-    hero.style.setProperty('--hue', hue);
+    heroWash.style.setProperty('--mx',  `${px}%`);
+    heroWash.style.setProperty('--my',  `${py}%`);
+    heroWash.style.setProperty('--hue', hue);
   };
 
   document.addEventListener('mousemove', e => {
@@ -149,7 +152,7 @@ if (hero && !prefersReducedMotion) {
     let touchHue = 300;
     window.addEventListener('scroll', () => {
       touchHue = 260 + ((window.scrollY % 400) / 400) * 100;
-      hero.style.setProperty('--hue', touchHue);
+      heroWash.style.setProperty('--hue', touchHue);
     }, { passive: true });
   }
 }
