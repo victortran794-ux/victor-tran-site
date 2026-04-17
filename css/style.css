@@ -931,7 +931,8 @@ button:focus-visible,
   margin-bottom: 12px;
   break-inside: avoid;
   border-radius: 3px;
-  transition: opacity 0.25s;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.25s;
+  display: block;
 }
 
 /* hover guard applied in @media (hover: hover) block below */
@@ -941,6 +942,13 @@ button:focus-visible,
 
 /* ── Gallery: pairs (2 columns, larger images) ── */
 .gallery-grid--pairs { columns: 2; }
+
+/* ── Gallery: slides (4-column tight contact sheet) ── */
+.gallery-grid--slides {
+  columns: 4;
+  column-gap: 8px;
+}
+.gallery-grid--slides img { margin-bottom: 8px; }
 
 /* ── Gallery: spotlight (single featured piece, centered) ── */
 .gallery-spotlight {
@@ -992,10 +1000,27 @@ button:focus-visible,
   margin: 0 auto;
   padding: var(--space-12) var(--page-x) var(--space-6);
 }
+/* Higher specificity to beat gallery-section:first-of-type */
+.gallery-section.gallery-group-chicago,
+.gallery-section.gallery-group-traditional {
+  padding-top: 96px;
+}
 .gallery-group-chicago .gallery-grid,
 .gallery-group-traditional .gallery-row {
   padding-left: 0;
   padding-right: 0;
+}
+
+/* ── Gallery: infographic (full-width, in-rhythm section) ── */
+.gallery-infographic {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--page-x);
+}
+.gallery-infographic img {
+  width: 100%;
+  display: block;
+  border-radius: 3px;
 }
 
 
@@ -1081,6 +1106,7 @@ button:focus-visible,
 
   .about-skills { grid-template-columns: 1fr 1fr; }
   .gallery-grid { columns: 2; padding: 16px var(--page-x) 32px; }
+  .gallery-grid--slides { columns: 2; }
   .gallery-section-title { padding-bottom: 8px; }
   .gallery-section { padding: 48px 0 16px; }
 }
@@ -1093,10 +1119,10 @@ button:focus-visible,
   /* Image zoom — guards against stuck hover state on touch tap */
   .project-card:hover img                      { transform: scale(1.05); }
   .featured-item:hover .featured-item-img img  { transform: scale(1.04); }
-  /* Gallery fades — not layout-critical but cleaner without on touch */
-  .gallery-grid img:hover                      { opacity: 0.88; }
-  .gallery-row img:hover                       { opacity: 0.88; }
-  .series-carousel-item img:hover              { opacity: 0.88; }
+  /* Gallery interactions */
+  .gallery-grid img:hover                      { transform: scale(1.025); opacity: 1; }
+  .gallery-row img:hover                       { opacity: 0.72; }
+  .series-carousel-item img:hover              { opacity: 0.72; }
 }
 
 
