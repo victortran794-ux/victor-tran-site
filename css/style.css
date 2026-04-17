@@ -515,7 +515,7 @@ button:focus-visible,
 
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2px;
   max-width: var(--max-w);
   margin: 0 auto;
@@ -939,6 +939,26 @@ button:focus-visible,
 /* ── Gallery: trio override (3 equal columns) ── */
 .gallery-grid--trio { columns: 3; }
 
+/* ── Gallery: pairs (2 columns, larger images) ── */
+.gallery-grid--pairs { columns: 2; }
+
+/* ── Gallery: spotlight (single featured piece, centered) ── */
+.gallery-spotlight {
+  max-width: var(--max-w);
+  margin: 0 auto var(--space-4);
+  padding: 0 var(--page-x);
+  display: flex;
+  justify-content: center;
+}
+.gallery-spotlight-fig {
+  width: clamp(260px, 52%, 500px);
+}
+.gallery-spotlight-fig img {
+  width: 100%;
+  display: block;
+  border-radius: 3px;
+}
+
 /* ── Gallery: flat row (equal-width images side by side) ── */
 .gallery-row {
   display: grid;
@@ -951,7 +971,8 @@ button:focus-visible,
 .gallery-row img {
   width: 100%;
   aspect-ratio: 4 / 5;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: var(--bg-2);
   border-radius: 3px;
   transition: opacity 0.25s;
 }
@@ -1053,7 +1074,7 @@ button:focus-visible,
 
   .hero-text { padding-bottom: 60px; }
 
-  .projects-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
   .featured-item { grid-template-columns: 1fr; direction: ltr !important; }
   .featured-item-img { min-height: 260px; }
   .featured-item-content { padding: 36px var(--page-x); }
@@ -1104,5 +1125,5 @@ button:focus-visible,
   .gallery-grid { columns: 1; }
   .hero { min-height: 520px; }
   .hero-text { padding-bottom: 48px; }
-  .projects-grid { padding-left: 0; padding-right: 0; }
+  .projects-grid { grid-template-columns: 1fr; padding-left: 0; padding-right: 0; }
 }
