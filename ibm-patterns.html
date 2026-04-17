@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBM Patterns: Contact Us — Victor Tran Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .patterns-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin: 2.5rem 0;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .patterns-stat {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+    }
+    .patterns-stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1;
+      color: var(--fg);
+      margin: 0 0 0.5rem;
+    }
+    .patterns-stat-label {
+      font-size: 0.85rem;
+      color: var(--fg-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .patterns-hmw {
+      border-left: 3px solid var(--fg);
+      padding: 1.25rem 1.75rem;
+      margin: 2.5rem 0;
+      background: var(--border);
+    }
+    .patterns-hmw p {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1.55;
+      color: var(--fg);
+      margin: 0;
+      font-style: italic;
+    }
+    .patterns-team {
+      display: flex;
+      gap: 0.5rem 2rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 0;
+    }
+    .patterns-team-member {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+    .patterns-team-member strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+    /* Rogue easter egg */
+    .patterns-rogue {
+      display: inline-block;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .patterns-rogue:hover {
+      opacity: 1;
+    }
+    .patterns-rogue-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      opacity: 0.3;
+      transition: opacity 0.3s;
+      cursor: default;
+    }
+    .patterns-rogue-trigger:hover {
+      opacity: 1;
+    }
+    .patterns-rogue-trigger:hover .patterns-rogue {
+      opacity: 1;
+    }
+    .patterns-rogue img {
+      width: 28px;
+      height: auto;
+      filter: var(--rogue-filter, none);
+    }
+    @media (prefers-color-scheme: dark) {
+      .patterns-rogue img { filter: invert(1); }
+    }
+    body.dark .patterns-rogue img { filter: invert(1); }
+    body.light .patterns-rogue img { filter: none; }
+
+    @media (max-width: 600px) {
+      .patterns-stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot"  aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/nav-logo.webp" alt="Victor Tran" width="34" height="34">
+        <span class="nav-logo-name">Victor Tran</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-content">
+
+    <header class="page-header">
+      <p class="section-label label-default">Product Design</p>
+      <h1 class="page-header-title">IBM Patterns: Contact Us</h1>
+      <p class="page-header-desc">A six-week sprint inside IBM's Patterns design education program — reimagining the flagship Contact Us experience on IBM.com so every visitor could find the right person, fast.</p>
+      <dl class="case-study-meta">
+        <div class="case-study-meta-item">
+          <dt>Role</dt>
+          <dd>Visual Designer</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>Year</dt>
+          <dd>2021</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>Program</dt>
+          <dd>IBM Patterns</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>Team</dt>
+          <dd>5 Designers</dd>
+        </div>
+      </dl>
+    </header>
+
+    <article class="case-study">
+
+      <div class="case-study-full-img reveal">
+        <img loading="lazy" src="images/patterns-hero.webp" alt="IBM Patterns: Contact Us — hero slide">
+      </div>
+
+      <h2 class="reveal">The Problem</h2>
+      <p>IBM's Contact Us page was drawing massive traffic — and converting almost none of it into actual connections. Over six months, the page logged 135,000 unique visitors and 13,000 form submissions. Nearly all of those submissions went nowhere: misdirected to wrong inboxes, dead ends, or support queues that never followed up.</p>
+      <p>Multiple competing contact pages across IBM.com each claimed to be the entry point, but none of them actually routed users to the right place. The experience was built to look like the rest of IBM.com — not to do what users came there to do.</p>
+
+      <div class="patterns-stat-grid reveal">
+        <div class="patterns-stat">
+          <p class="patterns-stat-number">135k</p>
+          <p class="patterns-stat-label">Unique visitors in 6 months</p>
+        </div>
+        <div class="patterns-stat">
+          <p class="patterns-stat-number">13k</p>
+          <p class="patterns-stat-label">Form submissions — most going nowhere</p>
+        </div>
+      </div>
+
+      <blockquote class="patterns-hmw">
+        <p>"The IBM contact us page is constructed to be like IBM.com, not like what users need."</p>
+      </blockquote>
+
+      <h2 class="reveal">IBM Patterns</h2>
+      <p>IBM Patterns is a six-week design education program that brings early-career IBM designers together under mentorship to tackle a real, sponsored project using Enterprise Design Thinking. Think of it as a design school sprint inside a Fortune 500 — full research-to-prototype process, real stakeholders, real constraints, and a final playback to IBM leadership.</p>
+      <p>Our team of five took on the Contact Us project — a problem that had been overlooked for years despite being one of IBM's highest-traffic entry points.</p>
+
+      <div class="patterns-team reveal">
+        <span class="patterns-team-member"><strong>Victor Tran</strong> — Visual Design</span>
+        <span class="patterns-team-member"><strong>Talya Nelson</strong> — Design Research</span>
+        <span class="patterns-team-member"><strong>Henrique Cardoso</strong> — UX Design</span>
+        <span class="patterns-team-member"><strong>Xènia Elena</strong> — iX Consulting</span>
+        <span class="patterns-team-member"><strong>Ricardo Sarraino</strong> — UX Design</span>
+      </div>
+
+      <h2 class="reveal">Research &amp; Framing</h2>
+      <p>We built two personas to anchor the research: Bradley, a developer at a large IBM customer account trying to resolve a technical issue, and Paige, a small business CEO looking to speak to a sales representative. Both hit the same wall — a generic form with no clear path forward, no routing, and no confidence that anyone would respond.</p>
+      <p>User research surfaced the same tension from every direction: people expected a fast, self-directed experience. Instead they got a page that pushed them toward a contact form as a first resort, not a last. One user put it plainly: "There is no excuse to not do personalized experiences for someone who has been to IBM.com before."</p>
+
+      <div class="patterns-hmw reveal">
+        <p>How might we help visitors contact the right team at IBM, quickly routing sales or support inquiries and diverting low-quality form submissions?</p>
+      </div>
+
+      <h2 class="reveal">The Design</h2>
+      <p>We restructured the entire contact experience around a persistent side navigation: Support, Sales, IBM Careers, Learn, Business Partners, Additional Resources, and Contact Information — each unfolding into clear subcategories with direct CTAs. No dead ends. No ambiguity about where a given request would land.</p>
+      <p>The landing page led with a hero — "Contact IBM. We're here to help." — backed by a photo to establish warmth and trust before routing users through topic-based icons. Sales inquiries were immediately flagged for virtual agent routing. Developers could self-direct to documentation. Every path had a destination.</p>
+
+      <div class="case-study-images wide reveal">
+        <img loading="lazy" src="images/patterns-design-1.webp" alt="IBM Contact Us — Sales subcategory navigation">
+        <img loading="lazy" src="images/patterns-design-2.webp" alt="IBM Contact Us — IBM Careers and Learn sections">
+      </div>
+
+      <div class="case-study-images wide reveal">
+        <img loading="lazy" src="images/patterns-design-3.webp" alt="IBM Contact Us — Additional Resources section">
+        <img loading="lazy" src="images/patterns-design-4.webp" alt="IBM Contact Us — Contact Information and footer band">
+      </div>
+
+      <h2 class="reveal">Testing &amp; Iteration</h2>
+      <p>User testing confirmed the structure worked. People found the category breakdown intuitive — it reflected their own mental models for how to reach IBM. The hero image increased trust. Having multiple contact options alongside self-service directions covered a range of needs without forcing everyone down the same path. We refined the tertiary labels and tightened the form based on feedback before locking the MVP.</p>
+
+      <h2 class="reveal">Outcome</h2>
+      <p>The MVP shipped with new primary category icons, a frequently-requested information section, and immediate sales inquiry routing to a virtual agent. Short-term: fewer misdirected submissions, clearer paths for revenue-generating inquiries, and a self-service track for technical users who just needed documentation. Long-term: a foundation for a unified global IBM contact experience — with the groundwork for AI-driven personalization ready for Phase 2.</p>
+
+      <p>The contact page had always been a missed opportunity. We closed it.</p>
+
+      <div class="reveal" style="margin-top: 3rem; display: flex; align-items: center; gap: 1rem;">
+        <span class="patterns-rogue-trigger" title="Our team name">
+          <span style="font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;">Team Rogue</span>
+          <span class="patterns-rogue">
+            <img src="images/patterns-rogue.webp" alt="Team Rogue logo" width="28" height="28">
+          </span>
+        </span>
+      </div>
+
+    </article>
+
+    <nav class="project-nav" aria-label="Project navigation">
+      <a href="ibmcloud.html" class="project-nav-item project-nav-item--prev">
+        <span class="project-nav-label">← Previous</span>
+        <span class="project-nav-title">IBM Cloud Observability</span>
+      </a>
+      <a href="pci.html" class="project-nav-item project-nav-item--next">
+        <span class="project-nav-label">Next →</span>
+        <span class="project-nav-title">Performance Contracting Group</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-tagline">Do more good things.</p>
+      <p class="footer-subtitle">See you soon.</p>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">Let's build something together.</a>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
