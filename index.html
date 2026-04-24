@@ -30,11 +30,130 @@
         <li><a href="about.html">About</a></li>
         <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle dna-trigger" aria-label="Open design DNA overlay" aria-haspopup="dialog">
+        <span class="dna-trigger-icon" aria-hidden="true">✦</span>
+        <span class="dna-trigger-label">DNA</span>
+      </button>
       <button class="theme-toggle" aria-label="Toggle dark mode">
         <span class="theme-toggle-icon"></span>
       </button>
     </div>
   </nav>
+
+  <!-- Design DNA overlay (home page only) -->
+  <div class="dna-overlay" id="dnaOverlay" role="dialog" aria-modal="true" aria-labelledby="dnaTitle" aria-hidden="true">
+    <div class="dna-overlay-scrim" data-dna-close></div>
+    <div class="dna-panel" role="document">
+      <header class="dna-panel-head">
+        <div>
+          <p class="dna-eyebrow">Peek behind the curtain</p>
+          <h2 class="dna-title" id="dnaTitle">Design <em>DNA</em></h2>
+        </div>
+        <button class="dna-close" data-dna-close aria-label="Close design DNA overlay">
+          <span aria-hidden="true">×</span>
+        </button>
+      </header>
+
+      <div class="dna-bento">
+
+        <!-- Colors card (2x2) -->
+        <section class="dna-card dna-card--colors" data-card="colors">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">01 · Palette</span>
+            <h3 class="dna-card-title">Colors</h3>
+            <p class="dna-card-desc">Live values pulled from <code>:root</code>. Hover a swatch to tint the preview.</p>
+          </header>
+          <div class="dna-swatches" id="dnaSwatches"><!-- injected --></div>
+          <div class="dna-color-preview" id="dnaColorPreview">
+            <img src="images/hero-vic.webp" alt="" class="dna-color-preview-img" width="800" height="504">
+            <div class="dna-color-preview-tint" aria-hidden="true"></div>
+            <span class="dna-color-preview-label" aria-live="polite">Hover a swatch</span>
+          </div>
+        </section>
+
+        <!-- Typography card (2x1) -->
+        <section class="dna-card dna-card--fonts" data-card="fonts">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">02 · Type</span>
+            <h3 class="dna-card-title">Typography</h3>
+          </header>
+          <ul class="dna-fonts">
+            <li class="dna-font" data-family="'DM Serif Display', serif" data-jitter="true">
+              <span class="dna-font-meta">DM Serif Display · 400 · italic on hover</span>
+              <span class="dna-font-sample" style="font-family:'DM Serif Display',serif;">Aa</span>
+              <span class="dna-font-use">Display &amp; headlines</span>
+            </li>
+            <li class="dna-font" data-family="'Barlow', sans-serif">
+              <span class="dna-font-meta">Barlow · 300 / 400 / 600 / 700</span>
+              <span class="dna-font-sample" style="font-family:'Barlow',sans-serif;font-weight:600;">Aa</span>
+              <span class="dna-font-use">UI, body, labels</span>
+            </li>
+            <li class="dna-font" data-family="'Source Code Pro', monospace">
+              <span class="dna-font-meta">Source Code Pro · 400 / 500</span>
+              <span class="dna-font-sample" style="font-family:'Source Code Pro',monospace;">Aa</span>
+              <span class="dna-font-use">Kickers &amp; labels</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Type playground (2x1) -->
+        <section class="dna-card dna-card--playground" data-card="playground">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">03 · Easter egg</span>
+            <h3 class="dna-card-title">Type here</h3>
+            <p class="dna-card-desc">Click the headline. Type anything. Tap a pill to change face.</p>
+          </header>
+          <div class="dna-playground">
+            <p class="dna-playground-text" id="dnaPlayText" contenteditable="true" spellcheck="false" style="font-family:'DM Serif Display',serif;">I design cool things with sincerity.</p>
+            <div class="dna-playground-controls">
+              <button class="dna-chip is-active" data-font="'DM Serif Display', serif">Serif</button>
+              <button class="dna-chip" data-font="'Barlow', sans-serif">Sans</button>
+              <button class="dna-chip" data-font="'Source Code Pro', monospace">Mono</button>
+              <button class="dna-chip" data-italic>Italic</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Spacing card (1x1) -->
+        <section class="dna-card dna-card--scale" data-card="scale">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">04 · Rhythm</span>
+            <h3 class="dna-card-title">Spacing</h3>
+          </header>
+          <ol class="dna-scale" id="dnaScale"><!-- injected --></ol>
+        </section>
+
+        <!-- Radii card (1x1) -->
+        <section class="dna-card dna-card--radii" data-card="radii">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">05 · Shape</span>
+            <h3 class="dna-card-title">Radii</h3>
+          </header>
+          <div class="dna-radii">
+            <div class="dna-radius" style="--r:0">    <span>0</span></div>
+            <div class="dna-radius" style="--r:4px">  <span>4</span></div>
+            <div class="dna-radius" style="--r:12px"> <span>12</span></div>
+            <div class="dna-radius" style="--r:999px"><span>pill</span></div>
+          </div>
+        </section>
+
+        <!-- Buttons card (1x1) -->
+        <section class="dna-card dna-card--ui" data-card="ui">
+          <header class="dna-card-head">
+            <span class="dna-card-kicker">06 · UI</span>
+            <h3 class="dna-card-title">Components</h3>
+          </header>
+          <div class="dna-ui-grid">
+            <button class="dna-sample-btn dna-sample-btn--pill" type="button">◐ Pill</button>
+            <button class="dna-sample-btn dna-sample-btn--ghost" type="button">Ghost →</button>
+            <span class="dna-sample-tag">section · label</span>
+            <span class="dna-sample-dot" aria-hidden="true"></span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
 
   <main class="page-content">
 

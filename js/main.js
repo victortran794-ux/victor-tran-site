@@ -282,3 +282,144 @@ if (heroTitle) {
     setTimeout(() => heroTitle.classList.add('chars-revealed'), 80);
   });
 }
+
+
+// ── Design DNA overlay ─────────────────────────────
+(function initDesignDNA() {
+  const overlay  = document.getElementById('dnaOverlay');
+  const trigger  = document.querySelector('.dna-trigger');
+  if (!overlay || !trigger) return;
+
+  // Read live values from CSS custom properties so this stays truthful as tokens evolve
+  const rootStyles = getComputedStyle(document.documentElement);
+  const readVar = (name) => rootStyles.getPropertyValue(name).trim();
+
+  // Light-or-dark decision for overlay text on swatches
+  const isLightHex = (hex) => {
+    const m = hex.replace('#', '');
+    if (m.length !== 6) return false;
+    const r = parseInt(m.slice(0, 2), 16);
+    const g = parseInt(m.slice(2, 4), 16);
+    const b = parseInt(m.slice(4, 6), 16);
+    return (r * 299 + g * 587 + b * 114) / 1000 > 170;
+  };
+
+  // Build swatches
+  const swatchKeys = [
+    { key: '--blue',   label: 'Blue'   },
+    { key: '--pink',   label: 'Pink'   },
+    { key: '--purple', label: 'Purple' },
+    { key: '--orange', label: 'Orange' },
+    { key: '--bg',     label: 'BG'     },
+    { key: '--bg-2',   label: 'BG2'    },
+    { key: '--text',   label: 'Text'   },
+    { key: '--text-2', label: 'Text2'  },
+    { key: '--border', label: 'Border' },
+  ];
+
+  const swatchRoot = document.getElementById('dnaSwatches');
+  const preview    = document.getElementById('dnaColorPreview');
+  const previewLbl = preview.querySelector('.dna-color-preview-label');
+
+  const renderSwatches = () => {
+    swatchRoot.innerHTML = '';
+    swatchKeys.forEach(({ key, label }) => {
+      const value = readVar(key);
+      if (!value) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'dna-swatch';
+      btn.style.setProperty('--swatch', value);
+      btn.setAttribute('data-light', isLightHex(value));
+      btn.setAttribute('aria-label', `${label} ${value}`);
+      btn.innerHTML = `
+        <span class="dna-swatch-meta">
+          <span class="dna-swatch-name">${label}</span>
+          <span class="dna-swatch-hex">${value}</span>
+        </span>
+      `;
+      btn.addEventListener('mouseenter', () => {
+        preview.style.setProperty('--tint', value);
+        preview.classList.add('is-tinted');
+        previewLbl.textContent = `${label} · ${value}`;
+      });
+      btn.addEventListener('focus', () => {
+        preview.style.setProperty('--tint', value);
+        preview.classList.add('is-tinted');
+        previewLbl.textContent = `${label} · ${value}`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        preview.classList.remove('is-tinted');
+        previewLbl.textContent = 'Hover a swatch';
+      });
+      swatchRoot.appendChild(btn);
+    });
+  };
+  renderSwatches();
+
+  // Build spacing scale
+  const scaleKeys = [1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 20];
+  const scaleRoot = document.getElementById('dnaScale');
+  const scaleValues = scaleKeys.map((n) => parseInt(readVar(`--space-${n}`), 10) || 0);
+  const scaleMax = Math.max(...scaleValues) || 1;
+  scaleRoot.innerHTML = scaleKeys.map((n, i) => {
+    const px = scaleValues[i];
+    const widthPct = Math.max(4, (px / scaleMax) * 100);
+    return `
+      <li class="dna-scale-row">
+        <span>--${n}</span>
+        <span class="dna-scale-bar" style="width:${widthPct}%"></span>
+        <span class="dna-scale-px">${px}px</span>
+      </li>
+    `;
+  }).join('');
+
+  // Type playground
+  const playText = document.getElementById('dnaPlayText');
+  const chips    = document.querySelectorAll('.dna-chip');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      if (chip.hasAttribute('data-italic')) {
+        playText.classList.toggle('is-italic');
+        chip.classList.toggle('is-active');
+        return;
+      }
+      chips.forEach((c) => { if (!c.hasAttribute('data-italic')) c.classList.remove('is-active'); });
+      chip.classList.add('is-active');
+      playText.style.fontFamily = chip.getAttribute('data-font');
+    });
+  });
+
+  // Open / close overlay
+  let lastFocus = null;
+  const open = () => {
+    lastFocus = document.activeElement;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    // Re-read tokens in case theme toggled while overlay was closed
+    renderSwatches();
+    setTimeout(() => {
+      const firstClose = overlay.querySelector('.dna-close');
+      if (firstClose) firstClose.focus();
+    }, 50);
+  };
+  const close = () => {
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    preview.classList.remove('is-tinted');
+    previewLbl.textContent = 'Hover a swatch';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  };
+
+  trigger.addEventListener('click', open);
+  overlay.querySelectorAll('[data-dna-close]').forEach((el) => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+  });
+
+  // Re-render swatches on theme change so live values reflect the active theme
+  const themeBtn = document.querySelector('.theme-toggle:not(.dna-trigger)');
+  if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(renderSwatches, 50));
+})();
