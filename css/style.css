@@ -874,18 +874,25 @@ button:focus-visible,
 /* ══════════════════════════════════════════════
    ABOUT PAGE
 ══════════════════════════════════════════════ */
-.about-bio {
+.about-intro {
   max-width: var(--max-w);
   margin: 0 auto;
   padding: var(--section-y) var(--page-x) var(--space-16);
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 300px);
+  gap: var(--space-12);
+  align-items: start;
 }
 
 .about-bio p {
   font-size: 1.0625rem;
   line-height: 1.9;
   color: var(--text-2);
-  max-width: 720px;
   margin-bottom: 28px;
+}
+
+.about-bio p:last-child {
+  margin-bottom: 0;
 }
 
 .about-bio p:first-child {
@@ -895,17 +902,20 @@ button:focus-visible,
   color: var(--text);
 }
 
-.about-photo {
-  max-width: var(--max-w);
-  margin: 0 auto var(--space-12);
-  padding: 0 var(--page-x);
-}
 .about-photo img {
   width: 100%;
   height: auto;
   display: block;
-  display: block;
   border-radius: 4px;
+}
+
+@media (max-width: 720px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+  }
+  .about-photo {
+    max-width: 320px;
+  }
 }
 
 .about-divider {
