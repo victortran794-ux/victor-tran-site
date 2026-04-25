@@ -120,40 +120,46 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Hero: cursor-reactive color wash ──────────────
 const hero = document.querySelector('.hero');
 if (hero && !prefersReducedMotion) {
-  // Target wash directly — setting vars on `.hero` cascades to all its
-  // children, triggering a style recalc subtree on every mousemove frame.
   const heroWash = hero.querySelector('.hero-wash');
-  let rafPending = false;
-  let lastX = 0, lastY = 0;
+  if (heroWash) {
+    // Throttle wash updates to ~30fps. A radial-gradient repaint across the
+    // hero is the expensive bit; the human eye can't tell the glow is updating
+    // every other frame, and this keeps the main thread free for scrolling.
+    const UPDATE_MS = 33;
+    let lastUpdate = 0;
+    let scheduled = false;
+    let lastX = 0, lastY = 0;
 
-  const updateHero = () => {
-    rafPending = false;
-    const rect = hero.getBoundingClientRect();
-    const px = ((lastX - rect.left) / rect.width)  * 100;
-    const py = ((lastY - rect.top)  / rect.height) * 100;
-    // Hue shifts with horizontal position (260° → 360°, magenta → pink sweep)
-    const hue = 260 + (px / 100) * 100;
-    heroWash.style.setProperty('--mx',  `${px}%`);
-    heroWash.style.setProperty('--my',  `${py}%`);
-    heroWash.style.setProperty('--hue', hue);
-  };
+    const updateHero = () => {
+      scheduled = false;
+      lastUpdate = performance.now();
+      const rect = hero.getBoundingClientRect();
+      const px = ((lastX - rect.left) / rect.width)  * 100;
+      const py = ((lastY - rect.top)  / rect.height) * 100;
+      // Hue shifts with horizontal position (260° → 360°, magenta → pink sweep)
+      const hue = 260 + (px / 100) * 100;
+      heroWash.style.setProperty('--mx',  `${px}%`);
+      heroWash.style.setProperty('--my',  `${py}%`);
+      heroWash.style.setProperty('--hue', hue);
+    };
 
-  document.addEventListener('mousemove', e => {
-    lastX = e.clientX;
-    lastY = e.clientY;
-    if (!rafPending) {
-      rafPending = true;
-      requestAnimationFrame(updateHero);
+    document.addEventListener('mousemove', e => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (scheduled) return;
+      const wait = Math.max(0, UPDATE_MS - (performance.now() - lastUpdate));
+      scheduled = true;
+      if (wait === 0) requestAnimationFrame(updateHero);
+      else setTimeout(() => requestAnimationFrame(updateHero), wait);
+    });
+
+    if ('ontouchstart' in window) {
+      let touchHue = 300;
+      window.addEventListener('scroll', () => {
+        touchHue = 260 + ((window.scrollY % 400) / 400) * 100;
+        heroWash.style.setProperty('--hue', touchHue);
+      }, { passive: true });
     }
-  });
-
-  // Touch devices: sweep subtly based on scroll instead
-  if ('ontouchstart' in window) {
-    let touchHue = 300;
-    window.addEventListener('scroll', () => {
-      touchHue = 260 + ((window.scrollY % 400) / 400) * 100;
-      heroWash.style.setProperty('--hue', touchHue);
-    }, { passive: true });
   }
 }
 
@@ -277,10 +283,11 @@ if (heroTitle) {
     .split('')
     .map((ch, i) => `<span class="char" style="--i:${i}">${ch === ' ' ? '&nbsp;' : ch}</span>`)
     .join('');
-  // Trigger after a brief delay
-  requestAnimationFrame(() => {
-    setTimeout(() => heroTitle.classList.add('chars-revealed'), 80);
-  });
+  // Force the browser to commit the chars' initial styles before flipping the
+  // class, otherwise the transition can be skipped entirely (no "from" value to
+  // animate). Reading offsetWidth flushes style/layout synchronously.
+  void heroTitle.offsetWidth;
+  setTimeout(() => heroTitle.classList.add('chars-revealed'), 60);
 }
 
 
