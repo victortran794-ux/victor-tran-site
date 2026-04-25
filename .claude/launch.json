@@ -4,8 +4,8 @@
     {
       "name": "victor-tran-site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8181"],
-      "port": 8181
+      "runtimeArgs": ["-m", "http.server", "8282"],
+      "port": 8282
     }
   ]
 }
