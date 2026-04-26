@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://victor-tran-site-2vxf.vercel.app/sitemap.xml
