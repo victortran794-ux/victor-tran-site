@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon + social -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="canonical" href="https://victor-tran-site-2vxf.vercel.app/playground">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://victor-tran-site-2vxf.vercel.app/playground">
+  <meta property="og:title" content="Playground · Victor Tran">
+  <meta property="og:description" content="A generative UI experiment. Ask the site about Victor's work and watch it lay itself out.">
+  <meta property="og:image" content="https://victor-tran-site-2vxf.vercel.app/images/hero-vic.jpg">
+  <meta property="og:image:width" content="1800">
+  <meta property="og:image:height" content="1134">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Playground · Victor Tran Design</title>
+  <meta name="description" content="A generative UI experiment. Ask the site about Victor's work and watch it lay itself out.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="cursor-dot"  aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/nav-logo.webp" alt="Victor Tran" width="34" height="34">
+        <span class="nav-logo-name">Victor Tran</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="playground.html" class="active">Playground</a></li>
+        <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-content">
+
+    <!-- Page header -->
+    <header class="page-header">
+      <p class="section-label label-default">Experiment · Generative UI</p>
+      <h1 class="page-header-title">Ask the site.</h1>
+      <p class="page-header-desc">Type a prompt and Claude picks a layout, theme, and content based on who's asking. This page is a static mock of one possible response — the cards layout, recruiter mood.</p>
+    </header>
+
+    <!-- Generative section (hardcoded for now) -->
+    <section class="playground" style="--gen-accent: #55a2f7;" data-mood="light">
+
+      <!-- Echo of the prompt + AI response header -->
+      <div class="playground-echo">
+        <p class="playground-prompt-label">You asked</p>
+        <p class="playground-prompt">"I'm a recruiter looking for product designers with AI experience."</p>
+      </div>
+
+      <div class="playground-response-head reveal">
+        <p class="section-label playground-meta">Layout · cards &nbsp;·&nbsp; Theme · light</p>
+        <h2 class="playground-headline">Designer who's shipped real AI products.</h2>
+        <p class="playground-subtext">Three years inside IBM's AI org, plus a decade of brand and product work before that. Here's what's relevant.</p>
+      </div>
+
+      <!-- Cards layout -->
+      <div class="gen-cards">
+
+        <article class="gen-card reveal" data-highlight="true">
+          <p class="gen-card-tag">Current · IBM</p>
+          <h3 class="gen-card-title">watsonx Orchestrate</h3>
+          <p class="gen-card-body">Visual designer on AI &amp; Automation. Designed agentic workflow patterns used across the product — the kind of generative UI surface I'm experimenting with on this very page.</p>
+        </article>
+
+        <article class="gen-card reveal">
+          <p class="gen-card-tag">Prior · IBM</p>
+          <h3 class="gen-card-title">IBM Cloud Observability</h3>
+          <p class="gen-card-body">UX designer on the Observability platform. Shipped dashboard primitives and incident workflows used by enterprise SREs.</p>
+        </article>
+
+        <article class="gen-card reveal">
+          <p class="gen-card-tag">Earlier · Pi Kappa Phi</p>
+          <h3 class="gen-card-title">In-house design lead</h3>
+          <p class="gen-card-body">Built brand systems, mobile apps, and editorial work for a national org. Shipped Pi Kapp App end-to-end as solo designer.</p>
+        </article>
+
+      </div>
+
+      <div class="playground-cta-row reveal">
+        <button class="playground-cta" type="button">Let's talk →</button>
+        <p class="playground-cta-aside">CTA copy and link generated by Claude based on your prompt.</p>
+      </div>
+
+      <!-- Try-another bar (placeholder for the real input) -->
+      <div class="playground-input-bar reveal" aria-hidden="true">
+        <span class="playground-input-label">Try another</span>
+        <span class="playground-chip">I'm a creative director</span>
+        <span class="playground-chip">Show me your weirdest project</span>
+        <span class="playground-chip">What's your stack?</span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-tagline">Do more good things.</p>
+      <p class="footer-subtitle">See you soon.</p>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">
+        Let's build something together.
+      </a>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

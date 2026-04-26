@@ -99,7 +99,7 @@ if (!prefersReducedMotion) {
 
 
 // ── Dark Mode Toggle ───────────────────────────────
-const themeToggle = document.querySelector('.theme-toggle');
+const themeToggle = document.querySelector('.theme-toggle:not(.dna-trigger)');
 const saved = localStorage.getItem('theme') || 'light';
 if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
 
