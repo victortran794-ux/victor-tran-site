@@ -69,7 +69,7 @@
     </header>
 
     <section class="case-study-lede reveal">
-      <p>A native mobile experience for a brotherhood that didn't have one. Built to serve a freshman tracking first milestones and a senior running a chapter, inside the same flow.</p>
+      <p>A native mobile concept for a brotherhood that didn't have one. Built to serve a freshman tracking first milestones and a senior running a chapter, inside the same flow.</p>
       <cite>Concept · Pi Kappa Phi</cite>
     </section>
 
@@ -79,27 +79,36 @@
         <img loading="lazy" src="images/pikapp-hero.png" alt="Pi Kapp App hero phone mockup">
       </div>
 
-      <p>The Pi Kapp App is the mobile application concept for the undergraduate members of the fraternal leadership organization to better keep track of their milestones and stay up to date with important information.</p>
+      <span class="case-study-eyebrow reveal">01 · The brief</span>
+      <h2 class="reveal">Three users, one flow</h2>
+      <p class="case-study-thesis reveal">An app for a brotherhood that didn't have one, sharing a single flow across very different members.</p>
+      <p>Pi Kappa Phi is a national fraternity with collegiate members spanning a four-year arc. The concept needed to land for three distinct users without splintering into three apps:</p>
+      <ol>
+        <li>A freshman just starting rush, tracking their first milestones.</li>
+        <li>A junior on the executive board running chapter responsibilities.</li>
+        <li>A graduating senior closing out capstone classes.</li>
+      </ol>
+      <p>Two constraints shaped everything that followed. The visual system had to inherit the existing brand: deep blue, gold star, the tessellated hex pattern that runs through the print materials. And the data layer had to plug into iMIS, the national member database, so the app could pull rank, term, and chapter assignment without duplicating records.</p>
 
-      <p>Much of the research revolved around apps and programs that use engaging ways to promote their consumers to achieve goals to obtain an award, a notable enjoyment out of the Gen-Z student population.</p>
-
-      <h2 class="reveal">Wireframing &amp; Information Architecture</h2>
+      <span class="case-study-eyebrow reveal">02 · Mapping the flow</span>
+      <h2 class="reveal">Wireframes &amp; information architecture</h2>
+      <p class="case-study-thesis reveal">Hand sketches first, then a sitemap that pinned down the four-tab shell.</p>
+      <p>Research looked at apps that turn long-arc goals into short-loop motivation: progress bars, ranked completion percentages, and term-bounded streaks. The pattern that translated cleanest to a fraternity context was a per-term progress bar paired with a ranking against the chapter. Visible to the member, comparable across peers, and explicitly time-bounded so it resets each semester.</p>
+      <p>The sitemap settled on a four-tab shell: <em>Member</em> (your dashboard), <em>Chapter</em> (your house), <em>National HQ</em> (Pi Kapp at large), and <em>Settings</em>. Same shell for everyone; what changes is the density of what's already done.</p>
 
       <div class="case-study-images wide contain reveal">
         <img loading="lazy" src="images/pikapp-wireframes.png" alt="Pi Kapp App hand-drawn wireframes">
         <img loading="lazy" src="images/pikapp-sitemap.png" alt="Pi Kapp App sitemap">
       </div>
 
-      <h2 class="reveal">User Personas</h2>
-      <p>The personas revolve around collegiate men varying in class year and engagement levels.</p>
-      <ol>
-        <li>Freshman student that just started their rush.</li>
-        <li>Junior student that serves on the executive board.</li>
-        <li>Graduating senior student on capstone classes.</li>
-      </ol>
-      <p>Many of the wireframing decisions were centered around being able to incorporate data from the member database (iMIS) and connecting to preexisting resources and platforms. Along with following the brand style guides provided, the app's visual components follow a similar style as their main website.</p>
+      <span class="case-study-eyebrow reveal">03 · Brand &amp; shell</span>
+      <h2 class="reveal">Inheriting the system</h2>
+      <p class="case-study-thesis reveal">The brand was set. The job was making it feel like an app, not a printed brochure.</p>
+      <p>The login and welcome screens lean on Pi Kappa Phi's existing visual system. Form fields, button shape, and bottom navigation are the only places where the app gets to add new vocabulary; everything else inherits. The hex pattern softens behind the splash, the gold star becomes the loading mark, and the deep blue carries the chrome on every screen.</p>
 
-      <h2 class="reveal">Screens</h2>
+      <div class="case-study-brand-mark reveal" aria-hidden="true">
+        <img src="images/pikapp-app-icon.png" alt="" width="220" height="220">
+      </div>
 
       <div class="case-study-full-img reveal">
         <img loading="lazy" src="images/pikapp-screens-1.png" alt="Pi Kapp App login and splash screens">
@@ -109,9 +118,22 @@
         <img loading="lazy" src="images/pikapp-screens-2.png" alt="Pi Kapp App chapter status, bulletin, and milestone screens">
       </div>
 
-      <h2 class="reveal">Outcome</h2>
-      <p class="case-study-thesis reveal">A concept built for three users in one flow.</p>
-      <p>From a freshman tracking first milestones to a graduating senior managing chapter responsibilities, the central challenge was designing within a constrained brand system while serving distinct users in a single flow. Connecting to the national member database (iMIS) also surfaced important questions about progressive disclosure: how much information to surface up front, and what to tuck behind a tap.</p>
+      <span class="case-study-eyebrow reveal">04 · Tracking in action</span>
+      <h2 class="reveal">Where the value lives</h2>
+      <p class="case-study-thesis reveal">A progress bar and a ranked percent — the loop a member opens the app to see.</p>
+      <p>The Member screen is home base: full-term progress, completion percentage, current rank against the chapter (21/45 in the mock), and the bulletin feed below. Tapping a milestone opens its task list, with one task expanded inline showing description and due date; siblings stay collapsed until tapped. Progressive disclosure keeps the dashboard from buckling under a term's worth of detail.</p>
+      <p>This is the flow that has to work for all three personas. A freshman with two completed tasks and a senior with twenty both land on the same screen. The hierarchy is what changes.</p>
+
+      <div class="case-study-images phones reveal">
+        <img loading="lazy" src="images/pikapp-member.png" alt="Pi Kapp App member dashboard with progress bar and bulletin">
+        <img loading="lazy" src="images/pikapp-task-expand.png" alt="Pi Kapp App milestone detail with one task expanded">
+      </div>
+
+      <section class="case-study-outro reveal">
+        <span class="case-study-eyebrow">Closing</span>
+        <h2>What the concept clarified</h2>
+        <p>A constrained brand system was a frame, not a ceiling. The harder question was hierarchy: how to surface enough of the long-arc journey to motivate a freshman, without overwhelming a senior who's already most of the way through. The answer wasn't different screens for different users. It was the same flow, ranked.</p>
+      </section>
 
     </article>
 
