@@ -136,11 +136,12 @@ if (hero && !prefersReducedMotion) {
       const rect = hero.getBoundingClientRect();
       const px = ((lastX - rect.left) / rect.width)  * 100;
       const py = ((lastY - rect.top)  / rect.height) * 100;
-      // Hue shifts with horizontal position (260° → 360°, magenta → pink sweep)
-      const hue = 260 + (px / 100) * 100;
-      heroWash.style.setProperty('--mx',  `${px}%`);
-      heroWash.style.setProperty('--my',  `${py}%`);
-      heroWash.style.setProperty('--hue', hue);
+      // Cursor X drives a 0→1 progress that sweeps the wash through the
+      // design-system palette (purple → pink → blue) via color-mix in CSS.
+      const p = Math.max(0, Math.min(1, px / 100));
+      heroWash.style.setProperty('--mx', `${px}%`);
+      heroWash.style.setProperty('--my', `${py}%`);
+      heroWash.style.setProperty('--p',  p.toFixed(3));
     };
 
     document.addEventListener('mousemove', e => {
@@ -154,10 +155,9 @@ if (hero && !prefersReducedMotion) {
     });
 
     if ('ontouchstart' in window) {
-      let touchHue = 300;
       window.addEventListener('scroll', () => {
-        touchHue = 260 + ((window.scrollY % 400) / 400) * 100;
-        heroWash.style.setProperty('--hue', touchHue);
+        const p = (window.scrollY % 400) / 400;
+        heroWash.style.setProperty('--p', p.toFixed(3));
       }, { passive: true });
     }
   }

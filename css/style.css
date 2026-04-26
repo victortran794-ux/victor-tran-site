@@ -347,10 +347,11 @@ button:focus-visible,
   min-height: 620px;
   overflow: hidden;
   background: #000;
-  /* Defaults until JS wires the cursor position */
+  /* Defaults until JS wires the cursor position. --p sweeps 0→1 across X
+     and steers the wash between palette tokens (purple → pink → blue). */
   --mx: 50%;
   --my: 50%;
-  --hue: 300;
+  --p: 0.5;
 }
 
 .hero-bg {
@@ -378,8 +379,12 @@ button:focus-visible,
   background:
     radial-gradient(
       circle 60vmax at var(--mx) var(--my),
-      hsla(var(--hue), 90%, 62%, 0.52) 0%,
-      hsla(calc(var(--hue) + 90), 80%, 52%, 0.32) 55%,
+      color-mix(in oklab,
+        color-mix(in oklab, var(--purple), var(--pink) calc(var(--p) * 100%)),
+        transparent 35%) 0%,
+      color-mix(in oklab,
+        color-mix(in oklab, var(--pink), var(--blue) calc(var(--p) * 100%)),
+        transparent 62%) 55%,
       transparent 100%
     );
 }
@@ -427,12 +432,12 @@ button:focus-visible,
 }
 
 .hero-tagline {
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-size: clamp(1.2rem, 2.1vw, 1.55rem);
   color: #fff;
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: 0.015em;
-  max-width: 620px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  max-width: 680px;
   padding-left: 0.12em;
 }
 
