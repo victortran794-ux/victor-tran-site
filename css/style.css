@@ -39,11 +39,12 @@
   /* Semantic layout aliases — rebind below for responsive */
   --page-x:    var(--space-12);  /* 48px — page side padding */
   --section-y: var(--space-20);  /* 80px — vertical rhythm between sections */
+  --gallery-x: var(--space-6);   /* 24px — viewport gutter for full-bleed galleries */
 }
 
 /* --page-x rebinds at breakpoints so consumers don't need media queries */
-@media (max-width: 900px) { :root { --page-x: var(--space-6); } }  /* 24px */
-@media (max-width: 600px) { :root { --page-x: var(--space-5); } }  /* 20px */
+@media (max-width: 900px) { :root { --page-x: var(--space-6); --gallery-x: var(--space-4); } }  /* 24 / 16 */
+@media (max-width: 600px) { :root { --page-x: var(--space-5); --gallery-x: var(--space-3); } }  /* 20 / 12 */
 
 /* ── Design tokens — dark ── */
 [data-theme="dark"] {
@@ -1343,10 +1344,13 @@ button:focus-visible,
 .gallery-grid {
   columns: 3;
   column-gap: 12px;
-  padding: var(--space-6) var(--page-x) var(--space-12);
-  max-width: var(--max-w);
+  padding: var(--space-6) var(--gallery-x) var(--space-12);
+  max-width: none;
   margin: 0 auto;
 }
+
+@media (min-width: 1400px) { .gallery-grid { columns: 4; } }
+@media (min-width: 1800px) { .gallery-grid { columns: 5; } }
 
 .gallery-grid img {
   width: 100%;
@@ -1361,9 +1365,13 @@ button:focus-visible,
 
 /* ── Gallery: trio override (3 equal columns) ── */
 .gallery-grid--trio { columns: 3; }
+@media (min-width: 1400px) { .gallery-grid--trio { columns: 3; } }
+@media (min-width: 1800px) { .gallery-grid--trio { columns: 3; } }
 
 /* ── Gallery: pairs (2 columns, larger images) ── */
 .gallery-grid--pairs { columns: 2; }
+@media (min-width: 1400px) { .gallery-grid--pairs { columns: 3; } }
+@media (min-width: 1800px) { .gallery-grid--pairs { columns: 4; } }
 
 /* ── Gallery: EDC (2-col grid, boomboxes top row, eyes bottom row) ── */
 .gallery-grid--edc {
@@ -1382,6 +1390,8 @@ button:focus-visible,
   columns: 4;
   column-gap: 8px;
 }
+@media (min-width: 1400px) { .gallery-grid--slides { columns: 5; } }
+@media (min-width: 1800px) { .gallery-grid--slides { columns: 6; } }
 .gallery-grid--slides img { margin-bottom: 8px; }
 
 /* ── Gallery: spotlight (single featured piece, centered) ── */
@@ -1406,8 +1416,8 @@ button:focus-visible,
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
-  padding: var(--space-6) var(--page-x) var(--space-8);
-  max-width: var(--max-w);
+  padding: var(--space-6) var(--gallery-x) var(--space-8);
+  max-width: none;
   margin: 0 auto;
 }
 .gallery-row img {
@@ -1583,8 +1593,9 @@ button:focus-visible,
   .featured-item-content { padding: 36px var(--page-x); }
 
   .about-skills { grid-template-columns: 1fr 1fr; }
-  .gallery-grid { columns: 2; padding: 16px var(--page-x) 32px; }
+  .gallery-grid { columns: 2; padding: 16px var(--gallery-x) 32px; }
   .gallery-grid--slides { columns: 2; }
+  .gallery-grid--pairs { columns: 2; }
   .gallery-section-title { padding-bottom: 8px; }
   .gallery-section { padding: 48px 0 16px; }
   .case-study-images.landscape { grid-template-columns: 1fr; }

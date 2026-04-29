@@ -164,14 +164,15 @@ if (hero && !prefersReducedMotion) {
 }
 
 
-// ── Art & Illustration Lightbox ───────────────────
+// ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img'
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img, .gallery-infographic img'
   ));
   if (!pageImgs.length) return;
 
   let current = 0;
+  const pageTitle = (document.querySelector('.page-header-title')?.textContent || 'Gallery').trim();
 
   // Build DOM
   const lb = document.createElement('div');
@@ -182,7 +183,7 @@ if (hero && !prefersReducedMotion) {
   lb.innerHTML = `
     <header class="lb-header">
       <div>
-        <p class="lb-title">Art &amp; Illustration</p>
+        <p class="lb-title"></p>
         <p class="lb-count"></p>
       </div>
       <div class="lb-header-actions">
@@ -199,6 +200,8 @@ if (hero && !prefersReducedMotion) {
     <div class="lb-strip"></div>
   `;
   document.body.appendChild(lb);
+
+  lb.querySelector('.lb-title').textContent = pageTitle;
 
   const lbImg   = lb.querySelector('.lb-img');
   const lbCount = lb.querySelector('.lb-count');
