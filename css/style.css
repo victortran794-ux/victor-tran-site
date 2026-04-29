@@ -1397,18 +1397,34 @@ button:focus-visible,
 /* ── Gallery: spotlight (single featured piece, centered) ── */
 .gallery-spotlight {
   max-width: var(--max-w);
-  margin: 0 auto var(--space-4);
+  margin: 0 auto var(--space-16);
   padding: 0 var(--page-x);
   display: flex;
   justify-content: center;
 }
 .gallery-spotlight-fig {
-  width: clamp(260px, 52%, 500px);
+  width: clamp(280px, 42vw, 660px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery-spotlight-label {
+  margin-bottom: 12px;
+  text-align: center;
 }
 .gallery-spotlight-fig img {
   width: 100%;
   display: block;
   border-radius: 3px;
+}
+.gallery-spotlight-cap {
+  margin-top: 14px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+  text-align: center;
 }
 
 /* ── Gallery: flat row (equal-width images side by side) ── */
@@ -1440,9 +1456,9 @@ button:focus-visible,
 /* ── Gallery: grouped sections ── */
 .gallery-group-chicago,
 .gallery-group-traditional {
-  max-width: var(--max-w);
+  max-width: none;
   margin: 0 auto;
-  padding: var(--space-12) var(--page-x) var(--space-6);
+  padding: var(--space-12) 0 var(--space-6);
 }
 /* Higher specificity to beat gallery-section:first-of-type */
 .gallery-section.gallery-group-chicago,
@@ -1451,15 +1467,15 @@ button:focus-visible,
 }
 .gallery-group-chicago .gallery-grid,
 .gallery-group-traditional .gallery-row {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: var(--gallery-x);
+  padding-right: var(--gallery-x);
 }
 
 /* ── Gallery: infographic (full-width, in-rhythm section) ── */
 .gallery-infographic {
-  max-width: var(--max-w);
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 0 var(--page-x);
+  padding: 0 var(--gallery-x);
 }
 .gallery-infographic img {
   width: 100%;
@@ -1470,9 +1486,9 @@ button:focus-visible,
 
 /* ── Series Carousel (scroll-snap) ── */
 .series-carousel {
-  max-width: var(--max-w);
+  max-width: none;
   margin: var(--space-8) auto var(--space-12);
-  padding: 0 var(--page-x);
+  padding: 0 var(--gallery-x);
 }
 
 .series-carousel-track {
@@ -1501,6 +1517,8 @@ button:focus-visible,
   border-radius: 3px;
   transition: opacity 0.25s;
 }
+@media (min-width: 1400px) { .series-carousel-item img { height: 480px; } }
+@media (min-width: 1800px) { .series-carousel-item img { height: 540px; } }
 
 /* hover guard applied in @media (hover: hover) block below */
 
