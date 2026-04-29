@@ -167,7 +167,7 @@ if (hero && !prefersReducedMotion) {
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img, .gallery-feature img'
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img'
   ));
   if (!pageImgs.length) return;
 
@@ -274,6 +274,44 @@ if (hero && !prefersReducedMotion) {
   lb.querySelectorAll('.lb-btn, .lb-arrow, .lb-thumb').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
     el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
+  });
+})();
+
+
+// ── Series Slideshow (auto-crossfade) ────────────
+(function () {
+  const stage = document.querySelector('.series-slideshow-stage');
+  if (!stage) return;
+  const slides = Array.from(stage.querySelectorAll('.series-slideshow-img'));
+  if (slides.length < 2) return;
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const INTERVAL = 3000;
+  let i = 0;
+  let timer = null;
+
+  function advance() {
+    slides[i].classList.remove('is-active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-active');
+  }
+  function start() {
+    if (reduceMotion || timer) return;
+    timer = setInterval(advance, INTERVAL);
+  }
+  function stop() {
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  start();
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', start);
+
+  // Pause when tab is hidden so it doesn't drift while away
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
   });
 })();
 
