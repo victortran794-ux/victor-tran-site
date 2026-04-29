@@ -388,7 +388,7 @@ function RankChip({ rank, of, trend }) {
 // Member dashboard
 // --------------------------------------------------------------------------
 
-function MemberTab({ milestones, onToggleTask, expandedId, setExpandedId }) {
+function MemberTab({ milestones, onToggleTask, expandedId, setExpandedId, frozenBurst }) {
   const total = milestones.reduce((s, m) => s + m.tasks.length, 0);
   const done  = milestones.reduce((s, m) => s + m.tasks.filter(t => t.done).length, 0);
   const pct   = total ? done / total : 0;
@@ -463,6 +463,7 @@ function MemberTab({ milestones, onToggleTask, expandedId, setExpandedId }) {
                 expanded={expandedId === m.id}
                 onToggle={() => setExpandedId(expandedId === m.id ? null : m.id)}
                 onToggleTask={onToggleTask}
+                frozenBurst={frozenBurst}
               />
             ))}
           </div>
@@ -510,7 +511,7 @@ function BulletinCard({ item, delay = 0 }) {
 // Milestone card with expandable task list
 // --------------------------------------------------------------------------
 
-function MilestoneCard({ milestone, expanded, onToggle, onToggleTask }) {
+function MilestoneCard({ milestone, expanded, onToggle, onToggleTask, frozenBurst }) {
   const total = milestone.tasks.length;
   const done = milestone.tasks.filter(t => t.done).length;
   const pct = done / total;
@@ -584,6 +585,7 @@ function MilestoneCard({ milestone, expanded, onToggle, onToggleTask }) {
                     key={task.id}
                     task={task}
                     onToggle={() => onToggleTask(milestone.id, task.id)}
+                    frozenBurst={frozenBurst === task.id}
                   />
                 ))}
               </div>
@@ -599,7 +601,7 @@ function MilestoneCard({ milestone, expanded, onToggle, onToggleTask }) {
 // Task row with star particle on completion
 // --------------------------------------------------------------------------
 
-function TaskRow({ task, onToggle }) {
+function TaskRow({ task, onToggle, frozenBurst }) {
   // each completion bumps `burst` to remount the particle
   const [burst, setBurst] = useState(0);
 
@@ -615,8 +617,17 @@ function TaskRow({ task, onToggle }) {
     >
       <div className="relative flex-shrink-0">
         <Checkbox checked={task.done} />
+        {/* Demo capture: static star, peak-of-animation pose, scaled up for screenshot legibility */}
+        {frozenBurst && (
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none text-pikapp-gold"
+            style={{ transform: "translate(0px, -4px) scale(2.4) rotate(10deg)", opacity: 1 }}
+          >
+            <StarSVG className="w-7 h-7 drop-shadow-[0_0_14px_rgba(232,179,61,1)]" />
+          </div>
+        )}
         <AnimatePresence>
-          {burst > 0 && task.done && (
+          {!frozenBurst && burst > 0 && task.done && (
             <motion.div
               key={burst}
               className="absolute inset-0 flex items-center justify-center pointer-events-none text-pikapp-gold"
@@ -782,10 +793,41 @@ function IconGear({ className }) {
 // --------------------------------------------------------------------------
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-  const [activeTab, setActiveTab] = useState("member");
-  const [milestones, setMilestones] = useState(INITIAL_MILESTONES);
-  const [expandedId, setExpandedId] = useState("m1");
+  const params = useMemo(
+    () => (typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams()),
+    []
+  );
+  const skipSplash = params.has("skip");
+  const frozenBurst = params.get("burst");
+  const initialTab = params.get("tab") || "member";
+  const initialExpanded = params.get("expand") || "m1";
+  const initialScroll = parseInt(params.get("scroll") || "0", 10);
+
+  // If a burst is frozen for capture, force that task to be done
+  const baseMilestones = useMemo(() => {
+    if (!frozenBurst) return INITIAL_MILESTONES;
+    return INITIAL_MILESTONES.map((m) => ({
+      ...m,
+      tasks: m.tasks.map((t) =>
+        t.id === frozenBurst ? { ...t, done: true, date: formatToday() } : t
+      ),
+    }));
+  }, [frozenBurst]);
+
+  const [showSplash, setShowSplash] = useState(!skipSplash);
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [milestones, setMilestones] = useState(baseMilestones);
+  const [expandedId, setExpandedId] = useState(initialExpanded);
+
+  // Demo capture: scroll the inner content area after mount
+  React.useEffect(() => {
+    if (!initialScroll) return;
+    const t = setTimeout(() => {
+      const sc = document.querySelector(".no-scrollbar");
+      if (sc) sc.scrollTop = initialScroll;
+    }, 250);
+    return () => clearTimeout(t);
+  }, [initialScroll, activeTab]);
 
   const toggleTask = (milestoneId, taskId) => {
     setMilestones((prev) =>
@@ -824,6 +866,7 @@ function App() {
               onToggleTask={toggleTask}
               expandedId={expandedId}
               setExpandedId={setExpandedId}
+              frozenBurst={frozenBurst}
             />
           )}
           {activeTab === "chapter" && (
