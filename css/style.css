@@ -1477,13 +1477,13 @@ button:focus-visible,
   padding-right: var(--gallery-x);
 }
 
-/* ── Gallery: infographic (full-width, in-rhythm section) ── */
-.gallery-infographic {
-  max-width: 1500px;
-  margin: 0 auto;
+/* ── Gallery: feature (full-bleed landscape piece) ── */
+.gallery-feature {
+  max-width: none;
+  margin: 0 auto var(--space-12);
   padding: 0 var(--gallery-x);
 }
-.gallery-infographic img {
+.gallery-feature img {
   width: 100%;
   display: block;
   border-radius: 3px;

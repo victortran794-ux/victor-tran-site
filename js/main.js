@@ -167,7 +167,7 @@ if (hero && !prefersReducedMotion) {
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img, .gallery-infographic img'
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-carousel img, .gallery-feature img'
   ));
   if (!pageImgs.length) return;
 
