@@ -1436,7 +1436,7 @@ button:focus-visible,
 /* ── Gallery: paired spotlight + slideshow ── */
 .gallery-pair {
   max-width: var(--max-w);
-  margin: 0 auto var(--space-16);
+  margin: var(--space-12) auto var(--space-16);
   padding: 0 var(--page-x);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(230px, 0.65fr);
