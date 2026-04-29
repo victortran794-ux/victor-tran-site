@@ -280,38 +280,50 @@ if (hero && !prefersReducedMotion) {
 
 // ── Series Slideshow (auto-crossfade) ────────────
 (function () {
-  const stage = document.querySelector('.series-slideshow-stage');
-  if (!stage) return;
-  const slides = Array.from(stage.querySelectorAll('.series-slideshow-img'));
-  if (slides.length < 2) return;
+  const stages = Array.from(document.querySelectorAll('.series-slideshow-stage'));
+  if (!stages.length) return;
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const INTERVAL = 3000;
-  let i = 0;
-  let timer = null;
+  const slideshows = stages.map(stage => {
+    const slides = Array.from(stage.querySelectorAll('.series-slideshow-img'));
+    if (slides.length < 2) return null;
 
-  function advance() {
-    slides[i].classList.remove('is-active');
-    i = (i + 1) % slides.length;
-    slides[i].classList.add('is-active');
-  }
-  function start() {
-    if (reduceMotion || timer) return;
-    timer = setInterval(advance, INTERVAL);
-  }
-  function stop() {
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-  }
+    let i = slides.findIndex(slide => slide.classList.contains('is-active'));
+    if (i < 0) i = 0;
+    slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === i));
 
-  start();
-  stage.addEventListener('mouseenter', stop);
-  stage.addEventListener('mouseleave', start);
+    let timer = null;
+
+    function advance() {
+      slides[i].classList.remove('is-active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-active');
+    }
+    function start() {
+      if (reduceMotion || timer) return;
+      timer = setInterval(advance, INTERVAL);
+    }
+    function stop() {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+    }
+
+    stage.addEventListener('mouseenter', stop);
+    stage.addEventListener('mouseleave', start);
+
+    return { start, stop };
+  }).filter(Boolean);
+
+  slideshows.forEach(slideshow => slideshow.start());
 
   // Pause when tab is hidden so it doesn't drift while away
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop(); else start();
+    slideshows.forEach(slideshow => {
+      if (document.hidden) slideshow.stop();
+      else slideshow.start();
+    });
   });
 })();
 
