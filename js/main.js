@@ -27,7 +27,7 @@ document.addEventListener('mousemove', e => {
 })();
 
 // Expand ring on interactive elements
-const interactiveEls = 'a, button, .project-card, .featured-item, .explore-btn';
+const interactiveEls = 'a, button, .featured-item';
 document.querySelectorAll(interactiveEls).forEach(el => {
   el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
   el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
@@ -124,7 +124,7 @@ document.addEventListener('click', (e) => {
 
 // ── Magnetic Cards (rAF-batched) ───────────────────
 if (!prefersReducedMotion) {
-  document.querySelectorAll('.project-card, .featured-item').forEach(card => {
+  document.querySelectorAll('.featured-item').forEach(card => {
     let pendingX = 0, pendingY = 0;
     let frame = 0;
 
