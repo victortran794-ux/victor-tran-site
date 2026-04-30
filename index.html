@@ -40,7 +40,24 @@
         <span class="nav-logo-name">Victor Tran</span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li class="nav-dropdown is-active">
+          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Work</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a role="menuitem" href="ibmcloud.html">IBM Cloud Observability</a></li>
+            <li role="none"><a role="menuitem" href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
+            <li role="none"><a role="menuitem" href="pci.html">Performance Contracting Group</a></li>
+            <li role="none"><a role="menuitem" href="abilityexperience.html">The Ability Experience</a></li>
+            <li role="none"><a role="menuitem" href="salmagazine.html">Star &amp; Lamp</a></li>
+            <li role="none"><a role="menuitem" href="pikappapp.html">Pi Kapp App</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Galleries</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a role="menuitem" href="artillustration.html">Art &amp; Illustration</a></li>
+            <li role="none"><a role="menuitem" href="graphicgallery.html">Graphic Gallery</a></li>
+          </ul>
+        </li>
         <li><a href="about.html">About</a></li>
         <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
       </ul>
@@ -202,54 +219,11 @@
       </div>
     </div>
 
-    <!-- Project Cards -->
-    <section class="projects reveal">
-      <div class="projects-grid">
-
-        <a href="pikappapp.html" class="project-card">
-          <img loading="lazy"
-            src="images/thumb-pikapp.webp"
-            alt="Pi Kapp App"
-          >
-          <div class="project-card-overlay">
-            <p class="section-label label-design">Design</p>
-            <h2 class="project-card-title">Pi Kapp App</h2>
-            <span class="explore-btn">Explore</span>
-          </div>
-        </a>
-
-        <a href="artillustration.html" class="project-card">
-          <img loading="lazy"
-            src="images/illus-solar.webp"
-            alt="Art & Illustration"
-          >
-          <div class="project-card-overlay">
-            <p class="section-label label-artwork">Artwork</p>
-            <h2 class="project-card-title">Art &amp; Illustration</h2>
-            <span class="explore-btn">Explore</span>
-          </div>
-        </a>
-
-        <a href="graphicgallery.html" class="project-card">
-          <img loading="lazy"
-            src="images/thumb-sgla.webp"
-            alt="Graphic Gallery"
-          >
-          <div class="project-card-overlay">
-            <p class="section-label label-design">Design</p>
-            <h2 class="project-card-title">Graphic Gallery</h2>
-            <span class="explore-btn">Explore</span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
     <!-- Featured Projects -->
-    <section class="featured">
+    <section class="featured" id="work">
       <div class="featured-list">
 
-        <a href="ibmcloud.html" class="featured-item reveal">
+        <a href="ibmcloud.html" class="featured-item featured-item--wide reveal">
           <div class="featured-item-img">
             <img loading="lazy" class="theme-img-light"
               src="images/ibm-thumb-light.png"
@@ -278,7 +252,7 @@
           <div class="featured-item-content">
             <p class="section-label label-default">Product Design</p>
             <h2 class="featured-item-title">IBM Patterns: Contact Us</h2>
-            <p class="featured-item-desc">Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so that 135,000 monthly visitors could actually reach the right team.</p>
+            <p class="featured-item-desc">Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.</p>
             <span class="view-link">View Project</span>
           </div>
         </a>
@@ -328,7 +302,37 @@
           </div>
         </a>
 
-        <a href="graphicgallery.html" class="featured-item reveal">
+        <a href="pikappapp.html" class="featured-item reveal">
+          <div class="featured-item-img">
+            <img loading="lazy"
+              src="images/thumb-pikapp.webp"
+              alt="Pi Kapp App"
+            >
+          </div>
+          <div class="featured-item-content">
+            <p class="section-label label-default">Product Design</p>
+            <h2 class="featured-item-title">Pi Kapp App</h2>
+            <p class="featured-item-desc">A mobile app concept for undergraduate fraternity members — track milestones, stay connected with the chapter, and live the values day-to-day.</p>
+            <span class="view-link">View Project</span>
+          </div>
+        </a>
+
+        <a href="artillustration.html" class="featured-item reveal">
+          <div class="featured-item-img">
+            <img loading="lazy"
+              src="images/illus-solar.webp"
+              alt="Art & Illustration"
+            >
+          </div>
+          <div class="featured-item-content">
+            <p class="section-label label-artwork">Artwork</p>
+            <h2 class="featured-item-title">Art &amp; Illustration</h2>
+            <p class="featured-item-desc">Digital and traditional illustration — posters, paintings, and personal series.</p>
+            <span class="view-link">View Gallery</span>
+          </div>
+        </a>
+
+        <a href="graphicgallery.html" class="featured-item featured-item--wide featured-item--flip reveal">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/thumb-sgla.webp"

@@ -72,6 +72,56 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
+// ── Nav dropdowns (Work, Galleries) ───────────────
+const navDropdowns = [...document.querySelectorAll('.nav-dropdown')].map(group => {
+  const toggle = group.querySelector('.nav-dropdown-toggle');
+  return { group, toggle };
+}).filter(d => d.toggle);
+
+const setDropdownOpen = (toggle, open) => {
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+};
+
+const closeOtherDropdowns = (except) => {
+  navDropdowns.forEach(({ toggle }) => {
+    if (toggle !== except) setDropdownOpen(toggle, false);
+  });
+};
+
+navDropdowns.forEach(({ group, toggle }) => {
+  toggle.addEventListener('click', () => {
+    const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+    closeOtherDropdowns(toggle);
+    setDropdownOpen(toggle, willOpen);
+  });
+
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let hoverTimer;
+    group.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimer);
+      closeOtherDropdowns(toggle);
+      setDropdownOpen(toggle, true);
+    });
+    group.addEventListener('mouseleave', () => {
+      hoverTimer = setTimeout(() => setDropdownOpen(toggle, false), 120);
+    });
+  }
+
+  group.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      setDropdownOpen(toggle, false);
+      toggle.focus();
+    }
+  });
+});
+
+document.addEventListener('click', (e) => {
+  navDropdowns.forEach(({ group, toggle }) => {
+    if (!group.contains(e.target)) setDropdownOpen(toggle, false);
+  });
+});
+
+
 // ── Magnetic Cards (rAF-batched) ───────────────────
 if (!prefersReducedMotion) {
   document.querySelectorAll('.project-card, .featured-item').forEach(card => {
