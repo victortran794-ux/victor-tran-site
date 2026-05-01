@@ -1811,6 +1811,24 @@ button:focus-visible,
   .sal-spread-pair { grid-template-columns: 1fr; gap: 32px; }
 }
 
+/* Three spreads in a row (anthology / hero intro) */
+.sal-spread-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 0 0 18px;
+}
+.sal-spread-trio img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  display: block;
+}
+@media (max-width: 800px) {
+  .sal-spread-trio { grid-template-columns: 1fr; gap: 14px; }
+}
+
 /* 2x2 grid of spreads (used for issue highlight collections) */
 .sal-spread-grid-2 {
   display: grid;
