@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
-  <link rel="preload" as="image" href="images/hero-vic.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero/figure16.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -189,21 +189,55 @@
   <main class="page-content">
 
     <!-- Hero -->
-    <section class="hero">
-      <img
-        class="hero-bg"
-        src="images/hero-vic.webp"
-        alt="Victor Tran"
-        width="1800" height="1134"
-        fetchpriority="high"
-        decoding="async"
-      >
-      <div class="hero-wash" aria-hidden="true"></div>
-      <div class="hero-text">
-        <h1 class="hero-title">I'm Vic.</h1>
-        <p class="hero-tagline">I design cool things with sincerity.</p>
+    <section class="hero" data-portrait="0">
+      <div class="hero-stage" aria-hidden="true">
+        <div class="hero-typeblock">
+          <span class="hero-bigtype">Visual</span>
+          <span class="hero-bigtype">Designer</span>
+        </div>
+
+        <div class="hero-portraits">
+          <figure class="hero-portrait is-active" data-portrait="0" style="--anchor: center bottom;">
+            <img class="hero-portrait-cutout" src="images/hero/figure16.webp" alt="Victor Tran, in a green sweater" width="1200" height="1800" fetchpriority="high" decoding="async">
+            <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure16-lens.webp);"></span>
+          </figure>
+          <figure class="hero-portrait" data-portrait="1" style="--anchor: left bottom;">
+            <img class="hero-portrait-cutout" src="images/hero/figure19.webp" alt="Victor Tran, in a white shirt" width="1200" height="1800" loading="lazy" decoding="async">
+            <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure19-lens.webp);"></span>
+          </figure>
+          <figure class="hero-portrait" data-portrait="2" style="--anchor: right bottom;">
+            <img class="hero-portrait-cutout" src="images/hero/figure20.webp" alt="Victor Tran, laughing" width="1200" height="1800" loading="lazy" decoding="async">
+            <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure20-lens.webp);"></span>
+          </figure>
+          <figure class="hero-portrait" data-portrait="3" style="--anchor: right bottom;">
+            <img class="hero-portrait-cutout" src="images/hero/figure21.webp" alt="Victor Tran, in a patterned shirt" width="1200" height="1800" loading="lazy" decoding="async">
+            <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure21-lens.webp);"></span>
+          </figure>
+        </div>
       </div>
-      <div class="hero-arrow" aria-hidden="true">↓</div>
+
+      <div class="hero-meta">
+        <p class="hero-eyebrow">Vic Tran <span aria-hidden="true">®</span></p>
+        <h1 class="hero-title">I design cool things with sincerity.</h1>
+        <a href="#work" class="hero-cta">See the work <span aria-hidden="true">→</span></a>
+      </div>
+
+      <ul class="hero-services" aria-label="Practice">
+        <li>Visual Design</li>
+        <li>Brand Identity</li>
+        <li>Art Direction</li>
+        <li>Illustration</li>
+      </ul>
+
+      <button class="hero-cycle" type="button" aria-label="Show next portrait">
+        <span class="hero-cycle-dots" aria-hidden="true">
+          <span class="hero-cycle-dot is-active"></span>
+          <span class="hero-cycle-dot"></span>
+          <span class="hero-cycle-dot"></span>
+          <span class="hero-cycle-dot"></span>
+        </span>
+        <span class="hero-cycle-label">Tap to cycle</span>
+      </button>
     </section>
 
     <!-- Divider strip -->
@@ -370,5 +404,7 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/generative-renderers.js"></script>
+  <script src="js/ask-vic.js"></script>
 </body>
 </html>

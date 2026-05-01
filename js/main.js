@@ -7,41 +7,44 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // ── Custom Cursor ──────────────────────────────────
 const dot  = document.querySelector('.cursor-dot');
 const ring = document.querySelector('.cursor-ring');
+const canUseCustomCursor = dot && ring && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-let mouseX = 0, mouseY = 0;
-let ringX  = 0, ringY  = 0;
+if (canUseCustomCursor) {
+  let mouseX = 0, mouseY = 0;
+  let ringX  = 0, ringY  = 0;
 
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  // dot updates inside the same rAF as the ring for batched layout writes
-});
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // dot updates inside the same rAF as the ring for batched layout writes
+  }, { passive: true });
 
-// Single rAF loop drives both dot (1:1) and ring (lagged)
-(function animateCursor() {
-  ringX += (mouseX - ringX) * 0.18;
-  ringY += (mouseY - ringY) * 0.18;
-  dot.style.transform  = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-  ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-  requestAnimationFrame(animateCursor);
-})();
+  // Single rAF loop drives both dot (1:1) and ring (lagged)
+  (function animateCursor() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    dot.style.transform  = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+    requestAnimationFrame(animateCursor);
+  })();
 
-// Expand ring on interactive elements
-const interactiveEls = 'a, button, .featured-item';
-document.querySelectorAll(interactiveEls).forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
-});
+  // Expand ring on interactive elements
+  const interactiveEls = 'a, button, .featured-item';
+  document.querySelectorAll(interactiveEls).forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
+  });
 
-// Hide cursor when leaving window
-document.addEventListener('mouseleave', () => {
-  dot.style.opacity  = '0';
-  ring.style.opacity = '0';
-});
-document.addEventListener('mouseenter', () => {
-  dot.style.opacity  = '1';
-  ring.style.opacity = '1';
-});
+  // Hide cursor when leaving window
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity  = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity  = '1';
+    ring.style.opacity = '1';
+  });
+}
 
 
 // ── Scroll Reveal ──────────────────────────────────
@@ -167,51 +170,73 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 });
 
 
-// ── Hero: cursor-reactive color wash ──────────────
-const hero = document.querySelector('.hero');
-if (hero && !prefersReducedMotion) {
-  const heroWash = hero.querySelector('.hero-wash');
-  if (heroWash) {
-    // Throttle wash updates to ~30fps. A radial-gradient repaint across the
-    // hero is the expensive bit; the human eye can't tell the glow is updating
-    // every other frame, and this keeps the main thread free for scrolling.
-    const UPDATE_MS = 33;
-    let lastUpdate = 0;
-    let scheduled = false;
-    let lastX = 0, lastY = 0;
+// ── Hero: session-color + slow photo rotation ────
+(function () {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const portraits = Array.from(hero.querySelectorAll('.hero-portrait'));
+  const dots = Array.from(hero.querySelectorAll('.hero-cycle-dot'));
+  const cycleBtn = hero.querySelector('.hero-cycle');
+  if (portraits.length < 2) return;
 
-    const updateHero = () => {
-      scheduled = false;
-      lastUpdate = performance.now();
-      const rect = hero.getBoundingClientRect();
-      const px = ((lastX - rect.left) / rect.width)  * 100;
-      const py = ((lastY - rect.top)  / rect.height) * 100;
-      // Cursor X drives a 0→1 progress that sweeps the wash through the
-      // design-system palette (purple → pink → blue) via color-mix in CSS.
-      const p = Math.max(0, Math.min(1, px / 100));
-      heroWash.style.setProperty('--mx', `${px}%`);
-      heroWash.style.setProperty('--my', `${py}%`);
-      heroWash.style.setProperty('--p',  p.toFixed(3));
-    };
+  // Lock two palette tokens for the whole session: a primary that drives the
+  // bg tint, "Visual", and the lens fill — and a different secondary that
+  // colors the italicized "Designer" so the headline plays a small two-tone
+  // game. Both stay put as photos rotate beneath.
+  const palette = ['--pink', '--blue', '--orange', '--purple'];
+  const sessionToken = palette[Math.floor(Math.random() * palette.length)];
+  const otherTokens = palette.filter(t => t !== sessionToken);
+  const accentToken = otherTokens[Math.floor(Math.random() * otherTokens.length)];
+  hero.style.setProperty('--bg-tint', `var(${sessionToken})`);
+  hero.style.setProperty('--lens-color', `var(${sessionToken})`);
+  hero.style.setProperty('--accent-2', `var(${accentToken})`);
 
-    document.addEventListener('mousemove', e => {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      if (scheduled) return;
-      const wait = Math.max(0, UPDATE_MS - (performance.now() - lastUpdate));
-      scheduled = true;
-      if (wait === 0) requestAnimationFrame(updateHero);
-      else setTimeout(() => requestAnimationFrame(updateHero), wait);
-    });
-
-    if ('ontouchstart' in window) {
-      window.addEventListener('scroll', () => {
-        const p = (window.scrollY % 400) / 400;
-        heroWash.style.setProperty('--p', p.toFixed(3));
-      }, { passive: true });
-    }
+  let i = 0;
+  function show(next) {
+    portraits[i].classList.remove('is-active');
+    dots[i]?.classList.remove('is-active');
+    i = (next + portraits.length) % portraits.length;
+    portraits[i].classList.add('is-active');
+    dots[i]?.classList.add('is-active');
+    hero.dataset.portrait = String(i);
   }
-}
+
+  // Random starting photo so each visit feels fresh.
+  show(Math.floor(Math.random() * portraits.length));
+
+  // Slow auto-rotation of the photo only — color stays locked. Pause on
+  // hover; pause when tab hidden so it doesn't drift while away.
+  const ROTATE_MS = 60_000;
+  let timer = null;
+  function start() {
+    if (prefersReducedMotion || timer) return;
+    timer = setInterval(() => show(i + 1), ROTATE_MS);
+  }
+  function stop() {
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  hero.addEventListener('click', e => {
+    if (e.target.closest('a, .hero-meta')) return;
+    show(i + 1);
+    stop(); start();
+  });
+  cycleBtn?.addEventListener('click', e => {
+    e.stopPropagation();
+    show(i + 1);
+    stop(); start();
+  });
+
+  hero.addEventListener('mouseenter', stop);
+  hero.addEventListener('mouseleave', start);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
+
+  start();
+})();
 
 
 // ── Gallery Lightbox ──────────────────────────────
@@ -290,7 +315,11 @@ if (hero && !prefersReducedMotion) {
 
     lbCount.textContent = `${current + 1} / ${pageImgs.length}`;
     thumbEls.forEach((t, i) => t.classList.toggle('is-active', i === current));
-    thumbEls[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    thumbEls[current].scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
   }
 
   function open(idx) {
@@ -321,10 +350,12 @@ if (hero && !prefersReducedMotion) {
   });
 
   // Expand cursor ring on lightbox buttons
-  lb.querySelectorAll('.lb-btn, .lb-arrow, .lb-thumb').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
-  });
+  if (canUseCustomCursor) {
+    lb.querySelectorAll('.lb-btn, .lb-arrow, .lb-thumb').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
+    });
+  }
 })();
 
 
@@ -378,20 +409,6 @@ if (hero && !prefersReducedMotion) {
 })();
 
 
-// ── Split text reveal on hero ─────────────────────
-const heroTitle = document.querySelector('.hero-title');
-if (heroTitle) {
-  const text = heroTitle.textContent;
-  heroTitle.innerHTML = text
-    .split('')
-    .map((ch, i) => `<span class="char" style="--i:${i}">${ch === ' ' ? '&nbsp;' : ch}</span>`)
-    .join('');
-  // Force the browser to commit the chars' initial styles before flipping the
-  // class, otherwise the transition can be skipped entirely (no "from" value to
-  // animate). Reading offsetWidth flushes style/layout synchronously.
-  void heroTitle.offsetWidth;
-  setTimeout(() => heroTitle.classList.add('chars-revealed'), 60);
-}
 
 
 // ── Design DNA overlay ─────────────────────────────
