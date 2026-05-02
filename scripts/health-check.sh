@@ -16,7 +16,6 @@ if command -v lychee >/dev/null 2>&1; then
   lychee --no-progress \
     --max-concurrency 8 \
     --accept 200,206,429 \
-    --exclude-mail \
     --exclude "localhost" \
     --exclude "victor-tran-site-2vxf.vercel.app" \
     "$ROOT"/*.html || echo "  (link issues found)"
