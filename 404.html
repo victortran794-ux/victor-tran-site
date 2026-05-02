@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <meta name="robots" content="noindex">
+  <title>Page not found · Victor Tran Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .notfound-main {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--section-y) var(--page-x);
+    }
+    .notfound-card {
+      max-width: 560px;
+      text-align: left;
+    }
+    .notfound-eyebrow {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin: 0 0 16px;
+    }
+    .notfound-title {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1.05;
+      margin: 0 0 24px;
+    }
+    .notfound-body {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-2);
+      margin: 0 0 32px;
+    }
+    .notfound-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .notfound-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 20px;
+      border: 1px solid var(--text);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .notfound-link.primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .notfound-link.primary:hover {
+      background: transparent;
+      color: var(--text);
+    }
+    .notfound-link:not(.primary):hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot"  aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/nav-logo.webp" alt="Victor Tran" width="34" height="34">
+        <span class="nav-logo-name">Victor Tran</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Work</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a role="menuitem" href="ibmcloud.html">IBM Cloud Observability</a></li>
+            <li role="none"><a role="menuitem" href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
+            <li role="none"><a role="menuitem" href="pci.html">Performance Contracting Group</a></li>
+            <li role="none"><a role="menuitem" href="abilityexperience.html">The Ability Experience</a></li>
+            <li role="none"><a role="menuitem" href="salmagazine.html">Star &amp; Lamp</a></li>
+            <li role="none"><a role="menuitem" href="pikappapp.html">Pi Kapp App</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Galleries</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a role="menuitem" href="artillustration.html">Art &amp; Illustration</a></li>
+            <li role="none"><a role="menuitem" href="graphicgallery.html">Graphic Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="notfound-main">
+    <div class="notfound-card">
+      <p class="notfound-eyebrow">404 · Off the page</p>
+      <h1 class="notfound-title">This one's a sketch I haven't finished yet.</h1>
+      <p class="notfound-body">
+        The page you're looking for doesn't exist — it may have moved, or it was never here to begin with.
+        Head back to the work, or drop me a note if you were looking for something specific.
+      </p>
+      <div class="notfound-links">
+        <a href="index.html" class="notfound-link primary">Back to portfolio</a>
+        <a href="mailto:victortran794@gmail.com" class="notfound-link">Email me</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-tagline">Do more good things.</p>
+      <p class="footer-subtitle">See you soon.</p>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">
+        Let's build something together.
+      </a>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

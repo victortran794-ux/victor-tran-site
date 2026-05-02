@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /pci
+Disallow: /pci.html
+Disallow: /ibmcloud
+Disallow: /ibmcloud.html
+Disallow: /ibm-patterns
+Disallow: /ibm-patterns.html
 
-Sitemap: https://victor-tran-site-2vxf.vercel.app/sitemap.xml
+Sitemap: https://victortrandesign.com/sitemap.xml
