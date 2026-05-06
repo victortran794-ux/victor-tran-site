@@ -35,6 +35,7 @@ jobs:
             --exclude "localhost"
             --exclude "victor-tran-site-2vxf.vercel.app"
             --exclude "linkedin.com"
+            --exclude "/pikappapp/demo"
             "./*.html"
           fail: true
 

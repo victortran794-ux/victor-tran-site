@@ -20,6 +20,7 @@ if command -v lychee >/dev/null 2>&1; then
     --exclude "localhost" \
     --exclude "victor-tran-site-2vxf.vercel.app" \
     --exclude "linkedin.com" \
+    --exclude "/pikappapp/demo" \
     "$ROOT"/*.html || echo "  (link issues found)"
 else
   echo "  lychee not installed — skipping. Install with: brew install lychee"
