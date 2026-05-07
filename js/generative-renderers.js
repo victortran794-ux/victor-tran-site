@@ -48,7 +48,7 @@ Only render known component types defined in a2ui/catalog.json.
   }
 
   function link(label, href, className) {
-    const node = el('a', className || 'gui-link', label || 'View');
+    const node = el('a', className || 'gui-link', label || '');
     node.href = normalizeHref(href);
     if (node.href.startsWith('https://')) {
       node.target = '_blank';
