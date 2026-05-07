@@ -1,0 +1,40 @@
+{
+  "version": "0.1",
+  "title": "A Good First Pass Through The Work",
+  "intro": "Start with a balanced path: enterprise product work, visual systems, then the more expressive gallery side of the portfolio.",
+  "components": [
+    {
+      "type": "RecommendedPath",
+      "title": "Start Here",
+      "steps": [
+        {
+          "title": "IBM Cloud Observability",
+          "reason": "The strongest overview of enterprise UX, product ownership, visual systems, and design system rigor.",
+          "url": "/ibmcloud"
+        },
+        {
+          "title": "IBM Patterns: Contact Us",
+          "reason": "A focused case study with a clear problem, large audience, and redesigned path through a real IBM.com experience.",
+          "url": "/ibm-patterns"
+        },
+        {
+          "title": "Graphic Gallery",
+          "reason": "A broader look at visual design instincts across brand, print, presentation, and graphic systems.",
+          "url": "/graphicgallery"
+        },
+        {
+          "title": "Art & Illustration",
+          "reason": "The personal visual practice behind the work: digital illustration, traditional pieces, and poster series.",
+          "url": "/artillustration"
+        }
+      ]
+    },
+    {
+      "type": "ContactCTA",
+      "headline": "Want To Keep Chatting?",
+      "body": "If something in the work feels worth talking through, Victor is easy to reach.",
+      "label": "Chat With Victor",
+      "href": "mailto:victortran794@gmail.com"
+    }
+  ]
+}

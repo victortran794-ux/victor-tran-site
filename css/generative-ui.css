@@ -1,0 +1,237 @@
+/* Generative UI preview and future chatbot response styles */
+
+.gui-preview-page {
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + var(--space-16)) var(--page-x) var(--space-20);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-2) 55%, transparent), transparent 360px),
+    var(--bg);
+}
+
+.gui-preview-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  max-width: var(--max-w);
+  margin: 0 auto var(--space-8);
+}
+
+.gui-shell {
+  display: grid;
+  gap: var(--space-8);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.gui-kicker {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.gui-page-title,
+.gui-title {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  line-height: 0.98;
+  color: var(--text);
+}
+
+.gui-page-title {
+  max-width: 880px;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+}
+
+.gui-title {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+}
+
+.gui-page-intro,
+.gui-copy {
+  max-width: 760px;
+  font-size: clamp(1.08rem, 2vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.gui-block {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border);
+}
+
+.gui-intro,
+.gui-cta {
+  gap: var(--space-4);
+}
+
+.gui-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.gui-button,
+.gui-preview-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font: 600 0.95rem/1 'Barlow', sans-serif;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.gui-preview-button {
+  background: transparent;
+  color: var(--text);
+}
+
+.gui-preview-button.is-active,
+.gui-button:hover,
+.gui-preview-button:hover {
+  transform: translateY(-1px);
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #fff;
+}
+
+.gui-project-grid,
+.gui-comparison,
+.gui-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.gui-project-card,
+.gui-comparison-card,
+.gui-image-figure,
+.gui-timeline-item,
+.gui-path-step {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 92%, var(--bg-2));
+  overflow: hidden;
+}
+
+.gui-project-card {
+  display: grid;
+  color: inherit;
+  min-height: 100%;
+}
+
+.gui-project-card.is-highlighted {
+  border-color: color-mix(in srgb, var(--pink) 55%, var(--border));
+}
+
+.gui-project-img,
+.gui-gallery-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--bg-2);
+}
+
+.gui-project-body,
+.gui-comparison-card,
+.gui-timeline-item,
+.gui-path-body {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.gui-card-title {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  line-height: 1.05;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.gui-card-copy {
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.gui-card-link,
+.gui-text-link {
+  width: fit-content;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.gui-list {
+  display: grid;
+  gap: var(--space-2);
+  padding-left: 1.1rem;
+  color: var(--text);
+}
+
+.gui-timeline,
+.gui-path {
+  display: grid;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+.gui-timeline-item {
+  position: relative;
+}
+
+.gui-path-step {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.gui-step-num {
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--border);
+  font-family: 'Source Code Pro', monospace;
+  color: var(--text-2);
+}
+
+.gui-caption {
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.gui-error {
+  max-width: var(--max-w);
+  margin: var(--space-20) auto;
+  color: var(--pink);
+}
+
+@media (max-width: 900px) {
+  .gui-project-grid,
+  .gui-comparison,
+  .gui-image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .gui-preview-page {
+    padding-top: calc(var(--nav-h) + var(--space-10));
+  }
+
+  .gui-project-grid,
+  .gui-comparison,
+  .gui-image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gui-path-step {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+}

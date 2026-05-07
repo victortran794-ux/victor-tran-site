@@ -83,6 +83,56 @@ All pages load Google Fonts via `<link>` tags with preconnect (not `@import`):
 - Marquee track auto-doubles its content for seamless loop
 - Hero title is split into `.char` spans and animated in on load
 
+## Ask Vic / curated portfolio guide
+
+The site includes an optional static chat-style portfolio guide called **Ask Vic**.
+
+Current mode: curated/static guide. It does **not** call AI APIs, does **not** use API keys, and does **not** require a backend. It loads local JSON responses from `a2ui/examples/` and renders them through a safe component renderer.
+
+To activate Ask Vic on a page, include these scripts after `js/main.js` and before `</body>`:
+
+```html
+<script src="js/generative-renderers.js"></script>
+<script src="js/ask-vic.js"></script>
+```
+
+`js/ask-vic.js` automatically loads:
+
+```txt
+css/generative-ui.css
+css/ask-vic.css
+```
+
+Ask Vic currently appears on `index.html` only. Keep it homepage-only unless explicitly asked to add it site-wide.
+
+Required files:
+
+- `js/ask-vic.js` — creates the lower-right launcher, panel, prompt routing, and curated response loading.
+- `js/generative-renderers.js` — safely renders approved portfolio UI components.
+- `css/ask-vic.css` — styles the launcher and chat panel.
+- `css/generative-ui.css` — styles generated response components.
+- `a2ui/examples/*.json` — curated response data.
+- `a2ui/catalog.json` — documents the allowed response component shapes.
+
+Do not render raw HTML from response JSON. Generated/curated responses should only use component types supported by `js/generative-renderers.js`.
+
+## Markdown content automation
+
+`scripts/html-to-md.mjs` converts the static HTML pages into Markdown files in `content/` and regenerates `content/site-index.json`.
+
+Run it after editing portfolio page content:
+
+```bash
+node scripts/html-to-md.mjs
+```
+
+Editing rules:
+
+- The `.html` pages are the source of truth for public portfolio content.
+- Most files in `content/*.md` are generated. Do not hand-edit generated Markdown.
+- `content/profile.md` is the exception: it is hand-maintained professional background context and may be edited directly.
+- If generated Markdown needs to improve, update `scripts/html-to-md.mjs` instead of patching generated output by hand.
+
 ## Asset sources
 
 - **Hero photo:** `~/Documents/Design Work/Website/Profile/Profile_Duo_v2.png` → converted to `images/hero-vic.jpg` (JPG 85%)

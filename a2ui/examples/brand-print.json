@@ -1,0 +1,45 @@
+{
+  "version": "0.1",
+  "title": "Brand, Print, And Visual Systems",
+  "intro": "This route focuses on work where identity, layout, collateral, and visual consistency matter most.",
+  "components": [
+    {
+      "type": "ProjectCardGrid",
+      "title": "Visual Design Route",
+      "items": [
+        {
+          "title": "Performance Contracting Group",
+          "category": "Brand & Print Design",
+          "description": "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.",
+          "url": "/pci",
+          "image": "images/pci-handbook-1-cover.webp",
+          "highlight": true
+        },
+        {
+          "title": "The Ability Experience",
+          "category": "Brand Identity & Collateral",
+          "description": "Brand identity and collateral for an organization focused on empowering social change through accessible design.",
+          "url": "/abilityexperience",
+          "image": "images/thumb-abex.webp",
+          "highlight": true
+        },
+        {
+          "title": "Star & Lamp",
+          "category": "Art Direction & Layout Design",
+          "description": "Layout and art direction work for the official Pi Kappa Phi magazine, modernizing a century-old publication.",
+          "url": "/salmagazine",
+          "image": "images/thumb-sal.webp",
+          "highlight": false
+        },
+        {
+          "title": "Graphic Gallery",
+          "category": "Graphic Design",
+          "description": "A collection of branding, print, presentation, infographic, and visual design work.",
+          "url": "/graphicgallery",
+          "image": "images/thumb-sgla.webp",
+          "highlight": false
+        }
+      ]
+    }
+  ]
+}

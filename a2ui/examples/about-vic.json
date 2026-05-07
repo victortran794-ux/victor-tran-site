@@ -1,0 +1,42 @@
+{
+  "version": "0.1",
+  "title": "A Little Context On Vic",
+  "intro": "A quick read on Victor's background, current role, and the range of work behind the portfolio.",
+  "components": [
+    {
+      "type": "PortfolioIntro",
+      "headline": "Victor Tran is a visual designer at IBM.",
+      "body": "He is a first-generation college graduate with a BFA in Graphic Design from Western Michigan University. His work spans enterprise UX, visual design, agentic workflow design, AI and automation, IBM Cloud, watsonx Orchestrate, brand, print, and illustration.",
+      "links": [
+        {
+          "label": "About Vic",
+          "href": "/about"
+        },
+        {
+          "label": "LinkedIn",
+          "href": "https://www.linkedin.com/in/victortrandesign/"
+        }
+      ]
+    },
+    {
+      "type": "ProjectComparison",
+      "title": "Where The Range Shows Up",
+      "columns": [
+        {
+          "title": "Enterprise UX",
+          "category": "Product Design",
+          "summary": "IBM Cloud Observability and IBM Patterns show product thinking, systems work, research, and interaction design.",
+          "strengths": ["Design systems", "Enterprise workflows", "Research synthesis"],
+          "url": "/ibmcloud"
+        },
+        {
+          "title": "Visual Systems",
+          "category": "Brand & Print",
+          "summary": "PCI, The Ability Experience, Star & Lamp, and Graphic Gallery show identity, layout, print, and visual communication range.",
+          "strengths": ["Brand identity", "Editorial design", "Collateral systems"],
+          "url": "/graphicgallery"
+        }
+      ]
+    }
+  ]
+}

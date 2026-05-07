@@ -1,0 +1,49 @@
+{
+  "version": "0.1",
+  "title": "A Visual Route Through The Artwork",
+  "intro": "This path highlights Victor's illustration range, from digital paintings and poster series to traditional work.",
+  "components": [
+    {
+      "type": "RecommendedPath",
+      "title": "Follow The Visual Work",
+      "steps": [
+        {
+          "title": "Art & Illustration",
+          "reason": "Start with the broadest view of Victor's digital and traditional illustration practice.",
+          "url": "/artillustration"
+        },
+        {
+          "title": "Graphic Gallery",
+          "reason": "Then look at how illustration shows up inside brand, print, presentation, and graphic systems.",
+          "url": "/graphicgallery"
+        },
+        {
+          "title": "IBM Cloud Observability",
+          "reason": "Finish with the illustration system work created for an enterprise product environment.",
+          "url": "/ibmcloud"
+        }
+      ]
+    },
+    {
+      "type": "ImageGallery",
+      "title": "Selected Images",
+      "items": [
+        {
+          "src": "images/illus-ibm-selectric-web.jpg",
+          "alt": "IBM Selectric 1961 · blueprint illustration",
+          "caption": "IBM Selectric feature"
+        },
+        {
+          "src": "images/illus-solar.jpg",
+          "alt": "Solar",
+          "caption": "Digital illustration"
+        },
+        {
+          "src": "images/illus-lost.jpg",
+          "alt": "Lost",
+          "caption": "Full-bleed landscape feature"
+        }
+      ]
+    }
+  ]
+}

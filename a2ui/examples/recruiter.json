@@ -1,0 +1,44 @@
+{
+  "version": "0.1",
+  "title": "Start With The Product Design Work",
+  "intro": "These pieces show enterprise product thinking, design system fluency, research, and end-to-end ownership.",
+  "components": [
+    {
+      "type": "ProjectCardGrid",
+      "title": "Recommended Case Studies",
+      "items": [
+        {
+          "title": "IBM Cloud Observability",
+          "category": "Product Design",
+          "description": "Three years shipping enterprise product work across IBM Cloud Observability, including Cloud Logs, Event Notifications, and illustration systems.",
+          "url": "/ibmcloud",
+          "image": "images/ibm-thumb-light.png",
+          "highlight": true
+        },
+        {
+          "title": "IBM Patterns: Contact Us",
+          "category": "Product Design",
+          "description": "A six-week redesign of IBM.com's Contact Us experience for 135,000 monthly visitors.",
+          "url": "/ibm-patterns",
+          "image": "images/patterns-hero.webp",
+          "highlight": true
+        },
+        {
+          "title": "Pi Kapp App",
+          "category": "Concept · Product Design",
+          "description": "A mobile app concept for fraternity members, exploring progress tracking, brand inheritance, and interaction polish.",
+          "url": "/pikappapp",
+          "image": "images/thumb-pikapp.webp",
+          "highlight": false
+        }
+      ]
+    },
+    {
+      "type": "ContactCTA",
+      "headline": "Want To Keep Chatting?",
+      "body": "Victor is a Visual Designer at IBM with experience across enterprise product, visual systems, brand, print, and illustration.",
+      "label": "Chat With Victor",
+      "href": "mailto:victortran794@gmail.com"
+    }
+  ]
+}

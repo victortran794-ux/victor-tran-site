@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "victor-tran-portfolio-ui",
+  "version": "0.1.0",
+  "description": "Allowed generative UI components for Victor Tran's portfolio chatbot. This is a local A2UI-style catalog draft and should be treated as the browser renderer contract until an official A2UI renderer is wired in.",
+  "designTokens": {
+    "colors": [
+      "--bg",
+      "--bg-2",
+      "--text",
+      "--text-2",
+      "--border",
+      "--blue",
+      "--pink",
+      "--purple",
+      "--orange"
+    ],
+    "fonts": {
+      "display": "DM Serif Display",
+      "body": "Barlow",
+      "mono": "Source Code Pro"
+    }
+  },
+  "responseSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["version", "title", "components"],
+    "properties": {
+      "version": {
+        "type": "string",
+        "const": "0.1"
+      },
+      "title": {
+        "type": "string",
+        "maxLength": 90
+      },
+      "intro": {
+        "type": "string",
+        "maxLength": 280
+      },
+      "components": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "items": {
+          "oneOf": [
+            { "$ref": "#/$defs/PortfolioIntro" },
+            { "$ref": "#/$defs/ProjectCardGrid" },
+            { "$ref": "#/$defs/CaseStudyTimeline" },
+            { "$ref": "#/$defs/ProjectComparison" },
+            { "$ref": "#/$defs/ImageGallery" },
+            { "$ref": "#/$defs/RecommendedPath" },
+            { "$ref": "#/$defs/ContactCTA" }
+          ]
+        }
+      }
+    },
+    "$defs": {
+      "PortfolioIntro": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "headline", "body"],
+        "properties": {
+          "type": { "const": "PortfolioIntro" },
+          "headline": { "type": "string", "maxLength": 90 },
+          "body": { "type": "string", "maxLength": 420 },
+          "links": {
+            "type": "array",
+            "maxItems": 3,
+            "items": { "$ref": "#/$defs/Link" }
+          }
+        }
+      },
+      "ProjectCardGrid": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "items"],
+        "properties": {
+          "type": { "const": "ProjectCardGrid" },
+          "title": { "type": "string", "maxLength": 90 },
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": { "$ref": "#/$defs/ProjectCard" }
+          }
+        }
+      },
+      "CaseStudyTimeline": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "items"],
+        "properties": {
+          "type": { "const": "CaseStudyTimeline" },
+          "title": { "type": "string", "maxLength": 90 },
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 7,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "title", "body"],
+              "properties": {
+                "label": { "type": "string", "maxLength": 40 },
+                "title": { "type": "string", "maxLength": 90 },
+                "body": { "type": "string", "maxLength": 260 },
+                "url": { "type": "string", "maxLength": 120 }
+              }
+            }
+          }
+        }
+      },
+      "ProjectComparison": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "columns"],
+        "properties": {
+          "type": { "const": "ProjectComparison" },
+          "title": { "type": "string", "maxLength": 90 },
+          "columns": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["title", "category", "summary", "strengths", "url"],
+              "properties": {
+                "title": { "type": "string", "maxLength": 90 },
+                "category": { "type": "string", "maxLength": 50 },
+                "summary": { "type": "string", "maxLength": 260 },
+                "strengths": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": { "type": "string", "maxLength": 90 }
+                },
+                "url": { "type": "string", "maxLength": 120 }
+              }
+            }
+          }
+        }
+      },
+      "ImageGallery": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "items"],
+        "properties": {
+          "type": { "const": "ImageGallery" },
+          "title": { "type": "string", "maxLength": 90 },
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 9,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["src", "alt"],
+              "properties": {
+                "src": { "type": "string", "maxLength": 180 },
+                "alt": { "type": "string", "maxLength": 160 },
+                "caption": { "type": "string", "maxLength": 120 }
+              }
+            }
+          }
+        }
+      },
+      "RecommendedPath": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "title", "steps"],
+        "properties": {
+          "type": { "const": "RecommendedPath" },
+          "title": { "type": "string", "maxLength": 90 },
+          "steps": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["title", "reason", "url"],
+              "properties": {
+                "title": { "type": "string", "maxLength": 90 },
+                "reason": { "type": "string", "maxLength": 220 },
+                "url": { "type": "string", "maxLength": 120 }
+              }
+            }
+          }
+        }
+      },
+      "ContactCTA": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "headline", "body", "label", "href"],
+        "properties": {
+          "type": { "const": "ContactCTA" },
+          "headline": { "type": "string", "maxLength": 90 },
+          "body": { "type": "string", "maxLength": 220 },
+          "label": { "type": "string", "maxLength": 40 },
+          "href": { "type": "string", "maxLength": 120 }
+        }
+      },
+      "ProjectCard": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "category", "description", "url"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 90 },
+          "category": { "type": "string", "maxLength": 50 },
+          "description": { "type": "string", "maxLength": 240 },
+          "url": { "type": "string", "maxLength": 120 },
+          "image": { "type": "string", "maxLength": 180 },
+          "highlight": { "type": "boolean" }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "href"],
+        "properties": {
+          "label": { "type": "string", "maxLength": 40 },
+          "href": { "type": "string", "maxLength": 120 }
+        }
+      }
+    }
+  }
+}
