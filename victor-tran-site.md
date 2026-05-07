@@ -85,7 +85,7 @@ All pages load Google Fonts via `<link>` tags with preconnect (not `@import`):
 
 ## Ask Vic / curated portfolio guide
 
-The site includes an optional static chat-style portfolio guide called **Ask Vic**.
+The site includes an optional static chat-style portfolio guide called **Ask Vic**. It is currently dormant on the live site.
 
 Current mode: curated/static guide. It does **not** call AI APIs, does **not** use API keys, and does **not** require a backend. It loads local JSON responses from `a2ui/examples/` and renders them through a safe component renderer.
 
@@ -103,7 +103,7 @@ css/generative-ui.css
 css/ask-vic.css
 ```
 
-Ask Vic currently appears on `index.html` only. Keep it homepage-only unless explicitly asked to add it site-wide.
+Ask Vic does not currently appear on any live page. To re-enable it, add the activation scripts to `index.html` only unless explicitly asked to add it site-wide.
 
 Required files:
 

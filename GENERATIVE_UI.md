@@ -2,7 +2,7 @@
 
 This document describes the chatbot and generative UI layer for Victor Tran's portfolio site. Treat this as an add-on system around the existing static HTML/CSS/JS site, not a reason to rewrite the portfolio.
 
-Current mode: curated/static portfolio guide. It does not call AI APIs, does not use API keys, and does not require a backend. Future mode may add an optional server-side AI endpoint.
+Current mode: curated/static portfolio guide, dormant on the live site. It does not call AI APIs, does not use API keys, and does not require a backend. Future mode may add an optional server-side AI endpoint.
 
 ## Source Of Truth
 
@@ -55,7 +55,7 @@ Markdown is the chatbot knowledge layer. A2UI or A2UI-inspired JSON is the rende
 
 ## Activation
 
-Ask Vic activates on any page that includes these scripts after `js/main.js`:
+Ask Vic is currently inactive. It activates on any page that includes these scripts after `js/main.js`:
 
 ```html
 <script src="js/generative-renderers.js"></script>
