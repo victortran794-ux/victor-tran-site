@@ -429,17 +429,22 @@ button:focus-visible,
   height: calc(100vh - var(--nav-h));
   min-height: 620px;
   overflow: hidden;
+  /* Hero is always dark regardless of site theme — scope dark tokens locally
+     so all descendants (eyebrow, title, subtitle, cta, services, cycle) flip
+     automatically. */
+  --bg:     #0e0e0e;
+  --bg-2:   #181818;
+  --text:   #f0f0ee;
+  --text-2: #888888;
+  --border: #2c2c2c;
   /* --bg-tint, --lens-color, and --accent-2 are session-locked at page load
      by JS. The bg is a soft, desaturated wash of the session color. */
   --bg-tint: transparent;
   --lens-color: var(--text);
   --accent-2: var(--text);
-  background: color-mix(in oklab, var(--bg-tint) 16%, var(--bg));
+  background: color-mix(in oklab, var(--bg-tint) 26%, var(--bg));
   color: var(--text);
   cursor: none; /* stage itself is the click target */
-}
-[data-theme="dark"] .hero {
-  background: color-mix(in oklab, var(--bg-tint) 26%, var(--bg));
 }
 
 /* The "stage" holds the giant type + portraits, centered and clipped */
@@ -529,10 +534,31 @@ button:focus-visible,
    fill color is decoupled from the PNG and driven by the hero's --lens-color.
    Mixed with a neutral gray to desaturate — the lens hue stays readable but
    doesn't shout over the figure. */
+/* Full-figure tint — same masking pattern as the lens, but uses the cutout
+   image as the mask so the session color washes the whole silhouette. Sits
+   below the lens in the stacking order; lighter opacity than the lens. */
+.hero-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--lens-color, var(--pink));
+  opacity: 0.28;
+  -webkit-mask-image: var(--portrait-mask);
+          mask-image: var(--portrait-mask);
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: var(--anchor, center bottom);
+          mask-position: var(--anchor, center bottom);
+}
+
 .hero-portrait-lens {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  opacity: 0.82;
   background: color-mix(in oklab, var(--lens-color, var(--pink)), var(--text-2) 32%);
   -webkit-mask-image: var(--lens-mask);
           mask-image: var(--lens-mask);
@@ -573,6 +599,16 @@ button:focus-visible,
   line-height: 1.45;
   color: var(--text-2);
   letter-spacing: 0.005em;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-2);
+  opacity: 0.8;
   margin: 0;
 }
 
