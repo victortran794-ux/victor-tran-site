@@ -476,7 +476,7 @@ button:focus-visible,
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
   font-size: clamp(7rem, 24vw, 26rem);
-  line-height: 0.86;
+  line-height: 0.78;
   letter-spacing: -0.025em;
   /* Track the active portrait's accent token so the words sit in the same
      hue as the lens fill — full saturation up top, knocked-back italic below. */
@@ -488,9 +488,13 @@ button:focus-visible,
   font-style: italic;
   /* Second word picks a different palette token (set on the hero by JS) so
      the headline plays a small two-color game. Italic + ~half opacity keeps
-     it knocked back behind "Visual". */
+     it knocked back behind "Visual". Indented + significant upward bite so
+     the cap height of "Designer" tucks under "Visual" — words overlap
+     vertically rather than just stack tight. */
   color: var(--accent-2, var(--lens-color));
   opacity: 0.55;
+  margin-left: 0.55em;
+  margin-top: -0.24em;
 }
 
 /* Portraits stack — one is .is-active at a time. They share a frame so the
