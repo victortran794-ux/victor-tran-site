@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "I'm Vic."
+title: "I design cool things with sincerity."
 source: "index.html"
 url: "/"
 category: "Portfolio"
 description: "Victor Tran. Visual designer at IBM. I design cool things with sincerity."
 ---
 
-# I'm Vic.
+# I design cool things with sincerity.
 
 ## Description
 
@@ -46,7 +46,9 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Body Copy
 
-I design cool things with sincerity.
+Vic Tran ®
+
+Visual designer working across brand, illustration, and product systems.
 
 Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.
 
@@ -64,9 +66,19 @@ Digital and traditional illustration — posters, paintings, and personal series
 
 A collection of graphic design work spanning brand identity, print, and digital design.
 
+## Lists And Tags
+
+- Visual Design
+- Brand Identity
+- Art Direction
+- Illustration
+
 ## Images
 
-- Victor Tran: images/hero-vic.webp
+- Victor Tran, in a green sweater: images/hero/figure16.webp
+- Victor Tran, in a white shirt: images/hero/figure19.webp
+- Victor Tran, laughing: images/hero/figure20.webp
+- Victor Tran, in a patterned shirt: images/hero/figure21.webp
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp
