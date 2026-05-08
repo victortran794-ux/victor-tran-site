@@ -40,6 +40,17 @@
   --page-x:    var(--space-12);  /* 48px — page side padding */
   --section-y: var(--space-20);  /* 80px — vertical rhythm between sections */
   --gallery-x: var(--space-6);   /* 24px — viewport gutter for full-bleed galleries */
+
+  /* Type scale — purpose-named, fluid where the use case is fluid.
+     See content/design-system.json + .md for the full spec. */
+  --text-caption:    0.6875rem;                             /* 11px — kickers, .section-label, mono caps */
+  --text-label:      0.8125rem;                             /* 13px — UI text, view-link, hero-cta, footer  */
+  --text-body:       0.9375rem;                             /* 15px — default body, card desc                */
+  --text-lead:       1.0625rem;                             /* 17px — case-study lead paragraphs             */
+  --text-subheading: 1.5rem;                                /* 24px — H3-equivalent                          */
+  --text-title:      clamp(1.5rem, 2.5vw, 2.25rem);         /* 24-36px fluid — H2 / card titles              */
+  --text-display:    clamp(2.75rem, 7vw, 5.5rem);           /* 44-88px fluid — hero H1, big section heads    */
+  --text-hero:       clamp(7rem, 24vw, 26rem);              /* 112-416px fluid — the "Visual / Designer" giant */
 }
 
 /* --page-x rebinds at breakpoints so consumers don't need media queries */
@@ -211,7 +222,7 @@ button:focus-visible,
 .nav-logo-name {
   font-family: 'Barlow', sans-serif;
   font-weight: 700;
-  font-size: 0.9375rem;
+  font-size: var(--text-body);
   color: var(--text);
   letter-spacing: 0.01em;
 }
@@ -224,7 +235,7 @@ button:focus-visible,
 }
 
 .nav-links a {
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   color: var(--text-2);
   transition: color 0.2s;
   letter-spacing: 0.01em;
@@ -247,7 +258,7 @@ button:focus-visible,
   padding: 0;
   margin: 0;
   font: inherit;
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   letter-spacing: 0.01em;
   color: var(--text-2);
   display: inline-flex;
@@ -310,7 +321,7 @@ button:focus-visible,
   display: block;
   padding: 9px 14px;
   border-radius: 8px;
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   color: var(--text-2);
   transition: background 0.15s, color 0.15s;
 }
@@ -327,7 +338,7 @@ button:focus-visible,
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 5px 13px;
-  font-size: 0.75rem;
+  font-size: var(--text-caption);
   font-family: 'Barlow', sans-serif;
   color: var(--text-2);
   letter-spacing: 0.04em;
@@ -365,20 +376,20 @@ button:focus-visible,
 
 .footer-tagline {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: var(--text-display);
   color: var(--text);
   margin-bottom: 6px;
   line-height: 1.1;
 }
 
 .footer-subtitle {
-  font-size: 1rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   margin-bottom: 36px;
 }
 
 .footer-cta {
-  font-size: 0.9375rem;
+  font-size: var(--text-body);
   font-weight: 500;
   color: var(--blue);
   border-bottom: 1px solid currentColor;
@@ -399,10 +410,10 @@ button:focus-visible,
   margin-top: 40px;
 }
 
-.footer-copyright { font-size: 0.8rem; color: var(--text-2); }
+.footer-copyright { font-size: var(--text-label); color: var(--text-2); }
 
 .footer-social a {
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   font-weight: 500;
   color: var(--text-2);
   transition: color 0.2s;
@@ -475,7 +486,7 @@ button:focus-visible,
   display: block;
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
-  font-size: clamp(7rem, 24vw, 26rem);
+  font-size: var(--text-hero);
   line-height: 0.86;
   letter-spacing: -0.025em;
   /* Track the active portrait's accent token so the words sit in the same
@@ -585,7 +596,7 @@ button:focus-visible,
 
 .hero-eyebrow {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.75rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -594,7 +605,7 @@ button:focus-visible,
 
 .hero-title {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.95rem;
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.45;
   color: var(--text-2);
@@ -604,7 +615,7 @@ button:focus-visible,
 
 .hero-subtitle {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--text-label);
   font-weight: 400;
   line-height: 1.5;
   color: var(--text-2);
@@ -614,7 +625,7 @@ button:focus-visible,
 
 .hero-cta {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.78rem;
+  font-size: var(--text-label);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -640,7 +651,7 @@ button:focus-visible,
   gap: var(--space-6);
   list-style: none;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.75rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -682,7 +693,7 @@ button:focus-visible,
 }
 .hero-cycle-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -697,14 +708,14 @@ button:focus-visible,
 @media (max-width: 900px) {
   .hero-meta { max-width: 240px; top: calc(var(--nav-h) + var(--space-8)); }
   .hero-cycle { top: calc(var(--nav-h) + var(--space-8)); }
-  .hero-services { font-size: 0.65rem; gap: var(--space-3); }
-  .hero-bigtype { font-size: clamp(6rem, 22vw, 16rem); }
+  .hero-services { font-size: var(--text-caption); gap: var(--space-3); }
+  .hero-bigtype { font-size: clamp(6rem, 22vw, 16rem);  /* mobile hero override */ }
 }
 
 /* Phone: stack meta above the type block; shrink portrait; 2x2 services. */
 @media (max-width: 600px) {
   .hero { min-height: 600px; }
-  .hero-bigtype { font-size: clamp(4.5rem, 24vw, 8rem); line-height: 0.88; }
+  .hero-bigtype { font-size: clamp(4.5rem, 24vw, 8rem);  /* mobile hero override */ line-height: 0.88; }
   .hero-portraits {
     height: min(60vh, 520px);
   }
@@ -713,14 +724,14 @@ button:focus-visible,
     max-width: 60vw;
     gap: var(--space-2);
   }
-  .hero-title { font-size: 0.82rem; line-height: 1.35; }
-  .hero-cta { font-size: 0.7rem; }
+  .hero-title { font-size: var(--text-label); line-height: 1.35; }
+  .hero-cta { font-size: var(--text-caption); }
   .hero-cycle-label { display: none; }
   .hero-services {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2) var(--space-4);
-    font-size: 0.58rem;
+    font-size: var(--text-caption);
     bottom: var(--space-4);
   }
 }
@@ -750,7 +761,7 @@ button:focus-visible,
   gap: 20px;
   padding: 0 28px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -775,7 +786,7 @@ button:focus-visible,
 ══════════════════════════════════════════════ */
 .section-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -855,21 +866,21 @@ button:focus-visible,
 
 .featured-item-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: var(--text-title);
   color: var(--text);
   margin-bottom: 14px;
   line-height: 1.1;
 }
 
 .featured-item-desc {
-  font-size: 0.9375rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   line-height: 1.8;
   margin-bottom: 28px;
 }
 
 .view-link {
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   font-weight: 500;
   color: var(--text-2);
   display: inline-flex;
@@ -887,6 +898,51 @@ button:focus-visible,
 }
 .view-link:hover::after { transform: translateX(6px); }
 
+/* ── Colored surface variants ──
+   Paired-token rule: orange surface → blue accent only;
+   purple surface → pink accent only.
+   Body text and titles use white for WCAG-passing contrast;
+   the paired accent is reserved for graphic punctuation
+   (the dot, the arrow), never for readable body text. */
+.featured-item--surface-orange .featured-item-content,
+.featured-item--surface-purple .featured-item-content {
+  color: #ffffff;
+}
+.featured-item--surface-orange .featured-item-content { background: var(--orange); }
+.featured-item--surface-purple .featured-item-content { background: var(--purple); }
+
+.featured-item--surface-orange .featured-item-title,
+.featured-item--surface-purple .featured-item-title { color: #ffffff; }
+
+.featured-item--surface-orange .featured-item-desc,
+.featured-item--surface-purple .featured-item-desc { color: rgba(255, 255, 255, 0.82); }
+
+.featured-item--surface-orange .section-label,
+.featured-item--surface-purple .section-label {
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.featured-item--surface-orange .section-label::before,
+.featured-item--surface-purple .section-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  flex: none;
+  margin-bottom: 1px;
+}
+.featured-item--surface-orange .section-label::before { background: var(--blue); }
+.featured-item--surface-purple .section-label::before { background: var(--pink); }
+
+.featured-item--surface-orange .view-link,
+.featured-item--surface-purple .view-link { color: rgba(255, 255, 255, 0.82); }
+.featured-item--surface-orange .view-link:hover,
+.featured-item--surface-purple .view-link:hover { color: #ffffff; }
+.featured-item--surface-orange .view-link::after { color: var(--blue); }
+.featured-item--surface-purple .view-link::after { color: var(--pink); }
+
 
 /* ══════════════════════════════════════════════
    PAGE HEADER (gallery / case study pages)
@@ -902,14 +958,14 @@ button:focus-visible,
 
 .page-header-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-size: var(--text-display);
   color: var(--text);
   line-height: 0.98;
   margin-bottom: 20px;
 }
 
 .page-header-desc {
-  font-size: 1rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   max-width: 540px;
   line-height: 1.8;
@@ -932,7 +988,7 @@ button:focus-visible,
 
 .case-study-meta dt {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.65rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -940,7 +996,7 @@ button:focus-visible,
 }
 
 .case-study-meta dd {
-  font-size: 0.9375rem;
+  font-size: var(--text-body);
   font-weight: 500;
   color: var(--text);
 }
@@ -956,7 +1012,7 @@ button:focus-visible,
 }
 
 .case-study p {
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
   line-height: 1.9;
   color: var(--text-2);
   max-width: 680px;
@@ -965,7 +1021,7 @@ button:focus-visible,
 
 .case-study h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.125rem;
+  font-size: var(--text-title);
   color: var(--text);
   margin: 56px 0 16px;
   line-height: 1.1;
@@ -973,7 +1029,7 @@ button:focus-visible,
 
 .case-study h3 {
   font-family: 'Barlow', sans-serif;
-  font-size: 1.125rem;
+  font-size: var(--text-lead);
   font-weight: 600;
   color: var(--text);
   margin: 36px 0 12px;
@@ -986,7 +1042,7 @@ button:focus-visible,
   padding-left: 24px;
   line-height: 2;
   color: var(--text-2);
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
 }
 
 .case-study-images {
@@ -1102,7 +1158,7 @@ button:focus-visible,
 .case-study-lede p {
   font-family: 'DM Serif Display', serif;
   font-style: italic;
-  font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+  font-size: var(--text-title);
   line-height: 1.35;
   color: var(--text);
   max-width: 760px;
@@ -1112,7 +1168,7 @@ button:focus-visible,
   display: block;
   font-style: normal;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -1122,7 +1178,7 @@ button:focus-visible,
 .case-study-eyebrow {
   display: block;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1133,7 +1189,7 @@ button:focus-visible,
 
 .case-study-thesis {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
+  font-size: var(--text-title);
   line-height: 1.4;
   color: var(--text);
   max-width: 720px;
@@ -1142,7 +1198,7 @@ button:focus-visible,
 
 .case-study-caption {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.72rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.06em;
   color: var(--text-2);
   margin-top: -32px;
@@ -1170,7 +1226,7 @@ button:focus-visible,
 
 .case-study-placeholder-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.72rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -1245,22 +1301,22 @@ button:focus-visible,
   font-family: 'Barlow', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   color: #F5D97A;
 }
 .case-study-prototype-cta-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.625rem;
+  font-size: var(--text-title);
   line-height: 1.1;
   color: #FAF7EE;
 }
 .case-study-prototype-cta-meta {
-  font-size: 0.8125rem;
+  font-size: var(--text-label);
   color: rgba(250, 247, 238, 0.6);
 }
 .case-study-prototype-cta-arrow {
   position: relative;
-  font-size: 1.5rem;
+  font-size: var(--text-subheading);
   color: #E8B33D;
   flex-shrink: 0;
   transition: transform 0.25s ease;
@@ -1274,8 +1330,8 @@ button:focus-visible,
     gap: var(--space-4);
   }
   .case-study-prototype-cta-mark { width: 44px; height: 44px; }
-  .case-study-prototype-cta-title { font-size: 1.25rem; }
-  .case-study-prototype-cta-meta { font-size: 0.75rem; }
+  .case-study-prototype-cta-title { font-size: var(--text-subheading); }
+  .case-study-prototype-cta-meta { font-size: var(--text-caption); }
 }
 
 .case-study-outro {
@@ -1286,13 +1342,13 @@ button:focus-visible,
 }
 .case-study-outro h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: var(--text-title);
   margin: 0 0 var(--space-6);
   color: var(--text);
   line-height: 1.1;
 }
 .case-study-outro p {
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
   line-height: 1.9;
   color: var(--text-2);
   max-width: 680px;
@@ -1332,7 +1388,7 @@ button:focus-visible,
 
 .project-nav-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.65rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1341,14 +1397,14 @@ button:focus-visible,
 
 .project-nav-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: var(--text-title);
   color: var(--text);
   line-height: 1.15;
   transition: color 0.2s;
 }
 
 .project-nav-arrow {
-  font-size: 1rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
@@ -1370,7 +1426,7 @@ button:focus-visible,
 }
 
 .about-bio p {
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
   line-height: 1.9;
   color: var(--text-2);
   margin-bottom: 28px;
@@ -1382,7 +1438,7 @@ button:focus-visible,
 
 .about-bio p:first-child {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-size: var(--text-title);
   line-height: 1.55;
   color: var(--text);
 }
@@ -1418,7 +1474,7 @@ button:focus-visible,
 
 .about-now-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: var(--text-display);
   color: var(--text);
   margin-bottom: 48px;
   line-height: 1.05;
@@ -1441,7 +1497,7 @@ button:focus-visible,
 
 .about-now-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--blue);
   text-transform: uppercase;
@@ -1451,7 +1507,7 @@ button:focus-visible,
 
 .about-now-value {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: var(--text-body);
   color: var(--text);
 }
 
@@ -1466,7 +1522,7 @@ button:focus-visible,
 
 .about-skills-section h3 {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--text-2);
   text-transform: uppercase;
@@ -1486,7 +1542,7 @@ button:focus-visible,
   background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: 100px;
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   color: var(--text);
   transition: border-color 0.2s, color 0.2s;
 }
@@ -1499,13 +1555,13 @@ button:focus-visible,
 
 .about-work h3 {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.75rem;
+  font-size: var(--text-title);
   margin-bottom: 6px;
   color: var(--text);
 }
 
 .about-work-subtitle {
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   color: var(--text-2);
   margin-bottom: 32px;
 }
@@ -1513,7 +1569,7 @@ button:focus-visible,
 .work-list { list-style: none; }
 
 .work-list li {
-  font-size: 0.9375rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
@@ -1525,7 +1581,7 @@ button:focus-visible,
 }
 
 .about-employer-role {
-  font-size: 0.9rem;
+  font-size: var(--text-body);
   color: var(--text-2);
   line-height: 1.6;
 }
@@ -1544,7 +1600,7 @@ button:focus-visible,
 
 .gallery-section-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-size: var(--text-display);
   line-height: 1.1;
   color: var(--text);
   max-width: var(--max-w);
@@ -1634,7 +1690,7 @@ button:focus-visible,
 .gallery-spotlight-cap {
   margin-top: 16px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.78rem;
+  font-size: var(--text-label);
   letter-spacing: 0.04em;
   color: var(--text-2);
   text-align: center;
@@ -1798,7 +1854,7 @@ button:focus-visible,
   border: 1px solid #f5c842;
   border-radius: 6px;
   padding: 6px 14px;
-  font-size: 0.85rem;
+  font-size: var(--text-label);
   color: #7a5c00;
   margin: 4px 4px 4px 0;
 }
@@ -1842,14 +1898,14 @@ button:focus-visible,
 
 .issue-index dt {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--blue);
 }
 
 .issue-index dd {
-  font-size: 0.875rem;
+  font-size: var(--text-label);
   color: var(--text-2);
 }
 
@@ -1889,7 +1945,7 @@ button:focus-visible,
 .sal-cover-wall span {
   margin-top: 10px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -1902,7 +1958,7 @@ button:focus-visible,
 }
 
 .sal-archive-note {
-  font-size: 0.95rem !important;
+  font-size: var(--text-body) !important;
   color: var(--text-2);
   margin: 8px 0 56px !important;
   max-width: 620px;
@@ -1934,14 +1990,14 @@ button:focus-visible,
 .sal-spread-feature figcaption .section-label {
   margin: 0;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--blue);
 }
 .sal-spread-feature figcaption p {
   margin: 0 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--text-body) !important;
   line-height: 1.6 !important;
   color: var(--text-2);
   font-style: italic;
@@ -1977,14 +2033,14 @@ button:focus-visible,
 .sal-spread-pair figcaption .section-label {
   margin: 0;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.68rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--blue);
 }
 .sal-spread-pair figcaption p {
   margin: 0 !important;
-  font-size: 0.88rem !important;
+  font-size: var(--text-label) !important;
   line-height: 1.55 !important;
   color: var(--text-2);
   font-style: italic;
@@ -2163,13 +2219,13 @@ button:focus-visible,
 
 .lb-title {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.95rem;
+  font-size: var(--text-body);
   font-weight: 600;
   color: rgba(240, 240, 238, 0.95);
   letter-spacing: 0.02em;
 }
 .lb-count {
-  font-size: 0.75rem;
+  font-size: var(--text-caption);
   color: rgba(240, 240, 238, 0.4);
   margin-top: 3px;
   font-family: 'Source Code Pro', monospace;
@@ -2192,7 +2248,7 @@ button:focus-visible,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: var(--text-body);
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 .lb-btn:hover {
@@ -2245,7 +2301,7 @@ button:focus-visible,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: var(--text-subheading);
   line-height: 1;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   backdrop-filter: blur(10px);
@@ -2328,7 +2384,7 @@ button:focus-visible,
 }
 .dna-trigger-icon {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: var(--text-label);
   color: var(--pink);
   transition: transform 0.3s ease;
 }
@@ -2378,7 +2434,7 @@ button:focus-visible,
 }
 .dna-eyebrow {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.72rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -2386,7 +2442,7 @@ button:focus-visible,
 }
 .dna-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-size: var(--text-display);
   line-height: 1;
   color: var(--text);
   font-weight: 400;
@@ -2402,7 +2458,7 @@ button:focus-visible,
   border-radius: 999px;
   width: 44px;
   height: 44px;
-  font-size: 1.4rem;
+  font-size: var(--text-subheading);
   line-height: 1;
   color: var(--text-2);
   cursor: pointer;
@@ -2462,27 +2518,27 @@ button:focus-visible,
 .dna-card-head { display: flex; flex-direction: column; gap: 4px; }
 .dna-card-kicker {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-2);
 }
 .dna-card-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.5rem;
+  font-size: var(--text-subheading);
   line-height: 1.1;
   color: var(--text);
   font-weight: 400;
 }
 .dna-card-desc {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.88rem;
+  font-size: var(--text-label);
   color: var(--text-2);
   line-height: 1.4;
 }
 .dna-card-desc code {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.82rem;
+  font-size: var(--text-label);
   padding: 1px 5px;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -2514,7 +2570,7 @@ button:focus-visible,
   bottom: 0;
   padding: 6px 8px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.62rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.04em;
   color: #fff;
   text-align: left;
@@ -2564,7 +2620,7 @@ button:focus-visible,
   left: 12px;
   bottom: 10px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
@@ -2594,13 +2650,13 @@ button:focus-visible,
 .dna-font:hover { border-color: var(--text-2); }
 .dna-font-meta {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.65rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.08em;
   color: var(--text-2);
   text-transform: uppercase;
 }
 .dna-font-sample {
-  font-size: 3.6rem;
+  font-size: var(--text-display);
   line-height: 1;
   color: var(--text);
   margin: 8px 0 4px;
@@ -2620,7 +2676,7 @@ button:focus-visible,
 }
 .dna-font-use {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.78rem;
+  font-size: var(--text-label);
   color: var(--text-2);
 }
 
@@ -2632,7 +2688,7 @@ button:focus-visible,
   flex: 1;
 }
 .dna-playground-text {
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-size: var(--text-title);
   line-height: 1.15;
   color: var(--text);
   padding: 14px 16px;
@@ -2659,7 +2715,7 @@ button:focus-visible,
   border-radius: 999px;
   padding: 6px 12px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.72rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.06em;
   color: var(--text-2);
   cursor: pointer;
@@ -2686,7 +2742,7 @@ button:focus-visible,
   align-items: center;
   gap: 10px;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   color: var(--text-2);
 }
 .dna-scale-bar {
@@ -2715,7 +2771,7 @@ button:focus-visible,
   align-items: center;
   justify-content: center;
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.7rem;
+  font-size: var(--text-caption);
   color: var(--text-2);
   transition: background 0.2s, color 0.2s;
 }
@@ -2735,7 +2791,7 @@ button:focus-visible,
   background: none;
   cursor: pointer;
   font-family: 'Barlow', sans-serif;
-  font-size: 0.78rem;
+  font-size: var(--text-label);
   letter-spacing: 0.04em;
   transition: all 0.2s;
 }
@@ -2757,7 +2813,7 @@ button:focus-visible,
 .dna-sample-btn--ghost:hover { color: var(--pink); border-bottom-color: var(--pink); }
 .dna-sample-tag {
   font-family: 'Source Code Pro', monospace;
-  font-size: 0.62rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-2);
@@ -2792,7 +2848,7 @@ button:focus-visible,
   .dna-card--scale, .dna-card--radii, .dna-card--ui { grid-column: 1 / -1; grid-row: auto; }
   .dna-panel { padding: 20px; }
   .dna-trigger-label { display: none; }
-  .dna-font-sample { font-size: 2.6rem; }
+  .dna-font-sample { font-size: var(--text-display); }
 }
 
 /* Reduced motion */
