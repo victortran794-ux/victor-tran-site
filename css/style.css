@@ -1782,13 +1782,74 @@ button:focus-visible,
 }
 /* Higher specificity to beat gallery-section:first-of-type */
 .gallery-section.gallery-group-chicago,
-.gallery-section.gallery-group-traditional {
+.gallery-section.gallery-group-traditional,
+.gallery-section.gallery-group-cards {
   padding-top: 96px;
 }
 .gallery-group-chicago .gallery-grid,
 .gallery-group-traditional .gallery-row {
   padding-left: var(--gallery-x);
   padding-right: var(--gallery-x);
+}
+
+/* ── Gallery: section description (sits under section title) ── */
+.gallery-section-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text-muted, var(--text));
+  opacity: 0.75;
+  max-width: var(--max-w);
+  margin: 0 auto var(--space-4);
+  padding: 0 var(--page-x);
+}
+
+/* ── Gallery: card grid (Suit of Diamonds character concepts) ── */
+.gallery-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--space-4) var(--gallery-x) var(--space-12);
+}
+@media (max-width: 1024px) { .gallery-cards { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px)  { .gallery-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+.gallery-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--surface-paired, var(--surface, #f4f1ea));
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -16px rgba(0,0,0,0.35);
+  border-color: var(--text);
+}
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: transparent;
+  padding: 14px 12px 6px;
+  display: block;
+  cursor: zoom-in;
+}
+.gallery-card figcaption {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.7;
+  text-align: center;
+  padding: 0 8px 12px;
 }
 
 /* ── Gallery: feature (full-bleed landscape piece) ── */
