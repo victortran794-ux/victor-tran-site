@@ -448,14 +448,14 @@ button:focus-visible,
   --text:   #f0f0ee;
   --text-2: #888888;
   --border: #2c2c2c;
-  /* --bg-tint, --lens-color, and --accent-2 are session-locked at page load
-     by JS. The bg is a soft, desaturated wash of the session color. */
+  /* --bg-tint, --lens-color, and --accent-2 are set by the hero color switcher.
+     The bg is a soft, desaturated wash of the selected color. */
   --bg-tint: transparent;
   --lens-color: var(--text);
   --accent-2: var(--text);
   background: color-mix(in oklab, var(--bg-tint) 26%, var(--bg));
   color: var(--text);
-  cursor: none; /* stage itself is the click target */
+  cursor: none; /* stage itself changes the hero color */
 }
 
 /* The "stage" holds the giant type + portraits, centered and clipped */
@@ -504,9 +504,9 @@ button:focus-visible,
   opacity: 0.55;
 }
 
-/* Portraits stack — one is .is-active at a time. They share a frame so the
-   lens overlay aligns with its cutout pixel-perfectly (both use the same
-   intrinsic dimensions and `contain` sizing). */
+/* Portrait frame — a single laughing portrait stays fixed while the color
+   treatment changes around it. The lens overlay aligns with the cutout
+   pixel-perfectly (both use the same intrinsic dimensions and `contain` sizing). */
 .hero-portraits {
   /* Container spans the full hero so each portrait's --anchor (center / left
      bottom / right bottom) actually has room to shift the figure within. */
@@ -658,7 +658,7 @@ button:focus-visible,
   color: var(--text);
 }
 
-/* Cycle hint — bottom-right, also acts as accessible button */
+/* Color switcher — bottom-right, also acts as accessible button */
 .hero-cycle {
   position: absolute;
   top: calc(var(--nav-h) + var(--space-12));
@@ -682,13 +682,13 @@ button:focus-visible,
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: var(--text-2);
+  background: var(--dot-color, var(--text-2));
   opacity: 0.4;
   transition: opacity 0.25s, background 0.25s, transform 0.25s;
 }
 .hero-cycle-dot.is-active {
   opacity: 1;
-  background: var(--text);
+  background: var(--dot-color, var(--text));
   transform: scale(1.25);
 }
 .hero-cycle-label {

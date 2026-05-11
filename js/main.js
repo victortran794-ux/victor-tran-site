@@ -170,74 +170,44 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 });
 
 
-// ── Hero: session-color + slow photo rotation ────
+// ── Hero: fixed portrait + color switcher ─────────
 (function () {
   const hero = document.querySelector('.hero');
   if (!hero) return;
-  const portraits = Array.from(hero.querySelectorAll('.hero-portrait'));
+
   const dots = Array.from(hero.querySelectorAll('.hero-cycle-dot'));
   const cycleBtn = hero.querySelector('.hero-cycle');
-  if (portraits.length < 2) return;
-
-  // Lock two palette tokens for the whole session: a primary that drives the
-  // bg tint, "Visual", and the lens fill — and a different secondary that
-  // colors the italicized "Designer" so the headline plays a small two-tone
-  // game. Both stay put as photos rotate beneath.
   const palette = ['--pink', '--blue', '--orange', '--purple'];
-  const sessionToken = palette[Math.floor(Math.random() * palette.length)];
-  const otherTokens = palette.filter(t => t !== sessionToken);
-  const accentToken = otherTokens[Math.floor(Math.random() * otherTokens.length)];
-  hero.style.setProperty('--bg-tint', `var(${sessionToken})`);
-  hero.style.setProperty('--lens-color', `var(${sessionToken})`);
-  hero.style.setProperty('--accent-2', `var(${accentToken})`);
 
-  let i = 0;
-  function show(next) {
-    portraits[i].classList.remove('is-active');
-    dots[i]?.classList.remove('is-active');
-    i = (next + portraits.length) % portraits.length;
-    portraits[i].classList.add('is-active');
-    dots[i]?.classList.add('is-active');
-    hero.dataset.portrait = String(i);
+  let i = Math.floor(Math.random() * palette.length);
+
+  function setHeroColor(next) {
+    i = (next + palette.length) % palette.length;
+    const sessionToken = palette[i];
+    const accentToken = palette[(i + 1) % palette.length];
+
+    hero.style.setProperty('--bg-tint', `var(${sessionToken})`);
+    hero.style.setProperty('--lens-color', `var(${sessionToken})`);
+    hero.style.setProperty('--accent-2', `var(${accentToken})`);
+    hero.dataset.color = String(i);
+
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('is-active', dotIndex === i);
+    });
   }
 
-  // Random starting photo so each visit feels fresh.
-  show(Math.floor(Math.random() * portraits.length));
-
-  // Slow auto-rotation of the photo only — color stays locked. Pause on
-  // hover; pause when tab hidden so it doesn't drift while away.
-  const ROTATE_MS = 60_000;
-  let timer = null;
-  function start() {
-    if (prefersReducedMotion || timer) return;
-    timer = setInterval(() => show(i + 1), ROTATE_MS);
-  }
-  function stop() {
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-  }
+  setHeroColor(i);
 
   hero.addEventListener('click', e => {
     if (e.target.closest('a, .hero-meta')) return;
-    show(i + 1);
-    stop(); start();
+    setHeroColor(i + 1);
   });
+
   cycleBtn?.addEventListener('click', e => {
     e.stopPropagation();
-    show(i + 1);
-    stop(); start();
+    setHeroColor(i + 1);
   });
-
-  hero.addEventListener('mouseenter', stop);
-  hero.addEventListener('mouseleave', start);
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop(); else start();
-  });
-
-  start();
 })();
-
 
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
