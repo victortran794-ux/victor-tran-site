@@ -148,15 +148,16 @@
     "source": "ibmcloud.html",
     "url": "/ibmcloud",
     "category": "Product Design",
-    "description": "Three years on the Observability squad shipping enterprise products at scale — Cloud Logs, Event Notifications, and the illustration system behind it all.",
+    "description": "Three years inside IBM Cloud Observability. Logging, monitoring, activity tracking, traces, and the visual system that helped fragmented enterprise tools feel more cohesive and IBM-native.",
     "contentFile": "content/ibmcloud.md",
     "headings": [
+      "Designing through complexity",
       "Routing audit events at scale",
-      "Blue-washing a partner product",
-      "Monitoring, Logging & Security",
-      "Owning a flow end-to-end",
-      "A visual voice for an enterprise console",
-      "What I carried out of Observability"
+      "Integrating Cloud Logs into IBM Cloud",
+      "Monitoring, Logging & Security reviews",
+      "Collapsing setup into a faster flow",
+      "Illustration system for IBM Cloud",
+      "What IBM Cloud taught me"
     ],
     "images": [
       {
@@ -215,7 +216,7 @@
     "source": "ibm-patterns.html",
     "url": "/ibm-patterns",
     "category": "Product Design",
-    "description": "Six weeks redesigning the Contact Us experience on IBM.com so that 135,000 monthly visitors could actually reach the right team.",
+    "description": "A six-week IBM Patterns project redesigning the Contact Us experience on IBM.com so high-volume visitors could better self-route to the right team.",
     "contentFile": "content/ibm-patterns.md",
     "headings": [
       "A page built to look the part, not do the job",
@@ -566,7 +567,8 @@
     "contentFile": "content/artillustration.md",
     "headings": [
       "56th Supreme Chapter Chicago",
-      "Traditional Work"
+      "Traditional Work",
+      "Suit of Diamonds · Character Concepts"
     ],
     "images": [
       {
