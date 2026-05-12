@@ -7,6 +7,7 @@ const CONTENT_DIR = path.join(ROOT, 'content');
 const PAGES = [
   'index.html',
   'about.html',
+  'document-processing.html',
   'ibmcloud.html',
   'ibm-patterns.html',
   'pikappapp.html',

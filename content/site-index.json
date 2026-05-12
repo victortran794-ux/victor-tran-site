@@ -144,6 +144,26 @@
     "projects": []
   },
   {
+    "title": "Designing the trust layer for AI document processing",
+    "source": "document-processing.html",
+    "url": "/document-processing",
+    "category": "Product Design / AI Workflow Design",
+    "description": "A product design case study about designing an accuracy evaluation workflow for AI document processing in Watson Orchestrate.",
+    "contentFile": "content/document-processing.md",
+    "headings": [
+      "The missing loop after extraction",
+      "AI extraction was useful, but hard to validate",
+      "Shipped classifier and extractor work shaped the evaluation direction",
+      "Lead designer for Accuracy Evaluation",
+      "Turning evaluation into an iteration loop",
+      "Make accuracy useful, not just visible",
+      "A measurable quality loop for document automation",
+      "Designing trust into complex AI systems"
+    ],
+    "images": [],
+    "projects": []
+  },
+  {
     "title": "IBM Cloud Observability",
     "source": "ibmcloud.html",
     "url": "/ibmcloud",
