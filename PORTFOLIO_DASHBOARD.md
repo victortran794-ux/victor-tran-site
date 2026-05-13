@@ -18,7 +18,7 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | drafting | password-gated / not public yet | `case-studies/document-processing/` | Confirm safety/claims, then decide whether to implement page | Screenshot/confidentiality safety, final public wording |
+| Document Processing | drafting | password-gated / not public yet | `case-studies/document-processing.md` | Confirm safety/claims, then decide whether to implement page | Screenshot/confidentiality safety, final public wording |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -26,6 +26,12 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 | Ability Experience | live | public | existing HTML/content | No active action | None noted |
 | SAL Magazine | live | public | existing HTML/content | No active action | None noted |
 | Graphic / Illustration galleries | live | public | existing HTML/content | No active action | Large image performance worth watching |
+
+## Folder model
+
+- `content/` — generated/exported site content for indexing/search/future generative UI; see `content/README.md`
+- `case-studies/` — durable planning/source notes for case studies
+- `archive/` — dormant experiments or retired systems, including archived A2UI files
 
 ## Site health
 
@@ -42,8 +48,8 @@ Current state from last inspection:
 
 ## Preferred workflow
 
-1. Put raw context in a project packet under `case-studies/<slug>/`.
-2. Separate facts, draft copy, media needs, and implementation tasks.
+1. Put durable case-study source/planning context in a single notes file under `case-studies/<slug>.md`.
+2. Keep facts, draft copy, media needs, and implementation tasks in that one file unless the project truly gets huge.
 3. Before touching HTML, confirm visibility/confidentiality status.
 4. After meaningful site changes, run the local sanity check:
    - `./scripts/preflight.sh`
