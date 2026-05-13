@@ -714,7 +714,7 @@ button:focus-visible,
 
 /* Phone: stack meta above the type block; shrink portrait; 2x2 services. */
 @media (max-width: 600px) {
-  .hero { min-height: 620px; }
+  .hero { min-height: 580px; }
   .hero-typeblock {
     top: 58%;
     left: var(--page-x);
@@ -728,8 +728,8 @@ button:focus-visible,
     font-style: normal;
   }
   .hero-portraits {
-    inset: auto 0 3.25rem 0;
-    height: min(58vh, 460px);
+    inset: auto 0 0 0;
+    height: min(60vh, 470px);
     z-index: 2;
   }
   .hero-portrait-cutout,
@@ -751,15 +751,16 @@ button:focus-visible,
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    top: calc(58% + clamp(7.75rem, 33vw, 9.5rem));
     left: var(--page-x);
     right: auto;
-    bottom: -0.08rem;
-    gap: 1px;
-    max-width: 10rem;
+    bottom: auto;
+    gap: 2px;
+    max-width: 12rem;
     padding: 0;
-    font-size: 0.56rem;
-    line-height: 1.08;
-    letter-spacing: 0.18em;
+    font-size: 0.68rem;
+    line-height: 1.05;
+    letter-spacing: 0.16em;
     border: 0;
     background: none;
     backdrop-filter: none;
