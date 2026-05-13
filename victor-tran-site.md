@@ -116,6 +116,16 @@ Required files:
 
 Do not render raw HTML from response JSON. Generated/curated responses should only use component types supported by `js/generative-renderers.js`.
 
+## Local preflight
+
+Run the local preflight before committing or pushing meaningful site changes:
+
+```bash
+./scripts/preflight.sh
+```
+
+It checks whitespace/conflict markers, regenerates Markdown exports, scans oversized images, and runs the local health helper when available. It is manual by default; it is not currently a Git hook.
+
 ## Markdown content automation
 
 `scripts/html-to-md.mjs` converts the static HTML pages into Markdown files in `content/` and regenerates `content/site-index.json`.

@@ -45,14 +45,13 @@ Current state from last inspection:
 1. Put raw context in a project packet under `case-studies/<slug>/`.
 2. Separate facts, draft copy, media needs, and implementation tasks.
 3. Before touching HTML, confirm visibility/confidentiality status.
-4. After editing page content, run `node scripts/html-to-md.mjs`.
-5. Before push/PR, run the smallest useful gate:
-   - `git diff --check`
-   - `./scripts/health-check.sh` when useful
-   - GitHub health workflow for full Lighthouse/link check
+4. After meaningful site changes, run the local sanity check:
+   - `./scripts/preflight.sh`
+5. Before push/PR, inspect changed files with `git diff --stat` and ask Vic before external-facing/significant changes.
+6. Use the GitHub health workflow for full remote Lighthouse/link checks.
 
 ## Next system improvements
 
-- Add `scripts/preflight.sh` for repeatable local checks.
 - Add a weekly OpenClaw/GitHub health digest only if failures occur.
 - Decide whether to install local Lychee with `brew install lychee`.
+- Optional later: add a Git pre-push hook that runs `./scripts/preflight.sh`, but keep it manual for now.

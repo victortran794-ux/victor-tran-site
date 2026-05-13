@@ -18,20 +18,8 @@
     ],
     "images": [
       {
-        "src": "images/hero/figure16.webp",
-        "alt": "Victor Tran, in a green sweater"
-      },
-      {
-        "src": "images/hero/figure19.webp",
-        "alt": "Victor Tran, in a white shirt"
-      },
-      {
         "src": "images/hero/figure20.webp",
         "alt": "Victor Tran, laughing"
-      },
-      {
-        "src": "images/hero/figure21.webp",
-        "alt": "Victor Tran, in a patterned shirt"
       },
       {
         "src": "images/ibm-thumb-light.png",
@@ -64,6 +52,10 @@
       {
         "src": "images/illus-solar.webp",
         "alt": "Art & Illustration"
+      },
+      {
+        "src": "images/thumb-sgla.webp",
+        "alt": "Graphic Gallery"
       }
     ],
     "projects": [

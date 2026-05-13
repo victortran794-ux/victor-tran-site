@@ -8,6 +8,7 @@ Last updated: 2026-05-13
 - Site conventions: `victor-tran-site.md`
 - Claude entrypoint: `CLAUDE.md`
 - GitHub health workflow: `.github/workflows/health-check.yml`
+- Local preflight script: `scripts/preflight.sh`
 - Local health script: `scripts/health-check.sh`
 
 ## Active/nearby work
@@ -40,6 +41,7 @@ Local `./scripts/health-check.sh` notes:
 ## Next useful actions
 
 - Continue using the lightweight `case-studies/document-processing/` packet: `status.md`, `notes.md`, and `draft.md`.
+- Run `./scripts/preflight.sh` before meaningful commits/pushes.
 - Consider installing Lychee locally if pre-push link checks become useful: `brew install lychee`.
 - Consider adding a weekly OpenClaw reminder/heartbeat to summarize GitHub health failures only when there is something actionable.
 - If Vercel-specific deployment status is needed, identify whether Vercel CLI is authenticated locally; otherwise use GitHub commit/status checks as the main deployment proxy.

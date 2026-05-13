@@ -71,6 +71,30 @@ Checked 2026-05-13:
 - PR #21 failed because `document-processing.html` linked canonically to `https://victortrandesign.com/document-processing` before that route existed live, causing Lychee to report a 404.
 - Local oversized image scan currently flags several `images/cards/diamond-*` PNGs plus `images/illus-img4496.jpg`.
 
+## Preflight checks
+
+Run this manually before committing or pushing meaningful site changes:
+
+```bash
+./scripts/preflight.sh
+```
+
+What it does:
+
+- prints the current branch and changed files
+- runs `git diff --check`
+- regenerates Markdown exports with `node scripts/html-to-md.mjs`
+- scans for images over 1MB as warnings
+- runs `scripts/health-check.sh` when available
+- prints changed files again in case generated content changed
+
+How it is triggered:
+
+- **Manual by default:** run `./scripts/preflight.sh` when you want a local sanity check.
+- **Not automatic:** it is not currently a Git hook, so it will not block commits or pushes.
+- **Optional future hook:** if desired, a pre-push Git hook can call this script later.
+- **GitHub is separate:** `.github/workflows/health-check.yml` still runs remotely on configured pushes/schedules/manual dispatch.
+
 ## Useful health commands
 
 ```bash
@@ -123,9 +147,7 @@ When Vic sends a case-study brain dump, immediately save it into `case-studies/<
 
 Before pushing portfolio changes:
 
-- run `git diff --check`
-- run `node scripts/html-to-md.mjs` if content changed
-- run `./scripts/health-check.sh` when practical
+- run `./scripts/preflight.sh`
 - inspect changed files with `git diff --stat`
 - ask Vic before push if work is confidential, external-facing, or significant
 

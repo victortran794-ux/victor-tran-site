@@ -75,10 +75,7 @@ A collection of graphic design work spanning brand identity, print, and digital 
 
 ## Images
 
-- Victor Tran, in a green sweater: images/hero/figure16.webp
-- Victor Tran, in a white shirt: images/hero/figure19.webp
 - Victor Tran, laughing: images/hero/figure20.webp
-- Victor Tran, in a patterned shirt: images/hero/figure21.webp
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp
