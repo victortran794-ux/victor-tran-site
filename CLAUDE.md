@@ -1,5 +1,11 @@
 See [victor-tran-site.md](./victor-tran-site.md) for project conventions, layout, open follow-ups, and gotchas.
 
+For portfolio workflow, case-study intake, and health automation notes, also read:
+
+- [PORTFOLIO_DASHBOARD.md](./PORTFOLIO_DASHBOARD.md)
+- [PORTFOLIO_SYSTEM.md](./PORTFOLIO_SYSTEM.md)
+- [PORTFOLIO_STATUS.md](./PORTFOLIO_STATUS.md)
+
 ## Hosting & deployment
 
 - **GitHub:** [victortran794-ux/victor-tran-site](https://github.com/victortran794-ux/victor-tran-site) (public)
