@@ -714,14 +714,34 @@ button:focus-visible,
 
 /* Phone: stack meta above the type block; shrink portrait; 2x2 services. */
 @media (max-width: 600px) {
-  .hero { min-height: 600px; }
-  .hero-bigtype { font-size: clamp(4.5rem, 24vw, 8rem);  /* mobile hero override */ line-height: 0.88; }
+  .hero { min-height: 620px; }
+  .hero-typeblock {
+    top: 61%;
+    left: var(--page-x);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  .hero-bigtype { font-size: clamp(4.25rem, 22vw, 6.25rem);  /* mobile hero override */ line-height: 0.9; }
+  .hero-bigtype + .hero-bigtype {
+    color: var(--lens-color, var(--text));
+    opacity: 0.72;
+    font-style: normal;
+  }
   .hero-portraits {
-    height: min(60vh, 520px);
+    inset: auto 0 4.75rem 0;
+    height: min(55vh, 440px);
+    z-index: 2;
+  }
+  .hero-portrait-cutout,
+  .hero-portrait::after,
+  .hero-portrait-lens {
+    object-position: 86% bottom;
+    -webkit-mask-position: 86% bottom;
+            mask-position: 86% bottom;
   }
   .hero-meta {
     top: calc(var(--nav-h) + var(--space-3));
-    max-width: 60vw;
+    max-width: min(72vw, 280px);
     gap: var(--space-2);
   }
   .hero-title { font-size: var(--text-label); line-height: 1.35; }
@@ -732,7 +752,14 @@ button:focus-visible,
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2) var(--space-4);
     font-size: var(--text-caption);
-    bottom: var(--space-4);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: var(--space-4) var(--page-x) var(--space-5);
+    border-top: 1px solid rgba(240, 240, 238, 0.12);
+    background: linear-gradient(180deg, rgba(14, 14, 14, 0), rgba(14, 14, 14, 0.44));
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
 }
 
@@ -2237,11 +2264,16 @@ button:focus-visible,
 
 @media (max-width: 600px) {
   /* Horizontal page padding handled by --page-x rebinding above. */
+  .nav-inner { gap: 16px; justify-content: flex-start; }
+  .nav-logo-name { display: none; }
+  .nav-links { margin-left: 16px; gap: 18px; flex: 0 0 auto; }
+  .nav-links > li:nth-child(2),
+  .nav-links > li:nth-child(4) { display: none; }
+  .theme-toggle { display: none; }
   .about-now-grid { grid-template-columns: 1fr; }
   .about-now-item { border-right: none !important; }
   .about-skills { grid-template-columns: 1fr; }
   .gallery-grid { columns: 1; }
-  .hero { min-height: 520px; }
   .hero-text { padding-bottom: 48px; }
   /* Project nav stacks vertically on mobile */
   .project-nav { grid-template-columns: 1fr; }
