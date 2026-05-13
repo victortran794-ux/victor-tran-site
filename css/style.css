@@ -748,18 +748,22 @@ button:focus-visible,
   .hero-cta { font-size: var(--text-caption); }
   .hero-cycle-label { display: none; }
   .hero-services {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2) var(--space-4);
-    font-size: var(--text-caption);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: var(--space-4) var(--page-x) var(--space-5);
-    border-top: 1px solid rgba(240, 240, 238, 0.12);
-    background: linear-gradient(180deg, rgba(14, 14, 14, 0), rgba(14, 14, 14, 0.44));
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: var(--page-x);
+    right: auto;
+    bottom: -0.08rem;
+    gap: 1px;
+    max-width: 10rem;
+    padding: 0;
+    font-size: 0.56rem;
+    line-height: 1.08;
+    letter-spacing: 0.18em;
+    border: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
