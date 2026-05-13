@@ -1,4 +1,36 @@
-# Document Processing Case Study — Current Narrative + Implementation Notes
+# Document Processing — Case Study Notes
+
+Last updated: 2026-05-13
+
+Status: `drafting`
+
+This is the single durable planning/source file for the Document Processing case study. It keeps notes, facts, draft direction, media guidance, and implementation reminders that should not live in the generated `content/` exports or the final HTML.
+
+## Quick status
+
+- Intended visibility: password-gated portfolio case study for now
+- Public indexing: use `noindex,nofollow` if implemented
+- Screenshot safety: needs confirmation from Vic
+- Publish safety: not confirmed
+- Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
+
+## Next action
+
+Confirm the open claims/safety notes in this file, then decide whether to:
+
+1. continue drafting only,
+2. scaffold `document-processing.html` locally without pushing, or
+3. pause until approved screenshots/assets are available.
+
+## Do not do yet
+
+- Do not push a live Document Processing page without Vic approval.
+- Do not add a homepage card until Vic has an approved thumbnail/photo or explicitly approves a placeholder.
+- Do not invent screenshots, image paths, metrics, or launch claims.
+
+---
+
+## Current Narrative + Implementation Notes
 
 Status: working case-study narrative and implementation handoff. This is not published. Treat this as the current planning doc until `document-processing.html` exists and Vic approves it.
 

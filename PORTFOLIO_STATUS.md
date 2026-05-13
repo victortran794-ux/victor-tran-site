@@ -19,7 +19,7 @@ Recent PRs #22 and #23 passed the site health workflow and were merged/pushed to
 
 ### Document Processing case study
 
-Current planning doc: `document-processing-case-study-current-notes.md`
+Current planning doc: `case-studies/document-processing.md`
 
 Known caution: do not publish or push more Document Processing work until Vic confirms confidentiality/screenshot safety and whether it should be linked publicly, password-gated, or held locally.
 
@@ -40,7 +40,7 @@ Local `./scripts/health-check.sh` notes:
 
 ## Next useful actions
 
-- Continue using the lightweight `case-studies/document-processing/` packet: `status.md`, `notes.md`, and `draft.md`.
+- Continue using the single lightweight `case-studies/document-processing.md` planning file.
 - Run `./scripts/preflight.sh` before meaningful commits/pushes.
 - Consider installing Lychee locally if pre-push link checks become useful: `brew install lychee`.
 - Consider adding a weekly OpenClaw reminder/heartbeat to summarize GitHub health failures only when there is something actionable.

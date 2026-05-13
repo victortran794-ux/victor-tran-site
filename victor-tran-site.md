@@ -87,7 +87,7 @@ All pages load Google Fonts via `<link>` tags with preconnect (not `@import`):
 
 The site includes an optional static chat-style portfolio guide called **Ask Vic**. It is currently dormant on the live site.
 
-Current mode: curated/static guide. It does **not** call AI APIs, does **not** use API keys, and does **not** require a backend. It loads local JSON responses from `a2ui/examples/` and renders them through a safe component renderer.
+Current mode: archived/dormant. It does **not** call AI APIs, does **not** use API keys, and does **not** require a backend. Its curated response data now lives in `archive/a2ui/`; restore or rewire that folder before re-enabling the feature.
 
 To activate Ask Vic on a page, include these scripts after `js/main.js` and before `</body>`:
 
@@ -103,7 +103,7 @@ css/generative-ui.css
 css/ask-vic.css
 ```
 
-Ask Vic does not currently appear on any live page. To re-enable it, add the activation scripts to `index.html` only unless explicitly asked to add it site-wide.
+Ask Vic does not currently appear on any live page. To re-enable it, first restore or rewire `archive/a2ui/` back to the paths expected by `js/ask-vic.js`, then add the activation scripts to `index.html` only unless explicitly asked to add it site-wide.
 
 Required files:
 
@@ -111,8 +111,8 @@ Required files:
 - `js/generative-renderers.js` — safely renders approved portfolio UI components.
 - `css/ask-vic.css` — styles the launcher and chat panel.
 - `css/generative-ui.css` — styles generated response components.
-- `a2ui/examples/*.json` — curated response data.
-- `a2ui/catalog.json` — documents the allowed response component shapes.
+- `archive/a2ui/examples/*.json` — archived curated response data.
+- `archive/a2ui/catalog.json` — archived allowed response component shapes.
 
 Do not render raw HTML from response JSON. Generated/curated responses should only use component types supported by `js/generative-renderers.js`.
 
@@ -128,6 +128,8 @@ It checks whitespace/conflict markers, regenerates Markdown exports, scans overs
 
 ## Markdown content automation
 
+`content/` contains generated/exported site content used for indexing, search, and possible future generative UI experiments. See `content/README.md`.
+
 `scripts/html-to-md.mjs` converts the static HTML pages into Markdown files in `content/` and regenerates `content/site-index.json`.
 
 Run it after editing portfolio page content:
@@ -141,6 +143,7 @@ Editing rules:
 - The `.html` pages are the source of truth for public portfolio content.
 - Most files in `content/*.md` are generated. Do not hand-edit generated Markdown.
 - `content/profile.md` is the exception: it is hand-maintained professional background context and may be edited directly.
+- Durable case-study planning/source notes belong in `case-studies/*.md`, not `content/`.
 - If generated Markdown needs to improve, update `scripts/html-to-md.mjs` instead of patching generated output by hand.
 
 ## Asset sources

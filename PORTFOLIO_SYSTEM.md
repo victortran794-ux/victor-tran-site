@@ -7,9 +7,9 @@ This file is the operating layer for Vic's portfolio work: where context lives, 
 - Public site implementation: `*.html`, `css/`, `js/`, `images/`
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
-- Generated content exports: `content/*.md` and `content/site-index.json`
-- Hand-maintained profile/context: `content/profile.md`
-- Case-study planning docs: root-level `*-case-study-*.md` files until a better project folder exists
+- Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
+- Hand-maintained profile/context exception: `content/profile.md`
+- Case-study planning/source docs: `case-studies/*.md`
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed.
 
@@ -17,23 +17,19 @@ Important rule: once a page is implemented and approved, the matching `.html` fi
 
 Use small durable files instead of stuffing an entire case study into one chat.
 
-Recommended lightweight project packet:
+Recommended lightweight project file:
 
 ```txt
-case-studies/<project-slug>/
-  status.md   # current state, next action, blockers, visibility
-  notes.md    # raw notes, confirmed facts, constraints, open questions
-  draft.md    # outline, draft copy, media plan, implementation notes
+case-studies/<project-slug>.md
 ```
 
-Use more files only when a project truly becomes too large or sensitive for this shape. Default to fewer files.
+Keep status, raw notes, confirmed facts, constraints, draft direction, media needs, and implementation notes in that one file. Split into more files only when a project truly becomes too large or sensitive. Default to fewer files.
 
-For now, existing root docs can stay where they are. New or restarted case studies should use the packet shape above.
+Do **not** put durable planning/source notes in `content/`; most of `content/` is generated from HTML and should stay machine-readable/export-focused. `content/` can support future search/generative UI experiments, but it is not the notes folder.
 
 ## Current case-study state
 
-- `document-processing-case-study-current-notes.md` is the original/current planning doc for Document Processing.
-- `case-studies/document-processing/` is the lightweight working packet for future sessions.
+- `case-studies/document-processing.md` is the current planning doc for Document Processing.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
 - Do not push confidential or unreleased work without Vic confirming screenshot/publication safety.
 
@@ -134,7 +130,7 @@ and summarize failures with links/log snippets.
 
 ### 3. Case-study intake command
 
-When Vic sends a case-study brain dump, immediately save it into `case-studies/<slug>/notes.md`, then extract:
+When Vic sends a case-study brain dump, immediately save it into `case-studies/<slug>.md`, then extract:
 
 - confirmed facts
 - risky claims
