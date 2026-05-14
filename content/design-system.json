@@ -1,68 +1,212 @@
 {
   "$comment": "Single source of truth for design tokens. Mirrors css/style.css :root for now — see content/design-system.md for the prose layer and the migration plan in scripts/build-tokens.mjs (TODO).",
   "version": "0.1.0",
-  "updated": "2026-05-08",
-
+  "updated": "2026-05-13",
   "colors": {
     "$comment": "Hex values are the live source. `role` is what the token is for in practice. `inDarkMode` is the dark variant or null if it doesn't rebind. `usage` notes where it actually appears.",
     "accents": {
-      "blue":   { "value": "#55a2f7", "inDarkMode": "#7ab8ff", "role": "Primary accent + paired glyph for orange surfaces", "usage": "Links, focus tints, hero wash hue, accent dot/arrow on .featured-item--surface-orange" },
-      "pink":   { "value": "#ea3b99", "inDarkMode": "#f06ab5", "role": "Focus / emphasis + paired glyph for purple surfaces", "usage": "Focus rings, italic display tint, accent dot/arrow on .featured-item--surface-purple" },
-      "purple": { "value": "#7928d2", "inDarkMode": "stable", "role": "Surface accent (paired with pink glyphs only)", "usage": "Card backplates (.featured-item--surface-purple). Body text on this surface is white; pink is reserved for graphic punctuation (dot, arrow) — never readable text. Theme-stable: does not rebind in dark mode by design." },
-      "orange": { "value": "#b06020", "inDarkMode": "stable", "role": "Surface accent (paired with blue glyphs only)",  "usage": "Card backplates (.featured-item--surface-orange). Body text on this surface is white; blue is reserved for graphic punctuation (dot, arrow) — never readable text. Theme-stable: does not rebind in dark mode by design." }
+      "blue": {
+        "value": "#55a2f7",
+        "inDarkMode": "#7ab8ff",
+        "role": "Primary accent + paired glyph for orange surfaces",
+        "usage": "Links, focus tints, hero wash hue, accent dot/arrow on .featured-item--surface-orange"
+      },
+      "pink": {
+        "value": "#ea3b99",
+        "inDarkMode": "#f06ab5",
+        "role": "Focus / emphasis + paired glyph for purple surfaces",
+        "usage": "Focus rings, italic display tint, accent dot/arrow on .featured-item--surface-purple"
+      },
+      "purple": {
+        "value": "#7928d2",
+        "inDarkMode": "stable",
+        "role": "Surface accent (paired with pink glyphs only)",
+        "usage": "Card backplates (.featured-item--surface-purple). Body text on this surface is white; pink is reserved for graphic punctuation (dot, arrow) — never readable text. Theme-stable: does not rebind in dark mode by design."
+      },
+      "orange": {
+        "value": "#b06020",
+        "inDarkMode": "stable",
+        "role": "Surface accent (paired with blue glyphs only)",
+        "usage": "Card backplates (.featured-item--surface-orange). Body text on this surface is white; blue is reserved for graphic punctuation (dot, arrow) — never readable text. Theme-stable: does not rebind in dark mode by design."
+      }
     },
     "pairings": {
       "$comment": "Documented colour pairings used as a surface + accent system. Body/title text on these surfaces is always white for WCAG contrast.",
-      "orange-blue":  { "surface": "orange", "glyph": "blue", "textOnSurface": "#ffffff", "appliedAt": ["a[href=\"salmagazine.html\"].featured-item"] },
-      "purple-pink":  { "surface": "purple", "glyph": "pink", "textOnSurface": "#ffffff", "appliedAt": ["a[href=\"pikappapp.html\"].featured-item"] }
+      "orange-blue": {
+        "surface": "orange",
+        "glyph": "blue",
+        "textOnSurface": "#ffffff",
+        "appliedAt": [
+          "a[href=\"salmagazine.html\"].featured-item"
+        ]
+      },
+      "purple-pink": {
+        "surface": "purple",
+        "glyph": "pink",
+        "textOnSurface": "#ffffff",
+        "appliedAt": [
+          "a[href=\"pikappapp.html\"].featured-item"
+        ]
+      }
     },
     "neutrals": {
-      "bg":     { "value": "#ffffff", "inDarkMode": "#0e0e0e", "role": "Page background" },
-      "bg-2":   { "value": "#f6f6f4", "inDarkMode": "#181818", "role": "Card / surface elevated" },
-      "text":   { "value": "#1a1a1a", "inDarkMode": "#f0f0ee", "role": "Primary text" },
-      "text-2": { "value": "#6e6e6e", "inDarkMode": "#888888", "role": "Secondary / meta text" },
-      "border": { "value": "#e5e5e3", "inDarkMode": "#2c2c2c", "role": "Hairline dividers, card edges" }
+      "bg": {
+        "value": "#ffffff",
+        "inDarkMode": "#0e0e0e",
+        "role": "Page background"
+      },
+      "bg-2": {
+        "value": "#f6f6f4",
+        "inDarkMode": "#181818",
+        "role": "Card / surface elevated"
+      },
+      "text": {
+        "value": "#1a1a1a",
+        "inDarkMode": "#f0f0ee",
+        "role": "Primary text"
+      },
+      "text-2": {
+        "value": "#6e6e6e",
+        "inDarkMode": "#888888",
+        "role": "Secondary / meta text"
+      },
+      "border": {
+        "value": "#e5e5e3",
+        "inDarkMode": "#2c2c2c",
+        "role": "Hairline dividers, card edges"
+      }
     }
   },
-
   "typography": {
     "families": {
-      "serif":    { "stack": "'DM Serif Display', serif",   "weights": [400], "italics": true,  "use": "Display headlines, hero" },
-      "sans":     { "stack": "'Barlow', sans-serif",        "weights": [300, 400, 600, 700], "italics": false, "use": "Body, UI, navigation" },
-      "mono":     { "stack": "'Source Code Pro', monospace","weights": [400, 500], "italics": false, "use": "Section labels, kickers" }
+      "serif": {
+        "stack": "'DM Serif Display', serif",
+        "weights": [
+          400
+        ],
+        "italics": true,
+        "use": "Display headlines, hero"
+      },
+      "sans": {
+        "stack": "'Barlow', sans-serif",
+        "weights": [
+          300,
+          400,
+          600,
+          700
+        ],
+        "italics": false,
+        "use": "Body, UI, navigation"
+      },
+      "mono": {
+        "stack": "'Source Code Pro', monospace",
+        "weights": [
+          400,
+          500
+        ],
+        "italics": false,
+        "use": "Section labels, kickers"
+      }
     },
     "scale": {
       "$comment": "Purpose-named scale. Fluid where the use case is fluid (clamps). Replaces 42 inline font-size values across css/style.css.",
       "tokens": {
-        "caption":    { "value": "0.6875rem", "px": 11, "use": "Kickers, .section-label, mono caps, smallest meta" },
-        "label":      { "value": "0.8125rem", "px": 13, "use": "UI text — view-link, hero-cta, nav, footer, button labels" },
-        "body":       { "value": "0.9375rem", "px": 15, "use": "Default body, card descriptions, paragraphs" },
-        "lead":       { "value": "1.0625rem", "px": 17, "use": "Case-study lead paragraphs, slightly larger intro text" },
-        "subheading": { "value": "1.5rem",    "px": 24, "use": "H3-equivalent section subheadings" },
-        "title":      { "value": "clamp(1.5rem, 2.5vw, 2.25rem)", "min": 24, "max": 36, "use": "H2 / featured card titles — fluid" },
-        "display":    { "value": "clamp(2.75rem, 7vw, 5.5rem)",   "min": 44, "max": 88, "use": "Hero H1, big section heads — fluid" },
-        "hero":       { "value": "clamp(7rem, 24vw, 26rem)",      "min": 112, "max": 416, "use": "One-off — the 'Visual / Designer' giant letters on the home hero" }
+        "caption": {
+          "value": "0.6875rem",
+          "px": 11,
+          "use": "Kickers, .section-label, mono caps, smallest meta"
+        },
+        "label": {
+          "value": "0.8125rem",
+          "px": 13,
+          "use": "UI text — view-link, hero-cta, nav, footer, button labels"
+        },
+        "body": {
+          "value": "0.9375rem",
+          "px": 15,
+          "use": "Default body, card descriptions, paragraphs"
+        },
+        "lead": {
+          "value": "1.0625rem",
+          "px": 17,
+          "use": "Case-study lead paragraphs, slightly larger intro text"
+        },
+        "subheading": {
+          "value": "1.5rem",
+          "px": 24,
+          "use": "H3-equivalent section subheadings"
+        },
+        "title": {
+          "value": "clamp(1.5rem, 2.5vw, 2.25rem)",
+          "min": 24,
+          "max": 36,
+          "use": "H2 / featured card titles — fluid"
+        },
+        "display": {
+          "value": "clamp(2.75rem, 7vw, 5.5rem)",
+          "min": 44,
+          "max": 88,
+          "use": "Hero H1, big section heads — fluid"
+        },
+        "hero": {
+          "value": "clamp(7rem, 24vw, 26rem)",
+          "min": 112,
+          "max": 416,
+          "use": "One-off — the 'Visual / Designer' giant letters on the home hero"
+        }
       },
       "exceptions": {
         "$comment": "Two literal font-size values remain in CSS by design.",
-        "html-root": { "value": "16px", "where": "html { font-size: 16px; }", "why": "Sets the rem base — must be a literal length" },
-        "marquee-dot": { "value": "1.3em", "where": ".marquee-item::after", "why": "em-relative scaling for a pseudo-element dot — intentionally proportional to its container, not the type scale" },
-        "hero-bigtype-mobile": { "value": "clamp(6rem, 22vw, 16rem) and clamp(4.5rem, 24vw, 8rem)", "where": "@media .hero-bigtype overrides", "why": "Bespoke responsive bounds for the giant hero letters — different breakpoints need different vw scaling" }
+        "html-root": {
+          "value": "16px",
+          "where": "html { font-size: 16px; }",
+          "why": "Sets the rem base — must be a literal length"
+        },
+        "marquee-dot": {
+          "value": "1.3em",
+          "where": ".marquee-item::after",
+          "why": "em-relative scaling for a pseudo-element dot — intentionally proportional to its container, not the type scale"
+        },
+        "hero-bigtype-mobile": {
+          "value": "clamp(6rem, 22vw, 16rem) and clamp(4.5rem, 24vw, 8rem)",
+          "where": "@media .hero-bigtype overrides",
+          "why": "Bespoke responsive bounds for the giant hero letters — different breakpoints need different vw scaling"
+        }
+      }
+    },
+    "leading": {
+      "$comment": "Purpose-named line-height tokens used by body copy, display/title text, and long-form case-study prose.",
+      "tokens": {
+        "tight": {
+          "value": "1",
+          "use": "Tight display/title moments where the type can lock up hard"
+        },
+        "title": {
+          "value": "1.1",
+          "use": "Section titles and case-study H2s"
+        },
+        "body": {
+          "value": "1.6",
+          "use": "Default body rhythm"
+        },
+        "loose": {
+          "value": "1.9",
+          "use": "Long-form portfolio prose and case-study paragraphs"
+        }
       }
     }
   },
-
   "spacing": {
     "$comment": "4px base scale. Numbers are the multiplier (--space-1 = 4px).",
     "base": 4,
     "scale": {
-      "1":  4,
-      "2":  8,
-      "3":  12,
-      "4":  16,
-      "5":  20,
-      "6":  24,
-      "8":  32,
+      "1": 4,
+      "2": 8,
+      "3": 12,
+      "4": 16,
+      "5": 20,
+      "6": 24,
+      "8": 32,
       "10": 40,
       "12": 48,
       "14": 56,
@@ -70,48 +214,131 @@
       "20": 80
     },
     "semantic": {
-      "page-x":    { "default": "--space-12", "≤900px": "--space-6", "≤600px": "--space-5", "role": "Horizontal page padding" },
-      "section-y": { "default": "--space-20", "role": "Vertical rhythm between sections" },
-      "gallery-x": { "default": "--space-6",  "≤900px": "--space-4", "≤600px": "--space-3", "role": "Gutter for full-bleed galleries" }
+      "page-x": {
+        "default": "--space-12",
+        "≤900px": "--space-6",
+        "≤600px": "--space-5",
+        "role": "Horizontal page padding"
+      },
+      "section-y": {
+        "default": "--space-20",
+        "role": "Vertical rhythm between sections"
+      },
+      "gallery-x": {
+        "default": "--space-6",
+        "≤900px": "--space-4",
+        "≤600px": "--space-3",
+        "role": "Gutter for full-bleed galleries"
+      }
     }
   },
-
   "radii": {
-    "$comment": "TBD — currently shown in DNA panel but NOT defined as CSS variables. Promote to tokens.",
+    "$comment": "Live CSS variables in :root. The system stays mostly sharp; radius is used for small media softening and pill chips only.",
     "tokens": {
-      "0":    "0",
-      "sm":   "4px",
-      "md":   "12px",
-      "pill": "999px"
+      "0": {
+        "value": "0",
+        "css": "--radius-0",
+        "use": "Hard editorial edges"
+      },
+      "sm": {
+        "value": "4px",
+        "css": "--radius-sm",
+        "use": "Images and small media cards"
+      },
+      "md": {
+        "value": "12px",
+        "css": "--radius-md",
+        "use": "Future larger cards / panels when a softer container is needed"
+      },
+      "pill": {
+        "value": "999px",
+        "css": "--radius-pill",
+        "use": "Tags, chips, pill buttons"
+      }
     }
   },
-
   "layout": {
     "max-w": "1200px",
     "nav-h": "68px",
-    "breakpoints": { "md": "900px", "sm": "600px" }
+    "breakpoints": {
+      "md": "900px",
+      "sm": "600px"
+    }
   },
-
   "motion": {
-    "$comment": "TBD — durations and easings are magic numbers in CSS/JS. Capture them here.",
-    "durations": {},
-    "easings": {}
+    "$comment": "Small, named motion set. Keep motion crisp; the system should feel editorial and responsive, not bouncy unless a project-specific prototype calls for it.",
+    "durations": {
+      "fast": {
+        "value": "0.2s",
+        "css": "--duration-fast",
+        "use": "Color and small state changes"
+      },
+      "base": {
+        "value": "0.3s",
+        "css": "--duration-base",
+        "use": "Gallery/image micro-interactions"
+      },
+      "slow": {
+        "value": "0.45s",
+        "css": "--duration-slow",
+        "use": "Card transforms and larger state changes"
+      },
+      "reveal": {
+        "value": "0.6s",
+        "css": "--duration-reveal",
+        "use": "Scroll reveal / entrance opacity"
+      }
+    },
+    "easings": {
+      "out": {
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "css": "--ease-out",
+        "use": "Primary expressive ease-out"
+      },
+      "soft": {
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "css": "--ease-soft",
+        "use": "Gallery hover / softer image motion"
+      },
+      "snap": {
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "css": "--ease-snap",
+        "use": "Crisp state changes that should feel immediate without becoming harsh"
+      }
+    }
   },
-
   "elevation": {
     "principle": "flat-with-hairlines",
     "shadows": "none-by-design",
     "$comment": "Stated principle: no drop shadows, ever. Hierarchy comes from --border hairlines and --bg/--bg-2 surface shifts. If a future component needs lift, use a thicker hairline or a --bg-2 surface — not a shadow.",
     "tokens": {}
   },
-
   "imagery": {
     "$comment": "TBD — see design-system.md for direction. Capture: aspect ratios used, treatment (cutout vs full-bleed), color grading.",
-    "ratios": ["16:9 (DNA preview)", "3:2 (portraits)", "1:1 (thumbnails)"],
+    "ratios": [
+      "16:9 (DNA preview)",
+      "3:2 (portraits)",
+      "1:1 (thumbnails)"
+    ],
     "treatments": []
   },
-
   "components": {
-    "$comment": "TBD — surface the primitives the DNA panel hints at (pill button, ghost button, tag, dot) as documented patterns with token references."
+    "$comment": "Next layer to formalize. Start with aliases for existing primitives, then migrate page-specific one-offs.",
+    "existing": [
+      "section-label",
+      "tag",
+      "featured-item",
+      "case-study-meta",
+      "gallery-section-label",
+      "callout-card",
+      "stat-grid",
+      "stat-card"
+    ],
+    "proposed": [
+      "artifact-card",
+      "decision-card",
+      "process-strip",
+      "section-note"
+    ]
   }
 }
