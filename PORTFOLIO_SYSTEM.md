@@ -11,8 +11,9 @@ This file is the operating layer for Vic's portfolio work: where context lives, 
 - Hand-maintained profile/context exception: `content/profile.md`
 - Case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
 - Dormant/superseded files: `archive/` — see `archive/README.md`
+- Retired page snapshots: `archive/pages/` — see `archive/pages/README.md`
 
-Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed.
+Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
 
 ## Case study workflow
 
