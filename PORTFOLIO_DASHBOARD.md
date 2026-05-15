@@ -30,8 +30,15 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 ## Folder model
 
 - `content/` — generated/exported site content for indexing/search/future generative UI; see `content/README.md`
-- `case-studies/` — durable planning/source notes for case studies
-- `archive/` — dormant experiments or retired systems, including archived A2UI files
+- `case-studies/` — durable planning/source notes for active case studies; see `case-studies/README.md`
+- `archive/` — dormant experiments, retired systems, and superseded handoffs; see `archive/README.md`
+
+Current archive examples:
+
+- `archive/a2ui/` — dormant Ask Vic / generative UI data
+- `archive/playground.html` and `archive/playground.css` — old playground files
+- `archive/doc-pro-case-study-handoff.md` — historical Doc Pro handoff; project is now Document Processing
+- active Document Processing planning file is `case-studies/document-processing.md`
 
 ## Site health
 

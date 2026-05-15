@@ -9,7 +9,8 @@ This file is the operating layer for Vic's portfolio work: where context lives, 
 - Claude Code entrypoint: `CLAUDE.md`
 - Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
 - Hand-maintained profile/context exception: `content/profile.md`
-- Case-study planning/source docs: `case-studies/*.md`
+- Case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
+- Dormant/superseded files: `archive/` — see `archive/README.md`
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed.
 
@@ -30,6 +31,7 @@ Do **not** put durable planning/source notes in `content/`; most of `content/` i
 ## Current case-study state
 
 - `case-studies/document-processing.md` is the current planning doc for Document Processing.
+- `archive/doc-pro-case-study-handoff.md` is a historical Doc Pro handoff; the active Document Processing planning file is `case-studies/document-processing.md`.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
 - Do not push confidential or unreleased work without Vic confirming screenshot/publication safety.
 

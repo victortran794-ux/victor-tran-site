@@ -1622,6 +1622,337 @@ button:focus-visible,
 
 
 /* ══════════════════════════════════════════════
+   ABOUT — PLAY & LISTEN (Tetris + Spotify)
+══════════════════════════════════════════════ */
+.about-play {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--page-x) var(--section-y);
+}
+
+.about-play-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-12);
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .about-play-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+.about-play-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.about-play-head { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.about-play-kicker {
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-2);
+}
+
+.about-play-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-title);
+  color: var(--text);
+  font-weight: 400;
+}
+
+.about-play-sub {
+  font-size: var(--text-body);
+  color: var(--text-2);
+  max-width: 44ch;
+}
+
+/* Neumorphic shadow tokens — light by default, overridden in dark mode */
+.tetris-embed {
+  --tn-bg: var(--bg);
+  --tn-bg-2: var(--bg-2);
+  --tn-shadow-dark: rgba(20, 20, 30, 0.10);
+  --tn-shadow-light: rgba(255, 255, 255, 0.85);
+  --tn-shadow-inset-dark: rgba(20, 20, 30, 0.08);
+  --tn-shadow-inset-light: rgba(255, 255, 255, 0.55);
+  --tn-overlay: rgba(255, 255, 255, 0.92);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--tn-bg);
+  box-shadow:
+    10px 10px 24px var(--tn-shadow-dark),
+    -10px -10px 24px var(--tn-shadow-light);
+  outline: none;
+}
+
+.tetris-embed:focus-visible {
+  box-shadow:
+    10px 10px 24px var(--tn-shadow-dark),
+    -10px -10px 24px var(--tn-shadow-light),
+    0 0 0 2px var(--pink);
+}
+
+html[data-theme="dark"] .tetris-embed {
+  --tn-shadow-dark: rgba(0, 0, 0, 0.55);
+  --tn-shadow-light: rgba(255, 255, 255, 0.04);
+  --tn-shadow-inset-dark: rgba(0, 0, 0, 0.55);
+  --tn-shadow-inset-light: rgba(255, 255, 255, 0.03);
+  --tn-overlay: rgba(14, 14, 14, 0.92);
+}
+
+.tetris-raised {
+  background: var(--tn-bg);
+  border-radius: var(--radius-md);
+  box-shadow:
+    4px 4px 10px var(--tn-shadow-dark),
+    -4px -4px 10px var(--tn-shadow-light);
+  border: 1px solid var(--border);
+}
+
+.tetris-inset {
+  background: var(--tn-bg-2);
+  border-radius: var(--radius-md);
+  box-shadow:
+    inset 4px 4px 8px var(--tn-shadow-inset-dark),
+    inset -4px -4px 8px var(--tn-shadow-inset-light);
+}
+
+.tetris-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: var(--space-5);
+}
+
+.tetris-board {
+  position: relative;
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.tetris-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: var(--radius-sm);
+}
+
+.tetris-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.tetris-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  min-height: 92px;
+  justify-content: center;
+}
+
+.tetris-cell-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.tetris-cell-row .tetris-cell { min-height: 72px; padding: var(--space-2); }
+
+.tetris-cell-label {
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-2);
+}
+
+.tetris-mini-canvas {
+  display: block;
+  width: 72px;
+  height: 72px;
+}
+
+.tetris-cell-stat .tetris-stat,
+.tetris-cell-stat .tetris-stat-sm {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.tetris-stat { font-size: 1.75rem; }
+.tetris-stat-sm { font-size: 1.25rem; }
+
+.tetris-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.tetris-btn {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: var(--text-label);
+  padding: var(--space-2) var(--space-4);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tetris-btn:hover {
+  box-shadow:
+    6px 6px 14px var(--tn-shadow-dark),
+    -6px -6px 14px var(--tn-shadow-light);
+  transform: translateY(-1px);
+}
+
+.tetris-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 2px 2px 6px var(--tn-shadow-inset-dark),
+    inset -2px -2px 6px var(--tn-shadow-inset-light);
+}
+
+.tetris-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tn-overlay);
+  border-radius: var(--radius-md);
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+
+.tetris-overlay.tetris-hidden { display: none; }
+
+.tetris-overlay-card {
+  text-align: center;
+  padding: var(--space-6) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 200px;
+}
+
+.tetris-overlay-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.tetris-overlay-card p {
+  font-size: var(--text-body);
+  color: var(--text-2);
+}
+
+.tetris-overlay-card .tetris-btn { padding: var(--space-2) var(--space-6); }
+
+.tetris-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-2);
+}
+
+.tetris-keys span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: 'Barlow', sans-serif;
+  font-size: var(--text-caption);
+  color: var(--text-2);
+}
+
+.tetris-keys kbd {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  box-shadow:
+    inset 2px 2px 4px var(--tn-shadow-inset-dark),
+    inset -2px -2px 4px var(--tn-shadow-inset-light);
+  color: var(--text);
+  min-width: 22px;
+  text-align: center;
+}
+
+.tetris-keys kbd + kbd { margin-left: 2px; }
+
+/* Mobile: collapse side panel under board */
+@media (max-width: 640px) {
+  .tetris-stage {
+    grid-template-columns: 1fr;
+  }
+  .tetris-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .tetris-cell { flex: 1 1 30%; min-height: 64px; padding: var(--space-2); }
+  .tetris-cell-row { flex: 1 1 100%; }
+  .tetris-mini-canvas { width: 56px; height: 56px; }
+  .tetris-buttons { flex: 1 1 100%; flex-direction: row; }
+  .tetris-buttons .tetris-btn { flex: 1; }
+  .tetris-keys { gap: var(--space-3); }
+}
+
+/* Spotify frame */
+.spotify-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 12px 32px rgba(20, 20, 30, 0.08),
+    0 2px 8px rgba(20, 20, 30, 0.04);
+  background: var(--bg-2);
+  flex: 1;
+  min-height: 500px;
+}
+
+.spotify-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: 0;
+}
+
+html[data-theme="dark"] .spotify-frame {
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ══════════════════════════════════════════════
    GALLERY
 ══════════════════════════════════════════════ */
 .gallery-section {
