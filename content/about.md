@@ -21,6 +21,8 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 ## Section Headings
 
 - Right now I am...
+- Tetris, but soft
+- A few favorite tracks
 
 ## Body Copy
 
@@ -29,6 +31,14 @@ Hi! I'm Victor, (or Vic). I am a first-gen college graduate with a BFA in Graphi
 Today, I'm a Visual Designer at IBM in Austin, Texas, where I've worked in a variety of tech from hybrid cloud to Agentic workflow design. Outside of work, I paint, play video games, travel, and try my best to do good in my community. Interested in voiceover or gameshow hosting work.
 
 I'm around, let's chat!
+
+IBM
+
+Visual Designer, watsonx Orchestrate AI & Automation
+
+User Experience Designer, IBM Cloud Observability
+
+Clients & employers
 
 Thinking about
 
@@ -54,13 +64,17 @@ Watching
 
 RuPaul's Drag Race
 
-IBM
+Mini game
 
-Visual Designer, watsonx Orchestrate AI & Automation
+Click in to play. Arrow keys move, ↑ rotates, Space hard-drops, C holds, P pauses.
 
-User Experience Designer, IBM Cloud Observability
+Click to start
 
-Clients & employers
+Score 0
+
+On rotation
+
+A running playlist of songs I keep coming back to.
 
 ## Lists And Tags
 
