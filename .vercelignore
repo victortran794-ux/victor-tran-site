@@ -1,0 +1,14 @@
+.DS_Store
+.claude/
+.trash-extensionless/
+.trash-orphans/
+.git/
+.github/
+.vercel/
+.env
+.env.*
+node_modules/
+*.log
+*.tmp
+*.swp
+Thumbs.db
