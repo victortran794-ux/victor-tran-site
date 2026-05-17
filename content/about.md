@@ -22,7 +22,7 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 
 - Right now I am...
 - Tetris, but soft
-- A few favorite tracks
+- A tour of my taste
 
 ## Body Copy
 
@@ -72,9 +72,9 @@ Click to start
 
 Score 0
 
-On rotation
+On shuffle
 
-A running playlist of songs I keep coming back to.
+A few songs from each phase of my music. Enjoy the eclectic mix.
 
 ## Lists And Tags
 
