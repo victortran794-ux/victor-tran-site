@@ -20,6 +20,8 @@ The transferred site is a static portfolio. It can be previewed directly from `i
 - Git is not currently available on this PC's PATH, so normal local clone/commit/push workflow still needs Git installed or added to PATH.
 - `winget` is also not currently available on PATH, so installing Git may require the Git for Windows installer or another package manager.
 - The live GitHub repo is newer than this transfer snapshot. The repo includes the About page Tetris/Spotify work from PR #26/#27, including `js/tetris.js`; this transfer snapshot does not.
+- iCloud Drive is available at `C:\Users\Victor\iCloudDrive`.
+- An iCloud copy of the site exists at `C:\Users\Victor\iCloudDrive\Documents\victor-tran-site`, but its `.git` folder appears to be an iCloud placeholder/reparse point and is not recognized by Git on Windows.
 - Local portfolio workflow docs already exist:
   - `CLAUDE.md`
   - `victor-tran-site.md`
@@ -94,6 +96,8 @@ Recommended rule:
 - The repo contains web-ready assets only: optimized JPG/PNG/WebP/SVG files used by the site.
 
 Before Magi uses source assets, ask Victor to confirm what is safe to publish, especially for confidential work like Document Processing, IBM, PCI, or any unreleased project.
+
+Do not use the iCloud copy of `victor-tran-site` as the active Git working copy on Windows. Use the local clone outside iCloud for commits and branches, and use iCloud as an asset/source archive.
 
 ### 6. Make Upkeep Repeatable
 
