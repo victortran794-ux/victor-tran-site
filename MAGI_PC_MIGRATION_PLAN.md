@@ -17,8 +17,8 @@ The transferred site is a static portfolio. It can be previewed directly from `i
 - Live repo listed in project docs: `victortran794-ux/victor-tran-site`.
 - Hosting listed in project docs: Vercel, auto-deploying from `main`.
 - Site health workflow already exists at `.github/workflows/health-check.yml`.
-- Git is not currently available on this PC's PATH, so normal local clone/commit/push workflow still needs Git installed or added to PATH.
-- `winget` is also not currently available on PATH, so installing Git may require the Git for Windows installer or another package manager.
+- Git for Windows is installed. Codex may need to call it directly at `C:\Program Files\Git\cmd\git.exe` until new shells pick up PATH.
+- A local clone now exists at `C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site`.
 - The live GitHub repo is newer than this transfer snapshot. The repo includes the About page Tetris/Spotify work from PR #26/#27, including `js/tetris.js`; this transfer snapshot does not.
 - iCloud Drive is available at `C:\Users\Victor\iCloudDrive`.
 - An iCloud copy of the site exists at `C:\Users\Victor\iCloudDrive\Documents\victor-tran-site`, but its `.git` folder appears to be an iCloud placeholder/reparse point and is not recognized by Git on Windows.
@@ -60,7 +60,7 @@ git clone https://github.com/victortran794-ux/victor-tran-site.git
 
 Then compare the cloned repo against this transfer snapshot. If this snapshot contains newer files, merge them into the repo carefully rather than replacing the repo wholesale.
 
-Current blocker: Git is not installed or not on PATH. Install Git for Windows first, then restart the terminal/Codex session if needed so `git --version` works.
+Current state: Git for Windows is installed and the live repo has been cloned locally. Continue using the local clone outside iCloud for active Git work.
 
 ### 2. Keep The Transfer Snapshot As Recovery Context
 
@@ -169,12 +169,12 @@ When Victor provides raw notes for a project:
 
 ## Immediate Next Actions
 
-1. Install Git for Windows or add an existing Git install to PATH.
-2. Clone `victortran794-ux/victor-tran-site` onto this PC.
-3. Treat the cloned repo as newer than this transfer snapshot unless a file-by-file comparison proves otherwise.
-4. Move only transfer-only migration docs, such as this plan and `AGENTS.md`, into the repo.
-5. Confirm where iCloud design folders live on this PC.
-6. Run a local preview from the cloned repo.
+1. Keep PR #28 open until Victor is comfortable merging the repo operating docs.
+2. Treat the cloned repo as newer than the transfer snapshot unless a file-by-file comparison proves otherwise.
+3. Use the iCloud site copy as reference/archive, not the active Git working copy.
+4. Identify the actual iCloud design/source folders Magi should be allowed to inspect.
+5. Decide whether the local repo should stay under Codex or move later to `Documents\Websites\victor-tran-site`.
+6. Run a local preview from the cloned repo when making site changes.
 7. Run `scripts/preflight.sh` where supported.
 8. Use GitHub Actions as the final site health signal.
 

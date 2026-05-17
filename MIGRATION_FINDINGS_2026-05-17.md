@@ -16,10 +16,11 @@ The transfer package is useful as a static backup, but it should not become the 
 
 ## Local PC Tooling
 
-- `git` is not currently available on PATH.
+- Git for Windows was installed during migration: `git version 2.54.0.windows.1`.
+- Codex may need to call Git directly at `C:\Program Files\Git\cmd\git.exe` until its shell PATH refreshes.
 - `gh` is not currently available on PATH.
 - `winget` is not currently available on PATH.
-- Checked common install paths for Git and GitHub CLI; neither appears installed there.
+- GitHub CLI is not installed at the checked common path.
 - The bundled Codex Python runtime can run a foreground static server.
 
 Preview command from this folder:
@@ -48,8 +49,8 @@ Evidence:
 Implication:
 
 - Do not overwrite the live repo from this transfer folder.
-- Clone the live repo after Git is installed.
-- Compare carefully and move only transfer-only migration docs into the repo.
+- The live repo has been cloned locally outside iCloud.
+- Compare carefully before moving anything else from transfer or iCloud copies into the repo.
 
 ## Transfer-Only Docs Created During Migration
 
@@ -63,10 +64,10 @@ An attempt to create a GitHub branch through the connector failed with `Resource
 
 ## Recommended Next Step
 
-Install Git for Windows, then clone:
+Use the local clone for active Git work:
 
-```powershell
-git clone https://github.com/victortran794-ux/victor-tran-site.git
+```text
+C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site
 ```
 
-After cloning, compare this transfer folder against the cloned repo before copying anything.
+Keep the iCloud copy at `C:\Users\Victor\iCloudDrive\Documents\victor-tran-site` as reference/archive, not the active Git working copy.
