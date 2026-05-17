@@ -10,3 +10,5 @@ node_modules/
 *.tmp
 *.swp
 Thumbs.db
+.vercel
+.env*.local

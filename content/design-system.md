@@ -98,7 +98,18 @@ The migration replaced 42 inline font-size values (most within 1-2px of each oth
 - `.marquee-item::after { font-size: 1.3em }` — em-relative for a pseudo-element dot, intentionally proportional to its container.
 - `.hero-bigtype` mobile overrides — bespoke responsive `clamp()` bounds for the giant hero letters, different breakpoints need different `vw` scaling.
 
-**Line-height pairings** — currently 1.6 on body globally; display headlines use ad-hoc tighter values. **TBD** if line-height needs its own tokens (`--leading-tight / --leading-base / --leading-loose`) or if the current ad-hoc approach is fine.
+### Line-height
+
+Line-height now has a small purpose-named scale:
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--leading-tight` | `1` | Big display/header lockups |
+| `--leading-title` | `1.1` | Section titles and case-study H2s |
+| `--leading-body` | `1.6` | Default body rhythm |
+| `--leading-loose` | `1.9` | Long-form portfolio/case-study prose |
+
+The intent: titles stay crisp and editorial; prose gets enough air to feel readable without becoming a Medium essay.
 
 ---
 
@@ -112,15 +123,34 @@ The migration replaced 42 inline font-size values (most within 1-2px of each oth
 
 ## Radii
 
-Used: `0`, `4px`, `12px`, `999px (pill)`.
+The radius scale is intentionally restrained:
 
-**Open question:** these are shown in the DNA panel but aren't actually CSS variables. Promote them to `--radius-sm`, `--radius-md`, `--radius-pill` so the DNA tab reads live values like it does for color and spacing.
+| Token | Value | Use |
+|-------|-------|-----|
+| `--radius-0` | `0` | Hard editorial edges |
+| `--radius-sm` | `4px` | Images and small media cards |
+| `--radius-md` | `12px` | Future larger cards/panels when softness is useful |
+| `--radius-pill` | `999px` | Tags, chips, pill buttons |
+
+The site should not become rounded SaaS soup. Most layout stays sharp; radius is a small finishing move, not the personality.
 
 ---
 
 ## Motion
 
-> **TBD.** Durations and easings live as magic numbers in CSS and `js/main.js` (cursor lag, reveal timing, theme fade, marquee speed). Pull them out into tokens — even three (`fast / base / slow` + a default easing) would be enough to start.
+Motion has a compact token set:
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--duration-fast` | `0.2s` | Color and small state changes |
+| `--duration-base` | `0.3s` | Gallery/image micro-interactions |
+| `--duration-slow` | `0.45s` | Card transforms and larger state changes |
+| `--duration-reveal` | `0.6s` | Scroll reveal / entrance opacity |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Primary expressive ease-out |
+| `--ease-snap` | `cubic-bezier(0.2, 0, 0, 1)` | Crisp state changes that should feel immediate |
+| `--ease-soft` | `cubic-bezier(0.23, 1, 0.32, 1)` | Softer gallery/image motion |
+
+Principle: crisp, editorial motion. Save springy/bouncy behavior for project-specific prototypes like Pi Kapp App, where motion is part of the artifact.
 
 ---
 
@@ -166,7 +196,18 @@ The DNA panel hints at four primitives. They live as one-off styles in `css/styl
 - **Tag / kicker** — small mono caps
 - **Dot indicator** — `.hero-cycle-dot`
 
-> **TBD** — if any of these get used across more than two pages, promote to documented patterns with token references.
+Current shared primitives now include:
+
+- `gallery-section-label` — removes repeated inline gallery label spacing
+- `stat-grid` / `stat-card` — reusable metric blocks, piloted on IBM Patterns
+- `callout-card` — reusable quote / HMW / thesis callout, piloted on IBM Patterns
+
+Next primitives to promote into documented patterns:
+
+- `artifact-card`
+- `decision-card`
+- `process-strip`
+- `section-note`
 
 ---
 

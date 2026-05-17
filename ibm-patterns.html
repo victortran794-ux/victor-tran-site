@@ -24,46 +24,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .patterns-stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin: 2.5rem 0;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .patterns-stat {
-      background: var(--bg);
-      padding: 2.5rem 2rem;
-    }
-    .patterns-stat-number {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      line-height: 1;
-      color: var(--fg);
-      margin: 0 0 0.5rem;
-    }
-    .patterns-stat-label {
-      font-size: 0.85rem;
-      color: var(--fg-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin: 0;
-    }
-    .patterns-hmw {
-      border-left: 3px solid var(--fg);
-      padding: 1.25rem 1.75rem;
-      margin: 2.5rem 0;
-      background: var(--border);
-    }
-    .patterns-hmw p {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      line-height: 1.55;
-      color: var(--fg);
-      margin: 0;
-      font-style: italic;
-    }
     .patterns-team {
       display: flex;
       gap: 0.5rem 2rem;
@@ -72,31 +32,37 @@
     }
     .patterns-team-member {
       font-size: 0.9rem;
-      color: var(--fg-muted);
+      color: var(--text-2);
     }
     .patterns-team-member strong {
-      color: var(--fg);
+      color: var(--text);
       font-weight: 600;
     }
     /* Rogue easter egg */
     .patterns-rogue {
       display: inline-block;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity var(--duration-base) var(--ease-out);
       cursor: default;
       user-select: none;
     }
     .patterns-rogue:hover {
       opacity: 1;
     }
+    .patterns-rogue-wrap {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
     .patterns-rogue-trigger {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       font-size: 0.8rem;
-      color: var(--fg-muted);
+      color: var(--text-2);
       opacity: 0.3;
-      transition: opacity 0.3s;
+      transition: opacity var(--duration-base) var(--ease-out);
       cursor: default;
     }
     .patterns-rogue-trigger:hover {
@@ -104,6 +70,11 @@
     }
     .patterns-rogue-trigger:hover .patterns-rogue {
       opacity: 1;
+    }
+    .patterns-rogue-label {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .patterns-rogue img {
       width: 28px;
@@ -115,10 +86,6 @@
     }
     body.dark .patterns-rogue img { filter: invert(1); }
     body.light .patterns-rogue img { filter: none; }
-
-    @media (max-width: 600px) {
-      .patterns-stat-grid { grid-template-columns: 1fr 1fr; }
-    }
   </style>
 
   <!-- password gate -->
@@ -210,18 +177,18 @@
       <p>IBM's Contact Us page was drawing huge volume, but the experience was not reliably helping visitors reach the right destination. Over six months, the page logged 135,000 unique visitors and 13,000 form submissions, many of which were difficult to route cleanly across sales, support, careers, partners, and other IBM teams.</p>
       <p>Multiple competing contact pages across IBM.com each claimed to be an entry point. The result was a page that looked like it belonged on IBM.com, but did not fully support what users came there to do: quickly understand their options and choose the right path forward.</p>
 
-      <div class="patterns-stat-grid reveal">
-        <div class="patterns-stat">
-          <p class="patterns-stat-number">135k</p>
-          <p class="patterns-stat-label">Unique visitors in 6 months</p>
+      <div class="stat-grid reveal">
+        <div class="stat-card">
+          <p class="stat-card-number">135k</p>
+          <p class="stat-card-label">Unique visitors in 6 months</p>
         </div>
-        <div class="patterns-stat">
-          <p class="patterns-stat-number">13k</p>
-          <p class="patterns-stat-label">Form submissions with unclear routing</p>
+        <div class="stat-card">
+          <p class="stat-card-number">13k</p>
+          <p class="stat-card-label">Form submissions with unclear routing</p>
         </div>
       </div>
 
-      <blockquote class="patterns-hmw">
+      <blockquote class="callout-card">
         <p>"The IBM contact us page is constructed to be like IBM.com, not like what users need."</p>
       </blockquote>
 
@@ -243,7 +210,7 @@
       <p>We built two personas to anchor the research: Bradley, a developer at a large IBM customer account trying to resolve a technical issue, and Paige, a small business CEO looking to speak to a sales representative. Both hit the same wall: a generic form with no clear path forward, limited routing logic, and little confidence in what would happen next.</p>
       <p>User research surfaced the same tension from multiple directions. People expected a fast, self-directed experience. Instead, the page pushed many visitors toward a contact form too early, before helping them understand whether sales, support, documentation, careers, partners, or another route was the better fit. One user put it plainly: "There is no excuse to not do personalized experiences for someone who has been to IBM.com before."</p>
 
-      <div class="patterns-hmw reveal">
+      <div class="callout-card reveal">
         <p>How might we help visitors contact the right team at IBM, quickly routing sales or support inquiries and diverting low-quality form submissions?</p>
       </div>
 
@@ -274,9 +241,9 @@
 
       <p>Long-term, the structure created a foundation for a more unified global IBM contact experience, including future opportunities for personalization. The contact page had been treated like a static destination; we reframed it as a routing experience.</p>
 
-      <div class="reveal" style="margin-top: 3rem; display: flex; align-items: center; gap: 1rem;">
+      <div class="patterns-rogue-wrap reveal">
         <span class="patterns-rogue-trigger" title="Our team name">
-          <span style="font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;">Team Rogue</span>
+          <span class="patterns-rogue-label">Team Rogue</span>
           <span class="patterns-rogue">
             <img src="images/patterns-rogue.webp" alt="Team Rogue logo" width="28" height="28">
           </span>
@@ -313,5 +280,9 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
