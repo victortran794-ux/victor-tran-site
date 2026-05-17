@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-13
+Last updated: 2026-05-17
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -27,6 +27,32 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 | SAL Magazine | live | public | existing HTML/content | No active action | None noted |
 | Graphic / Illustration galleries | live | public | existing HTML/content | No active action | Large image performance worth watching |
 
+## Current PC / Agent Setup
+
+Active local repo:
+
+```text
+C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site
+```
+
+iCloud design/source archive:
+
+```text
+C:\Users\Victor\iCloudDrive\Documents\Design Work
+```
+
+Important operating docs:
+
+- `AGENTS.md` - start here for future agents
+- `MAGI_ACCESS_POLICY.md` - local/iCloud/Discord access rules
+- `MAGI_PC_MIGRATION_PLAN.md` - PC migration architecture and follow-ups
+- `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` - current upkeep backlog
+
+Recent merged setup PRs:
+
+- PR #28 - Magi PC migration docs and access policy
+- PR #29 - portfolio upkeep backlog and generated About content sync
+
 ## Folder model
 
 - `content/` — generated/exported site content for indexing/search/future generative UI; see `content/README.md`
@@ -44,14 +70,14 @@ Current archive examples:
 
 Primary automation: `.github/workflows/health-check.yml`
 
-Current state from last inspection:
+Current state from latest local audit:
 
 - GitHub health workflow is active.
-- Recent PR #22 and #23 health runs passed.
-- PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live.
 - Local health script exists at `scripts/health-check.sh`.
-- Local `lychee` is not installed, so local broken-link checks currently skip.
-- Oversized image warnings exist for several `images/cards/diamond-*` PNGs and `images/illus-img4496.jpg`.
+- Local `lychee` is not installed, so local broken-link checks currently skip; rely on GitHub Actions for full link checks.
+- Local Lighthouse remains remote/GitHub-only.
+- Current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`.
+- Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live.
 
 ## Preferred workflow
 
@@ -65,6 +91,8 @@ Current state from last inspection:
 
 ## Next system improvements
 
-- Add a weekly OpenClaw/GitHub health digest only if failures occur.
-- Decide whether to install local Lychee with `brew install lychee`.
-- Optional later: add a Git pre-push hook that runs `./scripts/preflight.sh`, but keep it manual for now.
+- Resolve the About page `(WIP)` current-state item.
+- Confirm Document Processing visibility, screenshot safety, and final media direction before further public changes.
+- Consider installing GitHub CLI for smoother PR/workflow checks from this PC.
+- Consider local Lychee or a Windows-native health script only if local link checks become routine.
+- Optional later: add a weekly GitHub health digest only if failures occur.

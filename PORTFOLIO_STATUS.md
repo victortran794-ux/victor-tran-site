@@ -1,21 +1,44 @@
 # Portfolio Status
 
-Last updated: 2026-05-13
+Last updated: 2026-05-17
 
 ## Current system
 
 - Main ops doc: `PORTFOLIO_SYSTEM.md`
 - Site conventions: `victor-tran-site.md`
 - Claude entrypoint: `CLAUDE.md`
+- Agent entrypoint: `AGENTS.md`
+- Local access policy: `MAGI_ACCESS_POLICY.md`
+- PC migration notes: `MAGI_PC_MIGRATION_PLAN.md`
+- Current upkeep backlog: `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
 - GitHub health workflow: `.github/workflows/health-check.yml`
 - Local preflight script: `scripts/preflight.sh`
 - Local health script: `scripts/health-check.sh`
+- Active local clone on this PC: `C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site`
+- iCloud design/source archive: `C:\Users\Victor\iCloudDrive\Documents\Design Work`
+
+## Recent setup work
+
+### PC / Magi migration
+
+PR #28 merged on 2026-05-17 and added the repo operating docs for Magi/Codex work from this PC:
+
+- `AGENTS.md`
+- `MAGI_ACCESS_POLICY.md`
+- `MAGI_PC_MIGRATION_PLAN.md`
+- `MIGRATION_FINDINGS_2026-05-17.md`
+
+Key decision: use the local Git clone outside iCloud for website work. Treat the iCloud `victor-tran-site` copy as reference/archive because its `.git` folder behaves like an iCloud placeholder on Windows.
+
+### Portfolio upkeep audit
+
+PR #29 merged on 2026-05-17 and added:
+
+- `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
+- generated About content sync in `content/about.md`
+- generated heading sync in `content/site-index.json`
 
 ## Active/nearby work
-
-### Homepage mobile hero
-
-Recent PRs #22 and #23 passed the site health workflow and were merged/pushed to `main`.
 
 ### Document Processing case study
 
@@ -23,25 +46,32 @@ Current planning doc: `case-studies/document-processing.md`
 
 Known caution: do not publish or push more Document Processing work until Vic confirms confidentiality/screenshot safety and whether it should be linked publicly, password-gated, or held locally.
 
+### About page current-state item
+
+`about.html` currently has `Training for: (WIP)`. This is a small content choice: replace it, remove it, or rename the prompt.
+
 ## Health automation snapshot
 
 GitHub workflow: active
 
-Recent health runs checked 2026-05-13:
+Recent historical notes:
 
 - PR #23: success
 - PR #22: success
 - PR #21: failed because `document-processing.html` linked to a live `/document-processing` URL before it existed, causing a Lychee 404
 
-Local `./scripts/health-check.sh` notes:
+Local check notes from 2026-05-17:
 
 - `lychee` is not installed locally, so local link check skipped
-- oversized image warnings exist for several `images/cards/diamond-*` files and `images/illus-img4496.jpg`
+- local Lighthouse remains a GitHub Actions task
+- current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
 
 ## Next useful actions
 
+- Use `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` as the current action list.
 - Continue using the single lightweight `case-studies/document-processing.md` planning file.
-- Run `./scripts/preflight.sh` before meaningful commits/pushes.
-- Consider installing Lychee locally if pre-push link checks become useful: `brew install lychee`.
-- Consider adding a weekly OpenClaw reminder/heartbeat to summarize GitHub health failures only when there is something actionable.
-- If Vercel-specific deployment status is needed, identify whether Vercel CLI is authenticated locally; otherwise use GitHub commit/status checks as the main deployment proxy.
+- Resolve the About page `(WIP)` item when Victor has a replacement.
+- Run `node scripts/html-to-md.mjs` after page copy changes.
+- Run `./scripts/preflight.sh` before meaningful commits/pushes when local tooling supports it.
+- Consider installing GitHub CLI later if terminal PR creation and workflow checks become useful.
+- Consider Lychee or a Windows-native local link-check script only if local link checks become routine.
