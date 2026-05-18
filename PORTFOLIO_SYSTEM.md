@@ -31,10 +31,11 @@ Do **not** put durable planning/source notes in `content/`; most of `content/` i
 
 ## Current case-study state
 
-- `case-studies/document-processing.md` is the current planning doc for Document Processing.
+- `document-processing.html` is intentionally live as a password-gated/noindex page that is currently linked from the Work dropdown and omitted from the sitemap.
+- `case-studies/document-processing.md` is the current planning/source doc for future Document Processing refinements.
 - `archive/doc-pro-case-study-handoff.md` is a historical Doc Pro handoff; the active Document Processing planning file is `case-studies/document-processing.md`.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
-- Do not push confidential or unreleased work without Vic confirming screenshot/publication safety.
+- Preserve the password gate/noindex and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval.
 
 ## Health automation currently present
 

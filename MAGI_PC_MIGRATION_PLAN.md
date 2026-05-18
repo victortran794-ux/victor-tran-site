@@ -229,7 +229,7 @@ Important safety rule: do not paste Discord bot tokens, webhook URLs, API keys, 
 - Where is iCloud Drive mounted on this Windows machine?
 - Should Magi be allowed to inspect iCloud design folders by default, or only when a task names a folder?
 - Should portfolio updates happen directly on `main`, or through branches and draft pull requests?
-- Should Document Processing remain password-gated, hidden, or become public later?
+- Document Processing decision as of 2026-05-18: keep it live, password-gated, noindex, and in its current navigation state unless Victor asks to promote, hide, or revise it.
 - Do you want a weekly portfolio health digest only when something fails?
 - Should Discord remain an active Magi interface, or should it become an archive of the old setup?
 - Are there parts of this PC, such as game folders, personal folders, or Discord exports, that Magi should never inspect without explicit permission?

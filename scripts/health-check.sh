@@ -21,17 +21,30 @@ elif [ -x "$ROOT/.tools/lychee/lychee.exe" ]; then
 fi
 
 if [ -n "$LYCHEE_BIN" ]; then
-  # Protected direct-link pages, including Document Processing, are expected to stay live,
-  # password-gated, noindex, and absent from homepage/nav/sitemap discovery.
+  # Protected pages, including Document Processing, are expected to stay live,
+  # password-gated, noindex, and omitted from sitemap/indexing checks. Document
+  # Processing is currently linked from the Work dropdown; do not treat that as
+  # direct-link only unless the navigation links are intentionally removed.
+  LYCHEE_ROOT="$ROOT"
+  LYCHEE_INPUTS=("$ROOT"/*.html)
+
+  if [[ "$LYCHEE_BIN" == *.exe ]] && command -v wslpath >/dev/null 2>&1; then
+    LYCHEE_ROOT="$(wslpath -w "$ROOT")"
+    LYCHEE_INPUTS=()
+    for html in "$ROOT"/*.html; do
+      LYCHEE_INPUTS+=("$(wslpath -w "$html")")
+    done
+  fi
+
   "$LYCHEE_BIN" --no-progress \
     --max-concurrency 8 \
     --accept 200,206,429,999 \
-    --root-dir "$ROOT" \
+    --root-dir "$LYCHEE_ROOT" \
     --exclude "localhost" \
     --exclude "victor-tran-site-2vxf.vercel.app" \
     --exclude "linkedin.com" \
     --exclude "pikappapp/demo" \
-    "$ROOT"/*.html || echo "  (link issues found)"
+    "${LYCHEE_INPUTS[@]}"
 else
   echo "  lychee not installed - skipping."
   echo "  Windows install: powershell -ExecutionPolicy Bypass -File scripts/install-lychee.ps1"

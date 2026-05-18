@@ -1,6 +1,6 @@
 # Portfolio Status
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 ## Current system
 
@@ -44,7 +44,7 @@ PR #29 merged on 2026-05-17 and added:
 
 Current planning doc: `case-studies/document-processing.md`
 
-Known caution: Document Processing should stay password-gated. Do not publish or push more work until Vic confirms confidentiality/screenshot safety, claims, final wording, and whether it should be linked from homepage/nav or kept direct-link only.
+Current decision: Document Processing is allowed to remain live in its current password-gated/noindex state. Treat the live page as acceptable protected portfolio material that is currently linked from the Work dropdown and omitted from the sitemap; preserve the password gate and do not add homepage/sitemap promotion, new screenshots, or major claim/copy changes unless Vic explicitly asks.
 
 ### About page current-state item
 
@@ -58,7 +58,7 @@ Recent historical notes:
 
 - PR #23: success
 - PR #22: success
-- PR #21: failed because `document-processing.html` linked to a live `/document-processing` URL before it existed, causing a Lychee 404
+- PR #21: failed because `document-processing.html` linked to a live `/document-processing` URL before it existed, causing a Lychee 404; `/document-processing` now resolves successfully and is intentionally password-gated/noindex
 
 Local check notes from 2026-05-17:
 
@@ -68,7 +68,7 @@ Local check notes from 2026-05-17:
 
 ## Next useful actions
 
-- Use `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` as the current action list.
+- Use `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` as the current action list, with the updated Document Processing decision below.
 - Continue using the single lightweight `case-studies/document-processing.md` planning file.
 - Keep the About page `Training for: (WIP)` item as-is.
 - Run `node scripts/html-to-md.mjs` after page copy changes.

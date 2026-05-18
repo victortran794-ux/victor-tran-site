@@ -8,46 +8,42 @@ This is the single durable planning/source file for the Document Processing case
 
 ## Quick status
 
-- Intended visibility: confirmed password-gated portfolio case study
-- Public indexing: use `noindex,nofollow` if implemented
-- Screenshot safety: needs confirmation from Vic
-- Publish safety: visibility is confirmed, but screenshots, claims, and final wording still need review
+- Intended visibility: confirmed live password-gated portfolio case study
+- Public indexing: keep `noindex,nofollow`
+- Current publication state: live/protected is acceptable as-is
+- Screenshot safety: still needs confirmation before adding or replacing visuals
+- Change safety: preserve the gate and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
 - Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
 
 ## Next action
 
-Confirm the open claims/safety notes in this file, then decide whether to:
+Keep the live password-gated page stable unless Vic asks for a refinement pass. If revisiting the page, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes.
 
-1. continue drafting only,
-2. continue refining `document-processing.html` locally without pushing, or
-3. pause until approved screenshots/assets are available.
+## Do not do without explicit approval
 
-## Do not do yet
-
-- Do not push a live Document Processing page without Vic approval.
-- Do not add a homepage card until Vic has an approved thumbnail/photo or explicitly approves a placeholder.
-- Do not invent screenshots, image paths, metrics, or launch claims.
+- Do not remove or weaken the password gate or `noindex,nofollow`.
+- Do not add a homepage card, sitemap entry, or change navigation visibility until Vic asks.
+- Do not invent screenshots, image paths, metrics, launch claims, or new final wording.
+- Do not treat the mere existence of the live protected route as a problem; the current protected live state is acceptable.
 
 ---
 
 ## Current Narrative + Implementation Notes
 
-Status: working case-study narrative and implementation handoff. This is not published. Treat this as the current planning doc until `document-processing.html` exists and Vic approves it.
+Status: working case-study narrative and implementation handoff for a live protected page. Treat this as the planning/source doc for future refinements; `document-processing.html` is the implemented page.
 
 Source: restored from archived 2026-05-11 handoff and tightened on 2026-05-12. Original draft came from Vic’s Discord attachment and was described as a tighter second draft: more portfolio-facing, less internal product-spec.
 
 ## Recommendation
 
-Build this as a **password-protected portfolio case study** after Vic confirms the open claims below. The strongest version is not a text dump; it should feel like a focused AI/workflow design story with a few lightweight visuals or placeholders.
+Keep this as a **password-protected portfolio case study**. Vic is comfortable with the current live protected state; future work should improve the story/media without changing visibility unless explicitly requested.
 
 Recommended path:
 
-1. Confirm the few factual/ownership details in “Claims to confirm.”
-2. Scaffold `document-processing.html` locally from an existing protected case-study page.
-3. Add the polished narrative below with TODO media slots.
-4. Keep the page local/committed until Vic says to push.
-
-Do **not** push a text-only page live unless Vic explicitly says that is okay.
+1. Preserve the current live password-gated/noindex route.
+2. Confirm any new factual/ownership details before changing claims.
+3. Replace placeholders or add media only with approved safe assets.
+4. Keep homepage/sitemap promotion and navigation visibility changes separate from content refinement and only do them if Vic asks.
 
 ## Strongest story direction
 
@@ -204,7 +200,7 @@ My role was to define how builders could move from informal testing to a repeata
 
 The design needed to serve technical accuracy goals while still feeling usable to builders who were configuring workflows, not performing data science.
 
-**Note for Vic:** This section is strong, but “lead designer” and “led independently” should be confirmed before publishing.
+**Note for Vic:** This section is strong, but “lead designer” and “led independently” should be confirmed before any future claim/copy refinement.
 
 ### The design approach — turning evaluation into an iteration loop
 
@@ -328,41 +324,36 @@ Do not invent image paths.
 - Vic was the lead designer on the Accuracy Evaluation experience.
 - If this appears on the homepage, it should sit above IBM Cloud, but wait for a suitable photo/thumbnail before adding the homepage card.
 
-## Still confirm before publishing
+## Still confirm before future refinements
+
+The page may remain live in its current password-gated/noindex state. Confirm these only before changing the relevant content or promotion:
 
 - Any measurable impact or concrete outcome that can be safely mentioned.
-- Any confidentiality constraints.
-- Vic confirmed the screens he provides for this case study will be okay for release.
-- Keep the password gate on Document Processing.
+- Any additional confidentiality constraints beyond the current password-gated/noindex setup.
+- Which screens, diagrams, or media are safe to add or replace.
 - Whether “newer agent model” is safe/public language.
+- Whether to promote the page in homepage, navigation, or sitemap. Default: do not promote.
 
-## Implementation plan for Claude Code
+## Future refinement plan for Claude Code / Codex
 
-1. Create `document-processing.html` by copying the structure from an existing protected case study, preferably `ibm-patterns.html` for a product/UX-heavy story.
-2. Update all metadata:
-   - `<title>`
-   - meta description
-   - canonical URL
-   - Open Graph title/description/url
-   - active nav state
-3. Add `Document Processing` to the Work dropdown nav on relevant pages, above IBM Cloud Observability. Follow existing nav ordering.
-4. Add the password-gate head block.
-5. Add the proposed page copy above.
-6. Add placeholder media blocks where visuals will go later. Use comments/TODOs instead of inventing assets.
-7. Add a featured card on `index.html` above IBM Cloud only once Vic has a suitable thumbnail/photo. Until then, avoid a homepage card or use a clearly intentional placeholder only if Vic approves.
-8. Run:
+1. Preserve the existing `document-processing.html` implementation, password gate, and `noindex,nofollow` metadata.
+2. Treat `document-processing.html` as the implemented page and this file as planning/source context.
+3. Scope future work narrowly: copy polish, approved media replacement, claim verification, or optional promotion should be separate tasks.
+4. Do not add `Document Processing` to the Work dropdown, homepage, or sitemap unless Vic explicitly asks.
+5. Do not invent assets, metrics, dates, launch claims, or new final wording.
+6. After page copy changes, run:
 
 ```bash
 node scripts/html-to-md.mjs
 ```
 
-9. Verify:
+7. Verify:
    - `document-processing.html` loads locally.
    - Password overlay appears in a fresh session.
    - Correct password unlocks the page.
-   - Nav links work.
-   - Generated `content/document-processing.md` and `content/site-index.json` update correctly.
-10. Commit changes only after Vic approves the implementation direction. Push only if Vic confirms the page should go live.
+   - The route remains omitted from the sitemap unless promotion is approved.
+   - Generated `content/document-processing.md` and `content/site-index.json` update correctly when copy changes.
+8. Commit/push only after Vic approves the specific task and review path.
 
 ## Suggested homepage/card copy, if featured later
 
