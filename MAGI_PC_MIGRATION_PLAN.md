@@ -18,7 +18,7 @@ The transferred site is a static portfolio. It can be previewed directly from `i
 - Hosting listed in project docs: Vercel, auto-deploying from `main`.
 - Site health workflow already exists at `.github/workflows/health-check.yml`.
 - Git for Windows is installed. Codex may need to call it directly at `C:\Program Files\Git\cmd\git.exe` until new shells pick up PATH.
-- A local clone now exists at `C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site`.
+- The active local clone now lives at `C:\Users\Victor\Documents\Websites\victor-tran-site`.
 - The live GitHub repo is newer than this transfer snapshot. The repo includes the About page Tetris/Spotify work from PR #26/#27, including `js/tetris.js`; this transfer snapshot does not.
 - iCloud Drive is available at `C:\Users\Victor\iCloudDrive`.
 - An iCloud copy of the site exists at `C:\Users\Victor\iCloudDrive\Documents\victor-tran-site`, but its `.git` folder appears to be an iCloud placeholder/reparse point and is not recognized by Git on Windows.
@@ -173,7 +173,7 @@ When Victor provides raw notes for a project:
 2. Treat the cloned repo as newer than the transfer snapshot unless a file-by-file comparison proves otherwise.
 3. Use the iCloud site copy as reference/archive, not the active Git working copy.
 4. Identify the actual iCloud design/source folders Magi should be allowed to inspect.
-5. Decide whether the local repo should stay under Codex or move later to `Documents\Websites\victor-tran-site`.
+5. Keep the active local repo at `C:\Users\Victor\Documents\Websites\victor-tran-site`; treat the older Codex-session clone as history.
 6. Run a local preview from the cloned repo when making site changes.
 7. Run `scripts/preflight.sh` where supported.
 8. Use GitHub Actions as the final site health signal.

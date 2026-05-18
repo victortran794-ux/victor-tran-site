@@ -45,11 +45,11 @@ Update these docs after this audit branch lands or as a separate docs pass.
 
 Status: needs Victor input.
 
-`document-processing.html` exists and contains placeholder visual blocks. The planning doc still marks screenshot/publish safety as unconfirmed.
+`document-processing.html` exists and contains placeholder visual blocks. Password-gated visibility is confirmed; screenshot safety, claims, and final wording still need review.
 
 Before pushing more Document Processing work publicly, confirm:
 
-- whether the page should remain password-gated
+- keep the page password-gated
 - whether it should be linked in navigation/homepage
 - which screenshots or diagrams are safe to show
 - whether "planned to release this summer" is still accurate
@@ -57,7 +57,7 @@ Before pushing more Document Processing work publicly, confirm:
 
 ### 4. About Page "Training For" WIP
 
-Status: small content choice.
+Status: intentionally left as-is.
 
 `about.html` currently contains:
 
@@ -65,11 +65,7 @@ Status: small content choice.
 Training for: (WIP)
 ```
 
-Options:
-
-- replace with a real current item
-- remove the card
-- rename the prompt to something more durable
+Victor confirmed this should stay because he may get back to it.
 
 ### 5. Local Health Tooling
 
@@ -114,7 +110,7 @@ Skip Figma for now. Later, revoke or rotate old Figma tokens found in legacy Cla
 Keep active Git work outside iCloud. Use:
 
 ```text
-C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site
+C:\Users\Victor\Documents\Websites\victor-tran-site
 ```
 
 Use iCloud Drive as design/source/archive:
