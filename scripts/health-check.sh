@@ -5,25 +5,37 @@
 #   ./scripts/health-check.sh                    # checks live production
 #   ./scripts/health-check.sh http://localhost:8000  # checks local dev server
 #
-# Requires: lychee (brew install lychee). Lighthouse step uses npx, no install needed.
+# Requires: lychee. On Windows, run: powershell -ExecutionPolicy Bypass -File scripts/install-lychee.ps1
+# Lighthouse step uses npx, no install needed.
 set -euo pipefail
 
 BASE_URL="${1:-https://victortrandesign.com}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "==> Checking links in *.html"
+LYCHEE_BIN=""
 if command -v lychee >/dev/null 2>&1; then
-  lychee --no-progress \
+  LYCHEE_BIN="lychee"
+elif [ -x "$ROOT/.tools/lychee/lychee.exe" ]; then
+  LYCHEE_BIN="$ROOT/.tools/lychee/lychee.exe"
+fi
+
+if [ -n "$LYCHEE_BIN" ]; then
+  # Protected direct-link pages, including Document Processing, are expected to stay live,
+  # password-gated, noindex, and absent from homepage/nav/sitemap discovery.
+  "$LYCHEE_BIN" --no-progress \
     --max-concurrency 8 \
     --accept 200,206,429,999 \
     --root-dir "$ROOT" \
     --exclude "localhost" \
     --exclude "victor-tran-site-2vxf.vercel.app" \
     --exclude "linkedin.com" \
-    --exclude "/pikappapp/demo" \
+    --exclude "pikappapp/demo" \
     "$ROOT"/*.html || echo "  (link issues found)"
 else
-  echo "  lychee not installed — skipping. Install with: brew install lychee"
+  echo "  lychee not installed - skipping."
+  echo "  Windows install: powershell -ExecutionPolicy Bypass -File scripts/install-lychee.ps1"
+  echo "  macOS install: brew install lychee"
 fi
 
 echo ""
@@ -40,7 +52,7 @@ fi
 
 echo ""
 echo "==> Lighthouse audit on $BASE_URL"
-echo "  (skipping locally — run via GitHub Actions for full report)"
+echo "  (skipping locally - run via GitHub Actions for full report)"
 echo "  trigger manually: gh workflow run \"Site health check\""
 
 echo ""
