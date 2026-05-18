@@ -1,6 +1,6 @@
 # Document Processing — Case Study Notes
 
-Last updated: 2026-05-13
+Last updated: 2026-05-18
 
 Status: `drafting`
 
@@ -8,10 +8,10 @@ This is the single durable planning/source file for the Document Processing case
 
 ## Quick status
 
-- Intended visibility: password-gated portfolio case study for now
+- Intended visibility: confirmed password-gated portfolio case study
 - Public indexing: use `noindex,nofollow` if implemented
 - Screenshot safety: needs confirmation from Vic
-- Publish safety: not confirmed
+- Publish safety: visibility is confirmed, but screenshots, claims, and final wording still need review
 - Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
 
 ## Next action
@@ -19,7 +19,7 @@ This is the single durable planning/source file for the Document Processing case
 Confirm the open claims/safety notes in this file, then decide whether to:
 
 1. continue drafting only,
-2. scaffold `document-processing.html` locally without pushing, or
+2. continue refining `document-processing.html` locally without pushing, or
 3. pause until approved screenshots/assets are available.
 
 ## Do not do yet
@@ -333,7 +333,7 @@ Do not invent image paths.
 - Any measurable impact or concrete outcome that can be safely mentioned.
 - Any confidentiality constraints.
 - Vic confirmed the screens he provides for this case study will be okay for release.
-- Keep the password gate on Document Processing for now; Vic can remove it later if the page is deemed okay for fully public access.
+- Keep the password gate on Document Processing.
 - Whether “newer agent model” is safe/public language.
 
 ## Implementation plan for Claude Code
@@ -381,7 +381,7 @@ Before implementation/publishing, confirm:
 - [ ] Exact public project name and product label.
 - [ ] Whether the work shipped, prototyped, or stayed exploratory.
 - [ ] Role/ownership wording is accurate.
-- [ ] Password-protected page is acceptable for this work.
+- [x] Password-protected page is acceptable for this work.
 - [ ] Whether it should be linked from homepage now or only available through nav/direct URL.
 - [ ] Any imagery that should be included immediately.
 - [ ] Whether Claude Code should commit only, or commit + push.

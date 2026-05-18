@@ -18,7 +18,7 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | drafting | password-gated / not public yet | `case-studies/document-processing.md` | Confirm safety/claims, then decide whether to implement page | Screenshot/confidentiality safety, final public wording |
+| Document Processing | drafting | password-gated | `case-studies/document-processing.md` | Confirm screenshot safety, claims, and final wording before publishing | Screenshot/confidentiality safety, final public wording |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -32,7 +32,7 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 Active local repo:
 
 ```text
-C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site
+C:\Users\Victor\Documents\Websites\victor-tran-site
 ```
 
 iCloud design/source archive:
@@ -91,8 +91,8 @@ Current state from latest local audit:
 
 ## Next system improvements
 
-- Resolve the About page `(WIP)` current-state item.
-- Confirm Document Processing visibility, screenshot safety, and final media direction before further public changes.
+- Keep the About page `Training for: (WIP)` line as an intentional joke.
+- Confirm Document Processing screenshot safety, claims, and final media direction before further public changes.
 - Consider installing GitHub CLI for smoother PR/workflow checks from this PC.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine.
 - Optional later: add a weekly GitHub health digest only if failures occur.

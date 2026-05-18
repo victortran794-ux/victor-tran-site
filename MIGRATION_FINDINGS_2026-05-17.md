@@ -64,10 +64,10 @@ An attempt to create a GitHub branch through the connector failed with `Resource
 
 ## Recommended Next Step
 
-Use the local clone for active Git work:
+Use the stable local clone for active Git work:
 
 ```text
-C:\Users\Victor\Documents\Codex\2026-05-17\files-mentioned-by-the-user-victor\victor-tran-site
+C:\Users\Victor\Documents\Websites\victor-tran-site
 ```
 
 Keep the iCloud copy at `C:\Users\Victor\iCloudDrive\Documents\victor-tran-site` as reference/archive, not the active Git working copy.
