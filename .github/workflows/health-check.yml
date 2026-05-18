@@ -17,6 +17,10 @@ on:
       - "js/**"
       - "sitemap.xml"
       - "robots.txt"
+      - ".github/workflows/health-check.yml"
+      - ".github/lighthouse-budget.json"
+      - "scripts/health-check.sh"
+      - "scripts/install-lychee.ps1"
 
 jobs:
   links:
