@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -18,7 +18,7 @@ This is the quick cockpit for portfolio work: what exists, what state it is in, 
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | drafting | password-gated | `case-studies/document-processing.md` | Confirm screenshot safety, claims, and final wording before publishing | Screenshot/confidentiality safety, final public wording |
+| Document Processing | live-drafting | live, password-gated, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; planning notes in `case-studies/document-processing.md` | Keep live in its current protected state; refine copy/media only when Vic asks | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links or new screenshots without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -77,7 +77,7 @@ Current state from latest local audit:
 - Local `lychee` is not installed, so local broken-link checks currently skip; rely on GitHub Actions for full link checks.
 - Local Lighthouse remains remote/GitHub-only.
 - Current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`.
-- Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live.
+- Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` is live on Vercel, password-gated, noindex, and omitted from the sitemap.
 
 ## Preferred workflow
 
@@ -92,7 +92,7 @@ Current state from latest local audit:
 ## Next system improvements
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
-- Confirm Document Processing screenshot safety, claims, and final media direction before further public changes.
+- Treat Document Processing as intentionally live-but-protected; only revisit screenshots, claims, homepage/nav placement, or final media direction when Vic asks.
 - Consider installing GitHub CLI for smoother PR/workflow checks from this PC.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine.
 - Optional later: add a weekly GitHub health digest only if failures occur.

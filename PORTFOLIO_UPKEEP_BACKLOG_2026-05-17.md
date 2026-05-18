@@ -41,19 +41,20 @@ Status: recommended next.
 
 Update these docs after this audit branch lands or as a separate docs pass.
 
-### 3. Document Processing Safety Review
+### 3. Document Processing Live Protected State
 
-Status: needs Victor input.
+Status: situated / accepted for now.
 
-`document-processing.html` exists and contains placeholder visual blocks. Password-gated visibility is confirmed; screenshot safety, claims, and final wording still need review.
+`document-processing.html` exists and may remain live in its current password-gated state. Victor is fine keeping the page live as protected portfolio material even while the narrative/media continues to evolve.
 
-Before pushing more Document Processing work publicly, confirm:
+Current operating rules:
 
-- keep the page password-gated
-- whether it should be linked in navigation/homepage
-- which screenshots or diagrams are safe to show
-- whether "planned to release this summer" is still accurate
-- final thumbnail/hero direction
+- preserve the password gate
+- preserve `noindex,nofollow`
+- preserve its current navigation visibility unless Victor asks to change it
+- do not add it to homepage, sitemap, screenshots, metrics, or other promotion without approval
+- do not add new screenshots, diagrams, metrics, launch claims, or major copy changes without approval
+- if health tooling flags the page, treat the protected live route as expected rather than as a publication blocker
 
 ### 4. About Page "Training For" WIP
 
