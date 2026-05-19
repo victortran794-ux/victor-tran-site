@@ -1,3 +1,11 @@
+# Archived Source Note — Design System Enhancement Plan
+
+Status: Archived / superseded.
+
+This file is a historical implementation/source note. The active direction is now `../../PORTFOLIO_DIRECTION_BRIEF.md`. Pull implementation details from here only when they still support that active brief.
+
+---
+
 # Design System Enhancement Plan
 
 Working plan for making `victor-tran-site` feel more robust, more designed, and more specifically Vic.

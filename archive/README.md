@@ -7,6 +7,8 @@ This folder holds dormant experiments, old handoffs, and retired source files th
 - Dormant experiments, such as `a2ui/`
 - Old playground files, such as `playground.html` and `playground.css`
 - Superseded case-study handoffs or drafts kept for history
+- Superseded planning notes under `planning/`
+- Historical website-ops reports under `website-health-reports/`
 - Frozen page snapshots under `pages/` when retiring, redesigning, or pausing live HTML pages
 
 ## What does not belong here
@@ -29,6 +31,8 @@ See `archive/pages/README.md` for the full convention.
 
 ## Current notes
 
+- `planning/` contains superseded portfolio direction notes. Use `../PORTFOLIO_DIRECTION_BRIEF.md` as the active source.
+- `website-health-reports/` contains historical operations reports copied from iCloud for durability.
 - `a2ui/` is archived/dormant. Restore or rewire it before re-enabling Ask Vic / generative UI behavior.
 - `doc-pro-case-study-handoff.md` is historical. The project is now referred to as Document Processing.
 - The active Document Processing planning file is `case-studies/document-processing.md`.
