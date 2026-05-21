@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -110,9 +110,16 @@
         <li><a href="about.html">About</a></li>
         <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle-icon"></span>
-      </button>
+      <div class="lens-switcher" role="group" aria-label="Viewing mode">
+        <button class="lens-switcher-btn" data-lens="light" aria-pressed="true" aria-label="Light mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25D0;</span>
+          <span class="lens-switcher-label">Light</span>
+        </button>
+        <button class="lens-switcher-btn" data-lens="dark" aria-pressed="false" aria-label="Dark mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
+          <span class="lens-switcher-label">Dark</span>
+        </button>
+      </div>
     </div>
   </nav>
 

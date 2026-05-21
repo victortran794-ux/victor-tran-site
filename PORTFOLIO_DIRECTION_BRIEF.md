@@ -111,11 +111,143 @@ Potential expressions:
 - Quote / design-tension callouts.
 - Project-category accents.
 
+### Lens switcher / viewing modes
+
+The glasses motif can become a useful interaction pattern if it stays lightweight: a “lens switcher” that changes the site’s viewing state instead of becoming a gimmick. Treat it as a way to shift mood, contrast, and system emphasis while preserving the same content and layout.
+
+Candidate lens themes:
+
+1. **Light**
+   - Default editorial reading mode.
+   - Best for recruiters, accessibility, and straightforward browsing.
+
+2. **Dark**
+   - Higher-contrast studio / night-session mode.
+   - Should preserve legibility and image fidelity, not become pure novelty.
+
+3. **DNA**
+   - System-inspection mode that exposes tokens, annotations, design-system details, project metadata, or “why this is built this way” notes.
+   - Best tied to the existing Design DNA idea.
+
+4. **Wildcolor**
+   - A controlled expressive mode using the site’s stronger accent palette.
+   - Should be opt-in and disciplined: color as indexing and mood, not random rainbow treatment.
+
+Implementation guardrails:
+
+- The switcher should be progressive enhancement. Content must remain usable without it.
+- Prefer CSS variables / `data-lens` attributes over duplicated page markup.
+- Save preference only if it feels useful; avoid surprising first-time visitors with an extreme mode.
+- Respect `prefers-color-scheme` and `prefers-reduced-motion`.
+- Start with Light/Dark or Light/Dark/DNA before adding Wildcolor if implementation risk grows.
+
+### UI screen display pattern
+
+The site needs a reusable, safe way to display UI/product screens across case studies. The first version can be simple: a colored frame pulled from the design system.
+
+Potential pattern:
+
+- `.screen-frame` wrapper with project/system accent color.
+- Rounded corners using the expanded radius tokens.
+- Optional top bar or caption strip only when it adds context.
+- Inner image keeps its natural UI fidelity; the frame supplies the portfolio system voice.
+- Variants for single screen, before/after pair, stacked flow, and annotated detail.
+- Confidential/protected screens can use the same frame with blur, crop, redaction, or placeholder states.
+
+This should make screens feel intentionally presented without inventing custom art direction for every project.
+
+### A2UI / Agent-to-User Interface showcase
+
+Added: 2026-05-21
+Reference: `https://github.com/google/A2UI`
+
+Google's A2UI project is useful because it names a future-facing portfolio opportunity: agents should not only answer in chat or generate arbitrary front-end code; they should be able to express UI intent through a safe, declarative format that the client renders with trusted components. The useful framing is “safe like data, expressive like code.”
+
+This should become a later showcase track, not part of the first visual-system hardening pass. Treat it as a case-study/prototype about designing the interface layer between humans and agents.
+
+Potential portfolio framing:
+
+- **Problem:** chat is too thin for complex agent workflows; users need visibility, approvals, sources, reversibility, and recovery states.
+- **System idea:** markdown/product brief → agent-generated A2UI-style JSON → trusted component catalog → rendered UI.
+- **Design contribution:** define the human-control layer: status, progress, approval, warning, source/evidence, edit, undo, and completion states.
+- **Showcase format:** a static or lightly interactive prototype that lets visitors switch between Brief, JSON, Rendered UI, and DNA views.
+- **Design-system tie-in:** reuse the lens switcher, screen-frame, radius, artifact-card, and process-strip patterns rather than inventing a separate visual language.
+
+Guardrails:
+
+- Do not imply production experience with Google A2UI unless a real implementation is built.
+- Do not adopt the full A2UI stack on the live site until the simpler design-system primitives are stable.
+- Prefer a simplified A2UI-inspired schema for the first portfolio prototype if that communicates the concept clearly.
+- Keep the public claim honest: this is an exploration of agent-to-user interface design, not a claim that Victor authored the protocol.
+- If implemented later, use static HTML/CSS/JS or a small isolated prototype; avoid adding a build system to the portfolio just for this.
+
+### Softer radius system
+
+Add more rounded corners where they support the glasses/lens/UI-screen metaphor and make artifacts feel more touchable. Keep the base visual language flat and editorial: rounded does not mean bubbly, SaaS-generic, or shadow-heavy.
+
+Good candidates:
+
+- UI screen frames.
+- Lens switcher controls.
+- Chips / tags.
+- Artifact cards.
+- Stat and decision cards.
+- Image masks where the content benefits from a softer container.
+
+Avoid rounding everything equally. Use radius as hierarchy: small for editorial cards, medium for UI frames, pill for controls/chips.
+
+---
+
+## External inspiration: State of AI Design
+
+Added: 2026-05-21
+Reference: `https://stateofaidesign.com/`
+
+The State of AI Design site is useful inspiration because it behaves less like a generic landing page and more like a designed report: a thesis, numbered chapters, evidence, case-study cards, methodology, and strong editorial pacing. Do not copy its Framer implementation or surface style wholesale. Translate the useful patterns into Victor's static HTML/CSS/JS system.
+
+### What to borrow
+
+- Report-style storytelling: thesis first, then numbered chapters, evidence, process, and credits.
+- Chapter navigation: a compact menu that makes long scrolling content feel organized rather than endless.
+- Large editorial stats and quote blocks as credibility moments.
+- Numbered project cards with discipline tags, short thesis copy, outcome/proof, and a clear CTA.
+- Methodology / production-notes sections at the end of case studies.
+- Full-viewport or near-full-viewport editorial beats used sparingly for rhythm.
+- Masked image reveals, sticky labels, and subtle parallax as punctuation.
+
+### Scroll and parallax principles
+
+Parallax should support the concept-album / studio-system direction, not become a theme-park effect.
+
+Preferred motion vocabulary:
+
+- Fade-up reveal for text and cards.
+- Subtle vertical parallax on hero art or one featured artifact per section.
+- Sticky chapter labels or project numbers in long case studies.
+- Masked image reveals using overflow-hidden wrappers.
+- Scroll progress indicator for case studies or the future now-playing chip.
+
+Implementation guardrails:
+
+- Use CSS transforms and opacity only; do not animate layout properties.
+- Use `requestAnimationFrame`-throttled scroll handlers or IntersectionObserver.
+- Disable or greatly simplify parallax under `prefers-reduced-motion: reduce` and on small/mobile screens.
+- Keep all content readable with JavaScript disabled.
+- Avoid scroll hijacking, custom smooth-scroll libraries, heavy Framer-like generated code, image sequences, or constant motion.
+- Limit active scroll effects to one or two per viewport.
+
+### How it maps to the existing direction
+
+- Concept album becomes more structured as a publication sequence: cover, tracklist, chapters, liner notes, credits.
+- Quiet stagehand navigation can become a chapter/track indicator with scroll progress.
+- Studio wall / production rig can borrow report patterns: methodology cards, evidence blocks, stats, process notes, and artifact cards.
+- Case-study endings can behave like report chapter outros: what changed, what was learned, next track.
+
 ---
 
 ## Practical direction
 
-This should be implemented in small, reviewable layers. Do not start by hunting for every possible photo. Start by tightening the system and choosing one pilot.
+This should be implemented in small, reviewable layers. Do not start by hunting for every possible photo. Start by tightening the system, defining the scroll/motion rules, and choosing one pilot.
 
 ### Phase 0 — Confirm this brief
 
@@ -193,13 +325,16 @@ Output:
 
 - A simple component spec that can be implemented later.
 
-### Phase 3 — Design-system hardening
+### Phase 3 — Design-system and motion hardening
 
-Goal: make the current system easier to extend before adding theatrical features.
+Goal: make the current system easier to extend before adding theatrical features or broader parallax.
 
 Low-risk implementation candidates from the repo plan:
 
 - Add missing CSS variables for radii, motion, easing, and line-height.
+- Expand radius tokens intentionally, for example `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, and `--radius-pill`, then map them to cards, frames, chips, and controls.
+- Add lens/theme tokens for Light, Dark, DNA, and eventual Wildcolor modes using CSS variables / `data-lens` rather than duplicate markup.
+- Add motion tokens for scroll effects, for example `--parallax-distance-sm`, `--parallax-distance-md`, `--reveal-distance`, and shared easing/duration values.
 - Mirror tokens in `content/design-system.json` if that remains part of the system.
 - Add reusable classes for:
   - callout cards
@@ -209,17 +344,24 @@ Low-risk implementation candidates from the repo plan:
   - process strips
   - section notes
   - chips
+  - chapter / track labels
+  - masked image reveal wrappers
+  - optional parallax layers
+  - screen frames for UI/product screenshots
+  - lens switcher controls / theme-state affordances
 - Keep visual output close to current pages at first.
 
 Recommended validation:
 
 - Check homepage, About, one case study, and both gallery pages.
+- Test with `prefers-reduced-motion` enabled.
+- Check mobile behavior; parallax should simplify or turn off.
 - Run `./scripts/preflight.sh` before any PR.
 - Use a review branch, not direct edits to `main`.
 
 Output:
 
-- A safer component vocabulary that supports the concept-album direction.
+- A safer component and motion vocabulary that supports the concept-album direction without over-animating the site.
 
 ### Phase 4 — Pick one pilot project
 
@@ -254,7 +396,24 @@ Output:
 - A list of allowed assets and confidentiality boundaries.
 - A small branch plan.
 
-### Phase 5 — Asset and photo inventory
+### Phase 5 — A2UI showcase spec
+
+Goal: separate the future-facing Agent-to-User Interface idea from the core site-polish work, then decide whether it becomes a public case study, a prototype, or both.
+
+Recommended scope:
+
+- Write a short case-study/prototype spec titled around “Agent-to-User Interface” or “From Markdown Brief to Agentic UI.”
+- Define one sample workflow that is safe to show publicly, preferably not based on protected IBM/PCI/client material.
+- Define a small trusted component catalog: status card, source/evidence card, approval panel, warning/risk state, editable recommendation, progress timeline, and completion summary.
+- Show the transformation across four views: Brief, A2UI-style JSON, Rendered UI, and DNA notes.
+- Use the existing lens-switcher idea as the viewing mechanism if it helps: Light for the polished case study, DNA for the underlying schema/states.
+- Keep it A2UI-inspired unless/until a real implementation is built with the Google A2UI stack.
+
+Output:
+
+- A separate A2UI showcase spec that can be implemented after the foundational design-system sprint.
+
+### Phase 6 — Asset and photo inventory
 
 Goal: find supporting examples and photos after the direction is clear.
 
@@ -306,11 +465,13 @@ Tasks:
 1. Approve or revise this brief.
 2. Treat this repo-root file as the active source of truth unless Victor decides otherwise.
 3. Keep the old scattered plans in `archive/planning/` as superseded source notes.
-4. Write a homepage tracklist spec.
-5. Write a now-playing chip spec.
-6. Choose one pilot project.
-7. Inventory only the assets needed for that pilot.
-8. Then create an implementation branch if Victor approves.
+4. Write a homepage tracklist / report-chapter spec.
+5. Write a now-playing chip / chapter-progress spec.
+6. Write a lightweight scroll-motion spec before implementing parallax.
+7. Choose one pilot project.
+8. Inventory only the assets needed for that pilot.
+9. Write the A2UI showcase spec as a later track after the core component system is stable.
+10. Then create an implementation branch if Victor approves.
 
 ---
 
@@ -325,11 +486,23 @@ Tasks:
    - Pi Kapp App: playful/personality pilot.
    - Ability Experience or SAL Magazine: public/safe visual pilot.
 
-4. Should the About page become more Playbill/liner-notes inspired?
+4. Should the lens switcher start with just Light/Dark, or should DNA be part of the first prototype?
+   - Recommendation: prototype Light/Dark/DNA as states, but ship Wildcolor only after the core modes feel controlled.
+
+5. Where should UI screen frames appear first?
+   - Recommendation: pilot on one public/non-sensitive project before using on protected case studies.
+
+6. How rounded should the system get?
+   - Recommendation: add radius tokens and use them selectively for frames/cards/chips rather than rounding the entire site.
+
+7. Should the About page become more Playbill/liner-notes inspired?
    - Safe: polish current About.
    - Spicy: personal dashboard / Playbill / liner notes.
 
-5. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
+8. Should A2UI become a separate future-facing showcase after the core system pass?
+   - Recommendation: yes, but spec it as an A2UI-inspired Agent-to-User Interface case study/prototype first; do not let it expand the first implementation sprint.
+
+9. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
 
 ---
 
@@ -350,9 +523,10 @@ Tasks:
 
 Recommended next action:
 
-Review this brief, then choose one:
+Review the updated brief, then choose one:
 
-1. “Direction approved — write the homepage tracklist spec.”
-2. “Direction approved — write the now-playing chip spec.”
-3. “Revise the brief before deeper planning.”
-4. “Pause portfolio concept work for now.”
+1. “Direction approved — write the homepage tracklist / report-chapter spec.”
+2. “Direction approved — write the now-playing chip / chapter-progress spec.”
+3. “Direction approved — write the lightweight scroll-motion / parallax spec.”
+4. “Revise the brief before deeper planning.”
+5. “Pause portfolio concept work for now.”
