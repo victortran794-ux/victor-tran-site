@@ -250,6 +250,16 @@
         "css": "--radius-md",
         "use": "Future larger cards / panels when a softer container is needed"
       },
+      "lg": {
+        "value": "20px",
+        "css": "--radius-lg",
+        "use": "UI screen frames (.screen-frame), Tetris embed, Spotify frame — any larger soft container"
+      },
+      "xl": {
+        "value": "32px",
+        "css": "--radius-xl",
+        "use": "Reserved — extra-large frame moments, future use"
+      },
       "pill": {
         "value": "999px",
         "css": "--radius-pill",

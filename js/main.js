@@ -151,17 +151,36 @@ if (!prefersReducedMotion) {
 }
 
 
-// ── Dark Mode Toggle ───────────────────────────────
-const themeToggle = document.querySelector('.theme-toggle:not(.dna-trigger)');
-const saved = localStorage.getItem('theme') || 'light';
-if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+// ── Lens Switcher (Light / Dark / DNA) ────────────
+(function () {
+  const lensBtns = document.querySelectorAll('.lens-switcher-btn');
+  if (!lensBtns.length) return;
 
-themeToggle?.addEventListener('click', () => {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const next = isDark ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-});
+  const saved = localStorage.getItem('lens') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  function applyLens(lens) {
+    if (lens === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    lensBtns.forEach(btn => {
+      const active = btn.dataset.lens === lens && lens !== 'dna';
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    if (lens !== 'dna') localStorage.setItem('lens', lens);
+  }
+
+  applyLens(saved);
+
+  lensBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.lens !== 'dna') applyLens(btn.dataset.lens);
+    });
+  });
+})();
 
 
 // ── Marquee clone for seamless loop ───────────────
@@ -516,7 +535,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
   });
 
-  // Re-render swatches on theme change so live values reflect the active theme
-  const themeBtn = document.querySelector('.theme-toggle:not(.dna-trigger)');
-  if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(renderSwatches, 50));
+  // Re-render swatches when lens mode changes so colors reflect the active theme
+  document.querySelectorAll('.lens-switcher-btn:not([data-lens="dna"])').forEach(btn => {
+    btn.addEventListener('click', () => setTimeout(renderSwatches, 50));
+  });
 })();

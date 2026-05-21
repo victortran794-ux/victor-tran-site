@@ -62,6 +62,8 @@
   --radius-0: 0;
   --radius-sm: 4px;
   --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
   --radius-pill: 999px;
 
   /* Motion scale */
@@ -121,7 +123,7 @@ img    { display: block; max-width: 100%; }
 a:focus-visible,
 button:focus-visible,
 .featured-item:focus-visible,
-.theme-toggle:focus-visible {
+.lens-switcher-btn:focus-visible {
   outline: 2px solid var(--pink);
   outline-offset: 4px;
   border-radius: 2px;
@@ -353,31 +355,50 @@ button:focus-visible,
   color: var(--text);
 }
 
-/* ── Theme Toggle ── */
-.theme-toggle {
-  background: none;
+/* ── Lens Switcher ── */
+.lens-switcher {
+  display: flex;
+  align-items: center;
   border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+
+.lens-switcher:hover { border-color: var(--text-2); }
+
+.lens-switcher-btn {
+  background: none;
+  border: none;
+  border-left: 1px solid var(--border);
+  padding: 5px 10px;
   font-size: var(--text-caption);
   font-family: 'Barlow', sans-serif;
   color: var(--text-2);
   letter-spacing: 0.04em;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: border-color 0.2s, color 0.2s;
+  gap: 5px;
+  cursor: pointer;
   white-space: nowrap;
-  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1;
 }
 
-.theme-toggle:hover {
+.lens-switcher-btn:first-child { border-left: none; }
+
+.lens-switcher-btn:hover {
   color: var(--text);
-  border-color: var(--text-2);
+  background: var(--bg-2);
 }
 
-.theme-toggle-icon::before           { content: '◐'; }
-[data-theme="dark"] .theme-toggle-icon::before { content: '○'; }
+.lens-switcher-btn.is-active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.lens-switcher-label { letter-spacing: 0.06em; }
 
 
 /* ══════════════════════════════════════════════
@@ -1293,6 +1314,54 @@ button:focus-visible,
 @media (max-width: 600px) {
   .stat-grid { grid-template-columns: 1fr; }
   .stat-card { padding: var(--space-8) var(--space-6); }
+}
+
+/* ══════════════════════════════════════════════
+   SCREEN FRAME — reusable UI/product screen display
+   ══════════════════════════════════════════════ */
+.screen-frame {
+  --frame-accent: var(--border);
+  position: relative;
+  border: 2px solid var(--frame-accent);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.screen-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screen-frame--pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.screen-frame--placeholder {
+  aspect-ratio: 16 / 9;
+  border-style: dashed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+}
+
+.screen-frame--blur img { filter: blur(8px); }
+
+.screen-frame-caption {
+  margin-top: var(--space-3);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  color: var(--text-2);
+  letter-spacing: 0.05em;
 }
 
 .case-study-caption {
@@ -2678,7 +2747,7 @@ html[data-theme="dark"] .spotify-frame {
   .nav-links { margin-left: 16px; gap: 18px; flex: 0 0 auto; }
   .nav-links > li:nth-child(2),
   .nav-links > li:nth-child(4) { display: none; }
-  .theme-toggle { display: none; }
+  .lens-switcher { display: none; }
   .about-now-grid { grid-template-columns: 1fr; }
   .about-now-item { border-right: none !important; }
   .about-skills { grid-template-columns: 1fr; }
@@ -2879,19 +2948,14 @@ html[data-theme="dark"] .spotify-frame {
    Design DNA overlay (home page)
    ══════════════════════════════════════════════ */
 
-/* Trigger button — matches theme-toggle shape, sits to its left */
-.dna-trigger {
-  gap: 6px;
-  cursor: pointer;
-}
+/* DNA segment within .lens-switcher — icon gets pink tint + rotation */
 .dna-trigger-icon {
   display: inline-block;
   font-size: var(--text-label);
   color: var(--pink);
   transition: transform 0.3s ease;
 }
-.dna-trigger:hover .dna-trigger-icon { transform: rotate(90deg); }
-.dna-trigger-label { letter-spacing: 0.08em; }
+.lens-switcher-btn[data-lens="dna"]:hover .dna-trigger-icon { transform: rotate(90deg); }
 
 /* Overlay container */
 .dna-overlay {

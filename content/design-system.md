@@ -129,8 +129,10 @@ The radius scale is intentionally restrained:
 |-------|-------|-----|
 | `--radius-0` | `0` | Hard editorial edges |
 | `--radius-sm` | `4px` | Images and small media cards |
-| `--radius-md` | `12px` | Future larger cards/panels when softness is useful |
-| `--radius-pill` | `999px` | Tags, chips, pill buttons |
+| `--radius-md` | `12px` | Artifact cards, panels when softness is useful |
+| `--radius-lg` | `20px` | UI screen frames (`.screen-frame`), larger image masks |
+| `--radius-xl` | `32px` | Reserved — extra-large frame moments |
+| `--radius-pill` | `999px` | Tags, chips, lens switcher controls |
 
 The site should not become rounded SaaS soup. Most layout stays sharp; radius is a small finishing move, not the personality.
 
@@ -201,6 +203,8 @@ Current shared primitives now include:
 - `gallery-section-label` — removes repeated inline gallery label spacing
 - `stat-grid` / `stat-card` — reusable metric blocks, piloted on IBM Patterns
 - `callout-card` — reusable quote / HMW / thesis callout, piloted on IBM Patterns
+- `lens-switcher` — unified Light / Dark / DNA nav control; replaces the old separate `theme-toggle` + `dna-trigger` buttons
+- `screen-frame` — reusable UI/product screen display with accent border, `--radius-lg`, and variants: `--pair`, `--placeholder`, `--blur`
 
 Next primitives to promote into documented patterns:
 

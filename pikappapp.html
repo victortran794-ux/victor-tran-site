@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -58,9 +58,16 @@
         <li><a href="about.html">About</a></li>
         <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle-icon"></span>
-      </button>
+      <div class="lens-switcher" role="group" aria-label="Viewing mode">
+        <button class="lens-switcher-btn" data-lens="light" aria-pressed="true" aria-label="Light mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25D0;</span>
+          <span class="lens-switcher-label">Light</span>
+        </button>
+        <button class="lens-switcher-btn" data-lens="dark" aria-pressed="false" aria-label="Dark mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
+          <span class="lens-switcher-label">Dark</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -129,11 +136,15 @@
       </div>
 
       <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/pikapp-screens-1.png" alt="Pi Kapp App login and splash screens">
+        <div class="screen-frame" style="--frame-accent: var(--purple);">
+          <img loading="lazy" src="images/pikapp-screens-1.png" alt="Pi Kapp App login and splash screens">
+        </div>
       </div>
 
       <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/pikapp-screens-2.png" alt="Pi Kapp App chapter status, bulletin, and milestone screens">
+        <div class="screen-frame" style="--frame-accent: var(--purple);">
+          <img loading="lazy" src="images/pikapp-screens-2.png" alt="Pi Kapp App chapter status, bulletin, and milestone screens">
+        </div>
       </div>
 
       <p>The system that came out of that work — color, type, mark, pattern, and the handful of components everything else is built from — codified the inherited brand into a working vocabulary. Five tokens, one feeling.</p>
@@ -159,7 +170,9 @@
       <p>A high-fidelity comp answers what something looks like. It can't answer what it feels like to use. So I rebuilt the Member dashboard as a working concept — single-file React with Tailwind and Framer Motion — to test whether gold-on-blue stayed legible at thumb scale, whether the milestone expand felt like progress instead of a state change, and whether the gold star earned its keep as something more than a mark.</p>
 
       <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/pikapp-app-hero.png" alt="Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed">
+        <div class="screen-frame" style="--frame-accent: var(--purple);">
+          <img loading="lazy" src="images/pikapp-app-hero.png" alt="Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed">
+        </div>
       </div>
 
       <p>The polish moments are where the brand stops being decoration and starts being function. The avatar gets a thin gold progress ring that reflects the semester at a glance. Tab switching uses spring physics, not ease-in-out — the difference between premium and templated almost always lives in the motion curve. Checking off a task pops a single gold star particle that scales, lifts, and fades. Same star that loads the splash. Same star that sits at the center of every empty state. One asset, three jobs.</p>
