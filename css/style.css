@@ -922,6 +922,11 @@ button:focus-visible,
   font-weight: 500;
 }
 
+.now-playing-chip b {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .now-playing-chip span::before {
   content: '';
   display: inline-block;
@@ -954,6 +959,14 @@ button:focus-visible,
 }
 
 .featured-tracklist span {
+  color: var(--pink);
+}
+
+.featured-tracklist li.is-active {
+  color: var(--text);
+}
+
+.featured-tracklist li.is-active span {
   color: var(--pink);
 }
 

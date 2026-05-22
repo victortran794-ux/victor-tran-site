@@ -253,22 +253,22 @@
         <div>
           <p class="section-label label-default">Now playing</p>
           <h2 class="featured-intro-title" id="featuredHeading">Selected work, sequenced like chapters.</h2>
-          <p class="now-playing-chip">
+          <p class="now-playing-chip" aria-live="polite">
             <span>Now viewing</span>
-            Systems at scale
-            <strong>01/03</strong>
+            <b data-now-playing-title>Systems at scale</b>
+            <strong data-now-playing-count>01/03</strong>
           </p>
         </div>
         <ol class="featured-tracklist" aria-label="Portfolio sequence">
-          <li><span>01</span> Systems at scale</li>
-          <li><span>02</span> Brand and publication worlds</li>
-          <li><span>03</span> Illustration and visual experiments</li>
+          <li class="is-active" data-chapter="01" aria-current="true"><span>01</span> Systems at scale</li>
+          <li data-chapter="02"><span>02</span> Brand and publication worlds</li>
+          <li data-chapter="03"><span>03</span> Illustration and visual experiments</li>
         </ol>
       </div>
 
       <div class="featured-list">
 
-        <a href="ibmcloud.html" class="featured-item featured-item--wide reveal">
+        <a href="ibmcloud.html" class="featured-item featured-item--wide reveal" data-chapter="01" data-chapter-title="Systems at scale">
           <div class="featured-item-img">
             <img loading="lazy" class="theme-img-light"
               src="images/ibm-thumb-light.png"
@@ -287,7 +287,7 @@
           </div>
         </a>
 
-        <a href="ibm-patterns.html" class="featured-item reveal">
+        <a href="ibm-patterns.html" class="featured-item reveal" data-chapter="01" data-chapter-title="Systems at scale">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/patterns-hero.webp"
@@ -302,7 +302,7 @@
           </div>
         </a>
 
-        <a href="pci.html" class="featured-item reveal">
+        <a href="pci.html" class="featured-item reveal" data-chapter="02" data-chapter-title="Brand and publication worlds">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/pci-handbook-1-cover.webp"
@@ -317,7 +317,7 @@
           </div>
         </a>
 
-        <a href="abilityexperience.html" class="featured-item reveal">
+        <a href="abilityexperience.html" class="featured-item reveal" data-chapter="02" data-chapter-title="Brand and publication worlds">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/thumb-abex.webp"
@@ -332,7 +332,7 @@
           </div>
         </a>
 
-        <a href="salmagazine.html" class="featured-item featured-item--surface-orange reveal">
+        <a href="salmagazine.html" class="featured-item featured-item--surface-orange reveal" data-chapter="02" data-chapter-title="Brand and publication worlds">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/thumb-sal.webp"
@@ -347,7 +347,7 @@
           </div>
         </a>
 
-        <a href="pikappapp.html" class="featured-item featured-item--surface-purple reveal">
+        <a href="pikappapp.html" class="featured-item featured-item--surface-purple reveal" data-chapter="02" data-chapter-title="Brand and publication worlds">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/thumb-pikapp.webp"
@@ -362,7 +362,7 @@
           </div>
         </a>
 
-        <a href="artillustration.html" class="featured-item reveal">
+        <a href="artillustration.html" class="featured-item reveal" data-chapter="03" data-chapter-title="Illustration and visual experiments">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/illus-solar.webp"
@@ -377,7 +377,7 @@
           </div>
         </a>
 
-        <a href="graphicgallery.html" class="featured-item featured-item--wide featured-item--flip reveal">
+        <a href="graphicgallery.html" class="featured-item featured-item--wide featured-item--flip reveal" data-chapter="03" data-chapter-title="Illustration and visual experiments">
           <div class="featured-item-img">
             <img loading="lazy"
               src="images/thumb-sgla.webp"
