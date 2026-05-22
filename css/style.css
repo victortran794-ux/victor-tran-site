@@ -897,6 +897,42 @@ button:focus-visible,
   margin-top: var(--space-3);
 }
 
+.now-playing-chip {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: 10px 14px;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-2);
+  color: var(--text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.now-playing-chip span,
+.now-playing-chip strong {
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.now-playing-chip span::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: var(--space-2);
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pink) 22%, transparent);
+}
+
 .featured-tracklist {
   list-style: none;
   margin: 0;
@@ -925,6 +961,10 @@ button:focus-visible,
   .featured-intro {
     grid-template-columns: 1fr;
     align-items: start;
+  }
+
+  .now-playing-chip {
+    border-radius: var(--radius-md);
   }
 }
 
