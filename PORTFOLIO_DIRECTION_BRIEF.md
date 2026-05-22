@@ -1,7 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Status: Draft for Victor review
+Last updated: 2026-05-22
+Status: Active direction brief; current phase is review pause after shipped enhancement pilots
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment.
@@ -69,6 +70,41 @@ Avoid:
 - Mandatory audio.
 - AI-generated art.
 - Publishing confidential screenshots, internal platform details, or risky metrics.
+
+---
+
+## Current shipped enhancement state
+
+Updated: 2026-05-22
+
+The first enhancement pass has moved from planning into a review checkpoint. The following patterns are now live and should be reviewed as a system before additional expansion:
+
+1. **Color punctuation pilots**
+   - IBM Cloud: orange system note and IBM-blue screen-frame treatments.
+   - Ability Experience: purple anniversary note.
+   - SAL Magazine: orange archive note.
+   - Current decision: pause further rollout until Victor reviews whether the pattern feels purposeful.
+
+2. **Homepage sequence system**
+   - Tracklist-style featured-work intro.
+   - Static now-playing chip.
+   - Non-sticky chapter-progress behavior tied to the homepage work grid.
+   - Current decision: keep behavior homepage-only and review before adding sticky, parallax, or case-study-wide progress.
+
+3. **About page**
+   - Reviewed and left as-is.
+   - A local “Program note” treatment was reverted because the `Act I / Act II / Encore` labels did not fit.
+   - Current decision: no immediate About redesign.
+
+4. **A2UI**
+   - Paused as a future track.
+   - Current decision: do not create or promote an A2UI page until after Victor’s deeper review.
+
+Review checkpoint:
+
+- Victor will review the current live site holistically and bring back enhancement/content notes.
+- New work should focus on clarifying, documenting, or refining the shipped patterns rather than adding more new patterns by default.
+- See `archive/planning/portfolio-enhancement-state-2026-05-22.md` for the current review checkpoint.
 
 ---
 
@@ -159,11 +195,19 @@ This should make screens feel intentionally presented without inventing custom a
 ### A2UI / Agent-to-User Interface showcase
 
 Added: 2026-05-21
+Updated: 2026-05-22 — paused as a future track
 Reference: `https://github.com/google/A2UI`
 
 Google's A2UI project is useful because it names a future-facing portfolio opportunity: agents should not only answer in chat or generate arbitrary front-end code; they should be able to express UI intent through a safe, declarative format that the client renders with trusted components. The useful framing is “safe like data, expressive like code.”
 
-This should become a later showcase track, not part of the first visual-system hardening pass. Treat it as a case-study/prototype about designing the interface layer between humans and agents.
+This remains a future showcase track, not the active implementation phase. Treat it as a later case-study/prototype about designing the interface layer between humans and agents.
+
+Current decision:
+
+- Pause A2UI implementation while Victor does a deeper review of the current site enhancements.
+- Do not create `a2ui.html` yet.
+- Do not add homepage/nav promotion yet.
+- Revisit as the next part only after the current system is clarified and Victor’s review notes are incorporated.
 
 Potential portfolio framing:
 
@@ -477,26 +521,35 @@ Output:
 
 ---
 
-## Suggested first concrete sprint
+## Review pause and next phase
 
-Do not start with broad implementation. Start with a planning + tiny prototype sprint.
+The first concrete enhancement sprint is complete enough for holistic review. Do not start another broad implementation track until Victor finishes a deep review of the current site.
 
-Sprint goal:
+Shipped in this sprint:
 
-Turn the concept into one safe, reviewable website direction without disrupting the live site.
+1. Phase C color punctuation pilots on IBM Cloud, Ability Experience, and SAL Magazine.
+2. Homepage tracklist / report-chapter intro.
+3. Homepage now-playing chip.
+4. Homepage non-sticky chapter-progress behavior.
+5. About page review, with no shipped change.
+6. A2UI identified as a future track, then paused.
+
+Next phase goal:
+
+Clarify the system after the shipped work, collect Victor’s review notes, then choose the next focused branch.
 
 Tasks:
 
-1. Approve or revise this brief.
-2. Treat this repo-root file as the active source of truth unless Victor decides otherwise.
-3. Keep the old scattered plans in `archive/planning/` as superseded source notes.
-4. Write a homepage tracklist / report-chapter spec.
-5. Write a now-playing chip / chapter-progress spec.
-6. Write a lightweight scroll-motion spec before implementing parallax.
-7. Choose one pilot project.
-8. Inventory only the assets needed for that pilot.
-9. Write the A2UI showcase spec as a later track after the core component system is stable.
-10. Then create an implementation branch if Victor approves.
+1. Keep this direction brief and `PORTFOLIO_DASHBOARD.md` updated with the shipped state.
+2. Use `archive/planning/portfolio-enhancement-state-2026-05-22.md` as the current checkpoint.
+3. Let Victor review the live site in desktop/mobile and Light/Dark.
+4. Collect review notes before adding more patterns.
+5. After review, choose one focused next track:
+   - refine homepage behavior;
+   - constrain or extend color punctuation;
+   - update content/copy;
+   - deepen one case study;
+   - resume A2UI as a separate spec/prototype.
 
 ---
 
@@ -549,19 +602,15 @@ Tasks:
 
 ## Immediate next step
 
-Current Phase C branch:
+Current state:
 
-- `docs/color-punctuation-phase-c`
-- Spec: `archive/planning/portfolio-phase-c-color-punctuation-spec-2026-05-21.md`
-- Tiny public pilot: IBM Cloud color-punctuation card + IBM-blue screen-frame treatment for two UI screenshot pairs.
+- Enhancement work is paused for Victor’s deep review.
+- A2UI is paused as a future track.
+- The current checkpoint is `archive/planning/portfolio-enhancement-state-2026-05-22.md`.
 
 Recommended next action:
 
-Review the IBM Cloud pilot visually, then choose one:
-
-1. Approve Phase C and roll the color-punctuation pattern to one more public case study.
-2. Revise the IBM Cloud pilot before broader rollout.
-3. Write the homepage tracklist / report-chapter spec.
-4. Write the now-playing chip / chapter-progress spec.
-5. Write the lightweight scroll-motion / parallax spec.
-6. Pause portfolio concept work for now.
+1. Victor reviews the current live site across desktop/mobile and Light/Dark.
+2. Victor brings back enhancement/content notes.
+3. The next branch is selected from those notes rather than continuing the roadmap automatically.
+4. Resume A2UI only when Victor wants to make it the next explicit track.

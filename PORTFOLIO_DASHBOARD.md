@@ -1,8 +1,25 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-18
+Last updated: 2026-05-22
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
+
+## Current enhancement phase
+
+Status: review pause after merged design-system enhancements.
+
+Recent shipped work:
+
+- Phase C color punctuation examples are live on IBM Cloud, Ability Experience, and SAL Magazine.
+- Homepage sequence system is live: tracklist intro, now-playing chip, and non-sticky chapter-progress behavior.
+- About page was reviewed and left as-is after reverting a local program-note experiment.
+- A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
+
+Current next action:
+
+- Victor will do a deep site review and bring back enhancement/content notes.
+- Do not start more broad visual expansion until those notes are reviewed.
+- Use `archive/planning/portfolio-enhancement-state-2026-05-22.md` as the current review checkpoint.
 
 ## Status legend
 
