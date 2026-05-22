@@ -66,6 +66,8 @@ Good candidates:
 - one archival note or awards block with a muted orange/purple surface;
 - avoid over-framing spreads, because the magazine imagery is already the color.
 
+Phase C follow-up implemented one orange archive note beneath the issue cover wall, keeping the magazine spreads themselves unframed so the existing publication imagery remains the main color source.
+
 ### Ability Experience
 
 Current feel: public and safe, but simpler/shorter than other case studies.
@@ -178,11 +180,24 @@ This gives the page:
 - a test of the color-punctuation pattern on a shorter public case study;
 - no protected-page or confidential-work changes.
 
+Public page: `salmagazine.html`
+
+Implemented:
+
+1. Converted the existing archive/links note beneath the issue covers into one orange `color-punct-card` labeled “Archive note.”
+2. Kept the external Issuu and pikapp.org links intact.
+3. Avoided screen frames or broad spread treatments because the magazine imagery already carries the page color.
+
+This gives the page:
+
+- one editorial beat between the issue cover wall and featured spreads;
+- a public-page test of color punctuation on image-rich publication work;
+- no protected-page or confidential-work changes.
+
 ---
 
 ## 6. What remains deferred
 
-- Rollout to SAL Magazine.
 - Protected-page use on IBM Patterns, PCI, or Document Processing.
 - Persistent DNA mode.
 - Wildcolor.
