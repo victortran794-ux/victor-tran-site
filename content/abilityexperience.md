@@ -37,7 +37,9 @@ A full brand package built around a single anniversary moment.
 
 The Ability Experience is the philanthropy of Pi Kappa Phi Fraternity, connecting student members with people with disabilities through cycling events and community programs. For the organization's 40th anniversary, I built an iconography system, an illustrated commemorative print, and cycling kits worn by nearly 100 riders traveling coast to coast.
 
-As a special tribute to the 40th anniversary of The Ability Experience, an iconography system was created to represent various aspects of the organization. The illustrated print shows the origins of the philanthropy and tells the story of multiple volunteer projects from across the country. Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode from the West Coast to Washington D.C.
+As a special tribute to the 40th anniversary of The Ability Experience, the brand package connected iconography, illustration, and cycling-kit design around one commemorative moment.
+
+The illustrated print shows the origins of the philanthropy and tells the story of multiple volunteer projects from across the country. Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode from the West Coast to Washington D.C.
 
 For each new year of team summer events, The Ability Experience designs a cycling kit that sets a branding standard for the summer of team events. Incorporating safety feature standards, these cycling kits are used during The Ability Experience summer team events Gear Up Florida and the Journey of Hope.
 

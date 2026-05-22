@@ -44,7 +44,7 @@ Good candidates:
 - convert one existing system-insight paragraph into a colored editorial note;
 - keep the rest of the page neutral so the enterprise work still feels serious.
 
-Phase C pilot implemented here because IBM Cloud is public and has several UI/product screenshots.
+Phase C pilot started here because IBM Cloud is public and has several UI/product screenshots.
 
 ### Pi Kapp App
 
@@ -75,6 +75,8 @@ Good candidates:
 - a color-backed anniversary note;
 - subtle project-accent chips around iconography/cycling kit sections;
 - potentially use color to separate print/iconography/cycling kit artifacts.
+
+Phase C follow-up implemented one purple anniversary note on this public case study to test whether the color-punctuation pattern helps shorter pages without adding visual noise.
 
 ### About and galleries
 
@@ -144,7 +146,7 @@ Rules:
 
 ---
 
-## 5. Tiny Phase C pilot implemented
+## 5. Tiny Phase C pilots implemented
 
 Public page: `ibmcloud.html`
 
@@ -162,11 +164,25 @@ This gives the page:
 - an IBM-blue accent without painting large sections blue;
 - a visible test of the system on a public, non-protected case study.
 
+Public page: `abilityexperience.html`
+
+Implemented:
+
+1. Converted the existing 40th-anniversary tribute sentence into one purple `color-punct-card` labeled “Anniversary note.”
+2. Kept the existing factual claims and supporting paragraph intact outside the card.
+3. Avoided additional chips or broad accent treatments so this remains a one-card public-page rollout.
+
+This gives the page:
+
+- one stronger editorial beat near the central anniversary artwork;
+- a test of the color-punctuation pattern on a shorter public case study;
+- no protected-page or confidential-work changes.
+
 ---
 
 ## 6. What remains deferred
 
-- Rollout to SAL Magazine / Ability Experience.
+- Rollout to SAL Magazine.
 - Protected-page use on IBM Patterns, PCI, or Document Processing.
 - Persistent DNA mode.
 - Wildcolor.

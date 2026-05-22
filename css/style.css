@@ -1384,7 +1384,7 @@ button:focus-visible,
   --punct-bg: var(--purple);
   --punct-mark: var(--pink);
   margin: var(--space-10) 0;
-  padding: var(--space-8) var(--space-10);
+  padding: var(--space-10) var(--space-14);
   background: var(--punct-bg);
   border-radius: var(--radius-md);
   color: #ffffff;
@@ -1418,14 +1418,14 @@ button:focus-visible,
 }
 
 .case-study .color-punct-card p {
-  max-width: none;
+  max-width: 720px;
   margin: 0;
   color: rgba(255, 255, 255, 0.86);
 }
 
 @media (max-width: 600px) {
   .color-punct-card {
-    padding: var(--space-6);
+    padding: var(--space-8);
   }
 }
 
