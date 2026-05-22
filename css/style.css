@@ -1423,6 +1423,11 @@ button:focus-visible,
   color: rgba(255, 255, 255, 0.86);
 }
 
+.color-punct-card a {
+  color: #ffffff;
+  border-bottom: 1px solid currentColor;
+}
+
 @media (max-width: 600px) {
   .color-punct-card {
     padding: var(--space-8);
