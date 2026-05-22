@@ -181,6 +181,30 @@ Guardrails:
 - Keep the public claim honest: this is an exploration of agent-to-user interface design, not a claim that Victor authored the protocol.
 - If implemented later, use static HTML/CSS/JS or a small isolated prototype; avoid adding a build system to the portfolio just for this.
 
+### Portfolio color punctuation
+
+The rest of the portfolio may need more intentional splashes of color so the energy of the homepage colored project boxes carries into deeper pages. The goal is not to make every page loud; it is to use the existing accent palette as wayfinding, rhythm, and project identity.
+
+Good candidates:
+
+- Section openers or chapter labels that borrow a project accent.
+- Selected artifact/stat/process cards with colored surfaces, similar in spirit to the homepage feature boxes.
+- Screen-frame accents and captions that reinforce each project’s color identity.
+- Small color-backed “track” moments between major sections.
+- Pull quotes, decision cards, or key outcomes that deserve a stronger editorial beat.
+- A restrained color strip/dot/chip system for metadata and project categories.
+
+Guardrails:
+
+- Preserve the flat editorial base: color is punctuation, not wallpaper.
+- Keep body copy on high-contrast neutral surfaces unless a colored card has proven contrast.
+- Reuse existing palette/token relationships before inventing new colors.
+- Use color to create hierarchy and movement through the page, not random decoration.
+- Document where colored surfaces are allowed so the system does not drift into generic SaaS blocks.
+- Test both Light and Dark lenses; colored surfaces should feel intentional in both.
+
+This should become its own small audit/spec before broad rollout: identify where deeper pages feel too monochrome, then choose one or two reusable color patterns to pilot.
+
 ### Softer radius system
 
 Add more rounded corners where they support the glasses/lens/UI-screen metaphor and make artifacts feel more touchable. Keep the base visual language flat and editorial: rounded does not mean bubbly, SaaS-generic, or shadow-heavy.
@@ -334,6 +358,7 @@ Low-risk implementation candidates from the repo plan:
 - Add missing CSS variables for radii, motion, easing, and line-height.
 - Expand radius tokens intentionally, for example `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, and `--radius-pill`, then map them to cards, frames, chips, and controls.
 - Add lens/theme tokens for Light, Dark, DNA, and eventual Wildcolor modes using CSS variables / `data-lens` rather than duplicate markup.
+- Add color-punctuation rules that extend the homepage’s colored-box energy into deeper pages through reusable accent surfaces, chapter labels, metadata chips, and selected artifact/stat/decision cards.
 - Add motion tokens for scroll effects, for example `--parallax-distance-sm`, `--parallax-distance-md`, `--reveal-distance`, and shared easing/duration values.
 - Mirror tokens in `content/design-system.json` if that remains part of the system.
 - Add reusable classes for:
@@ -502,7 +527,10 @@ Tasks:
 8. Should A2UI become a separate future-facing showcase after the core system pass?
    - Recommendation: yes, but spec it as an A2UI-inspired Agent-to-User Interface case study/prototype first; do not let it expand the first implementation sprint.
 
-9. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
+9. Should the deeper portfolio pages use more color punctuation?
+   - Recommendation: yes; audit the pages first, then add a small set of reusable accent-surface rules inspired by the homepage colored boxes. Avoid random per-page decoration.
+
+10. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
 
 ---
 
@@ -521,12 +549,19 @@ Tasks:
 
 ## Immediate next step
 
+Current Phase C branch:
+
+- `docs/color-punctuation-phase-c`
+- Spec: `archive/planning/portfolio-phase-c-color-punctuation-spec-2026-05-21.md`
+- Tiny public pilot: IBM Cloud color-punctuation card + IBM-blue screen-frame treatment for two UI screenshot pairs.
+
 Recommended next action:
 
-Review the updated brief, then choose one:
+Review the IBM Cloud pilot visually, then choose one:
 
-1. “Direction approved — write the homepage tracklist / report-chapter spec.”
-2. “Direction approved — write the now-playing chip / chapter-progress spec.”
-3. “Direction approved — write the lightweight scroll-motion / parallax spec.”
-4. “Revise the brief before deeper planning.”
-5. “Pause portfolio concept work for now.”
+1. Approve Phase C and roll the color-punctuation pattern to one more public case study.
+2. Revise the IBM Cloud pilot before broader rollout.
+3. Write the homepage tracklist / report-chapter spec.
+4. Write the now-playing chip / chapter-progress spec.
+5. Write the lightweight scroll-motion / parallax spec.
+6. Pause portfolio concept work for now.

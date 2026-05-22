@@ -1342,6 +1342,19 @@ button:focus-visible,
   overflow: hidden;
 }
 
+.screen-frame--contain img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  padding: 12px;
+  background: var(--bg-2);
+}
+
+@media (max-width: 700px) {
+  .screen-frame--pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 .screen-frame--placeholder {
   aspect-ratio: 16 / 9;
   border-style: dashed;
@@ -1362,6 +1375,58 @@ button:focus-visible,
   font-size: var(--text-caption);
   color: var(--text-2);
   letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════
+   COLOR PUNCTUATION — selected editorial accents
+   ══════════════════════════════════════════════ */
+.color-punct-card {
+  --punct-bg: var(--purple);
+  --punct-mark: var(--pink);
+  margin: var(--space-10) 0;
+  padding: var(--space-8) var(--space-10);
+  background: var(--punct-bg);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+}
+
+.color-punct-card--orange {
+  --punct-bg: var(--orange);
+  --punct-mark: var(--blue);
+}
+
+.color-punct-card--purple {
+  --punct-bg: var(--purple);
+  --punct-mark: var(--pink);
+}
+
+.color-punct-card .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  margin-bottom: var(--space-4);
+}
+
+.color-punct-card .section-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  flex: none;
+  background: var(--punct-mark);
+}
+
+.case-study .color-punct-card p {
+  max-width: none;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 600px) {
+  .color-punct-card {
+    padding: var(--space-6);
+  }
 }
 
 .case-study-caption {
