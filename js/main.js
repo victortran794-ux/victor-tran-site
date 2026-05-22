@@ -189,6 +189,52 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 });
 
 
+// ── Homepage chapter progress ─────────────────────
+(function () {
+  const featured = document.querySelector('.featured');
+  if (!featured) return;
+
+  const cards = Array.from(featured.querySelectorAll('.featured-item[data-chapter]'));
+  const titleNode = featured.querySelector('[data-now-playing-title]');
+  const countNode = featured.querySelector('[data-now-playing-count]');
+  const trackRows = Array.from(featured.querySelectorAll('.featured-tracklist [data-chapter]'));
+  if (!cards.length || !titleNode || !countNode || !trackRows.length) return;
+
+  function setActiveChapter(chapter, title) {
+    if (!chapter || !title) return;
+
+    titleNode.textContent = title;
+    countNode.textContent = `${chapter}/03`;
+
+    trackRows.forEach(row => {
+      const active = row.dataset.chapter === chapter;
+      row.classList.toggle('is-active', active);
+      if (active) {
+        row.setAttribute('aria-current', 'true');
+      } else {
+        row.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) return;
+
+    const card = visible.target;
+    setActiveChapter(card.dataset.chapter, card.dataset.chapterTitle);
+  }, {
+    threshold: [0.35, 0.55],
+    rootMargin: '-20% 0px -35% 0px'
+  });
+
+  cards.forEach(card => observer.observe(card));
+})();
+
+
 // ── Hero: fixed portrait + color switcher ─────────
 (function () {
   const hero = document.querySelector('.hero');
