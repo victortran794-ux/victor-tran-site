@@ -205,6 +205,7 @@ Current shared primitives now include:
 - `callout-card` — reusable quote / HMW / thesis callout, piloted on IBM Patterns
 - `lens-switcher` — unified Light / Dark / DNA nav control; replaces the old separate `theme-toggle` + `dna-trigger` buttons
 - `screen-frame` — reusable UI/product screen display with accent border, `--radius-lg`, and variants: `--pair`, `--placeholder`, `--blur`
+- `color-punct-card` — selected colored editorial note for case-study rhythm; orange/purple surface variants borrow the homepage colored-box behavior without making whole pages loud
 
 Next primitives to promote into documented patterns:
 
