@@ -35,6 +35,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Section Headings
 
+- Selected work, sequenced like chapters.
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting Group
@@ -72,6 +73,9 @@ A collection of graphic design work spanning brand identity, print, and digital 
 - Brand Identity
 - Art Direction
 - Illustration
+- 01 Systems at scale
+- 02 Brand and publication worlds
+- 03 Illustration and visual experiments
 
 ## Images
 
