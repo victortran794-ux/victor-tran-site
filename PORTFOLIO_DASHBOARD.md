@@ -18,6 +18,7 @@ Recent shipped work:
 Current next action:
 
 - Victor will do a deep site review and bring back enhancement/content notes.
+- Add a tone/wording pass to the review: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
 - Do not start more broad visual expansion until those notes are reviewed.
 - Use `archive/planning/portfolio-enhancement-state-2026-05-22.md` as the current review checkpoint.
 

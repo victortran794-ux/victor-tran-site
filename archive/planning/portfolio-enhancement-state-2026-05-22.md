@@ -86,6 +86,7 @@ Victor’s review should cover:
 - whether color punctuation feels purposeful or decorative;
 - whether any page now feels under-designed relative to the homepage;
 - content cleanup notes;
+- places where pull quotes, section headers, labels, or supporting copy feel too cheesy, over-written, or theatrical;
 - places where the system feels too theatrical or not theatrical enough.
 
 ## Recommended next phase
@@ -112,9 +113,10 @@ Likely tracks:
 
 1. Refine shipped homepage behavior.
 2. Refine or constrain color-punctuation rules.
-3. Update content/copy where Victor has notes.
-4. Deepen one case-study design treatment.
-5. Resume A2UI as a separate future-facing spec/prototype.
+3. Run a tone and wording pass on pull quotes, section headers, labels, and supporting copy.
+4. Update content/copy where Victor has specific notes.
+5. Deepen one case-study design treatment.
+6. Resume A2UI as a separate future-facing spec/prototype.
 
 ## Deferred
 

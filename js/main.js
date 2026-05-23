@@ -185,7 +185,22 @@ if (!prefersReducedMotion) {
 
 // ── Marquee clone for seamless loop ───────────────
 document.querySelectorAll('.marquee-track').forEach(track => {
-  track.innerHTML += track.innerHTML; // double the content for seamless loop
+  const originalItems = Array.from(track.children);
+  if (!originalItems.length) return;
+
+  const fillTrack = () => {
+    const originalMarkup = originalItems.map(item => item.outerHTML).join('');
+    track.innerHTML = originalMarkup;
+
+    while (track.scrollWidth < window.innerWidth * 1.5) {
+      track.insertAdjacentHTML('beforeend', originalMarkup);
+    }
+
+    track.innerHTML += track.innerHTML;
+  };
+
+  fillTrack();
+  window.addEventListener('resize', fillTrack);
 });
 
 
