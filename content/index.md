@@ -35,7 +35,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Section Headings
 
-- A focused path through product, brand, publication, and visual work.
+- Start with the core projects, then browse the visual archive.
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting Group
@@ -65,11 +65,11 @@ Modernizing a century-old publication. I led the layout and art direction for th
 
 A mobile app concept for undergraduate fraternity members — track milestones, stay connected with the chapter, and live the values day-to-day.
 
-Two lighter collections live here: one for illustration and one for graphic design.
+Standalone illustration and graphic design pieces, kept separate from the main case-study sequence.
 
-Digital and traditional illustration — posters, paintings, and personal series.
+Standalone digital and traditional work — posters, paintings, and personal series.
 
-A collection of graphic design work spanning brand identity, print, and digital design.
+Standalone identity, print, illustration, and event graphics.
 
 ## Lists And Tags
 
@@ -79,7 +79,7 @@ A collection of graphic design work spanning brand identity, print, and digital 
 - Illustration
 - 01 Systems at scale
 - 02 Brand, publication, and community work
-- 03 Illustration and graphic design
+- 03 Visual archive
 
 ## Images
 
