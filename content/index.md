@@ -31,7 +31,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Star & Lamp (Art Direction): salmagazine
 - Pi Kapp App (Product Design): pikappapp
 - Art & Illustration (Artwork): artillustration
-- Graphic Gallery (Graphic Design): graphicgallery
+- Graphics (Graphic Design): graphicgallery
 
 ## Section Headings
 
@@ -43,7 +43,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Star & Lamp
 - Pi Kapp App
 - Art & Illustration
-- Graphic Gallery
+- Graphics
 
 ## Body Copy
 
@@ -64,6 +64,8 @@ Empowering social change through accessible design. Brand identity and collatera
 Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.
 
 A mobile app concept for undergraduate fraternity members — track milestones, stay connected with the chapter, and live the values day-to-day.
+
+Two lighter collections live here: one for illustration and one for graphic design.
 
 Digital and traditional illustration — posters, paintings, and personal series.
 

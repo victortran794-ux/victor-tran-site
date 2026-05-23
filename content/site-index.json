@@ -15,7 +15,7 @@
       "Star & Lamp",
       "Pi Kapp App",
       "Art & Illustration",
-      "Graphic Gallery"
+      "Graphics"
     ],
     "images": [
       {
@@ -110,7 +110,7 @@
         "alt": "Art & Illustration"
       },
       {
-        "title": "Graphic Gallery",
+        "title": "Graphics",
         "category": "Graphic Design",
         "url": "graphicgallery",
         "image": "images/thumb-sgla.webp",
