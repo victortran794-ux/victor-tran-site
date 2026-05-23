@@ -1,26 +1,28 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
 ## Current enhancement phase
 
-Status: review pause after merged design-system enhancements.
+Status: review pause after merged design-system and navigation enhancements.
 
 Recent shipped work:
 
 - Phase C color punctuation examples are live on IBM Cloud, Ability Experience, and SAL Magazine.
-- Homepage sequence system is live: tracklist intro, now-playing chip, and non-sticky chapter-progress behavior.
+- Homepage sequence system is live: tracklist intro, now-playing chip, non-sticky chapter-progress behavior, and the wide-desktop marquee gap fix.
+- Navigation has been simplified: the separate top-level Galleries menu is gone, and `Art & Illustration` plus `Graphics` now live under Work.
+- The homepage Work area now separates primary project cards from a dedicated Galleries subsection.
 - About page was reviewed and left as-is after reverting a local program-note experiment.
 - A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
 
 Current next action:
 
-- Victor will do a deep site review and bring back enhancement/content notes.
+- Victor should do one live visual review of the merged homepage/nav polish: marquee loop, Work dropdown, mobile top nav, Light/Dark, and the new Galleries subsection.
 - Add a tone/wording pass to the review: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
 - Do not start more broad visual expansion until those notes are reviewed.
-- Use `archive/planning/portfolio-enhancement-state-2026-05-22.md` as the current review checkpoint.
+- Use `archive/planning/portfolio-enhancement-state-2026-05-23.md` as the current review checkpoint.
 
 ## Status legend
 
@@ -43,7 +45,7 @@ Current next action:
 | Pi Kapp App | live | public | existing HTML/content | No active action | None noted |
 | Ability Experience | live | public | existing HTML/content | No active action | None noted |
 | SAL Magazine | live | public | existing HTML/content | No active action | None noted |
-| Graphic / Illustration galleries | live | public | existing HTML/content | No active action | Large image performance worth watching |
+| Art & Illustration / Graphics galleries | live | public, discoverable under Work and in the homepage Galleries subsection | `artillustration.html`; `graphicgallery.html`; homepage Work section | Review placement after nav simplification | Large image performance worth watching |
 
 ## Current PC / Agent Setup
 
@@ -92,7 +94,7 @@ Current state from latest local audit:
 
 - GitHub health workflow is active.
 - Local health script exists at `scripts/health-check.sh`.
-- Local `lychee` is not installed, so local broken-link checks currently skip; rely on GitHub Actions for full link checks.
+- Local preflight currently runs the link check successfully from this PC/WSL setup.
 - Local Lighthouse remains remote/GitHub-only.
 - Current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`.
 - Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` is live on Vercel, password-gated, noindex, and omitted from the sitemap.
@@ -111,6 +113,6 @@ Current state from latest local audit:
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
 - Treat Document Processing as intentionally live-but-protected; only revisit screenshots, claims, homepage/nav placement, or final media direction when Vic asks.
-- Consider installing GitHub CLI for smoother PR/workflow checks from this PC.
-- Consider local Lychee or a Windows-native health script only if local link checks become routine.
+- Windows Git and Windows GitHub CLI are available as WSL credential bridges for push/PR/merge work when plain WSL Git/GH auth is unavailable.
+- Consider local Lychee or a Windows-native health script only if local link checks become routine outside preflight.
 - Optional later: add a weekly GitHub health digest only if failures occur.

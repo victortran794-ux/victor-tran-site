@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-05-22
-Status: Active direction brief; current phase is review pause after shipped enhancement pilots
+Last updated: 2026-05-23
+Status: Active direction brief; current phase is review pause after shipped enhancement and navigation polish
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment.
@@ -56,7 +56,8 @@ Preserve:
 - Editorial, polished, selective tone.
 - Flat visual language: hairlines, surface shifts, no drop shadows.
 - Personal, slightly irreverent voice.
-- Existing navigation, footer, theme, cursor, reveal, and case-study patterns unless a specific change is approved.
+- Existing footer, theme, cursor, reveal, and case-study patterns unless a specific change is approved.
+- Current simplified navigation model: Work contains both primary case studies and the lighter Art & Illustration / Graphics galleries; About remains top-level; Contact can stay de-emphasized on mobile.
 - Password gates and confidentiality protections.
 - Document Processing in its current live, password-gated, noindex state unless Victor explicitly approves promotion or major copy/media changes.
 - About page `Training for: (WIP)` as an intentional current-state note.
@@ -75,7 +76,7 @@ Avoid:
 
 ## Current shipped enhancement state
 
-Updated: 2026-05-22
+Updated: 2026-05-23
 
 The first enhancement pass has moved from planning into a review checkpoint. The following patterns are now live and should be reviewed as a system before additional expansion:
 
@@ -89,14 +90,21 @@ The first enhancement pass has moved from planning into a review checkpoint. The
    - Tracklist-style featured-work intro.
    - Static now-playing chip.
    - Non-sticky chapter-progress behavior tied to the homepage work grid.
+   - Wide-desktop marquee loop fix so the strip stays seamless when the viewport is larger than the original item set.
    - Current decision: keep behavior homepage-only and review before adding sticky, parallax, or case-study-wide progress.
 
-3. **About page**
+3. **Navigation / galleries regrouping**
+   - Removed the separate top-level Galleries nav menu.
+   - Added `Art & Illustration` and `Graphics` to the Work dropdown.
+   - Moved gallery cards into a dedicated Galleries subsection inside the homepage Work area, preserving the main project sequence.
+   - Current decision: keep the simpler nav, then review mobile clarity and homepage rhythm before adding any new navigation affordance.
+
+4. **About page**
    - Reviewed and left as-is.
    - A local “Program note” treatment was reverted because the `Act I / Act II / Encore` labels did not fit.
    - Current decision: no immediate About redesign.
 
-4. **A2UI**
+5. **A2UI**
    - Paused as a future track.
    - Current decision: do not create or promote an A2UI page until after Victor’s deeper review.
 
@@ -104,7 +112,7 @@ Review checkpoint:
 
 - Victor will review the current live site holistically and bring back enhancement/content notes.
 - New work should focus on clarifying, documenting, or refining the shipped patterns rather than adding more new patterns by default.
-- See `archive/planning/portfolio-enhancement-state-2026-05-22.md` for the current review checkpoint.
+- See `archive/planning/portfolio-enhancement-state-2026-05-23.md` for the current review checkpoint.
 
 ---
 
