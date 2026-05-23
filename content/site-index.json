@@ -51,12 +51,12 @@
         "alt": "Pi Kapp App"
       },
       {
-        "src": "images/illus-solar.webp",
-        "alt": "Art & Illustration"
+        "src": "images/illus-glow.jpg",
+        "alt": "Blue illustrated figure surrounded by orange creatures"
       },
       {
-        "src": "images/thumb-sgla.webp",
-        "alt": "Graphic Design"
+        "src": "images/gg-edc-0.jpg",
+        "alt": "Purple boombox graphic with two illustrated eye panels"
       }
     ],
     "projects": [
@@ -106,15 +106,15 @@
         "title": "Art & Illustration",
         "category": "Artwork",
         "url": "artillustration",
-        "image": "images/illus-solar.webp",
-        "alt": "Art & Illustration"
+        "image": "images/illus-glow.jpg",
+        "alt": "Blue illustrated figure surrounded by orange creatures"
       },
       {
         "title": "Graphic Design",
         "category": "Graphic Design",
         "url": "graphicgallery",
-        "image": "images/thumb-sgla.webp",
-        "alt": "Graphic Design"
+        "image": "images/gg-edc-0.jpg",
+        "alt": "Purple boombox graphic with two illustrated eye panels"
       }
     ]
   },
