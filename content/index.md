@@ -28,22 +28,22 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting Group (Brand & Print): pci
 - The Ability Experience (Brand Identity): abilityexperience
-- Star & Lamp (Art Direction): salmagazine
+- Star & Lamp Magazine (Art Direction): salmagazine
 - Pi Kapp App (Product Design): pikappapp
 - Art & Illustration (Artwork): artillustration
-- Graphics (Graphic Design): graphicgallery
+- Graphic Design (Graphic Design): graphicgallery
 
 ## Section Headings
 
-- Selected work, sequenced like chapters.
+- A focused path through product, brand, publication, and visual work.
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting Group
 - The Ability Experience
-- Star & Lamp
+- Star & Lamp Magazine
 - Pi Kapp App
 - Art & Illustration
-- Graphics
+- Graphic Design
 
 ## Body Copy
 
@@ -51,7 +51,7 @@ Vic Tran ®
 
 Visual designer working across brand, illustration, and product systems.
 
-Now viewing Systems at scale 01/03
+Current section Systems at scale 01/03
 
 Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.
 
@@ -78,8 +78,8 @@ A collection of graphic design work spanning brand identity, print, and digital 
 - Art Direction
 - Illustration
 - 01 Systems at scale
-- 02 Brand and publication worlds
-- 03 Illustration and visual experiments
+- 02 Brand, publication, and community work
+- 03 Illustration and graphic design
 
 ## Images
 
@@ -92,4 +92,4 @@ A collection of graphic design work spanning brand identity, print, and digital 
 - Star & Lamp Magazine: images/thumb-sal.webp
 - Pi Kapp App: images/thumb-pikapp.webp
 - Art & Illustration: images/illus-solar.webp
-- Graphic Gallery: images/thumb-sgla.webp
+- Graphic Design: images/thumb-sgla.webp

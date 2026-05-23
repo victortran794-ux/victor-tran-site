@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "Graphic Gallery"
+title: "Graphic Design"
 source: "graphicgallery.html"
 url: "/graphicgallery"
 category: "Design"
 description: "Brand identity, print, and digital design across nonprofit and editorial work."
 ---
 
-# Graphic Gallery
+# Graphic Design
 
 ## Description
 
