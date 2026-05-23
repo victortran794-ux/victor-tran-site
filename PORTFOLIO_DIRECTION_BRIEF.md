@@ -97,7 +97,8 @@ The first enhancement pass has moved from planning into a review checkpoint. The
    - Removed the separate top-level Galleries nav menu.
    - Added `Art & Illustration` and `Graphics` to the Work dropdown.
    - Moved gallery cards into a dedicated Galleries subsection inside the homepage Work area, preserving the main project sequence.
-   - Current decision: keep the simpler nav, then review mobile clarity and homepage rhythm before adding any new navigation affordance.
+   - Finalized the two Gallery cards as single-image cards with orange/purple text surfaces and tighter `Visual archive` wording.
+   - Current decision: keep the simpler nav, then review mobile clarity, homepage rhythm, Gallery card treatment, and archive wording before adding any new navigation affordance.
 
 4. **About page**
    - Reviewed and left as-is.

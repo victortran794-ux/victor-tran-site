@@ -6,7 +6,7 @@ Scope: summarize the merged homepage/nav polish after the 2026-05-22 design-syst
 
 ## Purpose
 
-This checkpoint updates the 2026-05-22 review pause after two small follow-up fixes shipped: the homepage marquee gap fix and the Work/Galleries navigation simplification.
+This checkpoint updates the 2026-05-22 review pause after small follow-up fixes shipped: the homepage marquee gap fix, the Work/Galleries navigation simplification, final Gallery card visual refinement, and a first homepage wording pass.
 
 The next phase should remain a review and refinement phase. Do not automatically expand into another visual-system rollout until Victor reviews the live site in desktop, mobile, Light, and Dark.
 
@@ -32,6 +32,15 @@ Merged in PR #46.
   - `graphicgallery.html`
 - Updated mobile nav behavior so the top menu stays simpler: Work and About remain visible while Contact is de-emphasized on small screens.
 
+### Gallery card refinement and homepage wording
+
+Merged in PR #49 and PR #50.
+
+- Finalized the homepage Gallery cards as single-image cards instead of decorative mosaics.
+- Art & Illustration uses the blue figure/orange-creatures artwork with an orange text surface.
+- Graphic Design uses the purple EDC boombox/eye-panel graphic with a purple text surface.
+- Tightened the homepage copy so the main Work section leads with core projects and treats the Gallery cards as a separate `Visual archive` rather than another case-study chapter.
+
 ## Current live review checklist
 
 Victor should review:
@@ -40,7 +49,8 @@ Victor should review:
 - homepage sequence rhythm after gallery cards moved into their own subsection;
 - mobile top nav clarity after removing the separate Galleries menu;
 - Work dropdown length and scanability now that gallery links are inside it;
-- Light and Dark treatment for the new Galleries subsection;
+- Light and Dark treatment for the single-image Gallery cards;
+- whether `Visual archive` feels grounded or too dry;
 - whether `Graphics` is the right public label while the underlying page file/title remains `graphicgallery.html` / `Graphic Gallery`;
 - any wording that feels cheesy, over-written, too theatrical, or too clever.
 
