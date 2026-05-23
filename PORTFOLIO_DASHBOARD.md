@@ -13,15 +13,15 @@ Recent shipped work:
 - Phase C color punctuation examples are live on IBM Cloud, Ability Experience, and SAL Magazine.
 - Homepage sequence system is live: tracklist intro, now-playing chip, non-sticky chapter-progress behavior, and the wide-desktop marquee gap fix.
 - Navigation has been simplified: the separate top-level Galleries menu is gone, and `Art & Illustration` plus `Graphics` now live under Work.
-- The homepage Work area now separates primary project cards from a dedicated Galleries subsection.
+- The homepage Work area now separates primary project cards from a dedicated Galleries subsection; the Gallery cards use one image each, orange/purple text surfaces, and the tighter `Visual archive` framing.
 - About page was reviewed and left as-is after reverting a local program-note experiment.
 - A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
 
 Current next action:
 
-- Victor should do one live visual review of the merged homepage/nav polish: marquee loop, Work dropdown, mobile top nav, Light/Dark, and the new Galleries subsection.
-- Add a tone/wording pass to the review: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
-- Do not start more broad visual expansion until those notes are reviewed.
+- Victor should do one live visual review of the merged homepage/nav/gallery polish: marquee loop, Work dropdown, mobile top nav, Light/Dark, single-image Gallery cards, and the `Visual archive` wording.
+- Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
+- Do not start more broad visual expansion until those review notes are reviewed.
 - Use `archive/planning/portfolio-enhancement-state-2026-05-23.md` as the current review checkpoint.
 
 ## Status legend
