@@ -544,9 +544,11 @@ Tasks:
 2. Use `archive/planning/portfolio-enhancement-state-2026-05-22.md` as the current checkpoint.
 3. Let Victor review the live site in desktop/mobile and Light/Dark.
 4. Collect review notes before adding more patterns.
-5. After review, choose one focused next track:
+5. Include a tone/wording track for pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
+6. After review, choose one focused next track:
    - refine homepage behavior;
    - constrain or extend color punctuation;
+   - run the tone/wording pass;
    - update content/copy;
    - deepen one case study;
    - resume A2UI as a separate spec/prototype.
@@ -611,6 +613,6 @@ Current state:
 Recommended next action:
 
 1. Victor reviews the current live site across desktop/mobile and Light/Dark.
-2. Victor brings back enhancement/content notes.
+2. Victor brings back enhancement/content notes, including wording that feels too cheesy, over-written, or theatrical.
 3. The next branch is selected from those notes rather than continuing the roadmap automatically.
 4. Resume A2UI only when Victor wants to make it the next explicit track.
