@@ -7,15 +7,15 @@
     "description": "Victor Tran. Visual designer at IBM. I design cool things with sincerity.",
     "contentFile": "content/index.md",
     "headings": [
-      "Selected work, sequenced like chapters.",
+      "A focused path through product, brand, publication, and visual work.",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
       "Performance Contracting Group",
       "The Ability Experience",
-      "Star & Lamp",
+      "Star & Lamp Magazine",
       "Pi Kapp App",
       "Art & Illustration",
-      "Graphics"
+      "Graphic Design"
     ],
     "images": [
       {
@@ -56,7 +56,7 @@
       },
       {
         "src": "images/thumb-sgla.webp",
-        "alt": "Graphic Gallery"
+        "alt": "Graphic Design"
       }
     ],
     "projects": [
@@ -89,7 +89,7 @@
         "alt": "The Ability Experience"
       },
       {
-        "title": "Star & Lamp",
+        "title": "Star & Lamp Magazine",
         "category": "Art Direction",
         "url": "salmagazine",
         "image": "images/thumb-sal.webp",
@@ -110,11 +110,11 @@
         "alt": "Art & Illustration"
       },
       {
-        "title": "Graphics",
+        "title": "Graphic Design",
         "category": "Graphic Design",
         "url": "graphicgallery",
         "image": "images/thumb-sgla.webp",
-        "alt": "Graphic Gallery"
+        "alt": "Graphic Design"
       }
     ]
   },
@@ -508,7 +508,7 @@
     "projects": []
   },
   {
-    "title": "Graphic Gallery",
+    "title": "Graphic Design",
     "source": "graphicgallery.html",
     "url": "/graphicgallery",
     "category": "Design",
