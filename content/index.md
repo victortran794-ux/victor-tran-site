@@ -91,5 +91,5 @@ A collection of graphic design work spanning brand identity, print, and digital 
 - The Ability Experience: images/thumb-abex.webp
 - Star & Lamp Magazine: images/thumb-sal.webp
 - Pi Kapp App: images/thumb-pikapp.webp
-- Art & Illustration: images/illus-solar.webp
-- Graphic Design: images/thumb-sgla.webp
+- Blue illustrated figure surrounded by orange creatures: images/illus-glow.jpg
+- Purple boombox graphic with two illustrated eye panels: images/gg-edc-0.jpg
