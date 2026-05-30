@@ -96,4 +96,4 @@ A few songs from each phase of my music. Enjoy the eclectic mix.
 
 ## Images
 
-- Victor Tran: images/about-vic-japan.jpg
+- Victor Tran smiling in front of a shrine in Japan: images/about-vic-japan.jpg
