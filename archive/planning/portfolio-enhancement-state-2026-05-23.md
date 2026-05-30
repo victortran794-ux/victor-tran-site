@@ -41,6 +41,10 @@ Merged in PR #49 and PR #50.
 - Graphic Design uses the purple EDC boombox/eye-panel graphic with a purple text surface.
 - Tightened the homepage copy so the main Work section leads with core projects and treats the Gallery cards as a separate `Visual archive` rather than another case-study chapter.
 
+## Follow-up validation note
+
+The earlier Claude Code design-system test handoff remains archived in `C:\Users\Victor\iCloudDrive\Documents\Website Items\portfolio-design-system-2026-05-21\`. Hermes rechecked the active PC repo afterward: `git diff --check` passed, `./scripts/preflight.sh` passed from WSL, Markdown regeneration completed with no post-check changed files, the local link check reported 0 errors, and the image scan passed. That follow-up produced no blocking fixes; its remaining recommendations are already captured below as review/refinement tracks rather than urgent test failures.
+
 ## Current live review checklist
 
 Victor should review:
