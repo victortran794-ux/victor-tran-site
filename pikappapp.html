@@ -21,7 +21,8 @@
   <title>Pi Kapp App · Victor Tran Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -97,7 +98,7 @@
     <article class="case-study">
 
       <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/pikapp-hero.png" alt="Pi Kapp App hero phone mockup">
+        <img loading="lazy" decoding="async" src="images/pikapp-hero.png" alt="Pi Kapp App hero phone mockup">
       </div>
 
       <span class="case-study-eyebrow reveal">01 · The brief</span>
@@ -118,8 +119,8 @@
       <p>The sitemap settled on a four-tab shell: <em>Member</em> (your dashboard), <em>Chapter</em> (your house), <em>National HQ</em> (Pi Kapp at large), and <em>Settings</em>. Same shell for everyone; what changes is the density of what's already done.</p>
 
       <div class="case-study-images wide contain reveal">
-        <img loading="lazy" src="images/pikapp-wireframes.png" alt="Pi Kapp App hand-drawn wireframes">
-        <img loading="lazy" src="images/pikapp-sitemap.png" alt="Pi Kapp App sitemap">
+        <img loading="lazy" decoding="async" src="images/pikapp-wireframes.png" alt="Pi Kapp App hand-drawn wireframes">
+        <img loading="lazy" decoding="async" src="images/pikapp-sitemap.png" alt="Pi Kapp App sitemap">
       </div>
 
       <span class="case-study-eyebrow reveal">03 · Brand &amp; shell</span>
@@ -133,20 +134,20 @@
 
       <div class="case-study-full-img reveal">
         <div class="screen-frame" style="--frame-accent: var(--purple);">
-          <img loading="lazy" src="images/pikapp-screens-1.png" alt="Pi Kapp App login and splash screens">
+          <img loading="lazy" decoding="async" src="images/pikapp-screens-1.png" alt="Pi Kapp App login and splash screens">
         </div>
       </div>
 
       <div class="case-study-full-img reveal">
         <div class="screen-frame" style="--frame-accent: var(--purple);">
-          <img loading="lazy" src="images/pikapp-screens-2.png" alt="Pi Kapp App chapter status, bulletin, and milestone screens">
+          <img loading="lazy" decoding="async" src="images/pikapp-screens-2.png" alt="Pi Kapp App chapter status, bulletin, and milestone screens">
         </div>
       </div>
 
       <p>The system that came out of that work — color, type, mark, pattern, and the handful of components everything else is built from — codified the inherited brand into a working vocabulary. Five tokens, one feeling.</p>
 
       <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/pikapp-app-designsystem.png" alt="Pi Kapp App design system board: color palette, type pairing, gold star at three sizes, hex tessellation, and component states">
+        <img loading="lazy" decoding="async" src="images/pikapp-app-designsystem.png" alt="Pi Kapp App design system board: color palette, type pairing, gold star at three sizes, hex tessellation, and component states">
       </div>
 
       <span class="case-study-eyebrow reveal">04 · Tracking in action</span>
@@ -156,8 +157,8 @@
       <p>This is the flow that has to work for all three personas. A freshman with two completed tasks and a senior with twenty both land on the same screen. The hierarchy is what changes.</p>
 
       <div class="case-study-images phones reveal">
-        <img loading="lazy" src="images/pikapp-member.png" alt="Pi Kapp App member dashboard with progress bar and bulletin">
-        <img loading="lazy" src="images/pikapp-task-expand.png" alt="Pi Kapp App milestone detail with one task expanded">
+        <img loading="lazy" decoding="async" src="images/pikapp-member.png" alt="Pi Kapp App member dashboard with progress bar and bulletin">
+        <img loading="lazy" decoding="async" src="images/pikapp-task-expand.png" alt="Pi Kapp App milestone detail with one task expanded">
       </div>
 
       <span class="case-study-eyebrow reveal">05 · From comp to concept</span>
@@ -167,15 +168,15 @@
 
       <div class="case-study-full-img reveal">
         <div class="screen-frame" style="--frame-accent: var(--purple);">
-          <img loading="lazy" src="images/pikapp-app-hero.png" alt="Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed">
+          <img loading="lazy" decoding="async" src="images/pikapp-app-hero.png" alt="Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed">
         </div>
       </div>
 
       <p>The polish moments are where the brand stops being decoration and starts being function. The avatar gets a thin gold progress ring that reflects the semester at a glance. Tab switching uses spring physics, not ease-in-out — the difference between premium and templated almost always lives in the motion curve. Checking off a task pops a single gold star particle that scales, lifts, and fades. Same star that loads the splash. Same star that sits at the center of every empty state. One asset, three jobs.</p>
 
       <div class="case-study-images wide contain reveal">
-        <img loading="lazy" src="images/pikapp-app-burst.png" alt="Pi Kapp App prototype: a task being checked off with the gold star particle bursting from the gold checkbox">
-        <img loading="lazy" src="images/pikapp-app-emptystate.png" alt="Pi Kapp App prototype: Chapter tab empty state with the gold star centered on deep blue with hex tessellation">
+        <img loading="lazy" decoding="async" src="images/pikapp-app-burst.png" alt="Pi Kapp App prototype: a task being checked off with the gold star particle bursting from the gold checkbox">
+        <img loading="lazy" decoding="async" src="images/pikapp-app-emptystate.png" alt="Pi Kapp App prototype: Chapter tab empty state with the gold star centered on deep blue with hex tessellation">
       </div>
 
       <p>What the prototype clarified — beyond what any flat comp could — was that the system had room to breathe. The same five tokens that built the splash also built the empty state, the tap feedback, and the progress ring. The brand wasn't a decoration layer applied at the end; it was the structure underneath.</p>
@@ -204,11 +205,11 @@
 
     <nav class="project-nav" aria-label="Project navigation">
       <a href="salmagazine.html" class="project-nav-item project-nav-item--prev">
-        <span class="project-nav-label">← Previous</span>
+        <span class="project-nav-label"><span aria-hidden="true">←</span> Previous</span>
         <span class="project-nav-title">Star &amp; Lamp</span>
       </a>
       <a href="ibmcloud.html" class="project-nav-item project-nav-item--next">
-        <span class="project-nav-label">Next →</span>
+        <span class="project-nav-label">Next <span aria-hidden="true">→</span></span>
         <span class="project-nav-title">IBM Cloud Observability</span>
       </a>
     </nav>

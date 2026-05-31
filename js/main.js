@@ -7,7 +7,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // ── Custom Cursor ──────────────────────────────────
 const dot  = document.querySelector('.cursor-dot');
 const ring = document.querySelector('.cursor-ring');
-const canUseCustomCursor = dot && ring && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const canUseCustomCursor = dot && ring && !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 if (canUseCustomCursor) {
   let mouseX = 0, mouseY = 0;
@@ -20,13 +20,15 @@ if (canUseCustomCursor) {
   }, { passive: true });
 
   // Single rAF loop drives both dot (1:1) and ring (lagged)
-  (function animateCursor() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    dot.style.transform  = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-    requestAnimationFrame(animateCursor);
-  })();
+  if (!prefersReducedMotion) {
+    (function animateCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      dot.style.transform  = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      requestAnimationFrame(animateCursor);
+    })();
+  }
 
   // Expand ring on interactive elements
   const interactiveEls = 'a, button, .featured-item';

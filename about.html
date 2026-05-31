@@ -21,7 +21,8 @@
   <meta name="description" content="About Victor Tran. Visual Designer at IBM, Austin TX.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -78,7 +79,7 @@
         <p>I'm around, let's chat!</p>
       </div>
       <div class="about-photo">
-        <img src="images/about-vic-japan.jpg" alt="Victor Tran smiling in front of a shrine in Japan" width="2048" height="1152">
+        <img src="images/about-vic-japan.jpg" alt="Victor Tran smiling in front of a shrine in Japan" width="2048" height="1152" decoding="async" fetchpriority="high">
       </div>
     </section>
 

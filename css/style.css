@@ -2977,6 +2977,8 @@ html[data-theme="dark"] .spotify-frame {
     scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
+  html, a, button { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
   .reveal { opacity: 1; transform: none; }
   .hero-title .char { opacity: 1; transform: none; }
   .marquee-track { animation: none; }
