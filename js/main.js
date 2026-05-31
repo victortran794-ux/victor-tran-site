@@ -427,6 +427,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === i));
 
     let timer = null;
+    let userPaused = reduceMotion;
 
     function advance() {
       slides[i].classList.remove('is-active');
@@ -434,7 +435,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       slides[i].classList.add('is-active');
     }
     function start() {
-      if (reduceMotion || timer) return;
+      if (userPaused || timer) return;
       timer = setInterval(advance, INTERVAL);
     }
     function stop() {
@@ -442,12 +443,34 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       clearInterval(timer);
       timer = null;
     }
+    function setUserPaused(paused) {
+      userPaused = paused;
+      if (paused) stop();
+      else start();
+    }
 
     stage.addEventListener('mouseenter', stop);
     stage.addEventListener('mouseleave', start);
 
-    return { start, stop };
+    return { stage, start, stop, setUserPaused, get userPaused() { return userPaused; } };
   }).filter(Boolean);
+
+  // Wire pause/play button per slideshow
+  slideshows.forEach(slideshow => {
+    const btn = slideshow.stage.querySelector('.slideshow-pause-btn');
+    if (!btn) return;
+    function syncBtn() {
+      const paused = slideshow.userPaused;
+      btn.setAttribute('aria-pressed', String(paused));
+      btn.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      btn.textContent = paused ? 'Play' : 'Pause';
+    }
+    syncBtn();
+    btn.addEventListener('click', () => {
+      slideshow.setUserPaused(!slideshow.userPaused);
+      syncBtn();
+    });
+  });
 
   slideshows.forEach(slideshow => slideshow.start());
 
