@@ -1,12 +1,12 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-31
+Last updated: 2026-06-01
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
 ## Current enhancement phase
 
-Status: docs checkpoint after a public-site polish mini-sprint; broad expansion remains paused pending review.
+Status: clean reset after public-site polish, image-dimension hardening, dash-heavy wording cleanup, and Git branch cleanup; broad expansion remains paused pending review.
 
 Recent shipped work:
 
@@ -15,13 +15,14 @@ Recent shipped work:
 - Navigation has been simplified: the separate top-level Galleries menu is gone, and `Art & Illustration` plus `Graphics` now live under Work.
 - The homepage Work area now separates primary project cards from a dedicated Galleries subsection; the Gallery cards use one image each, orange/purple text surfaces, and the tighter `Visual archive` framing.
 - Recent public-site polish also shipped: homepage Work-section copy refinement, About photo accessibility, public-page accessibility/performance hygiene, and a real Pause/Play control for the Art & Illustration slideshow.
+- Follow-up cleanup shipped: public image dimensions were added, decorative em-dash rhythm was removed from selected public copy/captions, and generated content exports were regenerated.
 - About page remains otherwise unchanged after the reverted program-note experiment.
 - A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
 
 Current next action:
 
-- Use `archive/planning/portfolio-enhancement-state-2026-05-31.md` as the current review checkpoint.
-- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, and the Art & Illustration slideshow pause control.
+- Use `archive/planning/portfolio-enhancement-state-2026-06-01.md` as the current reset checkpoint.
+- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
 - Treat Document Processing media work as a future Claude Code + Figma media-audit planning pass, not an implementation/rewrite task, until Victor explicitly selects it.
 - Do not start more broad visual expansion until those review notes are reviewed.

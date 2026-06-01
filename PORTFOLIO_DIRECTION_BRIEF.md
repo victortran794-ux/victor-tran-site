@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-05-31
-Status: Active direction brief; current phase is review pause after shipped public-site polish mini-sprint
+Last updated: 2026-06-01
+Status: Active direction brief; current phase is review pause after shipped public-site polish, performance hardening, and wording cleanup
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -29,7 +29,7 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to pause and review as a system. A small public-site polish mini-sprint has also landed, so the next move should be review, checkpointing, or one branch-sized refinement rather than broad expansion.
+The enhancement work has shipped enough to pause and review as a system. A small public-site polish mini-sprint, public image-dimension pass, and dash-heavy wording cleanup have landed, so the next move should be review, checkpointing, or one branch-sized refinement rather than broad expansion.
 
 Current working posture:
 
@@ -43,13 +43,13 @@ Current working posture:
 
 1. Keep, soften, or rename the “concept album + quiet stagehand” framing.
 2. Decide whether the homepage should feel like a literal tracklist or only borrow sequencing behavior.
-3. Decide whether the next branch is image-dimension/performance hardening, tone/wording, color-punctuation refinement, a Document Processing media-audit plan, or A2UI spec/prototype.
+3. Decide whether the next branch is a small homepage/nav refinement, deeper tone/wording pass, Document Processing media-audit plan, or A2UI spec/prototype.
 
 ---
 
 ## 2. Current shipped state
 
-Updated: 2026-05-31
+Updated: 2026-06-01
 
 The following patterns are live or explicitly decided and should be reviewed together before more expansion.
 
@@ -91,10 +91,15 @@ The following patterns are live or explicitly decided and should be reviewed tog
    - Art & Illustration now has an explicit accessible Pause/Play control for the auto-advancing slideshow.
    - Current decision: review the polish in mobile, Light, and Dark before opening a broader media/performance pass.
 
+7. **Public image dimensions and wording cleanup**
+   - Public image dimensions landed as a mechanical performance-hardening pass.
+   - A small dash-heavy wording cleanup removed decorative em-dash rhythm from selected public copy, captions, alt text, and the 404 page while preserving real date-range dashes.
+   - Current decision: review the public copy changes in context before opening a deeper tone pass.
+
 ### Current checkpoint
 
 - Enhancement work is paused for Victor's deep review.
-- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-05-31.md`.
+- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-06-01.md`.
 - Future work should clarify, document, or refine shipped patterns rather than add more patterns by default.
 
 ---

@@ -8,7 +8,8 @@ Active direction source:
 
 Archived notes:
 
-- `portfolio-enhancement-state-2026-05-31.md` — current mini-sprint checkpoint after public-site polish and slideshow pause-control work.
+- `portfolio-enhancement-state-2026-06-01.md` — current reset checkpoint after public image dimensions, public dash-heavy wording cleanup, and Git branch cleanup.
+- `portfolio-enhancement-state-2026-05-31.md` — mini-sprint checkpoint after public-site polish and slideshow pause-control work.
 - `portfolio-enhancement-state-2026-05-23.md` — previous post-navigation-polish review checkpoint.
 - `portfolio-enhancement-state-2026-05-22.md` — earlier review-pause checkpoint after the first design-system enhancement set.
 - `design-system-enhancement-plan.md` — original practical design-system/component plan.
