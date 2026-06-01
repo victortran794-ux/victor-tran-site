@@ -54,9 +54,9 @@ The brand was set. The job was making it feel like an app, not a printed brochur
 
 The login and welcome screens lean on Pi Kappa Phi's existing visual system. Form fields, button shape, and bottom navigation are the only places where the app gets to add new vocabulary; everything else inherits. The hex pattern softens behind the splash, the gold star becomes the loading mark, and the deep blue carries the chrome on every screen.
 
-The system that came out of that work — color, type, mark, pattern, and the handful of components everything else is built from — codified the inherited brand into a working vocabulary. Five tokens, one feeling.
+The system that came out of that work codified the inherited brand into a working vocabulary: color, type, mark, pattern, and the handful of components everything else is built from. Five tokens, one feeling.
 
-A progress bar and a ranked percent — the loop a member opens the app to see.
+A progress bar and a ranked percent create the loop a member opens the app to see.
 
 The Member screen is home base: full-term progress, completion percentage, current rank against the chapter (21/45 in the mock), and the bulletin feed below. Tapping a milestone opens its task list, with one task expanded inline showing description and due date; siblings stay collapsed until tapped. Progressive disclosure keeps the dashboard from buckling under a term's worth of detail.
 
@@ -64,11 +64,11 @@ This is the flow that has to work for all three personas. A freshman with two co
 
 The comp held the design language. The prototype tested whether it held under interaction.
 
-A high-fidelity comp answers what something looks like. It can't answer what it feels like to use. So I rebuilt the Member dashboard as a working concept — single-file React with Tailwind and Framer Motion — to test whether gold-on-blue stayed legible at thumb scale, whether the milestone expand felt like progress instead of a state change, and whether the gold star earned its keep as something more than a mark.
+A high-fidelity comp answers what something looks like. It can't answer what it feels like to use. So I rebuilt the Member dashboard as a working concept with single-file React, Tailwind, and Framer Motion. The prototype tested whether gold-on-blue stayed legible at thumb scale, whether the milestone expand felt like progress instead of a state change, and whether the gold star earned its keep as something more than a mark.
 
-The polish moments are where the brand stops being decoration and starts being function. The avatar gets a thin gold progress ring that reflects the semester at a glance. Tab switching uses spring physics, not ease-in-out — the difference between premium and templated almost always lives in the motion curve. Checking off a task pops a single gold star particle that scales, lifts, and fades. Same star that loads the splash. Same star that sits at the center of every empty state. One asset, three jobs.
+The polish moments are where the brand stops being decoration and starts being function. The avatar gets a thin gold progress ring that reflects the semester at a glance. Tab switching uses spring physics, not ease-in-out. The difference between premium and templated almost always lives in the motion curve. Checking off a task pops a single gold star particle that scales, lifts, and fades. Same star that loads the splash. Same star that sits at the center of every empty state. One asset, three jobs.
 
-What the prototype clarified — beyond what any flat comp could — was that the system had room to breathe. The same five tokens that built the splash also built the empty state, the tap feedback, and the progress ring. The brand wasn't a decoration layer applied at the end; it was the structure underneath.
+What the prototype clarified, beyond what any flat comp could, was that the system had room to breathe. The same five tokens that built the splash also built the empty state, the tap feedback, and the progress ring. The brand wasn't a decoration layer applied at the end; it was the structure underneath.
 
 A constrained brand system was a frame, not a ceiling. The harder question was hierarchy: how to surface enough of the long-arc journey to motivate a freshman, without overwhelming a senior who's already most of the way through. The answer wasn't different screens for different users. It was the same flow, ranked.
 

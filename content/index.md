@@ -63,11 +63,11 @@ Empowering social change through accessible design. Brand identity and collatera
 
 Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.
 
-A mobile app concept for undergraduate fraternity members — track milestones, stay connected with the chapter, and live the values day-to-day.
+A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
 
 Personal work in illustration and graphic design, including posters, paintings, identity marks, and event graphics.
 
-Standalone digital and traditional work — posters, paintings, and personal series.
+Standalone digital and traditional work, including posters, paintings, and personal series.
 
 Standalone identity, print, illustration, and event graphics.
 
