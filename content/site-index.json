@@ -458,19 +458,19 @@
     "images": [
       {
         "src": "images/sal-f2020-house-home.jpg",
-        "alt": "Fall 2020 — House & Home spread"
+        "alt": "Fall 2020 House & Home spread"
       },
       {
         "src": "images/sal-f2020-virtually.jpg",
-        "alt": "Fall 2020 — Virtually Impossible spread"
+        "alt": "Fall 2020 Virtually Impossible spread"
       },
       {
         "src": "images/sal-f2020-covid-heroes.jpg",
-        "alt": "Fall 2020 — COVID Heroes chapter stories spread"
+        "alt": "Fall 2020 COVID Heroes chapter stories spread"
       },
       {
         "src": "images/sal-f2020-connie-owen.jpg",
-        "alt": "Fall 2020 — Connie Owen portrait tribute spread"
+        "alt": "Fall 2020 Connie Owen portrait tribute spread"
       },
       {
         "src": "images/sal-cover-2016-fall.jpg",
@@ -578,7 +578,7 @@
     "source": "artillustration.html",
     "url": "/artillustration",
     "category": "Artwork",
-    "description": "Digital and traditional illustration — posters, paintings, and personal series.",
+    "description": "Digital and traditional illustration, including posters, paintings, and personal series.",
     "contentFile": "content/artillustration.md",
     "headings": [
       "56th Supreme Chapter Chicago",

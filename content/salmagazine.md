@@ -53,32 +53,32 @@ Read the full archive on Issuu, or visit pikapp.org for the latest issues.
 
 Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.
 
-"A Common Bond" — six brothers from across generations weigh in on the call to lead and the duty to serve.
+"A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.
 
-"Thirty Under 30" — celebrating thirty alumni redefining what it means to lead.
+"Thirty Under 30" celebrates thirty alumni redefining what it means to lead.
 
-Documenting the men who ride, build, and serve through TAE — the philanthropic heart of Pi Kappa Phi.
+Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.
 
 Four highlight spreads from my first issue as creative director.
 
-"Test on 10th" — balancing photography, pull quotes, and dense reporting across the spread.
+"Test on 10th" balances photography, pull quotes, and dense reporting across the spread.
 
-One cover story from each of the remaining issues — five years of features in chronological order.
+One cover story from each of the remaining issues, with five years of features in chronological order.
 
-"Woven into the lives of others" — stories from the summer Ability Experience.
+"Woven into the lives of others" collects stories from the summer Ability Experience.
 
-"The Challenge We Must Face." — a hard look at the fraternity in the wake of a brother's death.
+"The Challenge We Must Face." takes a hard look at the fraternity in the wake of a brother's death.
 
-"Throwing Bones" — Kenny Capps runs the Mountains-to-Sea Trail in the face of cancer.
+"Throwing Bones" follows Kenny Capps as he runs the Mountains-to-Sea Trail in the face of cancer.
 
-"Leading the Decade" — Pi Kapp College for Emerging Leaders at ten years.
+"Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.
 
 ## Images
 
-- Fall 2020 — House & Home spread: images/sal-f2020-house-home.jpg
-- Fall 2020 — Virtually Impossible spread: images/sal-f2020-virtually.jpg
-- Fall 2020 — COVID Heroes chapter stories spread: images/sal-f2020-covid-heroes.jpg
-- Fall 2020 — Connie Owen portrait tribute spread: images/sal-f2020-connie-owen.jpg
+- Fall 2020 House & Home spread: images/sal-f2020-house-home.jpg
+- Fall 2020 Virtually Impossible spread: images/sal-f2020-virtually.jpg
+- Fall 2020 COVID Heroes chapter stories spread: images/sal-f2020-covid-heroes.jpg
+- Fall 2020 Connie Owen portrait tribute spread: images/sal-f2020-connie-owen.jpg
 - Fall 2016 cover: images/sal-cover-2016-fall.jpg
 - Summer 2017 cover: images/sal-cover-2017-summer.jpg
 - Fall 2017 cover: images/sal-cover-2017-fall.jpg
@@ -88,9 +88,9 @@ One cover story from each of the remaining issues — five years of features in 
 - Fall 2019 cover: images/sal-cover-2019-fall.jpg
 - Spring 2020 cover: images/sal-cover-2020-spring.jpg
 - Fall 2020 cover: images/sal-cover-2020-fall.jpg
-- A Common Bond — feature opener: images/sal-common-bond-1.jpg
-- A Common Bond — interior spread: images/sal-common-bond-2.jpg
-- A Common Bond — closing spread: images/sal-common-bond-3.jpg
+- A Common Bond feature opener: images/sal-common-bond-1.jpg
+- A Common Bond interior spread: images/sal-common-bond-2.jpg
+- A Common Bond closing spread: images/sal-common-bond-3.jpg
 - Thirty Under 30 feature: images/sal-fall2018-spread-1.jpg
 - Fall 2018 feature spread: images/sal-fall2018-spread-2.jpg
 - The Ability Experience challenges feature: images/sal-abex-challenges.jpg

@@ -9,14 +9,14 @@ title: "Art & Illustration"
 source: "artillustration.html"
 url: "/artillustration"
 category: "Artwork"
-description: "Digital and traditional illustration — posters, paintings, and personal series."
+description: "Digital and traditional illustration, including posters, paintings, and personal series."
 ---
 
 # Art & Illustration
 
 ## Description
 
-Digital and traditional illustration — posters, paintings, and personal series.
+Digital and traditional illustration, including posters, paintings, and personal series.
 
 ## Page Intro
 
