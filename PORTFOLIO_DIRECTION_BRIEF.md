@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-05-30
-Status: Active direction brief; current phase is review pause after shipped enhancement and navigation polish
+Last updated: 2026-05-31
+Status: Active direction brief; current phase is review pause after shipped public-site polish mini-sprint
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -29,7 +29,7 @@ Short version:
 
 ### Current posture
 
-The first enhancement sprint has shipped enough to pause and review as a system. Do not continue expanding the roadmap by default.
+The enhancement work has shipped enough to pause and review as a system. A small public-site polish mini-sprint has also landed, so the next move should be review, checkpointing, or one branch-sized refinement rather than broad expansion.
 
 Current working posture:
 
@@ -43,13 +43,13 @@ Current working posture:
 
 1. Keep, soften, or rename the “concept album + quiet stagehand” framing.
 2. Decide whether the homepage should feel like a literal tracklist or only borrow sequencing behavior.
-3. Decide whether the next branch is review/polish, tone/wording, color-punctuation refinement, one case-study deepening, or A2UI spec/prototype.
+3. Decide whether the next branch is image-dimension/performance hardening, tone/wording, color-punctuation refinement, a Document Processing media-audit plan, or A2UI spec/prototype.
 
 ---
 
 ## 2. Current shipped state
 
-Updated: 2026-05-30
+Updated: 2026-05-31
 
 The following patterns are live or explicitly decided and should be reviewed together before more expansion.
 
@@ -84,10 +84,17 @@ The following patterns are live or explicitly decided and should be reviewed tog
    - Identified as a future track, then paused.
    - Current decision: do not create or promote an A2UI page until after Victor's deeper review.
 
+6. **Public-site accessibility and performance polish mini-sprint**
+   - Homepage Work-section copy was tightened so galleries read as supporting visual archive material rather than competing case studies.
+   - About photo accessibility was improved without redesigning the About page.
+   - Public-page accessibility/performance hygiene was improved across safe public pages.
+   - Art & Illustration now has an explicit accessible Pause/Play control for the auto-advancing slideshow.
+   - Current decision: review the polish in mobile, Light, and Dark before opening a broader media/performance pass.
+
 ### Current checkpoint
 
 - Enhancement work is paused for Victor's deep review.
-- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-05-23.md`.
+- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-05-31.md`.
 - Future work should clarify, document, or refine shipped patterns rather than add more patterns by default.
 
 ---
@@ -289,7 +296,7 @@ This section replaces the older long phase roadmap. It separates what needs revi
 
 1. **Holistic live-site review**
    - Review desktop/mobile and Light/Dark.
-   - Look specifically at homepage rhythm, Work/Galleries grouping, color-punctuation cards, now-playing/chapter cue behavior, and overall tone.
+   - Look specifically at homepage rhythm, Work/Galleries grouping, color-punctuation cards, now-playing/chapter cue behavior, homepage Work copy, About image behavior, public media loading, Art & Illustration slideshow controls, and overall tone.
 
 2. **Tone / wording pass**
    - Identify pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
@@ -301,15 +308,24 @@ This section replaces the older long phase roadmap. It separates what needs revi
 
 ### Candidate next
 
-1. **Homepage refinement**
+1. **Image-dimension / performance hardening**
+   - Add explicit image dimensions or similarly narrow media-loading improvements where the current public pages still need stability/performance hardening.
+   - Keep this as a mechanical/public-page pass unless Victor explicitly selects broader visual changes.
+
+2. **Homepage refinement**
    - Refine tracklist labels, now-playing wording, or chapter-progress behavior if review shows the structure works but needs grounding.
    - Avoid sticky/fixed UI, parallax, or heavier behavior unless explicitly selected.
 
-2. **One focused case-study/content pass**
+3. **One focused case-study/content pass**
    - Choose one public or approved protected case study.
    - Define allowed assets, confidentiality boundaries, and whether the goal is copy, visuals, evidence, or structure.
 
-3. **Design-system hardening**
+4. **Document Processing Claude Code + Figma media-audit plan**
+   - Treat this as planning only until Victor explicitly approves implementation.
+   - Ask Claude Code to review the active Document Processing page/context plus Victor-provided Figma screens and recommend 3-5 visuals, the best hero/composition, one annotatable UI detail, any needed workflow diagram, screens to avoid, captions, and redaction/cropping/blur guidance.
+   - Do not rewrite the page, add raw screenshots, change nav/homepage/sitemap visibility, or alter the password-gated/noindex state during the audit.
+
+5. **Design-system hardening**
    - Add or clarify reusable tokens/classes only as needed: radius, motion, screen frames, artifact cards, stat cards, process strips, section notes, chips, chapter labels, masked image wrappers, and lens controls.
    - Keep visual output close to current pages at first.
 
@@ -337,7 +353,7 @@ This section replaces the older long phase roadmap. It separates what needs revi
 
 ### Do not touch without explicit approval
 
-- Document Processing promotion, screenshots, metrics, launch claims, or major copy/media changes.
+- Document Processing promotion, raw screenshots, metrics, launch claims, or major copy/media changes. A media-audit plan is allowed only as a planning artifact when Victor asks.
 - Password-gate/noindex behavior.
 - Homepage/nav/sitemap promotion for paused or protected work.
 - Full redesign, framework/build-step adoption, or site-wide visual-system rollout.
@@ -390,7 +406,7 @@ Guardrails:
 4. Do the Work/Galleries nav changes make the site clearer on mobile and desktop?
 5. Do Gallery cards feel correctly secondary/supporting, or do they still compete with the main case studies?
 6. Do the IBM Cloud, Ability Experience, and SAL color-punctuation examples feel purposeful enough to keep?
-7. Should the next branch be polish/review, tone/wording, one case-study pass, design-system hardening, or A2UI spec/prototype?
+7. Should the next branch be polish/review, image-dimension/performance hardening, tone/wording, Document Processing media-audit planning, design-system hardening, or A2UI spec/prototype?
 8. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
 
 ### Recommended next action

@@ -1,12 +1,12 @@
 # Portfolio Dashboard
 
-Last updated: 2026-05-23
+Last updated: 2026-05-31
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
 ## Current enhancement phase
 
-Status: review pause after merged design-system and navigation enhancements.
+Status: docs checkpoint after a public-site polish mini-sprint; broad expansion remains paused pending review.
 
 Recent shipped work:
 
@@ -14,15 +14,17 @@ Recent shipped work:
 - Homepage sequence system is live: tracklist intro, now-playing chip, non-sticky chapter-progress behavior, and the wide-desktop marquee gap fix.
 - Navigation has been simplified: the separate top-level Galleries menu is gone, and `Art & Illustration` plus `Graphics` now live under Work.
 - The homepage Work area now separates primary project cards from a dedicated Galleries subsection; the Gallery cards use one image each, orange/purple text surfaces, and the tighter `Visual archive` framing.
-- About page was reviewed and left as-is after reverting a local program-note experiment.
+- Recent public-site polish also shipped: homepage Work-section copy refinement, About photo accessibility, public-page accessibility/performance hygiene, and a real Pause/Play control for the Art & Illustration slideshow.
+- About page remains otherwise unchanged after the reverted program-note experiment.
 - A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
 
 Current next action:
 
-- Victor should do one live visual review of the merged homepage/nav/gallery polish: marquee loop, Work dropdown, mobile top nav, Light/Dark, single-image Gallery cards, and the `Visual archive` wording.
+- Use `archive/planning/portfolio-enhancement-state-2026-05-31.md` as the current review checkpoint.
+- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, and the Art & Illustration slideshow pause control.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
+- Treat Document Processing media work as a future Claude Code + Figma media-audit planning pass, not an implementation/rewrite task, until Victor explicitly selects it.
 - Do not start more broad visual expansion until those review notes are reviewed.
-- Use `archive/planning/portfolio-enhancement-state-2026-05-23.md` as the current review checkpoint.
 
 ## Status legend
 
@@ -38,7 +40,7 @@ Current next action:
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live-drafting | live, password-gated, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; planning notes in `case-studies/document-processing.md` | Keep live in its current protected state; refine copy/media only when Vic asks | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links or new screenshots without approval |
+| Document Processing | live-drafting | live, password-gated, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; planning notes in `case-studies/document-processing.md` | Keep live in its current protected state; next safe step is a Claude Code + Figma media-audit plan only when Vic asks | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -112,7 +114,7 @@ Current state from latest local audit:
 ## Next system improvements
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
-- Treat Document Processing as intentionally live-but-protected; only revisit screenshots, claims, homepage/nav placement, or final media direction when Vic asks.
+- Treat Document Processing as intentionally live-but-protected; only revisit screenshots, claims, homepage/nav placement, or final media direction when Vic asks. The next safe planning move is a Claude Code + Figma media audit that recommends 3-5 visuals, captions, redaction/cropping/blur guidance, and screens to avoid before any page rewrite or implementation.
 - Windows Git and Windows GitHub CLI are available as WSL credential bridges for push/PR/merge work when plain WSL Git/GH auth is unavailable.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine outside preflight.
 - Optional later: add a weekly GitHub health digest only if failures occur.
