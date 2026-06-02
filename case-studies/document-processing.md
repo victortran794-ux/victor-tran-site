@@ -1,23 +1,24 @@
 # Document Processing — Case Study Notes
 
-Last updated: 2026-05-18
+Last updated: 2026-06-02
 
-Status: `drafting`
+Status: `live`
 
-This is the single durable planning/source file for the Document Processing case study. It keeps notes, facts, draft direction, media guidance, and implementation reminders that should not live in the generated `content/` exports or the final HTML.
+This is the durable package manifest for the live Document Processing case study. It keeps notes, facts, narrative direction, media guidance, redesign notes, and implementation reminders that should not live in the generated `content/` exports or the final HTML.
 
 ## Quick status
 
-- Intended visibility: confirmed live password-gated portfolio case study
+- Intended visibility: live password-protected portfolio case study
 - Public indexing: keep `noindex,nofollow`
-- Current publication state: live/protected is acceptable as-is
-- Screenshot safety: still needs confirmation before adding or replacing visuals
+- Current publication state: live/protected is acceptable as-is; the password gate is the visitor-privacy layer, not an unresolved launch blocker
+- Screenshot/media safety: use the consolidated Claude Code + Figma media-audit handoff before adding or replacing visuals: `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - Change safety: preserve the gate and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
+- Package model: source page `document-processing.html`, generated export `content/document-processing.md`, package manifest `case-studies/document-processing.md`, historical source notes in `archive/doc-pro-case-study-handoff.md`, and private media-audit source material in iCloud Downloads
 - Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
 
 ## Next action
 
-Keep the live password-gated page stable unless Vic asks for a refinement pass. If revisiting the page, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes.
+Keep the live password-protected page stable unless Vic asks for a refinement pass. If revisiting the package, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes. Use the consolidated Claude Code + Figma media-audit handoff as source material before changing visuals or claims, with Hermes reviewing any agent output before implementation.
 
 ## Do not do without explicit approval
 
