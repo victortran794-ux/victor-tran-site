@@ -7,32 +7,33 @@ This file is the operating layer for Vic's portfolio work: where context lives, 
 - Public site implementation: `*.html`, `css/`, `js/`, `images/`
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
+- Agent workflow and project-package rules: `PORTFOLIO_AGENT_WORKFLOWS.md`
 - Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
 - Hand-maintained profile/context exception: `content/profile.md`
-- Case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
+- Project-package manifests and case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
 - Dormant/superseded files: `archive/` — see `archive/README.md`
 - Retired page snapshots: `archive/pages/` — see `archive/pages/README.md`
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
 
-## Case study workflow
+## Project package / case study workflow
 
 Use small durable files instead of stuffing an entire case study into one chat.
 
-Recommended lightweight project file:
+Recommended lightweight project-package manifest:
 
 ```txt
 case-studies/<project-slug>.md
 ```
 
-Keep status, raw notes, confirmed facts, constraints, draft direction, media needs, and implementation notes in that one file. Split into more files only when a project truly becomes too large or sensitive. Default to fewer files.
+Treat each project as a contained package even while the static site keeps flat root HTML files. A package usually has a source HTML page, generated content export, package manifest, assets, and archived source notes. Keep status, visibility, confirmed facts, constraints, narrative direction, media guidance, redesign notes, and implementation boundaries in the package manifest. Split into more files only when a project truly becomes too large or sensitive. Default to fewer files.
 
 Do **not** put durable planning/source notes in `content/`; most of `content/` is generated from HTML and should stay machine-readable/export-focused. `content/` can support future search/generative UI experiments, but it is not the notes folder.
 
 ## Current case-study state
 
-- `document-processing.html` is intentionally live as a password-gated/noindex page that is currently linked from the Work dropdown and omitted from the sitemap.
-- `case-studies/document-processing.md` is the current planning/source doc for future Document Processing refinements.
+- `document-processing.html` is intentionally live as a password-protected/noindex page that is currently linked from the Work dropdown and omitted from the sitemap. The password gate is the visitor-privacy layer, not an unresolved launch blocker.
+- `case-studies/document-processing.md` is the current package manifest for future Document Processing refinements.
 - `archive/doc-pro-case-study-handoff.md` is a historical Doc Pro handoff; the active Document Processing planning file is `case-studies/document-processing.md`.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
 - Preserve the password gate/noindex and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval.

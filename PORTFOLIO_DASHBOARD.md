@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-01
+Last updated: 2026-06-02
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -24,7 +24,7 @@ Current next action:
 - Use `archive/planning/portfolio-enhancement-state-2026-06-01.md` as the current reset checkpoint.
 - Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
-- Treat Document Processing media work as a future Claude Code + Figma media-audit planning pass, not an implementation/rewrite task, until Victor explicitly selects it.
+- Treat Document Processing as a live protected project package. No active work is required unless Victor selects that package; if he does, use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Do not start more broad visual expansion until those review notes are reviewed.
 
 ## Status legend
@@ -41,7 +41,7 @@ Current next action:
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live-drafting | live, password-gated, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; planning notes in `case-studies/document-processing.md` | Keep live in its current protected state; next safe step is a Claude Code + Figma media-audit plan only when Vic asks | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; private audit handoff at `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state. If selected later, run a media-audit/planning pass before changing visuals or claims | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -104,18 +104,19 @@ Current state from latest local audit:
 
 ## Preferred workflow
 
-1. Put durable case-study source/planning context in a single notes file under `case-studies/<slug>.md`.
-2. Keep facts, draft copy, media needs, and implementation tasks in that one file unless the project truly gets huge.
-3. Before touching HTML, confirm visibility/confidentiality status.
-4. After meaningful site changes, run the local sanity check:
+1. Treat each project as a package: source HTML, generated content export, package manifest, assets, and archived source notes.
+2. Put durable project-package context in a single manifest under `case-studies/<slug>.md`.
+3. Keep visibility, facts, narrative direction, media guidance, redesign notes, and agent boundaries in that one file unless the project truly gets huge.
+4. Before touching HTML, confirm visibility/confidentiality status.
+5. After meaningful site changes, run the local sanity check:
    - `./scripts/preflight.sh`
-5. Before push/PR, inspect changed files with `git diff --stat` and ask Vic before external-facing/significant changes.
-6. Use the GitHub health workflow for full remote Lighthouse/link checks.
+6. Before push/PR, inspect changed files with `git diff --stat` and ask Vic before external-facing/significant changes.
+7. Use the GitHub health workflow for full remote Lighthouse/link checks.
 
 ## Next system improvements
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
-- Treat Document Processing as intentionally live-but-protected; only revisit screenshots, claims, homepage/nav placement, or final media direction when Vic asks. The next safe planning move is a Claude Code + Figma media audit that recommends 3-5 visuals, captions, redaction/cropping/blur guidance, and screens to avoid before any page rewrite or implementation.
+- Treat Document Processing as live. Its password gate is the visitor-privacy layer, and that state is acceptable. If Vic selects that package later, use the consolidated Claude Code + Figma media audit handoff in `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` as source material before changing visuals or claims.
 - Windows Git and Windows GitHub CLI are available as WSL credential bridges for push/PR/merge work when plain WSL Git/GH auth is unavailable.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine outside preflight.
 - Optional later: add a weekly GitHub health digest only if failures occur.

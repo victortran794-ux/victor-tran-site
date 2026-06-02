@@ -1,8 +1,9 @@
 See [victor-tran-site.md](./victor-tran-site.md) for project conventions, layout, open follow-ups, and gotchas.
 
-For portfolio workflow, case-study intake, and health automation notes, also read:
+For portfolio workflow, agent handoffs, case-study intake, and health automation notes, also read:
 
 - [PORTFOLIO_DASHBOARD.md](./PORTFOLIO_DASHBOARD.md)
+- [PORTFOLIO_AGENT_WORKFLOWS.md](./PORTFOLIO_AGENT_WORKFLOWS.md)
 - [PORTFOLIO_SYSTEM.md](./PORTFOLIO_SYSTEM.md)
 - [PORTFOLIO_STATUS.md](./PORTFOLIO_STATUS.md)
 
