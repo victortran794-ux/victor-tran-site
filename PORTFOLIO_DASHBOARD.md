@@ -1,8 +1,39 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-02
+Last updated: 2026-06-03
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
+
+## Authority note
+
+This file is authoritative for current portfolio status, the active plan, project tracker state, and next actions. It is not authoritative for the master repo operating manual, agent handoff rules, creative direction, or design token values.
+
+Consult next:
+
+- `PORTFOLIO_SYSTEM.md` for repo structure, publishing, health checks, and maintenance rules.
+- `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, permissions, guardrails, handoffs, and closeout.
+- `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
+- `content/design-system.md` and `content/design-system.json` for design system principles and tokens.
+- `archive/planning/README.md` for historical planning context only.
+
+## Active plan
+
+### Current active plan
+
+Review the recently shipped public-site polish as a system, keep broad visual expansion paused, and use one focused follow-up branch only after Victor chooses the next slice.
+
+### Current next actions
+
+1. Review the live site across desktop/mobile and Light/Dark.
+2. Capture review notes about homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and dash-cleanup copy changes.
+3. Keep Document Processing in its current live password-gated/noindex state unless Victor explicitly selects that package for a media-audit/planning pass.
+4. Do not start broad visual expansion, A2UI implementation, or protected-page promotion without explicit approval.
+
+### Supporting historical context
+
+- Latest reset checkpoint: `archive/planning/portfolio-enhancement-state-2026-06-01.md`.
+- Historical planning files under `archive/planning/` are context only unless this dashboard or `PORTFOLIO_DIRECTION_BRIEF.md` explicitly references them as active work.
+- Legacy status snapshot: `archive/planning/portfolio-status-legacy-2026-05-18.md`; do not use it as the current status tracker.
 
 ## Current enhancement phase
 
@@ -69,7 +100,7 @@ Important operating docs:
 - `AGENTS.md` - start here for future agents
 - `MAGI_ACCESS_POLICY.md` - local/iCloud/Discord access rules
 - `MAGI_PC_MIGRATION_PLAN.md` - PC migration architecture and follow-ups
-- `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` - current upkeep backlog
+- `archive/planning/portfolio-upkeep-backlog-2026-05-17.md` - historical upkeep backlog; current actions live in this dashboard
 
 Recent merged setup PRs:
 
@@ -99,7 +130,7 @@ Current state from latest local audit:
 - Local health script exists at `scripts/health-check.sh`.
 - Local preflight currently runs the link check successfully from this PC/WSL setup.
 - Local Lighthouse remains remote/GitHub-only.
-- Current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`.
+- Current local image scan found no images over 1MB, though several were close in the historical `archive/planning/portfolio-upkeep-backlog-2026-05-17.md` snapshot.
 - Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` is live on Vercel, password-gated, noindex, and omitted from the sitemap.
 
 ## Preferred workflow

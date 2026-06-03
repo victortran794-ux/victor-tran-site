@@ -2,6 +2,10 @@
 
 Hand-edited prose layer that sits next to [design-system.json](design-system.json). The JSON holds tokens; this file holds the *why* — principles, voice, imagery direction, and anything that doesn't fit neatly in a token.
 
+## Authority note
+
+This file is authoritative for design system principles, voice, imagery direction, usage guidance, and prose explanations. It is not authoritative for current portfolio status, next actions, or the structured token values themselves. Use `design-system.json` for token data, `../PORTFOLIO_DASHBOARD.md` for current status, and `../PORTFOLIO_DIRECTION_BRIEF.md` for broader creative/product direction.
+
 > Status: scaffold. Sections marked **TBD** are gaps surfaced from auditing the current site. Fill them in as you have a point of view.
 
 ---

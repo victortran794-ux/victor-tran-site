@@ -27,7 +27,7 @@ The transferred site is a static portfolio. It can be previewed directly from `i
   - `victor-tran-site.md`
   - `PORTFOLIO_SYSTEM.md`
   - `PORTFOLIO_DASHBOARD.md`
-  - `PORTFOLIO_STATUS.md`
+  - historical snapshot: `archive/planning/portfolio-status-legacy-2026-05-18.md`
 
 ## Recommended Architecture
 
@@ -73,7 +73,7 @@ Magi should no longer be defined by a specific old computer. Define Magi through
 - Use `CLAUDE.md` as the entrypoint.
 - Keep site conventions in `victor-tran-site.md`.
 - Keep operational workflow in `PORTFOLIO_SYSTEM.md`.
-- Keep status and next actions in `PORTFOLIO_DASHBOARD.md` and `PORTFOLIO_STATUS.md`.
+- Keep status and next actions in `PORTFOLIO_DASHBOARD.md`; use `archive/planning/portfolio-status-legacy-2026-05-18.md` only as historical context.
 - Put active case-study planning in `case-studies/<slug>.md`.
 - Treat root HTML pages as the source of truth for published content.
 

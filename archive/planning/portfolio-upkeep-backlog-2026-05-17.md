@@ -30,7 +30,7 @@ This should be committed as a small generated-content sync.
 
 Status: recommended next.
 
-`PORTFOLIO_DASHBOARD.md` and `PORTFOLIO_STATUS.md` still say "Last updated: 2026-05-13" and do not mention:
+Historical note: root `PORTFOLIO_DASHBOARD.md` and the now-archived status snapshot still said "Last updated: 2026-05-13" and did not mention:
 
 - PC migration complete
 - PR #28 merged

@@ -8,10 +8,10 @@ Before making meaningful changes, read:
 
 - `victor-tran-site.md` for site structure, conventions, gotchas, and asset notes.
 - `PORTFOLIO_SYSTEM.md` for source-of-truth rules and health automation.
-- `PORTFOLIO_DASHBOARD.md` for current project status.
+- `PORTFOLIO_DASHBOARD.md` for current project status and next actions.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for Claude Code, Codex, Figma MCP, and Hermes handoff rules.
-- `PORTFOLIO_STATUS.md` for recent work and cautions.
 - `MAGI_PC_MIGRATION_PLAN.md` for the PC-based Magi workflow.
+- `archive/planning/portfolio-status-legacy-2026-05-18.md` only when historical status context is needed.
 - `MAGI_ACCESS_POLICY.md` before inspecting iCloud, Discord, private config, or local machine folders.
 
 ## Source Of Truth

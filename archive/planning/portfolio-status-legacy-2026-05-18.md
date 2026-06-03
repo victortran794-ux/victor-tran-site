@@ -2,6 +2,12 @@
 
 Last updated: 2026-05-18
 
+## Legacy snapshot notice
+
+This file is a historical status snapshot from 2026-05-18. It is not the active status tracker or next-actions board. Current portfolio status, active plan, and next actions live in `../../PORTFOLIO_DASHBOARD.md`.
+
+Use this file only for historical context about the PC/Magi migration, early upkeep audit, and older health automation notes. If any current-looking detail here conflicts with `../../PORTFOLIO_DASHBOARD.md`, `../../PORTFOLIO_SYSTEM.md`, or `../../PORTFOLIO_AGENT_WORKFLOWS.md`, treat those active files as authoritative.
+
 ## Current system
 
 - Main ops doc: `PORTFOLIO_SYSTEM.md`
@@ -10,7 +16,7 @@ Last updated: 2026-05-18
 - Agent entrypoint: `AGENTS.md`
 - Local access policy: `MAGI_ACCESS_POLICY.md`
 - PC migration notes: `MAGI_PC_MIGRATION_PLAN.md`
-- Current upkeep backlog: `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
+- Historical upkeep backlog: `portfolio-upkeep-backlog-2026-05-17.md`
 - GitHub health workflow: `.github/workflows/health-check.yml`
 - Local preflight script: `scripts/preflight.sh`
 - Local health script: `scripts/health-check.sh`
@@ -34,7 +40,7 @@ Key decision: use the local Git clone outside iCloud for website work. Treat the
 
 PR #29 merged on 2026-05-17 and added:
 
-- `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
+- `portfolio-upkeep-backlog-2026-05-17.md`
 - generated About content sync in `content/about.md`
 - generated heading sync in `content/site-index.json`
 
@@ -64,11 +70,11 @@ Local check notes from 2026-05-17:
 
 - `lychee` is not installed locally, so local link check skipped
 - local Lighthouse remains a GitHub Actions task
-- current local image scan found no images over 1MB, though several are close and listed in `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md`
+- current local image scan found no images over 1MB, though several are close and listed in `portfolio-upkeep-backlog-2026-05-17.md`
 
 ## Next useful actions
 
-- Use `PORTFOLIO_UPKEEP_BACKLOG_2026-05-17.md` as the current action list, with the updated Document Processing decision below.
+- Historical instruction said to use `portfolio-upkeep-backlog-2026-05-17.md` as the action list; that backlog is now archived, and current actions live in `../../PORTFOLIO_DASHBOARD.md`.
 - Continue using the single lightweight `case-studies/document-processing.md` planning file.
 - Keep the About page `Training for: (WIP)` item as-is.
 - Run `node scripts/html-to-md.mjs` after page copy changes.

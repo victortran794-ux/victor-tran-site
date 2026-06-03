@@ -2,17 +2,37 @@
 
 This file is the operating layer for Vic's portfolio work: where context lives, how to avoid huge chat-context dumps, and how site health is monitored.
 
+## Authority note
+
+This file is authoritative for repo structure, source-of-truth hierarchy, health checks, publishing/preflight, and maintenance rules. It is not the active current-status tracker, creative direction brief, or detailed agent handoff playbook.
+
+Consult next:
+
+- `PORTFOLIO_DASHBOARD.md` for current status, active plan, and next actions.
+- `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, permissions, guardrails, handoffs, and closeout.
+- `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
+- `content/design-system.md` and `content/design-system.json` for design system authority.
+- `archive/planning/README.md` and `archive/website-health-reports/` for historical reference only.
+
 ## Source-of-truth map
 
+- Master operating manual: `PORTFOLIO_SYSTEM.md`
+- Current status and active next actions: `PORTFOLIO_DASHBOARD.md`
+- Creative/product direction and enhancement intent: `PORTFOLIO_DIRECTION_BRIEF.md`
+- Agent workflow, permissions, guardrails, handoffs, and closeout: `PORTFOLIO_AGENT_WORKFLOWS.md`
 - Public site implementation: `*.html`, `css/`, `js/`, `images/`
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
-- Agent workflow and project-package rules: `PORTFOLIO_AGENT_WORKFLOWS.md`
 - Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
+- Design system prose and structured tokens: `content/design-system.md` and `content/design-system.json`
 - Hand-maintained profile/context exception: `content/profile.md`
 - Project-package manifests and case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
+- Historical planning reference only: `archive/planning/` — see `archive/planning/README.md`
+- Historical website health/audit reference only: `archive/website-health-reports/`
 - Dormant/superseded files: `archive/` — see `archive/README.md`
 - Retired page snapshots: `archive/pages/` — see `archive/pages/README.md`
+
+Important archive rule: truly archived files should move to the designated archive area instead of remaining mixed into active docs. Use `archive/planning/` for historical planning notes, `archive/website-health-reports/` for historical health/audit reports, `archive/pages/` for retired page snapshots, and PC-side `C:\Users\Victor\Documents\Website Items` for private handoffs/backups/recovery material that should not live in the public repo. Check with Victor before moving ambiguous archive candidates.
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
 
@@ -115,7 +135,9 @@ gh workflow run "Site health check" --repo victortran794-ux/victor-tran-site
 gh workflow run "Site health check" --repo victortran794-ux/victor-tran-site -f url=https://victortrandesign.com
 ```
 
-## Good automations to add next
+## Historical automation ideas, not active next actions
+
+These ideas are parking-lot material only. Use `PORTFOLIO_DASHBOARD.md` for current next actions.
 
 ### 1. Portfolio heartbeat summary
 

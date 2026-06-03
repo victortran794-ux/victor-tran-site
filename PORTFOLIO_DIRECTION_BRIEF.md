@@ -7,7 +7,20 @@ Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
 
-Use this file for direction-setting. Use dated files under `archive/planning/` for historical checkpoints, implementation notes, and source context.
+## Authority note
+
+This file is authoritative for creative/product direction, enhancement intent, design-system direction, and future-track framing. It is not authoritative for current next actions, repo operating rules, agent permissions, or structured token values.
+
+Consult next:
+
+- `PORTFOLIO_DASHBOARD.md` for current active plan, current status, and next actions.
+- `PORTFOLIO_SYSTEM.md` for repo structure, publishing, health checks, and maintenance rules.
+- `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, guardrails, and handoffs.
+- `content/design-system.md` for design system principles, voice, imagery, and usage.
+- `content/design-system.json` for structured token values.
+- `archive/planning/README.md` for historical checkpoints and source notes.
+
+Use this file for direction-setting. Use dated files under `archive/planning/` for historical checkpoints, implementation notes, and source context. Archived plans are historical unless this brief or `PORTFOLIO_DASHBOARD.md` explicitly references them as active work.
 
 ---
 
@@ -438,7 +451,7 @@ This brief supersedes these planning sources for direction-setting purposes:
 
 3. Website repo cockpit/status docs
    - `PORTFOLIO_DASHBOARD.md`
-   - `PORTFOLIO_STATUS.md`
-   - Main value: current portfolio state, active repo path, access policy, protected-page guardrails.
+   - `archive/planning/portfolio-status-legacy-2026-05-18.md`
+   - Main value: current portfolio state in the dashboard, plus historical context from the archived status snapshot, active repo path, access policy, and protected-page guardrails.
 
 The original direction notes have been archived under `archive/planning/`. Treat this brief as the unified active direction reference unless Victor revises it.

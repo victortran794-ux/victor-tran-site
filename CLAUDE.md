@@ -5,7 +5,7 @@ For portfolio workflow, agent handoffs, case-study intake, and health automation
 - [PORTFOLIO_DASHBOARD.md](./PORTFOLIO_DASHBOARD.md)
 - [PORTFOLIO_AGENT_WORKFLOWS.md](./PORTFOLIO_AGENT_WORKFLOWS.md)
 - [PORTFOLIO_SYSTEM.md](./PORTFOLIO_SYSTEM.md)
-- [PORTFOLIO_STATUS.md](./PORTFOLIO_STATUS.md)
+- [portfolio-status-legacy-2026-05-18.md](./archive/planning/portfolio-status-legacy-2026-05-18.md) only for historical status context
 
 ## Hosting & deployment
 

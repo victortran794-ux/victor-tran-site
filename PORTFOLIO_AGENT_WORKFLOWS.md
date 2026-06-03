@@ -5,6 +5,17 @@ Status: Active workflow reference for Hermes, Claude Code, Codex, and future Fig
 
 This file is the repo-local source of truth for how agent-assisted portfolio work should run. It is intentionally stored in the active website repo so the workflow survives changes in chat context, iCloud sync state, and Claude Code subscription status.
 
+## Authority note
+
+This file is authoritative for agent roles, permissions, guardrails, prompts, handoffs, and closeout process. It is not authoritative for current portfolio status, master repo health/publishing rules, creative direction, or design tokens.
+
+Consult next:
+
+- `PORTFOLIO_SYSTEM.md` for repo structure, publishing, health checks, and maintenance rules.
+- `PORTFOLIO_DASHBOARD.md` for current status, active plan, and next actions.
+- `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
+- `content/design-system.md` and `content/design-system.json` for design system rules.
+
 ## Source-of-truth file model
 
 - Active website source of truth: `C:\Users\Victor\Documents\Websites\victor-tran-site`
