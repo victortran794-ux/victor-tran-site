@@ -24,7 +24,7 @@ Current next action:
 - Use `archive/planning/portfolio-enhancement-state-2026-06-01.md` as the current reset checkpoint.
 - Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
-- Treat Document Processing as a live protected project package. No active work is required unless Victor selects that package; if he does, use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+- Treat Document Processing as a live protected project package. No active work is required unless Victor selects that package; if he does, use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Do not start more broad visual expansion until those review notes are reviewed.
 
 ## Status legend
@@ -41,7 +41,7 @@ Current next action:
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; private audit handoff at `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state. If selected later, run a media-audit/planning pass before changing visuals or claims | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state. If selected later, run a media-audit/planning pass before changing visuals or claims | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
@@ -116,7 +116,7 @@ Current state from latest local audit:
 ## Next system improvements
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
-- Treat Document Processing as live. Its password gate is the visitor-privacy layer, and that state is acceptable. If Vic selects that package later, use the consolidated Claude Code + Figma media audit handoff in `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` as source material before changing visuals or claims.
+- Treat Document Processing as live. Its password gate is the visitor-privacy layer, and that state is acceptable. If Vic selects that package later, use the consolidated Claude Code + Figma media audit handoff in `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` as source material before changing visuals or claims.
 - Windows Git and Windows GitHub CLI are available as WSL credential bridges for push/PR/merge work when plain WSL Git/GH auth is unavailable.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine outside preflight.
 - Optional later: add a weekly GitHub health digest only if failures occur.
