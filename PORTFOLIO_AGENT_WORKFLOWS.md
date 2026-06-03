@@ -9,9 +9,10 @@ This file is the repo-local source of truth for how agent-assisted portfolio wor
 
 - Active website source of truth: `C:\Users\Victor\Documents\Websites\victor-tran-site`
 - Temporary transfer/drop folder only: `C:\Users\Victor\iCloudDrive\Downloads`
-- Private archive/reference/recovery area: `C:\Users\Victor\iCloudDrive\Documents\Website Items`
+- PC-side private reference area for portfolio handoffs: `C:\Users\Victor\Documents\Website Items`
+- iCloud-side archive/reference/recovery area: `C:\Users\Victor\iCloudDrive\Documents\Website Items`
 
-Important portfolio prompts, workflow rules, case-study planning, and reusable implementation notes belong in this repo. iCloud Downloads can be used to pass files between devices or tools, but it should not become the durable home for current portfolio direction.
+Important portfolio prompts, workflow rules, case-study planning, and reusable implementation notes belong in this repo or the PC-side private reference area. iCloud Downloads can be used to pass files between devices or tools, but it should not become the durable home for current portfolio direction. Treat iCloud Drive as useful for reference and cross-device transfer, not as a guaranteed up-to-date PC source of truth.
 
 ## Agent roles
 
@@ -227,7 +228,7 @@ Current planning status:
 
 - Document Processing remains live, password-gated, noindex, currently linked from the Work dropdown, and omitted from sitemap.
 - The current private Figma/media handoff is:
-  `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
+  `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - That handoff may be used as source material, but important outcomes should be consolidated back into the repo.
 
 Audit-only prompt shape:
@@ -240,7 +241,7 @@ Read:
 - PORTFOLIO_DIRECTION_BRIEF.md
 - PORTFOLIO_AGENT_WORKFLOWS.md
 - case-studies/document-processing.md
-- the consolidated private handoff at C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md, if available
+- the consolidated private handoff at C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md, if available
 
 Use only Victor-approved Figma screens, exported frames, links, or MCP-accessible files.
 

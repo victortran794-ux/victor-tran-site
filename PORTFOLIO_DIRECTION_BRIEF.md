@@ -327,7 +327,7 @@ This section replaces the older long phase roadmap. It separates what needs revi
 
 4. **Document Processing Claude Code + Figma media-audit plan**
    - Treat this as planning only until Victor explicitly approves implementation.
-   - Current private handoff: `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+   - Current private handoff: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
    - Ask Claude Code to review the active Document Processing page/context plus Victor-provided Figma screens and recommend 3-5 visuals, the best hero/composition, one annotatable UI detail, any needed workflow diagram, screens to avoid, captions, and redaction/cropping/blur guidance.
    - Do not rewrite the page, add raw screenshots, change nav/homepage/sitemap visibility, or alter the password-gated/noindex state during the audit.
 

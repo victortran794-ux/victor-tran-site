@@ -11,9 +11,9 @@ This is the durable package manifest for the live Document Processing case study
 - Intended visibility: live password-protected portfolio case study
 - Public indexing: keep `noindex,nofollow`
 - Current publication state: live/protected is acceptable as-is; the password gate is the visitor-privacy layer, not an unresolved launch blocker
-- Screenshot/media safety: use the consolidated Claude Code + Figma media-audit handoff before adding or replacing visuals: `C:\Users\Victor\iCloudDrive\Downloads\Handoff Notes\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
+- Screenshot/media safety: use the consolidated Claude Code + Figma media-audit handoff before adding or replacing visuals: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - Change safety: preserve the gate and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
-- Package model: source page `document-processing.html`, generated export `content/document-processing.md`, package manifest `case-studies/document-processing.md`, historical source notes in `archive/doc-pro-case-study-handoff.md`, and private media-audit source material in iCloud Downloads
+- Package model: source page `document-processing.html`, generated export `content/document-processing.md`, package manifest `case-studies/document-processing.md`, historical source notes in `archive/doc-pro-case-study-handoff.md`, and private media-audit source material in the PC-side Website Items folder
 - Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
 
 ## Next action
