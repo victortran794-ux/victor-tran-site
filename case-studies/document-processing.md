@@ -300,7 +300,14 @@ This is tighter than a generic problem → process → solution → impact flow 
 
 ## Media guidance
 
-Add imagery later. Strongest candidates:
+Current placeholder media pass, added from Victor-approved iCloud exports while a larger transfer is pending:
+
+- `images/document-processing-evaluation-results-placeholder.png` — evaluation/results placeholder for the hero or first major product visual.
+- `images/document-processing-review-workflow-placeholder.png` — review-workflow placeholder showing source document plus extracted values.
+- `images/document-processing-classifier-context-placeholder.png` — classifier/platform-context placeholder.
+- `images/document-processing-extraction-indicators-placeholder.png` — annotated-detail placeholder for extraction indicators and uncertainty.
+
+Treat these as temporary placeholders, not the final media system. Stronger future candidates still include:
 
 - Hero visual: final Document Processing UI, workflow mockup, or abstract diagram.
 - Before/after: informal spot-checking vs structured evaluation loop.
@@ -309,13 +316,7 @@ Add imagery later. Strongest candidates:
 - Annotated UI: field-level metrics or failure-to-schema improvement moment.
 - System/detail shot: component states, empty/loading/error, confidence, review controls.
 
-Implementation note: create placeholder blocks in `document-processing.html` with comments like:
-
-```html
-<!-- TODO: Replace with Document Processing hero image once selected. -->
-```
-
-Do not invent image paths.
+For the later larger transfer, use prompts/Codex or Claude-first workflows to create safer animations, prototypes, redacted composites, or recreated diagrams. Do not add raw screenshot dumps; preserve password-gate/noindex/nav/sitemap state unless Victor explicitly approves a visibility change.
 
 ## Confirmed details from Vic
 

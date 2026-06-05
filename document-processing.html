@@ -68,24 +68,26 @@
       margin: 0;
       font-style: italic;
     }
-    .document-processing-placeholder {
-      border: 1px dashed var(--fg-muted);
-      background: color-mix(in srgb, var(--border) 70%, transparent);
-      min-height: 280px;
+    .document-processing-media {
       margin: 2.5rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      overflow: hidden;
     }
-    .document-processing-placeholder p {
-      max-width: 520px;
+    .document-processing-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .document-processing-media figcaption {
       margin: 0;
-      color: var(--fg-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: var(--text-label);
+      line-height: 1.55;
     }
+
     .document-processing-decision-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -192,9 +194,10 @@
 
     <article class="case-study">
 
-      <div class="document-processing-placeholder reveal">
-        <p><!-- TODO: Replace with Document Processing hero image once selected. --> Hero visual placeholder: document input → AI extraction → accuracy evaluation → schema improvement.</p>
-      </div>
+      <figure class="document-processing-media reveal">
+        <img src="images/document-processing-evaluation-results-placeholder.png" alt="Placeholder evaluation results interface showing document extraction quality metrics and field-level results." width="2400" height="1428" decoding="async">
+        <figcaption>Placeholder visual: evaluation results surfaced field-level quality signals so builders could see where extraction needed improvement before production use.</figcaption>
+      </figure>
 
       <span class="case-study-eyebrow reveal">01 · Overview</span>
       <h2 class="reveal">The missing loop after extraction</h2>
@@ -223,9 +226,10 @@
       <p>Without a structured evaluation workflow, teams had to rely on small manual spot-checks and subjective confidence. That made it difficult to responsibly scale document automation.</p>
       <p>The problem was not just extracting data. It was making extraction quality measurable, explainable, and improvable.</p>
 
-      <div class="document-processing-placeholder reveal">
-        <p><!-- TODO: Replace with before/after diagram once selected. --> Before/after placeholder: informal spot-checking → no clear readiness signal → structured evaluation workflow.</p>
-      </div>
+      <figure class="document-processing-media reveal">
+        <img src="images/document-processing-review-workflow-placeholder.png" alt="Placeholder document review interface with a source document and extracted fields shown side by side." width="1312" height="984" loading="lazy" decoding="async">
+        <figcaption>Placeholder visual: the review pattern kept source documents and extracted values close together so teams could verify results before treating automation as trustworthy.</figcaption>
+      </figure>
 
       <span class="case-study-eyebrow reveal">03 · Platform Context</span>
       <h2 class="reveal">Shipped classifier and extractor work shaped the evaluation direction</h2>
@@ -241,6 +245,11 @@
       </ul>
       <p>This gave me a working understanding of the system: how builders created extractors, how document types shaped schemas, how AI confidence surfaced, and where the experience broke down between testing and deployment.</p>
       <p>With classifier and extractor shipped, Accuracy Evaluation became the missing loop.</p>
+
+      <figure class="document-processing-media reveal">
+        <img src="images/document-processing-classifier-context-placeholder.png" alt="Placeholder classifier interface showing document classes and test results for document processing setup." width="2624" height="1692" loading="lazy" decoding="async">
+        <figcaption>Placeholder visual: classifier and extractor flows created the platform context that Accuracy Evaluation later connected into a measurable improvement loop.</figcaption>
+      </figure>
 
       <span class="case-study-eyebrow reveal">04 · My Role</span>
       <h2 class="reveal">Lead designer for Accuracy Evaluation</h2>
@@ -296,9 +305,10 @@
         </section>
       </div>
 
-      <div class="document-processing-placeholder reveal">
-        <p><!-- TODO: Replace with annotated UI once selected. --> Annotated UI placeholder: field-level metrics, weak-field review, or failure-to-schema improvement moment.</p>
-      </div>
+      <figure class="document-processing-media reveal">
+        <img src="images/document-processing-extraction-indicators-placeholder.png" alt="Placeholder extraction interface showing document fields with review and quality indicators." width="1584" height="1042" loading="lazy" decoding="async">
+        <figcaption>Placeholder visual: field-level indicators connected extraction output back to the source document, making uncertainty visible during review.</figcaption>
+      </figure>
 
       <span class="case-study-eyebrow reveal">07 · Outcome</span>
       <h2 class="reveal">A measurable quality loop for document automation</h2>

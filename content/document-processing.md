@@ -45,8 +45,6 @@ Watson Orchestrate’s document processing capabilities helped teams automate wo
 
 I designed the evaluation layer that helped builders understand, measure, and improve AI document extraction before trusting it in production.
 
-Hero visual placeholder: document input → AI extraction → accuracy evaluation → schema improvement.
-
 Watson Orchestrate’s document processing capabilities helped teams automate work across business documents like invoices, purchase orders, bills of lading, and utility bills.
 
 I contributed to the broader classifier and extractor experiences, helping shape how builders configured document workflows, selected schemas, and worked with AI-generated extraction results.
@@ -66,8 +64,6 @@ Builders needed to answer questions like:
 Without a structured evaluation workflow, teams had to rely on small manual spot-checks and subjective confidence. That made it difficult to responsibly scale document automation.
 
 The problem was not just extracting data. It was making extraction quality measurable, explainable, and improvable.
-
-Before/after placeholder: informal spot-checking → no clear readiness signal → structured evaluation workflow.
 
 Before leading Accuracy Evaluation, I tag-teamed work across the shipped document classifier and extractor experiences.
 
@@ -98,8 +94,6 @@ Ground truth creation could have become a completely separate experience. Instea
 When a field performed poorly, the experience needed to connect that result back to field names, descriptions, examples, document variation, or model behavior. Evaluation became a bridge between AI output and better configuration.
 
 AI document processing will always have edge cases. The experience could not imply perfect automation, so the design made uncertainty visible and manageable before production use.
-
-Annotated UI placeholder: field-level metrics, weak-field review, or failure-to-schema improvement moment.
 
 Accuracy Evaluation is planned to release this summer and defines a design direction for making document extraction quality easier to measure and improve.
 
@@ -135,3 +129,10 @@ It reflects my strengths in AI product UX, enterprise workflow design, builder t
 - identify weak spots
 - adjust schema definitions
 - rerun evaluation and compare results
+
+## Images
+
+- Placeholder evaluation results interface showing document extraction quality metrics and field-level results.: images/document-processing-evaluation-results-placeholder.png
+- Placeholder document review interface with a source document and extracted fields shown side by side.: images/document-processing-review-workflow-placeholder.png
+- Placeholder classifier interface showing document classes and test results for document processing setup.: images/document-processing-classifier-context-placeholder.png
+- Placeholder extraction interface showing document fields with review and quality indicators.: images/document-processing-extraction-indicators-placeholder.png
