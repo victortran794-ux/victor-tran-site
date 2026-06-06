@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-03
+Last updated: 2026-06-06
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,24 +20,25 @@ Consult next:
 
 ### Current active plan
 
-Review the recently shipped public-site polish as a system, keep broad visual expansion paused, and use one focused follow-up branch only after Victor chooses the next slice.
+Review the newly merged Document Processing placeholder media and homepage/About wording polish as a system, keep broad visual expansion paused, and use one focused follow-up branch only after Victor chooses the next slice.
 
 ### Current next actions
 
 1. Review the live site across desktop/mobile and Light/Dark.
-2. Capture review notes about homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and dash-cleanup copy changes.
-3. Keep Document Processing in its current live password-gated/noindex state unless Victor explicitly selects that package for a media-audit/planning pass.
-4. Do not start broad visual expansion, A2UI implementation, or protected-page promotion without explicit approval.
+2. Confirm the homepage Work wording, Ability Experience card copy, and About-page bio sentence feel grounded in Victor's voice.
+3. Review the protected Document Processing page later for placeholder-media fit, caption tone, and any safer diagram/composite needs; preserve the current password-gated/noindex state.
+4. Capture any notes about About image behavior, public-page media loading, Art & Illustration slideshow pause control, and remaining tone issues.
+5. Do not start broad visual expansion, A2UI implementation, or protected-page promotion without explicit approval.
 
 ### Supporting historical context
 
-- Latest reset checkpoint: `archive/planning/portfolio-enhancement-state-2026-06-01.md`.
+- Latest reset checkpoint: `archive/planning/portfolio-enhancement-state-2026-06-06.md`.
 - Historical planning files under `archive/planning/` are context only unless this dashboard or `PORTFOLIO_DIRECTION_BRIEF.md` explicitly references them as active work.
 - Legacy status snapshot: `archive/planning/portfolio-status-legacy-2026-05-18.md`; do not use it as the current status tracker.
 
 ## Current enhancement phase
 
-Status: clean reset after public-site polish, image-dimension hardening, dash-heavy wording cleanup, and Git branch cleanup; broad expansion remains paused pending review.
+Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, and Git branch cleanup; broad expansion remains paused pending review.
 
 Recent shipped work:
 
@@ -47,15 +48,17 @@ Recent shipped work:
 - The homepage Work area now separates primary project cards from a dedicated Galleries subsection; the Gallery cards use one image each, orange/purple text surfaces, and the tighter `Visual archive` framing.
 - Recent public-site polish also shipped: homepage Work-section copy refinement, About photo accessibility, public-page accessibility/performance hygiene, and a real Pause/Play control for the Art & Illustration slideshow.
 - Follow-up cleanup shipped: public image dimensions were added, decorative em-dash rhythm was removed from selected public copy/captions, and generated content exports were regenerated.
+- Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
+- Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
 - About page remains otherwise unchanged after the reverted program-note experiment.
 - A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
 
 Current next action:
 
-- Use `archive/planning/portfolio-enhancement-state-2026-06-01.md` as the current reset checkpoint.
-- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially homepage Work wording, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
+- Use `archive/planning/portfolio-enhancement-state-2026-06-06.md` as the current reset checkpoint.
+- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially the homepage Work wording, Ability Experience card copy, About bio sentence, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
-- Treat Document Processing as a live protected project package. No active work is required unless Victor selects that package; if he does, use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+- Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Do not start more broad visual expansion until those review notes are reviewed.
 
 ## Status legend
@@ -72,7 +75,7 @@ Current next action:
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state. If selected later, run a media-audit/planning pass before changing visuals or claims | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshots, metrics, launch claims, or major copy/media changes without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state; review placeholder-media fit later if Victor selects the package | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshot dumps, metrics, launch claims, or major copy/media changes without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
