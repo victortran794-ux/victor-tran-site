@@ -35,7 +35,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Section Headings
 
-- A focused path through product systems, publications, and community work.
+- Product systems, publication work, and community-centered design.
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting Group
@@ -59,7 +59,7 @@ Six weeks inside IBM's design education program. Redesigning the Contact Us expe
 
 A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.
 
-Empowering social change through accessible design. Brand identity and collateral for The Ability Experience.
+Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.
 
 Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.
 
