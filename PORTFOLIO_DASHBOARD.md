@@ -20,15 +20,15 @@ Consult next:
 
 ### Current active plan
 
-Review the newly merged Document Processing placeholder media and homepage/About wording polish as a system, keep broad visual expansion paused, and use one focused follow-up branch only after Victor chooses the next slice.
+Use the adjusted slice structure below to decide what kind of work comes next. Start with current-site review, then choose one focused branch from the public tone, public visual/interaction, or protected Document Processing tracks. Keep future concepts parked unless Victor explicitly selects one.
 
 ### Current next actions
 
-1. Review the live site across desktop/mobile and Light/Dark.
-2. Confirm the homepage Work wording, Ability Experience card copy, and About-page bio sentence feel grounded in Victor's voice.
-3. Review the protected Document Processing page later for placeholder-media fit, caption tone, and any safer diagram/composite needs; preserve the current password-gated/noindex state.
-4. Capture any notes about About image behavior, public-page media loading, Art & Illustration slideshow pause control, and remaining tone issues.
-5. Do not start broad visual expansion, A2UI implementation, or protected-page promotion without explicit approval.
+1. Run a current-site review pass across desktop/mobile and Light/Dark.
+2. Convert review notes into a short prioritized punch list, not an immediate implementation batch.
+3. Choose one adjusted slice for the next branch: public tone/voice cleanup, public visual/interaction polish, or Document Processing protected-page media/story review.
+4. Keep A2UI, broader visual expansion, new portfolio concept systems, and bigger motion/prototype ideas parked unless Victor explicitly selects one.
+5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
 
 ### Supporting historical context
 
@@ -56,10 +56,82 @@ Recent shipped work:
 Current next action:
 
 - Use `archive/planning/portfolio-enhancement-state-2026-06-06.md` as the current reset checkpoint.
-- Victor should review the recent public polish across desktop/mobile and Light/Dark, especially the homepage Work wording, Ability Experience card copy, About bio sentence, About image behavior, public-page media loading, Art & Illustration slideshow pause control, and the public dash-cleanup copy changes.
-- Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
+- Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
+- Do current-site review first, then choose one focused slice for the next branch.
+- Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
 - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
-- Do not start more broad visual expansion until those review notes are reviewed.
+- Keep broad visual expansion and A2UI paused until Victor explicitly selects one of those future tracks.
+
+## Adjusted enhancement slices
+
+### A. Current-site review and punch list
+
+Purpose: review what is already live and decide what actually needs attention before creating another branch.
+
+Includes:
+
+- Homepage Work/Galleries framing and whether `Visual archive` feels like supporting material.
+- Ability Experience card copy.
+- About wording and image behavior.
+- Art & Illustration slideshow Pause/Play control.
+- Desktop/mobile and Light/Dark checks.
+- Tone issues that feel too polished, cheesy, theatrical, or agent-written.
+
+Output: a short prioritized punch list. No implementation unless Victor approves a specific item.
+
+### B. Public copy/tone slice
+
+Purpose: make the public site sound more like Victor and less agent-polished.
+
+Includes:
+
+- Homepage card copy.
+- Gallery labels and captions.
+- About copy.
+- Pull quotes and section headers.
+- Dash-heavy or overly clever sentence rhythm.
+
+Excludes layout redesign, new visuals, and protected pages unless Victor explicitly selects them.
+
+### C. Public visual/interaction polish slice
+
+Purpose: make small public-page UI improvements without starting a new design-system rollout.
+
+Includes:
+
+- Art & Illustration Pause/Play button treatment.
+- Homepage Work/Galleries visual balance.
+- Media loading and image behavior.
+- Small responsive tweaks.
+
+Excludes new design-system rollout, new homepage structure, and Document Processing.
+
+### D. Document Processing protected-page media/story slice
+
+Purpose: focus only on the protected Document Processing project package.
+
+Includes:
+
+- Reviewing the four temporary placeholder images.
+- Caption tone.
+- Whether a safer diagram/composite is needed.
+- Later Claude/Figma audit when screens are ready.
+
+Excludes homepage promotion, sitemap changes, `noindex` changes, password-gate changes, and broad case-study rewrites unless Victor explicitly chooses them.
+
+### E. Future concepts parked
+
+Purpose: keep bigger ideas captured without letting them accidentally become the next implementation task.
+
+Includes:
+
+- A2UI.
+- Broader visual expansion.
+- New portfolio concept systems.
+- Report-style chapter treatments.
+- Bigger motion/prototype ideas.
+
+Status: paused unless Victor explicitly selects one.
 
 ## Status legend
 
