@@ -26,9 +26,9 @@ Use the adjusted slice structure below to keep practical polish gated and move i
 
 1. Treat the current-site review gate as mechanically clear: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, and no missing local image references were found in the selected pages.
 2. If Victor notices a concrete issue during human visual/tone review, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
-3. If no practical issue blocks review, move to Future concepts as the next planning area.
-4. Keep A2UI, broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
-5. Do not start protected-page promotion, sitemap changes, major copy rewrites, live future-concept pages, or broad redesign work without explicit approval.
+3. A2UI has been selected as the first future-concept prototype. Current branch: `feat/a2ui-showcase-static-prototype`.
+4. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
+5. Do not start protected-page promotion, sitemap changes, major copy rewrites, homepage/nav promotion, or broad redesign work without explicit approval.
 
 ### Supporting historical context
 
@@ -51,7 +51,7 @@ Recent shipped work:
 - Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
 - Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
 - About page remains otherwise unchanged after the reverted program-note experiment.
-- A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
+- A2UI is now in first static-prototype review on branch `feat/a2ui-showcase-static-prototype`: standalone `a2ui.html`, no homepage/nav/sitemap promotion.
 
 Current next action:
 
@@ -60,7 +60,7 @@ Current next action:
 - Mechanical current-site review checks passed on 2026-06-06; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
 - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
-- Keep broad visual expansion and A2UI paused until Victor explicitly selects one of those future tracks.
+- Keep broad visual expansion paused. A2UI is selected only for the current standalone static prototype; do not promote it in homepage/nav/sitemap until Victor approves.
 
 ## Adjusted enhancement slices
 

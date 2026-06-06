@@ -16,6 +16,7 @@ const PAGES = [
   'salmagazine.html',
   'graphicgallery.html',
   'artillustration.html',
+  'a2ui.html',
 ];
 
 const GENERATED_NOTICE = `<!--

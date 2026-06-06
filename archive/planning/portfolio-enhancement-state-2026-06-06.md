@@ -63,7 +63,8 @@ Focus review notes on:
 - Choose one adjusted slice per branch after review; do not mix review, copy, public UI polish, protected-page work, and future concepts into one implementation batch.
 - Keep Document Processing live, password-gated, noindex, and omitted from the sitemap.
 - Do not add Document Processing homepage/sitemap promotion, raw screenshot dumps, metrics, launch claims, or major copy/media changes without explicit approval.
-- Keep A2UI and broad visual expansion paused unless Victor explicitly selects one of those future tracks.
+- A2UI has now been selected as a standalone static prototype branch. Keep it direct-link only with no homepage/nav/sitemap promotion until Victor approves.
+- Keep broad visual expansion paused unless Victor explicitly selects it.
 - Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
 
 ## Adjusted enhancement slices
@@ -100,10 +101,10 @@ Includes reviewing the four temporary placeholder images, caption tone, whether 
 
 Excludes homepage promotion, sitemap changes, `noindex` changes, password-gate changes, and broad case-study rewrites unless Victor explicitly chooses them.
 
-### E. Future concepts parked
+### E. Future concepts
 
-Keep bigger ideas captured without letting them accidentally become next work.
+Keep bigger ideas captured without letting them accidentally become broad work.
 
 Includes A2UI, broader visual expansion, new portfolio concept systems, report-style chapter treatments, and bigger motion/prototype ideas.
 
-Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.
+Status: A2UI is the selected first standalone prototype; the rest remain parked and opt-in.

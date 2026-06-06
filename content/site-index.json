@@ -653,5 +653,20 @@
       }
     ],
     "projects": []
+  },
+  {
+    "title": "Agent-to-User Interface",
+    "source": "a2ui.html",
+    "url": "/a2ui",
+    "category": "Future concept prototype",
+    "description": "A static prototype for turning agent intent into trusted, inspectable user interfaces.",
+    "contentFile": "content/a2ui.md",
+    "headings": [
+      "One request, four interface layers",
+      "States an agent UI should make visible",
+      "This is interface design for agentic work."
+    ],
+    "images": [],
+    "projects": []
   }
 ]

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon + social -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="canonical" href="https://victortrandesign.com/a2ui">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://victortrandesign.com/a2ui">
+  <meta property="og:title" content="Agent-to-User Interface · Victor Tran">
+  <meta property="og:description" content="A static prototype for turning agent intent into trusted, inspectable user interfaces.">
+  <meta property="og:image" content="https://victortrandesign.com/images/hero-vic.jpg">
+  <meta property="og:image:width" content="1800">
+  <meta property="og:image:height" content="1134">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Agent-to-User Interface · Victor Tran Design</title>
+  <meta name="description" content="A static prototype for turning agent intent into trusted, inspectable user interfaces.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/nav-logo.webp" alt="Victor Tran" width="34" height="34">
+        <span class="nav-logo-name">Victor Tran</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Work</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a role="menuitem" href="document-processing.html">Document Processing</a></li>
+            <li role="none"><a role="menuitem" href="ibmcloud.html">IBM Cloud Observability</a></li>
+            <li role="none"><a role="menuitem" href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
+            <li role="none"><a role="menuitem" href="pci.html">Performance Contracting Group</a></li>
+            <li role="none"><a role="menuitem" href="abilityexperience.html">The Ability Experience</a></li>
+            <li role="none"><a role="menuitem" href="salmagazine.html">Star &amp; Lamp Magazine</a></li>
+            <li role="none"><a role="menuitem" href="pikappapp.html">Pi Kapp App</a></li>
+            <li class="nav-dropdown-separator" role="separator" aria-hidden="true"></li>
+            <li role="none"><a role="menuitem" href="artillustration.html">Art &amp; Illustration</a></li>
+            <li role="none"><a role="menuitem" href="graphicgallery.html">Graphic Design</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:victortran794@gmail.com" class="nav-contact">Contact</a></li>
+      </ul>
+      <div class="lens-switcher" role="group" aria-label="Viewing mode">
+        <button class="lens-switcher-btn" data-lens="light" aria-pressed="true" aria-label="Light mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25D0;</span>
+          <span class="lens-switcher-label">Light</span>
+        </button>
+        <button class="lens-switcher-btn" data-lens="dark" aria-pressed="false" aria-label="Dark mode">
+          <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
+          <span class="lens-switcher-label">Dark</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-content a2ui-page">
+
+    <header class="page-header a2ui-hero">
+      <p class="section-label label-default">Future concept prototype</p>
+      <h1 class="page-header-title">Agent-to-User Interface</h1>
+      <p class="page-header-desc">A static prototype for turning agent intent into trusted, inspectable user interfaces. The page uses A2UI-style thinking, but does not claim a production Google A2UI implementation.</p>
+      <dl class="case-study-meta">
+        <div class="case-study-meta-item">
+          <dt>Mode</dt>
+          <dd>Direct-link prototype</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>Sample</dt>
+          <dd>Portfolio refresh assistant</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>System</dt>
+          <dd>Brief, JSON, rendered UI, DNA</dd>
+        </div>
+        <div class="case-study-meta-item">
+          <dt>Status</dt>
+          <dd>Review draft</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section class="a2ui-principle-strip" aria-label="Prototype principles">
+      <div class="a2ui-principle-card reveal">
+        <span class="section-label">Problem</span>
+        <p>Chat is thin when an agent needs to show scope, evidence, risk, progress, approval, and recovery.</p>
+      </div>
+      <div class="a2ui-principle-card reveal">
+        <span class="section-label">Idea</span>
+        <p>The agent sends structured intent. The site renders that intent through trusted portfolio-native components.</p>
+      </div>
+      <div class="a2ui-principle-card reveal">
+        <span class="section-label">Guardrail</span>
+        <p>This demo is static, public-safe, and based on a fictional portfolio review workflow.</p>
+      </div>
+    </section>
+
+    <article class="a2ui-prototype" aria-labelledby="prototype-title">
+      <header class="a2ui-section-header reveal">
+        <p class="section-label">Prototype frame</p>
+        <h2 id="prototype-title">One request, four interface layers</h2>
+        <p>The same agent response is shown as a human brief, structured JSON, a rendered UI, and inspection notes. The point is not the bot. The point is the control surface around the bot.</p>
+      </header>
+
+      <div class="a2ui-view-grid">
+        <section class="a2ui-view-card a2ui-view-card--brief reveal">
+          <span class="a2ui-view-number">01</span>
+          <p class="section-label">Brief</p>
+          <h3>Human request</h3>
+          <blockquote>
+            Review the public homepage and propose one safe improvement. Stay inside the existing design system, cite what you inspected, explain risk, and ask before changing anything.
+          </blockquote>
+          <ul class="a2ui-checklist">
+            <li>Public homepage only</li>
+            <li>No protected case-study edits</li>
+            <li>No sitemap or nav changes</li>
+            <li>Approval required before file edits</li>
+          </ul>
+        </section>
+
+        <section class="a2ui-view-card a2ui-view-card--json reveal">
+          <span class="a2ui-view-number">02</span>
+          <p class="section-label">A2UI-style JSON</p>
+          <h3>Structured intent</h3>
+          <pre class="a2ui-code"><code>{
+  "task": "portfolio_refresh_review",
+  "scope": ["index.html", "css/style.css"],
+  "guardrails": [
+    "public pages only",
+    "preserve nav and sitemap",
+    "ask before edits"
+  ],
+  "components": [
+    { "type": "status", "state": "ready_for_review" },
+    { "type": "evidence", "source": "homepage featured grid" },
+    { "type": "recommendation", "risk": "low" },
+    { "type": "approval", "actions": ["approve", "revise", "park"] }
+  ]
+}</code></pre>
+        </section>
+
+        <section class="a2ui-view-card a2ui-view-card--rendered reveal">
+          <span class="a2ui-view-number">03</span>
+          <p class="section-label">Rendered UI</p>
+          <h3>Trusted component output</h3>
+          <div class="a2ui-render-stack" aria-label="Rendered trust components">
+            <div class="a2ui-mini-panel">
+              <strong>Status</strong>
+              <span>Ready for review</span>
+            </div>
+            <div class="a2ui-mini-panel">
+              <strong>Evidence</strong>
+              <span>Homepage Work grid and Visual archive section inspected.</span>
+            </div>
+            <div class="a2ui-mini-panel a2ui-mini-panel--warning">
+              <strong>Risk</strong>
+              <span>Low. Copy-only change. No layout or visibility changes.</span>
+            </div>
+            <div class="a2ui-action-row" aria-label="Sample approval actions">
+              <button type="button">Approve</button>
+              <button type="button">Revise</button>
+              <button type="button">Park</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="a2ui-view-card a2ui-view-card--dna reveal">
+          <span class="a2ui-view-number">04</span>
+          <p class="section-label">DNA notes</p>
+          <h3>Why the UI exists</h3>
+          <dl class="a2ui-dna-list">
+            <div>
+              <dt>Scope guard</dt>
+              <dd>Shows what the agent is allowed to touch before any work starts.</dd>
+            </div>
+            <div>
+              <dt>Evidence card</dt>
+              <dd>Turns claims into inspectable sources instead of vague confidence.</dd>
+            </div>
+            <div>
+              <dt>Approval panel</dt>
+              <dd>Keeps the human in control when the next step changes files.</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </article>
+
+    <section class="a2ui-component-catalog" aria-labelledby="catalog-title">
+      <header class="a2ui-section-header reveal">
+        <p class="section-label">Trusted component catalog</p>
+        <h2 id="catalog-title">States an agent UI should make visible</h2>
+        <p>These are small, reusable surfaces. They make an agent feel less like a magic text box and more like a clear work system.</p>
+      </header>
+
+      <div class="a2ui-catalog-grid">
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Status card</h3>
+          <p>Names the current state: planning, reviewing, waiting, editing, blocked, or complete.</p>
+        </article>
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Source card</h3>
+          <p>Shows where the agent looked and what evidence supports the recommendation.</p>
+        </article>
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Scope guard</h3>
+          <p>Separates allowed work from protected areas before the agent acts.</p>
+        </article>
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Recommendation</h3>
+          <p>Presents a proposed change with reason, expected effect, and review notes.</p>
+        </article>
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Approval panel</h3>
+          <p>Turns the next step into a clear human decision: approve, revise, park, or stop.</p>
+        </article>
+        <article class="a2ui-catalog-card reveal">
+          <span class="a2ui-card-dot"></span>
+          <h3>Recovery state</h3>
+          <p>Explains rollback, undo, and what happens if a tool fails or the result is wrong.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="a2ui-closing reveal">
+      <p class="section-label">Positioning note</p>
+      <h2>This is interface design for agentic work.</h2>
+      <p>The page is meant to show how Victor thinks about human control, not to present a live automation product. It can stay direct-link only until the prototype earns a public place on the site.</p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-tagline">Do more good things.</p>
+      <p class="footer-subtitle">See you soon.</p>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">
+        Let's build something together.
+      </a>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

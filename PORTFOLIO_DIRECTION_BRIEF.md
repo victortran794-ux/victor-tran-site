@@ -369,26 +369,26 @@ These are the next exploration candidates, not an automatic build queue. Start w
 - Password-gate/noindex behavior.
 - Homepage/nav/sitemap promotion for paused or protected work.
 - Full redesign, framework/build-step adoption, or site-wide visual-system rollout.
-- A2UI page creation or homepage/nav promotion.
+- Homepage/nav/sitemap promotion for the A2UI prototype.
 
 ---
 
 ## 7. A2UI / Agent-to-User Interface future track
 
 Added: 2026-05-21
-Updated: 2026-06-06 — future concept candidate, still opt-in
-Reference: `https://github.com/google/A2UI`
+Updated: 2026-06-06 — selected for first standalone static prototype
+Reference: `https://github.com/a2ui-project/a2ui`
 
 Google's A2UI project is useful because it names a future-facing portfolio opportunity: agents should not only answer in chat or generate arbitrary front-end code; they should be able to express UI intent through a safe, declarative format that the client renders with trusted components. The useful framing is “safe like data, expressive like code.”
 
-This is now part of the future concepts area, but it is still not an active implementation task. Treat it as a possible later case-study/prototype about designing the interface layer between humans and agents.
+This is now the first selected future-concept prototype. Treat it as a standalone direct-link page about designing the interface layer between humans and agents, not as a production implementation of the A2UI protocol.
 
 Current decision:
 
-- A2UI can be explored as a future concept if Victor selects it.
-- Do not create `a2ui.html` yet.
-- Do not add homepage/nav promotion yet.
-- Start with a written spec or isolated static prototype plan before any live-site implementation.
+- Build the first pass as `a2ui.html` on branch `feat/a2ui-showcase-static-prototype`.
+- Keep it standalone and direct-link only for review.
+- Do not add homepage/nav/sitemap promotion yet.
+- Use the safe `Portfolio refresh assistant` workflow with Brief, A2UI-style JSON, Rendered UI, and DNA notes.
 
 Potential portfolio framing:
 
@@ -418,15 +418,15 @@ Guardrails:
 4. Do the Work/Galleries nav changes make the site clearer on mobile and desktop?
 5. Do Gallery cards feel correctly secondary/supporting, or do they still compete with the main case studies?
 6. Do the IBM Cloud, Ability Experience, and SAL color-punctuation examples feel purposeful enough to keep?
-7. If Victor chooses future concepts next, should the first exploration be A2UI, report-style chapters, lens/DNA mode, broader motion/prototype behavior, or a written comparison of those options?
+7. Does the standalone A2UI prototype feel like the right first future-concept page, or should the direction stay private/parked after review?
 8. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
 
 ### Recommended next action
 
 1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
-2. Use future concepts as the next planning area, not an automatic implementation queue.
-3. Pick one future-concept exploration format: written spec, isolated static prototype plan, or Claude/Figma handoff.
-4. Keep any live-page implementation, homepage/nav promotion, sitemap changes, or protected-page changes behind a separate approval.
+2. Review the standalone A2UI static prototype before any public promotion.
+3. Keep report-style chapters, broader motion/prototype behavior, and other future concepts parked.
+4. Keep homepage/nav promotion, sitemap changes, or protected-page changes behind a separate approval.
 
 ---
 
