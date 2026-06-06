@@ -20,15 +20,15 @@ Consult next:
 
 ### Current active plan
 
-Use the adjusted slice structure below to decide what kind of work comes next. Start with current-site review, then choose one focused branch from the public tone, public visual/interaction, or protected Document Processing tracks. Keep future concepts parked unless Victor explicitly selects one.
+Use the adjusted slice structure below to keep practical polish gated and move intentionally toward future-concepts exploration. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. Otherwise, the next planning area is Future concepts.
 
 ### Current next actions
 
-1. Run a current-site review pass across desktop/mobile and Light/Dark.
-2. Convert review notes into a short prioritized punch list, not an immediate implementation batch.
-3. Choose one adjusted slice for the next branch: public tone/voice cleanup, public visual/interaction polish, or Document Processing protected-page media/story review.
-4. Keep A2UI, broader visual expansion, new portfolio concept systems, and bigger motion/prototype ideas parked unless Victor explicitly selects one.
-5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
+1. Treat the current-site review gate as mechanically clear: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, and no missing local image references were found in the selected pages.
+2. If Victor notices a concrete issue during human visual/tone review, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
+3. If no practical issue blocks review, move to Future concepts as the next planning area.
+4. Keep A2UI, broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
+5. Do not start protected-page promotion, sitemap changes, major copy rewrites, live future-concept pages, or broad redesign work without explicit approval.
 
 ### Supporting historical context
 
@@ -38,7 +38,7 @@ Use the adjusted slice structure below to decide what kind of work comes next. S
 
 ## Current enhancement phase
 
-Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, and Git branch cleanup; broad expansion remains paused pending review.
+Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, and mechanical review-gate checks; practical slices are gated and future concepts are the next planning area if Victor selects them.
 
 Recent shipped work:
 
@@ -57,7 +57,7 @@ Current next action:
 
 - Use `archive/planning/portfolio-enhancement-state-2026-06-06.md` as the current reset checkpoint.
 - Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
-- Do current-site review first, then choose one focused slice for the next branch.
+- Mechanical current-site review checks passed on 2026-06-06; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
 - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Keep broad visual expansion and A2UI paused until Victor explicitly selects one of those future tracks.
@@ -131,7 +131,7 @@ Includes:
 - Report-style chapter treatments.
 - Bigger motion/prototype ideas.
 
-Status: paused unless Victor explicitly selects one.
+Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.
 
 ## Status legend
 

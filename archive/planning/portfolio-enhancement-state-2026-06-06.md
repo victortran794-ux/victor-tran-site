@@ -1,6 +1,6 @@
 # Portfolio enhancement state: 2026-06-06
 
-This checkpoint records the current portfolio state after the Document Processing placeholder-media slice and the small homepage/About wording polish landed.
+This checkpoint records the current portfolio state after the Document Processing placeholder-media slice, the small homepage/About wording polish, the adjusted enhancement-slice docs, and the 2026-06-06 mechanical review gate.
 
 ## Current git state
 
@@ -8,7 +8,8 @@ This checkpoint records the current portfolio state after the Document Processin
 - Recent merged PRs:
   - PR #63: `feat: add document processing placeholder media`
   - PR #64: `copy: polish homepage and about wording`
-- Broad visual expansion remains paused until Victor reviews the current site as a system.
+  - PR #66: `docs: clarify portfolio enhancement slices`
+- Broad visual expansion remains paused unless Victor explicitly selects it as a future concept.
 
 ## Shipped since the previous reset
 
@@ -34,9 +35,18 @@ This checkpoint records the current portfolio state after the Document Processin
 - Document Processing returned `200`, still includes `noindex,nofollow`, still includes password-gate markers, and includes the four placeholder media references.
 - GitHub Actions `Site health check` completed successfully for both PR #63 and PR #64.
 
+## Mechanical review gate: 2026-06-06
+
+- Homepage returned `200`, redirected to `https://www.victortrandesign.com/`, and contained expected Work/Galleries, `Visual archive`, Ability Experience, and chapter-marker content.
+- About returned `200` and contained expected IBM, Training, and WIP markers.
+- Art & Illustration returned `200` and contained the slideshow Pause control markers, including `slideshow-pause-btn` and `aria-pressed="false"`.
+- Document Processing returned `200`, still included `noindex,nofollow`, password-gate markers, and all four temporary placeholder image references.
+- Sitemap returned `200`, included 8 URLs, and still omitted Document Processing.
+- Local `./scripts/preflight.sh` passed, local selected-page image-reference scan found no missing images, and selected checked HTML files had no em-dash hits.
+
 ## Current review posture
 
-Victor should review the site across desktop/mobile and Light/Dark before any broad expansion. The review should produce a short prioritized punch list, not an automatic implementation batch.
+Mechanical review-gate checks passed on 2026-06-06, so practical polish is not blocking movement into future-concepts planning. Victor can still review the site across desktop/mobile and Light/Dark; any issues should become a short prioritized punch list, not an automatic implementation batch.
 
 Focus review notes on:
 
@@ -58,7 +68,7 @@ Focus review notes on:
 
 ## Adjusted enhancement slices
 
-Choose one, not all:
+Choose one, not all. If no practical issue is selected, move to the Future concepts slice as the next planning area:
 
 ### A. Current-site review and punch list
 
@@ -96,4 +106,4 @@ Keep bigger ideas captured without letting them accidentally become next work.
 
 Includes A2UI, broader visual expansion, new portfolio concept systems, report-style chapter treatments, and bigger motion/prototype ideas.
 
-Status: paused unless Victor explicitly selects one.
+Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.

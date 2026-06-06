@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-06-01
-Status: Active direction brief; current phase is review pause after shipped public-site polish, performance hardening, and wording cleanup
+Last updated: 2026-06-06
+Status: Active direction brief; practical polish is gated and the next exploration area is future concepts
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,29 +42,29 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to pause and review as a system. A small public-site polish mini-sprint, public image-dimension pass, and dash-heavy wording cleanup have landed, so the next move should be review, checkpointing, or one branch-sized refinement rather than broad expansion.
+The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, so the next exploration area can be future concepts unless Victor flags a concrete current-site issue.
 
 Current working posture:
 
-1. Review the live site holistically across desktop/mobile and Light/Dark.
-2. Clarify whether the shipped patterns feel useful, tasteful, and grounded.
-3. Collect Victor's review notes, especially anything that feels cheesy, over-written, too theatrical, or visually muddled.
-4. Choose one focused next branch from those notes.
-5. Keep A2UI paused until Victor explicitly resumes it as the next track.
+1. Treat current-site review, public tone, public visual/interaction polish, and Document Processing protected-page media/story as separate gated slices.
+2. If Victor finds a concrete issue, choose one narrow practical slice and fix that before broadening.
+3. If no concrete issue blocks review, move into future-concepts exploration as an opt-in planning track.
+4. Keep A2UI, report-style chapters, lens/DNA mode, and broader motion/prototype ideas as future concepts until Victor explicitly selects the first one.
+5. Do not turn future concepts into live pages, homepage/nav promotion, sitemap changes, or broad redesign work without a separate approval.
 
 ### Top active decisions
 
-1. Keep, soften, or rename the “concept album + quiet stagehand” framing.
-2. Decide whether the homepage should feel like a literal tracklist or only borrow sequencing behavior.
-3. Decide whether the next branch is a small homepage/nav refinement, deeper tone/wording pass, Document Processing media-audit plan, or A2UI spec/prototype.
+1. Decide which future concept should be explored first, if any: A2UI, report-style chapters, lens/DNA mode, broader motion/prototype behavior, or another concept system.
+2. Decide whether future concepts should start as a written spec, static prototype, or Claude/Figma audit handoff.
+3. Keep practical refinements available as narrow follow-ups only if current-site review surfaces a concrete issue.
 
 ---
 
 ## 2. Current shipped state
 
-Updated: 2026-06-01
+Updated: 2026-06-06
 
-The following patterns are live or explicitly decided and should be reviewed together before more expansion.
+The following patterns are live or explicitly decided. Mechanical review checks passed on 2026-06-06; human visual/tone review can still flag narrow fixes, but these tracks are no longer blocking movement into future-concepts planning.
 
 ### Shipped / reviewed patterns
 
@@ -72,21 +72,21 @@ The following patterns are live or explicitly decided and should be reviewed tog
    - IBM Cloud: orange system note and IBM-blue screen-frame treatments.
    - Ability Experience: purple anniversary note.
    - SAL Magazine: orange archive note.
-   - Current decision: pause broad rollout until Victor reviews whether the pattern feels purposeful.
+   - Current decision: keep as shipped; only broaden if Victor selects a future visual-system direction.
 
 2. **Homepage sequence system**
    - Tracklist-style featured-work intro.
    - Static now-playing chip.
    - Non-sticky chapter-progress behavior tied to the homepage work grid.
    - Wide-desktop marquee loop fix so the strip stays seamless when the viewport is larger than the original item set.
-   - Current decision: keep behavior homepage-only and review before adding sticky, parallax, or case-study-wide progress.
+   - Current decision: keep behavior homepage-only; treat sticky, parallax, or case-study-wide progress as future-concept work.
 
 3. **Navigation / galleries regrouping**
    - Removed the separate top-level Galleries nav menu.
    - Added `Art & Illustration` and `Graphics` to the Work dropdown.
    - Moved gallery cards into a dedicated Galleries subsection inside the homepage Work area, preserving the main project sequence.
    - Finalized the two Gallery cards as single-image cards with orange/purple text surfaces and tighter `Visual archive` wording.
-   - Current decision: keep the simpler nav, then review mobile clarity, homepage rhythm, Gallery card treatment, and archive wording before adding any new navigation affordance.
+   - Current decision: keep the simpler nav; only revisit if human review flags a concrete issue.
 
 4. **About page**
    - Reviewed and left as-is.
@@ -95,25 +95,26 @@ The following patterns are live or explicitly decided and should be reviewed tog
 
 5. **A2UI**
    - Identified as a future track, then paused.
-   - Current decision: do not create or promote an A2UI page until after Victor's deeper review.
+   - Current decision: A2UI is part of the future-concepts area, but no page or promotion should be created without explicit selection.
 
 6. **Public-site accessibility and performance polish mini-sprint**
    - Homepage Work-section copy was tightened so galleries read as supporting visual archive material rather than competing case studies.
    - About photo accessibility was improved without redesigning the About page.
    - Public-page accessibility/performance hygiene was improved across safe public pages.
    - Art & Illustration now has an explicit accessible Pause/Play control for the auto-advancing slideshow.
-   - Current decision: review the polish in mobile, Light, and Dark before opening a broader media/performance pass.
+   - Current decision: keep as shipped; handle any human review issues as one narrow practical slice.
 
 7. **Public image dimensions and wording cleanup**
    - Public image dimensions landed as a mechanical performance-hardening pass.
    - A small dash-heavy wording cleanup removed decorative em-dash rhythm from selected public copy, captions, alt text, and the 404 page while preserving real date-range dashes.
-   - Current decision: review the public copy changes in context before opening a deeper tone pass.
+   - Current decision: keep as shipped; open a deeper tone pass only if Victor selects it after review.
 
 ### Current checkpoint
 
-- Enhancement work is paused for Victor's deep review.
-- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-06-01.md`.
-- Future work should clarify, document, or refine shipped patterns rather than add more patterns by default.
+- Practical enhancement slices are gated after PR #66 clarified the adjusted slice structure.
+- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-06-06.md`.
+- Future work may move into future-concepts planning, but implementation remains opt-in and branch-sized.
+- If human review surfaces a concrete current-site issue, handle it as one narrow practical slice before returning to future concepts.
 
 ---
 
@@ -310,51 +311,47 @@ How it maps to the existing direction:
 
 This section replaces the older long phase roadmap. It separates what needs review now from what may come later.
 
-### Review now
+### Practical slices gated
 
-1. **Holistic live-site review**
-   - Review desktop/mobile and Light/Dark.
-   - Look specifically at homepage rhythm, Work/Galleries grouping, color-punctuation cards, now-playing/chapter cue behavior, homepage Work copy, About image behavior, public media loading, Art & Illustration slideshow controls, and overall tone.
+The current-site review gate found no mechanical blocker on 2026-06-06: homepage, About, Art & Illustration, Document Processing, and sitemap returned expected live states; preflight passed; selected public/protected pages had no missing local image references and no em-dash hits in the checked HTML files. Human visual/tone review can still produce a narrow practical follow-up, but the practical tracks are not blocking future-concepts planning.
 
-2. **Tone / wording pass**
-   - Identify pull quotes, section headers, labels, and supporting copy that feel too cheesy, over-written, or theatrical.
-   - Goal: sharper and more grounded, not generic corporate UX copy.
+If Victor flags a concrete issue, choose one of these narrow slices:
 
-3. **Color punctuation evaluation**
-   - Decide whether IBM Cloud, Ability Experience, and SAL feel like a coherent reusable pattern.
-   - Do not broaden the pattern until the first three examples are reviewed.
+1. **Current-site review and punch list**
+   - Desktop/mobile and Light/Dark notes only; output is a prioritized punch list, not an implementation batch.
 
-### Candidate next
+2. **Public copy/tone slice**
+   - Homepage cards, gallery labels/captions, About copy, pull quotes, section headers, and dash-heavy or overly clever sentence rhythm.
 
-1. **Image-dimension / performance hardening**
-   - Add explicit image dimensions or similarly narrow media-loading improvements where the current public pages still need stability/performance hardening.
-   - Keep this as a mechanical/public-page pass unless Victor explicitly selects broader visual changes.
+3. **Public visual/interaction polish slice**
+   - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
-2. **Homepage refinement**
-   - Refine tracklist labels, now-playing wording, or chapter-progress behavior if review shows the structure works but needs grounding.
-   - Avoid sticky/fixed UI, parallax, or heavier behavior unless explicitly selected.
-
-3. **One focused case-study/content pass**
-   - Choose one public or approved protected case study.
-   - Define allowed assets, confidentiality boundaries, and whether the goal is copy, visuals, evidence, or structure.
-
-4. **Document Processing Claude Code + Figma media-audit plan**
-   - Treat this as planning only until Victor explicitly approves implementation.
+4. **Document Processing protected-page media/story slice**
+   - Treat any media/story work as planning only until Victor explicitly approves implementation.
    - Current private handoff: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
    - Ask Claude Code to review the active Document Processing page/context plus Victor-provided Figma screens and recommend 3-5 visuals, the best hero/composition, one annotatable UI detail, any needed workflow diagram, screens to avoid, captions, and redaction/cropping/blur guidance.
    - Do not rewrite the page, add raw screenshots, change nav/homepage/sitemap visibility, or alter the password-gated/noindex state during the audit.
 
-5. **Design-system hardening**
-   - Add or clarify reusable tokens/classes only as needed: radius, motion, screen frames, artifact cards, stat cards, process strips, section notes, chips, chapter labels, masked image wrappers, and lens controls.
-   - Keep visual output close to current pages at first.
+### Future concepts area
 
-### Later
+These are the next exploration candidates, not an automatic build queue. Start with a written spec or static prototype plan before touching live pages.
 
 1. **A2UI / Agent-to-User Interface showcase**
    - See Section 7.
    - Keep paused until Victor explicitly resumes it.
 
-2. **Asset and photo inventory**
+2. **Report-style chapter system**
+   - Explore whether case studies should borrow stronger report patterns: thesis, numbered chapters, evidence blocks, methodology notes, and chapter outros.
+   - Keep this as a structure/spec exercise before changing live pages.
+
+3. **Lens / DNA inspection mode**
+   - Explore a restrained lens mode that exposes tokens, annotations, design-system details, project metadata, or “why this is built this way” notes.
+   - Start as a prototype/spec; do not surprise normal visitors with an extreme default mode.
+
+4. **Broader motion / prototype behavior**
+   - Consider masked reveals, subtle parallax, and chapter progress only after the concept is specified and reduced-motion/mobile behavior is clear.
+
+5. **Asset and photo inventory**
    - Inventory candidate assets only after the next direction is clear.
    - Safe default reference areas from the access policy include:
      - `C:\Users\Victor\iCloudDrive\Documents\Design Work\Website`
@@ -365,10 +362,6 @@ This section replaces the older long phase roadmap. It separates what needs revi
      - `C:\Users\Victor\iCloudDrive\Documents\Photography\1_Me`
      - `C:\Users\Victor\iCloudDrive\Documents\Photography\2_Art`
    - Ask first before inspecting or using IBM folders, PCI folders, Important Documents, internal screenshots, password-gated material, client/unreleased work, or anything likely to contain credentials, legal, HR, compliance, or private personal records.
-
-3. **Broader motion / parallax**
-   - Only after the static structure and current homepage behavior feel grounded.
-   - Keep it subtle, accessible, and progressive-enhancement first.
 
 ### Do not touch without explicit approval
 
@@ -383,19 +376,19 @@ This section replaces the older long phase roadmap. It separates what needs revi
 ## 7. A2UI / Agent-to-User Interface future track
 
 Added: 2026-05-21
-Updated: 2026-05-30 — paused as a future track
+Updated: 2026-06-06 — future concept candidate, still opt-in
 Reference: `https://github.com/google/A2UI`
 
 Google's A2UI project is useful because it names a future-facing portfolio opportunity: agents should not only answer in chat or generate arbitrary front-end code; they should be able to express UI intent through a safe, declarative format that the client renders with trusted components. The useful framing is “safe like data, expressive like code.”
 
-This remains a future showcase track, not the active implementation phase. Treat it as a later case-study/prototype about designing the interface layer between humans and agents.
+This is now part of the future concepts area, but it is still not an active implementation task. Treat it as a possible later case-study/prototype about designing the interface layer between humans and agents.
 
 Current decision:
 
-- Pause A2UI implementation while Victor does a deeper review of the current site enhancements.
+- A2UI can be explored as a future concept if Victor selects it.
 - Do not create `a2ui.html` yet.
 - Do not add homepage/nav promotion yet.
-- Revisit only after the current system is clarified and Victor's review notes are incorporated.
+- Start with a written spec or isolated static prototype plan before any live-site implementation.
 
 Potential portfolio framing:
 
@@ -425,15 +418,15 @@ Guardrails:
 4. Do the Work/Galleries nav changes make the site clearer on mobile and desktop?
 5. Do Gallery cards feel correctly secondary/supporting, or do they still compete with the main case studies?
 6. Do the IBM Cloud, Ability Experience, and SAL color-punctuation examples feel purposeful enough to keep?
-7. Should the next branch be polish/review, image-dimension/performance hardening, tone/wording, Document Processing media-audit planning, design-system hardening, or A2UI spec/prototype?
+7. If Victor chooses future concepts next, should the first exploration be A2UI, report-style chapters, lens/DNA mode, broader motion/prototype behavior, or a written comparison of those options?
 8. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
 
 ### Recommended next action
 
-1. Victor reviews the current live site across desktop/mobile and Light/Dark.
-2. Victor brings back enhancement/content notes, including wording that feels too cheesy, over-written, or theatrical.
-3. The next branch is selected from those notes rather than continuing the roadmap automatically.
-4. Resume A2UI only when Victor wants to make it the next explicit track.
+1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
+2. Use future concepts as the next planning area, not an automatic implementation queue.
+3. Pick one future-concept exploration format: written spec, isolated static prototype plan, or Claude/Figma handoff.
+4. Keep any live-page implementation, homepage/nav promotion, sitemap changes, or protected-page changes behind a separate approval.
 
 ---
 
