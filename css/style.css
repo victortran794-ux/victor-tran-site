@@ -3046,7 +3046,11 @@ html[data-theme="dark"] .spotify-frame {
   .nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown-menu { transform: translateY(0); }
   .lens-switcher { display: none; }
   .about-now-grid { grid-template-columns: 1fr; }
-  .about-now-item { border-right: none !important; }
+  .about-now-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border);
+  }
+  .about-now-item:last-child { border-bottom: none; }
   .about-skills { grid-template-columns: 1fr; }
   .gallery-grid { columns: 1; }
   .hero-text { padding-bottom: 48px; }
