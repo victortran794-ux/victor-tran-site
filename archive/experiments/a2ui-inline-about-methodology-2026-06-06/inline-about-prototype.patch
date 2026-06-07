@@ -1,0 +1,492 @@
+diff --git a/about.html b/about.html
+index a3d96fa..fb2d18d 100644
+--- a/about.html
++++ b/about.html
+@@ -254,6 +254,35 @@
+               title="Victor's Spotify playlist"></iframe>
+           </div>
+         </div>
++
++        <!-- A2UI inline methodology prototype -->
++        <section class="about-play-card about-studio-agent" aria-labelledby="studio-agent-title" data-a2ui-agent>
++          <div class="about-studio-agent-copy">
++            <header class="about-play-head">
++              <p class="about-play-kicker">Studio assistant</p>
++              <h2 id="studio-agent-title" class="about-play-title">Ask the liner notes</h2>
++              <p class="about-play-sub">A small A2UI-inspired surface. Pick a prompt and the site renders trusted portfolio cards instead of opening a generic chat bubble.</p>
++            </header>
++            <p class="about-agent-note">Static prototype. No live AI, no stored input, no tracking beyond the normal site analytics.</p>
++          </div>
++
++          <div class="about-agent-shell">
++            <div class="about-agent-prompts" role="group" aria-label="Studio assistant prompts">
++              <button type="button" class="about-agent-chip is-active" data-a2ui-prompt="first">What should I look at first?</button>
++              <button type="button" class="about-agent-chip" data-a2ui-prompt="playlist">Explain the playlist vibe.</button>
++              <button type="button" class="about-agent-chip" data-a2ui-prompt="tetris">What does Tetris have to do with this page?</button>
++              <button type="button" class="about-agent-chip" data-a2ui-prompt="dna">Show the portfolio system DNA.</button>
++            </div>
++
++            <div class="about-agent-surface" aria-live="polite" data-a2ui-surface></div>
++
++            <div class="about-agent-actions">
++              <button type="button" class="about-agent-inspect" data-a2ui-inspect aria-expanded="false" aria-controls="studio-agent-dna">Inspect payload</button>
++            </div>
++
++            <pre id="studio-agent-dna" class="about-agent-dna" data-a2ui-dna hidden><code></code></pre>
++          </div>
++        </section>
+       </div>
+     </section>
+ 
+diff --git a/content/about.md b/content/about.md
+index 389b61b..fbf1730 100644
+--- a/content/about.md
++++ b/content/about.md
+@@ -23,6 +23,7 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
+ - Right now I am...
+ - Tetris, but soft
+ - A tour of my taste
++- Ask the liner notes
+ 
+ ## Body Copy
+ 
+@@ -76,6 +77,12 @@ On shuffle
+ 
+ A few songs from each phase of my music. Enjoy the eclectic mix.
+ 
++Studio assistant
++
++A small A2UI-inspired surface. Pick a prompt and the site renders trusted portfolio cards instead of opening a generic chat bubble.
++
++Static prototype. No live AI, no stored input, no tracking beyond the normal site analytics.
++
+ ## Lists And Tags
+ 
+ - Pi Kappa Phi Fraternity Headquarters
+diff --git a/content/site-index.json b/content/site-index.json
+index ecafef3..d65a8f1 100644
+--- a/content/site-index.json
++++ b/content/site-index.json
+@@ -128,7 +128,8 @@
+     "headings": [
+       "Right now I am...",
+       "Tetris, but soft",
+-      "A tour of my taste"
++      "A tour of my taste",
++      "Ask the liner notes"
+     ],
+     "images": [
+       {
+diff --git a/css/style.css b/css/style.css
+index cf84e70..1fde4f2 100644
+--- a/css/style.css
++++ b/css/style.css
+@@ -2329,6 +2329,223 @@ html[data-theme="dark"] .spotify-frame {
+     0 2px 8px rgba(0, 0, 0, 0.3);
+ }
+ 
++/* Inline A2UI methodology prototype */
++.about-studio-agent {
++  grid-column: 1 / -1;
++  display: grid;
++  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1fr);
++  gap: var(--space-8);
++  padding: var(--space-8);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-lg);
++  background:
++    radial-gradient(circle at top left, rgba(223, 82, 130, 0.10), transparent 34%),
++    var(--bg-2);
++}
++
++.about-studio-agent-copy {
++  display: flex;
++  flex-direction: column;
++  justify-content: space-between;
++  gap: var(--space-6);
++}
++
++.about-agent-note {
++  font-family: 'Source Code Pro', monospace;
++  font-size: var(--text-caption);
++  line-height: 1.6;
++  color: var(--text-2);
++  max-width: 44ch;
++}
++
++.about-agent-shell {
++  display: flex;
++  flex-direction: column;
++  gap: var(--space-5);
++  min-width: 0;
++}
++
++.about-agent-prompts {
++  display: flex;
++  flex-wrap: wrap;
++  gap: var(--space-2);
++}
++
++.about-agent-chip,
++.about-agent-inspect,
++.about-agent-card-link {
++  border: 1px solid var(--border);
++  border-radius: var(--radius-pill);
++  background: var(--bg);
++  color: var(--text);
++  font-family: 'Barlow', sans-serif;
++  font-size: var(--text-label);
++  font-weight: 600;
++  line-height: 1.2;
++  padding: var(--space-2) var(--space-4);
++  cursor: pointer;
++  transition: border-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast), background var(--duration-fast);
++}
++
++.about-agent-chip:hover,
++.about-agent-inspect:hover,
++.about-agent-card-link:hover {
++  border-color: var(--blue);
++  color: var(--blue);
++  transform: translateY(-1px);
++}
++
++.about-agent-chip.is-active {
++  background: var(--text);
++  border-color: var(--text);
++  color: var(--bg);
++}
++
++.about-agent-surface {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: var(--space-4);
++}
++
++.about-agent-card {
++  min-width: 0;
++  padding: var(--space-5);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-md);
++  background: var(--bg);
++}
++
++.about-agent-card--recommendation {
++  background: var(--orange);
++  border-color: var(--orange);
++  color: #ffffff;
++}
++
++.about-agent-card--recommendation .about-agent-card-label,
++.about-agent-card--recommendation p,
++.about-agent-card--recommendation .about-agent-card-meta {
++  color: rgba(255, 255, 255, 0.84);
++}
++
++.about-agent-card--recommendation h3 { color: #ffffff; }
++
++.about-agent-card--recommendation .about-agent-card-link {
++  background: rgba(255, 255, 255, 0.14);
++  border-color: rgba(255, 255, 255, 0.5);
++  color: #ffffff;
++}
++
++.about-agent-card-label {
++  display: block;
++  font-family: 'Source Code Pro', monospace;
++  font-size: var(--text-caption);
++  text-transform: uppercase;
++  letter-spacing: 0.12em;
++  color: var(--text-2);
++  margin-bottom: var(--space-3);
++}
++
++.about-agent-card h3 {
++  font-family: 'DM Serif Display', serif;
++  font-size: var(--text-subheading);
++  font-weight: 400;
++  line-height: 1.12;
++  color: var(--text);
++  margin-bottom: var(--space-3);
++}
++
++.about-agent-card p,
++.about-agent-card li {
++  font-size: var(--text-body);
++  line-height: 1.65;
++  color: var(--text-2);
++}
++
++.about-agent-card ul {
++  list-style: none;
++  display: flex;
++  flex-direction: column;
++  gap: var(--space-2);
++  margin: 0;
++}
++
++.about-agent-card li::before {
++  content: '';
++  display: inline-block;
++  width: 6px;
++  height: 6px;
++  margin-right: var(--space-2);
++  border-radius: 1px;
++  background: var(--pink);
++  transform: translateY(-1px);
++}
++
++.about-agent-card-meta {
++  display: block;
++  margin-top: var(--space-4);
++  font-family: 'Source Code Pro', monospace;
++  font-size: var(--text-caption);
++  color: var(--text-2);
++}
++
++.about-agent-card-link {
++  display: inline-flex;
++  align-items: center;
++  width: fit-content;
++  margin-top: var(--space-4);
++  text-decoration: none;
++}
++
++.about-agent-actions {
++  display: flex;
++  justify-content: flex-end;
++}
++
++.about-agent-dna {
++  max-height: 340px;
++  overflow: auto;
++  padding: var(--space-5);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-md);
++  background: var(--text);
++  color: var(--bg);
++  font-family: 'Source Code Pro', monospace;
++  font-size: var(--text-caption);
++  line-height: 1.7;
++  white-space: pre-wrap;
++}
++
++.about-agent-dna[hidden] { display: none; }
++
++@media (max-width: 980px) {
++  .about-studio-agent {
++    grid-template-columns: 1fr;
++  }
++
++  .about-agent-surface {
++    grid-template-columns: 1fr;
++  }
++}
++
++@media (max-width: 640px) {
++  .about-studio-agent {
++    padding: var(--space-6);
++  }
++
++  .about-agent-prompts {
++    flex-direction: column;
++    align-items: stretch;
++  }
++
++  .about-agent-chip,
++  .about-agent-inspect,
++  .about-agent-card-link {
++    width: 100%;
++    justify-content: center;
++    text-align: center;
++  }
++}
++
+ 
+ /* ══════════════════════════════════════════════
+    GALLERY
+diff --git a/js/main.js b/js/main.js
+index b4be8d8..c57d020 100644
+--- a/js/main.js
++++ b/js/main.js
+@@ -486,6 +486,180 @@ document.querySelectorAll('.marquee-track').forEach(track => {
+ 
+ 
+ 
++// ── Inline A2UI-inspired About assistant ──────────
++(function initAboutA2UIAssistant() {
++  const root = document.querySelector('[data-a2ui-agent]');
++  if (!root) return;
++
++  const surface = root.querySelector('[data-a2ui-surface]');
++  const dna = root.querySelector('[data-a2ui-dna]');
++  const dnaCode = dna ? dna.querySelector('code') : null;
++  const inspectBtn = root.querySelector('[data-a2ui-inspect]');
++  const chips = Array.from(root.querySelectorAll('[data-a2ui-prompt]'));
++  if (!surface || !dna || !dnaCode || !inspectBtn || !chips.length) return;
++
++  const prompts = {
++    first: {
++      version: 'a2ui-inspired-static-v1',
++      createSurface: {
++        surfaceId: 'about-studio-assistant',
++        catalogId: 'victor-portfolio-inline-catalog'
++      },
++      updateComponents: [
++        {
++          id: 'status',
++          component: 'StatusCard',
++          label: 'Mode',
++          title: 'Start with the systems work',
++          body: 'If you want the clearest read on Victor, start with IBM Cloud Observability, then come back for the visual archive.'
++        },
++        {
++          id: 'recommendation',
++          component: 'RecommendationCard',
++          label: 'Recommended track',
++          title: 'IBM Cloud Observability',
++          body: 'A strong first stop because it shows enterprise product thinking, design systems, and complex workflow clarity.',
++          href: 'ibmcloud.html',
++          cta: 'Open case study'
++        },
++        {
++          id: 'evidence',
++          component: 'EvidenceCard',
++          label: 'Evidence',
++          items: ['Primary case study in the Work sequence', 'Connects product strategy to interface detail', 'Pairs well with the portfolio system story']
++        }
++      ]
++    },
++    playlist: {
++      version: 'a2ui-inspired-static-v1',
++      createSurface: {
++        surfaceId: 'about-studio-assistant',
++        catalogId: 'victor-portfolio-inline-catalog'
++      },
++      updateComponents: [
++        {
++          id: 'status',
++          component: 'StatusCard',
++          label: 'Reading the room',
++          title: 'The playlist is a taste map',
++          body: 'It is less about one genre and more about range: polished, chaotic, nostalgic, theatrical, and useful for understanding the person behind the work.'
++        },
++        {
++          id: 'note',
++          component: 'PlaylistNote',
++          label: 'Liner note',
++          title: 'Eclectic on purpose',
++          body: 'The same site can hold enterprise UX, soft Tetris, drag references, and a beach Diet Coke daydream without pretending they are separate people.'
++        }
++      ]
++    },
++    tetris: {
++      version: 'a2ui-inspired-static-v1',
++      createSurface: {
++        surfaceId: 'about-studio-assistant',
++        catalogId: 'victor-portfolio-inline-catalog'
++      },
++      updateComponents: [
++        {
++          id: 'status',
++          component: 'StatusCard',
++          label: 'Game note',
++          title: 'Tetris is a design-system joke that works',
++          body: 'It turns order, constraint, pacing, recovery, and play into something visitors can actually touch.'
++        },
++        {
++          id: 'game',
++          component: 'GameNote',
++          label: 'Mechanic',
++          items: ['Limited pieces', 'Fast decisions', 'Soft interface skin', 'A tiny reset loop when the board gets messy']
++        }
++      ]
++    },
++    dna: {
++      version: 'a2ui-inspired-static-v1',
++      createSurface: {
++        surfaceId: 'about-studio-assistant',
++        catalogId: 'victor-portfolio-inline-catalog'
++      },
++      updateComponents: [
++        {
++          id: 'status',
++          component: 'StatusCard',
++          label: 'Method',
++          title: 'The agent describes intent. The site owns the interface.',
++          body: 'That is the useful A2UI lesson for this portfolio: structured payloads, trusted components, renderer-controlled styling, and inspectable state.'
++        },
++        {
++          id: 'evidence',
++          component: 'EvidenceCard',
++          label: 'Catalog',
++          items: ['StatusCard', 'RecommendationCard', 'EvidenceCard', 'PlaylistNote', 'GameNote', 'DnaPanel']
++        }
++      ]
++    }
++  };
++
++  function escapeHTML(value) {
++    return String(value).replace(/[&<>"']/g, (char) => ({
++      '&': '&amp;',
++      '<': '&lt;',
++      '>': '&gt;',
++      '"': '&quot;',
++      "'": '&#39;'
++    }[char]));
++  }
++
++  function renderComponent(component) {
++    const type = component.component || 'StatusCard';
++    const modifier = type === 'RecommendationCard' ? ' about-agent-card--recommendation' : '';
++    const body = component.body ? `<p>${escapeHTML(component.body)}</p>` : '';
++    const items = Array.isArray(component.items) && component.items.length
++      ? `<ul>${component.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`
++      : '';
++    const link = component.href
++      ? `<a class="about-agent-card-link" href="${escapeHTML(component.href)}">${escapeHTML(component.cta || 'Open')}</a>`
++      : '';
++
++    return `
++      <article class="about-agent-card${modifier}">
++        <span class="about-agent-card-label">${escapeHTML(component.label || type)}</span>
++        <h3>${escapeHTML(component.title || 'Untitled response')}</h3>
++        ${body}
++        ${items}
++        ${link}
++        <span class="about-agent-card-meta">${escapeHTML(type)}</span>
++      </article>
++    `;
++  }
++
++  function renderPrompt(key) {
++    const payload = prompts[key] || prompts.first;
++    surface.innerHTML = payload.updateComponents.map(renderComponent).join('');
++    dnaCode.textContent = JSON.stringify(payload, null, 2);
++    if (!dna.hidden) {
++      inspectBtn.setAttribute('aria-expanded', 'true');
++    }
++  }
++
++  chips.forEach(chip => {
++    chip.addEventListener('click', () => {
++      chips.forEach(item => item.classList.remove('is-active'));
++      chip.classList.add('is-active');
++      renderPrompt(chip.dataset.a2uiPrompt);
++    });
++  });
++
++  inspectBtn.addEventListener('click', () => {
++    const isHidden = dna.hidden;
++    dna.hidden = !isHidden;
++    inspectBtn.setAttribute('aria-expanded', String(isHidden));
++    inspectBtn.textContent = isHidden ? 'Hide payload' : 'Inspect payload';
++  });
++
++  renderPrompt('first');
++})();
++
++
+ // ── Design DNA overlay ─────────────────────────────
+ (function initDesignDNA() {
+   const overlay  = document.getElementById('dnaOverlay');

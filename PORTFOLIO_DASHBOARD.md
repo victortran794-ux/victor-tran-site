@@ -20,15 +20,16 @@ Consult next:
 
 ### Current active plan
 
-Use the adjusted slice structure below to keep practical polish gated and move intentionally toward future-concepts exploration. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. Otherwise, the next planning area is Future concepts.
+Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
 
 ### Current next actions
 
 1. Treat the current-site review gate as mechanically clear: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, and no missing local image references were found in the selected pages.
 2. If Victor notices a concrete issue during human visual/tone review, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
-3. If no practical issue blocks review, move to Future concepts as the next planning area.
-4. Keep A2UI, broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
-5. Do not start protected-page promotion, sitemap changes, major copy rewrites, live future-concept pages, or broad redesign work without explicit approval.
+3. Treat A2UI as parked. The inline prototype is preserved under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` for future pickup when the technology/infrastructure catches up.
+4. Choose the next task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
+5. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
+6. Do not start protected-page promotion, sitemap changes, major copy rewrites, homepage/nav/sitemap promotion, floating chat widgets, or broad redesign work without explicit approval.
 
 ### Supporting historical context
 
@@ -51,7 +52,7 @@ Recent shipped work:
 - Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
 - Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
 - About page remains otherwise unchanged after the reverted program-note experiment.
-- A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
+- A2UI experiments are parked: the standalone `a2ui.html` branch remains unmerged, and the inline About-page prototype is contained under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`.
 
 Current next action:
 
@@ -60,7 +61,7 @@ Current next action:
 - Mechanical current-site review checks passed on 2026-06-06; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
 - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
-- Keep broad visual expansion and A2UI paused until Victor explicitly selects one of those future tracks.
+- Keep broad visual expansion paused. Keep A2UI parked in `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it; do not merge or promote the parked standalone page as-is.
 
 ## Adjusted enhancement slices
 
@@ -131,7 +132,7 @@ Includes:
 - Report-style chapter treatments.
 - Bigger motion/prototype ideas.
 
-Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.
+Status: A2UI is parked as a contained experiment under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`; resume only when Victor explicitly selects it and the technology/infrastructure is ready. The rest remain parked and opt-in. The parked standalone `a2ui.html` branch should not be merged or promoted as-is.
 
 ## Status legend
 

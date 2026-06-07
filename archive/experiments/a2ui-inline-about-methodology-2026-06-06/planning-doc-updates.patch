@@ -1,0 +1,203 @@
+diff --git a/PORTFOLIO_DASHBOARD.md b/PORTFOLIO_DASHBOARD.md
+index db61013..7026b85 100644
+--- a/PORTFOLIO_DASHBOARD.md
++++ b/PORTFOLIO_DASHBOARD.md
+@@ -20,15 +20,16 @@ Consult next:
+ 
+ ### Current active plan
+ 
+-Use the adjusted slice structure below to keep practical polish gated and move intentionally toward future-concepts exploration. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. Otherwise, the next planning area is Future concepts.
++Use the adjusted slice structure below to keep practical polish gated and move intentionally through future-concepts exploration. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. Otherwise, review the inline A2UI About-page prototype branch before deciding whether it should stay, be revised, or be parked.
+ 
+ ### Current next actions
+ 
+ 1. Treat the current-site review gate as mechanically clear: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, and no missing local image references were found in the selected pages.
+ 2. If Victor notices a concrete issue during human visual/tone review, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
+-3. If no practical issue blocks review, move to Future concepts as the next planning area.
+-4. Keep A2UI, broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
+-5. Do not start protected-page promotion, sitemap changes, major copy rewrites, live future-concept pages, or broad redesign work without explicit approval.
++3. Review the inline A2UI About-page prototype on this branch; keep the parked standalone branch unmerged.
++4. If the inline pattern feels native after Light/Dark/mobile review, decide whether to refine it for PR or keep it parked as a private experiment.
++5. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
++6. Do not start protected-page promotion, sitemap changes, major copy rewrites, homepage/nav/sitemap promotion, floating chat widgets, or broad redesign work without explicit approval.
+ 
+ ### Supporting historical context
+ 
+@@ -51,7 +52,7 @@ Recent shipped work:
+ - Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
+ - Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
+ - About page remains otherwise unchanged after the reverted program-note experiment.
+-- A2UI is paused as a future track; no `a2ui.html` page or public promotion yet.
++- A2UI has an inline About-page methodology prototype on a feature branch; the standalone `a2ui.html` branch remains parked and unmerged.
+ 
+ Current next action:
+ 
+@@ -60,7 +61,7 @@ Current next action:
+ - Mechanical current-site review checks passed on 2026-06-06; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
+ - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
+ - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+-- Keep broad visual expansion and A2UI paused until Victor explicitly selects one of those future tracks.
++- Keep broad visual expansion paused. For A2UI, review the inline About-page prototype before PR/merge; do not merge or promote the parked standalone page as-is.
+ 
+ ## Adjusted enhancement slices
+ 
+@@ -131,7 +132,7 @@ Includes:
+ - Report-style chapter treatments.
+ - Bigger motion/prototype ideas.
+ 
+-Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.
++Status: A2UI now has a local inline About-page prototype branch for review. The rest remain parked and opt-in. The parked standalone `a2ui.html` branch should not be merged or promoted as-is.
+ 
+ ## Status legend
+ 
+diff --git a/PORTFOLIO_DIRECTION_BRIEF.md b/PORTFOLIO_DIRECTION_BRIEF.md
+index 5ae24bc..52911dc 100644
+--- a/PORTFOLIO_DIRECTION_BRIEF.md
++++ b/PORTFOLIO_DIRECTION_BRIEF.md
+@@ -42,20 +42,21 @@ Short version:
+ 
+ ### Current posture
+ 
+-The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, so the next exploration area can be future concepts unless Victor flags a concrete current-site issue.
++The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, so the current future-concepts work can focus on A2UI only if it becomes an inline methodology pattern embedded into the portfolio rather than a standalone explainer page.
+ 
+ Current working posture:
+ 
+ 1. Treat current-site review, public tone, public visual/interaction polish, and Document Processing protected-page media/story as separate gated slices.
+ 2. If Victor finds a concrete issue, choose one narrow practical slice and fix that before broadening.
+-3. If no concrete issue blocks review, move into future-concepts exploration as an opt-in planning track.
+-4. Keep A2UI, report-style chapters, lens/DNA mode, and broader motion/prototype ideas as future concepts until Victor explicitly selects the first one.
+-5. Do not turn future concepts into live pages, homepage/nav promotion, sitemap changes, or broad redesign work without a separate approval.
++3. Review the inline A2UI About-page methodology prototype near the Tetris/playlist context before merging or promoting any public-facing feature.
++4. Keep the parked standalone A2UI branch unmerged while this direction is evaluated: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
++5. Keep report-style chapters, lens/DNA mode, and broader motion/prototype ideas as future concepts until Victor explicitly selects the first one.
++6. Do not turn future concepts into live pages, homepage/nav promotion, sitemap changes, floating chat widgets, or broad redesign work without a separate approval.
+ 
+ ### Top active decisions
+ 
+-1. Decide which future concept should be explored first, if any: A2UI, report-style chapters, lens/DNA mode, broader motion/prototype behavior, or another concept system.
+-2. Decide whether future concepts should start as a written spec, static prototype, or Claude/Figma audit handoff.
++1. Decide whether the inline A2UI methodology prototype belongs on the About page near Tetris/playlist, or whether A2UI should stay parked for now.
++2. If it belongs, decide whether to refine this branch for PR/merge or keep it as a private experiment.
+ 3. Keep practical refinements available as narrow follow-ups only if current-site review surfaces a concrete issue.
+ 
+ ---
+@@ -334,11 +335,12 @@ If Victor flags a concrete issue, choose one of these narrow slices:
+ 
+ ### Future concepts area
+ 
+-These are the next exploration candidates, not an automatic build queue. Start with a written spec or static prototype plan before touching live pages.
++These are exploration candidates, not an automatic build queue. A2UI is only worth continuing if the inline About-page prototype feels portfolio-native rather than a standalone explanation page.
+ 
+-1. **A2UI / Agent-to-User Interface showcase**
+-   - See Section 7.
+-   - Keep paused until Victor explicitly resumes it.
++1. **A2UI / Agent-to-User Interface methodology**
++   - See Section 7 and `archive/planning/a2ui-inline-about-methodology-spec-2026-06-06.md`.
++   - Preferred direction: inline About-page assistant near Tetris/playlist, using trusted portfolio components and an inspectable DNA/payload view.
++   - Keep the parked standalone `a2ui.html` branch unmerged unless it is reworked around this methodology direction.
+ 
+ 2. **Report-style chapter system**
+    - Explore whether case studies should borrow stronger report patterns: thesis, numbered chapters, evidence blocks, methodology notes, and chapter outros.
+@@ -369,41 +371,43 @@ These are the next exploration candidates, not an automatic build queue. Start w
+ - Password-gate/noindex behavior.
+ - Homepage/nav/sitemap promotion for paused or protected work.
+ - Full redesign, framework/build-step adoption, or site-wide visual-system rollout.
+-- A2UI page creation or homepage/nav promotion.
++- A2UI standalone page creation, floating chat widgets, or homepage/nav/sitemap promotion.
+ 
+ ---
+ 
+ ## 7. A2UI / Agent-to-User Interface future track
+ 
+ Added: 2026-05-21
+-Updated: 2026-06-06 — future concept candidate, still opt-in
+-Reference: `https://github.com/google/A2UI`
++Updated: 2026-06-06 — inline About-page prototype branch under review
++Reference: `https://github.com/a2ui-project/a2ui`
+ 
+ Google's A2UI project is useful because it names a future-facing portfolio opportunity: agents should not only answer in chat or generate arbitrary front-end code; they should be able to express UI intent through a safe, declarative format that the client renders with trusted components. The useful framing is “safe like data, expressive like code.”
+ 
+-This is now part of the future concepts area, but it is still not an active implementation task. Treat it as a possible later case-study/prototype about designing the interface layer between humans and agents.
++This is now part of the future concepts area, but the preferred direction is no longer a page that merely explains A2UI. The current local prototype evaluates A2UI as a methodology installed into the portfolio itself: an inline, contextual agent surface on the About page near the Tetris/playlist area. The visitor picks constrained prompt chips and the site renders trusted portfolio-native cards, with an optional DNA/inspect view of the A2UI-inspired payload.
+ 
+ Current decision:
+ 
+-- A2UI can be explored as a future concept if Victor selects it.
+-- Do not create `a2ui.html` yet.
+-- Do not add homepage/nav promotion yet.
+-- Start with a written spec or isolated static prototype plan before any live-site implementation.
++- Do not merge or promote the parked standalone branch `feat/a2ui-showcase-static-prototype` at `87ddb60` as-is.
++- Use `archive/planning/a2ui-inline-about-methodology-spec-2026-06-06.md` as the current A2UI planning source.
++- Prefer an inline About-page prototype over a floating chat icon or standalone explainer page.
++- Keep the first prototype static/local-only unless Victor explicitly approves live agent infrastructure.
++- Do not add homepage/nav/sitemap promotion yet.
+ 
+ Potential portfolio framing:
+ 
+ - **Problem:** chat is too thin for complex agent workflows; users need visibility, approvals, sources, reversibility, and recovery states.
+ - **System idea:** markdown/product brief → agent-generated A2UI-style JSON → trusted component catalog → rendered UI.
+ - **Design contribution:** define the human-control layer: status, progress, approval, warning, source/evidence, edit, undo, and completion states.
+-- **Showcase format:** a static or lightly interactive prototype that lets visitors switch between Brief, JSON, Rendered UI, and DNA views.
++- **Showcase format:** an inline About-page "Studio Assistant" or "Liner Notes Assistant" where visitor prompt chips render portfolio-native cards, with an optional DNA/inspect view for the A2UI-style payload.
+ - **Design-system tie-in:** reuse the lens switcher, screen-frame, radius, artifact-card, and process-strip patterns rather than inventing a separate visual language.
+ 
+ Guardrails:
+ 
+-- Do not imply production experience with Google A2UI unless a real implementation is built.
++- Do not imply production experience with A2UI unless a real implementation is built.
+ - Do not adopt the full A2UI stack on the live site until the simpler design-system primitives are stable.
+ - Prefer a simplified A2UI-inspired schema for the first portfolio prototype if that communicates the concept clearly.
+ - Keep the public claim honest: this is an exploration of agent-to-user interface design, not a claim that Victor authored the protocol.
++- Avoid a floating chat icon. The trigger should be inline and contextual.
+ - If implemented later, use static HTML/CSS/JS or a small isolated prototype; avoid adding a build system to the portfolio just for this.
+ 
+ ---
+@@ -418,15 +422,15 @@ Guardrails:
+ 4. Do the Work/Galleries nav changes make the site clearer on mobile and desktop?
+ 5. Do Gallery cards feel correctly secondary/supporting, or do they still compete with the main case studies?
+ 6. Do the IBM Cloud, Ability Experience, and SAL color-punctuation examples feel purposeful enough to keep?
+-7. If Victor chooses future concepts next, should the first exploration be A2UI, report-style chapters, lens/DNA mode, broader motion/prototype behavior, or a written comparison of those options?
++7. Does the inline About-page A2UI methodology pattern feel native to the Tetris/playlist area, or should A2UI stay parked?
+ 8. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
+ 
+ ### Recommended next action
+ 
+ 1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
+-2. Use future concepts as the next planning area, not an automatic implementation queue.
+-3. Pick one future-concept exploration format: written spec, isolated static prototype plan, or Claude/Figma handoff.
+-4. Keep any live-page implementation, homepage/nav promotion, sitemap changes, or protected-page changes behind a separate approval.
++2. Use `archive/planning/a2ui-inline-about-methodology-spec-2026-06-06.md` to decide whether A2UI belongs as an inline About-page methodology prototype.
++3. If it does, build a small static/local-only prototype on a fresh branch from `main` and stop for review.
++4. Keep the parked standalone A2UI branch unmerged, and keep homepage/nav promotion, sitemap changes, floating chat widgets, or protected-page changes behind a separate approval.
+ 
+ ---
+ 
+diff --git a/archive/planning/portfolio-enhancement-state-2026-06-06.md b/archive/planning/portfolio-enhancement-state-2026-06-06.md
+index e088ade..1000c98 100644
+--- a/archive/planning/portfolio-enhancement-state-2026-06-06.md
++++ b/archive/planning/portfolio-enhancement-state-2026-06-06.md
+@@ -63,7 +63,8 @@ Focus review notes on:
+ - Choose one adjusted slice per branch after review; do not mix review, copy, public UI polish, protected-page work, and future concepts into one implementation batch.
+ - Keep Document Processing live, password-gated, noindex, and omitted from the sitemap.
+ - Do not add Document Processing homepage/sitemap promotion, raw screenshot dumps, metrics, launch claims, or major copy/media changes without explicit approval.
+-- Keep A2UI and broad visual expansion paused unless Victor explicitly selects one of those future tracks.
++- Keep A2UI parked as a standalone page. Current direction is an inline About-page methodology prototype; see `archive/planning/a2ui-inline-about-methodology-spec-2026-06-06.md`.
++- Keep broad visual expansion paused unless Victor explicitly selects it.
+ - Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
+ 
+ ## Adjusted enhancement slices
+@@ -100,10 +101,10 @@ Includes reviewing the four temporary placeholder images, caption tone, whether
+ 
+ Excludes homepage promotion, sitemap changes, `noindex` changes, password-gate changes, and broad case-study rewrites unless Victor explicitly chooses them.
+ 
+-### E. Future concepts parked
++### E. Future concepts
+ 
+-Keep bigger ideas captured without letting them accidentally become next work.
++Keep bigger ideas captured without letting them accidentally become broad work.
+ 
+ Includes A2UI, broader visual expansion, new portfolio concept systems, report-style chapter treatments, and bigger motion/prototype ideas.
+ 
+-Status: next planning area if Victor selects one; still opt-in and not an automatic implementation queue.
++Status: A2UI is now only preferred as a possible inline About-page methodology prototype, not as a standalone explainer page. The rest remain parked and opt-in.
