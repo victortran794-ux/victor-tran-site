@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-06-06
-Status: Active direction brief; practical polish is gated and the next exploration area is future concepts
+Last updated: 2026-06-07
+Status: Active direction brief; objective closeout is complete and practical polish is gated pending Victor's manual review
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,7 +42,7 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06. A2UI is now contained as a parked experiment, so the active slate returns to the docket/menu of gated slices and opt-in future concepts.
+The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
 
 Current working posture:
 
@@ -55,17 +55,19 @@ Current working posture:
 
 ### Top active decisions
 
-1. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
-2. Keep A2UI parked until the technology/infrastructure catches up or Victor explicitly resumes it.
-3. Keep practical refinements available as narrow follow-ups only if current-site review surfaces a concrete issue.
+1. Victor reviews the live site manually across desktop/mobile and Light/Dark; any notes become a prioritized punch list rather than an automatic implementation batch.
+2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
+3. Keep A2UI parked until the technology/infrastructure catches up or Victor explicitly resumes it.
+4. Do not merge or promote the parked standalone A2UI branch as-is.
+5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
 
 ---
 
 ## 2. Current shipped state
 
-Updated: 2026-06-06
+Updated: 2026-06-07
 
-The following patterns are live or explicitly decided. Mechanical review checks passed on 2026-06-06; human visual/tone review can still flag narrow fixes, but these tracks are no longer blocking movement into future-concepts planning.
+The following patterns are live or explicitly decided. Mechanical review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human visual/tone review can still flag narrow fixes, but these tracks are no longer blocking movement into future-concepts planning.
 
 ### Shipped / reviewed patterns
 
@@ -314,7 +316,7 @@ This section replaces the older long phase roadmap. It separates what needs revi
 
 ### Practical slices gated
 
-The current-site review gate found no mechanical blocker on 2026-06-06: homepage, About, Art & Illustration, Document Processing, and sitemap returned expected live states; preflight passed; selected public/protected pages had no missing local image references and no em-dash hits in the checked HTML files. Human visual/tone review can still produce a narrow practical follow-up, but the practical tracks are not blocking future-concepts planning.
+The current-site review gate found no mechanical blocker on 2026-06-06: homepage, About, Art & Illustration, Document Processing, and sitemap returned expected live states; preflight passed; selected public/protected pages had no missing local image references and no em-dash hits in the checked HTML files. Final objective closeout checks on 2026-06-07 confirmed the simplified About voiceover wording, current generated exports, preserved Document Processing guardrails, preserved sitemap omissions, and passing preflight. Human visual/tone review can still produce a narrow practical follow-up, but the practical tracks are not blocking future-concepts planning.
 
 If Victor flags a concrete issue, choose one of these narrow slices:
 

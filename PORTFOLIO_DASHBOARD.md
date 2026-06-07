@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-06
+Last updated: 2026-06-07
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,12 +20,12 @@ Consult next:
 
 ### Current active plan
 
-Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06; if Victor flags a concrete issue, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
+Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06 and a final objective closeout passed on 2026-06-07 after the voiceover wording cleanup. If Victor flags a concrete issue during manual review, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
 
 ### Current next actions
 
-1. Treat the current-site review gate as mechanically clear: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, and no missing local image references were found in the selected pages.
-2. If Victor notices a concrete issue during human visual/tone review, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
+1. Treat the objective closeout as complete: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, the About voiceover copy is simplified, generated exports are current, Document Processing guardrails still hold, and no open PRs remain.
+2. Victor's next step is manual site review across desktop/mobile and Light/Dark. If he notices a concrete issue, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
 3. Treat A2UI as parked. The inline prototype is preserved under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` for future pickup when the technology/infrastructure catches up.
 4. Choose the next task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
 5. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
@@ -39,7 +39,7 @@ Use the adjusted slice structure below to keep practical polish gated and keep f
 
 ## Current enhancement phase
 
-Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, and mechanical review-gate checks; practical slices are gated and future concepts are the next planning area if Victor selects them.
+Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, mechanical review-gate checks, and the final objective closeout before Victor's manual review; practical slices are gated and future concepts are the next planning area if Victor selects them.
 
 Recent shipped work:
 
@@ -51,14 +51,15 @@ Recent shipped work:
 - Follow-up cleanup shipped: public image dimensions were added, decorative em-dash rhythm was removed from selected public copy/captions, and generated content exports were regenerated.
 - Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
 - Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
+- About voiceover cleanup shipped in PRs #71 and #72: the game-show wording was replaced with `open to voice over work`, the generated About export and profile Markdown were aligned, and the repo returned to clean synced `main`.
 - About page remains otherwise unchanged after the reverted program-note experiment.
 - A2UI experiments are parked: the standalone `a2ui.html` branch remains unmerged, and the inline About-page prototype is contained under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`.
 
 Current next action:
 
-- Use `archive/planning/portfolio-enhancement-state-2026-06-06.md` as the current reset checkpoint.
+- Use `archive/planning/portfolio-enhancement-state-2026-06-07.md` as the current manual-review-ready checkpoint.
 - Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
-- Mechanical current-site review checks passed on 2026-06-06; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
+- Mechanical current-site review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
 - Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Keep broad visual expansion paused. Keep A2UI parked in `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it; do not merge or promote the parked standalone page as-is.
