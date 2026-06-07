@@ -35,7 +35,7 @@ His design career began at Pi Kappa Phi, where he served as the in-house designe
 
 ## Other Interests
 
-Outside of work, Victor paints, plays video games, travels, and tries to do good in his community. He is also interested in voiceover and game show hosting work.
+Outside of work, Victor paints, plays video games, travels, and tries to do good in his community. He is also open to voice over work.
 
 ## Contact
 
