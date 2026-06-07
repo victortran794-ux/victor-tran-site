@@ -132,7 +132,7 @@ It reflects my strengths in AI product UX, enterprise workflow design, builder t
 
 ## Images
 
-- Placeholder evaluation results interface showing document extraction quality metrics and field-level results.: images/document-processing-evaluation-results-placeholder.png
-- Placeholder document review interface with a source document and extracted fields shown side by side.: images/document-processing-review-workflow-placeholder.png
-- Placeholder classifier interface showing document classes and test results for document processing setup.: images/document-processing-classifier-context-placeholder.png
-- Placeholder extraction interface showing document fields with review and quality indicators.: images/document-processing-extraction-indicators-placeholder.png
+- Evaluation results interface showing document extraction quality metrics and field-level results.: images/document-processing-evaluation-results-placeholder.png
+- Document review interface with a source document and extracted fields shown side by side.: images/document-processing-review-workflow-placeholder.png
+- Classifier interface showing document classes and test results for document processing setup.: images/document-processing-classifier-context-placeholder.png
+- Extraction interface showing document fields with review and quality indicators.: images/document-processing-extraction-indicators-placeholder.png

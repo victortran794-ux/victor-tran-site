@@ -28,7 +28,7 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 
 Hi! I'm Victor, (or Vic). I am a first-gen college graduate with a BFA in Graphic Design from Western Michigan University. My design career began at Pi Kappa Phi, where I served as the in-house designer and later as Assistant Executive Director of Communication.
 
-Today, I'm a Visual Designer at IBM in Austin, Texas, where my work has ranged from hybrid cloud products to agentic workflow design. Outside of work, I paint, play video games, travel, and try my best to do good in my community. Interested in voiceover or gameshow hosting work.
+Today, I'm a Visual Designer at IBM in Austin, Texas, where my work has ranged from hybrid cloud products to agentic workflow design. Outside of work, I paint, play video games, travel, and try my best to do good in my community. I'm also interested in voiceover and game show hosting work.
 
 I'm around, let's chat!
 

@@ -158,19 +158,19 @@
     "images": [
       {
         "src": "images/document-processing-evaluation-results-placeholder.png",
-        "alt": "Placeholder evaluation results interface showing document extraction quality metrics and field-level results."
+        "alt": "Evaluation results interface showing document extraction quality metrics and field-level results."
       },
       {
         "src": "images/document-processing-review-workflow-placeholder.png",
-        "alt": "Placeholder document review interface with a source document and extracted fields shown side by side."
+        "alt": "Document review interface with a source document and extracted fields shown side by side."
       },
       {
         "src": "images/document-processing-classifier-context-placeholder.png",
-        "alt": "Placeholder classifier interface showing document classes and test results for document processing setup."
+        "alt": "Classifier interface showing document classes and test results for document processing setup."
       },
       {
         "src": "images/document-processing-extraction-indicators-placeholder.png",
-        "alt": "Placeholder extraction interface showing document fields with review and quality indicators."
+        "alt": "Extraction interface showing document fields with review and quality indicators."
       }
     ],
     "projects": []
