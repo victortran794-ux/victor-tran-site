@@ -233,11 +233,12 @@ At the end, summarize:
 
 ## Document Processing project-page media-audit workflow
 
-Use this when Victor selects Document Processing media planning or later enables Figma MCP for specific screens. The name refers to Victor's protected IBM portfolio project page, not a generic document-processing automation workflow or Life OS document-management task. The `case-studies/` notes file is part of the shared project-package workflow for all future portfolio pages.
+Use this only if Victor explicitly reselects Document Processing media planning or later enables Figma MCP for specific screens. There is no standing Document Processing-specific action. The name refers to Victor's protected IBM portfolio project page, not a generic document-processing automation workflow or Life OS document-management task. The `case-studies/` notes file is part of the shared project-package workflow for all future portfolio pages.
 
 Current planning status:
 
 - Document Processing remains live as a protected portfolio project page, password-gated, noindex, currently linked from the Work dropdown, and omitted from sitemap.
+- Temporary placeholder media has shipped; keep it stable unless Victor explicitly asks for a new refinement pass.
 - The current private Figma/media handoff is:
   `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - That handoff may be used as source material, but important outcomes should be consolidated back into the repo.
