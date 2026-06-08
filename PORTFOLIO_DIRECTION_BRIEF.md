@@ -42,11 +42,11 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. On 2026-06-08, the project-package notes workflow was clarified as an internal system for gathering consistent facts, media, claims, and guardrails across portfolio pages. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
+The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. On 2026-06-08, the project-package notes workflow was clarified as an internal system for gathering consistent facts, media, claims, and guardrails across portfolio pages. The standing Document Processing-specific media/story item is now closed; keep that page stable unless Victor explicitly selects a new refinement. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
 
 Current working posture:
 
-1. Treat current-site review, public tone, public visual/interaction polish, and Document Processing project-page media/story as separate gated slices.
+1. Treat current-site review, public tone, and public visual/interaction polish as separate gated slices.
 2. If Victor finds a concrete issue, choose one narrow practical slice and fix that before broadening.
 3. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it.
 4. Keep the parked standalone A2UI branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
@@ -56,7 +56,7 @@ Current working posture:
 ### Top active decisions
 
 1. Victor reviews the live site manually across desktop/mobile and Light/Dark; any notes become a prioritized punch list rather than an automatic implementation batch.
-2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, Document Processing project-page media/story review, or another future concept.
+2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, or another future concept.
 3. Keep A2UI parked until the technology/infrastructure catches up or Victor explicitly resumes it.
 4. Do not merge or promote the parked standalone A2UI branch as-is.
 5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
@@ -329,12 +329,11 @@ If Victor flags a concrete issue, choose one of these narrow slices:
 3. **Public visual/interaction polish slice**
    - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
-4. **Document Processing project-page media/story slice**
-   - Treat any media/story work as planning only until Victor explicitly approves implementation.
-   - This slice refers only to the protected IBM portfolio page if Victor selects it. Do not spin it into a generic document-processing workflow, automation project, or Life OS document-management task; apply the same scoping rules used for other portfolio project pages.
-   - Current private handoff: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
-   - Ask Claude Code to review the active Document Processing page/context plus Victor-provided Figma screens and recommend 3-5 visuals, the best hero/composition, one annotatable UI detail, any needed workflow diagram, screens to avoid, captions, and redaction/cropping/blur guidance.
-   - Do not rewrite the page, add raw screenshots, change nav/homepage/sitemap visibility, or alter the password-gated/noindex state during the audit.
+4. **Document Processing closed protected-page state**
+   - No standing Document Processing-specific action remains.
+   - Keep the protected IBM portfolio page live in its current password-gated/noindex state with current Work-dropdown visibility and sitemap omission.
+   - Temporary placeholder media is acceptable as-is until Victor explicitly selects a new refinement pass.
+   - If Victor reselects the page later, start a new approval-gated slice and use the private handoff before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 
 ### Future concepts area
 
@@ -370,7 +369,7 @@ These are exploration candidates, not an automatic build queue. A2UI is parked a
 
 ### Do not touch without explicit approval
 
-- Document Processing promotion, raw screenshots, metrics, launch claims, or major copy/media changes. A media-audit plan is allowed only as a planning artifact when Victor asks.
+- Document Processing promotion, raw screenshots, metrics, launch claims, or major copy/media changes. A media-audit plan is allowed only as a new planning artifact if Victor explicitly reselects the page.
 - Password-gate/noindex behavior.
 - Homepage/nav/sitemap promotion for paused or protected work.
 - Full redesign, framework/build-step adoption, or site-wide visual-system rollout.
@@ -431,7 +430,7 @@ Guardrails:
 
 1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
 2. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed.
-3. Choose the next branch-sized task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing project-page media/story review, or another future concept.
+3. Choose the next branch-sized task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, or another future concept.
 4. Keep homepage/nav promotion, sitemap changes, floating chat widgets, or protected-page changes behind a separate approval.
 
 ---

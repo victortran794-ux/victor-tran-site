@@ -19,7 +19,7 @@ This is the durable project-package notes file for the live Document Processing 
 
 ## Next action
 
-Keep the live password-protected page stable unless Vic asks for a refinement pass. If revisiting the page, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes. Use the consolidated Claude Code + Figma media-audit handoff as source material before changing visuals or claims, with Hermes reviewing any agent output before implementation.
+No standing Document Processing-specific action remains. Keep the live password-protected page stable unless Vic explicitly asks for a new refinement pass. If revisiting the page, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes. Use the consolidated Claude Code + Figma media-audit handoff as source material before changing visuals or claims, with Hermes reviewing any agent output before implementation.
 
 ## Do not do without explicit approval
 
