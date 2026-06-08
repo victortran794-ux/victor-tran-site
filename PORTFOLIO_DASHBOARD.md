@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-07
+Last updated: 2026-06-08
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,14 +20,14 @@ Consult next:
 
 ### Current active plan
 
-Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06 and a final objective closeout passed on 2026-06-07 after the voiceover wording cleanup. If Victor flags a concrete issue during manual review, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
+Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06 and a final objective closeout passed on 2026-06-07 after the voiceover wording cleanup. On 2026-06-08, the project-package notes workflow was clarified: `case-studies/` files are internal gathering docs for consistent facts, media, claims, and guardrails across portfolio pages, not a visitor-facing label. If Victor flags a concrete issue during manual review, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
 
 ### Current next actions
 
 1. Treat the objective closeout as complete: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, the About voiceover copy is simplified, generated exports are current, Document Processing guardrails still hold, and no open PRs remain.
-2. Victor's next step is manual site review across desktop/mobile and Light/Dark. If he notices a concrete issue, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing protected-page media/story.
+2. Victor's next step is manual site review across desktop/mobile and Light/Dark. If he notices a concrete issue, choose one narrow practical slice: public copy/tone, public visual/interaction polish, or Document Processing project-page media/story review.
 3. Treat A2UI as parked. The inline prototype is preserved under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` for future pickup when the technology/infrastructure catches up.
-4. Choose the next task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
+4. Choose the next task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing project-page media/story review, or another future concept.
 5. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
 6. Do not start protected-page promotion, sitemap changes, major copy rewrites, homepage/nav/sitemap promotion, floating chat widgets, or broad redesign work without explicit approval.
 
@@ -39,7 +39,7 @@ Use the adjusted slice structure below to keep practical polish gated and keep f
 
 ## Current enhancement phase
 
-Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, mechanical review-gate checks, and the final objective closeout before Victor's manual review; practical slices are gated and future concepts are the next planning area if Victor selects them.
+Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, mechanical review-gate checks, and the final objective closeout before Victor's manual review; practical slices are gated and future concepts are the next planning area if Victor selects them. Project-package notes are an internal system for keeping future portfolio pages consistent.
 
 Recent shipped work:
 
@@ -49,7 +49,7 @@ Recent shipped work:
 - The homepage Work area now separates primary project cards from a dedicated Galleries subsection; the Gallery cards use one image each, orange/purple text surfaces, and the tighter `Visual archive` framing.
 - Recent public-site polish also shipped: homepage Work-section copy refinement, About photo accessibility, public-page accessibility/performance hygiene, and a real Pause/Play control for the Art & Illustration slideshow.
 - Follow-up cleanup shipped: public image dimensions were added, decorative em-dash rhythm was removed from selected public copy/captions, and generated content exports were regenerated.
-- Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex case study while preserving password gate, sitemap omission, and current navigation visibility.
+- Document Processing placeholder media shipped in PR #63: four curated temporary visuals were added to the protected/noindex project page while preserving password gate, sitemap omission, and current navigation visibility.
 - Homepage/About wording polish shipped in PR #64: the selected-work intro, Ability Experience homepage card, and one IBM bio sentence were tightened without visual, navigation, sitemap, protected-page, or asset changes.
 - About voiceover cleanup shipped in PRs #71 and #72: the game-show wording was replaced with `open to voice over work`, the generated About export and profile Markdown were aligned, and the repo returned to clean synced `main`.
 - About page remains otherwise unchanged after the reverted program-note experiment.
@@ -61,7 +61,7 @@ Current next action:
 - Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
 - Mechanical current-site review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
-- Treat Document Processing as a live protected project package with temporary placeholder media now merged. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+- Treat Document Processing as a normal live protected project page with temporary placeholder media now merged. Its `case-studies/` notes file is part of the shared project-package workflow for gathering consistent information across portfolio pages. If selected later, review placeholder fit and use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Keep broad visual expansion paused. Keep A2UI parked in `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it; do not merge or promote the parked standalone page as-is.
 
 ## Adjusted enhancement slices
@@ -108,9 +108,9 @@ Includes:
 
 Excludes new design-system rollout, new homepage structure, and Document Processing.
 
-### D. Document Processing protected-page media/story slice
+### D. Document Processing project-page media/story slice
 
-Purpose: focus only on the protected Document Processing project package.
+Purpose: focus only on the protected Document Processing portfolio page if Victor selects it. The `case-studies/` label is an internal project-package workflow for consistent facts/media/claims gathering across all future portfolio pages, not a reason to give this page special emphasis.
 
 Includes:
 
@@ -149,7 +149,7 @@ Status: A2UI is parked as a contained experiment under `archive/experiments/a2ui
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; package manifest in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state; review placeholder-media fit later if Victor selects the package | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshot dumps, metrics, launch claims, or major copy/media changes without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Keep live in its current protected state; review placeholder-media fit later only if Victor selects this page | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshot dumps, metrics, launch claims, major copy/media changes, or generic document-processing workflow tasks without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |

@@ -1,7 +1,7 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-06-07
+Last updated: 2026-06-08
 Status: Active direction brief; objective closeout is complete and practical polish is gated pending Victor's manual review
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
@@ -42,11 +42,11 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
+The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. On 2026-06-08, the project-package notes workflow was clarified as an internal system for gathering consistent facts, media, claims, and guardrails across portfolio pages. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
 
 Current working posture:
 
-1. Treat current-site review, public tone, public visual/interaction polish, and Document Processing protected-page media/story as separate gated slices.
+1. Treat current-site review, public tone, public visual/interaction polish, and Document Processing project-page media/story as separate gated slices.
 2. If Victor finds a concrete issue, choose one narrow practical slice and fix that before broadening.
 3. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it.
 4. Keep the parked standalone A2UI branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
@@ -56,7 +56,7 @@ Current working posture:
 ### Top active decisions
 
 1. Victor reviews the live site manually across desktop/mobile and Light/Dark; any notes become a prioritized punch list rather than an automatic implementation batch.
-2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
+2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, Document Processing project-page media/story review, or another future concept.
 3. Keep A2UI parked until the technology/infrastructure catches up or Victor explicitly resumes it.
 4. Do not merge or promote the parked standalone A2UI branch as-is.
 5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
@@ -136,7 +136,7 @@ Preserve:
 - Existing footer, theme, cursor, reveal, and case-study patterns unless a specific change is approved.
 - Current simplified navigation model: Work contains both primary case studies and the lighter Art & Illustration / Graphics galleries; About remains top-level; Contact can stay de-emphasized on mobile.
 - Password gates and confidentiality protections.
-- Document Processing in its current live, password-gated, noindex state unless Victor explicitly approves promotion or major copy/media changes.
+- Document Processing in its current live, password-gated, noindex state unless Victor explicitly approves promotion or major copy/media changes. In planning and handoffs, treat it with the same weight as any other portfolio project page; the `case-studies/` notes workflow exists to standardize information gathering across projects.
 - About page `Training for: (WIP)` as an intentional current-state note.
 
 Avoid:
@@ -329,8 +329,9 @@ If Victor flags a concrete issue, choose one of these narrow slices:
 3. **Public visual/interaction polish slice**
    - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
-4. **Document Processing protected-page media/story slice**
+4. **Document Processing project-page media/story slice**
    - Treat any media/story work as planning only until Victor explicitly approves implementation.
+   - This slice refers only to the protected IBM portfolio page if Victor selects it. Do not spin it into a generic document-processing workflow, automation project, or Life OS document-management task; apply the same scoping rules used for other portfolio project pages.
    - Current private handoff: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
    - Ask Claude Code to review the active Document Processing page/context plus Victor-provided Figma screens and recommend 3-5 visuals, the best hero/composition, one annotatable UI detail, any needed workflow diagram, screens to avoid, captions, and redaction/cropping/blur guidance.
    - Do not rewrite the page, add raw screenshots, change nav/homepage/sitemap visibility, or alter the password-gated/noindex state during the audit.
@@ -430,7 +431,7 @@ Guardrails:
 
 1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
 2. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed.
-3. Choose the next branch-sized task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing protected-page media/story, or another future concept.
+3. Choose the next branch-sized task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, Document Processing project-page media/story review, or another future concept.
 4. Keep homepage/nav promotion, sitemap changes, floating chat widgets, or protected-page changes behind a separate approval.
 
 ---
