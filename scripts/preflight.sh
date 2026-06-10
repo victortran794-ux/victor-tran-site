@@ -53,6 +53,18 @@ else
   echo "  skipped — scripts/html-to-md.mjs not found"
 fi
 
+section "Project manifest/order validation"
+if [ -f "scripts/validate-project-manifest.mjs" ]; then
+  if node scripts/validate-project-manifest.mjs; then
+    echo "  ok"
+  else
+    STATUS=1
+    echo "  failed"
+  fi
+else
+  echo "  skipped — scripts/validate-project-manifest.mjs not found"
+fi
+
 section "Oversized image scan (>1MB)"
 OVERSIZED=$(find images -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -size +1024k 2>/dev/null || true)
 if [ -n "$OVERSIZED" ]; then
