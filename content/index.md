@@ -25,6 +25,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Featured Projects
 
 - IBM Cloud Observability (Product Design): ibmcloud
+- Document Processing (Product Design): document-processing
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting Group (Brand & Print): pci
 - The Ability Experience (Brand Identity): abilityexperience
@@ -37,6 +38,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 - Product systems, publication work, and community-centered design.
 - IBM Cloud Observability
+- Document Processing
 - IBM Patterns: Contact Us
 - Performance Contracting Group
 - The Ability Experience
@@ -54,6 +56,8 @@ Visual designer working across brand, illustration, and product systems.
 Now playing Systems at scale 01/03
 
 Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.
+
+Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.
 
 Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.
 
@@ -86,6 +90,7 @@ Standalone identity, print, illustration, and event graphics.
 - Victor Tran, laughing: images/hero/figure20.webp
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
+- Document Processing evaluation results dashboard: images/document-processing-evaluation-results-placeholder.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp
 - Performance Contracting Group: images/pci-handbook-1-cover.webp
 - The Ability Experience: images/thumb-abex.webp

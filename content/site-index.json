@@ -9,6 +9,7 @@
     "headings": [
       "Product systems, publication work, and community-centered design.",
       "IBM Cloud Observability",
+      "Document Processing",
       "IBM Patterns: Contact Us",
       "Performance Contracting Group",
       "The Ability Experience",
@@ -29,6 +30,10 @@
       {
         "src": "images/ibm-thumb-dark.png",
         "alt": "IBM Cloud Observability"
+      },
+      {
+        "src": "images/document-processing-evaluation-results-placeholder.png",
+        "alt": "Document Processing evaluation results dashboard"
       },
       {
         "src": "images/patterns-hero.webp",
@@ -66,6 +71,13 @@
         "url": "ibmcloud",
         "image": "images/ibm-thumb-light.png",
         "alt": "IBM Cloud Observability"
+      },
+      {
+        "title": "Document Processing",
+        "category": "Product Design",
+        "url": "document-processing",
+        "image": "images/document-processing-evaluation-results-placeholder.png",
+        "alt": "Document Processing evaluation results dashboard"
       },
       {
         "title": "IBM Patterns: Contact Us",
