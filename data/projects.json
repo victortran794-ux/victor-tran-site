@@ -1,19 +1,29 @@
 {
-  "description": "Authoritative portfolio project order and metadata used by validation scripts. The site HTML is still static; update this manifest first, then sync the Work dropdown and homepage cards to match.",
+  "description": "Authoritative portfolio project order and metadata. scripts/generate-project-sections.mjs uses this file to generate the Work dropdown and homepage project cards, and scripts/validate-project-manifest.mjs checks the generated HTML/content output.",
   "projects": [
     {
       "slug": "document-processing",
       "title": "Document Processing",
       "url": "document-processing.html",
       "category": "Product Design",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": true,
+      "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "image": "images/document-processing-evaluation-results-placeholder.png",
-      "alt": "Document Processing evaluation results dashboard",
+      "description": "Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/document-processing-evaluation-results-placeholder.png",
+          "width": 2400,
+          "height": 1428,
+          "alt": "Document Processing evaluation results dashboard"
+        }
+      ],
       "protected": true,
       "noindex": true,
       "sitemap": false
@@ -23,14 +33,32 @@
       "title": "IBM Cloud Observability",
       "url": "ibmcloud.html",
       "category": "Product Design",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "image": "images/ibm-thumb-light.png",
-      "alt": "IBM Cloud Observability",
+      "description": "Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/ibm-thumb-light.png",
+          "width": 960,
+          "height": 540,
+          "alt": "IBM Cloud Observability",
+          "class": "theme-img-light"
+        },
+        {
+          "src": "images/ibm-thumb-dark.png",
+          "width": 960,
+          "height": 540,
+          "alt": "IBM Cloud Observability",
+          "class": "theme-img-dark"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -40,14 +68,24 @@
       "title": "IBM Patterns: Contact Us",
       "url": "ibm-patterns.html",
       "category": "Product Design",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "image": "images/patterns-hero.webp",
-      "alt": "IBM Patterns: Contact Us",
+      "description": "Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/patterns-hero.webp",
+          "width": 3840,
+          "height": 2160,
+          "alt": "IBM Patterns: Contact Us"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -57,14 +95,24 @@
       "title": "Performance Contracting Group",
       "url": "pci.html",
       "category": "Brand & Print",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "image": "images/pci-handbook-1-cover.webp",
-      "alt": "Performance Contracting Group",
+      "description": "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/pci-handbook-1-cover.webp",
+          "width": 1584,
+          "height": 1224,
+          "alt": "Performance Contracting Group"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -74,14 +122,24 @@
       "title": "The Ability Experience",
       "url": "abilityexperience.html",
       "category": "Brand Identity",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "image": "images/thumb-abex.webp",
-      "alt": "The Ability Experience",
+      "description": "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/thumb-abex.webp",
+          "width": 1081,
+          "height": 1080,
+          "alt": "The Ability Experience"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -91,14 +149,24 @@
       "title": "Star & Lamp Magazine",
       "url": "salmagazine.html",
       "category": "Art Direction",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "orange",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "image": "images/thumb-sal.webp",
-      "alt": "Star & Lamp Magazine",
+      "description": "Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/thumb-sal.webp",
+          "width": 1081,
+          "height": 1081,
+          "alt": "Star & Lamp Magazine"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -108,14 +176,24 @@
       "title": "Pi Kapp App",
       "url": "pikappapp.html",
       "category": "Product Design",
+      "labelClass": "label-default",
       "type": "primary",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "purple",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "image": "images/thumb-pikapp.webp",
-      "alt": "Pi Kapp App",
+      "description": "A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.",
+      "cta": "View Project",
+      "images": [
+        {
+          "src": "images/thumb-pikapp.webp",
+          "width": 1081,
+          "height": 1081,
+          "alt": "Pi Kapp App"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -125,14 +203,24 @@
       "title": "Art & Illustration",
       "url": "artillustration.html",
       "category": "Artwork",
+      "labelClass": "label-artwork",
       "type": "gallery",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "orange",
       "chapter": "03",
       "chapterTitle": "Visual archive",
-      "image": "images/illus-glow.jpg",
-      "alt": "Blue illustrated figure surrounded by orange creatures",
+      "description": "Standalone digital and traditional work, including posters, paintings, and personal series.",
+      "cta": "View Gallery",
+      "images": [
+        {
+          "src": "images/illus-glow.jpg",
+          "width": 1117,
+          "height": 1600,
+          "alt": "Blue illustrated figure surrounded by orange creatures"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true
@@ -142,14 +230,24 @@
       "title": "Graphic Design",
       "url": "graphicgallery.html",
       "category": "Graphic Design",
+      "labelClass": "label-default",
       "type": "gallery",
       "nav": true,
       "homepage": true,
       "wide": false,
+      "surface": "purple",
       "chapter": "03",
       "chapterTitle": "Visual archive",
-      "image": "images/gg-edc-0.jpg",
-      "alt": "Purple boombox graphic with two illustrated eye panels",
+      "description": "Standalone identity, print, illustration, and event graphics.",
+      "cta": "View Gallery",
+      "images": [
+        {
+          "src": "images/gg-edc-0.jpg",
+          "width": 1600,
+          "height": 1279,
+          "alt": "Purple boombox graphic with two illustrated eye panels"
+        }
+      ],
       "protected": false,
       "noindex": false,
       "sitemap": true

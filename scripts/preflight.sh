@@ -41,6 +41,18 @@ fi
 
 run_required "Whitespace/conflict marker check" git diff --check
 
+section "Generating project sections"
+if [ -f "scripts/generate-project-sections.mjs" ]; then
+  if node scripts/generate-project-sections.mjs; then
+    echo "  ok"
+  else
+    STATUS=1
+    echo "  failed"
+  fi
+else
+  echo "  skipped — scripts/generate-project-sections.mjs not found"
+fi
+
 section "Regenerating Markdown content exports"
 if [ -f "scripts/html-to-md.mjs" ]; then
   if node scripts/html-to-md.mjs; then

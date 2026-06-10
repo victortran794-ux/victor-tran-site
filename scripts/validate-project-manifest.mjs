@@ -113,8 +113,9 @@ function validateCards(cards, expectedProjects, label) {
     if (card.category !== expected.category) fail(`${label} category mismatch for ${expected.url}: ${card.category} !== ${expected.category}`);
     if (card.chapter !== expected.chapter) fail(`${label} chapter mismatch for ${expected.url}: ${card.chapter} !== ${expected.chapter}`);
     if (card.chapterTitle !== expected.chapterTitle) fail(`${label} chapter title mismatch for ${expected.url}: ${card.chapterTitle} !== ${expected.chapterTitle}`);
-    if (card.image !== expected.image) fail(`${label} image mismatch for ${expected.url}: ${card.image} !== ${expected.image}`);
-    if (card.alt !== expected.alt) fail(`${label} alt mismatch for ${expected.url}: ${card.alt} !== ${expected.alt}`);
+    const expectedImage = expected.images?.[0] ?? { src: expected.image, alt: expected.alt };
+    if (card.image !== expectedImage.src) fail(`${label} image mismatch for ${expected.url}: ${card.image} !== ${expectedImage.src}`);
+    if (card.alt !== expectedImage.alt) fail(`${label} alt mismatch for ${expected.url}: ${card.alt} !== ${expectedImage.alt}`);
 
     const isWide = card.classes.includes('featured-item--wide');
     if (isWide !== Boolean(expected.wide)) fail(`${label} wide-card flag mismatch for ${expected.url}: html=${isWide}, manifest=${Boolean(expected.wide)}`);
