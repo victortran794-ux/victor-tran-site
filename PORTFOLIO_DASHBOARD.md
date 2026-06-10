@@ -61,7 +61,7 @@ Current next action:
 - Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
 - Mechanical current-site review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
-- Treat Document Processing as a normal live protected project page with temporary placeholder media now merged and no standing project-specific action. Its `case-studies/` notes file is part of the shared project-package workflow for gathering consistent information across portfolio pages. If Victor explicitly reselects the page later, use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+- Treat Document Processing as a normal live protected project page with temporary placeholder media now merged. Victor reselected it on 2026-06-10 and approved adding it to the homepage Selected Work area while preserving the password gate, `noindex`, and sitemap omission. Its `case-studies/` notes file is part of the shared project-package workflow for gathering consistent information across portfolio pages, not a special visitor-facing label or priority. Use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
 - Keep broad visual expansion paused. Keep A2UI parked in `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it; do not merge or promote the parked standalone page as-is.
 
 ## Adjusted enhancement slices
@@ -108,19 +108,19 @@ Includes:
 
 Excludes new design-system rollout, new homepage structure, and Document Processing.
 
-### D. Document Processing closed protected-page state
+### D. Document Processing protected project-page state
 
-Purpose: keep the protected Document Processing portfolio page stable without carrying a standing page-specific task.
+Purpose: treat Document Processing like the rest of the portfolio while preserving its protected-page guardrails.
 
 Current state:
 
-- Live, password-gated, noindex, currently linked from the Work dropdown, and omitted from sitemap.
+- Live, password-gated, noindex, currently linked from the Work dropdown, approved for a homepage Selected Work card on 2026-06-10, and omitted from sitemap.
 - Temporary placeholder media has shipped and is acceptable as-is until Victor explicitly asks for a new refinement pass.
-- The `case-studies/` note remains an internal project-package workflow artifact for consistent facts/media/claims gathering across all future portfolio pages.
+- The `case-studies/` note remains an internal project-package workflow artifact for consistent facts/media/claims gathering across all future portfolio pages, not a visitor-facing category or priority label.
 
-No active next action. If Victor explicitly reselects this page later, scope the work as a new approval-gated slice and use the private media-audit handoff before changing visuals or claims.
+Current approved action: add the homepage card only. If Victor explicitly reselects this page later, scope any further work as a new approval-gated slice and use the private media-audit handoff before changing visuals or claims.
 
-Excludes homepage promotion, sitemap changes, `noindex` changes, password-gate changes, raw screenshot dumps, metrics, launch claims, and broad case-study rewrites unless Victor explicitly chooses them.
+Excludes sitemap changes, `noindex` changes, password-gate changes, raw screenshot dumps, metrics, launch claims, and broad project-page rewrites unless Victor explicitly chooses them.
 
 ### E. Future concepts parked
 
@@ -150,7 +150,7 @@ Status: A2UI is parked as a contained experiment under `archive/experiments/a2ui
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | No standing Document Processing-specific action; keep live in its current protected state unless Victor explicitly reselects the page | Preserve password gate/noindex and current navigation visibility; do not add homepage/sitemap links, raw screenshot dumps, metrics, launch claims, major copy/media changes, or generic document-processing workflow tasks without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, approved for homepage Selected Work card, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Homepage card approved on 2026-06-10; no other standing Document Processing-specific action | Preserve password gate/noindex and current navigation visibility; do not add sitemap links, raw screenshot dumps, metrics, launch claims, major copy/media changes, or generic document-processing workflow tasks without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |
