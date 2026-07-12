@@ -89,6 +89,66 @@
       inset 0 0 0 1px rgba(255,255,255,0.08);
   }
 
+  /* Rendered before remote React/Babel dependencies finish loading. */
+  .prototype-boot {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  .prototype-boot-card {
+    width: min(100%, 390px);
+    min-height: min(780px, calc(100vh - 48px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 48px;
+    background: #15295C;
+    box-shadow: 0 60px 120px -30px rgba(0,0,0,0.55), 0 30px 60px -20px rgba(0,0,0,0.35);
+    color: #fff;
+  }
+  .prototype-boot-mark {
+    width: 88px;
+    height: 88px;
+    color: #E8B33D;
+    filter: drop-shadow(0 4px 24px rgba(232,179,61,0.45));
+    animation: boot-pulse 1.4s ease-in-out infinite alternate;
+  }
+  .prototype-boot-brand {
+    margin: 28px 0 0;
+    font-family: Barlow, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+  }
+  .prototype-boot-status {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: rgba(255,255,255,0.58);
+  }
+  .prototype-back-link {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 50;
+    color: rgba(255,255,255,0.62);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .prototype-back-link:hover { color: #F5D97A; }
+  @media (max-width: 767px) { .prototype-back-link { display: none; } }
+  @keyframes boot-pulse {
+    from { opacity: 0.62; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
@@ -108,9 +168,19 @@
 </head>
 <body>
 
-<div id="root"></div>
+<div id="root">
+  <div class="prototype-boot" role="status" aria-live="polite">
+    <div class="prototype-boot-card">
+      <svg class="prototype-boot-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 4 L61.5 38.2 L97 38.2 L68.4 59.4 L79.7 93.6 L50 72.5 L20.3 93.6 L31.6 59.4 L3 38.2 L38.5 38.2 Z" fill="currentColor" />
+      </svg>
+      <p class="prototype-boot-brand">Pi Kappa Phi</p>
+      <p class="prototype-boot-status">Loading prototype…</p>
+    </div>
+  </div>
+</div>
 
-<a href="/pikappapp" class="hidden md:block fixed top-6 left-6 z-50 text-white/60 hover:text-pikapp-gold-light text-sm tracking-wide transition-colors">
+<a href="/pikappapp" class="prototype-back-link hidden md:block fixed top-6 left-6 z-50 text-white/60 hover:text-pikapp-gold-light text-sm tracking-wide transition-colors">
   ← Back to case study
 </a>
 
