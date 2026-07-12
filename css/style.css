@@ -9,7 +9,8 @@
 
 /* ── Design tokens — light ── */
 :root {
-  --blue:   #55a2f7;
+  --blue:      #55a2f7;
+  --blue-text: #2468a9;
   --pink:   #ea3b99;
   --purple: #7928d2;
   --orange: #b06020;
@@ -87,7 +88,8 @@
   --text:   #f0f0ee;
   --text-2: #888888;
   --border: #2c2c2c;
-  --blue:   #7ab8ff;
+  --blue:      #7ab8ff;
+  --blue-text: #7ab8ff;
   --pink:   #f06ab5;
 }
 
@@ -439,7 +441,7 @@ button:focus-visible,
 .footer-cta {
   font-size: var(--text-body);
   font-weight: 500;
-  color: var(--blue);
+  color: var(--blue-text);
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
   display: inline-block;
@@ -907,7 +909,7 @@ button:focus-visible,
 
 .label-design  { color: var(--orange); }
 .label-artwork { color: var(--pink); }
-.label-default { color: var(--blue); }
+.label-default { color: var(--blue-text); }
 
 
 /* ══════════════════════════════════════════════
@@ -1941,7 +1943,7 @@ button:focus-visible,
   font-family: 'Source Code Pro', monospace;
   font-size: var(--text-caption);
   font-weight: 500;
-  color: var(--blue);
+  color: var(--blue-text);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 6px;
