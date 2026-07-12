@@ -20,7 +20,10 @@ Archived notes:
 
 - `portfolio-status-legacy-2026-05-18.md` — historical root `PORTFOLIO_STATUS.md` snapshot; superseded by `../../PORTFOLIO_DASHBOARD.md` for current status.
 - `portfolio-upkeep-backlog-2026-05-17.md` — historical root upkeep backlog; superseded by `../../PORTFOLIO_DASHBOARD.md` for current next actions.
-- `portfolio-enhancement-state-2026-06-01.md` — current reset checkpoint after public image dimensions, public dash-heavy wording cleanup, and Git branch cleanup.
+- `portfolio-enhancement-state-2026-07-12.md` — latest reconciled checkpoint after homepage/project manifest/order work and the later private site-review backlog audit.
+- `portfolio-enhancement-state-2026-06-07.md` — manual-review-ready closeout before the later homepage/project ordering work.
+- `portfolio-enhancement-state-2026-06-06.md` — A2UI containment and practical-slice reset checkpoint.
+- `portfolio-enhancement-state-2026-06-01.md` — earlier reset checkpoint after public image dimensions, public dash-heavy wording cleanup, and Git branch cleanup.
 - `portfolio-enhancement-state-2026-05-31.md` — mini-sprint checkpoint after public-site polish and slideshow pause-control work.
 - `portfolio-enhancement-state-2026-05-23.md` — previous post-navigation-polish review checkpoint.
 - `portfolio-enhancement-state-2026-05-22.md` — earlier review-pause checkpoint after the first design-system enhancement set.
