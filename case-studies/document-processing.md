@@ -259,7 +259,7 @@ Instead, the design made uncertainty visible and manageable. Builders could see 
 
 ### Outcome — a measurable quality loop for document automation
 
-Accuracy Evaluation is planned to release this summer and defines a design direction for making document extraction quality easier to measure and improve.
+Accuracy Evaluation is planned for the second half of 2026 and defines a design direction for making document extraction quality easier to measure and improve.
 
 It connected the broader document processing platform into a clearer loop:
 

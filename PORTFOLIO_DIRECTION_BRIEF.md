@@ -42,7 +42,7 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. A fresh desktop/mobile and Light/Dark review is the next gate. The later site-review candidates for contact resilience, Pi Kapp demo cold-start presentation, and time-sensitive release wording are captured as candidates rather than assumed implementation work. Employer/project naming was resolved against the official site in favor of Performance Contracting, Inc.; any public-label alignment remains a separate narrow copy task. A2UI remains parked.
+The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. A fresh desktop/mobile and Light/Dark review is the next gate. The later site-review backlog is resolved: contact resilience, Pi Kapp demo cold-start presentation, Performance Contracting naming, and the second-half-of-2026 release wording have shipped or been aligned. The manual mobile/Light/Dark review is deferred; subjective visual changes remain gated until that review. A2UI remains parked.
 
 Current working posture:
 
