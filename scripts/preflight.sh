@@ -41,6 +41,8 @@ fi
 
 run_required "Whitespace/conflict marker check" git diff --check
 
+run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
+
 section "Generating project sections"
 if [ -f "scripts/generate-project-sections.mjs" ]; then
   if node scripts/generate-project-sections.mjs; then

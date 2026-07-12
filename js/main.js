@@ -594,8 +594,21 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   // Open / close overlay
   let lastFocus = null;
+  const focusableSelector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[contenteditable="true"]',
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(',');
+  const getFocusable = () => [...overlay.querySelectorAll(focusableSelector)]
+    .filter((element) => !element.hidden && element.getClientRects().length > 0);
+
   const open = () => {
     lastFocus = document.activeElement;
+    overlay.inert = false;
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -607,6 +620,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     }, 50);
   };
   const close = () => {
+    overlay.inert = true;
     overlay.setAttribute('aria-hidden', 'true');
     overlay.classList.remove('is-open');
     document.body.style.overflow = '';
@@ -618,7 +632,29 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   trigger.addEventListener('click', open);
   overlay.querySelectorAll('[data-dna-close]').forEach((el) => el.addEventListener('click', close));
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    if (!overlay.classList.contains('is-open')) return;
+    if (e.key === 'Escape') {
+      close();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!overlay.contains(document.activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+        return;
+      }
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   // Re-render swatches when lens mode changes so colors reflect the active theme
