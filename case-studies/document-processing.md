@@ -70,7 +70,7 @@ Recommended category:
 ## Target page
 
 - Suggested file: `document-processing.html`
-- Suggested public URL: `https://victortrandesign.com/document-processing`
+- Suggested public URL: `https://www.victortrandesign.com/document-processing`
 - Suggested title: `Document Processing · Victor Tran Design`
 - Suggested nav label: `Document Processing`
 - Suggested project type label: `Product Design / AI Workflow Design`

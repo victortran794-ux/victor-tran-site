@@ -89,7 +89,7 @@ Checked 2026-05-13:
 
 - GitHub workflow `Site health check` is active.
 - Recent successful runs exist for PR #22 and PR #23.
-- PR #21 failed because `document-processing.html` linked canonically to `https://victortrandesign.com/document-processing` before that route existed live, causing Lychee to report a 404.
+- PR #21 failed because `document-processing.html` linked canonically to `https://www.victortrandesign.com/document-processing` before that route existed live, causing Lychee to report a 404.
 - Local oversized image scan currently flags several `images/cards/diamond-*` PNGs plus `images/illus-img4496.jpg`.
 
 ## Preflight checks
@@ -132,7 +132,7 @@ gh run view <run-id> --repo victortran794-ux/victor-tran-site --log-failed
 gh workflow run "Site health check" --repo victortran794-ux/victor-tran-site
 
 # Trigger manual health check against another base URL
-gh workflow run "Site health check" --repo victortran794-ux/victor-tran-site -f url=https://victortrandesign.com
+gh workflow run "Site health check" --repo victortran794-ux/victor-tran-site -f url=https://www.victortrandesign.com
 ```
 
 ## Historical automation ideas, not active next actions

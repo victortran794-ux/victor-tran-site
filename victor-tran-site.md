@@ -6,7 +6,7 @@ Victor Tran's portfolio site. Plain HTML / CSS / JS — no framework, no build s
 
 - **GitHub:** [victortran794-ux/victor-tran-site](https://github.com/victortran794-ux/victor-tran-site) (public)
 - **Hosting:** Vercel — auto-deploys on push to `main`
-- **Live URL:** [victortrandesign.com](https://victortrandesign.com) (also reachable at `victortrandesigns.com` and the Vercel preview `victor-tran-site-2vxf.vercel.app`)
+- **Live URL:** [victortrandesign.com](https://www.victortrandesign.com) (also reachable at `victortrandesigns.com` and the Vercel preview `victor-tran-site-2vxf.vercel.app`)
 - **Config:** `vercel.json` (static site, clean URLs)
 - **Stack:** HTML5, CSS3, JavaScript — no framework, no build step
 

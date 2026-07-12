@@ -9,7 +9,7 @@
 # Lighthouse step uses npx, no install needed.
 set -euo pipefail
 
-BASE_URL="${1:-https://victortrandesign.com}"
+BASE_URL="${1:-https://www.victortrandesign.com}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "==> Checking links in *.html"

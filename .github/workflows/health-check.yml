@@ -6,7 +6,7 @@ on:
       url:
         description: "Base URL to check (no trailing slash)"
         required: false
-        default: "https://victortrandesign.com"
+        default: "https://www.victortrandesign.com"
   schedule:
     - cron: "0 12 * * 1"  # Mondays at 12:00 UTC
   push:
@@ -20,7 +20,12 @@ on:
       - ".github/workflows/health-check.yml"
       - ".github/lighthouse-budget.json"
       - "scripts/health-check.sh"
+      - "scripts/check-production-host.mjs"
       - "scripts/install-lychee.ps1"
+      - "case-studies/document-processing.md"
+      - "CLAUDE.md"
+      - "PORTFOLIO_SYSTEM.md"
+      - "victor-tran-site.md"
 
 jobs:
   links:
@@ -28,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Production host regression check
+        run: node scripts/check-production-host.mjs
       - name: Lychee link check
         uses: lycheeverse/lychee-action@v2
         with:
@@ -56,7 +63,7 @@ jobs:
         id: url
         run: |
           BASE="${{ github.event.inputs.url }}"
-          if [ -z "$BASE" ]; then BASE="https://victortrandesign.com"; fi
+          if [ -z "$BASE" ]; then BASE="https://www.victortrandesign.com"; fi
           echo "base=$BASE" >> "$GITHUB_OUTPUT"
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v12
