@@ -95,7 +95,7 @@ When a field performed poorly, the experience needed to connect that result back
 
 AI document processing will always have edge cases. The experience could not imply perfect automation, so the design made uncertainty visible and manageable before production use.
 
-Accuracy Evaluation is planned to release this summer and defines a design direction for making document extraction quality easier to measure and improve.
+Accuracy Evaluation is planned for the second half of 2026 and defines a design direction for making document extraction quality easier to measure and improve.
 
 It connected the broader document processing platform into a clearer loop:
 

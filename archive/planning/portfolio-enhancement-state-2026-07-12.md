@@ -39,11 +39,11 @@ Review focus:
 5. Responsive navigation, cards, project navigation, and protected gate.
 6. Copy that feels theatrical, overly clever, or agent-polished.
 
-## Reconciled unapproved candidates
+## Reconciled candidate outcomes
 
-1. **Contact resilience:** candidate visible email, copy-email control, LinkedIn, and retained email link.
-2. **Pi Kapp demo cold start:** candidate static pre-render loading/splash markup inside `#root`, replaced when React initializes.
-3. **Time-sensitive Accuracy Evaluation wording:** verify actual status before editing `planned to release this summer`.
+1. **Contact resilience — resolved in PR #82:** visible email, Copy email control, LinkedIn, and retained email link.
+2. **Pi Kapp demo cold start — resolved in PR #83:** static pre-render loading/splash markup inside `#root`, replaced when React initializes.
+3. **Time-sensitive Accuracy Evaluation wording — resolved 2026-07-12:** describe release timing as the second half of 2026.
 4. **Performance Contracting name consistency — resolved:** the official site identifies the company as Performance Contracting, Inc. Keep any project-label alignment as a separate narrow copy task.
 
 ## Future concepts remain opt-in

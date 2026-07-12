@@ -20,15 +20,15 @@ Consult next:
 
 ### Current active plan
 
-Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective closeout passed on 2026-06-07. A later private site review approved two tasks that have since landed: IBM Cloud's empty placeholder slots were removed and the Document Processing homepage card shipped in PR #76. Follow-up manifest work in PRs #78–#80 now generates and validates the Work dropdown/homepage project sections and aligns project-page previous/next navigation. Three unapproved review candidates remain: contact resilience, Pi Kapp demo cold-start presentation, and time-sensitive Document Processing release wording. Performance Contracting naming was resolved on 2026-07-12: the official site identifies the company as Performance Contracting, Inc.; a future narrow copy-alignment slice may update project-facing `Performance Contracting Group` labels. A2UI remains parked.
+Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective closeout passed on 2026-06-07. A later private site review approved two tasks that have since landed: IBM Cloud's empty placeholder slots were removed and the Document Processing homepage card shipped in PR #76. Follow-up manifest work in PRs #78–#80 now generates and validates the Work dropdown/homepage project sections and aligns project-page previous/next navigation. The later review backlog is now resolved: contact resilience shipped in PR #82, the Pi Kapp pre-render loading state shipped in PR #83, Performance Contracting naming aligned in PR #84, and Document Processing release wording now uses the second half of 2026. A2UI remains parked.
 
 ### Current next actions
 
 1. Treat the objective closeout and later manifest/order work as complete; do not revive superseded implementation plans.
 2. Run a fresh manual/visual review across desktop/mobile and Light/Dark. The 2026-06-09 external review did not test mobile, so mobile conclusions from that review are void.
 3. Turn review observations into a short prioritized punch list before implementation.
-4. Verify the current Accuracy Evaluation release status before editing that time-sensitive sentence. Performance Contracting naming is resolved in favor of the official `Performance Contracting, Inc.` form.
-5. Keep the contact fallback/copy-email treatment and Pi Kapp demo pre-render loading state as unapproved candidate slices until Victor selects one.
+4. Treat contact resilience, Pi Kapp pre-render loading, Performance Contracting naming, and the Document Processing release window as complete.
+5. Continue narrow, verified agent work while the manual mobile/Light/Dark review is deferred; reserve subjective visual changes for that review.
 6. Treat A2UI as parked. Keep broader visual expansion, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in.
 7. Do not start protected-page promotion, sitemap changes, major copy rewrites, floating chat widgets, or broad redesign work without explicit approval.
 
@@ -109,14 +109,14 @@ Includes:
 
 Excludes new design-system rollout, new homepage structure, and Document Processing.
 
-### C2. Reconciled candidate slices from the 2026-06-09 review
+### C2. Resolved later review backlog
 
-These are verified as still present but are not approved implementation work by default:
+These items were verified and closed through narrow, reviewed changes:
 
-- **Contact resilience:** direct `mailto:` links can fail silently without a configured mail client. Candidate treatment: visible email, copy-email action, LinkedIn, and retained email link.
-- **Pi Kapp demo cold start:** `pikappapp/demo.html` depends on remote Tailwind, React, Framer Motion, Babel, and fonts before React can render its designed splash. Candidate first slice: static pre-render loading markup that React replaces after initialization.
-- **Time-sensitive release wording:** verify the current Accuracy Evaluation status before changing `planned to release this summer` in source, generated content, and project-package notes.
-- **Name consistency resolved:** `performancecontracting.com` identifies the company as Performance Contracting, Inc. Keep this as a separate narrow copy-alignment task rather than mixing it into contact or demo work.
+- **Contact resilience resolved:** active footers expose a visible email address, Copy email action, LinkedIn, and retained email link.
+- **Pi Kapp demo cold start resolved:** `pikappapp/demo.html` includes a branded static pre-render loading state that React replaces after initialization.
+- **Release wording resolved:** Accuracy Evaluation is described as planned for the second half of 2026 across the public case study and project-package notes.
+- **Name consistency resolved:** public labels align to the official Performance Contracting, Inc. name.
 
 Mobile findings from the 2026-06-09 review are void because mobile was not actually tested. Any mobile work begins with a fresh verification pass.
 
