@@ -92,7 +92,7 @@
     },
     {
       "slug": "pci",
-      "title": "Performance Contracting Group",
+      "title": "Performance Contracting, Inc.",
       "url": "pci.html",
       "category": "Brand & Print",
       "labelClass": "label-default",
@@ -110,7 +110,7 @@
           "src": "images/pci-handbook-1-cover.webp",
           "width": 1584,
           "height": 1224,
-          "alt": "Performance Contracting Group"
+          "alt": "Performance Contracting, Inc."
         }
       ],
       "protected": false,

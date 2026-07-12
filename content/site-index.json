@@ -11,7 +11,7 @@
       "Document Processing",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
-      "Performance Contracting Group",
+      "Performance Contracting, Inc.",
       "The Ability Experience",
       "Star & Lamp Magazine",
       "Pi Kapp App",
@@ -41,7 +41,7 @@
       },
       {
         "src": "images/pci-handbook-1-cover.webp",
-        "alt": "Performance Contracting Group"
+        "alt": "Performance Contracting, Inc."
       },
       {
         "src": "images/thumb-abex.webp",
@@ -87,11 +87,11 @@
         "alt": "IBM Patterns: Contact Us"
       },
       {
-        "title": "Performance Contracting Group",
+        "title": "Performance Contracting, Inc.",
         "category": "Brand & Print",
         "url": "pci",
         "image": "images/pci-handbook-1-cover.webp",
-        "alt": "Performance Contracting Group"
+        "alt": "Performance Contracting, Inc."
       },
       {
         "title": "The Ability Experience",
@@ -362,7 +362,7 @@
     "projects": []
   },
   {
-    "title": "Performance Contracting Group",
+    "title": "Performance Contracting, Inc.",
     "source": "pci.html",
     "url": "/pci",
     "category": "Brand & Print Design",
