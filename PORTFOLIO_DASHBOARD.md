@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-06-08
+Last updated: 2026-07-12
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,26 +20,27 @@ Consult next:
 
 ### Current active plan
 
-Use the adjusted slice structure below to keep practical polish gated and keep future concepts opt-in. Mechanical current-site checks passed on 2026-06-06 and a final objective closeout passed on 2026-06-07 after the voiceover wording cleanup. On 2026-06-08, the project-package notes workflow was clarified: `case-studies/` files are internal gathering docs for consistent facts, media, claims, and guardrails across portfolio pages, not a visitor-facing label. The standing Document Processing-specific media/story item is now closed; keep the page stable unless Victor explicitly selects a new refinement. If Victor flags a concrete issue during manual review, choose one narrow practical slice. A2UI has been contained as a parked experiment for future pickup, so the active slate returns to the docket/menu below.
+Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective closeout passed on 2026-06-07. A later private site review approved two tasks that have since landed: IBM Cloud's empty placeholder slots were removed and the Document Processing homepage card shipped in PR #76. Follow-up manifest work in PRs #78–#80 now generates and validates the Work dropdown/homepage project sections and aligns project-page previous/next navigation. Three unapproved review candidates remain: contact resilience, Pi Kapp demo cold-start presentation, and time-sensitive Document Processing release wording. Performance Contracting naming was resolved on 2026-07-12: the official site identifies the company as Performance Contracting, Inc.; a future narrow copy-alignment slice may update project-facing `Performance Contracting Group` labels. A2UI remains parked.
 
 ### Current next actions
 
-1. Treat the objective closeout as complete: live homepage/About/Art & Illustration/Document Processing/sitemap checks passed, local preflight passed, the About voiceover copy is simplified, generated exports are current, Document Processing guardrails still hold, and no open PRs remain.
-2. Victor's next step is manual site review across desktop/mobile and Light/Dark. If he notices a concrete issue, choose one narrow practical slice: public copy/tone or public visual/interaction polish.
-3. Treat A2UI as parked. The inline prototype is preserved under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` for future pickup when the technology/infrastructure catches up.
-4. Choose the next task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, or another future concept.
-5. Keep broader visual expansion, new portfolio concept systems, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in until Victor selects one.
-6. Do not start protected-page promotion, sitemap changes, major copy rewrites, homepage/nav/sitemap promotion, floating chat widgets, or broad redesign work without explicit approval.
+1. Treat the objective closeout and later manifest/order work as complete; do not revive superseded implementation plans.
+2. Run a fresh manual/visual review across desktop/mobile and Light/Dark. The 2026-06-09 external review did not test mobile, so mobile conclusions from that review are void.
+3. Turn review observations into a short prioritized punch list before implementation.
+4. Verify the current Accuracy Evaluation release status before editing that time-sensitive sentence. Performance Contracting naming is resolved in favor of the official `Performance Contracting, Inc.` form.
+5. Keep the contact fallback/copy-email treatment and Pi Kapp demo pre-render loading state as unapproved candidate slices until Victor selects one.
+6. Treat A2UI as parked. Keep broader visual expansion, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in.
+7. Do not start protected-page promotion, sitemap changes, major copy rewrites, floating chat widgets, or broad redesign work without explicit approval.
 
 ### Supporting historical context
 
-- Latest reset checkpoint: `archive/planning/portfolio-enhancement-state-2026-06-06.md`.
+- Latest reconciled checkpoint: `archive/planning/portfolio-enhancement-state-2026-07-12.md`.
 - Historical planning files under `archive/planning/` are context only unless this dashboard or `PORTFOLIO_DIRECTION_BRIEF.md` explicitly references them as active work.
 - Legacy status snapshot: `archive/planning/portfolio-status-legacy-2026-05-18.md`; do not use it as the current status tracker.
 
 ## Current enhancement phase
 
-Status: clean reset after public-site polish, Document Processing placeholder media, homepage/About wording polish, adjusted slice docs, mechanical review-gate checks, and the final objective closeout before Victor's manual review; practical slices are gated and future concepts are the next planning area if Victor selects them. Project-package notes are an internal system for keeping future portfolio pages consistent.
+Status: clean synced implementation baseline after public-site polish, homepage/protected-card work, project-manifest generation/validation, and project-navigation order alignment. A fresh human visual review is in progress; four later review candidates remain unapproved and future concepts remain opt-in.
 
 Recent shipped work:
 
@@ -57,7 +58,7 @@ Recent shipped work:
 
 Current next action:
 
-- Use `archive/planning/portfolio-enhancement-state-2026-06-07.md` as the current manual-review-ready checkpoint.
+- Use `archive/planning/portfolio-enhancement-state-2026-07-12.md` as the current reconciled checkpoint.
 - Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
 - Mechanical current-site review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
 - Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
@@ -108,6 +109,17 @@ Includes:
 
 Excludes new design-system rollout, new homepage structure, and Document Processing.
 
+### C2. Reconciled candidate slices from the 2026-06-09 review
+
+These are verified as still present but are not approved implementation work by default:
+
+- **Contact resilience:** direct `mailto:` links can fail silently without a configured mail client. Candidate treatment: visible email, copy-email action, LinkedIn, and retained email link.
+- **Pi Kapp demo cold start:** `pikappapp/demo.html` depends on remote Tailwind, React, Framer Motion, Babel, and fonts before React can render its designed splash. Candidate first slice: static pre-render loading markup that React replaces after initialization.
+- **Time-sensitive release wording:** verify the current Accuracy Evaluation status before changing `planned to release this summer` in source, generated content, and project-package notes.
+- **Name consistency resolved:** `performancecontracting.com` identifies the company as Performance Contracting, Inc. Keep this as a separate narrow copy-alignment task rather than mixing it into contact or demo work.
+
+Mobile findings from the 2026-06-09 review are void because mobile was not actually tested. Any mobile work begins with a fresh verification pass.
+
 ### D. Document Processing protected project-page state
 
 Purpose: treat Document Processing like the rest of the portfolio while preserving its protected-page guardrails.
@@ -118,7 +130,7 @@ Current state:
 - Temporary placeholder media has shipped and is acceptable as-is until Victor explicitly asks for a new refinement pass.
 - The `case-studies/` note remains an internal project-package workflow artifact for consistent facts/media/claims gathering across all future portfolio pages, not a visitor-facing category or priority label.
 
-Current approved action: add the homepage card only. If Victor explicitly reselects this page later, scope any further work as a new approval-gated slice and use the private media-audit handoff before changing visuals or claims.
+Current approved action is complete: the homepage card shipped in PR #76. If Victor explicitly reselects this page later, scope any further work as a new approval-gated slice and use the private media-audit handoff before changing visuals or claims.
 
 Excludes sitemap changes, `noindex` changes, password-gate changes, raw screenshot dumps, metrics, launch claims, and broad project-page rewrites unless Victor explicitly chooses them.
 
@@ -150,7 +162,7 @@ Status: A2UI is parked as a contained experiment under `archive/experiments/a2ui
 
 | Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, currently linked from the Work dropdown, approved for homepage Selected Work card, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; private audit handoff at `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Homepage card approved on 2026-06-10; no other standing Document Processing-specific action | Preserve password gate/noindex and current navigation visibility; do not add sitemap links, raw screenshot dumps, metrics, launch claims, major copy/media changes, or generic document-processing workflow tasks without approval |
+| Document Processing | live | live, password-protected for visitors, noindex, linked from Work and homepage Selected Work, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; homepage card shipped in PR #76; private audit handoff at `C:\\Users\\Victor\\Documents\\Website Items\\Portfolio Handoffs\\Document Processing\\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | Verify the time-sensitive release sentence before any factual copy edit; no standing visual/media action | Preserve password gate/noindex and current visibility; do not add sitemap links, raw screenshot dumps, metrics, launch claims, or major copy/media changes without approval |
 | IBM Cloud Observability | live | public/password status follows existing site | existing HTML/content | No active action | Treat existing page as source of truth |
 | IBM Patterns | live | protected | existing HTML/content | No active action | Preserve password gate |
 | PCI | live | protected/confidential | existing HTML/content | No active action | Do not unblur confidential body copy |

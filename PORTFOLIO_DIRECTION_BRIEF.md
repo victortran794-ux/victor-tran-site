@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-06-08
-Status: Active direction brief; objective closeout is complete and practical polish is gated pending Victor's manual review
+Last updated: 2026-07-12
+Status: Active direction brief; current implementation is reconciled and a fresh cross-viewport visual review is the next gate
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,7 +42,7 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to treat the practical polish tracks as gated. Public-site polish, public image-dimension hardening, dash-heavy wording cleanup, Document Processing temporary protected-page media, homepage/About wording polish, final About voiceover cleanup, and the adjusted slice structure have landed. Mechanical live checks passed on 2026-06-06, and final objective closeout checks passed on 2026-06-07. On 2026-06-08, the project-package notes workflow was clarified as an internal system for gathering consistent facts, media, claims, and guardrails across portfolio pages. The standing Document Processing-specific media/story item is now closed; keep that page stable unless Victor explicitly selects a new refinement. A2UI is now contained as a parked experiment, so the active slate returns to Victor's manual review followed by the docket/menu of gated slices and opt-in future concepts.
+The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. A fresh desktop/mobile and Light/Dark review is the next gate. The later site-review candidates for contact resilience, Pi Kapp demo cold-start presentation, and time-sensitive release wording are captured as candidates rather than assumed implementation work. Employer/project naming was resolved against the official site in favor of Performance Contracting, Inc.; any public-label alignment remains a separate narrow copy task. A2UI remains parked.
 
 Current working posture:
 
@@ -115,7 +115,7 @@ The following patterns are live or explicitly decided. Mechanical review checks 
 ### Current checkpoint
 
 - Practical enhancement slices are gated after PR #66 clarified the adjusted slice structure.
-- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-06-06.md`.
+- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-07-12.md`.
 - Future work may move into future-concepts planning, but implementation remains opt-in and branch-sized.
 - If human review surfaces a concrete current-site issue, handle it as one narrow practical slice before returning to future concepts.
 
