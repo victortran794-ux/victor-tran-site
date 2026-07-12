@@ -80,7 +80,7 @@ A few songs from each phase of my music. Enjoy the eclectic mix.
 
 - Pi Kappa Phi Fraternity Headquarters
 - The Ability Experience
-- Performance Contracting Inc
+- Performance Contracting, Inc.
 - Holmes Murphy
 - Atrium Health
 - Elevate

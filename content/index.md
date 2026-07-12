@@ -27,7 +27,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Document Processing (Product Design): document-processing
 - IBM Cloud Observability (Product Design): ibmcloud
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
-- Performance Contracting Group (Brand & Print): pci
+- Performance Contracting, Inc. (Brand & Print): pci
 - The Ability Experience (Brand Identity): abilityexperience
 - Star & Lamp Magazine (Art Direction): salmagazine
 - Pi Kapp App (Product Design): pikappapp
@@ -40,7 +40,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Document Processing
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
-- Performance Contracting Group
+- Performance Contracting, Inc.
 - The Ability Experience
 - Star & Lamp Magazine
 - Pi Kapp App
@@ -92,7 +92,7 @@ Standalone identity, print, illustration, and event graphics.
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp
-- Performance Contracting Group: images/pci-handbook-1-cover.webp
+- Performance Contracting, Inc.: images/pci-handbook-1-cover.webp
 - The Ability Experience: images/thumb-abex.webp
 - Star & Lamp Magazine: images/thumb-sal.webp
 - Pi Kapp App: images/thumb-pikapp.webp

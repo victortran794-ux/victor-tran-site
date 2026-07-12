@@ -18,7 +18,7 @@ victor-tran-site/
 ├── about.html           About page
 ├── pikappapp.html       Case study — Pi Kapp App (mobile app design)
 ├── ibmcloud.html        Case study — IBM Cloud Observability
-├── pci.html             Case study — Performance Contracting Group
+├── pci.html             Case study — Performance Contracting, Inc.
 ├── abilityexperience.html  Case study — The Ability Experience
 ├── salmagazine.html     Case study — Star & Lamp magazine
 ├── graphicgallery.html  Gallery — branding, illustration, slides

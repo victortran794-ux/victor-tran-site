@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "Performance Contracting Group"
+title: "Performance Contracting, Inc."
 source: "pci.html"
 url: "/pci"
 category: "Brand & Print Design"
 description: "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide."
 ---
 
-# Performance Contracting Group
+# Performance Contracting, Inc.
 
 ## Description
 
@@ -27,7 +27,7 @@ Brand collateral for one of the country's largest specialty contractors. A 42-pa
 - Category: Brand & Print Design
 - Role: Layout & Print Design
 - Year: 2026
-- Client: Performance Contracting Group
+- Client: Performance Contracting, Inc.
 - Type: Brand & Print
 
 ## Section Headings
