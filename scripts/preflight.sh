@@ -44,6 +44,7 @@ run_required "Whitespace/conflict marker check" git diff --check
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "Production-host regression check" node scripts/check-production-host.mjs
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
+run_required "Gallery media regression check" node scripts/check-gallery-media.mjs
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs
 run_required "Install pinned website build tools" npm ci --ignore-scripts
 run_required "Pi Kapp demo reproducible build check" npm run verify:pikapp-demo

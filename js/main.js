@@ -337,21 +337,30 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const lbPrev  = lb.querySelector('.lb-arrow--prev');
   const lbNext  = lb.querySelector('.lb-arrow--next');
 
-  // Build thumbnails
-  pageImgs.forEach((img, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'lb-thumb';
-    btn.setAttribute('aria-label', `Go to image ${i + 1}`);
-    const ti = document.createElement('img');
-    ti.src = img.src;
-    ti.alt = img.alt;
-    ti.loading = 'lazy';
-    btn.appendChild(ti);
-    btn.addEventListener('click', () => goTo(i));
-    lbStrip.appendChild(btn);
-  });
+  let thumbEls = [];
 
-  const thumbEls = Array.from(lbStrip.querySelectorAll('.lb-thumb'));
+  function buildThumbnails() {
+    if (thumbEls.length) return;
+
+    pageImgs.forEach((img, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'lb-thumb';
+      btn.setAttribute('aria-label', `Go to image ${i + 1}`);
+      const ti = document.createElement('img');
+      ti.src = img.src;
+      ti.alt = img.alt;
+      ti.loading = 'lazy';
+      btn.appendChild(ti);
+      btn.addEventListener('click', () => goTo(i));
+      if (canUseCustomCursor) {
+        btn.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
+        btn.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
+      }
+      lbStrip.appendChild(btn);
+    });
+
+    thumbEls = Array.from(lbStrip.querySelectorAll('.lb-thumb'));
+  }
 
   function goTo(idx) {
     current = (idx + pageImgs.length) % pageImgs.length;
@@ -375,6 +384,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   }
 
   function open(idx) {
+    buildThumbnails();
     goTo(idx);
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -403,7 +413,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   // Expand cursor ring on lightbox buttons
   if (canUseCustomCursor) {
-    lb.querySelectorAll('.lb-btn, .lb-arrow, .lb-thumb').forEach(el => {
+    lb.querySelectorAll('.lb-btn, .lb-arrow').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring--hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring--hover'));
     });

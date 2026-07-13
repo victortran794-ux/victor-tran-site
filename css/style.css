@@ -2402,6 +2402,7 @@ html[data-theme="dark"] .spotify-frame {
 
 .gallery-grid img {
   width: 100%;
+  height: auto;
   margin-bottom: 12px;
   break-inside: avoid;
   border-radius: var(--radius-sm);
@@ -2465,6 +2466,7 @@ html[data-theme="dark"] .spotify-frame {
 }
 .gallery-spotlight-fig img {
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 3px;
 }
@@ -2641,6 +2643,7 @@ html[data-theme="dark"] .spotify-frame {
 }
 .gallery-feature img {
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 3px;
 }
