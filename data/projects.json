@@ -81,6 +81,8 @@
       "images": [
         {
           "src": "images/patterns-hero.webp",
+          "srcset": "images/responsive/patterns-hero-640.webp 640w, images/responsive/patterns-hero-1200.webp 1200w",
+          "sizes": "(max-width: 720px) 100vw, 50vw",
           "width": 3840,
           "height": 2160,
           "alt": "IBM Patterns: Contact Us"
@@ -108,6 +110,8 @@
       "images": [
         {
           "src": "images/pci-handbook-1-cover.webp",
+          "srcset": "images/responsive/pci-handbook-1-cover-640.webp 640w, images/responsive/pci-handbook-1-cover-1200.webp 1200w",
+          "sizes": "(max-width: 720px) 100vw, 50vw",
           "width": 1584,
           "height": 1224,
           "alt": "Performance Contracting, Inc."
@@ -162,6 +166,8 @@
       "images": [
         {
           "src": "images/thumb-sal.webp",
+          "srcset": "images/responsive/thumb-sal-540.webp 540w, images/thumb-sal.webp 1081w",
+          "sizes": "(max-width: 720px) 100vw, 50vw",
           "width": 1081,
           "height": 1081,
           "alt": "Star & Lamp Magazine"

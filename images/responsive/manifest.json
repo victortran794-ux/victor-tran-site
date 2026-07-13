@@ -1,0 +1,96 @@
+{
+  "encoder": {
+    "format": "WEBP",
+    "method": 6,
+    "quality": 82
+  },
+  "outputs": {
+    "images/responsive/about-vic-japan-1200.webp": {
+      "bytes": 120142,
+      "height": 1800,
+      "sha256": "33fd6d0952073a353dc17494ef430c0f577316393b2515432dbc05d6e73cac5b",
+      "width": 1200
+    },
+    "images/responsive/about-vic-japan-480.webp": {
+      "bytes": 27098,
+      "height": 720,
+      "sha256": "4ab650db5e7aa74c13b8054037e8302bff857a64441ea432c4c14dfc35655092",
+      "width": 480
+    },
+    "images/responsive/about-vic-japan-800.webp": {
+      "bytes": 64074,
+      "height": 1200,
+      "sha256": "a133ad3ee73ad0743d856126ef1b3a56aa6a6d86a129c0148db5731808147395",
+      "width": 800
+    },
+    "images/responsive/dna-preview-1200.webp": {
+      "bytes": 23714,
+      "height": 675,
+      "sha256": "56f0e78103bbe838ecd845577295f81efc619bb643be24358ad2a37e2617c148",
+      "width": 1200
+    },
+    "images/responsive/dna-preview-640.webp": {
+      "bytes": 9908,
+      "height": 360,
+      "sha256": "bb707add17ce7735856ec7be3e61d5fb14faf1f9e2352d97e408ebb47f054d19",
+      "width": 640
+    },
+    "images/responsive/patterns-hero-1200.webp": {
+      "bytes": 44700,
+      "height": 675,
+      "sha256": "1675a139b1a34c338a167b240b4760898936c02f1d253e6f0c97b2827f4ee8e3",
+      "width": 1200
+    },
+    "images/responsive/patterns-hero-640.webp": {
+      "bytes": 19586,
+      "height": 360,
+      "sha256": "9b7d5bb3c22d965d16eb1732689368bf26b27adc8058108eeec4b38bb996976c",
+      "width": 640
+    },
+    "images/responsive/pci-handbook-1-cover-1200.webp": {
+      "bytes": 166970,
+      "height": 927,
+      "sha256": "867d03adde845758d633a4e763ab72bf6bb62ba0117a944a846f5d00885ef2f8",
+      "width": 1200
+    },
+    "images/responsive/pci-handbook-1-cover-640.webp": {
+      "bytes": 61848,
+      "height": 495,
+      "sha256": "ec591f2fd98b9e78d5fd9e727b44e594993109aa1190630d79a47d53fa0789f1",
+      "width": 640
+    },
+    "images/responsive/thumb-sal-540.webp": {
+      "bytes": 74878,
+      "height": 540,
+      "sha256": "eac12944363bbaea005a1f17a89f3737345d580aec0dab1e3ec64c6879624180",
+      "width": 540
+    }
+  },
+  "pillowVersion": "12.3.0",
+  "runtime": {
+    "python": "3.14",
+    "webp": "1.6.0"
+  },
+  "sources": {
+    "images/about-vic-japan.jpg": {
+      "bytes": 598512,
+      "sha256": "5a6169c44e67b6ca6cfd8d606d455942811187fb33fd3b513d87f89a17c9b4a7"
+    },
+    "images/dna-preview.jpg": {
+      "bytes": 197309,
+      "sha256": "ec856141094bfb63d03132131c504bb8b5c69a5f5c096ab689f48ab742b326db"
+    },
+    "images/patterns-hero.webp": {
+      "bytes": 219526,
+      "sha256": "0aca7c892f52649548a0397a79f37a8a18359381c89c8acdc8f7bc741fb448e2"
+    },
+    "images/pci-handbook-1-cover.webp": {
+      "bytes": 262032,
+      "sha256": "3aa596bf0fe9c796e0cea7933f54eafbc93cd49145a45de98aef4e830831ef88"
+    },
+    "images/thumb-sal.webp": {
+      "bytes": 217374,
+      "sha256": "f1ae98c4d7143f6f7525fabafb1a1c045bf5c5cdbe2eb5f3f27de0c290dd969d"
+    }
+  }
+}
