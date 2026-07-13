@@ -43,6 +43,7 @@ run_required "Whitespace/conflict marker check" git diff --check
 
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "Production-host regression check" node scripts/check-production-host.mjs
+run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
 
 section "Generating project sections"
 if [ -f "scripts/generate-project-sections.mjs" ]; then

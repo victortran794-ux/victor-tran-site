@@ -32,7 +32,9 @@ function imageMarkup(project, indent) {
   const attrIndent = `${indent}      `;
   return (project.images ?? []).map(image => {
     const classAttr = image.class ? ` class="${escapeHtml(image.class)}"` : '';
-    return `${imageIndent}<img loading="lazy" decoding="async"${classAttr}\n${attrIndent}src="${escapeHtml(image.src)}" width="${image.width}" height="${image.height}"\n${attrIndent}alt="${escapeHtml(image.alt)}"\n${imageIndent}>`;
+    const srcsetAttr = image.srcset ? `\n${attrIndent}srcset="${escapeHtml(image.srcset)}"` : '';
+    const sizesAttr = image.sizes ? `\n${attrIndent}sizes="${escapeHtml(image.sizes)}"` : '';
+    return `${imageIndent}<img loading="lazy" decoding="async"${classAttr}\n${attrIndent}src="${escapeHtml(image.src)}"${srcsetAttr}${sizesAttr} width="${image.width}" height="${image.height}"\n${attrIndent}alt="${escapeHtml(image.alt)}"\n${imageIndent}>`;
   }).join('\n');
 }
 
