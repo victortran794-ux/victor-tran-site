@@ -1,0 +1,16 @@
+{
+  "name": "victor-tran-site-build-tools",
+  "private": true,
+  "scripts": {
+    "build:pikapp-demo": "tailwindcss -c pikappapp/tailwind.config.cjs -i pikappapp/demo-source.css -o pikappapp/demo.bundle.css --minify && esbuild pikappapp/demo-source.jsx --bundle --minify --format=esm --target=es2022 --outfile=pikappapp/demo.bundle.js",
+    "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",
+    "verify:pikapp-demo": "npm run build:pikapp-demo && git diff --exit-code -- pikappapp/demo.bundle.css pikappapp/demo.bundle.js && npm run check:pikapp-demo"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1",
+    "framer-motion": "11.11.17",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "3.4.17"
+  }
+}
