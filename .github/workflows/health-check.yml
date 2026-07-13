@@ -19,6 +19,7 @@ on:
       - "data/projects.json"
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
+      - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
       - "sitemap.xml"
@@ -47,6 +48,7 @@ on:
       - "data/projects.json"
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
+      - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
       - "sitemap.xml"
@@ -95,6 +97,8 @@ jobs:
           git diff --exit-code -- images/responsive
       - name: Responsive image regression check
         run: node scripts/check-responsive-images.mjs
+      - name: Gallery media regression check
+        run: node scripts/check-gallery-media.mjs
       - name: Lychee link check
         uses: lycheeverse/lychee-action@v2
         with:
