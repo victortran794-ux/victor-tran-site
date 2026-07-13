@@ -45,6 +45,8 @@ for (const selector of ['.label-default', '.about-now-label', '.footer-cta']) {
 
 for (const file of activePages) {
   const html = read(file);
+  expect(/<a\s+href="index\.html"\s+class="nav-logo"\s+aria-label="Victor Tran home">/.test(html),
+    `${file}: navigation logo link must retain an accessible name when its visible text is hidden.`);
   expect(/<img\s+src="images\/nav-logo\.webp"\s+alt=""/.test(html),
     `${file}: navigation avatar must be decorative with alt="".`);
 }
