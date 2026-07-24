@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-07-12
+Last updated: 2026-07-24
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,17 +20,17 @@ Consult next:
 
 ### Current active plan
 
-Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective closeout passed on 2026-06-07. A later private site review approved two tasks that have since landed: IBM Cloud's empty placeholder slots were removed and the Document Processing homepage card shipped in PR #76. Follow-up manifest work in PRs #78–#80 now generates and validates the Work dropdown/homepage project sections and aligns project-page previous/next navigation. The later review backlog is now resolved: contact resilience shipped in PR #82, the Pi Kapp pre-render loading state shipped in PR #83, Performance Contracting naming aligned in PR #84, and Document Processing release wording now uses the second half of 2026. A2UI remains parked.
+Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective technical closeout and the later maintenance backlog are complete. The Ability Experience VicO2 translation and the homepage system alignment are now live and production-verified. **VicO2 system continuation is the primary portfolio-enhancement lane**, organized as bounded page-by-page translations rather than a broad redesign. Public visual review, selected-page copy/tone work, responsive/media/interaction polish, system documentation, and proven-component Figma reconstruction now support that lane instead of competing with it as disconnected broad passes. Document Processing and wxO Canvas remain separate protected-project lanes. A2UI remains parked.
 
 ### Current next actions
 
-1. Treat the objective closeout and later manifest/order work as complete; do not revive superseded implementation plans.
-2. Run a fresh manual/visual review across desktop/mobile and Light/Dark. The 2026-06-09 external review did not test mobile, so mobile conclusions from that review are void.
-3. Turn review observations into a short prioritized punch list before implementation.
-4. Treat contact resilience, Pi Kapp pre-render loading, Performance Contracting naming, and the Document Processing release window as complete.
-5. Continue narrow, verified agent work while the manual mobile/Light/Dark review is deferred; reserve subjective visual changes for that review.
-6. Treat A2UI as parked. Keep broader visual expansion, report-style chapters, lens/DNA mode, and bigger motion/prototype ideas opt-in.
-7. Do not start protected-page promotion, sitemap changes, major copy rewrites, floating chat widgets, or broad redesign work without explicit approval.
+1. Treat the Ability Experience and homepage VicO2 translations as complete, live production checkpoints; observe them and reopen only with new evidence.
+2. Advance **VicO2 system continuation** as the primary enhancement lane: select one safe public page, build a bounded current-versus-proposed comparison, and obtain Victor's Keep / Adjust / Reject judgment before implementation.
+3. Fold the selected page's desktop/mobile, Light/Dark, copy/tone, image/media, responsive, and interaction review into that translation instead of running disconnected broad redesign passes.
+4. Reconcile only reusable decisions from successful production work back into the mini specification and component language; reconstruct proven foundations/components in Figma when useful, not as a blocker.
+5. Keep objective technical defects that are not design-system questions—such as isolated performance regressions or third-party embed loading—separate and evidence-driven.
+6. Keep Document Processing paused behind its existing protected refinement gates. Keep wxO Canvas separate as a protected case-study candidate with shipped-versus-exploratory and sanitization decisions required before design work.
+7. Promote optional chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2. Keep Lens/Design-DNA and larger prototype behaviors conditional; keep A2UI, framework migration, broad redesign, generative/chat UI promotion, and uncontrolled site-wide rollout parked.
 
 ### Supporting historical context
 
@@ -40,7 +40,7 @@ Use the reconciled slice structure below to keep practical polish gated and futu
 
 ## Current enhancement phase
 
-Status: clean synced implementation baseline after public-site polish, homepage/protected-card work, project-manifest generation/validation, and project-navigation order alignment. A fresh human visual review is in progress; four later review candidates remain unapproved and future concepts remain opt-in.
+Status: clean synced production baseline after the Ability Experience and homepage VicO2 translations. System continuation is the primary open enhancement lane. The next action is selection and private comparison of one safe public page, with page-specific visual, copy, responsive, media, and interaction review folded into that work. Document Processing and wxO Canvas remain separate protected lanes; future concepts remain opt-in.
 
 Recent shipped work:
 
@@ -58,14 +58,17 @@ Recent shipped work:
 
 Current next action:
 
-- Use `archive/planning/portfolio-enhancement-state-2026-07-12.md` as the current reconciled checkpoint.
-- Use the adjusted enhancement slices below so review, copy, visual/UI polish, protected-page work, and future concepts do not get mixed together.
-- Mechanical current-site review checks passed on 2026-06-06 and final objective closeout checks passed on 2026-06-07; human review can still create a narrow practical follow-up, but practical polish is not blocking future-concepts planning.
-- Keep the tone/wording review active for future passes: flag pull quotes, section headers, labels, captions, metadata, and supporting copy that feel too cheesy, over-written, theatrical, or agent-written.
-- Treat Document Processing as a normal live protected project page with temporary placeholder media now merged. Victor reselected it on 2026-06-10 and approved adding it to the homepage Selected Work area while preserving the password gate, `noindex`, and sitemap omission. Its `case-studies/` notes file is part of the shared project-package workflow for gathering consistent information across portfolio pages, not a special visitor-facing label or priority. Use the private media-audit handoff as source material before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
-- Keep broad visual expansion paused. Keep A2UI parked in `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it; do not merge or promote the parked standalone page as-is.
+- Use this dashboard as the current status cockpit. Use `archive/planning/portfolio-enhancement-state-2026-07-12.md` only for historical technical-closeout context.
+- Use the VicO2 checkpoint at `C:\Users\Victor\Documents\Website Items\Design Kits\2026-07-23-carbon-victor-system\README.md` as the priority-lane scope and guardrail reference.
+- Select one safe public page before creating another implementation branch. Its visual, mobile, Light/Dark, copy/tone, media, and interaction review should happen inside that bounded page translation.
+- Keep residual objective maintenance separate when it is not a design-system question.
+- Treat Document Processing as a live protected page with a separately paused private refinement. Use the 2026-07-23 Figma source audit and private comparison as its current refinement checkpoint; preserve the password gate, `noindex`, sitemap omission, media boundaries, and claims boundaries.
+- Treat wxO Canvas as a separate protected case-study candidate, never as a Document Processing chapter. Resume only from its dedicated handoff.
+- Keep broad visual expansion and A2UI parked unless Victor explicitly resumes them.
 
 ## Adjusted enhancement slices
+
+**Queue rule:** VicO2 system continuation is the primary lane. Slices A–C are supporting checks to run within a selected page translation whenever relevant; they are not prerequisites for a separate site-wide review or rewrite.
 
 ### A. Current-site review and punch list
 
@@ -134,19 +137,30 @@ Current approved action is complete: the homepage card shipped in PR #76. If Vic
 
 Excludes sitemap changes, `noindex` changes, password-gate changes, raw screenshot dumps, metrics, launch claims, and broad project-page rewrites unless Victor explicitly chooses them.
 
-### E. Future concepts parked
+### E. Future-concept alignment with VicO2
 
-Purpose: keep bigger ideas captured without letting them accidentally become the next implementation task.
+Purpose: move concepts into VicO2 only when they strengthen real case-study storytelling without turning them into automatic site-wide features.
 
-Includes:
+Promoted into VicO2:
 
-- A2UI.
-- Broader visual expansion.
-- New portfolio concept systems.
-- Report-style chapter treatments.
-- Bigger motion/prototype ideas.
+- Report-style project chapters as an optional long-form editorial structure.
+- Artifact/process storytelling as a core case-study pattern.
+- Technical diagrams as a reusable, accessible component family.
+- Selective motion as a bounded behavior layer with truthful controls and reduced-motion support.
 
-Status: A2UI is parked as a contained experiment under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`; resume only when Victor explicitly selects it and the technology/infrastructure is ready. The rest remain parked and opt-in. The parked standalone `a2ui.html` branch should not be merged or promoted as-is.
+Conditional and still parked until a real page proves the need:
+
+- Lens / Design-DNA inspection mode.
+- Larger prototypes or project-progress behaviors.
+- Asset/photography inventory as page preparation rather than a visible feature.
+
+Parked outside VicO2:
+
+- A2UI and generative/chat UI promotion.
+- Framework migration or new build-system architecture absent a verified blocker.
+- Broad redesign and uncontrolled site-wide rollout.
+
+Status: A2UI remains a contained experiment under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`; the parked standalone `a2ui.html` branch must not be merged or promoted as-is. VicO2 may eventually style a real implementation, but visual compatibility does not make the technology or claims ready.
 
 ## Status legend
 
