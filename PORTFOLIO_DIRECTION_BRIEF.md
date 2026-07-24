@@ -46,19 +46,19 @@ The enhancement work has shipped enough to keep broad expansion gated. In additi
 
 Current working posture:
 
-1. Treat current-site review, public tone, and public visual/interaction polish as separate gated slices.
-2. If Victor finds a concrete issue, choose one narrow practical slice and fix that before broadening.
-3. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until Victor explicitly resumes it.
-4. Keep the parked standalone A2UI branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
-5. Keep report-style chapters, lens/DNA mode, and broader motion/prototype ideas as future concepts until Victor explicitly selects the first one.
-6. Do not turn future concepts into live pages, homepage/nav promotion, sitemap changes, floating chat widgets, or broad redesign work without a separate approval.
+1. Treat **VicO2** (Victor + Carbon) as the primary system-continuation lane, advanced through bounded page-by-page translations rather than broad redesign.
+2. Fold the selected page's public visual review, copy/tone, responsive/media, and interaction polish into that translation.
+3. Promote optional report-style chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2 as reusable patterns—not mandatory decoration.
+4. Keep Lens/Design-DNA mode and larger prototype/progress behavior conditional until a selected project demonstrates real reader value.
+5. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
+6. Keep framework migration, generative/chat UI promotion, broad redesign, homepage/nav promotion, sitemap changes, floating chat widgets, and uncontrolled site-wide rollout outside VicO2 without a separate verified need and approval.
 
 ### Top active decisions
 
-1. Victor reviews the live site manually across desktop/mobile and Light/Dark; any notes become a prioritized punch list rather than an automatic implementation batch.
-2. Pick the next docket item, if any: current-site review, public copy/tone, public visual/interaction polish, or another future concept.
-3. Keep A2UI parked until the technology/infrastructure catches up or Victor explicitly resumes it.
-4. Do not merge or promote the parked standalone A2UI branch as-is.
+1. Audit the live homepage and Ability Experience VicO2 translations for reusable decisions and inconsistencies without reopening them absent new evidence.
+2. Select one safe public page for the next bounded VicO2 comparison.
+3. Include that page's visual, copy/tone, responsive/media, interaction, and relevant promoted-pattern review in the same approval lane.
+4. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
 5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
 
 ---
