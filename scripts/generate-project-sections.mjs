@@ -22,6 +22,7 @@ function projectClass(project) {
   const classes = ['featured-item'];
   if (project.type === 'gallery') classes.push('featured-item--gallery');
   if (project.wide) classes.push('featured-item--wide');
+  if (project.homepageVariant) classes.push(`featured-item--${project.homepageVariant}`);
   if (project.surface) classes.push(`featured-item--surface-${project.surface}`);
   classes.push('reveal');
   return classes.join(' ');
@@ -41,6 +42,23 @@ function imageMarkup(project, indent) {
 function cardMarkup(project, indent = '        ') {
   const labelClass = project.labelClass || 'label-default';
   return `${indent}<a href="${escapeHtml(project.url)}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${indent}    <p class="section-label ${escapeHtml(labelClass)}">${escapeHtml(project.category)}</p>\n${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>\n${indent}  </div>\n${indent}</a>`;
+}
+
+function chapterMarkerMarkup(project, indent = '        ') {
+  return `${indent}<header class="featured-chapter" data-chapter-marker="${escapeHtml(project.chapter)}">\n${indent}  <span>${escapeHtml(project.chapter)}</span>\n${indent}  <h3>${escapeHtml(project.chapterTitle)}</h3>\n${indent}</header>`;
+}
+
+function cardsWithChapterMarkers(items, indent = '        ') {
+  let previousChapter = null;
+  return items.flatMap(project => {
+    const fragments = [];
+    if (project.chapter !== previousChapter) {
+      fragments.push(chapterMarkerMarkup(project, indent));
+      previousChapter = project.chapter;
+    }
+    fragments.push(cardMarkup(project, indent));
+    return fragments;
+  }).join('\n\n');
 }
 
 function navItem(project, indent = '            ') {
@@ -69,7 +87,7 @@ const navBody = [
   ...navGalleries.map(project => navItem(project)),
 ].join('\n');
 
-const primaryBody = homepagePrimary.map(project => cardMarkup(project)).join('\n\n');
+const primaryBody = cardsWithChapterMarkers(homepagePrimary);
 const galleryBody = homepageGalleries.map(project => cardMarkup(project, '          ')).join('\n\n');
 
 let output = indexHtml;

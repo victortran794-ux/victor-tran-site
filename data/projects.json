@@ -26,7 +26,8 @@
       ],
       "protected": true,
       "noindex": true,
-      "sitemap": false
+      "sitemap": false,
+      "homepageVariant": "lead"
     },
     {
       "slug": "ibmcloud",
@@ -61,7 +62,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-7"
     },
     {
       "slug": "ibm-patterns",
@@ -90,7 +92,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-5"
     },
     {
       "slug": "pci",
@@ -119,7 +122,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-5"
     },
     {
       "slug": "abilityexperience",
@@ -131,7 +135,7 @@
       "nav": true,
       "homepage": true,
       "wide": false,
-      "surface": "",
+      "surface": "ability",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
       "description": "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.",
@@ -146,7 +150,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-7"
     },
     {
       "slug": "salmagazine",
@@ -175,7 +180,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-7"
     },
     {
       "slug": "pikappapp",
@@ -202,7 +208,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-5"
     },
     {
       "slug": "artillustration",
@@ -229,7 +236,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-7"
     },
     {
       "slug": "graphicgallery",
@@ -256,7 +264,8 @@
       ],
       "protected": false,
       "noindex": false,
-      "sitemap": true
+      "sitemap": true,
+      "homepageVariant": "span-5"
     }
   ]
 }

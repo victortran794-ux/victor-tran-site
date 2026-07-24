@@ -252,42 +252,83 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 })();
 
 
-// ── Hero: fixed portrait + color switcher ─────────
+// ── Hero: fixed portrait + ambient color switcher ─────
 (function () {
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
   const dots = Array.from(hero.querySelectorAll('.hero-cycle-dot'));
   const cycleBtn = hero.querySelector('.hero-cycle');
-  const palette = ['--pink', '--blue', '--orange', '--purple'];
+  const heroLabel = hero.querySelector('.hero-cycle-label');
+  const heroStatus = hero.querySelector('[data-hero-status]');
+  const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const palette = [
+    { name: 'Pink', session: '--pink', accent: '--blue' },
+    { name: 'Blue', session: '--blue', accent: '--pink' },
+    { name: 'Orange', session: '--orange', accent: '--blue' },
+    { name: 'Purple', session: '--purple', accent: '--pink' },
+  ];
 
-  let i = Math.floor(Math.random() * palette.length);
+  let i = 0;
+  let heroTimer = null;
+  let manualPause = false;
 
-  function setHeroColor(next) {
+  function setHeroColor(next, announce = false) {
     i = (next + palette.length) % palette.length;
-    const sessionToken = palette[i];
-    const accentToken = palette[(i + 1) % palette.length];
+    const state = palette[i];
 
-    hero.style.setProperty('--bg-tint', `var(${sessionToken})`);
-    hero.style.setProperty('--lens-color', `var(${sessionToken})`);
-    hero.style.setProperty('--accent-2', `var(${accentToken})`);
+    hero.style.setProperty('--bg-tint', `var(${state.session})`);
+    hero.style.setProperty('--lens-color', `var(${state.session})`);
+    hero.style.setProperty('--accent-2', `var(${state.accent})`);
     hero.dataset.color = String(i);
 
     dots.forEach((dot, dotIndex) => {
       dot.classList.toggle('is-active', dotIndex === i);
     });
+    if (heroLabel) heroLabel.textContent = `Color shift · ${state.name}`;
+    if (announce && heroStatus) {
+      heroStatus.textContent = `Hero color changed to ${state.name}. Ambient cycling paused for this visit.`;
+    }
   }
 
-  setHeroColor(i);
+  function stopHeroCycle() {
+    if (!heroTimer) return;
+    window.clearInterval(heroTimer);
+    heroTimer = null;
+  }
 
-  hero.addEventListener('click', e => {
-    if (e.target.closest('a, .hero-meta')) return;
-    setHeroColor(i + 1);
+  function startHeroCycle() {
+    if (manualPause || heroReducedMotion.matches || document.hidden || heroTimer) return;
+    heroTimer = window.setInterval(() => setHeroColor(i + 1), 12000);
+  }
+
+  function chooseNextColor() {
+    manualPause = true;
+    stopHeroCycle();
+    setHeroColor(i + 1, true);
+  }
+
+  setHeroColor(0);
+  startHeroCycle();
+
+  hero.addEventListener('click', event => {
+    if (event.target.closest('a, button, .hero-meta')) return;
+    chooseNextColor();
   });
 
-  cycleBtn?.addEventListener('click', e => {
-    e.stopPropagation();
-    setHeroColor(i + 1);
+  cycleBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    chooseNextColor();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopHeroCycle();
+    else startHeroCycle();
+  });
+
+  heroReducedMotion.addEventListener?.('change', () => {
+    if (heroReducedMotion.matches) stopHeroCycle();
+    else startHeroCycle();
   });
 })();
 
