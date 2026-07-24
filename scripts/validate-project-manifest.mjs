@@ -119,6 +119,10 @@ function validateCards(cards, expectedProjects, label) {
 
     const isWide = card.classes.includes('featured-item--wide');
     if (isWide !== Boolean(expected.wide)) fail(`${label} wide-card flag mismatch for ${expected.url}: html=${isWide}, manifest=${Boolean(expected.wide)}`);
+    const expectedVariant = expected.homepageVariant ? `featured-item--${expected.homepageVariant}` : '';
+    if (expectedVariant && !card.classes.includes(expectedVariant)) {
+      fail(`${label} homepage variant mismatch for ${expected.url}: missing ${expectedVariant}`);
+    }
   });
 }
 
