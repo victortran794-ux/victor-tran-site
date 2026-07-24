@@ -3763,3 +3763,313 @@ html[data-theme="dark"] .spotify-frame {
   .dna-color-preview-img, .dna-color-preview-tint { transition: none; }
   .dna-font[data-jitter="true"]:hover .dna-font-sample { animation: none; }
 }
+
+/* ABILITY EXPERIENCE: START */
+.ability-hero {
+  --ability-project: #efaa18;
+  --ability-project-blue: #03436e;
+  min-height: min(820px, calc(100vh - var(--nav-h)));
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+  overflow: hidden;
+  background: var(--ability-project);
+  color: #151515;
+}
+
+.ability-hero-copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(44px, 7vw, 104px) var(--page-x);
+}
+
+.ability-kicker,
+.ability-component-label,
+.ability-chapter-index,
+.ability-meta dt,
+.ability-case-study figcaption,
+.ability-diagram-node span,
+.ability-diagram-node small {
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.ability-kicker { margin-bottom: 0; color: var(--ability-project-blue); }
+
+.ability-hero h1 {
+  max-width: 900px;
+  margin: var(--space-6) 0 var(--space-10);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(4.875rem, 11vw, 11rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.76;
+}
+
+.ability-hero-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+  gap: var(--space-10);
+  align-items: end;
+}
+
+.ability-hero-intro > p:first-child {
+  max-width: 36ch;
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  line-height: 1.4;
+}
+
+.ability-hero-note {
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--ability-project-blue);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.ability-hero-media { min-width: 0; }
+.ability-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.ability-meta {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--page-x);
+  border-bottom: 1px solid var(--border);
+}
+
+.ability-meta dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ability-meta .case-study-meta { gap: 0; margin-top: 0; padding-top: 0; border-top: 0; }
+.ability-meta dl > div {
+  padding: var(--space-8) 0;
+  border-right: 1px solid var(--border);
+}
+.ability-meta dl > div + div { padding-left: clamp(22px, 4vw, 60px); }
+.ability-meta dl > div:last-child { border-right: 0; }
+.ability-meta dt { color: var(--text-2); }
+.ability-meta dd {
+  margin-top: var(--space-2);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  line-height: var(--leading-title);
+}
+
+.ability-case-study { width: 100%; }
+.ability-chapter {
+  padding: clamp(84px, 11vw, 160px) var(--page-x);
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+}
+.ability-chapter--system { background: var(--bg-2); }
+.ability-chapter > * { max-width: var(--max-w); margin-left: auto; margin-right: auto; }
+
+.ability-chapter-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) minmax(260px, 0.55fr);
+  gap: var(--space-8);
+  align-items: start;
+  margin-bottom: clamp(56px, 8vw, 112px);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+.ability-chapter-header::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 24%;
+  height: 3px;
+  background: var(--blue-text);
+}
+.ability-chapter-index { color: var(--blue-text); }
+.ability-chapter-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+.ability-chapter-header > p:last-child { color: var(--text-2); font-size: var(--text-body); }
+
+.ability-opening-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+.ability-thesis {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--space-12));
+  padding-top: var(--space-6);
+  border-top: 3px solid var(--blue-text);
+}
+.ability-thesis blockquote {
+  margin-bottom: var(--space-8);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.875rem);
+  font-style: italic;
+  line-height: 1.02;
+}
+.ability-thesis > p:last-child { color: var(--text-2); font-size: var(--text-lead); line-height: var(--leading-body); }
+.ability-component-label { margin-bottom: var(--space-5); color: var(--blue-text); }
+.ability-media-surface { padding: clamp(12px, 2vw, 26px); background: #efaa18; border-radius: var(--radius-sm); }
+.ability-media-surface img { width: 100%; height: auto; border-radius: 2px; }
+.ability-case-study figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+}
+
+.ability-identity-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.ability-artifact {
+  grid-row: span 2;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+.ability-artifact-copy { padding: clamp(28px, 4vw, 56px); }
+.ability-artifact h3,
+.ability-diagram-heading h3,
+.ability-kit-copy h3 {
+  margin-bottom: var(--space-5);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+.ability-artifact-copy > p:last-child,
+.ability-diagram-heading > p,
+.ability-kit-copy > p:last-child { color: var(--text-2); font-size: var(--text-lead); line-height: var(--leading-body); }
+.ability-artifact img,
+.ability-icon-card img { width: 100%; height: auto; }
+.ability-icon-card { padding: var(--space-4); border: 1px solid var(--border); background: var(--bg); }
+.ability-icon-card--final { margin-left: clamp(0px, 4vw, 64px); }
+
+.ability-diagram {
+  margin-top: clamp(72px, 9vw, 128px);
+  padding-top: var(--space-8);
+  border-top: 3px solid var(--blue-text);
+}
+.ability-diagram-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+  gap: var(--space-10);
+  align-items: end;
+}
+.ability-diagram-path {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+}
+.ability-diagram-path::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: 20%;
+  height: 2px;
+  background: var(--blue-text);
+}
+.ability-diagram-node { position: relative; padding-top: var(--space-5); }
+.ability-diagram-node::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--bg-2);
+  border-radius: 50%;
+  background: var(--blue-text);
+}
+.ability-diagram-node:last-child::before { background: var(--pink); }
+.ability-diagram-node span { display: block; margin-bottom: var(--space-4); color: var(--blue-text); }
+.ability-diagram-node strong { display: block; font-family: 'DM Serif Display', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.1; }
+.ability-diagram-node small { display: block; margin-top: var(--space-2); color: var(--text-2); }
+
+.ability-kit-feature {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.65fr) minmax(0, 1.35fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: end;
+}
+.ability-kit-copy { padding: var(--space-8) 0; border-top: 3px solid var(--blue-text); border-bottom: 1px solid var(--border); }
+.ability-kit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); margin-top: clamp(56px, 7vw, 96px); }
+.ability-kit-grid figure { min-width: 0; padding: var(--space-4); border: 1px solid var(--border); background: var(--bg-2); }
+.ability-kit-grid img { width: 100%; height: auto; }
+.ability-map-frame { margin-top: clamp(56px, 7vw, 96px); padding-top: var(--space-8); border-top: 3px solid var(--blue-text); }
+.ability-map-frame img { width: 100%; height: auto; border-radius: var(--radius-sm); }
+
+@media (max-width: 1000px) {
+  .ability-hero { grid-template-columns: 1fr; }
+  .ability-hero-copy { min-height: 610px; }
+  .ability-hero-media { min-height: 540px; }
+  .ability-chapter-header { grid-template-columns: 90px minmax(0, 1fr); }
+  .ability-chapter-header > p:last-child { grid-column: 2; }
+  .ability-opening-grid,
+  .ability-identity-grid,
+  .ability-kit-feature { grid-template-columns: 1fr; }
+  .ability-thesis { position: static; }
+  .ability-artifact { grid-row: auto; }
+  .ability-icon-card--final { margin-left: 0; }
+  .ability-diagram-heading { grid-template-columns: 1fr; }
+  .ability-kit-copy { order: -1; }
+}
+
+@media (max-width: 700px) {
+  .ability-hero-copy { min-height: 560px; padding: 44px var(--page-x); }
+  .ability-hero h1 { font-size: clamp(3.75rem, 18vw, 5rem); }
+  .ability-hero-intro { grid-template-columns: 1fr; gap: var(--space-6); }
+  .ability-hero-media { min-height: 430px; }
+  .ability-meta dl { grid-template-columns: 1fr; }
+  .ability-meta dl > div { padding: var(--space-5) 0; border-right: 0; border-bottom: 1px solid var(--border); }
+  .ability-meta dl > div + div { padding-left: 0; }
+  .ability-meta dl > div:last-child { border-bottom: 0; }
+  .ability-chapter { padding-top: 78px; padding-bottom: 78px; }
+  .ability-chapter-header { grid-template-columns: 1fr; gap: var(--space-3); }
+  .ability-chapter-header > p:last-child { grid-column: auto; }
+  .ability-chapter-header h2 { font-size: clamp(2.75rem, 14vw, 4rem); }
+  .ability-opening-grid,
+  .ability-identity-grid,
+  .ability-kit-feature { gap: var(--space-10); }
+  .ability-thesis blockquote { font-size: clamp(2.25rem, 11vw, 3.25rem); }
+  .ability-case-study figcaption { align-items: flex-start; }
+  .ability-artifact-copy { padding: var(--space-8) var(--space-6); }
+  .ability-artifact h3,
+  .ability-diagram-heading h3,
+  .ability-kit-copy h3 { font-size: clamp(2.25rem, 11vw, 3.25rem); }
+  .ability-diagram-path { grid-template-columns: 1fr; gap: 0; padding: 0 0 0 var(--space-12); }
+  .ability-diagram-path::before { top: 8px; bottom: 100px; left: 7px; right: auto; width: 2px; height: auto; }
+  .ability-diagram-node { padding: 0 0 var(--space-8); }
+  .ability-diagram-node::before { top: 2px; left: calc(-1 * var(--space-12)); }
+  .ability-kit-grid { grid-template-columns: 1fr; }
+}
+/* ABILITY EXPERIENCE: END */
