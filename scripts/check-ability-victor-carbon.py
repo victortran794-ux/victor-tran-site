@@ -7,6 +7,17 @@ ROOT=Path(__file__).resolve().parents[1]
 HTML=ROOT/'abilityexperience.html'
 CSS=ROOT/'css/style.css'
 
+
+def relative_luminance(hex_color):
+    channels=[int(hex_color[index:index+2],16)/255 for index in (1,3,5)]
+    linear=[value/12.92 if value<=0.04045 else ((value+0.055)/1.055)**2.4 for value in channels]
+    return 0.2126*linear[0]+0.7152*linear[1]+0.0722*linear[2]
+
+
+def contrast_ratio(color_a,color_b):
+    luminances=sorted((relative_luminance(color_a),relative_luminance(color_b)),reverse=True)
+    return (luminances[0]+0.05)/(luminances[1]+0.05)
+
 class Audit(HTMLParser):
     def __init__(self):
         super().__init__(); self.tags=[]; self.images=[]; self.ids=[]; self.classes=[]
@@ -53,6 +64,11 @@ def main():
     ability_css=css[slice_start:slice_end] if slice_start!=-1 and slice_end!=-1 else ''
     need('@media (max-width: 700px)' in ability_css,'missing page-specific narrow recomposition')
     need('.ability-diagram' in css and '.ability-artifact' in css,'missing production component styles')
+    project_color=re.search(r'--ability-project:\s*(#[0-9a-fA-F]{6})',ability_css)
+    project_blue=re.search(r'--ability-project-blue:\s*(#[0-9a-fA-F]{6})',ability_css)
+    need(bool(project_color and project_blue),'missing Ability project color tokens')
+    if project_color and project_blue:
+        need(contrast_ratio(project_color.group(1),project_blue.group(1))>=4.5,'Ability hero kicker must meet WCAG AA text contrast')
     need('left: 7px;' in ability_css and 'right: 20%;' in ability_css,'desktop diagram line must connect the node sequence')
     need('bottom: 100px;' in ability_css,'mobile diagram line must terminate at the final node')
     need('box-shadow' not in ability_css,'Ability Experience slice must stay shadow-free')

@@ -3767,7 +3767,7 @@ html[data-theme="dark"] .spotify-frame {
 /* ABILITY EXPERIENCE: START */
 .ability-hero {
   --ability-project: #efaa18;
-  --ability-project-blue: #075893;
+  --ability-project-blue: #03436e;
   min-height: min(820px, calc(100vh - var(--nav-h)));
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
