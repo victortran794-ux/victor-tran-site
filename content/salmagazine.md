@@ -32,36 +32,48 @@ Modernizing a century-old publication. I led the layout and art direction for th
 
 ## Section Headings
 
-- Fraternity Communications Association Awards
-- Issues of the Star & Lamp
-- Featured spreads
-- Cover stories from the archive
+- From brochure to publication.
+- One publication, many reading modes.
+- Range inside the system.
+- The work stays available in full.
 
 ## Body Copy
 
 A century-old fraternity magazine, redrawn into an award-winning publication. Five years of issues, art direction, and editorial design.
 
-"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, in my last issue as creative director.
+01 / Redrawing a legacy
 
 From rinse-and-repeat brochure to industry award winner.
 
+Publication context
+
 First published in the fall of 1909, the Star & Lamp is the magazine of Pi Kappa Phi Fraternity and is produced in-house. As the official publication of the organization, it serves as a forum of communication to educate, inspire, and move members to action on fraternity, Greek, and men's issues. From primary designer to creative director (while still designing), this magazine evolved into an industry award-winning publication.
 
-Five years of issues, archived in full on Issuu. Click any cover to read the issue.
+"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, in my last issue as creative director.
 
-Read the full archive on Issuu, or visit pikapp.org for the latest issues.
+02 / Editorial system
+
+Feature openers, reporting, captions, and issue markers form a flexible editorial system.
+
+"Test on 10th" balances photography, pull quotes, and dense reporting across the spread.
+
+Artifact reading
+
+System relationship
+
+Four highlight spreads from my first issue as creative director.
+
+03 / Art direction in practice
 
 Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.
 
 "A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.
 
+Representative work across reporting, information design, photography, illustration, and cover features.
+
 "Thirty Under 30" celebrates thirty alumni redefining what it means to lead.
 
 Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.
-
-Four highlight spreads from my first issue as creative director.
-
-"Test on 10th" balances photography, pull quotes, and dense reporting across the spread.
 
 One cover story from each of the remaining issues, with five years of features in chronological order.
 
@@ -73,12 +85,46 @@ One cover story from each of the remaining issues, with five years of features i
 
 "Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.
 
+04 / Five years of issues
+
+Five years of issues, archived in full on Issuu. Click any cover to read the issue.
+
+Verified recognition
+
+2019 · 3rd Place Overall Magazine Excellence
+
+2018 · 3rd Place Overall Magazine Excellence
+
+The complete nine-issue archive remains accessible.
+
+Archive note
+
+Read the full archive on Issuu, or visit pikapp.org for the latest issues.
+
 ## Images
 
+- Fall 2020 Connie Owen portrait tribute spread: images/sal-f2020-connie-owen.jpg
 - Fall 2020 House & Home spread: images/sal-f2020-house-home.jpg
 - Fall 2020 Virtually Impossible spread: images/sal-f2020-virtually.jpg
 - Fall 2020 COVID Heroes chapter stories spread: images/sal-f2020-covid-heroes.jpg
-- Fall 2020 Connie Owen portrait tribute spread: images/sal-f2020-connie-owen.jpg
+- Test on 10th feature: images/sal-test-on-10th.jpg
+- Summer 2017 spread: images/sal-sum2017-1.jpg
+- Summer 2017 spread: images/sal-sum2017-2.jpg
+- Summer 2017 spread: images/sal-sum2017-3.jpg
+- Summer 2017 spread: images/sal-sum2017-4.jpg
+- A Common Bond feature opener: images/sal-common-bond-1.jpg
+- A Common Bond interior spread: images/sal-common-bond-2.jpg
+- A Common Bond closing spread: images/sal-common-bond-3.jpg
+- Thirty Under 30 feature: images/sal-fall2018-spread-1.jpg
+- Fall 2018 feature spread: images/sal-fall2018-spread-2.jpg
+- The Ability Experience challenges feature: images/sal-abex-challenges.jpg
+- Spring 2019 feature spread: images/sal-spr2019-spread-1.jpg
+- Spring 2019 feature page: images/sal-spr2019-page25.jpg
+- Spring 2019 closing feature page: images/sal-spr2019-page37.jpg
+- Fall 2016 cover story spread: images/sal-f2016-cover-story.jpg
+- Winter 2018 cover story spread: images/sal-f2017-cover-story.jpg
+- Fall 2019 cover story spread: images/sal-f2019-cover-story.jpg
+- Summer 2020 cover story spread: images/sal-s2020-cover-story.jpg
 - Fall 2016 cover: images/sal-cover-2016-fall.jpg
 - Summer 2017 cover: images/sal-cover-2017-summer.jpg
 - Fall 2017 cover: images/sal-cover-2017-fall.jpg
@@ -88,21 +134,3 @@ One cover story from each of the remaining issues, with five years of features i
 - Fall 2019 cover: images/sal-cover-2019-fall.jpg
 - Spring 2020 cover: images/sal-cover-2020-spring.jpg
 - Fall 2020 cover: images/sal-cover-2020-fall.jpg
-- A Common Bond feature opener: images/sal-common-bond-1.jpg
-- A Common Bond interior spread: images/sal-common-bond-2.jpg
-- A Common Bond closing spread: images/sal-common-bond-3.jpg
-- Thirty Under 30 feature: images/sal-fall2018-spread-1.jpg
-- Fall 2018 feature spread: images/sal-fall2018-spread-2.jpg
-- The Ability Experience challenges feature: images/sal-abex-challenges.jpg
-- Summer 2017 spread: images/sal-sum2017-1.jpg
-- Summer 2017 spread: images/sal-sum2017-2.jpg
-- Summer 2017 spread: images/sal-sum2017-3.jpg
-- Summer 2017 spread: images/sal-sum2017-4.jpg
-- Test on 10th feature: images/sal-test-on-10th.jpg
-- Spring 2019 feature spread: images/sal-spr2019-spread-1.jpg
-- Spring 2019 feature page: images/sal-spr2019-page25.jpg
-- Spring 2019 closing feature page: images/sal-spr2019-page37.jpg
-- Fall 2016 cover story spread: images/sal-f2016-cover-story.jpg
-- Winter 2018 cover story spread: images/sal-f2017-cover-story.jpg
-- Fall 2019 cover story spread: images/sal-f2019-cover-story.jpg
-- Summer 2020 cover story spread: images/sal-s2020-cover-story.jpg
