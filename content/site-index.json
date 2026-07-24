@@ -433,40 +433,46 @@
     "description": "Empowering social change through accessible design. Brand identity and collateral for The Ability Experience.",
     "contentFile": "content/abilityexperience.md",
     "headings": [
-      "Cycling Kits"
+      "One moment, one connected story.",
+      "A family of signs, not a single mark.",
+      "The identity in motion."
     ],
     "images": [
+      {
+        "src": "images/thumb-abex.webp",
+        "alt": "Ability Experience cyclist riding toward the camera in an orange and blue kit"
+      },
       {
         "src": "images/abex-print.jpg",
         "alt": "The Ability Experience 40th anniversary illustrated print"
       },
       {
         "src": "images/abex-40logo.jpg",
-        "alt": "The Ability Experience 40th anniversary logo"
+        "alt": "The Ability Experience 40th anniversary primary logo, alternate logo, and early explorations"
       },
       {
         "src": "images/abex-icons-2.jpg",
-        "alt": "Iconography sketches"
+        "alt": "Early Ability Experience iconography sketches"
       },
       {
         "src": "images/abex-icons-1.jpg",
-        "alt": "Iconography final"
-      },
-      {
-        "src": "images/abex-kits-1.jpg",
-        "alt": "AbEx cycling kit front"
-      },
-      {
-        "src": "images/abex-kits-2.jpg",
-        "alt": "AbEx cycling kit back"
+        "alt": "Final orange Ability Experience iconography combining places, events, values, and cycling symbols"
       },
       {
         "src": "images/abex-kits-3.jpg",
-        "alt": "AbEx cycling kit in use"
+        "alt": "Ability Experience cycling kit in use during a team ride"
+      },
+      {
+        "src": "images/abex-kits-1.jpg",
+        "alt": "Ability Experience cycling kit front"
+      },
+      {
+        "src": "images/abex-kits-2.jpg",
+        "alt": "Ability Experience cycling kit back"
       },
       {
         "src": "images/abex-map.jpg",
-        "alt": "SC56 Backdrop map"
+        "alt": "SC56 event backdrop map for The Ability Experience"
       }
     ],
     "projects": []
