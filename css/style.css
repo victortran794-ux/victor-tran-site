@@ -4209,6 +4209,7 @@ html[data-theme="dark"] .spotify-frame {
 .vico2-chapter-nav a { display: block; padding: var(--space-6) var(--space-5); border-right: 1px solid var(--border); text-decoration: none; }
 .vico2-chapter-nav li:first-child a { border-left: 1px solid var(--border); }
 .vico2-chapter-nav a:hover { color: var(--blue-text); }
+.vico2-case-study img { height: auto; }
 .vico2-chapter { padding: clamp(88px, 11vw, 164px) var(--page-x); border-bottom: 1px solid var(--border); scroll-margin-top: calc(var(--nav-h) + var(--space-4)); }
 .vico2-chapter > * { max-width: var(--max-w); margin-left: auto; margin-right: auto; }
 .vico2-chapter-header { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 3.2fr); gap: var(--space-8); margin-bottom: clamp(52px, 8vw, 96px); padding-top: var(--space-6); border-top: 1px solid var(--border); }

@@ -144,6 +144,7 @@ def main() -> int:
     for selector in [".vico2-hero", ".vico2-chapter", ".vico2-artifact", ".vico2-system-map", ".vico2-media-gallery", ".vico2-evidence"]:
         need(selector in shared_css, f"missing shared VicO2 selector: {selector}")
     need("@media (max-width: 700px)" in shared_css, "shared VicO2 layer needs narrow recomposition")
+    need(".vico2-case-study img { height: auto; }" in shared_css, "responsive VicO2 images must override fixed HTML height attributes")
     need(".vico2-case-study figcaption," not in shared_css, "long figcaptions must not inherit the mono uppercase label treatment")
     need("--sal-project" in sal_css and "--sal-project-blue" in sal_css, "missing SAL project skin tokens")
     need(".sal-vico2-hero,\n.sal-vico2-case-study {" in sal_css, "SAL skin tokens must reach both hero and case-study components")
