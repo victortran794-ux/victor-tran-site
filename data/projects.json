@@ -42,7 +42,7 @@
       "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.",
+      "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.",
       "cta": "View Project",
       "images": [
         {
@@ -60,9 +60,9 @@
           "class": "theme-img-dark"
         }
       ],
-      "protected": false,
-      "noindex": false,
-      "sitemap": true,
+      "protected": true,
+      "noindex": true,
+      "sitemap": false,
       "homepageVariant": "span-7"
     },
     {

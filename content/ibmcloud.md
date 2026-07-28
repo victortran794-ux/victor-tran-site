@@ -5,113 +5,130 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "IBM Cloud Observability"
+title: "IBM Cloud"
 source: "ibmcloud.html"
 url: "/ibmcloud"
-category: "Product Design"
-description: "Three years inside IBM Cloud Observability. Logging, monitoring, activity tracking, traces, and the visual system that helped fragmented enterprise tools feel more cohesive and IBM-native."
+category: "Product Design · Visual Systems"
+description: "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods."
 ---
 
-# IBM Cloud Observability
+# IBM Cloud
 
 ## Description
 
-Three years inside IBM Cloud Observability. Logging, monitoring, activity tracking, traces, and the visual system that helped fragmented enterprise tools feel more cohesive and IBM-native.
+IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.
 
 ## Page Intro
 
-Three years designing inside a complex enterprise platform. Logging, monitoring, activity tracking, traces, and related observability services. The work was less about single projects and more about helping fragmented tools feel more cohesive, more IBM-native, and easier to understand.
+I design complex enterprise workflows, stay close to implementation quality, and build visual methods intended to make complex work easier to understand and extend.
 
 ## Metadata
 
-- Category: Product Design
+- Category: Product Design · Visual Systems
 - Role: UX + Visual Designer
-- Year: 2021–2024
+- Period: 2021–2023
+- Focus: Product workflows + reusable methods
 - Client: IBM
-- Type: Product Design
 
 ## Section Headings
 
-- Designing through complexity
-- Routing audit events at scale
-- Integrating Cloud Logs into IBM Cloud
-- Monitoring, Logging & Security reviews
-- Collapsing setup into a faster flow
-- Illustration system for IBM Cloud
-- What IBM Cloud taught me
+- Move from solving the screen to improving how the team moves.
+- Carry the workflow, not just the screen.
+- Make critique survive the meeting.
+- Turn finished images into repeatable construction.
+- Create leverage beyond the artifact.
 
 ## Body Copy
 
-IBM Cloud Observability was where I learned how to design inside a complex enterprise platform.
+I joined IBM Cloud while learning a new technical domain, a layered design ecosystem, and a large organization at the same time. Over three years, that learning turned into responsibility across partner releases, implementation quality, end-to-end workflows, portfolio reviews, technical diagrams, and reusable illustration methods.
 
-The work spanned logging, monitoring, activity tracking, traces, and related observability services that helped users across various technical roles understand what was happening across their cloud environments. These products supported log management, infrastructure and application monitoring, audit event routing, trace viewing, alerting, configuration, and incident investigation.
+The projects were not one uninterrupted process. Some shipped, some changed direction, and some produced methods that outlasted an individual screen. The three proof points below show how my role expanded: carrying complex product work, converting review findings into team action, and designing visual construction for reuse.
 
-The challenge was that the ecosystem was not clean or simple. Many experiences were shaped by partner products, third-party tooling, legacy patterns, unclear routing models, limited development resources, and platform requirements that all had to fit within IBM Cloud. My role was to help make those fragmented tools feel more cohesive, more IBM-native, and easier to understand.
+Proof 01 · Carried complex product work
 
-Across three years, I contributed to routing concepts, partner product integrations, D&UX reviews, end-to-end flow redesigns, and illustration systems used across IBM Cloud. More than any single project, this work taught me how to translate messy technical systems into usable, shippable product experiences.
+Event Notifications is the clearest example of carrying a complex product problem through framing, co-design, prototyping, moderated testing, synthesis, and recommendation. Sysdig Secure and IBM Cloud Logs provide the release context around it.
 
-Activity Tracker was my entry point into Observability and professional enterprise design.
+Event Notifications gave me one of my clearest opportunities to carry a complex workflow from framing through testing and recommendation.
 
-I joined IBM in early 2021 with a steep learning curve: a complex cloud domain, an unfamiliar design system, and a team still finding its footing. When our design lead left mid-year, I stepped into an interim co-lead role while still ramping up. That meant organizing the design repo, attending lead meetings, running cross-functional syncs, and learning how to ask better questions in a domain where the answers were rarely simple.
+The interface could rely on familiar IBM Cloud and Carbon components. The harder problem was sequencing the work: users had to understand sources, destinations, conditions, and the subscription they were building without carrying the entire system model in their heads.
 
-The routing work started as self-directed exploration. I created low-fidelity concepts for how operators could configure where audit events were sent, then co-hosted a Mini Design Jam to gather ideas from the broader team. Those early concepts fed into internal workshops and helped shape the platform-level direction for routing.
+The existing creation experience required several setup steps before users could begin the task they came to complete. I organized co-design workshops to rethink the sequence and helped consolidate the work into a fast-track concept through Details, Sources, Destinations, and Review.
 
-It was a first lesson in designing through ambiguity: learning the system quickly, contributing before I had all the answers, and using rough concepts to move technical conversations forward.
+The conditions builder was the most demanding interaction. It needed to feel as approachable as an email filter while supporting compound event logic. I worked through progressive disclosure, hierarchy, rule relationships, and the point at which additional complexity should become visible.
 
-Cloud Logs became the largest design systems effort of my time on the squad.
+I built a high-fidelity prototype, prepared and moderated user sessions, synthesized the findings, and presented recommendations to stakeholders. The prototype was not the outcome by itself; it was the tool that let the team test the workflow and make the decision points concrete.
 
-IBM was integrating a partner observability product into IBM Cloud. The goal was not only to update the interface visually, but to make the experience feel native to the platform: aligned with Carbon, consistent with IBM Cloud patterns, and understandable to users moving through the broader Observability ecosystem.
+Alongside Event Notifications, I supported Sysdig Secure on IBM Cloud and IBM Cloud Logs through research and design reviews, UI and icon work, Design Intent Review, and implementation follow-up. In a final Cloud Logs push, I identified and helped resolve four dark-mode issues with the UI development team.
 
-I led UI design across the Preview, Experimental, and Beta release schedule. That meant reviewing screens in detail, flagging inconsistencies, translating Carbon and Carbon for Cloud guidance, and producing implementation-ready deliverables at a level of detail the team had not used in previous integration efforts.
+Proof 02 · Turned review findings into team action
 
-I also created technical diagrams for the documentation library and assets used during IBM TechXchange live labs. That year, Observability became the second-largest revenue-generating product space within IBM Cloud Infrastructure, and this work was part of the broader push to make those products feel more cohesive and platform-native.
+Across Observability, reviews became useful when they produced a shared priority, a backlog, an implementation change, or an artifact another team could pick up.
 
-Design systems work happens in the details. Not just applying components, but helping another product inherit the expectations, behaviors, and quality bar of a larger platform.
+Finding an issue was only the beginning. The useful work was translating it into a form the team could act on.
 
-D&UX reviews gave me a broader view of Observability as a portfolio.
+I participated in D&UX reviews across Logging, Monitoring, and Security, contributed to Sysdig Secure interviews and synthesis, and brought findings back to squads and design leadership. Looking across products made repeated problems visible: navigation, instance pages, icon treatment, documentation, and implementation details that no single screen review could explain.
 
-Across Monitoring, Logging, and Security, I reviewed dense enterprise interfaces for interaction, visual, and usability issues. Running this work as an early-career designer taught me how to separate signal from noise, present findings credibly to senior stakeholders, and build enough trust with development teams for issues to move beyond documentation and into resolution.
+We used an Improvement Jam to audit the portfolio, create focus, and convert the conversation into a UX backlog. That translation mattered. It separated quick implementation fixes from broader product questions and gave teams a clearer way to decide what should move next.
 
-For Sysdig Secure, our team conducted nine user interviews and synthesized findings into actionable product recommendations. Roughly half of the cataloged issues were resolved before launch, and many improvements applied across multiple Observability services.
+The same practice extended into Activity Tracker routing concepts, dark-mode reviews, Figma-library contributions, and a Monitoring heuristic evaluation. Each project required a slightly different format, but the method stayed consistent: identify the issue, understand its reach, bring the right people into the room, and leave behind something specific enough to continue.
 
-Quality at the portfolio level is mostly about how small issues compound. Critique gets more useful when it is specific, prioritized, and tied to something the team can implement.
+I also carried a technical-diagram uplift across the Observability documentation library. I coordinated weekly with the documentation team and compared patterns with designers in CPaaS and Satellite to simplify complex infrastructure concepts. The work continued into 2023, and selected diagrams were used during TechXchange live labs.
 
-Event Notifications was the first project I owned end-to-end.
+This is where I began to understand team leverage as a design outcome. A useful review does more than describe quality. It creates shared language, exposes the next decision, and reduces the distance between a finding and the work required to address it.
 
-The existing creation flow required users to complete multiple setup steps before they could begin the actual task. I organized co-design workshops to rethink the experience, and we consolidated the process into a single fast-track flow.
+Reconstructed working method
 
-One of the trickiest parts was the conditions builder: a rule-building interaction similar to email filters, but flexible enough to support more complex logic. Designing that experience taught me a lot about progressive disclosure, information hierarchy, and how much complexity to reveal at each step.
+Compare products, research, implementation, and documentation rather than treating each screen as an isolated case.
 
-I produced a high-fidelity prototype, prepared and moderated user testing sessions, synthesized findings, and presented recommendations to stakeholders. The work also contributed to a reusable connected-experiences pattern in Carbon for Cloud.
+Use workshops and critique to separate local defects from patterns that affect the wider portfolio.
 
-This was where I learned to carry a problem from ambiguity to evidence: framing the workflow, designing the prototype, testing the experience, and turning the findings into something the team could build from.
+Turn findings into a backlog item, design direction, diagram, library change, or implementation check.
 
-Not every part of Observability was about configuration and dense workflows.
+Work with development, documentation, and partner teams until the reasoning is usable outside the review room.
 
-Some of the work was about making IBM Cloud feel more intentional. I started with world-page illustrations for Observability and later co-led a cross-team illustration workgroup with Developer Services. We built guidelines, ran design jams, and presented the process to the Cloud PAL Design Guild.
+Improvement Jam findings translated into a UX backlog.
 
-By 2022, I was deconstructing the illustration system into a reusable Figma kit. The kit helped designers build complex assets faster while staying aligned with the style guidelines. That work eventually fed into the broader Cloud PAL 2.0 system used across IBM Cloud.
+Carbon and dark-mode issues followed through with the UI development team.
 
-IBM Cloud Observability gave me three years of enterprise reps: shipping under design system constraints, working with partner products, reviewing complex interfaces, leading end-to-end research and design, and helping fragmented tools feel more connected.
+Technical diagrams continued into live-lab use at TechXchange.
 
-The biggest lesson was that enterprise UX is rarely about designing from a blank slate. It is about working through constraints, understanding technical systems, collaborating across teams, and still finding ways to make the experience clearer for the people using it.
+Proof 03 · Designed visual systems for reuse
 
-This work shaped how I approach design now: practical, systems-minded, collaborative, and comfortable in complexity.
+The illustration work became more valuable when the method—not only the final scene—could travel to another designer.
+
+I stopped treating each illustration as a one-time solution and started designing the path another person could follow.
+
+I joined a Developer Services illustration squad in 2021. The group aligned how Cloud and DevOps concepts were represented across world pages. I developed assets and guidance, completed world-page illustrations, and facilitated a mini-jam to explore how the visual language could support additional products and stories.
+
+The work expanded beyond making images. I presented the process and documentation to the Cloud PAL Design Guild, contributed guidance approved for Cloud PAL, and participated in animated-illustration research. That made discovery, explanation, and reuse part of the design problem.
+
+In 2022, I returned to the work with a more deliberate systems mindset. I mentored designers through the existing documentation, collaborated on the next phase of Cloud illustration, developed a Figma illustration kit for pilot use, supported light-mode testing, and helped mobilize a restart of the Cloud Illustration Squad.
+
+The system had to hold two ideas at once. Each service needed enough specificity to remain recognizable, while the construction logic, lighting, perspective, and reduced metaphors needed enough consistency to make the family feel related. Testing contextual scenes beside reduced symbols made that balance visible.
+
+By 2023, the same approach continued through collaborative Cloud PAL 2.0 illustration documentation. The lasting value was not a single hero image. It was a clearer method for moving from concept to scene, from scene to reusable parts, and from individual craft to a visual language another designer could extend.
+
+Designed for reuse
+
+World-page assets established the visual range. Documentation, pilot playback, light-mode testing, and reduced service metaphors were intended to make the method easier to inspect and extend.
+
+Selected visual evidence
+
+The sequence shows how contextual scenes, reduced studies, and light/dark system work informed one another without treating image volume as evidence of importance.
+
+The throughline
+
+Across IBM Cloud, my strongest work connected individual design decisions to the systems around them—shaping complex workflows, turning review findings into team action, and documenting visual methods other designers could understand and extend.
+
+The progression was not from junior work to a perfect process. It was from needing the system explained to me toward making complex work clearer for the next person: a user navigating a subscription, a team deciding what to fix, a developer implementing Carbon, or a designer extending a visual language.
 
 ## Images
 
-- IBM Cloud Observability hero: images/ibm-thumb-light.png
-- IBM Cloud Observability hero: images/ibm-thumb-dark.png
-- IBM Activity Tracker technical diagram: images/ibm-at-diagram.jpg
-- IBM Cloud Observability world page concept: images/ibm-p4-world-hifi.jpg
-- IBM Cloud Observability world page card: images/ibm-p4-world-01.jpg
-- IBM Cloud Logs instance list design: images/ibm-logs-instance-list.jpg
-- IBM Cloud Logs create side panel: images/ibm-logs-create-panel.jpg
-- IBM Cloud Monitoring D&UX heuristic evaluation: images/ibm-dux-logging.jpg
-- Sysdig Secure D&UX review: images/ibm-dux-sysdig.jpg
-- Event Notifications conditions builder: images/ibm-en-conditions.jpg
-- Event Notifications custom domains: images/ibm-en-custom-domains.jpg
-- Kubernetes illustration digital concepts: images/ibm-p1-sketch.jpg
-- Kubernetes illustration drawn concepts: images/ibm-p1-devops.jpg
-- Illustration system elements light: images/ibm-p2-main-light.jpg
-- Illustration system elements dark: images/ibm-p2-main-dark.jpg
+- IBM Cloud Observability abstract service illustration in light mode: images/ibm-thumb-light.png
+- IBM Cloud Observability abstract service illustration in dark mode: images/ibm-thumb-dark.png
+- IBM Cloud Observability world-page illustration concept: images/ibm-p4-world-hifi.jpg
+- IBM Cloud Observability world-page service card: images/ibm-p4-world-01.jpg
+- Early digital studies for IBM Cloud service illustration construction: images/ibm-p1-sketch.jpg
+- Drawn studies for IBM Cloud DevOps illustration construction: images/ibm-p1-devops.jpg
+- IBM Cloud illustration-system elements in light mode: images/ibm-p2-main-light.jpg
+- IBM Cloud illustration-system elements in dark mode: images/ibm-p2-main-dark.jpg
