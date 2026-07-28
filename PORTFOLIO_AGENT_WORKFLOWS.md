@@ -67,6 +67,20 @@ The same workflow applies:
 
 Claude Code prompts in this file should be reusable as Codex prompts with only the executor name changed.
 
+### Codex asset-package intake / Pi Kapp-style readiness
+
+When Victor says a case-study page should be ready “like Pi Kapp,” this means the lo-fi structure, copy boundary, and placeholder media slots are ready for a **Victor-provided Codex package of worked-on assets**. It does not automatically request a demo route, staging deck, commit, hosted preview, or deployment.
+
+The next stage is:
+
+1. Victor provides the Codex asset package.
+2. Hermes inventories, hashes, visually inspects, and maps the package to approved page slots.
+3. Existing imagery remains placeholder material until that mapping is approved.
+4. Hermes integrates only the selected assets in an isolated worktree, then reruns privacy, source, responsive, Light/Dark, motion, and visual QA.
+5. Work stops for a Signal-readable review before commit, push, or deployment.
+
+Victor reviews lo-fi passes as a grouped in-person docket rather than a sequence of separate Signal approvals. Bring each completed pass to `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW`. After the grouped review, approved pages advance together to `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`. Create interactive demo/staging routes only when Victor asks for that separately.
+
 ### Figma MCP
 
 Figma MCP setup is deferred until a specific screen or Figma file is selected.

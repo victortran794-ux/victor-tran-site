@@ -1,6 +1,6 @@
 # Document Processing — Case Study Notes
 
-Last updated: 2026-06-08
+Last updated: 2026-07-28
 
 Status: `live`
 
@@ -15,16 +15,17 @@ This is the durable project-package notes file for the live Document Processing 
 - Screenshot/media safety: use the consolidated Claude Code + Figma media-audit handoff before adding or replacing visuals: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - Change safety: preserve the gate and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
 - Package model: source page `document-processing.html`, generated export `content/document-processing.md`, package manifest `case-studies/document-processing.md`, historical source notes in `archive/doc-pro-case-study-handoff.md`, and private media-audit source material in the PC-side Website Items folder
-- Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, plus the working notes below
+- Current private review checkpoint: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\2026-07-27-vico2-asset-integration\Document-Processing-VicO2-asset-integration.html`; it uses sanitized derivatives and does not reference the raw bundle
+- Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, the working notes below, and the source-cross-checked 2026-07-27 private comparison
 
 ## Next action
 
-No standing Document Processing-specific action remains. Keep the live password-protected page stable unless Vic explicitly asks for a new refinement pass. If revisiting the page, focus on one clearly approved scope at a time: copy polish, media replacement, claim verification, or visibility changes. Use the consolidated Claude Code + Figma media-audit handoff as source material before changing visuals or claims, with Hermes reviewing any agent output before implementation.
+The private VicO2 comparison is `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped portfolio docket. Keep the live password-protected page stable until that review. Approval would authorize a separate implementation branch using only reviewed sanitized derivatives and approved copy; it would not authorize gate, indexing, sitemap, navigation, homepage, or additional claims changes.
 
 ## Do not do without explicit approval
 
 - Do not remove or weaken the password gate or `noindex,nofollow`.
-- Do not add a homepage card, sitemap entry, or change navigation visibility until Vic asks.
+- Do not change the current homepage card, Work navigation visibility, or sitemap omission until Vic asks.
 - Do not invent screenshots, image paths, metrics, launch claims, or new final wording.
 - Do not treat the mere existence of the live protected route as a problem; the current protected live state is acceptable.
 - Do not create generic “document processing” tasks, dashboards, workflows, or automation plans from this name. In this repo, Document Processing refers to this IBM portfolio project page unless Vic explicitly says otherwise.
@@ -259,7 +260,7 @@ Instead, the design made uncertainty visible and manageable. Builders could see 
 
 ### Outcome — a measurable quality loop for document automation
 
-Accuracy Evaluation is planned for the second half of 2026 and defines a design direction for making document extraction quality easier to measure and improve.
+Victor confirmed on 2026-07-27 that Document Extractor and its combined Evaluation experience released in July 2026. The experience makes document extraction quality easier to measure and improve.
 
 It connected the broader document processing platform into a clearer loop:
 
@@ -269,7 +270,7 @@ For builders, this created a path from “the AI extracted something” to “I 
 
 For the platform, it helped frame document processing as a more trustworthy enterprise workflow: configurable, reviewable, and measurable.
 
-**Note for Vic:** If this shipped, influenced roadmap, or was handed off to engineering, add one concrete sentence here. If not, keep this as “defined a design direction” to avoid overclaiming.
+**Claim boundary:** Release timing is confirmed. Do not add adoption, business-impact, or roadmap-influence claims without separate evidence and approval.
 
 ### What this project shows
 
@@ -324,9 +325,9 @@ For the later larger transfer, use prompts/Codex or Claude-first workflows to cr
 
 - Public project/page name: `Document Processing`.
 - Classifier and extractor are fully shipped.
-- Accuracy Evaluation is planned to come out this summer.
+- Document Extractor and its combined Evaluation experience released in July 2026.
 - Vic was the lead designer on the Accuracy Evaluation experience.
-- If this appears on the homepage, it should sit above IBM Cloud, but wait for a suitable photo/thumbnail before adding the homepage card.
+- The current homepage Selected Work card sits above IBM Cloud; preserve that visibility unless Victor explicitly approves a change.
 
 ## Still confirm before future refinements
 
@@ -343,7 +344,7 @@ The page may remain live in its current password-gated/noindex state. Confirm th
 1. Preserve the existing `document-processing.html` implementation, password gate, and `noindex,nofollow` metadata.
 2. Treat `document-processing.html` as the implemented page and this file as planning/source context.
 3. Scope future work narrowly: copy polish, approved media replacement, claim verification, or optional promotion should be separate tasks.
-4. Do not add `Document Processing` to the Work dropdown, homepage, or sitemap unless Vic explicitly asks.
+4. Preserve the existing Work dropdown and homepage card, and keep the page omitted from the sitemap unless Vic explicitly approves a visibility change.
 5. Do not invent assets, metrics, dates, launch claims, or new final wording.
 6. After page copy changes, run:
 
@@ -359,24 +360,25 @@ node scripts/html-to-md.mjs
    - Generated `content/document-processing.md` and `content/site-index.json` update correctly when copy changes.
 8. Commit/push only after Vic approves the specific task and review path.
 
-## Suggested homepage/card copy, if featured later
+## Current homepage/card state
 
 **Title:** Document Processing
 
-**Description:** Designing an evaluation workflow that helped builders measure, understand, and improve AI document extraction before trusting it in production.
+**Current description:** Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.
 
-**Category:** Product Design / AI Workflow Design
+**Current category:** Product Design
 
-**Thumbnail:** TODO — add later.
+**Current thumbnail:** `images/document-processing-evaluation-results-placeholder.png`
 
 ## Review checklist for Vic
 
 Before implementation/publishing, confirm:
 
-- [ ] Exact public project name and product label.
-- [ ] Whether the work shipped, prototyped, or stayed exploratory.
-- [ ] Role/ownership wording is accurate.
+- [x] Public project name is `Document Processing`; the current homepage label is `Product Design`.
+- [x] Document Extractor and its combined Evaluation experience released in July 2026.
+- [x] Victor was the lead designer on the Accuracy Evaluation experience.
 - [x] Password-protected page is acceptable for this work.
-- [ ] Whether it should be linked from homepage now or only available through nav/direct URL.
-- [ ] Any imagery that should be included immediately.
-- [ ] Whether Claude Code should commit only, or commit + push.
+- [x] Current homepage and Work-navigation visibility are approved; sitemap omission remains intentional.
+- [x] Sanitized private-comparison imagery is selected for in-person review; live placeholder imagery remains unchanged until approval.
+- [ ] Grouped in-person review decision: Keep / Adjust / Reject.
+- [ ] For any approved implementation, confirm the exact commit/push/PR boundary separately.

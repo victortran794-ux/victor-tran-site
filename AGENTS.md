@@ -37,7 +37,7 @@ Root HTML files are the source of truth for public portfolio content. Do not han
 - Preserve Victor's existing visual voice: editorial, polished, selective, and personal.
 - Reuse existing navigation, footer, cursor, reveal, theme, and case-study patterns.
 - Keep protected pages protected and confidential copy/images intentionally obscured.
-- Do not remove the deliberate PCI body-copy blur.
+- Preserve the current live PCI body-copy blur until a separately approved migration. Victor guarantees that future PCI Codex-package artifacts will contain no sensitive information, so an approved VicO2 migration may use those sanitized assets/copy without reproducing the legacy blur.
 - Optimize images before adding them to the site.
 
 ## Case Study Intake

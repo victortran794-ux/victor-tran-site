@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-07-12
-Status: Active direction brief; current implementation is reconciled and a fresh cross-viewport visual review is the next gate
+Last updated: 2026-07-28
+Status: Active direction brief; the current VicO2 lo-fi docket is reconciled and grouped in-person review is the next gate
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,7 +42,7 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. A fresh desktop/mobile and Light/Dark review is the next gate. The later site-review backlog is resolved: contact resilience, Pi Kapp demo cold-start presentation, Performance Contracting naming, and the second-half-of-2026 release wording have shipped or been aligned. The manual mobile/Light/Dark review is deferred; subjective visual changes remain gated until that review. A2UI remains parked.
+The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. The homepage and Ability Experience are live VicO2 checkpoints. The remaining project manifest is represented by eight completed private lo-fi review surfaces: Document Processing, IBM Cloud Observability, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art & Illustration, and Graphic Design. Victor's grouped in-person review is the next gate before copy/artifact decisions or asset integration. Document Extractor and its combined Evaluation experience were confirmed released in July 2026; the live protected page still carries older wording until an approved implementation slice replaces it. A2UI remains parked.
 
 Current working posture:
 
@@ -55,11 +55,11 @@ Current working posture:
 
 ### Top active decisions
 
-1. Audit the live homepage and Ability Experience VicO2 translations for reusable decisions and inconsistencies without reopening them absent new evidence.
-2. Select one safe public page for the next bounded VicO2 comparison.
-3. Include that page's visual, copy/tone, responsive/media, interaction, and relevant promoted-pattern review in the same approval lane.
-4. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
-5. Do not start protected-page promotion, sitemap changes, major copy rewrites, or broad redesign work without explicit approval.
+1. Treat the live homepage and Ability Experience VicO2 translations as stable checkpoints; reopen them only with new evidence.
+2. Review the eight completed lo-fi project surfaces together in person rather than opening separate Signal approval rounds.
+3. Advance approved pages to `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`, then inventory and map each package before integration.
+4. Keep theme/contact changes for a later global bundle. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
+5. Preserve protected-page gates, indexing, sitemap, navigation, media, and claims boundaries unless a separately approved implementation slice changes them.
 
 ---
 
@@ -232,6 +232,23 @@ Potential pattern:
 - Variants for single screen, before/after pair, stacked flow, and annotated detail.
 - Confidential/protected screens can use the same frame with blur, crop, redaction, or placeholder states.
 
+### Portfolio shell + project-native canvas
+
+Future concept: create a reusable page template that keeps a visible tie to the portfolio system—a compact header, project identity, navigation, theme context, and return path—while allowing everything below that shell to use its own isolated CSS and visual language.
+
+This would let a project be experienced closer to its native form instead of being flattened into the standard case-study layout. For example, a sanitized architecture dashboard could appear as the body of its portfolio page, retaining its own dashboard composition and interaction model while still reading as part of Victor's portfolio.
+
+Potential structure:
+
+- **Portfolio shell:** global identity, project title/context, access state, theme behavior, and clear navigation back into the portfolio sequence.
+- **Project-native canvas:** separately scoped CSS, layout, tokens, components, and optional JavaScript owned by that project presentation.
+- **Isolation boundary:** namespace styles or use another explicit containment strategy so project CSS cannot alter the portfolio shell and portfolio CSS does not flatten the project.
+- **Responsive contract:** each native canvas must define its own desktop/mobile behavior rather than inheriting a generic case-study grid.
+- **Truth and access boundary:** dashboards must use real, approved states or clearly labeled static demonstrations—never fabricated data or fake working actions. Protected/internal architecture remains sanitized, gated, or withheld.
+- **Progressive fallback:** the project context and essential story remain understandable if the native canvas or optional behavior cannot load.
+
+Status: idea only. Validate first with one private, bounded prototype before considering a reusable template or broader rollout.
+
 ### Portfolio color punctuation
 
 The portfolio can use intentional splashes of color so the energy of the homepage colored project boxes carries into deeper pages. The goal is not to make every page loud; it is to use the existing accent palette as wayfinding, rhythm, and project identity.
@@ -329,11 +346,11 @@ If Victor flags a concrete issue, choose one of these narrow slices:
 3. **Public visual/interaction polish slice**
    - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
-4. **Document Processing closed protected-page state**
-   - No standing Document Processing-specific action remains.
-   - Keep the protected IBM portfolio page live in its current password-gated/noindex state with current Work-dropdown visibility and sitemap omission.
-   - Temporary placeholder media is acceptable as-is until Victor explicitly selects a new refinement pass.
-   - If Victor reselects the page later, start a new approval-gated slice and use the private handoff before changing visuals or claims: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`.
+4. **Document Processing protected-page review state**
+   - The private VicO2 comparison is complete and held with the grouped in-person review docket.
+   - Keep the live IBM portfolio page in its current password-gated/noindex state with current homepage/Work visibility and sitemap omission until that review closes.
+   - The private comparison uses reviewed sanitized derivatives and corrected July 2026 release framing; the raw bundle remains private.
+   - Approval of the comparison would authorize a separate protected-page implementation branch, not visibility, indexing, sitemap, navigation, homepage, or additional claims changes.
 
 ### Future concepts area
 
@@ -428,10 +445,10 @@ Guardrails:
 
 ### Recommended next action
 
-1. Treat the practical slices as gated unless Victor flags a concrete current-site issue.
-2. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed.
-3. Choose the next branch-sized task from the docket/menu: current-site review, public copy/tone, public visual/interaction polish, or another future concept.
-4. Keep homepage/nav promotion, sitemap changes, floating chat widgets, or protected-page changes behind a separate approval.
+1. Review the eight completed VicO2 lo-fi project surfaces together at the grouped in-person checkpoint.
+2. Mark approved pages `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`; keep adjusted or rejected pages at the review gate with explicit notes.
+3. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed, and keep theme/contact changes for a later global bundle.
+4. Keep homepage/nav promotion, sitemap changes, floating chat widgets, and protected-page visibility or claims changes behind separate approval.
 
 ---
 
