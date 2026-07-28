@@ -57,7 +57,7 @@ Now playing Systems at scale 01/03
 
 Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.
 
-Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all.
+IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
 
 Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.
 

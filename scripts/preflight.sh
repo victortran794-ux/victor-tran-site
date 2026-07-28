@@ -42,6 +42,7 @@ fi
 run_required "Whitespace/conflict marker check" git diff --check
 
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
+run_required "Protected IBM Cloud hiring-cut contract" node scripts/check-ibmcloud-hiring-cut.mjs
 run_required "Production-host regression check" node scripts/check-production-host.mjs
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
 run_required "Gallery media regression check" node scripts/check-gallery-media.mjs

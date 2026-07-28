@@ -188,69 +188,51 @@
     "projects": []
   },
   {
-    "title": "IBM Cloud Observability",
+    "title": "IBM Cloud",
     "source": "ibmcloud.html",
     "url": "/ibmcloud",
-    "category": "Product Design",
-    "description": "Three years inside IBM Cloud Observability. Logging, monitoring, activity tracking, traces, and the visual system that helped fragmented enterprise tools feel more cohesive and IBM-native.",
+    "category": "Product Design · Visual Systems",
+    "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
     "contentFile": "content/ibmcloud.md",
     "headings": [
-      "Designing through complexity",
-      "Routing audit events at scale",
-      "Integrating Cloud Logs into IBM Cloud",
-      "Monitoring, Logging & Security reviews",
-      "Collapsing setup into a faster flow",
-      "Illustration system for IBM Cloud",
-      "What IBM Cloud taught me"
+      "Move from solving the screen to improving how the team moves.",
+      "Carry the workflow, not just the screen.",
+      "Make critique survive the meeting.",
+      "Turn finished images into repeatable construction.",
+      "Create leverage beyond the artifact."
     ],
     "images": [
       {
         "src": "images/ibm-thumb-light.png",
-        "alt": "IBM Cloud Observability hero"
+        "alt": "IBM Cloud Observability abstract service illustration in light mode"
       },
       {
         "src": "images/ibm-thumb-dark.png",
-        "alt": "IBM Cloud Observability hero"
-      },
-      {
-        "src": "images/ibm-at-diagram.jpg",
-        "alt": "IBM Activity Tracker technical diagram"
+        "alt": "IBM Cloud Observability abstract service illustration in dark mode"
       },
       {
         "src": "images/ibm-p4-world-hifi.jpg",
-        "alt": "IBM Cloud Observability world page concept"
+        "alt": "IBM Cloud Observability world-page illustration concept"
       },
       {
         "src": "images/ibm-p4-world-01.jpg",
-        "alt": "IBM Cloud Observability world page card"
-      },
-      {
-        "src": "images/ibm-logs-instance-list.jpg",
-        "alt": "IBM Cloud Logs instance list design"
-      },
-      {
-        "src": "images/ibm-logs-create-panel.jpg",
-        "alt": "IBM Cloud Logs create side panel"
-      },
-      {
-        "src": "images/ibm-dux-logging.jpg",
-        "alt": "IBM Cloud Monitoring D&UX heuristic evaluation"
-      },
-      {
-        "src": "images/ibm-dux-sysdig.jpg",
-        "alt": "Sysdig Secure D&UX review"
-      },
-      {
-        "src": "images/ibm-en-conditions.jpg",
-        "alt": "Event Notifications conditions builder"
-      },
-      {
-        "src": "images/ibm-en-custom-domains.jpg",
-        "alt": "Event Notifications custom domains"
+        "alt": "IBM Cloud Observability world-page service card"
       },
       {
         "src": "images/ibm-p1-sketch.jpg",
-        "alt": "Kubernetes illustration digital concepts"
+        "alt": "Early digital studies for IBM Cloud service illustration construction"
+      },
+      {
+        "src": "images/ibm-p1-devops.jpg",
+        "alt": "Drawn studies for IBM Cloud DevOps illustration construction"
+      },
+      {
+        "src": "images/ibm-p2-main-light.jpg",
+        "alt": "IBM Cloud illustration-system elements in light mode"
+      },
+      {
+        "src": "images/ibm-p2-main-dark.jpg",
+        "alt": "IBM Cloud illustration-system elements in dark mode"
       }
     ],
     "projects": []
