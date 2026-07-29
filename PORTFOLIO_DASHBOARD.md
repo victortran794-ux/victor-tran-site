@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-07-28
+Last updated: 2026-07-29
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,18 +20,19 @@ Consult next:
 
 ### Current active plan
 
-Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective technical closeout and the later maintenance backlog are complete. The Ability Experience VicO2 translation and the homepage system alignment are now live and production-verified. **VicO2 system continuation is the primary portfolio-enhancement lane**, organized as bounded page-by-page translations rather than a broad redesign. Public visual review, selected-page copy/tone work, responsive/media/interaction polish, system documentation, and proven-component Figma reconstruction now support that lane instead of competing with it as disconnected broad passes. Document Processing and wxO Canvas remain separate protected-project lanes. A2UI remains parked.
+Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective technical closeout and the later maintenance backlog are complete. The Ability Experience VicO2 translation and homepage system alignment are live and production-verified. The nine-package private Hi-Fi docket is also complete and is now paused for Victor's later Keep / Adjust / Reject edits: Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. After a package is edited and approved, its canonical private Hi-Fi package becomes the bounded source for replacing—or, where no counterpart exists, establishing—its production page. Production migration remains serial, reviewable, and protection-aware rather than an automatic broad rollout. A2UI remains parked.
 
 ### Current next actions
 
 1. Treat the Ability Experience and homepage VicO2 translations as complete, live production checkpoints; observe them and reopen only with new evidence.
-2. Group all completed lo-fi VicO2 passes into one in-person review docket. Do not ask Victor to approve these pages one by one over Signal unless he requests it.
-3. Hold Document Processing, IBM Cloud Observability, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art & Illustration, and Graphic Design at the same checkpoint: `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW`. After the grouped review, approved pages advance to `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`.
-4. Keep current imagery as placeholder material until the grouped review closes. On receipt of an approved Codex package, Hermes inventories, hashes, inspects, and maps it before integration.
-5. Include Pi Kapp's completed private VicO2 comparison in the grouped in-person review. Updated screens remain future asset-package input, not a blocker to reviewing the lo-fi direction.
-6. Treat the verified combined Visual Archive comparison as the lo-fi review surface for Art & Illustration and Graphic Design, while preserving them as distinct supporting galleries.
-7. Keep theme/contact changes parked for a later global bundle. Keep wxO Canvas separate as a protected candidate requiring shipped-versus-exploratory and sanitization decisions before design work.
-8. Promote optional chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2. Preserve PCI's gate, noindex state, and confidential framing; Victor guarantees that future Codex-package artifacts contain no sensitive information, so its migration does not need to reproduce the legacy copy blur. Keep Lens/Design-DNA, A2UI, framework migration, broad redesign, generative/chat UI promotion, and uncontrolled rollout parked.
+2. Treat the nine canonical private Hi-Fi packages as complete construction checkpoints and pause additional Hi-Fi production. Resume only for Victor's package-specific Keep / Adjust / Reject edits.
+3. Preserve each canonical package, its manifest, and its claims/privacy contract as the migration source. Do not hand-integrate private raw material or bypass the verified derivatives.
+4. After the Hi-Fi edits are approved, complete one Launch Integration Contract covering final project order, public/protected visibility, indexing/robots/sitemap behavior, homepage/Work placement, previous/next behavior, shared case-study chrome, recruiter actions, accessibility, evidence/credit rules, launch metadata, and preview/deployment strategy.
+5. Finalize one bounded shared header/footer shell and case-study chrome bundle from the approved contract. Apply it once across the integration surface so every migrated page inherits the same navigation, theme, contact, accessibility, responsive, and protected-state behavior.
+6. Migrate approved Hi-Fi packages serially into a coordinated launch/integration branch rather than directly onto live `main`. Archive each existing production page, preserve or establish its approved route/visibility contract, and run package-specific QA before continuing.
+7. Keep Art & Illustration and Graphic Design as distinct supporting visual archives even when their Hi-Fi packages replace the current production galleries.
+8. Review the complete integrated portfolio through a Vercel preview, resolve the whole-site visual/tone/responsive/accessibility/metadata punch list, then obtain explicit approval before merging to `main` and launching.
+9. Keep Lens/Design-DNA, A2UI, framework migration, broad redesign, generative/chat UI promotion, and uncontrolled rollout parked.
 
 ### Supporting historical context
 
@@ -41,7 +42,7 @@ Use the reconciled slice structure below to keep practical polish gated and futu
 
 ## Current enhancement phase
 
-Status: production remains unchanged after the Ability Experience and homepage VicO2 translations. The active docket is a grouped in-person review batch: Document Processing, IBM Cloud Observability, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art & Illustration, and Graphic Design are all at `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` before copy/artifact decisions or individual asset integration proceed. Theme/contact and larger future concepts remain parked. wxO Canvas remains a separate protected lane.
+Status: production remains unchanged after the Ability Experience and homepage VicO2 translations. The approved July 2026 Document Processing release-wording correction is complete and verified in the local working tree but is not committed or deployed. Nine canonical private Hi-Fi packages are complete and paused for later editing/review. After those edits are approved, the next phase is a Launch Integration Contract, followed by one shared shell/case-study-chrome bundle and serial migration into a coordinated Vercel preview. Final whole-site review and explicit approval happen before merge to live `main`. Larger future concepts remain parked.
 
 Recent shipped work:
 
@@ -61,11 +62,14 @@ Current next action:
 
 - Use this dashboard as the current status cockpit. Use `archive/planning/portfolio-enhancement-state-2026-07-12.md` only for historical technical-closeout context.
 - Use the VicO2 checkpoint at `C:\Users\Victor\Documents\Website Items\Design Kits\2026-07-23-carbon-victor-system\README.md` as the priority-lane scope and guardrail reference.
-- Hold completed lo-fi pages for Victor's grouped in-person review. Do not create separate Signal approval rounds for each page unless Victor asks.
-- Do not start another case-study lo-fi pass before the grouped in-person review. The current project manifest is fully accounted for: homepage and Ability Experience are live VicO2 checkpoints; the remaining eight project pages are held in the shared review batch.
+- Hold the completed canonical Hi-Fi packages for Victor's later Keep / Adjust / Reject editing pass. Do not start another Hi-Fi construction batch.
+- Do not replace a production page until its Hi-Fi package is edited and explicitly approved for migration.
 - Keep residual objective maintenance separate when it is not a design-system question.
-- Treat Document Processing, IBM Cloud Observability, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art & Illustration, and Graphic Design as one lo-fi in-person review batch. Slot maps live under `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Codex Asset Intake\`. Preserve password gates, `noindex`, sitemap omission, media boundaries, and claims boundaries where applicable.
-- Treat wxO Canvas as a separate protected case-study candidate, never as a Document Processing chapter. Resume only from its dedicated handoff.
+- Treat Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp as the completed private Hi-Fi docket. Canonical packages live under `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Hi-Fi Review\`.
+- Treat wxO Canvas as the protected 2024–present umbrella story; Document Processing is a feature thread within it and may retain its focused standalone page. Preserve both packages' distinct reader roles and claims boundaries during production planning.
+- Complete the Launch Integration Contract before implementing the shared shell. Do not improvise project order, visibility, indexing, protected-route treatment, recruiter actions, or cross-page behavior during migration.
+- Prepare the shared header/footer and case-study chrome bundle as one global-shell change, not as repeated per-page edits. Finalize its exact design from the approved contract before implementation.
+- Integrate shell and page migrations on a coordinated preview branch. Run one whole-site review for tone, responsive behavior, accessibility, media loading, metadata, and visual balance before approving merge to `main`.
 - Keep broad visual expansion and A2UI parked unless Victor explicitly resumes them.
 
 ## Adjusted enhancement slices
@@ -122,10 +126,55 @@ These items were verified and closed through narrow, reviewed changes:
 
 - **Contact resilience resolved:** active footers expose a visible email address, Copy email action, LinkedIn, and retained email link.
 - **Pi Kapp demo cold start resolved:** `pikappapp/demo.html` includes a branded static pre-render loading state that React replaces after initialization.
-- **Release wording corrected 2026-07-27:** Victor confirmed that Document Extractor and its combined Evaluation experience released in July 2026. Earlier `planned for the second half of 2026` wording is stale and must be replaced only within the approved protected-page copy-rebuild slice.
+- **Release wording correction prepared locally 2026-07-29:** Victor confirmed that Accuracy Evaluation released in July 2026. The protected page source now uses the confirmed release state and is verified locally; it remains uncommitted and undeployed. Its gate, `noindex`, sitemap omission, navigation visibility, media, and other claims are unchanged.
 - **Name consistency resolved:** public labels align to the official Performance Contracting, Inc. name.
 
 Mobile findings from the 2026-06-09 review are void because mobile was not actually tested. Any mobile work begins with a fresh verification pass.
+
+### C3. Launch Integration Contract
+
+Purpose: resolve the cross-page launch decisions that individual Hi-Fi packages cannot settle before shared-shell implementation or production-counterpart migration begins.
+
+Required decisions:
+
+- Final project sequence across homepage, Work menu, and previous/next navigation after wxO Canvas joins the existing portfolio.
+- Per-project visibility matrix: public/protected, `index`/`noindex`, robots inclusion, sitemap inclusion, homepage visibility, Work-menu visibility, direct-link behavior, and whether a lock/protected indicator appears before entry.
+- wxO Canvas production treatment: protected route, homepage/Work visibility, sequence position, and relationship to the focused Document Processing page.
+- Reconciliation of `data/projects.json`, page-level gate/index metadata, `robots.txt`, and `sitemap.xml`. Current known mismatch: the manifest marks IBM Patterns and PCI as public/indexable/sitemap-eligible while their HTML is gated/`noindex` and robots excludes them. Do not resolve this silently; Victor must approve the intended contract.
+- Shared case-study chrome beyond header/footer: project metadata, optional chapter navigation, captions/credits, protected-state cues, previous/next behavior, return path, media fallbacks, and reduced-motion behavior.
+- Recruiter journey: primary contact action, résumé/CV decision, LinkedIn role, availability/location framing if desired, and protected-access guidance.
+- Accessibility contract: skip-to-content, `aria-current`, keyboard navigation, focus behavior, 200% zoom/reflow, exact-mobile touch targets, reduced motion, gate focus management, and image alternatives/captions.
+- Evidence and attribution contract: shipped/exploratory state, Victor's role, collaborators, dates, approved metrics, source ownership, client attribution, and sanitized/reconstructed/withheld media labels.
+- Launch metadata: final titles/descriptions, project-specific social cards, structured-data decision, canonical routes, redirects, and protected-page share/index behavior.
+- Integration strategy: page branches may feed one coordinated launch/integration branch; Vercel preview is the final review surface; merge to live `main` requires explicit approval after complete-site QA.
+
+Exit criteria:
+
+- One approved route/visibility matrix.
+- One approved final project sequence.
+- One approved shared-shell/case-study-chrome specification.
+- One approved recruiter/contact decision.
+- One approved accessibility and evidence/attribution checklist.
+- One approved preview-to-production launch plan.
+
+### C4. Shared header/footer and case-study chrome production bundle
+
+Purpose: implement the approved Launch Integration Contract as one deliberate global-shell and case-study-chrome change before serial Hi-Fi migrations so the static pages do not receive repeated, drifting edits.
+
+Proposed scope:
+
+- Header/navigation consistency across public and protected pages.
+- Mobile menu and current-page behavior.
+- Light/Dark control treatment, including whether visible mode words remain while preserving accessible names and state.
+- Footer contact hierarchy: visible email, Copy Email decision, LinkedIn, retained email link, and any approved replacement utility.
+- Shared keyboard, focus, contrast, reduced-motion, responsive, protected-state, project-navigation, caption/credit, and fallback behavior.
+
+Excludes:
+
+- Case-study narrative, project media, project-native composition, claims, visibility, gates, indexing, sitemap, or homepage promotion.
+- A new design-system rollout, floating chat, A2UI, or framework migration.
+
+Sequence: complete and approve the Launch Integration Contract after Hi-Fi edits; implement the bundle once on the launch/integration branch; require all migrated pages to inherit the verified shell and chrome; review the combined result through Vercel preview; merge to `main` only after explicit launch approval.
 
 ### D. Document Processing protected project-page state
 
@@ -136,9 +185,9 @@ Current state:
 - Live, password-gated, noindex, currently linked from the Work dropdown, approved for a homepage Selected Work card on 2026-06-10, and omitted from sitemap.
 - Temporary placeholder media has shipped and is acceptable as-is until Victor explicitly asks for a new refinement pass.
 - The `case-studies/` note remains an internal project-package workflow artifact for consistent facts/media/claims gathering across all future portfolio pages, not a visitor-facing category or priority label.
-- The 2026-07-27 VicO2 comparison is the current private review checkpoint: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\2026-07-27-vico2-asset-integration\Document-Processing-VicO2-asset-integration.html`. It now uses sanitized source-faithful motion, poster, and storyboard derivatives; preserves the theatrical hero; tells a cross-checked platform story across classification, extraction, table data, human review, and evaluation; and records the July 2026 combined Extractor + Evaluation release. The raw bundle remains private and is not referenced by the comparison.
+- The canonical private Hi-Fi package is the current review and future migration source: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Hi-Fi Review\Document Processing\`. It uses sanitized source-faithful derivatives, preserves the theatrical hero, tells a cross-checked platform story across classification, extraction, table data, human review, and evaluation, and records the July 2026 Accuracy Evaluation release. The raw bundle remains private and is not referenced by the package.
 
-Current approved action is complete at the private comparison gate: sanitized media and the source-backed copy rebuild are integrated and locally verified. The next gate is Victor's visual/copy approval of this comparison. Approval would authorize a separate protected-page implementation branch using only the reviewed derivative set and approved copy; it would not authorize gate, indexing, sitemap, navigation, homepage, or additional claims changes.
+Current approved action is complete at the canonical private Hi-Fi gate. Hi-Fi construction is paused. The next gate is Victor's Keep / Adjust / Reject editing pass; later approval would authorize a separate protected production-migration branch using only the manifested derivative set and approved copy. It would not authorize gate, indexing, sitemap, navigation, homepage, or additional claims changes.
 
 Excludes sitemap changes, `noindex` changes, password-gate changes, raw screenshot dumps, metrics, launch claims, and broad project-page rewrites unless Victor explicitly chooses them.
 
@@ -179,16 +228,18 @@ Status: A2UI remains a contained experiment under `archive/experiments/a2ui-inli
 
 ## Project tracker
 
-| Project | Status | Visibility | Source docs | Next action | Blockers / cautions |
+| Project | Status | Visibility | Canonical Hi-Fi source | Next action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live | live, password-protected for visitors, noindex, linked from Work and homepage Selected Work, omitted from sitemap | `document-processing.html`; project-package notes in `case-studies/document-processing.md`; placeholder media merged in PR #63; homepage card shipped in PR #76; private audit handoff at `C:\\Users\\Victor\\Documents\\Website Items\\Portfolio Handoffs\\Document Processing\\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Preserve password gate/noindex and current visibility; do not add sitemap links, raw screenshot dumps, metrics, launch claims, or major copy/media changes without approval |
-| IBM Cloud Observability | live | public page; private comparison is noindex | `ibmcloud.html`; self-contained private master and hiring cut under `Website Items\Portfolio Handoffs\IBM Cloud Observability\private-vico2-comparison\`; Codex slot map under `Website Items\Portfolio Handoffs\Codex Asset Intake\IBM Cloud Observability\` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | External publication remains blocked pending IBM permission, naming, attribution, provenance, and fresh privacy clearance; private proofreading and artifact selection are allowed |
-| IBM Patterns | live | protected | existing HTML/content; Codex slot map under `Website Items\Portfolio Handoffs\Codex Asset Intake\IBM Patterns\` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Preserve password gate; current visuals remain placeholders until grouped review closes |
-| PCI | live | protected/confidential | `pci.html`; `content/pci.md`; `case-studies/pci.md`; authorized source review at `Website Items\Portfolio Handoffs\Codex Asset Intake\PCI\SOURCE_STORY_REVIEW.md`; expanded Codex slot map in the same folder; isolated migration worktree at `Website Items\Portfolio Worktrees\PCI-vico2-migration` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Selective 2023–2026 anthology spanning publication systems, environmental graphics, information design, operational communication, and optional high-trust editorial work. Preserve gate/noindex/confidential framing; use only Victor-cleared sanitized artifacts |
-| Pi Kapp App | live | public | existing HTML/content; private comparison at `Website Items\Portfolio Handoffs\Pi Kapp\2026-07-28-vico2-private-comparison\Pi-Kapp-VicO2-private-comparison.html`; Codex slot map under `Website Items\Portfolio Handoffs\Codex Asset Intake\Pi Kapp\` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Concept, not shipped. Updated screens remain future package input; do not imply launch, integration, testing, adoption, engagement, completion, or outcomes |
-| Ability Experience | live | public | existing HTML/content | No active action | None noted |
-| SAL Magazine | live | public; private comparison is noindex | `salmagazine.html`; self-contained private comparison and QA under `Website Items\Portfolio Handoffs\Star & Lamp\2026-07-24-vico2-private-comparison\`; Codex slot map under `Website Items\Portfolio Handoffs\Codex Asset Intake\Star & Lamp\` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Existing public imagery and verified role/date/award language only; Victor will proofread copy and select final spreads in person |
-| Art & Illustration / Graphics galleries | live | public, discoverable under Work and in the homepage Galleries subsection; private comparison is noindex | `artillustration.html`; `graphicgallery.html`; homepage Work section; verified combined review, PDF, and QA under `Website Items\Portfolio Handoffs\Visual Archive\2026-07-28-vico2-private-comparison\`; Codex slot map under `Website Items\Portfolio Handoffs\Codex Asset Intake\Visual Archive\` | `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped batch | Keep both galleries secondary to case studies and visually distinct; existing images are review placeholders; large-image performance remains worth watching |
+| Document Processing | live; private Hi-Fi complete/paused | password-protected, `noindex`, linked from Work and homepage Selected Work, omitted from sitemap | `Website Items\Portfolio Handoffs\Hi-Fi Review\Document Processing\` | Keep / Adjust / Reject edits, then approved protected production migration | Preserve gate, `noindex`, sitemap omission, current visibility, manifested media, July 2026 release state, and claims boundaries |
+| wxO Canvas | private Hi-Fi complete/paused; no production page yet | future production counterpart must be protected | `Website Items\Portfolio Handoffs\Hi-Fi Review\wxO Canvas\` | Keep / Adjust / Reject edits, then establish a protected production page if approved | 2024–present umbrella; Document Processing is a feature thread; Canvas 1 shipment unclaimed; Canvas Future exploratory; no public migration without approval |
+| IBM Cloud | live; private Hi-Fi complete/paused | public production page; private Hi-Fi package | `Website Items\Portfolio Handoffs\Hi-Fi Review\IBM Cloud\` | Keep / Adjust / Reject edits, then approved production replacement | External publication remains bounded by IBM permission, naming, attribution, provenance, and fresh privacy clearance |
+| IBM Patterns | live; private Hi-Fi complete/paused | protected | `Website Items\Portfolio Handoffs\Hi-Fi Review\IBM Patterns\` | Keep / Adjust / Reject edits, then approved protected production replacement | Preserve password gate, source/ownership framing, and non-shipped six-week concept status |
+| PCI | live; private Hi-Fi complete/paused | protected/confidential | `Website Items\Portfolio Handoffs\Hi-Fi Review\PCI\` | Keep / Adjust / Reject edits, then approved protected production replacement | Preserve gate, `noindex`, confidential framing, and only Victor-cleared sanitized artifacts; do not restore sensitive legacy copy |
+| Pi Kapp App | live; private Hi-Fi complete/paused | public | `Website Items\Portfolio Handoffs\Hi-Fi Review\Pi Kapp\` | Keep / Adjust / Reject edits, then approved production replacement | Concept, not shipped; do not imply launch, integration, testing, adoption, engagement, completion, or outcomes |
+| Star & Lamp / SAL Magazine | live; private Hi-Fi complete/paused | public | `Website Items\Portfolio Handoffs\Hi-Fi Review\Star & Lamp\` | Keep / Adjust / Reject edits, then approved production replacement | Preserve verified chronology, role/date/award language, and selected source-backed spreads |
+| Art & Illustration | live; private Hi-Fi complete/paused | public supporting visual archive | `Website Items\Portfolio Handoffs\Hi-Fi Review\Art & Illustration\` | Keep / Adjust / Reject edits, then approved gallery replacement | Keep as a visual archive rather than a case study; preserve rights/authorship boundaries and monitor large-image performance |
+| Graphic Design | live; private Hi-Fi complete/paused | public supporting visual archive | `Website Items\Portfolio Handoffs\Hi-Fi Review\Graphic Design\` | Keep / Adjust / Reject edits, then approved gallery replacement | Keep distinct from Art & Illustration and from product-case-study composition; preserve rights and client boundaries |
+| Ability Experience | live production checkpoint | public | Existing production HTML | No active action | Reopen only with new evidence |
 
 ## Current PC / Agent Setup
 

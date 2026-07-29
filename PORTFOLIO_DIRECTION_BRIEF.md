@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-07-28
-Status: Active direction brief; the current VicO2 lo-fi docket is reconciled and grouped in-person review is the next gate
+Last updated: 2026-07-29
+Status: Active direction brief; nine private Hi-Fi packages are complete and paused for editing before the Launch Integration Contract, shared-shell work, integration preview, and approved launch
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,24 +42,28 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to keep broad expansion gated. In addition to the June closeout, IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, and project-manifest generation/validation now keeps the homepage, Work menu, and project navigation aligned. The homepage and Ability Experience are live VicO2 checkpoints. The remaining project manifest is represented by eight completed private lo-fi review surfaces: Document Processing, IBM Cloud Observability, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art & Illustration, and Graphic Design. Victor's grouped in-person review is the next gate before copy/artifact decisions or asset integration. Document Extractor and its combined Evaluation experience were confirmed released in July 2026; the live protected page still carries older wording until an approved implementation slice replaces it. A2UI remains parked.
+The enhancement work has shipped enough to keep broad expansion gated. IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, project-manifest generation/validation keeps homepage, Work-menu, and project navigation aligned, and the homepage plus Ability Experience are live VicO2 checkpoints. The private enhancement lane has advanced beyond lo-fi: nine canonical Hi-Fi packages are complete for Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. Hi-Fi construction is paused for Victor's later Keep / Adjust / Reject editing pass. Accuracy Evaluation was confirmed released in July 2026; the protected page source carries that corrected release state in the verified local working tree, pending a separately approved commit and deployment. After Hi-Fi edits are approved, a Launch Integration Contract must resolve cross-page architecture, visibility, accessibility, recruiter, metadata, and deployment decisions before one shared shell/case-study-chrome bundle and serial package migration proceed on a coordinated integration preview. Final whole-site human review and explicit approval happen before merge to live `main`. A2UI remains parked.
 
 Current working posture:
 
-1. Treat **VicO2** (Victor + Carbon) as the primary system-continuation lane, advanced through bounded page-by-page translations rather than broad redesign.
-2. Fold the selected page's public visual review, copy/tone, responsive/media, and interaction polish into that translation.
+1. Treat **VicO2** (Victor + Carbon) as the production system-continuation lane, advanced through bounded page-by-page migrations rather than broad redesign.
+2. Use each edited and approved canonical Hi-Fi package as the source for its production migration; preserve its source, claim, privacy, and visibility contract.
 3. Promote optional report-style chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2 as reusable patterns—not mandatory decoration.
 4. Keep Lens/Design-DNA mode and larger prototype/progress behavior conditional until a selected project demonstrates real reader value.
 5. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
-6. Keep framework migration, generative/chat UI promotion, broad redesign, homepage/nav promotion, sitemap changes, floating chat widgets, and uncontrolled site-wide rollout outside VicO2 without a separate verified need and approval.
+6. Complete the Launch Integration Contract before shared-shell implementation; migrate through a coordinated Vercel preview and run the complete public visual/copy/responsive/accessibility/metadata review before approving merge to live `main`.
+7. Keep framework migration, generative/chat UI promotion, broad redesign, homepage/nav promotion, sitemap changes, floating chat widgets, and uncontrolled site-wide rollout outside VicO2 without a separate verified need and approval.
 
 ### Top active decisions
 
 1. Treat the live homepage and Ability Experience VicO2 translations as stable checkpoints; reopen them only with new evidence.
-2. Review the eight completed lo-fi project surfaces together in person rather than opening separate Signal approval rounds.
-3. Advance approved pages to `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`, then inventory and map each package before integration.
-4. Keep theme/contact changes for a later global bundle. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
-5. Preserve protected-page gates, indexing, sitemap, navigation, media, and claims boundaries unless a separately approved implementation slice changes them.
+2. Pause additional Hi-Fi construction; resume with package-specific Keep / Adjust / Reject edits when Victor is ready.
+3. After Hi-Fi edits are approved, complete and approve the Launch Integration Contract before implementing shared cross-page behavior.
+4. Build the bounded shared header/footer shell and case-study chrome from that contract on a coordinated launch/integration branch.
+5. Replace or establish production counterparts one package at a time on the integration branch using archive → implementation → preflight → package QA gates.
+6. Review the complete portfolio through a Vercel preview, resolve the final punch list, and obtain explicit approval before merging to live `main`.
+7. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
+8. Preserve protected-page gates, indexing, sitemap, navigation, media, and claims boundaries unless the approved Launch Integration Contract explicitly changes them.
 
 ---
 
@@ -347,10 +351,10 @@ If Victor flags a concrete issue, choose one of these narrow slices:
    - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
 4. **Document Processing protected-page review state**
-   - The private VicO2 comparison is complete and held with the grouped in-person review docket.
-   - Keep the live IBM portfolio page in its current password-gated/noindex state with current homepage/Work visibility and sitemap omission until that review closes.
-   - The private comparison uses reviewed sanitized derivatives and corrected July 2026 release framing; the raw bundle remains private.
-   - Approval of the comparison would authorize a separate protected-page implementation branch, not visibility, indexing, sitemap, navigation, homepage, or additional claims changes.
+   - The canonical private Hi-Fi package is complete and paused with the nine-package docket.
+   - The protected page source uses the confirmed July 2026 Accuracy Evaluation release state in the verified local working tree, pending a separately approved commit and deployment. Its password gate, `noindex`, current homepage/Work visibility, and sitemap omission are unchanged.
+   - The Hi-Fi package uses reviewed sanitized derivatives and source-backed copy; the raw bundle remains private.
+   - Approval of later Hi-Fi edits would authorize a separate protected production-migration branch, not visibility, indexing, sitemap, navigation, homepage, or additional claims changes.
 
 ### Future concepts area
 
@@ -445,10 +449,13 @@ Guardrails:
 
 ### Recommended next action
 
-1. Review the eight completed VicO2 lo-fi project surfaces together at the grouped in-person checkpoint.
-2. Mark approved pages `LO-FI APPROVED — AWAITING CODEX ASSET PACKAGE`; keep adjusted or rejected pages at the review gate with explicit notes.
-3. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed, and keep theme/contact changes for a later global bundle.
-4. Keep homepage/nav promotion, sitemap changes, floating chat widgets, and protected-page visibility or claims changes behind separate approval.
+1. Keep the nine canonical private Hi-Fi packages paused until Victor resumes their Keep / Adjust / Reject editing pass.
+2. After the package edits are approved, complete the Launch Integration Contract defined in `PORTFOLIO_DASHBOARD.md`.
+3. Implement the shared header/footer shell and case-study chrome once on a coordinated launch/integration branch.
+4. Migrate approved Hi-Fi packages serially into that branch, preserving the approved page-specific protection, visibility, indexing, sitemap, media, and claims contracts.
+5. Run the complete public-site visual/tone/responsive/accessibility/metadata review through a Vercel preview; merge to live `main` only after explicit approval.
+6. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed.
+7. Keep homepage/nav promotion, sitemap changes, floating chat widgets, and protected-page visibility or claims changes behind the Launch Integration Contract and explicit approval.
 
 ---
 

@@ -20,7 +20,7 @@ A product design case study about designing an accuracy evaluation workflow for 
 
 ## Page Intro
 
-Watson Orchestrate’s document processing capabilities helped teams automate work across business documents like invoices, purchase orders, bills of lading, and utility bills. I contributed to the shipped classifier and extractor experiences, then led Accuracy Evaluation: a workflow planned for this summer that helps builders test extraction quality against ground truth, understand where automation is reliable, and improve document schemas before deployment.
+Watson Orchestrate’s document processing capabilities helped teams automate work across business documents like invoices, purchase orders, bills of lading, and utility bills. I contributed to the shipped classifier and extractor experiences, then led Accuracy Evaluation: a workflow released in July 2026 that helps builders test extraction quality against ground truth, understand where automation is reliable, and improve document schemas before deployment.
 
 ## Metadata
 
@@ -95,7 +95,7 @@ When a field performed poorly, the experience needed to connect that result back
 
 AI document processing will always have edge cases. The experience could not imply perfect automation, so the design made uncertainty visible and manageable before production use.
 
-Accuracy Evaluation is planned for the second half of 2026 and defines a design direction for making document extraction quality easier to measure and improve.
+Accuracy Evaluation released in July 2026 and gave builders a structured way to measure and improve document extraction quality.
 
 It connected the broader document processing platform into a clearer loop:
 
