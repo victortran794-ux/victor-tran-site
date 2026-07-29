@@ -20,7 +20,7 @@ Consult next:
 
 ### Current active plan
 
-Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective technical closeout and the later maintenance backlog are complete. The Ability Experience VicO2 translation and homepage system alignment are live and production-verified. The nine-package private Hi-Fi docket is also complete and is now paused for Victor's later Keep / Adjust / Reject edits: Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. After a package is edited and approved, its canonical private Hi-Fi package becomes the bounded source for replacing—or, where no counterpart exists, establishing—its production page. Production migration remains serial, reviewable, and protection-aware rather than an automatic broad rollout. A2UI remains parked.
+Use the reconciled slice structure below to keep practical polish gated and future concepts opt-in. Objective technical closeout and the later maintenance backlog are complete. The Ability Experience VicO2 translation and homepage system alignment are live and production-verified. The nine-package private Hi-Fi docket is also complete and is now paused for Victor's later Keep / Adjust / Reject edits: Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. After a package is edited and approved, its canonical private Hi-Fi package becomes the bounded source for replacing—or, where no counterpart exists, establishing—its production page. Together, the approved page migrations, homepage/navigation redesign, shared shell, case-study chrome, and final integration pass constitute a controlled broad redesign. Production migration remains serial, reviewable, and protection-aware rather than an uncontrolled rollout. A2UI remains parked.
 
 ### Current next actions
 
@@ -32,7 +32,7 @@ Use the reconciled slice structure below to keep practical polish gated and futu
 6. Migrate approved Hi-Fi packages serially into a coordinated launch/integration branch rather than directly onto live `main`. Archive each existing production page, preserve or establish its approved route/visibility contract, and run package-specific QA before continuing.
 7. Keep Art & Illustration and Graphic Design as distinct supporting visual archives even when their Hi-Fi packages replace the current production galleries.
 8. Review the complete integrated portfolio through a Vercel preview, resolve the whole-site visual/tone/responsive/accessibility/metadata punch list, then obtain explicit approval before merging to `main` and launching.
-9. Keep Lens/Design-DNA, A2UI, framework migration, broad redesign, generative/chat UI promotion, and uncontrolled rollout parked.
+9. Keep Lens/Design-DNA, A2UI, portfolio framework/build-system migration, generative/chat UI promotion, and uncontrolled rollout parked. Broad redesign plus controlled homepage/navigation work are active only through the approved Launch Integration Contract and integration-preview workflow.
 
 ### Supporting historical context
 
@@ -70,7 +70,7 @@ Current next action:
 - Complete the Launch Integration Contract before implementing the shared shell. Do not improvise project order, visibility, indexing, protected-route treatment, recruiter actions, or cross-page behavior during migration.
 - Prepare the shared header/footer and case-study chrome bundle as one global-shell change, not as repeated per-page edits. Finalize its exact design from the approved contract before implementation.
 - Integrate shell and page migrations on a coordinated preview branch. Run one whole-site review for tone, responsive behavior, accessibility, media loading, metadata, and visual balance before approving merge to `main`.
-- Keep broad visual expansion and A2UI parked unless Victor explicitly resumes them.
+- Treat the controlled broad redesign and homepage/navigation redesign as active workflow scope. Keep A2UI, framework/build-system migration, and uncontrolled expansion parked unless Victor explicitly resumes them or the current static stack becomes a verified blocker.
 
 ## Adjusted enhancement slices
 
@@ -138,6 +138,7 @@ Purpose: resolve the cross-page launch decisions that individual Hi-Fi packages 
 Required decisions:
 
 - Final project sequence across homepage, Work menu, and previous/next navigation after wxO Canvas joins the existing portfolio.
+- Controlled broad-redesign scope: homepage composition, navigation model, global shell, project transitions, About/liner-notes relationship, visual rhythm, color punctuation, project-native canvases, and selective motion. Pull the existing concept-album, studio-system, report-chapter, and project-native-canvas notes from `PORTFOLIO_DIRECTION_BRIEF.md` into this decision rather than treating them as a separate future lane.
 - Per-project visibility matrix: public/protected, `index`/`noindex`, robots inclusion, sitemap inclusion, homepage visibility, Work-menu visibility, direct-link behavior, and whether a lock/protected indicator appears before entry.
 - wxO Canvas production treatment: protected route, homepage/Work visibility, sequence position, and relationship to the focused Document Processing page.
 - Reconciliation of `data/projects.json`, page-level gate/index metadata, `robots.txt`, and `sitemap.xml`. Current known mismatch: the manifest marks IBM Patterns and PCI as public/indexable/sitemap-eligible while their HTML is gated/`noindex` and robots excludes them. Do not resolve this silently; Victor must approve the intended contract.
@@ -172,7 +173,7 @@ Proposed scope:
 Excludes:
 
 - Case-study narrative, project media, project-native composition, claims, visibility, gates, indexing, sitemap, or homepage promotion.
-- A new design-system rollout, floating chat, A2UI, or framework migration.
+- Floating chat, A2UI, framework/build-system migration, or visual changes outside the approved controlled redesign.
 
 Sequence: complete and approve the Launch Integration Contract after Hi-Fi edits; implement the bundle once on the launch/integration branch; require all migrated pages to inherit the verified shell and chrome; review the combined result through Vercel preview; merge to `main` only after explicit launch approval.
 
@@ -208,11 +209,11 @@ Conditional and still parked until a real page proves the need:
 - Larger prototypes or project-progress behaviors.
 - Asset/photography inventory as page preparation rather than a visible feature.
 
-Parked outside VicO2:
+Parked outside the controlled redesign:
 
 - A2UI and generative/chat UI promotion.
 - Framework migration or new build-system architecture absent a verified blocker.
-- Broad redesign and uncontrolled site-wide rollout.
+- Uncontrolled site-wide rollout or changes outside the Launch Integration Contract and approved preview.
 
 Status: A2UI remains a contained experiment under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`; the parked standalone `a2ui.html` branch must not be merged or promoted as-is. VicO2 may eventually style a real implementation, but visual compatibility does not make the technology or claims ready.
 

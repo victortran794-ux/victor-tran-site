@@ -42,17 +42,17 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to keep broad expansion gated. IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, project-manifest generation/validation keeps homepage, Work-menu, and project navigation aligned, and the homepage plus Ability Experience are live VicO2 checkpoints. The private enhancement lane has advanced beyond lo-fi: nine canonical Hi-Fi packages are complete for Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. Hi-Fi construction is paused for Victor's later Keep / Adjust / Reject editing pass. Accuracy Evaluation was confirmed released in July 2026; the protected page source carries that corrected release state in the verified local working tree, pending a separately approved commit and deployment. After Hi-Fi edits are approved, a Launch Integration Contract must resolve cross-page architecture, visibility, accessibility, recruiter, metadata, and deployment decisions before one shared shell/case-study-chrome bundle and serial package migration proceed on a coordinated integration preview. Final whole-site human review and explicit approval happen before merge to live `main`. A2UI remains parked.
+The enhancement work has shipped enough to support a controlled broad redesign without turning it into an uncontrolled rewrite. IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, project-manifest generation/validation keeps homepage, Work-menu, and project navigation aligned, and the homepage plus Ability Experience are live VicO2 checkpoints. The private enhancement lane has advanced beyond lo-fi: nine canonical Hi-Fi packages are complete for Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. Hi-Fi construction is paused for Victor's later Keep / Adjust / Reject editing pass. Accuracy Evaluation was confirmed released in July 2026; the protected page source carries that corrected release state in the verified local working tree, pending a separately approved commit and deployment. After Hi-Fi edits are approved, a Launch Integration Contract must pull the existing concept-album, studio-system, report-chapter, project-native-canvas, homepage, and navigation directions into one controlled redesign decision before shared shell/case-study-chrome implementation and serial package migration proceed on a coordinated integration preview. Final whole-site human review and explicit approval happen before merge to live `main`. A2UI remains parked.
 
 Current working posture:
 
-1. Treat **VicO2** (Victor + Carbon) as the production system-continuation lane, advanced through bounded page-by-page migrations rather than broad redesign.
+1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded page-by-page migrations and one approved integration plan rather than a one-shot rewrite.
 2. Use each edited and approved canonical Hi-Fi package as the source for its production migration; preserve its source, claim, privacy, and visibility contract.
 3. Promote optional report-style chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2 as reusable patterns—not mandatory decoration.
 4. Keep Lens/Design-DNA mode and larger prototype/progress behavior conditional until a selected project demonstrates real reader value.
 5. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
 6. Complete the Launch Integration Contract before shared-shell implementation; migrate through a coordinated Vercel preview and run the complete public visual/copy/responsive/accessibility/metadata review before approving merge to live `main`.
-7. Keep framework migration, generative/chat UI promotion, broad redesign, homepage/nav promotion, sitemap changes, floating chat widgets, and uncontrolled site-wide rollout outside VicO2 without a separate verified need and approval.
+7. Keep portfolio framework/build-system migration, generative/chat UI promotion, floating chat widgets, and uncontrolled site-wide rollout outside the active lane without a separately verified need and approval. Treat homepage/navigation redesign as active only through the Launch Integration Contract; protected-page visibility and sitemap changes remain page-specific approval decisions.
 
 ### Top active decisions
 
@@ -393,7 +393,7 @@ These are exploration candidates, not an automatic build queue. A2UI is parked a
 - Document Processing promotion, raw screenshots, metrics, launch claims, or major copy/media changes. A media-audit plan is allowed only as a new planning artifact if Victor explicitly reselects the page.
 - Password-gate/noindex behavior.
 - Homepage/nav/sitemap promotion for paused or protected work.
-- Full redesign, framework/build-step adoption, or site-wide visual-system rollout.
+- Framework/build-step adoption or visual changes outside the approved controlled broad redesign and integration preview.
 - A2UI standalone page creation, floating chat widgets, or homepage/nav/sitemap promotion.
 
 ---
