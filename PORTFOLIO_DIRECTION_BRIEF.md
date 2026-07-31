@@ -263,6 +263,16 @@ Potential structure:
 
 Status: idea only. Validate first with one private, bounded prototype before considering a reusable template or broader rollout.
 
+### Project families and design-system lineage
+
+Use family resemblance where the projects have a real organizational, historical, or system relationship. This is not permission to apply one page template across the portfolio.
+
+- **Pi Kapp / Star & Lamp / The Ability Experience:** treat these as a related editorial and color family. Pi Kappa Phi's philanthropy relationship to The Ability Experience makes selective shared color relationships meaningful. Reuse family-level pacing or palette cues where they help, but keep each project's own evidence, composition, and identity.
+- **IBM / Carbon lineage:** use Carbon as the common system foundation while distinguishing the work by era and role. IBM Patterns is the 2021 incubator project; IBM Cloud is the later true product-work chapter; wxO Canvas and Document Processing are the current product-work chapter. Shared system language must not flatten those differences or imply identical ownership, shipment, or publication status.
+- **Visual archives:** Art & Illustration and Graphic Design form a useful paired review lane, but remain distinct archives with different curation, rights, and composition.
+
+The current bounded process trial uses the already-refined Pi Kapp and IBM Patterns private candidates. It tests the review method with a strong Keep bias; it does not establish that those two pages should share styling.
+
 ### Portfolio color punctuation
 
 The portfolio can use intentional splashes of color so the energy of the homepage colored project boxes carries into deeper pages. The goal is not to make every page loud; it is to use the existing accent palette as wayfinding, rhythm, and project identity.
