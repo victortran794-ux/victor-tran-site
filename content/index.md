@@ -49,7 +49,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Body Copy
 
-Vic Tran ®
+Victor Tran ®
 
 Visual designer working across brand, illustration, and product systems.
 

@@ -26,6 +26,7 @@ What this site refuses to be:
 - **No dark patterns.** No timer panic, no opt-out gotchas, no fake urgency, no manufactured friction.
 - **No "boring because it's email or PowerPoint."** Even the mundane formats deserve craft. Boo to the general-ole email.
 - **No insider jargon for its own sake.** Write for the general-ole person — the smart non-specialist.
+- **No utility-template sameness.** Repeated equal cards, default pill clusters, uniform dashboard grids, gratuitous rounded panels, and framework-demo spacing should not become the portfolio's visual voice. Utility tooling may support an isolated prototype, but the authored result must remain editorial, asymmetric, project-aware, and recognizably Victor's.
 
 ---
 
@@ -36,6 +37,7 @@ First-person. Conversational. A dose of humor where it lands.
 - **Positioning:** *"I've designed a bunch of things — today it's UIs and delightful experiences."* The past stays visible (illustration, magazine, brand, fraternity work all live on the same page); the present has a focus.
 - **Headline register:** short, plain, sometimes wry. (*"I design cool things with sincerity."* / *"Do more good things."*)
 - **Body register:** full sentences, low jargon, can stretch when the story needs it. The IBM and Star & Lamp paragraphs read as someone telling you about their work over coffee — not a press release.
+- **Name convention:** use **Victor Tran** whenever the full name appears. Use **Vic** when a first name appears alone. Never use **Vic Tran**.
 - **Humor:** yes, where it doesn't undercut the work. The italic-on-hover serif, the "Tap to cycle" portrait toggle, the easter-egg DNA tab — that's the right wavelength.
 
 ---

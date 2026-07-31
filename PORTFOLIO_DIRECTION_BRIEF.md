@@ -179,6 +179,16 @@ Potential expressions:
 - Optional interludes: doodles, process fragments, short reflections, or behind-the-scenes artifacts.
 - One project eventually presented as a “remaster” or “Victor's Version.”
 
+### Homepage cover refinement
+
+Victor review note, 2026-07-29. Treat this as an input to the controlled homepage redesign and Launch Integration Contract, not authorization for an isolated live edit.
+
+- Bring the `Visual` and `Designer` cover lines closer together.
+- Explore partial transparency on one line so the tighter lockup creates a deliberate overlap rather than a collision.
+- Introduce a restrained background texture derived from Victor's own authored materials or existing site assets. Do not use stock or AI-generated texture.
+- Preserve the theatrical full-span cover exception; do not force the hero into the same grid/card grammar used below it.
+- Test the final composition at desktop and exact mobile widths in Light and Dark, including legibility, contrast, portrait interaction, and reduced motion.
+
 ### Quiet stagehand navigation
 
 Navigation should be helpful but not loud. It should keep orientation, progress, and next steps visible without taking over the work.

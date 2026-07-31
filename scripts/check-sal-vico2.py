@@ -149,6 +149,10 @@ def main() -> int:
     need("--sal-project" in sal_css and "--sal-project-blue" in sal_css, "missing SAL project skin tokens")
     need(".sal-vico2-hero,\n.sal-vico2-case-study {" in sal_css, "SAL skin tokens must reach both hero and case-study components")
     need("@media (max-width: 700px)" in sal_css, "SAL layer needs narrow recomposition")
+    need(".sal-vico2-cover-wall a:focus-visible" in sal_css,
+         "issue-cover focus must be scoped so the cover and caption column are not awkwardly outlined together")
+    need(".sal-vico2-cover-wall a:focus-visible img" in sal_css,
+         "issue-cover keyboard focus must remain visibly attached to the cover image")
     need("box-shadow" not in sal_css, "SAL VicO2 slice must stay shadow-free")
     need("linear-gradient" not in sal_css, "SAL VicO2 slice must stay gradient-free")
 

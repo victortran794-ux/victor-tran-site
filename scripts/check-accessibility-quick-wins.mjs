@@ -54,8 +54,10 @@ for (const file of activePages) {
 const homepage = read('index.html');
 expect(/id="dnaOverlay"[^>]*\sinert(?:\s|>)/.test(homepage),
   'The closed Design DNA overlay must begin inert.');
-expect(/aria-label="Color shift:[^"]+"/i.test(homepage),
-  'The hero button accessible name must include its visible “Color shift” text.');
+expect(/aria-label="Change color"/i.test(homepage),
+  'The hero color button accessible name must match its visible “Change color” text.');
+expect(!/Color shift/i.test(homepage),
+  'The hero color control must not expose the former “Color shift” label.');
 
 const js = read('js/main.js');
 expect(js.includes('overlay.inert = false'), 'DNA open behavior must remove inert.');

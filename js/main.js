@@ -263,10 +263,10 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const heroStatus = hero.querySelector('[data-hero-status]');
   const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const palette = [
-    { name: 'Pink', session: '--pink', accent: '--blue' },
-    { name: 'Blue', session: '--blue', accent: '--pink' },
-    { name: 'Orange', session: '--orange', accent: '--blue' },
-    { name: 'Purple', session: '--purple', accent: '--pink' },
+    { session: '--pink', accent: '--blue' },
+    { session: '--blue', accent: '--pink' },
+    { session: '--orange', accent: '--blue' },
+    { session: '--purple', accent: '--pink' },
   ];
 
   let i = 0;
@@ -285,9 +285,9 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     dots.forEach((dot, dotIndex) => {
       dot.classList.toggle('is-active', dotIndex === i);
     });
-    if (heroLabel) heroLabel.textContent = `Color shift · ${state.name}`;
+    if (heroLabel) heroLabel.textContent = 'Change color';
     if (announce && heroStatus) {
-      heroStatus.textContent = `Hero color changed to ${state.name}. Ambient cycling paused for this visit.`;
+      heroStatus.textContent = 'Hero color changed. Ambient cycling paused for this visit.';
     }
   }
 

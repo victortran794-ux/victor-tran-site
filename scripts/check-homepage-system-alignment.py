@@ -57,7 +57,7 @@ for token in (
     'class="hero-portraits"', 'class="hero-portrait is-active"',
     'class="hero-portrait-lens"', 'class="hero-meta"',
     'class="hero-services"', 'class="hero-cycle"',
-    'aria-label="Color shift: change hero color"',
+    'aria-label="Change color"',
 ):
     need(index.count(token) == 1, f"signature hero token must remain exactly once: {token}")
 for authored_copy in (
@@ -86,16 +86,22 @@ need("data-hero-status" in index and 'aria-live="polite"' in index,
      "manual hero color changes need a polite live-region announcement")
 need("hero-cycle-label" in js and "heroStatus" in js,
      "hero render path must synchronize its visible label and status")
+need("Change color" in index and "Color shift" not in index and "Color shift" not in js,
+     "hero color control must use the neutral action label without a visible color name")
+need("state.name" not in js,
+     "hero color rendering must not expose palette names")
+need("Vic Tran" not in index and "Victor Tran" in index,
+     "homepage must use Victor Tran for the full name, never Vic Tran")
 need("1800ms" in css, "hero color fields need the approved 1.8-second crossfade")
 need("min-width: 44px" in css and "min-height: 44px" in css,
-     "manual Color shift control must keep a 44px pointer target")
+     "manual hero color control must keep a 44px pointer target")
 need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\S]*?transition:\s*none", css),
      "reduced-motion CSS must remove hero color transitions")
 
 # Canonical project facts and protection flags.
 expected = {
     "document-processing": ("Document Processing", "document-processing.html", "Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production."),
-    "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "Three years on the Observability squad shipping enterprise products at scale. From Cloud Logs and Event Notifications to the illustration system behind it all."),
+    "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide."),
     "abilityexperience": ("The Ability Experience", "abilityexperience.html", "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities."),
