@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "protectedPages": [
+    {
+      "source": "document-processing.html",
+      "slug": "document-processing"
+    },
+    {
+      "source": "ibmcloud.html",
+      "slug": "ibmcloud"
+    },
+    {
+      "source": "ibm-patterns.html",
+      "slug": "ibm-patterns"
+    },
+    {
+      "source": "pci.html",
+      "slug": "pci"
+    },
+    {
+      "source": "wxo-canvas.html",
+      "slug": "wxo-canvas",
+      "provisional": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "pages": [
+    "404.html",
+    "abilityexperience.html",
+    "about.html",
+    "artillustration.html",
+    "document-processing.html",
+    "graphicgallery.html",
+    "ibm-patterns.html",
+    "ibmcloud.html",
+    "index.html",
+    "pci.html",
+    "pikappapp.html",
+    "salmagazine.html"
+  ],
+  "skipLabel": "Skip to content",
+  "protectedLabel": "Private case study",
+  "protectedDetail": "Access required",
+  "contactEmail": "victortran794@gmail.com",
+  "linkedInUrl": "https://www.linkedin.com/in/victortrandesign/",
+  "footerTagline": "Do more good things.",
+  "footerSubtitle": "See you soon.",
+  "footerCta": "Let's build something together.",
+  "copyright": "© Victor Tran 2026 All Rights Reserved"
+}

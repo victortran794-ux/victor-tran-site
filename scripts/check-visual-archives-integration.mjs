@@ -1,0 +1,311 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const root = path.resolve(import.meta.dirname, '..');
+const failures = [];
+const scope = process.argv[2] ?? 'all';
+if (!['art', 'graphic', 'all'].includes(scope)) {
+  console.error('Usage: node scripts/check-visual-archives-integration.mjs [art|graphic|all]');
+  process.exit(2);
+}
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const expect = (condition, message) => { if (!condition) failures.push(message); };
+
+function relativeLuminance(hex) {
+  const channels = hex.slice(1).match(/.{2}/g).map((value) => {
+    const channel = Number.parseInt(value, 16) / 255;
+    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function contrastRatio(foreground, background) {
+  const values = [relativeLuminance(foreground), relativeLuminance(background)].sort((a, b) => b - a);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+}
+
+function mainHtml(html) {
+  return html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? '';
+}
+
+function images(html) {
+  return [...mainHtml(html).matchAll(/<img\b[^>]*>/gi)].map((match) => {
+    const tag = match[0];
+    const attr = (name) => tag.match(new RegExp(`${name}="([^"]*)"`, 'i'))?.[1] ?? '';
+    return { tag, src: attr('src'), alt: attr('alt'), width: attr('width'), height: attr('height') };
+  });
+}
+
+function primaryHtml(html) {
+  const start = html.search(/<section class="archive-primary"/i);
+  if (start < 0) return '';
+  const details = html.indexOf('<details class="archive-extended">', start);
+  const mainEnd = html.indexOf('</main>', start);
+  const end = details >= 0 ? details : mainEnd;
+  return end >= 0 ? html.slice(start, end) : '';
+}
+
+const pages = {
+  art: {
+    file: 'artillustration.html',
+    baseline: 'archive/pages/artillustration-2026-07-31/artillustration.html',
+    bodyClass: 'visual-archive-page art-archive-v2',
+    marker: 'data-archive="art-studio-wall"',
+    keepExtendedArchive: false,
+    headings: ['An open studio wall.', 'Characters and worlds', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work'],
+    selectedAssets: [
+      'images/art-archive-v2/old-one.webp',
+      'images/art-archive-v2/coffee.webp',
+    ],
+    rejectedAssets: [
+      'images/art-archive-v2/diamond-a.webp',
+      'images/art-archive-v2/diamond-q.webp',
+      'images/art-archive-v2/diamond-k.webp',
+      'images/art-archive-v2/diamond-10.webp',
+      'images/art-archive-v2/vertical-narrative.webp',
+      'images/art-archive-v2/pbr.webp',
+    ],
+    livePrimaryMinimum: 14,
+    requiredLivePrimaryAssets: [
+      'images/illus-ibm-selectric-web.jpg',
+      'images/illus-untitled-5.jpg',
+      'images/illus-lost.jpg',
+      'images/illus-sc-boat.jpg',
+      'images/illus-sc-park.jpg',
+      'images/illus-sc-tower.jpg',
+      'images/cards/diamond-2.png',
+      'images/cards/diamond-a.png',
+      'images/cards/diamond-10.png',
+      'images/cards/diamond-j.png',
+      'images/cards/diamond-q.png',
+      'images/cards/diamond-k.png',
+      'images/illus-img4531.jpg',
+    ],
+  },
+  graphic: {
+    file: 'graphicgallery.html',
+    baseline: 'archive/pages/graphicgallery-2026-07-31/graphicgallery.html',
+    bodyClass: 'visual-archive-page graphic-archive-v2',
+    marker: 'data-archive="graphic-contact-sheet"',
+    keepExtendedArchive: false,
+    headings: ['Graphic Design in motion.', 'EDC / Boombox', 'Southeastern Greek Leadership Association', 'Selected slide work', 'Marks and applications', 'Events and print', 'Selected illustrations', 'Wide-format information design'],
+    selectedAssets: [
+      'images/graphic-archive-v2/chantico.webp',
+      'images/graphic-archive-v2/dog.webp',
+      'images/graphic-archive-v2/abex.webp',
+    ],
+    rejectedAssets: [
+      'images/graphic-archive-v2/taste.webp',
+      'images/graphic-archive-v2/midwest.webp',
+      'images/graphic-archive-v2/sam.webp',
+      'images/graphic-archive-v2/imij.webp',
+    ],
+    livePrimaryMinimum: 18,
+    requiredLivePrimaryAssets: [
+      'images/gg-edc-1.jpg',
+      'images/gg-edc-0.jpg',
+      'images/gg-edc-2.jpg',
+      'images/gg-edc-3.jpg',
+      'images/logos-1.jpg',
+      'images/logos-2.jpg',
+      'images/logos-3.jpg',
+      'images/logos-4.jpg',
+      'images/gg-illus-1.jpg',
+      'images/gg-illus-4.jpg',
+      'images/thumb-sgla.webp',
+      'images/gg-slides-3.jpg',
+      'images/gg-slides-6.jpg',
+      'images/gg-slides-7.jpg',
+      'images/gg-slides-13.jpg',
+    ],
+  },
+};
+
+for (const [name, page] of Object.entries(pages).filter(([name]) => scope === 'all' || scope === name)) {
+  const html = read(page.file);
+  const baselineHtml = read(page.baseline);
+  const currentImages = images(html);
+  const baselineImages = images(baselineHtml);
+  const currentSrcs = new Set(currentImages.map((image) => image.src));
+  const primary = primaryHtml(html);
+  const primarySrcs = new Set(images(`<main>${primary}</main>`).map((image) => image.src));
+
+  expect(html.includes(`<body class="${page.bodyClass}">`), `${page.file}: add the bounded visual-archive body classes.`);
+  expect(html.includes(page.marker), `${page.file}: add the project-native archive marker.`);
+  expect(html.includes('id="visual-archive-v2-styles"'), `${page.file}: include scoped archive styles.`);
+  expect(html.includes('class="archive-primary"'), `${page.file}: add a curated primary sequence.`);
+  if (page.keepExtendedArchive) {
+    expect(html.includes('class="archive-extended"'), `${page.file}: preserve live material in a secondary extended archive.`);
+  } else {
+    expect(!html.includes('class="archive-extended"'), `${page.file}: remove the duplicate hidden archive after promoting all original work.`);
+  }
+
+  for (const heading of page.headings) {
+    expect(html.includes(heading), `${page.file}: missing required archive heading “${heading}”.`);
+  }
+  for (const asset of page.selectedAssets) {
+    expect(currentSrcs.has(asset), `${page.file}: missing approved selected asset ${asset}.`);
+    expect(fs.existsSync(path.join(root, asset)), `${page.file}: selected asset file does not exist: ${asset}.`);
+  }
+  for (const asset of page.rejectedAssets) {
+    expect(!currentSrcs.has(asset), `${page.file}: rejected asset must not remain in the page: ${asset}.`);
+  }
+  for (const baseline of baselineImages) {
+    expect(currentSrcs.has(baseline.src), `${page.file}: previously public image must be preserved: ${baseline.src}.`);
+  }
+  expect((primary.match(/data-live-primary/g) ?? []).length >= page.livePrimaryMinimum,
+    `${page.file}: promote more live-page work into aligned primary stacks.`);
+  for (const asset of page.requiredLivePrimaryAssets) {
+    expect(primarySrcs.has(asset), `${page.file}: live-reference asset must appear in the primary archive: ${asset}.`);
+  }
+  expect(!/rotate\(|translateY\(/i.test(html), `${page.file}: primary archive items must stay straight and aligned.`);
+
+  for (const image of currentImages) {
+    expect(Boolean(image.src), `${page.file}: image is missing src.`);
+    expect(Boolean(image.alt), `${page.file}: ${image.src || 'unknown image'} needs meaningful alt text.`);
+    expect(/^\d+$/.test(image.width) && /^\d+$/.test(image.height), `${page.file}: ${image.src || 'unknown image'} needs numeric width and height.`);
+  }
+
+  expect(!/Current \+ Proposed|Current only|Proposed only|private decision|Nothing is transmitted|source-backed|already part of the live page/i.test(mainHtml(html)),
+    `${page.file}: private-review or migration scaffolding must not enter the public page.`);
+  expect(!/Lorem ipsum|\bXYZ\b|Misc #|Placeholder text|User input text/i.test(mainHtml(html)),
+    `${page.file}: accidental filler is forbidden.`);
+  expect(/<a\s+href="index\.html"\s+class="nav-logo"\s+aria-label="Victor Tran home">/.test(html),
+    `${page.file}: preserve the shared navigation logo contract.`);
+  expect(html.includes('<!-- generated:site-shell-header:start -->') && html.includes('<!-- generated:site-shell-header:end -->'),
+    `${page.file}: preserve generator-owned shared-header fences.`);
+  expect(html.includes('<!-- generated:site-shell-footer:start -->') && html.includes('<!-- generated:site-shell-footer:end -->'),
+    `${page.file}: preserve generator-owned shared-footer fences.`);
+  expect((html.match(/<main\b[^>]*\bid="main-content"[^>]*\btabindex="-1"[^>]*>/gi) ?? []).length === 1,
+    `${page.file}: preserve the validated main focus target.`);
+  expect(!html.includes('generated:site-shell-project-nav:start'),
+    `${page.file}: visual archives stay outside primary case-study previous/next navigation.`);
+  expect(!html.includes('Design DNA'), `${page.file}: Design DNA remains homepage-only.`);
+  expect(html.includes('class="footer"'), `${page.file}: preserve the shared footer.`);
+}
+
+if (scope !== 'graphic') {
+const art = read('artillustration.html');
+const artLightPalette = art.match(/\.art-archive-v2 \.archive-primary \{ --paper: (#[0-9a-f]{6}); --ink: #[0-9a-f]{6}; --orange: (#[0-9a-f]{6});/i);
+const artDarkPalette = art.match(/\[data-theme="dark"\] \.art-archive-v2 \.archive-primary \{ --paper: (#[0-9a-f]{6}); --ink: #[0-9a-f]{6}; --orange: (#[0-9a-f]{6});/i);
+expect(Boolean(artLightPalette), 'artillustration.html: expose a parseable Light paper/orange palette.');
+expect(Boolean(artDarkPalette), 'artillustration.html: expose a parseable Dark paper/orange palette.');
+if (artLightPalette) {
+  expect(contrastRatio(artLightPalette[2], artLightPalette[1]) >= 4.5,
+    `artillustration.html: Light kicker orange must meet WCAG AA 4.5:1 contrast (found ${contrastRatio(artLightPalette[2], artLightPalette[1]).toFixed(2)}:1).`);
+}
+if (artDarkPalette) {
+  expect(contrastRatio(artDarkPalette[2], artDarkPalette[1]) >= 4.5,
+    `artillustration.html: Dark kicker orange must meet WCAG AA 4.5:1 contrast (found ${contrastRatio(artDarkPalette[2], artDarkPalette[1]).toFixed(2)}:1).`);
+}
+expect(!primaryHtml(art).includes('—'), 'artillustration.html: primary copy must not use em dashes.');
+expect(!/<figcaption\b/i.test(primaryHtml(art)),
+  'artillustration.html: artwork-only primary viewing should not show individual labels.');
+for (const restoredAsset of [
+  'images/illus-untitled-6.jpg', 'images/illus-untitled-7.jpg', 'images/illus-untitled-8.jpg',
+  'images/illus-untitled-9.jpg', 'images/illus-untitled-10.jpg', 'images/illus-untitled-11.jpg',
+  'images/illus-large.jpg', 'images/illus-img7358.jpg', 'images/illus-img4537.jpg',
+  'images/illus-img4496.jpg', 'images/illus-glow.jpg', 'images/illus-forgive-me.jpg',
+  'images/illus-1-14-24.jpg', 'images/illus-night-glow.jpg', 'images/illus-sharing.jpg',
+  'images/illus-shatter.jpg', 'images/illus-flesh-golem.jpg', 'images/illus-untitled-3.jpg',
+]) {
+  expect(primaryHtml(art).includes(`src="${restoredAsset}"`),
+    `artillustration.html: restore original-page artwork to the visible primary wall: ${restoredAsset}.`);
+}
+expect((primaryHtml(art).match(/data-sc56-primary/g) ?? []).length === 3,
+  'artillustration.html: restore the named SC56 trio as its own visible primary section.');
+const restoredWall = art.match(/<div class="art-restored-wall">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect((restoredWall.match(/data-live-primary/g) ?? []).length === 5 && primaryHtml(art).includes('class="art-section-kicker">Traditional media</p>'),
+  'artillustration.html: reserve Traditional work for the five physical/traditional pieces.');
+for (const src of ['images/illus-large.jpg', 'images/illus-img7358.jpg', 'images/illus-img4537.jpg', 'images/illus-img4496.jpg', 'images/illus-img4531.jpg']) {
+  expect(restoredWall.includes(`src="${src}"`), `artillustration.html: Traditional work is missing ${src}.`);
+}
+const charactersWall = art.match(/<div class="art-live-wall">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+for (const src of ['images/illus-glow.jpg', 'images/illus-forgive-me.jpg', 'images/illus-1-14-24.jpg', 'images/illus-night-glow.jpg', 'images/illus-sharing.jpg', 'images/illus-shatter.jpg', 'images/illus-flesh-golem.jpg', 'images/illus-untitled-3.jpg']) {
+  expect(charactersWall.includes(`src="${src}"`) && !restoredWall.includes(`src="${src}"`),
+    `artillustration.html: move ${src} from Traditional work into Characters and worlds.`);
+}
+expect(charactersWall.includes('src="images/art-archive-v2/coffee.webp"') &&
+  !primaryHtml(art).includes('images/art-archive-v2/pbr.webp') &&
+  !primaryHtml(art).includes('id="art-range-title"') && !primaryHtml(art).includes('aria-label="Closing artwork"'),
+  'artillustration.html: move Coffee into Characters and worlds, remove the 1844/PBR piece, and fold the final traditional piece into Traditional work.');
+expect(!primaryHtml(art).includes('id="art-horned-title"') && !primaryHtml(art).includes('id="art-traditional-title"'),
+  'artillustration.html: return to the previous iteration’s quieter chapter structure.');
+const hornedSlideshow = art.match(/<figure[^>]*data-horned-slideshow[\s\S]*?<\/figure>/i)?.[0] ?? '';
+expect((hornedSlideshow.match(/series-slideshow-img/g) ?? []).length === 7 && hornedSlideshow.includes('slideshow-pause-btn'),
+  'artillustration.html: restore all seven Horned Woman versions as the original auto-crossfade slideshow.');
+for (const heading of ['Characters and worlds', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work']) {
+  expect(primaryHtml(art).includes(heading), `artillustration.html: use the clear Art header “${heading}”.`);
+}
+for (const label of ['Selected illustrations', 'Event illustration', 'Card series', 'Traditional media']) {
+  expect(primaryHtml(art).includes(`class="art-section-kicker">${label}</p>`),
+    `artillustration.html: use the consistent Art family label “${label}”.`);
+}
+expect(art.includes('class="art-section-kicker"'),
+  'artillustration.html: use small source-family kickers above the expressive Art headers.');
+expect(art.includes('grid-template-columns: 1fr; align-items: end; border-top: 2px solid var(--orange)') &&
+  art.includes('font-size: clamp(2.35rem, 4.5vw, 4.75rem)'),
+  'artillustration.html: stack labels above smaller Art chapter headers.');
+expect(art.includes('grid-template-columns: repeat(20, minmax(0, 1fr))'),
+  'artillustration.html: use a 20-track Diamond grid for a deliberate 4 / 5 / 4 row rhythm.');
+expect(art.includes('.art-diamonds figure:nth-child(n+5):nth-child(-n+9) { grid-column: span 4; }'),
+  'artillustration.html: the middle Diamond row must contain five equal cards.');
+expect(/is-selectric is-large[\s\S]*is-horned is-medium[\s\S]*is-old-one is-small/i.test(primaryHtml(art)),
+  'artillustration.html: Selectric must lead, Horned Woman must be medium, and Old One must be smallest.');
+expect(art.includes('.art-opening-stack .is-large { grid-column: span 6; }') &&
+  art.includes('.art-opening-stack .is-medium { grid-column: span 4; }') &&
+  art.includes('.art-opening-stack .is-small { grid-column: span 2; }'),
+  'artillustration.html: preserve the large / medium / small opening hierarchy at every viewport.');
+const diamondStack = art.match(/<div class="art-diamonds">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect(Boolean(diamondStack), 'artillustration.html: preserve the Suit of Diamonds stack.');
+expect(!/<figcaption\b/i.test(diamondStack), 'artillustration.html: Diamond cards must not show individual labels.');
+}
+
+if (scope !== 'art') {
+const graphic = read('graphicgallery.html');
+expect(!primaryHtml(graphic).includes('—'), 'graphicgallery.html: primary copy must not use em dashes.');
+expect(!/<figcaption\b/i.test(primaryHtml(graphic)),
+  'graphicgallery.html: primary artwork should not carry small object labels.');
+expect(!primaryHtml(graphic).includes('class="archive-note"'),
+  'graphicgallery.html: use the same clean label/title hierarchy as Art without explanatory header notes.');
+for (const [label, heading] of [
+  ['Project graphics', 'EDC / Boombox'],
+  ['Identity and presentation', 'Southeastern Greek Leadership Association'],
+  ['Presentation design', 'Selected slide work'],
+  ['Brand applications', 'Marks and applications'],
+  ['Event graphics', 'Events and print'],
+  ['Illustration', 'Selected illustrations'],
+  ['Information design', 'Wide-format information design'],
+]) {
+  expect(primaryHtml(graphic).includes(`class="graphic-section-kicker">${label}</p>`) && primaryHtml(graphic).includes(`>${heading}</h2>`),
+    `graphicgallery.html: use the aligned text pair “${label} / ${heading}”.`);
+}
+expect(graphic.includes('border-top: 2px solid var(--pink)') && graphic.includes('color: var(--acid)') &&
+  graphic.includes('font-size: clamp(2.35rem, 4.5vw, 4.75rem)'),
+  'graphicgallery.html: reuse the Art label/title treatment with Graphic-specific colors and type.');
+const edcStack = graphic.match(/<div class="graphic-edc">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect((edcStack.match(/class="archive-frame is-half"/g) ?? []).length === 4,
+  'graphicgallery.html: EDC must return to an even 2 × 2 block.');
+expect(graphic.includes('.graphic-edc img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover;'),
+  'graphicgallery.html: EDC tiles must share one 4:3 crop so both rows align evenly.');
+const presentationStack = graphic.match(/<div class="graphic-slides is-compact">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect((presentationStack.match(/data-presentation-primary/g) ?? []).length === 16,
+  'graphicgallery.html: restore all 16 presentation slides in the compact primary contact sheet.');
+for (let slide = 1; slide <= 16; slide += 1) {
+  expect(presentationStack.includes(`src="images/gg-slides-${slide}.jpg"`),
+    `graphicgallery.html: compact presentation grid is missing gg-slides-${slide}.jpg.`);
+}
+expect((primaryHtml(graphic).match(/data-sgla-primary/g) ?? []).length >= 5,
+  'graphicgallery.html: replace the rejected logo row with a substantial SGLA grouping.');
+for (const genericAlt of ['alt="Logo"', 'alt="Hero"', 'alt="Slide 3"', 'alt="Infographic"']) {
+  expect(!graphic.includes(genericAlt), `graphicgallery.html: replace generic accessibility debt ${genericAlt}.`);
+}
+}
+
+if (failures.length) {
+  console.error(`Visual archives sprint contract failed (${failures.length}):`);
+  failures.forEach((failure) => console.error(`- ${failure}`));
+  process.exit(1);
+}
+
+console.log(`Visual archives integration contract passed for scope=${scope}.`);

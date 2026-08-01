@@ -133,6 +133,126 @@ button:focus-visible,
   border-radius: 2px;
 }
 
+/* shared-shell:a11y:start */
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--page-x);
+  z-index: 10000;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid var(--text);
+  transform: translateY(calc(-100% - var(--space-6)));
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.site-route-status {
+  position: fixed;
+  top: calc(var(--nav-h) + var(--space-3));
+  right: var(--page-x);
+  z-index: 95;
+  min-height: 44px;
+  max-width: calc(100vw - (2 * var(--page-x)));
+  padding: var(--space-2) var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.site-route-status small {
+  padding-left: var(--space-2);
+  color: var(--text-2);
+  border-left: 1px solid var(--border);
+  font: inherit;
+}
+
+main#main-content {
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+}
+
+.nav-logo,
+.lens-switcher-btn,
+.footer-social a,
+.footer-copy-email {
+  min-height: 44px;
+}
+
+.nav-logo,
+.footer-social a,
+.footer-copy-email {
+  display: inline-flex;
+  align-items: center;
+}
+
+.lens-switcher-btn { min-width: 44px; }
+.footer-copy-email { padding-inline: var(--space-2); }
+.nav-mobile-theme { display: none; }
+
+@media (max-width: 600px) {
+  .nav-dropdown-toggle,
+  .nav-links > li > a,
+  .nav-dropdown-menu a,
+  .nav-mobile-lens-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo { min-width: 44px; }
+  .nav-dropdown-toggle,
+  .nav-links > li > a { justify-content: center; }
+
+  .nav-mobile-theme {
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-mobile-theme-label {
+    color: var(--text-2);
+    font-family: 'Source Code Pro', monospace;
+    font-size: var(--text-caption);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-mobile-theme-controls {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .nav-mobile-lens-btn {
+    padding: 0 var(--space-3);
+    border: 1px solid var(--border);
+  }
+
+  .site-route-status {
+    top: calc(58px + var(--space-2));
+    white-space: normal;
+  }
+}
+/* shared-shell:a11y:end */
+
 
 /* ══════════════════════════════════════════════
    CUSTOM CURSOR
@@ -441,12 +561,14 @@ button:focus-visible,
 }
 
 .footer-cta {
+  min-height: 44px;
   font-size: var(--text-body);
   font-weight: 500;
   color: var(--blue-text);
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 24px;
   transition: opacity 0.2s;
 }
@@ -468,8 +590,17 @@ button:focus-visible,
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.footer-social ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 12px 18px;
+  list-style: none;
 }
 
 .footer-social a,
@@ -482,7 +613,7 @@ button:focus-visible,
 
 .footer-copy-email {
   appearance: none;
-  padding: 0;
+  padding: 0 var(--space-2);
   border: 0;
   background: none;
   font-family: inherit;
@@ -3167,7 +3298,8 @@ html[data-theme="dark"] .spotify-frame {
   .nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown-menu { transform: translateY(0); }
   .lens-switcher { display: none; }
   .footer-bottom { align-items: flex-start; flex-direction: column; gap: 18px; }
-  .footer-social { justify-content: flex-start; }
+  .footer-social,
+  .footer-social ul { justify-content: flex-start; }
   .about-now-grid { grid-template-columns: 1fr; }
   .about-now-item {
     border-right: none !important;

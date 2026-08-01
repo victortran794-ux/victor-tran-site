@@ -1,9 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = process.cwd();
-const CONTENT_DIR = path.join(ROOT, 'content');
-
 const PAGES = [
   'index.html',
   'about.html',
@@ -17,6 +14,33 @@ const PAGES = [
   'graphicgallery.html',
   'artillustration.html',
 ];
+
+function parseArgs(argv) {
+  const args = { root: process.cwd(), mode: 'public' };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === '--root') {
+      const value = argv[index + 1];
+      if (!value || value.startsWith('--')) throw new Error('--root requires a path');
+      args.root = path.resolve(value);
+      index += 1;
+    } else if (arg === '--mode') {
+      const value = argv[index + 1];
+      if (!value || value.startsWith('--')) throw new Error('--mode requires public or private');
+      args.mode = value;
+      index += 1;
+    } else {
+      throw new Error(`Unknown argument: ${arg}`);
+    }
+  }
+
+  if (!['public', 'private'].includes(args.mode)) {
+    throw new Error(`Unsupported mode: ${args.mode}. Use public or private.`);
+  }
+
+  return args;
+}
 
 const GENERATED_NOTICE = `<!--
 Generated file. Do not edit directly.
@@ -196,6 +220,15 @@ function yamlString(value) {
   return `"${String(value ?? '').replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
 }
 
+function protectedPageToMarkdown() {
+  return `<!-- Generated protected-content stub. Do not edit directly. -->
+
+# Protected case study
+
+This case study is password-protected. Contact Victor Tran to request access.
+`;
+}
+
 function pageToMarkdown(file, html) {
   const cleanHtml = removeSiteChrome(html);
   const title = firstMatch(html, /<title[^>]*>([\s\S]*?)<\/title>/i).replace(/\s*·\s*Victor Tran Design$/, '');
@@ -314,32 +347,53 @@ function pageToMarkdown(file, html) {
 }
 
 function main() {
-  fs.mkdirSync(CONTENT_DIR, { recursive: true });
+  const { root, mode } = parseArgs(process.argv.slice(2));
+  const policyPath = path.join(root, 'data', 'content-export-policy.json');
+  const policy = JSON.parse(fs.readFileSync(policyPath, 'utf8'));
+  const protectedPages = new Map(
+    policy.protectedPages.map(item => [item.source, item])
+  );
+  const pageFiles = [...new Set([...PAGES, ...protectedPages.keys()])];
+  const outputName = mode === 'public' ? 'content' : '.private-content';
+  const outputDir = path.join(root, outputName);
+
+  fs.mkdirSync(outputDir, { recursive: true });
 
   const index = [];
 
-  for (const file of PAGES) {
-    const sourcePath = path.join(ROOT, file);
+  for (const file of pageFiles) {
+    const sourcePath = path.join(root, file);
     if (!fs.existsSync(sourcePath)) {
-      console.warn(`Skipping missing page: ${file}`);
+      if (!protectedPages.get(file)?.provisional) {
+        console.warn(`Skipping missing page: ${file}`);
+      }
       continue;
     }
 
     const html = fs.readFileSync(sourcePath, 'utf8');
+    const pagePolicy = protectedPages.get(file);
+    const outputFile = pagePolicy ? `${pagePolicy.slug}.md` : contentFileFromHtml(file);
+    const outputPath = path.join(outputDir, outputFile);
+
+    if (mode === 'public' && pagePolicy) {
+      fs.writeFileSync(outputPath, protectedPageToMarkdown(), 'utf8');
+      continue;
+    }
+
     const { markdown, summary } = pageToMarkdown(file, html);
-    const outputPath = path.join(CONTENT_DIR, contentFileFromHtml(file));
+    summary.contentFile = `${outputName}/${outputFile}`;
 
     fs.writeFileSync(outputPath, markdown, 'utf8');
     index.push(summary);
   }
 
   fs.writeFileSync(
-    path.join(CONTENT_DIR, 'site-index.json'),
+    path.join(outputDir, 'site-index.json'),
     `${JSON.stringify(index, null, 2)}\n`,
     'utf8'
   );
 
-  console.log(`Generated ${index.length} Markdown files in content/.`);
+  console.log(`Generated ${index.length} indexed Markdown files in ${outputName}/ (${mode} mode).`);
 }
 
 main();

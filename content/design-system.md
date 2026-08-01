@@ -6,7 +6,7 @@ Hand-edited prose layer that sits next to [design-system.json](design-system.jso
 
 This file is authoritative for design system principles, voice, imagery direction, usage guidance, and prose explanations. It is not authoritative for current portfolio status, next actions, or the structured token values themselves. Use `design-system.json` for token data, `../PORTFOLIO_DASHBOARD.md` for current status, and `../PORTFOLIO_DIRECTION_BRIEF.md` for broader creative/product direction.
 
-> Status: scaffold. Sections marked **TBD** are gaps surfaced from auditing the current site. Fill them in as you have a point of view.
+> Status: reconciled foundations and component direction harvested from approved local candidates. Sections marked **TBD** remain deliberate gaps. This document does not authorize shared-shell implementation or production rollout.
 
 ---
 
@@ -164,11 +164,11 @@ Principle: crisp, editorial motion. Save springy/bouncy behavior for project-spe
 
 ## Elevation
 
-**Flat with hairlines. No shadows, ever.**
+**Flat and hairline-first. No generic SaaS elevation.**
 
-The system uses `--border` and small surface-color shifts (`--bg` → `--bg-2`) to imply hierarchy, never drop shadows. This is a stated principle, not a default. The site reads as editorial / print-adjacent — drop shadows would dilute that.
+The shared system uses `--border` and small surface-color shifts (`--bg` to `--bg-2`) to imply hierarchy. It does not define a global shadow scale. The site reads as editorial and print-adjacent, so generic soft elevation would dilute that.
 
-If a future component needs lift (dropdown, tooltip, popover), reach for: a thicker hairline, a `--bg-2` surface, or a contrasting outline. Not a shadow.
+If a future shared component needs lift, start with a thicker hairline, a `--bg-2` surface, or a contrasting outline. Rare print offsets or media-frame depth may remain as scoped project-native variants. They do not become global elevation tokens.
 
 ---
 
@@ -213,12 +213,33 @@ Current shared primitives now include:
 - `screen-frame` — reusable UI/product screen display with accent border, `--radius-lg`, and variants: `--pair`, `--placeholder`, `--blur`
 - `color-punct-card` — selected colored editorial note for case-study rhythm; orange/purple surface variants borrow the homepage colored-box behavior without making whole pages loud
 
-Next primitives to promote into documented patterns:
+Shared anatomy contracts accepted from approved candidate evidence, with implementation still pending:
 
-- `artifact-card`
-- `decision-card`
-- `process-strip`
-- `section-note`
+- chapter marker / long-form section
+- asymmetric project card
+- artifact / process card
+- media figure with provenance and evidence state
+- accessible technical relationship diagram
+- protected-page gate and safe generated-export behavior
+
+These are documented contracts, not proof that matching shared CSS classes or shared-shell components already exist.
+
+Shared evidence anatomy may include media, a factual caption, provenance, evidence status, and a source boundary. When relevant, evidence status must distinguish original, sanitized, reconstructed, exploratory, and withheld material. Protected or unavailable evidence uses direct text and never relies on blur alone.
+
+Project-native variants remain first-class system decisions rather than exceptions to erase:
+
+- Art and Illustration keeps its artwork-first field, warm serif hierarchy, and caption-free artwork groupings.
+- Graphic Design keeps its violet, pink, acid-yellow, and cream contact-sheet identity.
+- Pi Kapp App keeps its deep blue, gold star, and white shield language.
+- IBM and other protected product stories keep project-specific structural language plus explicit provenance and privacy states.
+
+Every accepted anatomy contract must specify Light/Dark behavior, exact-mobile collapse, keyboard and focus behavior where interactive, reduced motion where animated, decoded-media expectations, and zero root horizontal overflow.
+
+Known implementation gaps:
+
+- Provenance, withheld, protected, and unavailable states do not yet have a completed shared CSS or markup implementation.
+- Live CSS references including `--space-7`, `--tracking-label`, `--dur-med`, and `--text-small` need deliberate definition, replacement, or page-local isolation before JSON can be described as a complete mirror of live CSS.
+- Iconography and expanded imagery treatments remain TBD.
 
 ---
 
@@ -226,10 +247,12 @@ Next primitives to promote into documented patterns:
 
 Today: hand-maintained, read by humans.
 
-**Migration path** (proposed, not yet built):
+**Migration path** (reconciled, not yet authorized):
 
-1. **Phase 1** — add `scripts/build-tokens.mjs`. Reads `design-system.json`, writes the `:root` block in `css/style.css` between marker comments. Run on demand. *Optional, since CSS already mirrors the JSON.*
-2. **Phase 2** — rewire the DNA panel in [index.html](../index.html) to fetch `design-system.json` and render cards from data, instead of hardcoding font lists, radii samples, and component swatches in HTML. This is where the "edit one file, everything updates" promise pays off.
-3. **Phase 3** — fill in the **TBD** sections above as design intent solidifies. Each one becomes a token group in the JSON and a paragraph here.
+1. **Phase 1**: keep the existing home-page Design DNA overlay stable while the approved candidate set defines the system.
+2. **Phase 2**: reconcile prose, token roles, shared anatomy, behavior contracts, and project-native variants without changing live CSS values.
+3. **Phase 3**: approve the Launch Integration Contract and implement shared shell and case-study chrome once in a coordinated local worktree.
+4. **Phase 4**: refresh the existing Design DNA overlay from the reconciled system after complete-site preview review.
+5. **Optional later phase**: add `scripts/build-tokens.mjs` or data-driven overlay rendering only when the JSON schema and reader value are stable.
 
-The order matters: don't rewire JS until the JSON shape is stable, and don't lock the JSON shape until you've answered the TBD questions for at least color, type scale, and motion. Otherwise you'll be migrating twice.
+The order matters. Do not rewire the overlay, introduce broad Lens behavior, or generate CSS from JSON before the coordinated integration preview proves that the schema and shared-shell decisions are stable.

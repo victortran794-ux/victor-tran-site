@@ -80,7 +80,8 @@ window.addEventListener('scroll', () => {
 // ── Nav dropdowns (Work, Galleries) ───────────────
 const navDropdowns = [...document.querySelectorAll('.nav-dropdown')].map(group => {
   const toggle = group.querySelector('.nav-dropdown-toggle');
-  return { group, toggle };
+  const links = [...group.querySelectorAll('.nav-dropdown-menu a[href]')];
+  return { group, toggle, links };
 }).filter(d => d.toggle);
 
 const setDropdownOpen = (toggle, open) => {
@@ -93,11 +94,19 @@ const closeOtherDropdowns = (except) => {
   });
 };
 
-navDropdowns.forEach(({ group, toggle }) => {
+navDropdowns.forEach(({ group, toggle, links }) => {
   toggle.addEventListener('click', () => {
     const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
     closeOtherDropdowns(toggle);
     setDropdownOpen(toggle, willOpen);
+  });
+
+  toggle.addEventListener('keydown', (e) => {
+    if (!links.length || !['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+    e.preventDefault();
+    closeOtherDropdowns(toggle);
+    setDropdownOpen(toggle, true);
+    links[e.key === 'ArrowDown' ? 0 : links.length - 1].focus();
   });
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -114,9 +123,24 @@ navDropdowns.forEach(({ group, toggle }) => {
 
   group.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      e.preventDefault();
       setDropdownOpen(toggle, false);
       toggle.focus();
+      return;
     }
+    if (e.target === toggle) return;
+    const currentIndex = links.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+    let nextIndex;
+    switch (e.key) {
+      case 'ArrowDown': nextIndex = (currentIndex + 1) % links.length; break;
+      case 'ArrowUp': nextIndex = (currentIndex - 1 + links.length) % links.length; break;
+      case 'Home': nextIndex = 0; break;
+      case 'End': nextIndex = links.length - 1; break;
+      default: return;
+    }
+    e.preventDefault();
+    links[nextIndex].focus();
   });
 });
 

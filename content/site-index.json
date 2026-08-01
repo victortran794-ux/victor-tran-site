@@ -151,136 +151,6 @@
     "projects": []
   },
   {
-    "title": "Designing the trust layer for AI document processing",
-    "source": "document-processing.html",
-    "url": "/document-processing",
-    "category": "Product Design / AI Workflow Design",
-    "description": "A product design case study about designing an accuracy evaluation workflow for AI document processing in Watson Orchestrate.",
-    "contentFile": "content/document-processing.md",
-    "headings": [
-      "The missing loop after extraction",
-      "AI extraction was useful, but hard to validate",
-      "Shipped classifier and extractor work shaped the evaluation direction",
-      "Lead designer for Accuracy Evaluation",
-      "Turning evaluation into an iteration loop",
-      "Make accuracy useful, not just visible",
-      "A measurable quality loop for document automation",
-      "Designing trust into complex AI systems"
-    ],
-    "images": [
-      {
-        "src": "images/document-processing-evaluation-results-placeholder.png",
-        "alt": "Evaluation results interface showing document extraction quality metrics and field-level results."
-      },
-      {
-        "src": "images/document-processing-review-workflow-placeholder.png",
-        "alt": "Document review interface with a source document and extracted fields shown side by side."
-      },
-      {
-        "src": "images/document-processing-classifier-context-placeholder.png",
-        "alt": "Classifier interface showing document classes and test results for document processing setup."
-      },
-      {
-        "src": "images/document-processing-extraction-indicators-placeholder.png",
-        "alt": "Extraction interface showing document fields with review and quality indicators."
-      }
-    ],
-    "projects": []
-  },
-  {
-    "title": "IBM Cloud",
-    "source": "ibmcloud.html",
-    "url": "/ibmcloud",
-    "category": "Product Design · Visual Systems",
-    "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
-    "contentFile": "content/ibmcloud.md",
-    "headings": [
-      "Move from solving the screen to improving how the team moves.",
-      "Carry the workflow, not just the screen.",
-      "Make critique survive the meeting.",
-      "Turn finished images into repeatable construction.",
-      "Create leverage beyond the artifact."
-    ],
-    "images": [
-      {
-        "src": "images/ibm-thumb-light.png",
-        "alt": "IBM Cloud Observability abstract service illustration in light mode"
-      },
-      {
-        "src": "images/ibm-thumb-dark.png",
-        "alt": "IBM Cloud Observability abstract service illustration in dark mode"
-      },
-      {
-        "src": "images/ibm-p4-world-hifi.jpg",
-        "alt": "IBM Cloud Observability world-page illustration concept"
-      },
-      {
-        "src": "images/ibm-p4-world-01.jpg",
-        "alt": "IBM Cloud Observability world-page service card"
-      },
-      {
-        "src": "images/ibm-p1-sketch.jpg",
-        "alt": "Early digital studies for IBM Cloud service illustration construction"
-      },
-      {
-        "src": "images/ibm-p1-devops.jpg",
-        "alt": "Drawn studies for IBM Cloud DevOps illustration construction"
-      },
-      {
-        "src": "images/ibm-p2-main-light.jpg",
-        "alt": "IBM Cloud illustration-system elements in light mode"
-      },
-      {
-        "src": "images/ibm-p2-main-dark.jpg",
-        "alt": "IBM Cloud illustration-system elements in dark mode"
-      }
-    ],
-    "projects": []
-  },
-  {
-    "title": "IBM Patterns: Contact Us",
-    "source": "ibm-patterns.html",
-    "url": "/ibm-patterns",
-    "category": "Product Design",
-    "description": "A six-week IBM Patterns project redesigning the Contact Us experience on IBM.com so high-volume visitors could better self-route to the right team.",
-    "contentFile": "content/ibm-patterns.md",
-    "headings": [
-      "A page built to look the part, not do the job",
-      "IBM Patterns",
-      "Two personas, one wall",
-      "Every path had a destination",
-      "The structure held",
-      "A page that finally did its job"
-    ],
-    "images": [
-      {
-        "src": "images/patterns-hero.webp",
-        "alt": "IBM Patterns Contact Us hero slide"
-      },
-      {
-        "src": "images/patterns-design-1.webp",
-        "alt": "IBM Contact Us Sales subcategory navigation"
-      },
-      {
-        "src": "images/patterns-design-2.webp",
-        "alt": "IBM Contact Us IBM Careers and Learn sections"
-      },
-      {
-        "src": "images/patterns-design-3.webp",
-        "alt": "IBM Contact Us Additional Resources section"
-      },
-      {
-        "src": "images/patterns-design-4.webp",
-        "alt": "IBM Contact Us Contact Information and footer band"
-      },
-      {
-        "src": "images/patterns-rogue.webp",
-        "alt": "Team Rogue logo"
-      }
-    ],
-    "projects": []
-  },
-  {
     "title": "Pi Kapp App",
     "source": "pikappapp.html",
     "url": "/pikappapp",
@@ -339,70 +209,6 @@
       {
         "src": "images/pikapp-app-emptystate.png",
         "alt": "Pi Kapp App prototype: Chapter tab empty state with the gold star centered on deep blue with hex tessellation"
-      }
-    ],
-    "projects": []
-  },
-  {
-    "title": "Performance Contracting, Inc.",
-    "source": "pci.html",
-    "url": "/pci",
-    "category": "Brand & Print Design",
-    "description": "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.",
-    "contentFile": "content/pci.md",
-    "headings": [
-      "Principles of Business Conduct",
-      "Banner System",
-      "Outcome"
-    ],
-    "images": [
-      {
-        "src": "images/pci-handbook-1-cover.jpg",
-        "alt": "PCG Principles of Business Conduct cover"
-      },
-      {
-        "src": "images/pci-handbook-2-interstitial.jpg",
-        "alt": "PCG handbook section interstitial"
-      },
-      {
-        "src": "images/pci-handbook-3-ceo-letter.jpg",
-        "alt": "PCG handbook CEO letter spread"
-      },
-      {
-        "src": "images/pci-handbook-5-toc.jpg",
-        "alt": "PCG handbook table of contents"
-      },
-      {
-        "src": "images/pci-handbook-13-conduct.jpg",
-        "alt": "PCG handbook Code of Conduct spread"
-      },
-      {
-        "src": "images/pci-handbook-20-harassment.jpg",
-        "alt": "PCG handbook Anti-Harassment policy spread"
-      },
-      {
-        "src": "images/pci-handbook-41-locations.jpg",
-        "alt": "PCG handbook US locations map"
-      },
-      {
-        "src": "images/pci-handbook-42-back.jpg",
-        "alt": "PCG handbook back cover"
-      },
-      {
-        "src": "images/pci-banners-1.jpg",
-        "alt": "PCG banners typography and asset exploration"
-      },
-      {
-        "src": "images/pci-banners-2.jpg",
-        "alt": "PCG banners pattern and color exploration"
-      },
-      {
-        "src": "images/pci-banners-3.jpg",
-        "alt": "PCG banners Build the Future final mockup"
-      },
-      {
-        "src": "images/pci-banners-4.jpg",
-        "alt": "PCG banners environmental and collateral mockups"
       }
     ],
     "projects": []
@@ -525,20 +331,26 @@
     "projects": []
   },
   {
-    "title": "Graphic Design",
+    "title": "Graphic Design in motion.",
     "source": "graphicgallery.html",
     "url": "/graphicgallery",
-    "category": "Design",
-    "description": "Brand identity, print, and digital design across nonprofit and editorial work.",
+    "category": "Graphic Design",
+    "description": "An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran.",
     "contentFile": "content/graphicgallery.md",
     "headings": [
       "EDC / Boombox",
-      "Logos & Branding",
-      "Illustrations",
-      "Presentation & Slide Design",
-      "Infographic"
+      "Southeastern Greek Leadership Association",
+      "Selected slide work",
+      "Marks and applications",
+      "Events and print",
+      "Selected illustrations",
+      "Wide-format information design"
     ],
     "images": [
+      {
+        "src": "images/graphic-archive-v2/chantico.webp",
+        "alt": "Three illustrated Chantico bottle applications"
+      },
       {
         "src": "images/gg-edc-1.jpg",
         "alt": "EDC Boombox 3D"
@@ -549,91 +361,96 @@
       },
       {
         "src": "images/gg-edc-2.jpg",
-        "alt": "EDC · pink eye"
+        "alt": "EDC pink eye graphic"
       },
       {
         "src": "images/gg-edc-3.jpg",
-        "alt": "EDC · green eye"
+        "alt": "EDC green eye graphic"
       },
       {
-        "src": "images/gg-day-of-giving.png",
-        "alt": "Pi Kappa Phi Day of Giving"
+        "src": "images/thumb-sgla.webp",
+        "alt": "SGLA identity mark over a warm multicolor grid"
       },
       {
-        "src": "images/gg-ibm-fan.jpg",
-        "alt": "IBM Be Equal Pride fan"
+        "src": "images/gg-slides-3.jpg",
+        "alt": "Better Fraternity, Better You presentation graphic"
       },
       {
-        "src": "images/logos-1.jpg",
-        "alt": "Logo"
+        "src": "images/gg-slides-6.jpg",
+        "alt": "An Hour of Power presentation graphic"
       },
       {
-        "src": "images/logos-2.jpg",
-        "alt": "Logo sketches"
+        "src": "images/gg-slides-7.jpg",
+        "alt": "Leadership Out Loud presentation graphic"
       },
       {
-        "src": "images/logos-3.jpg",
-        "alt": "STM Banner"
+        "src": "images/gg-slides-13.jpg",
+        "alt": "Transitions presentation graphic"
       },
       {
-        "src": "images/logos-4.jpg",
-        "alt": "Hero"
+        "src": "images/gg-slides-1.jpg",
+        "alt": "MTM Widescreen 21 presentation slide"
       },
       {
-        "src": "images/gg-illus-1.jpg",
-        "alt": "Little Shop"
-      },
-      {
-        "src": "images/gg-illus-2.jpg",
-        "alt": "The Wiz"
+        "src": "images/gg-slides-2.jpg",
+        "alt": "Bama 23 presentation slide"
       }
     ],
     "projects": []
   },
   {
-    "title": "Art & Illustration",
+    "title": "An open studio wall.",
     "source": "artillustration.html",
     "url": "/artillustration",
-    "category": "Artwork",
-    "description": "Digital and traditional illustration, including posters, paintings, and personal series.",
+    "category": "Art & Illustration",
+    "description": "An evolving studio wall of character illustration, personal series, paintings, and experiments by Victor Tran.",
     "contentFile": "content/artillustration.md",
     "headings": [
+      "Characters and worlds",
       "56th Supreme Chapter Chicago",
-      "Traditional Work",
-      "Suit of Diamonds · Character Concepts"
+      "Suit of Diamonds",
+      "Traditional work"
     ],
     "images": [
       {
         "src": "images/illus-ibm-selectric-web.jpg",
-        "alt": "IBM Selectric 1961 · blueprint illustration"
+        "alt": "IBM Selectric 1961 blueprint illustration"
       },
       {
         "src": "images/illus-untitled-5.jpg",
-        "alt": "Horned woman · pencil sketch"
+        "alt": "Horned Woman pencil sketch"
       },
       {
         "src": "images/illus-untitled-6.jpg",
-        "alt": "Horned woman · painted"
+        "alt": "Horned Woman painted study"
       },
       {
         "src": "images/illus-untitled-7.jpg",
-        "alt": "Horned woman · stylized B&W"
+        "alt": "Horned Woman stylized black-and-white study"
       },
       {
         "src": "images/illus-untitled-8.jpg",
-        "alt": "Horned woman · glitch"
+        "alt": "Horned Woman glitch study"
       },
       {
         "src": "images/illus-untitled-9.jpg",
-        "alt": "Horned woman · pink overlay"
+        "alt": "Horned Woman pink overlay study"
       },
       {
         "src": "images/illus-untitled-10.jpg",
-        "alt": "Horned woman · watercolor"
+        "alt": "Horned Woman watercolor study"
       },
       {
         "src": "images/illus-untitled-11.jpg",
-        "alt": "Horned woman · blue ink"
+        "alt": "Horned Woman blue ink study"
+      },
+      {
+        "src": "images/art-archive-v2/old-one.webp",
+        "alt": "Black-and-white and turquoise character illustration"
+      },
+      {
+        "src": "images/illus-lost.jpg",
+        "alt": "Lost"
       },
       {
         "src": "images/illus-untitled-4.jpg",
@@ -642,14 +459,6 @@
       {
         "src": "images/illus-untitled-2.jpg",
         "alt": "Golden mask"
-      },
-      {
-        "src": "images/illus-solar.jpg",
-        "alt": "Solar"
-      },
-      {
-        "src": "images/illus-untitled-1.jpg",
-        "alt": "Cosmic figure"
       }
     ],
     "projects": []
