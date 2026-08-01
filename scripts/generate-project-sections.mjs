@@ -61,9 +61,6 @@ function cardsWithChapterMarkers(items, indent = '        ') {
   }).join('\n\n');
 }
 
-function navItem(project, indent = '            ') {
-  return `${indent}<li role="none"><a role="menuitem" href="${escapeHtml(project.url)}">${escapeHtml(project.title)}</a></li>`;
-}
 
 function generatedBlock(name, body, indent = '') {
   return `${indent}<!-- generated:${name}:start -->\n${body}\n${indent}<!-- generated:${name}:end -->`;
@@ -76,28 +73,13 @@ function replaceOrCreate(html, name, fallbackPattern, body, indent = '') {
   return html.replace(fallbackPattern, block);
 }
 
-const navPrimary = projects.filter(project => project.type === 'primary' && project.nav);
-const navGalleries = projects.filter(project => project.type === 'gallery' && project.nav);
 const homepagePrimary = projects.filter(project => project.type === 'primary' && project.homepage);
 const homepageGalleries = projects.filter(project => project.type === 'gallery' && project.homepage);
-
-const navBody = [
-  ...navPrimary.map(project => navItem(project)),
-  '            <li class="nav-dropdown-separator" role="separator" aria-hidden="true"></li>',
-  ...navGalleries.map(project => navItem(project)),
-].join('\n');
 
 const primaryBody = cardsWithChapterMarkers(homepagePrimary);
 const galleryBody = homepageGalleries.map(project => cardMarkup(project, '          ')).join('\n\n');
 
 let output = indexHtml;
-output = replaceOrCreate(
-  output,
-  'projects-nav',
-  /            <li role="none"><a role="menuitem" href="document-processing\.html">Document Processing<\/a><\/li>[\s\S]*?            <li role="none"><a role="menuitem" href="graphicgallery\.html">Graphic Design<\/a><\/li>/,
-  navBody,
-  '            ',
-);
 output = replaceOrCreate(
   output,
   'homepage-primary-projects',
@@ -117,5 +99,5 @@ if (output === indexHtml) {
   console.log('Project sections already up to date.');
 } else {
   fs.writeFileSync(indexPath, output);
-  console.log('Generated Work dropdown and homepage project sections from data/projects.json.');
+  console.log('Generated homepage project sections from data/projects.json.');
 }

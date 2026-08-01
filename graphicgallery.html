@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Brand identity, print, and digital design across nonprofit and editorial work.">
+  <meta name="description" content="An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran.">
 
   <!-- favicon + social -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
@@ -13,10 +13,10 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.victortrandesign.com/graphicgallery">
   <meta property="og:title" content="Graphic Design · Victor Tran">
-  <meta property="og:description" content="Brand identity, print, and digital design across nonprofit and editorial work.">
-  <meta property="og:image" content="https://www.victortrandesign.com/images/thumb-sgla.webp">
-  <meta property="og:image:width" content="1081">
-  <meta property="og:image:height" content="1081">
+  <meta property="og:description" content="An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran.">
+  <meta property="og:image" content="https://www.victortrandesign.com/images/graphic-archive-v2/chantico.webp">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="2000">
   <meta name="twitter:card" content="summary_large_image">
   <title>Graphic Design · Victor Tran Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +24,124 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
+
+  <style id="visual-archive-v2-styles">
+    .visual-archive-page .archive-primary { overflow: clip; }
+    .visual-archive-page .archive-primary img,
+    .visual-archive-page .archive-extended img { display: block; max-width: 100%; height: auto; }
+    .visual-archive-page .archive-kicker {
+      margin: 0 0 1rem; font: 600 .74rem/1.2 'Source Code Pro', monospace;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .visual-archive-page .archive-title { margin: 0; font-family: 'DM Serif Display', serif; line-height: .92; }
+    .visual-archive-page .archive-lede { max-width: 34rem; margin: 1.4rem 0 0; font-size: clamp(1rem, 1.6vw, 1.3rem); line-height: 1.55; }
+    .visual-archive-page .archive-chapter { margin-top: clamp(5rem, 11vw, 10rem); scroll-margin-top: calc(var(--nav-h) + 1rem); }
+    .visual-archive-page .archive-chapter-head { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+    .visual-archive-page .archive-chapter h2 { margin: 0; font-family: 'DM Serif Display', serif; font-size: clamp(2.25rem, 5vw, 5.75rem); line-height: .96; scroll-margin-top: calc(var(--nav-h) + 1rem); }
+    .visual-archive-page .archive-note { max-width: 27rem; margin: 0; line-height: 1.55; }
+    .visual-archive-page .archive-frame { margin: 0; }
+    .visual-archive-page .archive-frame figcaption { margin-top: .65rem; font: 500 .73rem/1.45 'Source Code Pro', monospace; letter-spacing: .04em; }
+    .visual-archive-page .archive-extended { background: var(--bg); color: var(--text); border-top: 1px solid var(--border); scroll-margin-top: var(--nav-h); }
+    .visual-archive-page .archive-extended > summary {
+      min-height: 64px; padding: 1.25rem var(--page-x); cursor: pointer; display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; font: 600 .8rem/1.2 'Source Code Pro', monospace;
+      letter-spacing: .1em; text-transform: uppercase; list-style: none;
+    }
+    .visual-archive-page .archive-extended > summary::-webkit-details-marker { display: none; }
+    .visual-archive-page .archive-extended > summary::after { content: '+'; font-size: 1.2rem; }
+    .visual-archive-page .archive-extended[open] > summary::after { content: '−'; }
+    .visual-archive-page .archive-extended-intro { max-width: 46rem; margin: 0; padding: 2rem var(--page-x) 0; color: var(--text-2); line-height: 1.6; }
+    .visual-archive-page .archive-extended-content { padding-bottom: var(--section-y); }
+    .visual-archive-page .archive-extended-content > .gallery-pair,
+    .visual-archive-page .archive-extended-content > .gallery-grid,
+    .visual-archive-page .archive-extended-content > .gallery-section,
+    .visual-archive-page .archive-extended-content > .gallery-feature { content-visibility: auto; contain-intrinsic-size: 900px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .visual-archive-page .archive-primary img { transition: transform 320ms ease; }
+      .visual-archive-page .archive-primary figure:hover img { transform: scale(1.012); }
+    }
+    @media (max-width: 720px) {
+      .visual-archive-page .archive-chapter-head { display: block; }
+      .visual-archive-page .archive-note { margin-top: .8rem; }
+      .visual-archive-page .archive-frame figcaption { font-size: .68rem; }
+    }
+  </style>
+
+  <style id="graphic-archive-v2-skin">
+    .graphic-archive-v2 .archive-primary { --violet: #5b39d9; --acid: #e8ff4f; --pink: #ff6db4; --cream: #fff9ea; background: var(--violet); color: var(--cream); }
+    [data-theme="dark"] .graphic-archive-v2 .archive-primary { --violet: #2e1d70; --acid: #ddfa48; --pink: #ff76bc; --cream: #fff9ea; }
+    .graphic-archive-v2 .graphic-shell { width: min(100%, 1600px); margin: 0 auto; padding: clamp(4rem, 8vw, 8rem) var(--page-x) clamp(7rem, 11vw, 11rem); }
+    .graphic-archive-v2 .archive-kicker { color: var(--acid); }
+    .graphic-archive-v2 .archive-title { font-family: 'Barlow', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -.065em; font-size: clamp(4.4rem, 13vw, 13rem); max-width: 7ch; }
+    .graphic-archive-v2 .archive-lede { color: var(--cream); }
+    .graphic-archive-v2 .graphic-opening { position: relative; min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(2rem, 5vw, 6rem); align-items: center; }
+    .graphic-archive-v2 .graphic-opening::after { content: 'FORM'; position: absolute; right: -4vw; bottom: -4rem; font: 700 clamp(7rem, 23vw, 24rem)/.7 'Barlow', sans-serif; letter-spacing: -.08em; color: color-mix(in srgb, var(--pink) 52%, transparent); pointer-events: none; }
+    .graphic-archive-v2 .graphic-opening figure { position: relative; z-index: 1; border: 14px solid var(--acid); }
+    .graphic-archive-v2 .graphic-opening figure img { width: 100%; }
+    .graphic-archive-v2 .archive-chapter h2 { font-family: 'Barlow', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -.045em; }
+    .graphic-archive-v2 .archive-chapter-head { display: grid; grid-template-columns: 1fr; align-items: end; border-top: 2px solid var(--pink); gap: .65rem; padding-top: 1rem; }
+    .graphic-archive-v2 .archive-chapter-head h2 { max-width: 18ch; font-size: clamp(2.35rem, 4.5vw, 4.75rem); line-height: .92; letter-spacing: -.035em; }
+    .graphic-archive-v2 .graphic-section-kicker { margin: 0; color: var(--acid); font: 700 .72rem/1.2 'Source Code Pro', monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .graphic-archive-v2 .graphic-edc,
+    .graphic-archive-v2 .graphic-brand-grid,
+    .graphic-archive-v2 .graphic-sgla,
+    .graphic-archive-v2 .graphic-slides { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(.7rem, 2vw, 1.5rem); align-items: start; }
+    .graphic-archive-v2 .graphic-edc .is-half { grid-column: span 6; }
+    .graphic-archive-v2 .graphic-edc img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
+    .graphic-archive-v2 .graphic-edc figure:first-child img { object-position: center 78%; }
+    .graphic-archive-v2 .graphic-sgla .is-logo { grid-column: span 4; }
+    .graphic-archive-v2 .graphic-sgla .is-feature { grid-column: span 8; }
+    .graphic-archive-v2 .graphic-sgla .is-half { grid-column: span 6; }
+    .graphic-archive-v2 .graphic-sgla .is-full { grid-column: 1 / -1; }
+    .graphic-archive-v2 .graphic-brand-grid .is-full { grid-column: 1 / -1; }
+    .graphic-archive-v2 .graphic-brand-grid .is-third { grid-column: span 4; }
+    .graphic-archive-v2 .graphic-brand-grid .is-four { grid-column: span 4; }
+    .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
+    .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
+    .graphic-archive-v2 .graphic-illustrations { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.7rem, 2vw, 1.5rem); align-items: start; }
+    .graphic-archive-v2 .graphic-slides.is-compact { display: block; columns: 4; column-gap: 8px; }
+    .graphic-archive-v2 .graphic-slides.is-compact figure { break-inside: avoid; margin: 0 0 8px; }
+    .graphic-archive-v2 .graphic-slides.is-compact img { width: 100%; }
+    @media (min-width: 1200px) { .graphic-archive-v2 .graphic-slides.is-compact { columns: 5; } }
+    .graphic-archive-v2 .graphic-wide { border-bottom: 18px solid var(--pink); }
+    .graphic-archive-v2 .archive-frame figcaption { color: var(--acid); }
+    @media (max-width: 720px) {
+      .graphic-archive-v2 .graphic-opening { min-height: auto; grid-template-columns: 1fr; }
+      .graphic-archive-v2 .archive-title { font-size: clamp(4.3rem, 22vw, 7rem); }
+      .graphic-archive-v2 .graphic-opening figure { margin-top: 2rem; border-width: 8px; }
+      .graphic-archive-v2 .graphic-opening::after { font-size: 9rem; bottom: -2rem; }
+      .graphic-archive-v2 .graphic-edc,
+      .graphic-archive-v2 .graphic-brand-grid,
+      .graphic-archive-v2 .graphic-sgla,
+      .graphic-archive-v2 .graphic-slides { grid-template-columns: 1fr; }
+      .graphic-archive-v2 .graphic-edc .is-half,
+      .graphic-archive-v2 .graphic-brand-grid .is-full,
+      .graphic-archive-v2 .graphic-brand-grid .is-third,
+      .graphic-archive-v2 .graphic-brand-grid .is-four,
+      .graphic-archive-v2 .graphic-brand-grid .is-eight,
+      .graphic-archive-v2 .graphic-sgla .is-logo,
+      .graphic-archive-v2 .graphic-sgla .is-feature,
+      .graphic-archive-v2 .graphic-sgla .is-half,
+      .graphic-archive-v2 .graphic-sgla .is-full,
+      .graphic-archive-v2 .graphic-slides .is-full,
+      .graphic-archive-v2 .graphic-slides .is-half,
+      .graphic-archive-v2 .graphic-slides .is-third { grid-column: 1; }
+      .graphic-archive-v2 .graphic-slides.is-compact { columns: 2; }
+      .graphic-archive-v2 .graphic-illustrations { grid-template-columns: 1fr 1fr; }
+      .graphic-archive-v2 .graphic-events { grid-template-columns: 1fr; }
+      .graphic-archive-v2 .archive-chapter-head { gap: .55rem; }
+      .graphic-archive-v2 .archive-chapter-head h2 { font-size: clamp(2.35rem, 10.5vw, 3.8rem); }
+    }
+  </style>
 </head>
-<body>
+<body class="visual-archive-page graphic-archive-v2">
 
   <div class="cursor-dot"  aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
-  <nav class="nav">
+    <!-- generated:site-shell-header:start -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
         <img src="images/nav-logo.webp" alt="" width="34" height="34">
@@ -38,18 +149,27 @@
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown is-active">
-          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Work</button>
-          <ul class="nav-dropdown-menu" role="menu">
-            <li role="none"><a role="menuitem" href="document-processing.html">Document Processing</a></li>
-            <li role="none"><a role="menuitem" href="ibmcloud.html">IBM Cloud Observability</a></li>
-            <li role="none"><a role="menuitem" href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
-            <li role="none"><a role="menuitem" href="pci.html">Performance Contracting, Inc.</a></li>
-            <li role="none"><a role="menuitem" href="abilityexperience.html">The Ability Experience</a></li>
-            <li role="none"><a role="menuitem" href="salmagazine.html">Star &amp; Lamp Magazine</a></li>
-            <li role="none"><a role="menuitem" href="pikappapp.html">Pi Kapp App</a></li>
-            <li class="nav-dropdown-separator" role="separator" aria-hidden="true"></li>
-            <li role="none"><a role="menuitem" href="artillustration.html">Art &amp; Illustration</a></li>
-            <li role="none"><a role="menuitem" href="graphicgallery.html" class="active">Graphic Design</a></li>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
+          <ul id="work-menu" class="nav-dropdown-menu">
+            <!-- generated:projects-nav:start -->
+            <li><a href="document-processing.html">Document Processing</a></li>
+            <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
+            <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
+            <li><a href="pci.html">Performance Contracting, Inc.</a></li>
+            <li><a href="abilityexperience.html">The Ability Experience</a></li>
+            <li><a href="salmagazine.html">Star &amp; Lamp Magazine</a></li>
+            <li><a href="pikappapp.html">Pi Kapp App</a></li>
+            <li class="nav-dropdown-separator" aria-hidden="true"></li>
+            <li><a href="artillustration.html">Art &amp; Illustration</a></li>
+            <li><a href="graphicgallery.html" class="active" aria-current="page">Graphic Design</a></li>
+            <!-- generated:projects-nav:end -->
+            <li class="nav-mobile-theme">
+              <span class="nav-mobile-theme-label">Theme</span>
+              <div class="nav-mobile-theme-controls" role="group" aria-label="Mobile viewing mode">
+                <button class="lens-switcher-btn nav-mobile-lens-btn" data-lens="light" data-mobile-lens="light" aria-pressed="true" aria-label="Light mode">Light</button>
+                <button class="lens-switcher-btn nav-mobile-lens-btn" data-lens="dark" data-mobile-lens="dark" aria-pressed="false" aria-label="Dark mode">Dark</button>
+              </div>
+            </li>
           </ul>
         </li>
         <li><a href="about.html">About</a></li>
@@ -67,94 +187,126 @@
       </div>
     </div>
   </nav>
+  <!-- generated:site-shell-header:end -->
 
-  <main class="page-content">
+  <main id="main-content" tabindex="-1" class="page-content" data-archive="graphic-contact-sheet">
 
-    <header class="page-header">
-      <p class="section-label label-design">Design</p>
-      <h1 class="page-header-title">Graphic Design</h1>
-      <p class="page-header-desc">A collection of graphic design work spanning brand identity, illustration, print, and presentation design.</p>
-    </header>
+    <section class="archive-primary" aria-labelledby="graphic-archive-title">
+      <div class="graphic-shell">
+        <header class="graphic-opening">
+          <div>
+            <p class="section-label archive-kicker label-design">Graphic Design</p>
+            <h1 class="archive-title" id="graphic-archive-title">Graphic Design in motion.</h1>
+            <p class="archive-lede">Identity, print, presentations, and applications. Edited by format, scale, and visual energy.</p>
+          </div>
+          <figure class="archive-frame">
+            <img loading="eager" fetchpriority="high" decoding="async" src="images/graphic-archive-v2/chantico.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications">
 
-    <section class="gallery-section">
-      <h2 class="gallery-section-title">EDC / Boombox</h2>
-      <div class="gallery-grid gallery-grid--edc">
-        <img loading="eager" fetchpriority="high" decoding="async" src="images/gg-edc-1.jpg" width="574" height="471" alt="EDC Boombox 3D">
-        <img loading="lazy" decoding="async" src="images/gg-edc-0.jpg" width="1600" height="1279" alt="EDC Boombox illustration">
-        <img loading="lazy" decoding="async" src="images/gg-edc-2.jpg" width="1600" height="1279" alt="EDC · pink eye">
-        <img loading="lazy" decoding="async" src="images/gg-edc-3.jpg" width="1600" height="1279" alt="EDC · green eye">
+          </figure>
+        </header>
+
+        <section class="archive-chapter" aria-labelledby="graphic-edc-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Project graphics</p><h2 id="graphic-edc-title">EDC / Boombox</h2></div>
+          <div class="graphic-edc">
+            <figure class="archive-frame is-half" data-live-primary><img loading="eager" fetchpriority="high" decoding="async" src="images/gg-edc-1.jpg" width="574" height="471" alt="EDC Boombox 3D"></figure>
+            <figure class="archive-frame is-half" data-live-primary><img loading="lazy" decoding="async" src="images/gg-edc-0.jpg" width="1600" height="1279" alt="EDC Boombox illustration"></figure>
+            <figure class="archive-frame is-half" data-live-primary><img loading="lazy" decoding="async" src="images/gg-edc-2.jpg" width="1600" height="1279" alt="EDC pink eye graphic"></figure>
+            <figure class="archive-frame is-half" data-live-primary><img loading="lazy" decoding="async" src="images/gg-edc-3.jpg" width="1600" height="1279" alt="EDC green eye graphic"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="graphic-sgla-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Identity and presentation</p><h2 id="graphic-sgla-title">Southeastern Greek Leadership Association</h2></div>
+          <div class="graphic-sgla">
+            <figure class="archive-frame is-logo" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/thumb-sgla.webp" width="1081" height="1081" alt="SGLA identity mark over a warm multicolor grid"></figure>
+            <figure class="archive-frame is-feature" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-3.jpg" width="2400" height="1350" alt="Better Fraternity, Better You presentation graphic"></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-6.jpg" width="1600" height="900" alt="An Hour of Power presentation graphic"></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-7.jpg" width="3000" height="2250" alt="Leadership Out Loud presentation graphic"></figure>
+            <figure class="archive-frame is-full" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-13.jpg" width="2133" height="1200" alt="Transitions presentation graphic"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="graphic-slides-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Presentation design</p><h2 id="graphic-slides-title">Selected slide work</h2></div>
+          <div class="graphic-slides is-compact">
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-1.jpg" width="1600" height="900" alt="MTM Widescreen 21 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-2.jpg" width="1600" height="900" alt="Bama 23 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-3.jpg" width="2400" height="1350" alt="Better Fraternity presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-4.jpg" width="1600" height="900" alt="Drunk Feminist 18 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-5.jpg" width="1600" height="900" alt="Drunk Feminist 44 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-6.jpg" width="1600" height="900" alt="Hour Power Proof presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-7.jpg" width="3000" height="2250" alt="Leadership Out Loud presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-8.jpg" width="3000" height="2250" alt="Leadership Out Loud 19 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-9.jpg" width="1600" height="1200" alt="Master Slide Revised presentation"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-10.jpg" width="1600" height="1200" alt="Master Slide 19 presentation"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-11.jpg" width="1600" height="1200" alt="Master Slide 29 presentation"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-12.jpg" width="1500" height="843" alt="Pillar presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-13.jpg" width="2133" height="1200" alt="Transitions presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-14.jpg" width="2133" height="1200" alt="Transitions 6 presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-15.jpg" width="1600" height="900" alt="MTM Widescreen presentation slide"></figure>
+            <figure class="archive-frame" data-live-primary data-presentation-primary><img loading="lazy" decoding="async" src="images/gg-slides-16.jpg" width="4001" height="2251" alt="Presentation slide composition"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="graphic-live-marks-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Brand applications</p><h2 id="graphic-live-marks-title">Marks and applications</h2></div>
+          <div class="graphic-brand-grid">
+            <figure class="archive-frame is-four" data-live-primary><img loading="lazy" decoding="async" src="images/gg-day-of-giving.png" width="1081" height="1080" alt="Pi Kappa Phi Day of Giving"></figure>
+            <figure class="archive-frame is-eight" data-live-primary><img loading="lazy" decoding="async" src="images/gg-ibm-fan.jpg" width="1800" height="1350" alt="IBM Be Equal Pride fan"></figure>
+            <figure class="archive-frame is-full" data-live-primary><img loading="lazy" decoding="async" src="images/logos-1.jpg" width="4000" height="2250" alt="Collection of identity marks"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Logo sketches"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-3.jpg" width="2500" height="1500" alt="STM banner"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-4.jpg" width="1698" height="1080" alt="Brand identity hero composition"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="graphic-events-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Event graphics</p><h2 id="graphic-events-title">Events and print</h2></div>
+          <div class="graphic-events">
+            <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/dog.webp" width="2400" height="2400" alt="Day of Giving event identity"></figure>
+            <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="AbEx 40 event graphic"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="graphic-illustrations-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Illustration</p><h2 id="graphic-illustrations-title">Selected illustrations</h2></div>
+          <div class="graphic-illustrations">
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-3.jpg" width="1120" height="1600" alt="Tran Designer"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Tran Type"></figure>
+          </div>
+        </section>
+
+
+        <section class="archive-chapter" aria-labelledby="graphic-wide-title">
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Information design</p><h2 id="graphic-wide-title">Wide-format information design</h2></div>
+          <figure class="archive-frame graphic-wide" data-live-primary><img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Wide informational graphic"></figure>
+        </section>
       </div>
     </section>
-
-    <section class="gallery-section">
-      <h2 class="gallery-section-title">Logos &amp; Branding</h2>
-      <div class="gallery-grid gallery-grid--pairs">
-        <img loading="lazy" decoding="async" src="images/gg-day-of-giving.png" width="1081" height="1080" alt="Pi Kappa Phi Day of Giving">
-        <img loading="lazy" decoding="async" src="images/gg-ibm-fan.jpg" width="1800" height="1350" alt="IBM Be Equal Pride fan">
-        <img loading="lazy" decoding="async" src="images/logos-1.jpg" width="4000" height="2250" alt="Logo">
-        <img loading="lazy" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Logo sketches">
-        <img loading="lazy" decoding="async" src="images/logos-3.jpg" width="2500" height="1500" alt="STM Banner">
-        <img loading="lazy" decoding="async" src="images/logos-4.jpg" width="1698" height="1080" alt="Hero">
-      </div>
-    </section>
-
-    <section class="gallery-section">
-      <h2 class="gallery-section-title">Illustrations</h2>
-      <div class="gallery-grid gallery-grid--pairs">
-        <img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop">
-        <img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz">
-        <img loading="lazy" decoding="async" src="images/gg-illus-3.jpg" width="1120" height="1600" alt="Tran Designer">
-        <img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Tran Type">
-      </div>
-    </section>
-
-    <section class="gallery-section">
-      <h2 class="gallery-section-title">Presentation &amp; Slide Design</h2>
-      <div class="gallery-grid gallery-grid--slides">
-        <img loading="lazy" decoding="async" src="images/gg-slides-1.jpg" width="1600" height="900" alt="MTM Widescreen 21">
-        <img loading="lazy" decoding="async" src="images/gg-slides-2.jpg" width="1600" height="900" alt="Bama 23">
-        <img loading="lazy" decoding="async" src="images/gg-slides-3.jpg" width="2400" height="1350" alt="Better Fraternity">
-        <img loading="lazy" decoding="async" src="images/gg-slides-4.jpg" width="1600" height="900" alt="Drunk Feminist 18">
-        <img loading="lazy" decoding="async" src="images/gg-slides-5.jpg" width="1600" height="900" alt="Drunk Feminist 44">
-        <img loading="lazy" decoding="async" src="images/gg-slides-6.jpg" width="1600" height="900" alt="Hour Power Proof">
-        <img loading="lazy" decoding="async" src="images/gg-slides-7.jpg" width="3000" height="2250" alt="Leadership Out Loud">
-        <img loading="lazy" decoding="async" src="images/gg-slides-8.jpg" width="3000" height="2250" alt="Leadership Out Loud 19">
-        <img loading="lazy" decoding="async" src="images/gg-slides-9.jpg" width="1600" height="1200" alt="Master Slide Revised">
-        <img loading="lazy" decoding="async" src="images/gg-slides-10.jpg" width="1600" height="1200" alt="Master Slide 19">
-        <img loading="lazy" decoding="async" src="images/gg-slides-11.jpg" width="1600" height="1200" alt="Master Slide 29">
-        <img loading="lazy" decoding="async" src="images/gg-slides-12.jpg" width="1500" height="843" alt="Pillar">
-        <img loading="lazy" decoding="async" src="images/gg-slides-13.jpg" width="2133" height="1200" alt="Transitions">
-        <img loading="lazy" decoding="async" src="images/gg-slides-14.jpg" width="2133" height="1200" alt="Transitions 6">
-        <img loading="lazy" decoding="async" src="images/gg-slides-15.jpg" width="1600" height="900" alt="MTM Widescreen">
-        <img loading="lazy" decoding="async" src="images/gg-slides-16.jpg" width="4001" height="2251" alt="Slide 3">
-      </div>
-    </section>
-
-    <section class="gallery-section">
-      <h2 class="gallery-section-title">Infographic</h2>
-      <div class="gallery-feature">
-        <img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Infographic">
-      </div>
-    </section>
-
   </main>
 
+    <!-- generated:site-shell-footer:start -->
   <footer class="footer">
     <div class="footer-inner">
-      <p class="footer-tagline">Do more good things.</p>
+      <h2 class="footer-tagline">Do more good things.</h2>
       <p class="footer-subtitle">See you soon.</p>
-      <a href="mailto:victortran794@gmail.com" class="footer-cta">Let's build something together.</a>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">Let&#39;s build something together.</a>
       <div class="footer-bottom">
         <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
-        <div class="footer-social" aria-label="Contact options">
-          <a href="mailto:victortran794@gmail.com">victortran794@gmail.com</a>
-          <button type="button" class="footer-copy-email" data-copy-email="victortran794@gmail.com">Copy email</button>
-          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        <nav class="footer-social" aria-label="Contact options">
+          <ul>
+            <li><a href="mailto:victortran794@gmail.com">victortran794@gmail.com</a></li>
+            <li><button type="button" class="footer-copy-email" data-copy-email="victortran794@gmail.com">Copy email</button></li>
+            <li><a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
           <span class="sr-only" data-copy-email-status aria-live="polite"></span>
-        </div>
+        </nav>
       </div>
     </div>
   </footer>
+  <!-- generated:site-shell-footer:end -->
 
   <script src="js/main.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>

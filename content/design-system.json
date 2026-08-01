@@ -1,7 +1,7 @@
 {
   "$comment": "Single source of truth for design tokens. Mirrors css/style.css :root for now — see content/design-system.md for the prose layer and the migration plan in scripts/build-tokens.mjs (TODO).",
-  "version": "0.1.0",
-  "updated": "2026-05-13",
+  "version": "0.2.0",
+  "updated": "2026-08-01",
   "colors": {
     "$comment": "Hex values are the live source. `role` is what the token is for in practice. `inDarkMode` is the dark variant or null if it doesn't rebind. `usage` notes where it actually appears.",
     "accents": {
@@ -58,7 +58,7 @@
       "bg-2": {
         "value": "#f6f6f4",
         "inDarkMode": "#181818",
-        "role": "Card / surface elevated"
+        "role": "Secondary section or artifact surface"
       },
       "text": {
         "value": "#1a1a1a",
@@ -156,7 +156,7 @@
         }
       },
       "exceptions": {
-        "$comment": "Two literal font-size values remain in CSS by design.",
+        "$comment": "Three literal font-size exceptions remain in CSS by design.",
         "html-root": {
           "value": "16px",
           "where": "html { font-size: 16px; }",
@@ -318,9 +318,10 @@
     }
   },
   "elevation": {
-    "principle": "flat-with-hairlines",
-    "shadows": "none-by-design",
-    "$comment": "Stated principle: no drop shadows, ever. Hierarchy comes from --border hairlines and --bg/--bg-2 surface shifts. If a future component needs lift, use a thicker hairline or a --bg-2 surface — not a shadow.",
+    "principle": "flat-and-hairline-first",
+    "sharedShadowScale": false,
+    "projectNativeDepth": "scoped-variants-only",
+    "$comment": "Shared hierarchy comes from --border hairlines and --bg/--bg-2 surface shifts. Generic soft SaaS elevation is excluded. Rare print offsets or media-frame depth may remain scoped project-native variants and never become global elevation tokens.",
     "tokens": {}
   },
   "imagery": {
@@ -333,7 +334,8 @@
     "treatments": []
   },
   "components": {
-    "$comment": "Next layer to formalize. Start with aliases for existing primitives, then migrate page-specific one-offs.",
+    "$comment": "Existing lists implementation inventory. Anatomy contracts are accepted documentation contracts, not shared CSS classes or completed shared-shell components.",
+    "implementationStatus": "documentation-contracts-only",
     "existing": [
       "section-label",
       "tag",
@@ -342,13 +344,46 @@
       "gallery-section-label",
       "callout-card",
       "stat-grid",
-      "stat-card"
+      "stat-card",
+      "lens-switcher",
+      "screen-frame",
+      "color-punct-card"
     ],
-    "proposed": [
-      "artifact-card",
-      "decision-card",
-      "process-strip",
-      "section-note"
+    "anatomyContractsPendingImplementation": [
+      "chapter-marker",
+      "asymmetric-project-card",
+      "artifact-process-card",
+      "media-figure-provenance-state",
+      "technical-relationship-diagram",
+      "protected-page-gate"
+    ],
+    "evidenceStates": [
+      "original",
+      "sanitized",
+      "reconstructed",
+      "exploratory",
+      "withheld"
+    ],
+    "sourceBoundaries": [
+      "public",
+      "protected",
+      "unavailable"
+    ],
+    "behaviorContracts": [
+      "light-dark",
+      "exact-mobile",
+      "keyboard-focus",
+      "reduced-motion",
+      "decoded-media",
+      "zero-root-overflow",
+      "protected-export-safety"
+    ],
+    "projectNativeVariants": [
+      "artwork-first-gallery",
+      "format-first-contact-sheet",
+      "project-theatrical-hero",
+      "project-specific-palette",
+      "print-offset-or-media-depth"
     ]
   }
 }

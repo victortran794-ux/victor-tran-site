@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Digital and traditional illustration, including posters, paintings, and personal series.">
+  <meta name="description" content="An evolving studio wall of character illustration, personal series, paintings, and experiments by Victor Tran.">
 
   <!-- favicon + social -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
@@ -13,10 +13,10 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.victortrandesign.com/artillustration">
   <meta property="og:title" content="Art & Illustration · Victor Tran">
-  <meta property="og:description" content="Digital and traditional illustration, including posters, paintings, and personal series.">
-  <meta property="og:image" content="https://www.victortrandesign.com/images/gg-illus-1.jpg">
-  <meta property="og:image:width" content="1117">
-  <meta property="og:image:height" content="1600">
+  <meta property="og:description" content="An evolving studio wall of character illustration, personal series, paintings, and experiments by Victor Tran.">
+  <meta property="og:image" content="https://www.victortrandesign.com/images/art-archive-v2/old-one.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="2071">
   <meta name="twitter:card" content="summary_large_image">
   <title>Art &amp; Illustration · Victor Tran Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +24,113 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
+
+  <style id="visual-archive-v2-styles">
+    .visual-archive-page .archive-primary { overflow: clip; }
+    .visual-archive-page .archive-primary img,
+    .visual-archive-page .archive-extended img { display: block; max-width: 100%; height: auto; }
+    .visual-archive-page .archive-kicker {
+      margin: 0 0 1rem; font: 600 .74rem/1.2 'Source Code Pro', monospace;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .visual-archive-page .archive-title { margin: 0; font-family: 'DM Serif Display', serif; line-height: .92; }
+    .visual-archive-page .archive-lede { max-width: 34rem; margin: 1.4rem 0 0; font-size: clamp(1rem, 1.6vw, 1.3rem); line-height: 1.55; }
+    .visual-archive-page .archive-chapter { margin-top: clamp(5rem, 11vw, 10rem); scroll-margin-top: calc(var(--nav-h) + 1rem); }
+    .visual-archive-page .archive-chapter-head { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+    .visual-archive-page .archive-chapter h2 { margin: 0; font-family: 'DM Serif Display', serif; font-size: clamp(2.25rem, 5vw, 5.75rem); line-height: .96; scroll-margin-top: calc(var(--nav-h) + 1rem); }
+    .visual-archive-page .archive-note { max-width: 27rem; margin: 0; line-height: 1.55; }
+    .visual-archive-page .archive-frame { margin: 0; }
+    .visual-archive-page .archive-frame figcaption { margin-top: .65rem; font: 500 .73rem/1.45 'Source Code Pro', monospace; letter-spacing: .04em; }
+    .visual-archive-page .archive-extended { background: var(--bg); color: var(--text); border-top: 1px solid var(--border); scroll-margin-top: var(--nav-h); }
+    .visual-archive-page .archive-extended > summary {
+      min-height: 64px; padding: 1.25rem var(--page-x); cursor: pointer; display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; font: 600 .8rem/1.2 'Source Code Pro', monospace;
+      letter-spacing: .1em; text-transform: uppercase; list-style: none;
+    }
+    .visual-archive-page .archive-extended > summary::-webkit-details-marker { display: none; }
+    .visual-archive-page .archive-extended > summary::after { content: '+'; font-size: 1.2rem; }
+    .visual-archive-page .archive-extended[open] > summary::after { content: '−'; }
+    .visual-archive-page .archive-extended-intro { max-width: 46rem; margin: 0; padding: 2rem var(--page-x) 0; color: var(--text-2); line-height: 1.6; }
+    .visual-archive-page .archive-extended-content { padding-bottom: var(--section-y); }
+    .visual-archive-page .archive-extended-content > .gallery-pair,
+    .visual-archive-page .archive-extended-content > .gallery-grid,
+    .visual-archive-page .archive-extended-content > .gallery-section,
+    .visual-archive-page .archive-extended-content > .gallery-feature { content-visibility: auto; contain-intrinsic-size: 900px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .visual-archive-page .archive-primary img { transition: transform 320ms ease; }
+      .visual-archive-page .archive-primary figure:hover img { transform: scale(1.012); }
+    }
+    @media (max-width: 720px) {
+      .visual-archive-page .archive-chapter-head { display: block; }
+      .visual-archive-page .archive-note { margin-top: .8rem; }
+      .visual-archive-page .archive-frame figcaption { font-size: .68rem; }
+    }
+  </style>
+
+  <style id="art-archive-v2-skin">
+    .art-archive-v2 .archive-primary { --paper: #f0e0c7; --ink: #2c241d; --orange: #b03a17; background: var(--paper); color: var(--ink); }
+    [data-theme="dark"] .art-archive-v2 .archive-primary { --paper: #211b17; --ink: #f1e2cd; --orange: #ff7447; }
+    .art-archive-v2 .art-shell { width: min(100%, 1480px); margin: 0 auto; padding: clamp(4.5rem, 9vw, 9rem) var(--page-x) clamp(7rem, 12vw, 12rem); }
+    .art-archive-v2 .archive-kicker, .art-archive-v2 .archive-frame figcaption { color: var(--orange); }
+    .art-archive-v2 .art-opening { min-height: min(72vh, 52rem); display: flex; align-items: flex-end; padding-bottom: clamp(3rem, 7vw, 7rem); }
+    .art-archive-v2 .archive-title { font-size: clamp(4rem, 10vw, 9.5rem); max-width: 8ch; }
+    .art-archive-v2 .art-opening-stack,
+    .art-archive-v2 .art-live-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(.8rem, 2vw, 1.75rem); align-items: start; }
+    .art-archive-v2 .art-opening-stack .is-large { grid-column: span 6; }
+    .art-archive-v2 .art-opening-stack .is-medium { grid-column: span 4; }
+    .art-archive-v2 .art-opening-stack .is-small { grid-column: span 2; }
+    .art-archive-v2 .art-opening-stack .series-slideshow { max-width: none; margin: 0; padding: 0; display: block; }
+    .art-archive-v2 .art-opening-stack .series-slideshow-stage { width: 100%; height: auto; aspect-ratio: 1 / 2; }
+    .art-archive-v2 .art-opening-stack img,
+    .art-archive-v2 .art-live-wall img { width: 100%; }
+    .art-archive-v2 .art-live-wall .is-wide { grid-column: 1 / -1; }
+    .art-archive-v2 .art-live-wall .is-third { grid-column: span 4; }
+    .art-archive-v2 .art-sc56,
+    .art-archive-v2 .art-restored-wall { align-items: start; gap: clamp(.8rem, 2vw, 1.5rem); }
+    .art-archive-v2 .art-sc56 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .art-archive-v2 .art-restored-wall figure { margin: 0; }
+    .art-archive-v2 .art-restored-wall img { width: 100%; height: auto; }
+    .art-archive-v2 .art-sc56 img,
+    .art-archive-v2 .art-restored-wall img { width: 100%; }
+    .art-archive-v2 .art-diamonds { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); align-items: start; gap: clamp(.65rem, 2vw, 1.5rem); }
+    .art-archive-v2 .art-diamonds figure { min-width: 0; grid-column: span 5; }
+    .art-archive-v2 .art-diamonds figure:nth-child(n+5):nth-child(-n+9) { grid-column: span 4; }
+
+    .art-archive-v2 .archive-chapter-head { display: grid; grid-template-columns: 1fr; align-items: end; border-top: 2px solid var(--orange); gap: .65rem; padding-top: 1rem; }
+    .art-archive-v2 .archive-chapter-head h2 { max-width: 18ch; font-size: clamp(2.35rem, 4.5vw, 4.75rem); line-height: .98; letter-spacing: -.025em; }
+    .art-archive-v2 .art-section-kicker { margin: 0; color: var(--orange-strong); font: 700 .72rem/1.2 'Source Code Pro', monospace; letter-spacing: .12em; text-transform: uppercase; }
+    @media (max-width: 720px) {
+      .art-archive-v2 .art-shell { padding-top: 4rem; }
+      .art-archive-v2 .art-opening { min-height: auto; padding-bottom: 3rem; }
+      .art-archive-v2 .archive-title { font-size: clamp(3.8rem, 19vw, 6rem); }
+      .art-archive-v2 .art-opening-stack { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .art-archive-v2 .art-opening-stack .is-large { grid-column: span 6; }
+      .art-archive-v2 .art-opening-stack .is-medium { grid-column: span 4; }
+      .art-archive-v2 .art-opening-stack .is-small { grid-column: span 2; }
+      .art-archive-v2 .art-live-wall { grid-template-columns: 1fr; }
+      .art-archive-v2 .art-live-wall .is-wide,
+      .art-archive-v2 .art-live-wall .is-third { grid-column: 1; }
+      .art-archive-v2 .art-restored-wall { grid-template-columns: 1fr 1fr; }
+      .art-archive-v2 .art-sc56 { grid-template-columns: 1fr; }
+      .art-archive-v2 .art-diamonds { grid-template-columns: 1fr 1fr; }
+      .art-archive-v2 .art-diamonds figure,
+      .art-archive-v2 .art-diamonds figure:nth-child(n+5):nth-child(-n+9) { grid-column: auto; }
+      .art-archive-v2 .art-diamonds figure:last-child { grid-column: 1 / -1; width: 50%; justify-self: center; }
+
+      .art-archive-v2 .archive-chapter-head { gap: .55rem; }
+      .art-archive-v2 .archive-chapter-head h2 { font-size: clamp(2.35rem, 10.5vw, 3.8rem); }
+    }
+  </style>
 </head>
-<body>
+<body class="visual-archive-page art-archive-v2">
 
   <div class="cursor-dot"  aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
-  <nav class="nav">
+    <!-- generated:site-shell-header:start -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
         <img src="images/nav-logo.webp" alt="" width="34" height="34">
@@ -38,18 +138,27 @@
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown is-active">
-          <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Work</button>
-          <ul class="nav-dropdown-menu" role="menu">
-            <li role="none"><a role="menuitem" href="document-processing.html">Document Processing</a></li>
-            <li role="none"><a role="menuitem" href="ibmcloud.html">IBM Cloud Observability</a></li>
-            <li role="none"><a role="menuitem" href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
-            <li role="none"><a role="menuitem" href="pci.html">Performance Contracting, Inc.</a></li>
-            <li role="none"><a role="menuitem" href="abilityexperience.html">The Ability Experience</a></li>
-            <li role="none"><a role="menuitem" href="salmagazine.html">Star &amp; Lamp Magazine</a></li>
-            <li role="none"><a role="menuitem" href="pikappapp.html">Pi Kapp App</a></li>
-            <li class="nav-dropdown-separator" role="separator" aria-hidden="true"></li>
-            <li role="none"><a role="menuitem" href="artillustration.html" class="active">Art &amp; Illustration</a></li>
-            <li role="none"><a role="menuitem" href="graphicgallery.html">Graphic Design</a></li>
+          <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
+          <ul id="work-menu" class="nav-dropdown-menu">
+            <!-- generated:projects-nav:start -->
+            <li><a href="document-processing.html">Document Processing</a></li>
+            <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
+            <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
+            <li><a href="pci.html">Performance Contracting, Inc.</a></li>
+            <li><a href="abilityexperience.html">The Ability Experience</a></li>
+            <li><a href="salmagazine.html">Star &amp; Lamp Magazine</a></li>
+            <li><a href="pikappapp.html">Pi Kapp App</a></li>
+            <li class="nav-dropdown-separator" aria-hidden="true"></li>
+            <li><a href="artillustration.html" class="active" aria-current="page">Art &amp; Illustration</a></li>
+            <li><a href="graphicgallery.html">Graphic Design</a></li>
+            <!-- generated:projects-nav:end -->
+            <li class="nav-mobile-theme">
+              <span class="nav-mobile-theme-label">Theme</span>
+              <div class="nav-mobile-theme-controls" role="group" aria-label="Mobile viewing mode">
+                <button class="lens-switcher-btn nav-mobile-lens-btn" data-lens="light" data-mobile-lens="light" aria-pressed="true" aria-label="Light mode">Light</button>
+                <button class="lens-switcher-btn nav-mobile-lens-btn" data-lens="dark" data-mobile-lens="dark" aria-pressed="false" aria-label="Dark mode">Dark</button>
+              </div>
+            </li>
           </ul>
         </li>
         <li><a href="about.html">About</a></li>
@@ -67,129 +176,127 @@
       </div>
     </div>
   </nav>
+  <!-- generated:site-shell-header:end -->
 
-  <main class="page-content">
+  <main id="main-content" tabindex="-1" class="page-content" data-archive="art-studio-wall">
 
-    <header class="page-header">
-      <p class="section-label label-artwork">Artwork</p>
-      <h1 class="page-header-title">Art &amp; Illustration</h1>
-      <p class="page-header-desc">I draw and paint.</p>
-    </header>
+    <section class="archive-primary" aria-labelledby="art-archive-title">
+      <div class="art-shell">
+        <header class="art-opening">
+          <div>
+            <p class="section-label archive-kicker label-artwork">Art &amp; Illustration</p>
+            <h1 class="archive-title" id="art-archive-title">An open studio wall.</h1>
+            <p class="archive-lede">I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.</p>
+          </div>
+        </header>
 
-    <!-- IBM Selectric spotlight + horned-woman series · paired hero -->
-    <div class="gallery-pair">
-      <figure class="gallery-spotlight-fig">
-        <img loading="eager" fetchpriority="high" decoding="async" src="images/illus-ibm-selectric-web.jpg" width="1806" height="2396" alt="IBM Selectric 1961 · blueprint illustration">
-        <figcaption class="gallery-spotlight-cap">
-          <span class="section-label label-artwork">Featured</span>
-          <span>IBM Selectric · 1961</span>
-        </figcaption>
-      </figure>
-
-      <section class="series-slideshow" aria-label="Horned woman illustration series" aria-roledescription="slideshow">
-        <div class="series-slideshow-stage">
-          <img class="series-slideshow-img is-active" loading="lazy" decoding="async" src="images/illus-untitled-5.jpg" width="800" height="1600"  alt="Horned woman · pencil sketch">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-6.jpg" width="800" height="1600"  alt="Horned woman · painted">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-7.jpg" width="800" height="1600"  alt="Horned woman · stylized B&amp;W">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-8.jpg" width="800" height="1600"  alt="Horned woman · glitch">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-9.jpg" width="800" height="1600"  alt="Horned woman · pink overlay">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-10.jpg" width="800" height="1600" alt="Horned woman · watercolor">
-          <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-11.jpg" width="800" height="1600" alt="Horned woman · blue ink">
-          <button class="slideshow-pause-btn" type="button" aria-label="Pause slideshow" aria-pressed="false">Pause</button>
+        <div class="art-opening-stack" aria-label="Opening artwork stack">
+          <figure class="archive-frame is-selectric is-large" data-live-primary><img loading="eager" fetchpriority="high" decoding="async" src="images/illus-ibm-selectric-web.jpg" width="1806" height="2396" alt="IBM Selectric 1961 blueprint illustration"></figure>
+          <figure class="archive-frame is-horned is-medium series-slideshow" data-live-primary data-horned-slideshow aria-label="Horned Woman illustration series" aria-roledescription="slideshow">
+            <div class="series-slideshow-stage">
+              <img class="series-slideshow-img is-active" loading="lazy" decoding="async" src="images/illus-untitled-5.jpg" width="800" height="1600" alt="Horned Woman pencil sketch">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-6.jpg" width="800" height="1600" alt="Horned Woman painted study">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-7.jpg" width="800" height="1600" alt="Horned Woman stylized black-and-white study">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-8.jpg" width="800" height="1600" alt="Horned Woman glitch study">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-9.jpg" width="800" height="1600" alt="Horned Woman pink overlay study">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-10.jpg" width="800" height="1600" alt="Horned Woman watercolor study">
+              <img class="series-slideshow-img" loading="lazy" decoding="async" src="images/illus-untitled-11.jpg" width="800" height="1600" alt="Horned Woman blue ink study">
+              <button class="slideshow-pause-btn" type="button" aria-label="Pause slideshow" aria-pressed="false">Pause</button>
+            </div>
+          </figure>
+          <figure class="archive-frame is-old-one is-small"><img loading="eager" fetchpriority="high" decoding="async" src="images/art-archive-v2/old-one.webp" width="1600" height="2071" alt="Black-and-white and turquoise character illustration"></figure>
         </div>
-      </section>
-    </div>
 
-    <!-- Digital illustrations · masonry grid -->
-    <div class="gallery-grid">
-      <img loading="lazy" decoding="async" src="images/illus-untitled-4.jpg" width="1117" height="1600"    alt="Isometric architecture">
-      <img loading="lazy" decoding="async" src="images/illus-untitled-2.jpg" width="1117" height="1600"    alt="Golden mask">
-      <img loading="lazy" decoding="async" src="images/illus-solar.jpg" width="1200" height="1600"         alt="Solar">
-      <img loading="lazy" decoding="async" src="images/illus-untitled-1.jpg" width="1117" height="1600"    alt="Cosmic figure">
-      <img loading="lazy" decoding="async" src="images/illus-1-9-24.jpg" width="1117" height="1600"        alt="Digital painting">
-      <img loading="lazy" decoding="async" src="images/illus-shelly.jpg" width="1117" height="1600"        alt="Shelly">
-    </div>
+        <section class="archive-chapter" aria-labelledby="art-live-wall-title">
+          <div class="archive-chapter-head">
+            <p class="art-section-kicker">Selected illustrations</p>
+            <h2 id="art-live-wall-title">Characters and worlds</h2>
+          </div>
+          <div class="art-live-wall">
+            <figure class="archive-frame is-wide" data-live-primary><img loading="lazy" decoding="async" src="images/illus-lost.jpg" width="1600" height="669" alt="Lost"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-untitled-4.jpg" width="1117" height="1600" alt="Isometric architecture"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-untitled-2.jpg" width="1117" height="1600" alt="Golden mask"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-solar.jpg" width="1200" height="1600" alt="Solar"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-untitled-1.jpg" width="1117" height="1600" alt="Cosmic figure"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-1-9-24.jpg" width="1117" height="1600" alt="Digital painting"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-shelly.jpg" width="1117" height="1600" alt="Shelly"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-glow.jpg" width="1117" height="1600" alt="Glow"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-forgive-me.jpg" width="1117" height="1600" alt="Forgive Me"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-1-14-24.jpg" width="1117" height="1600" alt="Green hooded figure"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-night-glow.jpg" width="1668" height="2388" alt="Night Glow"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-sharing.jpg" width="1668" height="2388" alt="Sharing"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-shatter.jpg" width="1117" height="1600" alt="Shatter"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-flesh-golem.jpg" width="1117" height="1600" alt="The Flesh Golem"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/illus-untitled-3.jpg" width="1668" height="2388" alt="Abstract figure"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/art-archive-v2/coffee.webp" width="1400" height="1534" alt="Illustration of a moka pot and coffee cup"></figure>
+          </div>
+        </section>
 
-    <!-- Chicago Chapter poster series -->
-    <section class="gallery-section gallery-group-chicago">
-      <p class="section-label label-artwork gallery-section-label">Series</p>
-      <h2 class="gallery-section-title">56th Supreme Chapter Chicago</h2>
-      <div class="gallery-grid gallery-grid--trio">
-        <img loading="lazy" decoding="async" src="images/illus-sc-boat.jpg" width="1237" height="1600"   alt="Supreme Chapter Chicago · boat poster">
-        <img loading="lazy" decoding="async" src="images/illus-sc-park.jpg" width="1236" height="1600"   alt="Supreme Chapter Chicago · park map poster">
-        <img loading="lazy" decoding="async" src="images/illus-sc-tower.jpg" width="1237" height="1600"  alt="Supreme Chapter Chicago · tower poster">
+        <section class="archive-chapter" aria-labelledby="art-sc56-title">
+          <div class="archive-chapter-head"><p class="art-section-kicker">Event illustration</p><h2 id="art-sc56-title">56th Supreme Chapter Chicago</h2></div>
+          <div class="art-sc56">
+            <figure class="archive-frame" data-live-primary data-sc56-primary><img loading="lazy" decoding="async" src="images/illus-sc-boat.jpg" width="1237" height="1600" alt="Supreme Chapter Chicago boat poster"></figure>
+            <figure class="archive-frame" data-live-primary data-sc56-primary><img loading="lazy" decoding="async" src="images/illus-sc-park.jpg" width="1236" height="1600" alt="Supreme Chapter Chicago park map poster"></figure>
+            <figure class="archive-frame" data-live-primary data-sc56-primary><img loading="lazy" decoding="async" src="images/illus-sc-tower.jpg" width="1237" height="1600" alt="Supreme Chapter Chicago tower poster"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="art-diamond-title">
+          <div class="archive-chapter-head">
+            <p class="art-section-kicker">Card series</p>
+            <h2 id="art-diamond-title">Suit of Diamonds</h2>
+          </div>
+          <div class="art-diamonds">
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-a.png" width="978" height="1400" alt="Suit of Diamonds: Ace"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-2.png" width="1668" height="2388" alt="Suit of Diamonds: Two"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-3.png" width="1668" height="2388" alt="Suit of Diamonds: Three"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-4.png" width="1668" height="2388" alt="Suit of Diamonds: Four"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-5.png" width="1668" height="2388" alt="Suit of Diamonds: Five"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-6.png" width="1668" height="2388" alt="Suit of Diamonds: Six"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-7.png" width="978" height="1400" alt="Suit of Diamonds: Seven"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-8.png" width="978" height="1400" alt="Suit of Diamonds: Eight"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-9.png" width="978" height="1400" alt="Suit of Diamonds: Nine"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-10.png" width="873" height="1250" alt="Suit of Diamonds: Ten"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-j.png" width="978" height="1400" alt="Suit of Diamonds: Jack"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-q.png" width="978" height="1400" alt="Suit of Diamonds: Queen"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/cards/diamond-k.png" width="978" height="1400" alt="Suit of Diamonds: King"></figure>
+          </div>
+        </section>
+
+        <section class="archive-chapter" aria-labelledby="art-restored-wall-title">
+          <div class="archive-chapter-head"><p class="art-section-kicker">Traditional media</p><h2 id="art-restored-wall-title">Traditional work</h2></div>
+          <div class="art-restored-wall">
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/illus-large.jpg" width="835" height="1600" alt="Large ink and pen drawing"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/illus-img7358.jpg" width="794" height="1600" alt="Colorful creature painting"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/illus-img4537.jpg" width="1280" height="1600" alt="Detailed traditional ink face drawing"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/illus-img4496.jpg" width="1280" height="1600" alt="Biomechanical skull canvas painting"></figure>
+            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/illus-img4531.jpg" width="1280" height="1600" alt="Detailed traditional ink composition"></figure>
+          </div>
+        </section>
       </div>
     </section>
-
-    <!-- Hand-drawn traditional work -->
-    <section class="gallery-section gallery-group-traditional">
-      <h2 class="gallery-section-title">Traditional Work</h2>
-      <div class="gallery-row">
-        <img loading="lazy" decoding="async" src="images/illus-large.jpg" width="835" height="1600"    alt="Large ink and pen drawing">
-        <img loading="lazy" decoding="async" src="images/illus-img7358.jpg" width="794" height="1600"  alt="Colorful creature painting">
-        <img loading="lazy" decoding="async" src="images/illus-img4537.jpg" width="1280" height="1600"  alt="Traditional ink drawing · detailed face">
-        <img loading="lazy" decoding="async" src="images/illus-img4531.jpg" width="1280" height="1600"  alt="Traditional ink drawing · large composition">
-        <img loading="lazy" decoding="async" src="images/illus-img4496.jpg" width="1280" height="1600"  alt="Biomechanical skull · canvas painting">
-      </div>
-    </section>
-
-    <!-- Suit of Diamonds · character concept series -->
-    <section class="gallery-section gallery-group-cards">
-      <p class="section-label label-artwork gallery-section-label">Series</p>
-      <h2 class="gallery-section-title">Suit of Diamonds · Character Concepts</h2>
-      <p class="gallery-section-desc">A character designed for each card in the suit. Click any card to zoom.</p>
-      <div class="gallery-cards">
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-a.png" width="978" height="1400"  alt="Suit of Diamonds · Ace"><figcaption>Ace</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-2.png" width="1668" height="2388"  alt="Suit of Diamonds · Two"><figcaption>2</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-3.png" width="1668" height="2388"  alt="Suit of Diamonds · Three"><figcaption>3</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-4.png" width="1668" height="2388"  alt="Suit of Diamonds · Four"><figcaption>4</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-5.png" width="1668" height="2388"  alt="Suit of Diamonds · Five"><figcaption>5</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-6.png" width="1668" height="2388"  alt="Suit of Diamonds · Six"><figcaption>6</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-7.png" width="978" height="1400"  alt="Suit of Diamonds · Seven"><figcaption>7</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-8.png" width="978" height="1400"  alt="Suit of Diamonds · Eight"><figcaption>8</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-9.png" width="978" height="1400"  alt="Suit of Diamonds · Nine"><figcaption>9</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-10.png" width="873" height="1250" alt="Suit of Diamonds · Ten"><figcaption>10</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-j.png" width="978" height="1400"  alt="Suit of Diamonds · Jack"><figcaption>Jack</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-q.png" width="978" height="1400"  alt="Suit of Diamonds · Queen"><figcaption>Queen</figcaption></figure>
-        <figure class="gallery-card"><img loading="lazy" decoding="async" src="images/cards/diamond-k.png" width="978" height="1400"  alt="Suit of Diamonds · King"><figcaption>King</figcaption></figure>
-      </div>
-    </section>
-
-    <!-- More digital illustrations -->
-    <div class="gallery-grid">
-      <img loading="lazy" decoding="async" src="images/illus-glow.jpg" width="1117" height="1600"          alt="Glow">
-      <img loading="lazy" decoding="async" src="images/illus-forgive-me.jpg" width="1117" height="1600"    alt="Forgive Me">
-      <img loading="lazy" decoding="async" src="images/illus-1-14-24.jpg" width="1117" height="1600"       alt="Green hooded figure">
-      <img loading="lazy" decoding="async" src="images/illus-night-glow.jpg" width="1668" height="2388"    alt="Night Glow">
-      <img loading="lazy" decoding="async" src="images/illus-sharing.jpg" width="1668" height="2388"       alt="Sharing">
-      <img loading="lazy" decoding="async" src="images/illus-shatter.jpg" width="1117" height="1600"       alt="Shatter">
-      <img loading="lazy" decoding="async" src="images/illus-flesh-golem.jpg" width="1117" height="1600"   alt="The Flesh Golem">
-      <img loading="lazy" decoding="async" src="images/illus-untitled-3.jpg" width="1668" height="2388"    alt="Abstract figure">
-    </div>
-
-    <!-- Lost · full-bleed landscape feature -->
-    <div class="gallery-feature">
-      <img loading="lazy" decoding="async" src="images/illus-lost.jpg" width="1600" height="669" alt="Lost">
-    </div>
-
   </main>
 
+    <!-- generated:site-shell-footer:start -->
   <footer class="footer">
     <div class="footer-inner">
-      <p class="footer-tagline">Do more good things.</p>
+      <h2 class="footer-tagline">Do more good things.</h2>
       <p class="footer-subtitle">See you soon.</p>
-      <a href="mailto:victortran794@gmail.com" class="footer-cta">Let's build something together.</a>
+      <a href="mailto:victortran794@gmail.com" class="footer-cta">Let&#39;s build something together.</a>
       <div class="footer-bottom">
         <span class="footer-copyright">© Victor Tran 2026 All Rights Reserved</span>
-        <div class="footer-social" aria-label="Contact options">
-          <a href="mailto:victortran794@gmail.com">victortran794@gmail.com</a>
-          <button type="button" class="footer-copy-email" data-copy-email="victortran794@gmail.com">Copy email</button>
-          <a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a>
+        <nav class="footer-social" aria-label="Contact options">
+          <ul>
+            <li><a href="mailto:victortran794@gmail.com">victortran794@gmail.com</a></li>
+            <li><button type="button" class="footer-copy-email" data-copy-email="victortran794@gmail.com">Copy email</button></li>
+            <li><a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
           <span class="sr-only" data-copy-email-status aria-live="polite"></span>
-        </div>
+        </nav>
       </div>
     </div>
   </footer>
+  <!-- generated:site-shell-footer:end -->
 
   <script src="js/main.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>

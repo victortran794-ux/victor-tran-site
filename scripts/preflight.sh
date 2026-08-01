@@ -49,6 +49,8 @@ run_required "Gallery media regression check" node scripts/check-gallery-media.m
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs
 run_required "Install pinned website build tools" npm ci --ignore-scripts
 run_required "Pi Kapp demo reproducible build check" npm run verify:pikapp-demo
+run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs
+run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
 
 section "Generating project sections"
 if [ -f "scripts/generate-project-sections.mjs" ]; then
@@ -62,6 +64,35 @@ else
   echo "  skipped — scripts/generate-project-sections.mjs not found"
 fi
 
+section "Generating visual archives"
+if [ -f "scripts/build-visual-archives-integration.py" ]; then
+  if PYTHONDONTWRITEBYTECODE=1 python3 scripts/build-visual-archives-integration.py all; then
+    echo "  ok"
+  else
+    STATUS=1
+    echo "  failed"
+  fi
+else
+  STATUS=1
+  echo "  failed: scripts/build-visual-archives-integration.py not found"
+fi
+
+section "Generating shared site shell"
+if [ -f "scripts/generate-site-shell.mjs" ]; then
+  if node scripts/generate-site-shell.mjs; then
+    echo "  ok"
+  else
+    STATUS=1
+    echo "  failed"
+  fi
+else
+  STATUS=1
+  echo "  failed: scripts/generate-site-shell.mjs not found"
+fi
+
+run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
+run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
+
 section "Regenerating Markdown content exports"
 if [ -f "scripts/html-to-md.mjs" ]; then
   if node scripts/html-to-md.mjs; then
@@ -72,6 +103,19 @@ if [ -f "scripts/html-to-md.mjs" ]; then
   fi
 else
   echo "  skipped — scripts/html-to-md.mjs not found"
+fi
+
+section "Protected public content export validation"
+if [ -f "scripts/check-protected-content-exports.mjs" ]; then
+  if node scripts/check-protected-content-exports.mjs; then
+    echo "  ok"
+  else
+    STATUS=1
+    echo "  failed"
+  fi
+else
+  STATUS=1
+  echo "  failed — scripts/check-protected-content-exports.mjs not found"
 fi
 
 section "Project manifest/order validation"

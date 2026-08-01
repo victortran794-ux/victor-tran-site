@@ -4,7 +4,17 @@
   "scripts": {
     "build:pikapp-demo": "tailwindcss -c pikappapp/tailwind.config.cjs -i pikappapp/demo-source.css -o pikappapp/demo.bundle.css --minify && esbuild pikappapp/demo-source.jsx --bundle --minify --format=esm --target=es2022 --outfile=pikappapp/demo.bundle.js",
     "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",
-    "verify:pikapp-demo": "npm run build:pikapp-demo && git diff --exit-code -- pikappapp/demo.bundle.css pikappapp/demo.bundle.js && npm run check:pikapp-demo"
+    "verify:pikapp-demo": "npm run build:pikapp-demo && git diff --exit-code -- pikappapp/demo.bundle.css pikappapp/demo.bundle.js && npm run check:pikapp-demo",
+    "test:content-export-policy": "node scripts/test-html-to-md.mjs",
+    "check:content-export-policy": "node scripts/check-protected-content-exports.mjs",
+    "generate:private-content": "node scripts/html-to-md.mjs --mode private",
+    "generate:site-shell": "node scripts/generate-site-shell.mjs",
+    "test:site-shell": "node scripts/test-site-shell.mjs",
+    "check:site-shell": "node scripts/check-shared-shell.mjs",
+    "check:site-shell-browser": "node scripts/check-shared-shell-browser.mjs",
+    "build:visual-archives": "python3 scripts/build-visual-archives-integration.py all",
+    "check:visual-archives": "node scripts/check-visual-archives-integration.mjs all",
+    "check:visual-archives-browser": "node scripts/check-visual-archives-browser.mjs all"
   },
   "devDependencies": {
     "esbuild": "0.28.1",

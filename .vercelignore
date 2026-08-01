@@ -10,5 +10,6 @@
 node_modules/
 *.log
 *.tmp
+.private-content/
 *.swp
 Thumbs.db

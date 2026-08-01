@@ -65,7 +65,7 @@ function linkHrefs(html) {
 }
 
 function navSections(indexHtml) {
-  const menu = indexHtml.match(/<ul class="nav-dropdown-menu" role="menu">([\s\S]*?)<\/ul>/i)?.[1] ?? '';
+  const menu = indexHtml.match(/<ul\b(?=[^>]*\bclass="[^"]*\bnav-dropdown-menu\b[^"]*")[^>]*>([\s\S]*?)<\/ul>/i)?.[1] ?? '';
   const [primaryHtml = '', galleryHtml = ''] = menu.split(/<li class="nav-dropdown-separator"[\s\S]*?<\/li>/i);
   return {
     primary: linkHrefs(primaryHtml),

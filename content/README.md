@@ -14,6 +14,23 @@ Most files here are created from the static HTML pages by:
 node scripts/html-to-md.mjs
 ```
 
+## Protected-content export contract
+
+`data/content-export-policy.json` is the authority for generated-content privacy. In normal public mode:
+
+- Existing policy-protected sources generate fixed, source-independent stubs in `content/`.
+- Protected route records are omitted from `content/site-index.json`.
+- Missing provisional sources, including the reserved wxO Canvas entry, generate nothing.
+
+For explicit local verification only, the generator can preserve complete extracted output in an ignored private mirror:
+
+```bash
+npm run generate:private-content
+node scripts/check-protected-content-exports.mjs --private
+```
+
+`.private-content/` is excluded by both `.gitignore` and `.vercelignore`. Normal preflight never generates private exports. The private mirror is not an access-control system and must not be committed or deployed.
+
 ## What belongs here
 
 - Markdown exports generated from live/static site pages, such as `index.md`, `about.md`, and project pages.

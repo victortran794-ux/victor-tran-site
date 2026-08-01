@@ -20,6 +20,7 @@ Consult next:
 - Current status and active next actions: `PORTFOLIO_DASHBOARD.md`
 - Creative/product direction and enhancement intent: `PORTFOLIO_DIRECTION_BRIEF.md`
 - Agent workflow, permissions, guardrails, handoffs, and closeout: `PORTFOLIO_AGENT_WORKFLOWS.md`
+- Independent portfolio direction and rendered-design review: `PORTFOLIO_DESIGN_CRITIQUE_RUBRIC.md`
 - Public site implementation: `*.html`, `css/`, `js/`, `images/`
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
@@ -47,6 +48,8 @@ case-studies/<project-slug>.md
 ```
 
 Treat each project as a contained package even while the static site keeps flat root HTML files. A package usually has a source HTML page, generated content export, package manifest, assets, and archived source notes. Keep status, visibility, confirmed facts, constraints, narrative direction, media guidance, redesign notes, and implementation boundaries in the package manifest. Split into more files only when a project truly becomes too large or sensitive. Default to fewer files.
+
+When two packages enter a redesign sprint, keep the sprint contract and private annotated references outside the public repo under `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\`. Promote only durable, reusable decisions back into this repo's existing authority files. Do not create duplicate strategy, visual-direction, component, or content-hierarchy authorities when the information already belongs in the direction brief, design system, agent workflow, critique rubric, or package manifests.
 
 Do **not** put durable planning/source notes in `content/`; most of `content/` is generated from HTML and should stay machine-readable/export-focused. `content/` can support future search/generative UI experiments, but it is not the notes folder.
 

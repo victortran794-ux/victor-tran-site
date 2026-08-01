@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-07-29
-Status: Active direction brief; nine private Hi-Fi packages are complete and paused for editing before the Launch Integration Contract, shared-shell work, integration preview, and approved launch
+Last updated: 2026-07-31
+Status: Active direction brief; page approval, local verification, and VicO2 reconciliation now feed a controlled integration contract
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,28 +42,30 @@ Short version:
 
 ### Current posture
 
-The enhancement work has shipped enough to support a controlled broad redesign without turning it into an uncontrolled rewrite. IBM Cloud's empty placeholders were removed, the Document Processing homepage card shipped, project-manifest generation/validation keeps homepage, Work-menu, and project navigation aligned, and the homepage plus Ability Experience are live VicO2 checkpoints. The private enhancement lane has advanced beyond lo-fi: nine canonical Hi-Fi packages are complete for Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, PCI, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. Hi-Fi construction is paused for Victor's later Keep / Adjust / Reject editing pass. Accuracy Evaluation was confirmed released in July 2026; the protected page source carries that corrected release state in the verified local working tree, pending a separately approved commit and deployment. After Hi-Fi edits are approved, a Launch Integration Contract must pull the existing concept-album, studio-system, report-chapter, project-native-canvas, homepage, and navigation directions into one controlled redesign decision before shared shell/case-study-chrome implementation and serial package migration proceed on a coordinated integration preview. Final whole-site human review and explicit approval happen before merge to live `main`. A2UI remains parked.
+The enhancement work now runs in two coordinated lanes. Page candidates move through visual approval and local verification while reusable decisions are harvested into VicO2. The homepage and Ability Experience remain live system references. Eight of the nine private package surfaces have Keep verdicts and passing local evidence: Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. PCI remains a verified private direction pending separately sanitized evidence completion. Art & Illustration and Graphic Design are visually approved and locally verified as distinct supporting archives. The existing home-page Design DNA overlay is already visitor-facing and remains stable while the pages establish the updated system. After page completion, reconcile VicO2, the design-system prose and token data, live CSS, and the existing DNA overlay. Then complete the Launch Integration Contract before shared-shell implementation or serial migration. Final whole-site review and explicit approval happen before any merge or launch. A2UI remains parked.
 
 Current working posture:
 
-1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded page-by-page migrations and one approved integration plan rather than a one-shot rewrite.
-2. Use each edited and approved canonical Hi-Fi package as the source for its production migration; preserve its source, claim, privacy, and visibility contract.
-3. Promote optional report-style chapters, artifact/process storytelling, technical diagrams, and selective motion into VicO2 as reusable patterns—not mandatory decoration.
-4. Keep Lens/Design-DNA mode and larger prototype/progress behavior conditional until a selected project demonstrates real reader value.
-5. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
-6. Complete the Launch Integration Contract before shared-shell implementation; migrate through a coordinated Vercel preview and run the complete public visual/copy/responsive/accessibility/metadata review before approving merge to live `main`.
-7. Keep portfolio framework/build-system migration, generative/chat UI promotion, floating chat widgets, and uncontrolled site-wide rollout outside the active lane without a separately verified need and approval. Treat homepage/navigation redesign as active only through the Launch Integration Contract; protected-page visibility and sitemap changes remain page-specific approval decisions.
+1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded page candidates and one approved integration plan rather than a one-shot rewrite.
+2. Preserve page-level visual approval and local verification beside the reconciled private VicO2 system record.
+3. Use each approved candidate and its canonical package as the bounded source for future migration; preserve source, claim, privacy, and visibility contracts.
+4. Promote optional report-style chapters, artifact and process storytelling, technical diagrams, factual label-title relationships, and selective motion into VicO2 only after they survive real page use.
+5. Keep the existing home-page Design DNA overlay stable. The prose, token-role, evidence-state, behavior-contract, and project-native-variant layers are reconciled; refresh the overlay only after complete-site preview evidence. Keep broader Lens expansion conditional on demonstrated reader value.
+6. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
+7. Preserve the frozen local Launch Integration Contract. The bounded shared shell and named Art then Graphic local migration batch passed local verification on `feat/portfolio-integration-shell-2026-08-01`; all other migration, remote preview, commit, push, merge, and launch retain separate approval gates.
+8. Keep framework migration, generative chat UI, floating chat widgets, and uncontrolled rollout outside the active lane without a separately verified need and approval.
 
 ### Top active decisions
 
 1. Treat the live homepage and Ability Experience VicO2 translations as stable checkpoints; reopen them only with new evidence.
-2. Pause additional Hi-Fi construction; resume with package-specific Keep / Adjust / Reject edits when Victor is ready.
-3. After Hi-Fi edits are approved, complete and approve the Launch Integration Contract before implementing shared cross-page behavior.
-4. Build the bounded shared header/footer shell and case-study chrome from that contract on a coordinated launch/integration branch.
-5. Replace or establish production counterparts one package at a time on the integration branch using archive → implementation → preflight → package QA gates.
-6. Review the complete portfolio through a Vercel preview, resolve the final punch list, and obtain explicit approval before merging to live `main`.
-7. Keep Lens/Design-DNA and larger prototype behavior conditional; keep A2UI and broad infrastructure/rollout concepts parked.
-8. Preserve protected-page gates, indexing, sitemap, navigation, media, and claims boundaries unless the approved Launch Integration Contract explicitly changes them.
+2. Preserve approved and exact local candidates in isolated worktrees while PCI evidence completion remains separate.
+3. Preserve the reconciled VicO2 patterns, evidence states, behavior contracts, and intentional project-native variants.
+4. Preserve the local public-stub export policy for gated routes and verify real preview URLs before approving any deployment.
+5. Use the frozen Launch Integration Contract as the local authority for the approved bounded shared-shell implementation.
+6. Preserve the reviewed shared header, footer, and case-study chrome checkpoint on `feat/portfolio-integration-shell-2026-08-01`.
+7. Preserve the locally migrated Art and Graphic archives and their exact candidate identities. Complete independent read-only review before any further gate.
+8. Review the complete portfolio through an approved preview strategy and obtain explicit approval before merge or launch.
+9. Preserve protected-page gates, indexing, sitemap, navigation, media, claims, and generated-content boundaries unless the approved contract explicitly changes them.
 
 ---
 
@@ -115,6 +117,12 @@ The following patterns are live or explicitly decided. Mechanical review checks 
    - Public image dimensions landed as a mechanical performance-hardening pass.
    - A small dash-heavy wording cleanup removed decorative em-dash rhythm from selected public copy, captions, alt text, and the 404 page while preserving real date-range dashes.
    - Current decision: keep as shipped; open a deeper tone pass only if Victor selects it after review.
+
+8. **Home-page Design DNA overlay**
+   - A visitor-facing Design DNA overlay already exists as the third segment of the Light, Dark, and DNA lens switcher.
+   - It exposes live CSS color and spacing values plus hardcoded type, radius, component, and playground examples.
+   - Dialog semantics, focus trap, Escape close, focus restoration, and Light/Dark swatch refresh are implemented.
+   - Current decision: keep the restrained home-only overlay stable. VicO2 is reconciled at the documentation and token-role layer; refresh the overlay only after coordinated complete-site preview review. Keep broader Lens expansion parked.
 
 ### Current checkpoint
 
@@ -178,6 +186,16 @@ Potential expressions:
 - Case-study endings that hand off to the next project.
 - Optional interludes: doodles, process fragments, short reflections, or behind-the-scenes artifacts.
 - One project eventually presented as a “remaster” or “Victor's Version.”
+
+### Homepage cover refinement
+
+Victor review note, 2026-07-29. Treat this as an input to the controlled homepage redesign and Launch Integration Contract, not authorization for an isolated live edit.
+
+- Bring the `Visual` and `Designer` cover lines closer together.
+- Explore partial transparency on one line so the tighter lockup creates a deliberate overlap rather than a collision.
+- Introduce a restrained background texture derived from Victor's own authored materials or existing site assets. Do not use stock or AI-generated texture.
+- Preserve the theatrical full-span cover exception; do not force the hero into the same grid/card grammar used below it.
+- Test the final composition at desktop and exact mobile widths in Light and Dark, including legibility, contrast, portrait interaction, and reduced motion.
 
 ### Quiet stagehand navigation
 
@@ -252,6 +270,16 @@ Potential structure:
 - **Progressive fallback:** the project context and essential story remain understandable if the native canvas or optional behavior cannot load.
 
 Status: idea only. Validate first with one private, bounded prototype before considering a reusable template or broader rollout.
+
+### Project families and design-system lineage
+
+Use family resemblance where the projects have a real organizational, historical, or system relationship. This is not permission to apply one page template across the portfolio.
+
+- **Pi Kapp / Star & Lamp / The Ability Experience:** treat these as a related editorial and color family. Pi Kappa Phi's philanthropy relationship to The Ability Experience makes selective shared color relationships meaningful. Reuse family-level pacing or palette cues where they help, but keep each project's own evidence, composition, and identity.
+- **IBM / Carbon lineage:** use Carbon as the common system foundation while distinguishing the work by era and role. IBM Patterns is the 2021 incubator project; IBM Cloud is the later true product-work chapter; wxO Canvas and Document Processing are the current product-work chapter. Shared system language must not flatten those differences or imply identical ownership, shipment, or publication status.
+- **Visual archives:** Art & Illustration and Graphic Design form a useful paired review lane, but remain distinct archives with different curation, rights, and composition.
+
+The current bounded process trial uses the already-refined Pi Kapp and IBM Patterns private candidates. It tests the review method with a strong Keep bias; it does not establish that those two pages should share styling.
 
 ### Portfolio color punctuation
 
@@ -351,10 +379,11 @@ If Victor flags a concrete issue, choose one of these narrow slices:
    - Art & Illustration Pause/Play button treatment, homepage Work/Galleries visual balance, media loading/image behavior, and small responsive tweaks.
 
 4. **Document Processing protected-page review state**
-   - The canonical private Hi-Fi package is complete and paused with the nine-package docket.
-   - The protected page source uses the confirmed July 2026 Accuracy Evaluation release state in the verified local working tree, pending a separately approved commit and deployment. Its password gate, `noindex`, current homepage/Work visibility, and sitemap omission are unchanged.
-   - The Hi-Fi package uses reviewed sanitized derivatives and source-backed copy; the raw bundle remains private.
-   - Approval of later Hi-Fi edits would authorize a separate protected production-migration branch, not visibility, indexing, sitemap, navigation, homepage, or additional claims changes.
+   - The exact local candidate is certified and has a Keep verdict.
+   - It uses the confirmed July 2026 Extractor and Evaluation release state, reviewed sanitized derivatives, and source-backed copy; the raw bundle remains private.
+   - Its password gate, `noindex`, current homepage and Work visibility, and sitemap omission remain unchanged.
+   - Generated Markdown and index exposure must be resolved before protected migration.
+   - Keep does not authorize migration, visibility, indexing, sitemap, navigation, homepage, or additional claims changes.
 
 ### Future concepts area
 
@@ -369,15 +398,16 @@ These are exploration candidates, not an automatic build queue. A2UI is parked a
    - Explore whether case studies should borrow stronger report patterns: thesis, numbered chapters, evidence blocks, methodology notes, and chapter outros.
    - Keep this as a structure/spec exercise before changing live pages.
 
-3. **Lens / DNA inspection mode**
-   - Explore a restrained lens mode that exposes tokens, annotations, design-system details, project metadata, or “why this is built this way” notes.
-   - Start as a prototype/spec; do not surprise normal visitors with an extreme default mode.
+3. **Design DNA reconciliation and broader Lens expansion**
+   - The restrained home-page Design DNA overlay already exists and remains stable during page enhancement work.
+   - After candidate completion, reconcile its token, typography, spacing, shape, and component content against the accepted VicO2 system.
+   - Keep broader project annotations, metadata, and why-this-is-built-this-way inspection behavior parked until a clear reader benefit is demonstrated.
 
 4. **Broader motion / prototype behavior**
    - Consider masked reveals, subtle parallax, and chapter progress only after the concept is specified and reduced-motion/mobile behavior is clear.
 
 5. **Asset and photo inventory**
-   - Inventory candidate assets only after the next direction is clear.
+   - The completed package and sprint inventories remain the current sources. Start another inventory only for a specific evidence gap such as PCI sanitized intake.
    - Safe default reference areas from the access policy include:
      - `C:\Users\Victor\iCloudDrive\Documents\Design Work\Website`
      - `C:\Users\Victor\iCloudDrive\Documents\Design Work\2_Assets`
@@ -446,16 +476,20 @@ Guardrails:
 6. Do the IBM Cloud, Ability Experience, and SAL color-punctuation examples feel purposeful enough to keep?
 7. Is there any current-site issue worth fixing now, or should the next move be a narrow review/audit rather than another implementation branch?
 8. Are the archived source notes useful to keep, or should they eventually be pruned after this direction is approved?
+9. After VicO2 reconciliation, should the existing home-only Design DNA overlay be refreshed in place, expanded, replaced with a dedicated page, or retired?
+10. What final sequence should coordinate the homepage, Work menu, and previous and next links after wxO Canvas is considered?
 
 ### Recommended next action
 
-1. Keep the nine canonical private Hi-Fi packages paused until Victor resumes their Keep / Adjust / Reject editing pass.
-2. After the package edits are approved, complete the Launch Integration Contract defined in `PORTFOLIO_DASHBOARD.md`.
-3. Implement the shared header/footer shell and case-study chrome once on a coordinated launch/integration branch.
-4. Migrate approved Hi-Fi packages serially into that branch, preserving the approved page-specific protection, visibility, indexing, sitemap, media, and claims contracts.
-5. Run the complete public-site visual/tone/responsive/accessibility/metadata review through a Vercel preview; merge to live `main` only after explicit approval.
-6. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` until explicitly resumed.
-7. Keep homepage/nav promotion, sitemap changes, floating chat widgets, and protected-page visibility or claims changes behind the Launch Integration Contract and explicit approval.
+1. Preserve approved and exact local candidates in their isolated worktrees.
+2. Complete PCI sanitized evidence intake before treating PCI as migration-ready.
+3. Preserve the private VicO2 harvest registry and completed specification reconciliation.
+4. Preserve the existing home-page Design DNA overlay until complete-site preview evidence exists.
+5. Use the frozen Launch Integration Contract defined in `PORTFOLIO_DASHBOARD.md` as the planning authority.
+6. Implement and verify the bounded shared header, footer, and case-study chrome on the authorized coordinated branch, then stop at the migration gate.
+7. After separate migration approval, migrate approved candidates serially into that branch while preserving protection, visibility, indexing, sitemap, media, generated-content, and claims contracts.
+8. Run the complete-site visual, tone, responsive, accessibility, metadata, privacy, and exposure review through an approved preview strategy; merge only after explicit approval.
+9. Keep A2UI, broader Lens expansion, framework migration, floating chat, and uncontrolled rollout parked until explicitly resumed.
 
 ---
 

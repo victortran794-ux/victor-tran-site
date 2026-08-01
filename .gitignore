@@ -13,3 +13,4 @@ Thumbs.db
 .vercel
 .env*.local
 .tools/
+.private-content/

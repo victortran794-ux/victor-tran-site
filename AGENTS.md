@@ -10,6 +10,7 @@ Before making meaningful changes, read:
 - `PORTFOLIO_SYSTEM.md` for source-of-truth rules and health automation.
 - `PORTFOLIO_DASHBOARD.md` for current project status and next actions.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for Claude Code, Codex, Figma MCP, and Hermes handoff rules.
+- `PORTFOLIO_DESIGN_CRITIQUE_RUBRIC.md` for independent direction and rendered-design review.
 - `MAGI_PC_MIGRATION_PLAN.md` for the PC-based Magi workflow.
 - `archive/planning/portfolio-status-legacy-2026-05-18.md` only when historical status context is needed.
 - `MAGI_ACCESS_POLICY.md` before inspecting iCloud, Discord, private config, or local machine folders.
@@ -43,3 +44,5 @@ Root HTML files are the source of truth for public portfolio content. Do not han
 ## Case Study Intake
 
 For new or revised case studies, keep durable planning in `case-studies/<slug>.md`. Track confirmed facts, risky claims, open questions, media needs, narrative direction, visibility, and implementation tasks there before editing the public page.
+
+For a redesign batch, use exactly two selected pages and copy the private sprint template at `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\TEMPLATE\SPRINT_BRIEF.md`. Close the direction gate before Hi-Fi implementation, keep unrelated findings deferred, and stop after the two pages are corrected, verified, documented, and closed.
