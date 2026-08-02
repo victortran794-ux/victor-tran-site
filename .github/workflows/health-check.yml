@@ -150,6 +150,7 @@ jobs:
             ${{ steps.url.outputs.base }}/abilityexperience
             ${{ steps.url.outputs.base }}/artillustration
             ${{ steps.url.outputs.base }}/graphicgallery
+            ${{ steps.url.outputs.base }}/wxo-canvas
             ${{ steps.url.outputs.base }}/document-processing
             ${{ steps.url.outputs.base }}/ibmcloud
             ${{ steps.url.outputs.base }}/ibm-patterns
@@ -188,6 +189,7 @@ jobs:
             ${{ steps.url.outputs.base }}/
             ${{ steps.url.outputs.base }}/about
             ${{ steps.url.outputs.base }}/artillustration
+            ${{ steps.url.outputs.base }}/wxo-canvas
             ${{ steps.url.outputs.base }}/document-processing
             ${{ steps.url.outputs.base }}/pikappapp/demo
           uploadArtifacts: true

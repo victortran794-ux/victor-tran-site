@@ -5,6 +5,7 @@ const PAGES = [
   'index.html',
   'about.html',
   'document-processing.html',
+  'wxo-canvas.html',
   'ibmcloud.html',
   'ibm-patterns.html',
   'pikappapp.html',

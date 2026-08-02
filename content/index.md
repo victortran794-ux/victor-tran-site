@@ -55,7 +55,7 @@ Visual designer working across brand, illustration, and product systems.
 
 Now playing Systems at scale 01/03
 
-Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.
+A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.
 
 IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
 

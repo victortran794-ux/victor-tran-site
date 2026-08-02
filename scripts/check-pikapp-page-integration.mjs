@@ -19,9 +19,6 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
-  'sitemap.xml': '80ec2007e4ae549a580f626611a76f4c868111f60c12c2f023c3f57504f08483',
-  'robots.txt': 'e8fa9813c95c4beeed93a2ce2caa0afef667d518acb760b2ff8fe52d1260436a',
-  'document-processing.html': '657309ac2233aac5e710d3a10fdb4a43b6ac703ea50490e041a61068a702ba5c',
   'ibmcloud.html': '0259ff87b7a02752925043dffc6b30605ed37ebca48221661badd61612e09c7b',
   'pci.html': '3758ecf6349e8a52e255d1a7b00d84058856e16ad40d15755023e30bb33eb45d',
   'pikappapp/demo.html': 'daf32161b516f022bc909e0b7a4ab48b227ec3b25e74f52a842a706538d41c18',
@@ -93,6 +90,8 @@ if ([...html.matchAll(/class="[^"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fai
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
 if (!html.includes('loading="lazy" decoding="async"')) fail('Pi Kapp evidence media must use lazy asynchronous decoding');
 if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail('public Pi Kapp route must remain indexable');
+if (!text('sitemap.xml').includes('/pikappapp')) fail('public Pi Kapp route must remain in sitemap.xml');
+if (/Disallow:\s*\/pikappapp/i.test(text('robots.txt'))) fail('robots.txt must not disallow the public Pi Kapp route');
 
 for (const forbidden of [
   'Private page review',

@@ -100,7 +100,7 @@ need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\
 
 # Canonical project facts and protection flags.
 expected = {
-    "document-processing": ("Document Processing", "document-processing.html", "Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production."),
+    "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide."),

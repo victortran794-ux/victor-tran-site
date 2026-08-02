@@ -14,7 +14,7 @@
       "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.",
+      "description": "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
       "cta": "View Project",
       "images": [
         {

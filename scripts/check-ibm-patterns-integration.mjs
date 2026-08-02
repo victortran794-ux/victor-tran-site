@@ -19,10 +19,6 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
-  'sitemap.xml': '80ec2007e4ae549a580f626611a76f4c868111f60c12c2f023c3f57504f08483',
-  'robots.txt': 'e8fa9813c95c4beeed93a2ce2caa0afef667d518acb760b2ff8fe52d1260436a',
-  'data/content-export-policy.json': '7b1862546071defe9931b64ea708af6db4dbca5a1143f81d0a4bf1a98a1cf16a',
-  'document-processing.html': '657309ac2233aac5e710d3a10fdb4a43b6ac703ea50490e041a61068a702ba5c',
   'ibmcloud.html': '0259ff87b7a02752925043dffc6b30605ed37ebca48221661badd61612e09c7b',
   'pci.html': '3758ecf6349e8a52e255d1a7b00d84058856e16ad40d15755023e30bb33eb45d',
   'pikappapp.html': '689001df997e44d0967b4bdece2dfa23010a4cf3cebcc6586f72a2391b0ab1a4',

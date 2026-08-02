@@ -3,127 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A product design case study about designing an accuracy evaluation workflow for AI document processing in Watson Orchestrate.">
-
-  <!-- favicon + social -->
+  <meta name="description" content="A protected product-design study of classification, extraction, human review, and evaluation in Watson Orchestrate Document Processing.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="referrer" content="no-referrer">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://www.victortrandesign.com/document-processing">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.victortrandesign.com/document-processing">
-  <meta property="og:title" content="Document Processing · Case Study">
-  <meta property="og:description" content="Designing the trust layer for AI document processing: an evaluation workflow for measuring and improving extraction quality before deployment.">
+  <meta property="og:title" content="Document Processing · Protected Case Study">
+  <meta property="og:description" content="Making classification, extraction, review, and evaluation one visible trust loop.">
   <meta property="og:image" content="https://www.victortrandesign.com/images/hero-vic.jpg">
-  <meta property="og:image:width" content="1800">
-  <meta property="og:image:height" content="1134">
-  <meta name="twitter:card" content="summary_large_image">
   <title>Document Processing · Victor Tran Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .document-processing-loop {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 2px;
-      margin: 2.5rem 0;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .document-processing-loop-step {
-      background: var(--bg);
-      padding: 1.35rem 1rem;
-      min-height: 96px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-direction: column;
-    }
-    .document-processing-loop-step span {
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.72rem;
-      color: var(--fg-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .document-processing-loop-step strong {
-      color: var(--fg);
-      font-size: 0.95rem;
-      line-height: 1.25;
-    }
-    .document-processing-callout {
-      border-left: 3px solid var(--fg);
-      padding: 1.25rem 1.75rem;
-      margin: 2.5rem 0;
-      background: var(--border);
-    }
-    .document-processing-callout p {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
-      line-height: 1.5;
-      color: var(--fg);
-      margin: 0;
-      font-style: italic;
-    }
-    .document-processing-media {
-      margin: 2.5rem 0;
-      border: 1px solid var(--border);
-      background: var(--bg-2);
-      overflow: hidden;
-    }
-    .document-processing-media img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-    .document-processing-media figcaption {
-      margin: 0;
-      padding: 1rem 1.25rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-2);
-      font-size: var(--text-label);
-      line-height: 1.55;
-    }
-
-    .document-processing-decision-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin: 2.5rem 0;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .document-processing-decision {
-      background: var(--bg);
-      padding: 2rem;
-    }
-    .document-processing-decision h3 {
-      margin-top: 0;
-    }
-    @media (max-width: 900px) {
-      .document-processing-loop { grid-template-columns: 1fr 1fr; }
-      .document-processing-decision-list { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .document-processing-loop { grid-template-columns: 1fr; }
-    }
-  </style>
-
+  <link rel="stylesheet" href="css/wxo-workflows-vico2.css">
   <!-- password gate -->
-  <meta name="robots" content="noindex,nofollow">
   <script>if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
   <link rel="stylesheet" href="css/password-gate.css">
   <script src="js/password-gate.js" defer></script>
 </head>
-<body>
-
-  <div class="cursor-dot"  aria-hidden="true"></div>
+<body class="workflow-pages doc-processing-page">
+  <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
-    <!-- generated:site-shell-header:start -->
+  <!-- generated:site-shell-header:start -->
   <a class="skip-link" href="#main-content">Skip to content</a>
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
@@ -175,170 +77,121 @@
   <!-- generated:site-shell-header:end -->
 
   <main class="page-content" id="main-content" tabindex="-1">
-
     <header class="page-header">
-      <p class="section-label label-default">Product Design / AI Workflow Design</p>
-      <h1 class="page-header-title">Designing the trust layer for AI document processing</h1>
-      <p class="page-header-desc">Watson Orchestrate’s document processing capabilities helped teams automate work across business documents like invoices, purchase orders, bills of lading, and utility bills. I contributed to the shipped classifier and extractor experiences, then led Accuracy Evaluation: a workflow released in July 2026 that helps builders test extraction quality against ground truth, understand where automation is reliable, and improve document schemas before deployment.</p>
+      <p class="workflow-label">Document Processing / Watson Orchestrate</p>
+      <h1 class="page-header-title">Make the trust loop visible.</h1>
+      <p class="page-header-desc">Document automation does not stop at extracting a value. Builders need to know what the system recognized, where it is uncertain, how a person can correct it, and whether a change improved the result. I worked across Watson Orchestrate's Document Processing experience to help connect those moments into one platform workflow.</p>
+      <p class="workflow-companion-link"><a href="wxo-canvas.html">View Document Processing inside the broader wxO Canvas story <span aria-hidden="true">→</span></a></p>
       <dl class="case-study-meta">
-        <div class="case-study-meta-item">
-          <dt>Role</dt>
-          <dd>Lead designer for Accuracy Evaluation; contributor across shipped classifier and extractor experiences</dd>
-        </div>
-        <div class="case-study-meta-item">
-          <dt>Context</dt>
-          <dd>Watson Orchestrate document processing</dd>
-        </div>
-        <div class="case-study-meta-item">
-          <dt>Focus</dt>
-          <dd>AI extraction, ground truth, evaluation metrics, schema improvement</dd>
-        </div>
-        <div class="case-study-meta-item">
-          <dt>System</dt>
-          <dd>Carbon-aligned product design</dd>
-        </div>
+        <div class="case-study-meta-item"><dt>Role</dt><dd>Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation</dd></div>
+        <div class="case-study-meta-item"><dt>Period</dt><dd>Product design · 2025–2026</dd></div>
+        <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier + Extractor specifications</dd></div>
+        <div class="case-study-meta-item"><dt>Throughline</dt><dd>HITL + shared patterns</dd></div>
+        <div class="case-study-meta-item"><dt>Release</dt><dd>Evaluation direction · released July 2026</dd></div>
       </dl>
     </header>
 
-    <section class="case-study-lede reveal">
-      <p>I designed the evaluation layer that helped builders understand, measure, and improve AI document extraction before trusting it in production.</p>
-      <cite>Document Processing · Watson Orchestrate · AI workflow design</cite>
-    </section>
-
     <article class="case-study">
+      <section class="workflow-chapter reveal" aria-labelledby="doc-platform-title">
+        <div class="workflow-chapter-head">
+          <span class="workflow-label">01 / Platform context</span>
+          <div>
+            <h2 id="doc-platform-title">The work started with the platform, not the dashboard.</h2>
+            <p class="workflow-chapter-lead">A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.</p>
+          </div>
+        </div>
+        <p>I joined the work in 2025 and ramped up alongside the existing design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
+        <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
+        <p class="workflow-boundary"><strong>Evidence boundary:</strong> source notes include ambitious scale, accuracy, review-rate, and efficiency targets. This case study treats those as requirements, not results. Source data and prototype values are physically removed from the media.</p>
 
-      <figure class="document-processing-media reveal">
-        <img src="images/document-processing-evaluation-results-placeholder.png" alt="Evaluation results interface showing document extraction quality metrics and field-level results." width="2400" height="1428" decoding="async">
-        <figcaption>Evaluation results surfaced field-level quality signals so builders could see where extraction needed improvement before production use.</figcaption>
-      </figure>
+        <figure class="doc-motion-frame">
+          <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><span>10 seconds · sanitized source geometry</span></figcaption>
+          <video controls muted loop playsinline preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Sanitized Document Processing evaluation journey">
+            <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm" type="video/webm">
+            <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
+          </video>
+        </figure>
 
-      <span class="case-study-eyebrow reveal">01 · Overview</span>
-      <h2 class="reveal">The missing loop after extraction</h2>
-      <p>Watson Orchestrate’s document processing capabilities helped teams automate work across business documents like invoices, purchase orders, bills of lading, and utility bills.</p>
-      <p>I contributed to the broader classifier and extractor experiences, helping shape how builders configured document workflows, selected schemas, and worked with AI-generated extraction results.</p>
-      <p>But the most important question came after extraction:</p>
+        <div class="doc-story-grid" aria-label="Three-step Document Processing storyboard">
+          <figure class="workflow-figure">
+            <img src="assets/document-processing/storyboard/01-select-training-documents-sanitized.png" width="1584" height="1042" alt="Sanitized source interface for selecting representative documents" loading="lazy" decoding="async">
+            <figcaption><strong>01 · Select</strong>Establish the working set used for training and evaluation.</figcaption>
+          </figure>
+          <figure class="workflow-figure">
+            <img src="assets/document-processing/storyboard/02-review-and-correct-sanitized.png" width="1584" height="1042" alt="Sanitized interface for reviewing extracted values and correcting low-confidence fields" loading="lazy" decoding="async">
+            <figcaption><strong>02 · Review</strong>Keep the source visible while a person confirms or corrects a result.</figcaption>
+          </figure>
+          <figure class="workflow-figure">
+            <img src="assets/document-processing/storyboard/03-evaluation-details-sanitized.png" width="1584" height="1042" alt="Sanitized interface showing overall and field-level evaluation details" loading="lazy" decoding="async">
+            <figcaption><strong>03 · Evaluate</strong>Move from an overall view to fields and documents needing attention.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-      <div class="document-processing-callout reveal">
-        <p>How do builders know if the AI is accurate enough to trust?</p>
-      </div>
+      <section class="workflow-chapter reveal" aria-labelledby="doc-loop-title">
+        <div class="workflow-chapter-head">
+          <span class="workflow-label">02 / System model</span>
+          <div>
+            <h2 id="doc-loop-title">Uncertainty needed somewhere to go.</h2>
+            <p class="workflow-chapter-lead">A confidence score can flag risk, but it cannot resolve an incorrect document type, a missed field, or a misread table by itself. The workflow needed a path from automated output to human judgment and back into the next design decision.</p>
+          </div>
+        </div>
+        <div class="doc-loop" role="img" aria-label="Classify, extract, review, evaluate, and improve form the Document Processing trust loop">
+          <div><span>01</span><strong>Classify</strong><p>Identify the document type and prepare the right schema.</p></div>
+          <div><span>02</span><strong>Extract</strong><p>Read fields and table structures into usable data.</p></div>
+          <div><span>03</span><strong>Review</strong><p>Put low-confidence output beside the source for judgment.</p></div>
+          <div><span>04</span><strong>Evaluate</strong><p>Compare output with a known reference and locate errors.</p></div>
+          <div><span>05</span><strong>Improve</strong><p>Use the evidence to revise the schema or working set.</p></div>
+        </div>
+        <p class="case-study-thesis">classify → extract → review → evaluate → improve</p>
+      </section>
 
-      <p>That became the focus of Accuracy Evaluation, a workflow I owned as the lead designer. The goal was to help builders test extraction quality against ground truth, understand where automation was reliable, and improve their document schemas before deploying workflows at scale.</p>
+      <section class="workflow-chapter reveal" aria-labelledby="doc-decisions-title">
+        <div class="workflow-chapter-head">
+          <span class="workflow-label">03 / Product decisions</span>
+          <div>
+            <h2 id="doc-decisions-title">Four decisions made the parts feel like one product.</h2>
+            <p class="workflow-chapter-lead">Different document types, schemas, tables, review states, and quality signals needed a consistent structure without flattening their specialized work.</p>
+          </div>
+        </div>
+        <div class="doc-decision-grid">
+          <article><h3>Keep source and output together</h3><p>Review works when a person can compare the document and extracted value without reconstructing context.</p></article>
+          <article><h3>Make uncertainty actionable</h3><p>Confidence and quality concepts needed to point toward the field, document, or configuration requiring attention.</p></article>
+          <article><h3>Reuse the workflow language</h3><p>Shared states and Carbon-aligned patterns kept specialized document work connected to the surrounding canvas.</p></article>
+          <article><h3>Separate goals from evidence</h3><p>Thresholds, table support, history, and assignment rules are described as design or technical scope, not demonstrated results.</p></article>
+        </div>
+      </section>
 
-      <span class="case-study-eyebrow reveal">02 · The Problem</span>
-      <h2 class="reveal">AI extraction was useful, but hard to validate</h2>
-      <p class="case-study-thesis reveal">Enterprise teams needed more than “it worked on a few examples.”</p>
-      <p>Document extraction could identify fields, pull values, and support automation. But for enterprise teams, “it worked on a few examples” was not enough.</p>
-      <p>Builders needed to answer questions like:</p>
-      <ul>
-        <li>How accurate is this extractor across a real test set?</li>
-        <li>Which fields are reliable?</li>
-        <li>Which fields keep failing?</li>
-        <li>Are schema changes improving results?</li>
-        <li>Is this workflow ready for production?</li>
-      </ul>
-      <p>Without a structured evaluation workflow, teams had to rely on small manual spot-checks and subjective confidence. That made it difficult to responsibly scale document automation.</p>
-      <p>The problem was not just extracting data. It was making extraction quality measurable, explainable, and improvable.</p>
+      <section class="workflow-chapter reveal" aria-labelledby="doc-role-title">
+        <div class="workflow-chapter-head">
+          <span class="workflow-label">04 / Contribution</span>
+          <div>
+            <h2 id="doc-role-title">My role grew as the work moved from setup to trust.</h2>
+            <p class="workflow-chapter-lead">I joined a platform already in motion. My contribution expanded from translating and specifying Classifier and Extractor work to connecting review patterns and leading the Accuracy Evaluation direction.</p>
+          </div>
+        </div>
+        <div class="workflow-role-grid">
+          <div><h3>Classifier and Extractor</h3><p>I helped convert earlier concepts into the agent model and delivered interface specifications, interaction detail, Carbon alignment, and reusable patterns.</p></div>
+          <div><h3>Human review</h3><p>I supported requirements and patterns where document context, low-confidence output, and a person's correction needed to stay together.</p></div>
+          <div><h3>Accuracy Evaluation</h3><p>I led the design direction for the evaluation workflow, connecting test-set preparation, ground truth, review, and quality inspection.</p></div>
+          <div><h3>Cross-team continuity</h3><p>I worked across adjacent product and system teams, and later carried additional Document Processing epics while design coverage was reduced.</p></div>
+        </div>
+      </section>
 
-      <figure class="document-processing-media reveal">
-        <img src="images/document-processing-review-workflow-placeholder.png" alt="Document review interface with a source document and extracted fields shown side by side." width="1312" height="984" loading="lazy" decoding="async">
-        <figcaption>The review pattern kept source documents and extracted values close together so teams could verify results before treating automation as trustworthy.</figcaption>
-      </figure>
-
-      <span class="case-study-eyebrow reveal">03 · Platform Context</span>
-      <h2 class="reveal">Shipped classifier and extractor work shaped the evaluation direction</h2>
-      <p>Before leading Accuracy Evaluation, I tag-teamed work across the shipped document classifier and extractor experiences.</p>
-      <p>That work included:</p>
-      <ul>
-        <li>document classification flows</li>
-        <li>schema-based extraction patterns</li>
-        <li>confidence thresholds</li>
-        <li>builder configuration experiences</li>
-        <li>alignment with the newer agent model</li>
-        <li>Carbon and visual consistency across related document processing work</li>
-      </ul>
-      <p>This gave me a working understanding of the system: how builders created extractors, how document types shaped schemas, how AI confidence surfaced, and where the experience broke down between testing and deployment.</p>
-      <p>With classifier and extractor shipped, Accuracy Evaluation became the missing loop.</p>
-
-      <figure class="document-processing-media reveal">
-        <img src="images/document-processing-classifier-context-placeholder.png" alt="Classifier interface showing document classes and test results for document processing setup." width="2624" height="1692" loading="lazy" decoding="async">
-        <figcaption>Classifier and extractor flows created the platform context that Accuracy Evaluation later connected into a measurable improvement loop.</figcaption>
-      </figure>
-
-      <span class="case-study-eyebrow reveal">04 · My Role</span>
-      <h2 class="reveal">Lead designer for Accuracy Evaluation</h2>
-      <p>For Accuracy Evaluation, I led the design direction for the experience.</p>
-      <p>My role was to define how builders could move from informal testing to a repeatable evaluation workflow:</p>
-      <ul>
-        <li>prepare a representative test set</li>
-        <li>create or import ground truth</li>
-        <li>run an evaluation</li>
-        <li>review overall and field-level accuracy</li>
-        <li>identify weak spots</li>
-        <li>adjust schema definitions</li>
-        <li>rerun evaluation and compare results</li>
-      </ul>
-      <p>The design needed to serve technical accuracy goals while still feeling usable to builders who were configuring workflows, not performing data science.</p>
-
-      <span class="case-study-eyebrow reveal">05 · Design Approach</span>
-      <h2 class="reveal">Turning evaluation into an iteration loop</h2>
-      <p>The workflow centered around a simple quality loop:</p>
-
-      <div class="document-processing-loop reveal" aria-label="Accuracy Evaluation workflow loop">
-        <div class="document-processing-loop-step"><span>01</span><strong>Test set</strong></div>
-        <div class="document-processing-loop-step"><span>02</span><strong>Ground truth</strong></div>
-        <div class="document-processing-loop-step"><span>03</span><strong>Evaluation</strong></div>
-        <div class="document-processing-loop-step"><span>04</span><strong>Metrics</strong></div>
-        <div class="document-processing-loop-step"><span>05</span><strong>Schema improvement</strong></div>
-        <div class="document-processing-loop-step"><span>06</span><strong>Rerun</strong></div>
-      </div>
-
-      <p>Instead of treating accuracy as a static score, the design framed evaluation as part of the builder’s iteration process.</p>
-      <p>A builder could upload a larger set of documents, confirm the expected values, run the extractor, and compare the AI output against ground truth. From there, they could inspect weak fields, understand where extraction failed, and make targeted schema changes.</p>
-      <p>The goal was not just to show whether an extractor passed or failed. It was to help builders understand what to improve next.</p>
-
-      <span class="case-study-eyebrow reveal">06 · Key Design Decisions</span>
-      <h2 class="reveal">Make accuracy useful, not just visible</h2>
-
-      <div class="document-processing-decision-list reveal">
-        <section class="document-processing-decision">
-          <h3>Make metrics actionable</h3>
-          <p>Accuracy, precision, recall, and F1 score are useful, but they can quickly become abstract. The design needed to translate those metrics into builder-friendly signals: what changed, what failed, which fields need attention, which documents are causing issues, and whether the extractor is improving over time.</p>
-        </section>
-        <section class="document-processing-decision">
-          <h3>Reuse familiar review patterns</h3>
-          <p>Ground truth creation could have become a completely separate experience. Instead, the direction reused familiar review patterns from human-in-the-loop document review, keeping the experience connected to the broader platform.</p>
-        </section>
-        <section class="document-processing-decision">
-          <h3>Connect failures back to schema changes</h3>
-          <p>When a field performed poorly, the experience needed to connect that result back to field names, descriptions, examples, document variation, or model behavior. Evaluation became a bridge between AI output and better configuration.</p>
-        </section>
-        <section class="document-processing-decision">
-          <h3>Design for uncertainty</h3>
-          <p>AI document processing will always have edge cases. The experience could not imply perfect automation, so the design made uncertainty visible and manageable before production use.</p>
-        </section>
-      </div>
-
-      <figure class="document-processing-media reveal">
-        <img src="images/document-processing-extraction-indicators-placeholder.png" alt="Extraction interface showing document fields with review and quality indicators." width="1584" height="1042" loading="lazy" decoding="async">
-        <figcaption>Field-level indicators connected extraction output back to the source document, making uncertainty visible during review.</figcaption>
-      </figure>
-
-      <span class="case-study-eyebrow reveal">07 · Outcome</span>
-      <h2 class="reveal">A measurable quality loop for document automation</h2>
-      <p>Accuracy Evaluation released in July 2026 and gave builders a structured way to measure and improve document extraction quality.</p>
-      <p>It connected the broader document processing platform into a clearer loop:</p>
-      <p class="case-study-thesis reveal">classify → extract → review → evaluate → improve</p>
-      <p>For builders, this created a path from “the AI extracted something” to “I understand how well it performs, where it fails, and what I can do next.”</p>
-      <p>For the platform, it helped frame document processing as a more trustworthy enterprise workflow: configurable, reviewable, and measurable.</p>
-
-      <span class="case-study-eyebrow reveal">08 · What This Project Shows</span>
-      <h2 class="reveal">Designing trust into complex AI systems</h2>
-      <p>This project shows my ability to design inside complex AI product systems where trust depends on more than a polished interface.</p>
-      <p>It reflects my strengths in AI product UX, enterprise workflow design, builder tools, systems thinking, Carbon-aligned product design, translating technical concepts into usable workflows, and owning an ambiguous product area independently.</p>
-
+      <section class="workflow-close reveal" aria-labelledby="doc-close-title">
+        <div class="workflow-close-grid">
+          <h2 id="doc-close-title">Trust comes from a workflow people can inspect.</h2>
+          <div>
+            <p>The combined Document Extractor and Evaluation experience released in July 2026. The release connected extraction with the quality-review direction described here.</p>
+            <p>Confidence alone is not enough. A person needs to see uncertainty in context, correct it without leaving the task, and understand whether the next version is better.</p>
+            <p class="workflow-small-print">Protected private candidate · source-backed copy · local sanitized assets · no public implementation authorized</p>
+          </div>
+        </div>
+      </section>
     </article>
+  </main>
 
-      <!-- generated:project-nav:start -->
+  <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
     <a href="pikappapp.html" class="project-nav-item project-nav-item--prev" aria-label="Previous project: Pi Kapp App">
       <span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span>
@@ -351,9 +204,7 @@
   </nav>
   <!-- generated:project-nav:end -->
 
-  </main>
-
-    <!-- generated:site-shell-footer:start -->
+  <!-- generated:site-shell-footer:start -->
   <footer class="footer">
     <div class="footer-inner">
       <h2 class="footer-tagline">Do more good things.</h2>
@@ -375,9 +226,5 @@
   <!-- generated:site-shell-footer:end -->
 
   <script src="js/main.js"></script>
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
