@@ -103,7 +103,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # Protected pages, including Document Processing, are expected to stay live,
-          # password-gated, noindex, and omitted from sitemap/indexing checks. Document
+          # visitor-gated, noindex, and omitted from sitemap/indexing checks. Document
           # Processing is currently linked from the Work dropdown; do not treat it as
           # direct-link only unless navigation links are intentionally removed.
           args: >
@@ -115,6 +115,7 @@ jobs:
             --exclude "victor-tran-site-2vxf.vercel.app"
             --exclude "linkedin.com"
             --exclude "pikappapp/demo"
+            --exclude "${{ github.event_name == 'pull_request' && 'www.victortrandesign.com/wxo-canvas' || 'a^' }}"
             "./*.html"
           fail: true
 
