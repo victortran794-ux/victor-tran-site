@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A six-week IBM Patterns project redesigning the Contact Us experience on IBM.com so high-volume visitors could better self-route to the right team.">
+  <meta name="description" content="A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.">
 
   <!-- favicon + social -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
@@ -13,8 +13,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.victortrandesign.com/ibm-patterns">
   <meta property="og:title" content="IBM Patterns: Contact Us · Case Study">
-  <meta property="og:description" content="A six-week IBM Patterns project redesigning the Contact Us experience on IBM.com so high-volume visitors could better self-route to the right team.">
-  <meta property="og:image" content="https://www.victortrandesign.com/images/hero-vic.jpg">
+  <meta property="og:description" content="A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.">
+  <meta property="og:image" content="https://www.victortrandesign.com/images/patterns-hero.webp">
   <meta property="og:image:width" content="1800">
   <meta property="og:image:height" content="1134">
   <meta name="twitter:card" content="summary_large_image">
@@ -23,70 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .patterns-team {
-      display: flex;
-      gap: 0.5rem 2rem;
-      flex-wrap: wrap;
-      margin: 1.5rem 0 0;
-    }
-    .patterns-team-member {
-      font-size: 0.9rem;
-      color: var(--text-2);
-    }
-    .patterns-team-member strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-    /* Rogue easter egg */
-    .patterns-rogue {
-      display: inline-block;
-      opacity: 0;
-      transition: opacity var(--duration-base) var(--ease-out);
-      cursor: default;
-      user-select: none;
-    }
-    .patterns-rogue:hover {
-      opacity: 1;
-    }
-    .patterns-rogue-wrap {
-      margin-top: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .patterns-rogue-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text-2);
-      opacity: 0.3;
-      transition: opacity var(--duration-base) var(--ease-out);
-      cursor: default;
-    }
-    .patterns-rogue-trigger:hover {
-      opacity: 1;
-    }
-    .patterns-rogue-trigger:hover .patterns-rogue {
-      opacity: 1;
-    }
-    .patterns-rogue-label {
-      font-size: var(--text-caption);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .patterns-rogue img {
-      width: 28px;
-      height: auto;
-      filter: var(--rogue-filter, none);
-    }
-    @media (prefers-color-scheme: dark) {
-      .patterns-rogue img { filter: invert(1); }
-    }
-    body.dark .patterns-rogue img { filter: invert(1); }
-    body.light .patterns-rogue img { filter: none; }
-  </style>
+  <link rel="stylesheet" href="css/ibm-patterns.css">
 
   <!-- password gate -->
   <meta name="robots" content="noindex,nofollow">
@@ -150,123 +87,136 @@
   <p class="site-route-status"><span>Private case study</span><small>Access required</small></p>
   <!-- generated:site-shell-header:end -->
 
-  <main class="page-content" id="main-content" tabindex="-1">
-
-    <header class="page-header">
-      <p class="section-label label-default">Product Design</p>
-      <h1 class="page-header-title">IBM Patterns: Contact Us</h1>
-      <p class="page-header-desc">A six-week IBM Patterns sprint reimagining the flagship Contact Us experience on IBM.com so high-volume visitors could better self-route to the right team.</p>
-      <dl class="case-study-meta">
-        <div class="case-study-meta-item">
-          <dt>Role</dt>
-          <dd>Visual Designer</dd>
+  <main class="page-content patterns-page" id="main-content" tabindex="-1">
+    <p class="section-label sr-only">Product Design</p>
+    <section class="patterns-hero-field" aria-labelledby="patterns-title">
+      <div class="patterns-shell patterns-hero">
+        <div class="patterns-hero-copy">
+          <p class="patterns-eyebrow">IBM Patterns | Contact Us | 2021 concept</p>
+          <h1 id="patterns-title">A route to someone real.</h1>
+          <p class="patterns-thesis">A six-week incubator project that asked whether IBM.com could help someone get closer to a real inbox or a real person before the general form became a dead end.</p>
         </div>
-        <div class="case-study-meta-item">
-          <dt>Year</dt>
-          <dd>2021</dd>
-        </div>
-        <div class="case-study-meta-item">
-          <dt>Program</dt>
-          <dd>IBM Patterns</dd>
-        </div>
-        <div class="case-study-meta-item">
-          <dt>Team</dt>
-          <dd>5 Designers</dd>
-        </div>
-      </dl>
-    </header>
-
-    <section class="case-study-lede reveal">
-      <p>135,000 unique visitors over six months, 13,000 form submissions, and a contact experience that still made it hard to reach the right team. Six weeks to understand the breakdown and redesign the routing experience.</p>
-      <cite>2021 · IBM Patterns · Team Rogue</cite>
+        <figure class="patterns-hero-visual">
+          <div class="patterns-hero-frame">
+            <img class="patterns-hero-image" src="images/ibm-patterns-case-study/hero-opening-support.webp" width="2400" height="1280" alt="2021 IBM Contact Us future-state opening with a warm welcome and support routes" decoding="async" fetchpriority="high">
+            <button class="patterns-motion-toggle" id="patterns-motion-toggle" type="button" aria-pressed="false" aria-label="Pause historical deliverable presentation motion">Pause</button>
+          </div>
+          <figcaption class="patterns-evidence-caption"><b>Historical deliverable | 2021 concept</b><span>Presentation motion highlights the preserved future-state composition.</span></figcaption>
+        </figure>
+        <dl class="patterns-meta">
+          <div><dt>Program</dt><dd>IBM Patterns</dd></div>
+          <div><dt>Team</dt><dd>Five-person team</dd></div>
+          <div><dt>Duration</dt><dd>Six weeks</dd></div>
+          <div><dt>Official role</dt><dd>Visual Designer</dd></div>
+          <div><dt>Contribution</dt><dd>Research, UX, UI</dd></div>
+          <div><dt>Status</dt><dd>Future-state concept</dd></div>
+        </dl>
+      </div>
     </section>
 
-    <article class="case-study">
-
-      <div class="case-study-full-img reveal">
-        <img loading="lazy" src="images/patterns-hero.webp" width="3840" height="2160" alt="IBM Patterns Contact Us hero slide">
-      </div>
-
-      <span class="case-study-eyebrow reveal">01 · The Problem</span>
-      <h2 class="reveal">A page built to look the part, not do the job</h2>
-      <p class="case-study-thesis reveal">Massive traffic, unclear routing.</p>
-      <p>IBM's Contact Us page was drawing huge volume, but the experience was not reliably helping visitors reach the right destination. Over six months, the page logged 135,000 unique visitors and 13,000 form submissions, many of which were difficult to route cleanly across sales, support, careers, partners, and other IBM teams.</p>
-      <p>Multiple competing contact pages across IBM.com each claimed to be an entry point. The result was a page that looked like it belonged on IBM.com, but did not fully support what users came there to do: quickly understand their options and choose the right path forward.</p>
-
-      <div class="stat-grid reveal">
-        <div class="stat-card">
-          <p class="stat-card-number">135k</p>
-          <p class="stat-card-label">Unique visitors in 6 months</p>
+    <section class="patterns-chapter" id="chapter-01" aria-labelledby="patterns-chapter-01">
+      <div class="patterns-shell patterns-origin-inner">
+        <div class="patterns-chapter-head">
+          <div><p class="patterns-chapter-meta">Chapter 01 | An incubator brief</p><h2 id="patterns-chapter-01">Six weeks to imagine a better front door.</h2></div>
+          <p class="patterns-chapter-intro">I chose the IBM.com Contact Us experience from the incubator assignments and joined four other designers to propose what its future state could be.</p>
         </div>
-        <div class="stat-card">
-          <p class="stat-card-number">13k</p>
-          <p class="stat-card-label">Form submissions with unclear routing</p>
+        <div class="patterns-prose">
+          <p>My official role was Visual Designer, but the work crossed disciplines. I conducted several early <strong>sponsor-user interviews</strong>, helped guide team decisions, and took a larger hand in the <strong>mid- and high-fidelity UX</strong> as the concept became tangible.</p>
+          <p>This was shared team work. I helped connect the research, interaction decisions, visual direction, prototype, and final story rather than owning every part alone.</p>
+        </div>
+        <div class="patterns-role-grid" aria-label="Victor's primary contribution areas">
+          <article><p class="patterns-chapter-meta">Early</p><h3>Interview and listen</h3><p>Several sponsor-user interviews helped the team understand how unclear inquiries reached the people handling them.</p></article>
+          <article><p class="patterns-chapter-meta">Middle</p><h3>Guide and shape</h3><p>I helped the team work through decisions and turn different inputs into one coherent routing direction.</p></article>
+          <article><p class="patterns-chapter-meta">Later</p><h3>Make it tangible</h3><p>My largest contribution came through the mid-fi, Hi-fi, prototype, and presentation storytelling.</p></article>
         </div>
       </div>
+    </section>
 
-      <blockquote class="callout-card">
-        <p>"The IBM contact us page is constructed to be like IBM.com, not like what users need."</p>
-      </blockquote>
-
-      <span class="case-study-eyebrow reveal">02 · The Program</span>
-      <h2 class="reveal">IBM Patterns</h2>
-      <p>IBM Patterns is a six-week design education program that brings early-career IBM designers together under mentorship to tackle a real sponsored project using Enterprise Design Thinking. The format moves quickly: research, framing, prototyping, testing, and a final playback to IBM leadership.</p>
-      <p>Our team of five took on Contact Us: a high-traffic experience that had been treated as a general entry point, but needed to behave more like a routing system.</p>
-
-      <div class="patterns-team reveal">
-        <span class="patterns-team-member"><strong>Victor Tran</strong> · Visual Design</span>
-        <span class="patterns-team-member"><strong>Talya Nelson</strong> · Design Research</span>
-        <span class="patterns-team-member"><strong>Henrique Cardoso</strong> · UX Design</span>
-        <span class="patterns-team-member"><strong>Xènia Elena</strong> · iX Consulting</span>
-        <span class="patterns-team-member"><strong>Ricardo Sarraino</strong> · UX Design</span>
+    <section class="patterns-chapter patterns-problem" id="chapter-02" aria-labelledby="patterns-chapter-02">
+      <div class="patterns-shell patterns-problem-inner">
+        <div class="patterns-chapter-head">
+          <div><p class="patterns-chapter-meta">Chapter 02 | The dead end</p><h2 id="patterns-chapter-02">Useful if you already knew IBM.</h2></div>
+          <p class="patterns-chapter-intro">The old experience did not accomplish much for someone who was new, smaller, or simply unsure where a question belonged.</p>
+        </div>
+        <div class="patterns-prose">
+          <p>If you were a primary customer with a representative, you had a shortcut. For the “lil ole user,” the page could become a dead end. The team also saw the receiving-side burden: many categories, poorly differentiated support destinations, and requests that still needed to be sorted by people.</p>
+          <p>We combined sponsor-user interviews with competitor analysis and Google 360 and IBM internal-search data. The historical playback distilled that work into two practical tensions.</p>
+        </div>
+        <figure class="patterns-before">
+          <img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/ibm-contact-before-form.webp" width="1800" height="1111" alt="Historical IBM Contact Us experience showing a list of destinations beside an empty general contact form">
+          <figcaption class="patterns-evidence-caption"><b>Before | 2021 Contact Us experience</b><span>Playback documentation preserved a long destination list beside a general contact form.</span></figcaption>
+        </figure>
+        <div class="patterns-research-grid" aria-label="Research themes from the 2021 playback">
+          <article class="patterns-research-card"><p class="patterns-chapter-meta">Research theme 01</p><h3>Support overload</h3><p>Many support destinations lacked a clear distinction, making it easier for inquiries to land with the wrong team.</p></article>
+          <article class="patterns-research-card"><p class="patterns-chapter-meta">Research theme 02</p><h3>Inconsistent entry points</h3><p>Product pages varied in what they offered, while someone seeking help expected a recognizable route from wherever they started.</p></article>
+        </div>
+        <aside class="patterns-question-set" aria-labelledby="patterns-routing-questions">
+          <p class="patterns-chapter-meta">Playback element | receiving-side questions</p>
+          <h3 id="patterns-routing-questions">What happens after someone presses send?</h3>
+          <ul class="patterns-questions"><li>Do the message categories help?</li><li>Is there automatic routing?</li><li>Are there specialized receiving teams?</li><li>Is there a consistent global process?</li></ul>
+        </aside>
       </div>
+    </section>
 
-      <span class="case-study-eyebrow reveal">03 · Research &amp; Framing</span>
-      <h2 class="reveal">Two personas, one wall</h2>
-      <p>We built two personas to anchor the research: Bradley, a developer at a large IBM customer account trying to resolve a technical issue, and Paige, a small business CEO looking to speak to a sales representative. Both hit the same wall: a generic form with no clear path forward, limited routing logic, and little confidence in what would happen next.</p>
-      <p>User research surfaced the same tension from multiple directions. People expected a fast, self-directed experience. Instead, the page pushed many visitors toward a contact form too early, before helping them understand whether sales, support, documentation, careers, partners, or another route was the better fit. One user put it plainly: "There is no excuse to not do personalized experiences for someone who has been to IBM.com before."</p>
-
-      <div class="callout-card reveal">
-        <p>How might we help visitors contact the right team at IBM, quickly routing sales or support inquiries and diverting low-quality form submissions?</p>
+    <section class="patterns-chapter patterns-solution" id="chapter-03" aria-labelledby="patterns-chapter-03">
+      <div class="patterns-shell">
+        <div class="patterns-chapter-head">
+          <div><p class="patterns-chapter-meta">Chapter 03 | A route before a form</p><h2 id="patterns-chapter-03">Make the next destination visible.</h2></div>
+          <p class="patterns-chapter-intro">We stopped treating Contact Us as one general form and began treating it as a routing experience.</p>
+        </div>
+        <div class="patterns-prose"><p>The future state surfaced recognizable choices earlier, then connected each choice to something more useful: self-service information, technical support, sales, another direct route, or assisted contact.</p><p>The goal was not to keep someone inside an interface. It was to get them closer to the right inbox or person.</p></div>
+        <section class="patterns-process" aria-labelledby="patterns-process-title">
+          <div class="patterns-process-heading"><div><p class="patterns-chapter-meta">Mid-fi explorations | February 23, 2021</p><h3 id="patterns-process-title">How the routing model took shape.</h3></div><p>These preserved states show the team moving from a content-first directory toward grouped choices, direct contact routes, and a visible human fallback.</p></div>
+          <div class="patterns-process-grid">
+            <figure class="patterns-process-item"><div class="patterns-process-frame"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/midfi-route-directory.png" width="1841" height="1834" alt="Mid-fidelity Contact IBM exploration organizing support, sales, academic services, careers, directories, and MyIBM as explicit routes"></div><figcaption class="patterns-evidence-caption"><b>Mid-fi exploration | Route directory</b>A content-first model tested whether making destinations explicit could replace the generic starting point.</figcaption></figure>
+            <figure class="patterns-process-item"><div class="patterns-process-frame"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/midfi-topic-cards-form.png" width="1216" height="1684" alt="Mid-fidelity Contact IBM exploration combining topic cards with a general contact form"></div><figcaption class="patterns-evidence-caption"><b>Mid-fi exploration | Topic cards and form</b>Grouped topics moved the model toward guided choices while keeping a general fallback in view.</figcaption></figure>
+            <figure class="patterns-process-item"><div class="patterns-process-frame"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/midfi-routing-grid.png" width="1312" height="1822" alt="Mid-fidelity Contact IBM exploration showing a grid of support destinations and direct contact routes"></div><figcaption class="patterns-evidence-caption"><b>Mid-fi exploration | Routing grid</b>A denser branch grouped destinations and surfaced direct contact routes before the final visual direction.</figcaption></figure>
+            <figure class="patterns-process-item"><div class="patterns-process-frame"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/midfi-human-fallback.png" width="1312" height="1822" alt="Mid-fidelity Contact IBM exploration with an expanded in-page human contact form"></div><figcaption class="patterns-evidence-caption"><b>Mid-fi exploration | Human fallback</b>An expanded state explored an in-page form when routing still did not resolve the need.</figcaption></figure>
+          </div>
+          <p class="patterns-source-note"><span class="patterns-note-label">Process provenance</span>These team explorations were preserved in a February 23, 2021 playback. They document the concept's evolution. Individual screen ownership is not assigned.</p>
+        </section>
+        <section class="patterns-humanize" aria-labelledby="patterns-humanize-title">
+          <div class="patterns-humanize-intro"><div><p class="patterns-chapter-meta">Visual direction | Humanizing the front door</p><h3 id="patterns-humanize-title">Making the front door feel more human.</h3></div><p>I remember the intent as humanizing the front door: warmer language and people-centered imagery, followed by choices that helped someone recognize their situation without understanding IBM's internal structure.</p></div>
+          <div class="patterns-hero-studies">
+            <figure class="patterns-hero-study"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/hero-study-collaboration.webp" width="1123" height="299" alt="XD prototype hero showing two people working together at a laptop beside the words Contact IBM, We're here to help"><figcaption class="patterns-evidence-caption"><b>XD prototype hero study | Collaborative help</b>A people-centered scene framed contact as something IBM could help someone work through.</figcaption></figure>
+            <figure class="patterns-hero-study"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/hero-study-welcome.webp" width="1800" height="395" alt="Preserved future-state hero showing a smiling person beside the words Contact IBM, We're here for you"><figcaption class="patterns-evidence-caption"><b>Preserved future-state hero | Welcoming front door</b>The later hero made the welcome more direct: “Contact IBM. We're here for you.”</figcaption></figure>
+          </div>
+          <div class="patterns-principles">
+            <article><strong>A warmer welcome.</strong><p>“We're here to help” and “We're here for you” shifted the opening away from organizational language and toward the person arriving.</p></article>
+            <article><strong>Recognizable situations.</strong><p>Support, sales, careers, learning, partners, and general inquiries became visible choices instead of one undifferentiated form.</p></article>
+            <article><strong>A person still within reach.</strong><p>When self-service did not resolve the need, contact information and assisted routes remained visible.</p></article>
+          </div>
+          <p class="patterns-source-note"><span class="patterns-note-label">Humanization rationale</span>The visuals are historical artifacts. The language about wanting a warmer, more human experience is my present-day recollection, consistent with the preserved copy and imagery but not documented as a measured research finding.</p>
+        </section>
+        <div class="patterns-atlas" aria-label="Selected future-state interface views">
+          <figure class="patterns-atlas-item patterns-atlas-sales"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/sales-routes.webp" width="1800" height="958" alt="Close-up of the 2021 future-state Sales routes arranged as six destination cards"><figcaption class="patterns-evidence-caption"><b>Sales became a first-class route</b>Six recognizable destinations replaced one undifferentiated request path.</figcaption></figure>
+          <figure class="patterns-atlas-item patterns-atlas-breadth"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/route-breadth.webp" width="1200" height="1209" alt="Close-up of the 2021 future-state navigation for IBM Careers and Learn"><figcaption class="patterns-evidence-caption"><b>More than support and sales</b>Careers and learning made the breadth of possible intent visible in the same system.</figcaption></figure>
+          <figure class="patterns-atlas-item patterns-atlas-fallback"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/human-fallback.webp" width="1800" height="955" alt="Close-up of contact information and the final general inquiry, IBM Support, and IBM Sales fallback routes"><figcaption class="patterns-evidence-caption"><b>A useful fallback remained</b>The concept still offered general inquiries, support, and sales when a clearer route did not resolve the need.</figcaption></figure>
+        </div>
       </div>
+    </section>
 
-      <span class="case-study-eyebrow reveal">04 · The Design</span>
-      <h2 class="reveal">Every path had a destination</h2>
-      <p class="case-study-thesis reveal">Side navigation, clear subcategories, no dead ends.</p>
-      <p>We restructured the entire contact experience around a persistent side navigation: Support, Sales, IBM Careers, Learn, Business Partners, Additional Resources, and Contact Information. Each unfolded into clear subcategories with direct CTAs. No ambiguity about where a given request would land.</p>
-      <p>The landing page led with a hero ("Contact IBM. We're here to help.") backed by a photo to establish warmth and trust before routing users through topic-based icons. Sales inquiries were flagged for virtual agent routing. Developers could self-direct to documentation. The goal was to make every major path feel intentional instead of dumping everyone into the same form.</p>
-
-      <div class="case-study-images wide reveal">
-        <img loading="lazy" src="images/patterns-design-1.webp" width="3584" height="1930" alt="IBM Contact Us Sales subcategory navigation">
-        <img loading="lazy" src="images/patterns-design-2.webp" width="3584" height="2018" alt="IBM Contact Us IBM Careers and Learn sections">
+    <section class="patterns-chapter patterns-playback" id="chapter-04" aria-labelledby="patterns-chapter-04">
+      <div class="patterns-shell patterns-playback-inner">
+        <div class="patterns-chapter-head"><div><p class="patterns-chapter-meta">Chapter 04 | Final playback</p><h2 id="patterns-chapter-04">The playback was part of the design.</h2></div><p class="patterns-chapter-intro">The final presentation connected people, internal operations, research, and interface decisions through one act-based story.</p></div>
+        <div class="patterns-playback-path" aria-label="Final playback story structure"><span>The Saga As-Is</span><i>→</i><span>Research and routing</span><i>→</i><span>The Saga To-Be</span></div>
+        <figure class="patterns-playback-single"><img loading="lazy" decoding="async" src="images/ibm-patterns-case-study/final-playback-slide-36.jpg" width="2400" height="1350" alt="Final playback chapter card showing Bradley and Paige in The Saga To-Be"><figcaption class="patterns-evidence-caption"><b>Playback evidence | The Saga To-Be</b>Bradley and Paige returned in the To-Be chapter, giving the future-state concept a human point of view.</figcaption></figure>
+        <div class="patterns-feedback"><blockquote>I am still especially proud of the final playback. The story was very, very well received, and I remember people loving it and sharing glowing comments afterward.</blockquote><div><p>The preserved evaluation independently recognizes my <strong>presentation storytelling</strong>, the way I helped co-lead the team, and how I connected user needs to research evidence.</p><p class="patterns-source-note"><span class="patterns-note-label">Source note</span>This paraphrases private program feedback. It does not expose reviewer identities or turn positive reception into measured product validation.</p></div></div>
       </div>
+    </section>
 
-      <div class="case-study-images wide reveal">
-        <img loading="lazy" src="images/patterns-design-3.webp" width="3584" height="1904" alt="IBM Contact Us Additional Resources section">
-        <img loading="lazy" src="images/patterns-design-4.webp" width="3584" height="1448" alt="IBM Contact Us Contact Information and footer band">
+    <section class="patterns-chapter patterns-influence" id="chapter-05" aria-labelledby="patterns-chapter-05">
+      <div class="patterns-shell patterns-influence-inner">
+        <div class="patterns-chapter-head"><div><p class="patterns-chapter-meta">Chapter 05 | What carried forward</p><h2 id="patterns-chapter-05">What carried forward.</h2></div><p class="patterns-chapter-intro">We presented the future state to the team responsible for the real Contact Us experience. I remember them loving the work and later recognizing several ideas in the page.</p></div>
+        <p class="patterns-reception">The IBM Patterns prototype itself did not become the production page. What I remember carrying forward was the direction: <strong>warmer language</strong>, <strong>card-based choices</strong>, more useful routes up front, and clearer guidance based on someone’s relationship with IBM.</p>
+        <div class="patterns-influence-list" aria-label="Concepts Victor remembers carrying forward"><div><strong>Warmer entry</strong><span>A friendlier feeling and less institutional language.</span></div><div><strong>Card format</strong><span>Recognizable choices instead of one undifferentiated entry.</span></div><div><strong>More up front</strong><span>A larger variety of useful destinations presented earlier.</span></div><div><strong>Relationship-aware</strong><span>Clearer direction for a new customer, someone with a sales representative, or another kind of inquiry.</span></div></div>
+        <p class="patterns-source-note"><span class="patterns-note-label">Influence boundary</span>This is a bounded first-person influence statement. Similarity in later versions supports the recollection but does not prove exact lineage, sole authorship, or direct implementation.</p>
       </div>
+    </section>
 
-      <span class="case-study-eyebrow reveal">05 · Testing &amp; Iteration</span>
-      <h2 class="reveal">The structure held</h2>
-      <p>User testing confirmed that the structure made sense. Participants found the category breakdown intuitive, and it better reflected their mental models for how to reach IBM. The hero image increased trust, while the mix of direct contact options and self-service routes supported different user needs without forcing everyone down the same path.</p>
-      <p>Based on feedback, we refined tertiary labels, tightened the form experience, and clarified where each path would lead before locking the MVP direction.</p>
-
-      <span class="case-study-eyebrow reveal">06 · Outcome</span>
-      <h2 class="reveal">A page that finally did its job</h2>
-      <p>The MVP direction brought together new primary category icons, a frequently requested information section, and clearer sales inquiry routing to a virtual agent. Short-term, the work aimed to reduce misdirected submissions, clarify paths for revenue-generating inquiries, and give technical users a self-service track when documentation was the better answer.</p>
-
-      <p>Long-term, the structure created a foundation for a more unified global IBM contact experience, including future opportunities for personalization. The contact page had been treated like a static destination; we reframed it as a routing experience.</p>
-
-      <div class="patterns-rogue-wrap reveal">
-        <span class="patterns-rogue-trigger" title="Our team name">
-          <span class="patterns-rogue-label">Team Rogue</span>
-          <span class="patterns-rogue">
-            <img src="images/patterns-rogue.webp" alt="Team Rogue logo" width="28" height="28">
-          </span>
-        </span>
-      </div>
-
-    </article>
+    <section class="patterns-coda" id="present-day" aria-labelledby="patterns-present-day">
+      <div class="patterns-coda-inner"><p class="patterns-chapter-meta">Present-day reflection | concept only</p><h2 id="patterns-present-day">If I revisited it now.</h2><p class="patterns-coda-lead">I would pair <strong>conversational AI</strong> with structured routing: clearer queues, immediate confirmation that a request was received, and honest status indicators showing where it went and what happens next.</p><p class="patterns-coda-note"><span class="patterns-note-label">Concept boundary</span>The human goal stays the same: interpret intent, reach the right destination, and keep a real person available. This is not a designed, tested, or implemented AI system.</p></div>
+    </section>
 
       <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
@@ -280,7 +230,6 @@
     </a>
   </nav>
   <!-- generated:project-nav:end -->
-
   </main>
 
     <!-- generated:site-shell-footer:start -->
@@ -305,6 +254,7 @@
   <!-- generated:site-shell-footer:end -->
 
   <script src="js/main.js"></script>
+  <script src="js/ibm-patterns.js"></script>
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
