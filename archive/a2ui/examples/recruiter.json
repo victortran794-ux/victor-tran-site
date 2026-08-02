@@ -18,7 +18,7 @@
         {
           "title": "IBM Patterns: Contact Us",
           "category": "Product Design",
-          "description": "A six-week redesign of IBM.com's Contact Us experience for 135,000 monthly visitors.",
+          "description": "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.",
           "url": "/ibm-patterns",
           "image": "images/patterns-hero.webp",
           "highlight": true

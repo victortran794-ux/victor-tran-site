@@ -78,7 +78,7 @@
       "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.",
+      "description": "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.",
       "cta": "View Project",
       "images": [
         {
@@ -90,9 +90,9 @@
           "alt": "IBM Patterns: Contact Us"
         }
       ],
-      "protected": false,
-      "noindex": false,
-      "sitemap": true,
+      "protected": true,
+      "noindex": true,
+      "sitemap": false,
       "homepageVariant": "span-5"
     },
     {

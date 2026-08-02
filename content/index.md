@@ -59,7 +59,7 @@ Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI 
 
 IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
 
-Six weeks inside IBM's design education program. Redesigning the Contact Us experience on IBM.com so 135,000 monthly visitors could reach the right team.
+A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.
 
 A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.
 

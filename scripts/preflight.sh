@@ -50,6 +50,7 @@ run_required "Lighthouse coverage regression check" node scripts/check-lighthous
 run_required "Install pinned website build tools" npm ci --ignore-scripts
 run_required "Pi Kapp demo reproducible build check" npm run verify:pikapp-demo
 run_required "Pi Kapp approved page integration contract" npm run check:pikapp-page
+run_required "IBM Patterns approved page integration contract" npm run check:ibm-patterns
 run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs
 run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
 
