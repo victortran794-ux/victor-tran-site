@@ -4,8 +4,6 @@ html[data-theme="dark"] .pikapp-page{--paper:#091126;--surface:#111b35;--ink:#f8
 
 .pikapp-page *{box-sizing:border-box}
 
-.pikapp-page html{scroll-behavior:smooth}
-
 .pikapp-page{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;overflow-x:hidden}
 
 .pikapp-page button,
