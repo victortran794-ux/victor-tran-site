@@ -158,57 +158,57 @@
     "description": "A mobile application concept for undergraduate fraternity members to track milestones and stay connected with their organization.",
     "contentFile": "content/pikappapp.md",
     "headings": [
-      "Three users, one flow",
-      "Wireframes & information architecture",
-      "Inheriting the system",
-      "Where the value lives",
-      "When the static screen becomes a real artifact",
-      "What the concept clarified"
+      "Every year looked a little different. The same stuff still had to get done.",
+      "There was already a system. It was just spread everywhere.",
+      "It still needed to look like Pi Kappa Phi.",
+      "The earlier concepts showed how the member view was taking shape.",
+      "A formative start, not a finished product.",
+      "What I might do with the app today."
     ],
     "images": [
       {
-        "src": "images/pikapp-hero.png",
-        "alt": "Pi Kapp App hero phone mockup"
+        "src": "images/pikapp-case-study/belltower-expansion.jpg",
+        "alt": "Illuminated bell tower against a dark blue night sky"
       },
       {
-        "src": "images/pikapp-wireframes.png",
-        "alt": "Pi Kapp App hand-drawn wireframes"
+        "src": "images/pikapp-case-study/expansion-cover.png",
+        "alt": "Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       },
       {
-        "src": "images/pikapp-sitemap.png",
-        "alt": "Pi Kapp App sitemap"
+        "src": "images/pikapp-case-study/wireframes.png",
+        "alt": "Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet"
       },
       {
-        "src": "images/pikapp-screens-1.png",
-        "alt": "Pi Kapp App login and splash screens"
+        "src": "images/pikapp-case-study/sitemap.png",
+        "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-screens-2.png",
-        "alt": "Pi Kapp App chapter status, bulletin, and milestone screens"
+        "src": "images/pikapp-case-study/app-icon.png",
+        "alt": "Original Pi Kapp App icon: a gold star over crossed swords"
       },
       {
-        "src": "images/pikapp-app-designsystem.png",
-        "alt": "Pi Kapp App design system board: color palette, type pairing, gold star at three sizes, hex tessellation, and component states"
+        "src": "images/pikapp-case-study/login-screen.png",
+        "alt": "Original Pi Kapp App login screen, cropped to remove the captured phone hardware"
       },
       {
-        "src": "images/pikapp-member.png",
-        "alt": "Pi Kapp App member dashboard with progress bar and bulletin"
+        "src": "images/pikapp-case-study/member.png",
+        "alt": "Original Pi Kapp App member dashboard screen"
       },
       {
-        "src": "images/pikapp-task-expand.png",
-        "alt": "Pi Kapp App milestone detail with one task expanded"
+        "src": "images/pikapp-case-study/task-expand.png",
+        "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-app-hero.png",
-        "alt": "Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed"
+        "src": "images/pikapp-case-study/v2-today-light.png",
+        "alt": "Light-theme Today screen showing chapter context, responsibilities, and an Update us field"
       },
       {
-        "src": "images/pikapp-app-burst.png",
-        "alt": "Pi Kapp App prototype: a task being checked off with the gold star particle bursting from the gold checkbox"
+        "src": "images/pikapp-case-study/v2-responsibility-detail-dark.png",
+        "alt": "Dark-theme responsibility detail sheet showing source context and review controls"
       },
       {
-        "src": "images/pikapp-app-emptystate.png",
-        "alt": "Pi Kapp App prototype: Chapter tab empty state with the gold star centered on deep blue with hex tessellation"
+        "src": "images/pikapp-case-study/v2-chapter-light.png",
+        "alt": "Light-theme Chapter screen showing shared chapter context and a restrained thank-you"
       }
     ],
     "projects": []

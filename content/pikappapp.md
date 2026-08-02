@@ -21,73 +21,84 @@ A mobile application concept for undergraduate fraternity members to track miles
 ## Metadata
 
 - Category: Design
-- Role: UX Designer
-- Client: Pi Kappa Phi
-- Type: Concept · Product Design
 
 ## Section Headings
 
-- Three users, one flow
-- Wireframes & information architecture
-- Inheriting the system
-- Where the value lives
-- When the static screen becomes a real artifact
-- What the concept clarified
+- Every year looked a little different. The same stuff still had to get done.
+- There was already a system. It was just spread everywhere.
+- It still needed to look like Pi Kappa Phi.
+- The earlier concepts showed how the member view was taking shape.
+- A formative start, not a finished product.
+- What I might do with the app today.
 
 ## Body Copy
 
-A native mobile concept for a brotherhood that didn't have one. Built to serve a freshman tracking first milestones and a senior running a chapter, inside the same flow.
+A passion project that brought together my love for leadership, helping people stay organized, and design.
 
-An app for a brotherhood that didn't have one, sharing a single flow across very different members.
+Students already had a lot going on: college, financial responsibilities, fraternity milestones, and all the systems around them. As Pi Kapp's lead designer and Assistant Executive Director of Communications, I wanted to see whether one mobile experience could make some of that easier to follow.
 
-Pi Kappa Phi is a national fraternity with collegiate members spanning a four-year arc. The concept needed to land for three distinct users without splintering into three apps:
+I started with the resources we already had, including recruitment guides, and talked with new graduate recruiters, students, executive-board members, and chapter administrators. I also brought my own experience inside the organization.
 
-Two constraints shaped everything that followed. The visual system had to inherit the existing brand: deep blue, gold star, the tessellated hex pattern that runs through the print materials. And the data layer had to plug into iMIS, the national member database, so the app could pull rank, term, and chapter assignment without duplicating records.
+The same problems kept coming up: things were disorganized, and the system was not flexible when another tool needed to plug in. Every small improvement mattered because gathering everything was already hard enough.
 
-Hand sketches first, then a sitemap that pinned down the four-tab shell.
+Research context: this was practical internal discovery for an experimental concept, not a funded usability study.
 
-Research looked at apps that turn long-arc goals into short-loop motivation: progress bars, ranked completion percentages, and term-bounded streaks. The pattern that translated cleanest to a fraternity context was a per-term progress bar paired with a ranking against the chapter. Visible to the member, comparable across peers, and explicitly time-bounded so it resets each semester.
+Starting out · Associate member
 
-The sitemap settled on a four-tab shell: Member (your dashboard), Chapter (your house), National HQ (Pi Kapp at large), and Settings. Same shell for everyone; what changes is the density of what's already done.
+Find the first milestones and understand what comes next.
 
-The brand was set. The job was making it feel like an app, not a printed brochure.
+Helping run it · Chapter secretary
 
-The login and welcome screens lean on Pi Kappa Phi's existing visual system. Form fields, button shape, and bottom navigation are the only places where the app gets to add new vocabulary; everything else inherits. The hex pattern softens behind the splash, the gold star becomes the loading mark, and the deep blue carries the chrome on every screen.
+Keep up with personal progress while helping the chapter stay organized.
 
-The system that came out of that work codified the inherited brand into a working vocabulary: color, type, mark, pattern, and the handful of components everything else is built from. Five tokens, one feeling.
+Finishing the year · Graduating senior
 
-A progress bar and a ranked percent create the loop a member opens the app to see.
+See what is finished, what is left, and how to stay connected.
 
-The Member screen is home base: full-term progress, completion percentage, current rank against the chapter (21/45 in the mock), and the bulletin feed below. Tapping a milestone opens its task list, with one task expanded inline showing description and due date; siblings stay collapsed until tapped. Progressive disclosure keeps the dashboard from buckling under a term's worth of detail.
+Chapter work moved through spreadsheets, Drive folders, PDFs, documents, financial tools, and the existing gateway. I was not trying to replace all of it. I wanted the member-facing part to feel more like one place.
 
-This is the flow that has to work for all three personas. A freshman with two completed tasks and a senior with twenty both land on the same screen. The hierarchy is what changes.
+I sketched the main surfaces first, then mapped the content into four destinations: Member, Chapter, National HQ, and Settings.
 
-The comp held the design language. The prototype tested whether it held under interaction.
+The member view held personal progress and chapter updates. The other tabs kept chapter standing, national information, and account details nearby without making the dashboard do everything.
 
-A high-fidelity comp answers what something looks like. It can't answer what it feels like to use. So I rebuilt the Member dashboard as a working concept with single-file React, Tailwind, and Framer Motion. The prototype tested whether gold-on-blue stayed legible at thumb scale, whether the milestone expand felt like progress instead of a state change, and whether the gold star earned its keep as something more than a mark.
+About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-The polish moments are where the brand stops being decoration and starts being function. The avatar gets a thin gold progress ring that reflects the semester at a glance. Tab switching uses spring physics, not ease-in-out. The difference between premium and templated almost always lives in the motion curve. Checking off a task pops a single gold star particle that scales, lifts, and fades. Same star that loads the splash. Same star that sits at the center of every empty state. One asset, three jobs.
+I did not need to invent another identity. The app already had a strong mark, clear colors, and a hex pattern I could keep pushing.
 
-What the prototype clarified, beyond what any flat comp could, was that the system had room to breathe. The same five tokens that built the splash also built the empty state, the tap feedback, and the progress ring. The brand wasn't a decoration layer applied at the end; it was the structure underneath.
+I used deep blue for the main information, bright blue when a screen needed more energy, and gold for progress. The star, swords, and hexagons gave me enough to vary the screens without losing the Pi Kapp feel.
 
-A constrained brand system was a frame, not a ceiling. The harder question was hierarchy: how to surface enough of the long-arc journey to motivate a freshman, without overwhelming a senior who's already most of the way through. The answer wasn't different screens for different users. It was the same flow, ranked.
+The Figma explorations and V1 screens brought progress, chapter updates, milestones, and the Pi Kapp identity into a member-facing concept. They were useful for showing direction, but they were not a current product or a finished system.
 
-## Lists And Tags
+I now treat these screens as supporting material: snapshots of how I was organizing the idea at the time. They help explain what carried forward, what I would simplify, and why the present-day coda takes a different approach.
 
-- A freshman just starting rush, tracking their first milestones.
-- A junior on the executive board running chapter responsibilities.
-- A graduating senior closing out capstone classes.
+Supporting materialThese screens are supporting evidence from earlier concept directions, not the current app.
+
+Earlier concept sequence
+
+The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda.
+
+This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
+
+HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization feel a little easier to reach. The fraternity members, recruitment staff, and HQ colleagues I presented it to responded positively. It felt current and met needs the recruitment team recognized, but it still needed to be fleshed out.
+
+I still do not have usability testing or evidence that the concept was adopted. It remained an experimental study, but it was a neat start and it changed how I thought about meeting an audience halfway.
+
+Present-day exploration | speculative V2 concept
+
+The screens below turn the main lessons from the earlier concept into one deliberately small present-day direction.
+
+Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.
 
 ## Images
 
-- Pi Kapp App hero phone mockup: images/pikapp-hero.png
-- Pi Kapp App hand-drawn wireframes: images/pikapp-wireframes.png
-- Pi Kapp App sitemap: images/pikapp-sitemap.png
-- Pi Kapp App login and splash screens: images/pikapp-screens-1.png
-- Pi Kapp App chapter status, bulletin, and milestone screens: images/pikapp-screens-2.png
-- Pi Kapp App design system board: color palette, type pairing, gold star at three sizes, hex tessellation, and component states: images/pikapp-app-designsystem.png
-- Pi Kapp App member dashboard with progress bar and bulletin: images/pikapp-member.png
-- Pi Kapp App milestone detail with one task expanded: images/pikapp-task-expand.png
-- Pi Kapp App prototype: Member dashboard with avatar progress ring, semester bar, rank chip, and chapter bulletin feed: images/pikapp-app-hero.png
-- Pi Kapp App prototype: a task being checked off with the gold star particle bursting from the gold checkbox: images/pikapp-app-burst.png
-- Pi Kapp App prototype: Chapter tab empty state with the gold star centered on deep blue with hex tessellation: images/pikapp-app-emptystate.png
+- Illuminated bell tower against a dark blue night sky: images/pikapp-case-study/belltower-expansion.jpg
+- Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover.png
+- Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
+- Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
+- Original Pi Kapp App icon: a gold star over crossed swords: images/pikapp-case-study/app-icon.png
+- Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
+- Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
+- Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
+- Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light.png
+- Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark.png
+- Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light.png
