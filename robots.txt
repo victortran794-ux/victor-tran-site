@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /wxo-canvas.html
+Disallow: /wxo-canvas
+Disallow: /document-processing.html
+Disallow: /document-processing
 Disallow: /pci
 Disallow: /pci.html
 Disallow: /ibmcloud

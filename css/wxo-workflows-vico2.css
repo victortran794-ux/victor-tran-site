@@ -1,0 +1,441 @@
+.workflow-pages {
+  --wxo-green: #16774d;
+  --wxo-orange: #d85a1b;
+  --wxo-purple: #7047c5;
+  --doc-blue: #0f62fe;
+  --doc-pink: #b7266b;
+  --editorial-serif: Georgia, 'Times New Roman', serif;
+  --editorial-sans: Arial, Helvetica, sans-serif;
+  --editorial-mono: 'Courier New', Courier, monospace;
+}
+
+html[data-theme='dark'] .workflow-pages {
+  --doc-blue: #78a9ff;
+}
+
+.workflow-pages .page-header {
+  padding-bottom: clamp(3.5rem, 8vw, 7rem);
+}
+
+.workflow-pages .case-study-meta {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.workflow-label {
+  font-family: var(--editorial-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wxo-page .page-header-title,
+.doc-processing-page .page-header-title,
+.workflow-chapter h2,
+.workflow-close h2 {
+  font-family: var(--editorial-serif);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.wxo-page .page-header-title {
+  max-width: 11ch;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  line-height: 0.82;
+}
+
+.wxo-page .page-header-title em {
+  display: block;
+  color: var(--wxo-green);
+  font-weight: 400;
+}
+
+.wxo-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+}
+
+.wxo-hero-aside {
+  border-left: 1px solid var(--border);
+  padding-left: clamp(1.5rem, 4vw, 3rem);
+}
+
+.wxo-hero-aside p {
+  font-family: var(--editorial-serif);
+  font-size: clamp(1.75rem, 3.5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 2rem;
+}
+
+.wxo-orbits {
+  aspect-ratio: 1;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, transparent 0 25%, var(--border) 25% calc(25% + 1px), transparent calc(25% + 1px) 49%, var(--border) 49% calc(49% + 1px), transparent calc(49% + 1px));
+}
+
+.wxo-orbits span {
+  position: absolute;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+}
+
+.wxo-orbits span:nth-child(1) { background: var(--wxo-orange); top: -0.4rem; left: 49%; }
+.wxo-orbits span:nth-child(2) { background: var(--wxo-green); top: 50%; right: -0.4rem; }
+.wxo-orbits span:nth-child(3) { background: var(--wxo-purple); bottom: 7%; left: 15%; }
+
+.wxo-chapter-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 0 clamp(2.5rem, 6vw, 5rem);
+  border: 1px solid var(--border);
+  background: var(--border);
+  gap: 1px;
+}
+
+.wxo-chapter-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 64px;
+  padding: 1rem 1.25rem;
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.wxo-chapter-nav a span {
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.wxo-chapter-nav a[aria-current='true'] {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.wxo-chapter-nav a[aria-current='true'] span {
+  color: inherit;
+}
+
+.wxo-chapter-nav a:focus-visible,
+.wxo-chapter-panel:focus-visible {
+  outline: 3px solid var(--blue-text);
+  outline-offset: 3px;
+}
+
+.wxo-chapter-panel[hidden] {
+  display: none;
+}
+
+.workflow-chapter {
+  padding: clamp(4rem, 9vw, 8rem) 0;
+  border-top: 1px solid var(--border);
+}
+
+.workflow-chapter-head {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.workflow-chapter h2,
+.workflow-close h2 {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  line-height: 0.98;
+  margin: 0;
+}
+
+.workflow-chapter-lead {
+  max-width: 46rem;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+.wxo-system-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.workflow-figure {
+  margin: 0;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.workflow-figure img,
+.workflow-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.workflow-figure figcaption {
+  padding: 1rem 1.25rem;
+  color: var(--text-2);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+}
+
+.workflow-figure figcaption strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wxo-feature-grid,
+.workflow-role-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.workflow-boundary {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--wxo-orange);
+  background: color-mix(in srgb, var(--wxo-orange) 7%, var(--bg));
+  color: var(--text-2);
+}
+
+.workflow-role-grid > div,
+.doc-decision-grid > article {
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+
+.workflow-role-grid h3,
+.doc-decision-grid h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.6rem;
+}
+
+
+.doc-processing-page .page-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 5rem);
+  background: linear-gradient(115deg, #e7f1fa 0%, #f7eef3 56%, #f4e9f0 100%);
+  color: #161616;
+}
+
+html[data-theme='dark'] .doc-processing-page .page-header {
+  background: linear-gradient(115deg, #10151b 0%, #181115 56%, #1a1016 100%);
+  color: #f4f4f4;
+}
+
+.doc-processing-page .page-header::after {
+  content: '';
+  position: absolute;
+  inset: 12% 0 auto 58%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--doc-blue), var(--doc-pink));
+  box-shadow: 0 70px color-mix(in srgb, var(--doc-blue) 25%, transparent), 0 140px color-mix(in srgb, var(--doc-pink) 25%, transparent);
+  z-index: -1;
+}
+
+.doc-processing-page .page-header-title {
+  max-width: 8ch;
+  font-size: clamp(4rem, 9vw, 8rem);
+  line-height: 0.92;
+}
+
+.doc-processing-page .page-header-desc {
+  max-width: 46rem;
+  color: inherit;
+  opacity: 0.72;
+}
+
+.doc-processing-page .case-study-meta {
+  color: inherit;
+  border-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+.doc-processing-page .case-study-meta dt,
+.doc-processing-page .case-study-meta dd {
+  color: inherit;
+}
+
+.doc-motion-frame {
+  margin: 0;
+  border: 1px solid var(--border);
+  background: #111;
+}
+
+.doc-motion-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  color: #f4f4f4;
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.doc-motion-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #111;
+}
+
+.doc-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.doc-loop {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  background: var(--border);
+  gap: 1px;
+  margin: 2.5rem 0;
+}
+
+.doc-loop > div {
+  min-height: 9rem;
+  padding: 1.25rem;
+  background: var(--bg);
+}
+
+.doc-loop span {
+  color: var(--doc-blue);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+}
+
+.doc-loop strong {
+  display: block;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.doc-loop p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-2);
+}
+
+.doc-decision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.workflow-close {
+  padding: clamp(4rem, 10vw, 9rem) 0;
+  border-top: 1px solid var(--border);
+}
+
+.workflow-close-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: start;
+}
+
+.workflow-small-print {
+  margin-top: 2rem;
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workflow-companion-link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: currentColor;
+  font-weight: 700;
+  text-underline-offset: 0.22em;
+}
+
+@media (max-width: 860px) {
+  .workflow-pages .page-header {
+    padding-top: 5.5rem;
+  }
+
+  .wxo-hero-grid,
+  .workflow-chapter-head,
+  .wxo-feature-grid,
+  .workflow-role-grid,
+  .workflow-close-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wxo-hero-aside {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding: 2rem 0 0;
+  }
+
+  .wxo-system-grid,
+  .doc-decision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-loop {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-loop > div {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .wxo-chapter-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-processing-page .page-header {
+    padding-inline: 1.1rem;
+  }
+
+
+  .doc-motion-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-pages *,
+  .workflow-pages *::before,
+  .workflow-pages *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

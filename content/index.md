@@ -24,7 +24,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Featured Projects
 
-- Document Processing (Product Design): document-processing
+- IBM watsonX Orchestrate (Product Systems): wxo-canvas
 - IBM Cloud Observability (Product Design): ibmcloud
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting, Inc. (Brand & Print): pci
@@ -36,8 +36,8 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Section Headings
 
-- Product systems, publication work, and community-centered design.
-- Document Processing
+- Selected Work
+- IBM watsonX Orchestrate
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting, Inc.
@@ -53,9 +53,7 @@ Victor Tran ®
 
 Visual designer working across brand, illustration, and product systems.
 
-Now playing Systems at scale 01/03
-
-Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.
+An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
 IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
 
@@ -69,7 +67,7 @@ Modernizing a century-old publication. I led the layout and art direction for th
 
 A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
 
-Personal work in illustration and graphic design, including posters, paintings, identity marks, and event graphics.
+Selected illustration, identity, print, and event work from across my creative practice.
 
 Standalone digital and traditional work, including posters, paintings, and personal series.
 
@@ -81,14 +79,11 @@ Standalone identity, print, illustration, and event graphics.
 - Brand Identity
 - Art Direction
 - Illustration
-- 01 Systems at scale
-- 02 Brand, publication, and community work
-- 03 Visual archive
 
 ## Images
 
 - Victor Tran, laughing: images/hero/figure20.webp
-- Document Processing evaluation results dashboard: images/document-processing-evaluation-results-placeholder.png
+- Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls: images/wxo-canvas/wxo-home-thumbnail.png
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp

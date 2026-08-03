@@ -51,6 +51,8 @@ run_required "Install pinned website build tools" npm ci --ignore-scripts
 run_required "Pi Kapp demo reproducible build check" npm run verify:pikapp-demo
 run_required "Pi Kapp approved page integration contract" npm run check:pikapp-page
 run_required "IBM Patterns approved page integration contract" npm run check:ibm-patterns
+run_required "wxO Canvas and Document Processing integration contract" npm run check:wxo-document-processing
+run_required "Route 02 homepage integration contract" npm run check:route02-homepage
 run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs
 run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
 
@@ -94,6 +96,7 @@ fi
 
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
+run_required "wxO Canvas and Document Processing browser contract" npm run check:wxo-document-processing-browser
 
 section "Regenerating Markdown content exports"
 if [ -f "scripts/html-to-md.mjs" ]; then

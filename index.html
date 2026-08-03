@@ -26,7 +26,7 @@
   <link rel="preload" as="image" href="images/hero/figure20.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-page">
 
   <!-- Custom cursor -->
   <div class="cursor-dot"  aria-hidden="true"></div>
@@ -46,7 +46,7 @@
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="document-processing.html">Document Processing</a></li>
+            <li><a href="wxo-canvas.html">IBM watsonX Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -249,55 +249,27 @@
       <span class="sr-only" aria-live="polite" data-hero-status></span>
     </section>
 
-    <!-- Divider strip -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span class="marquee-item">IBM</span>
-        <span class="marquee-item">Pi Kappa Phi</span>
-        <span class="marquee-item">sal magazine</span>
-        <span class="marquee-item">The Ability Experience</span>
-      </div>
-    </div>
-
     <!-- Featured Projects -->
-    <section class="featured" id="work">
-      <div class="featured-intro reveal" aria-labelledby="featuredHeading">
-        <div>
-          <p class="section-label label-default">Selected work</p>
-          <h2 class="featured-intro-title" id="featuredHeading">Product systems, publication work, and community-centered design.</h2>
-          <p class="now-playing-chip" aria-live="polite">
-            <span>Now playing</span>
-            <b data-now-playing-title>Systems at scale</b>
-            <strong data-now-playing-count>01/03</strong>
-          </p>
-        </div>
-        <ol class="featured-tracklist" aria-label="Portfolio sections">
-          <li class="is-active" data-chapter="01" aria-current="true"><span>01</span> Systems at scale</li>
-          <li data-chapter="02"><span>02</span> Brand, publication, and community work</li>
-          <li data-chapter="03"><span>03</span> Visual archive</li>
-        </ol>
-      </div>
+    <section class="featured" id="work" aria-labelledby="featuredHeading">
+      <header class="featured-heading">
+        <h2 id="featuredHeading">Selected Work</h2>
+      </header>
 
       <div class="featured-list">
 
         <!-- generated:homepage-primary-projects:start -->
-        <header class="featured-chapter" data-chapter-marker="01">
-          <span>01</span>
-          <h3>Systems at scale</h3>
-        </header>
-
-        <a href="document-processing.html" class="featured-item featured-item--wide featured-item--lead reveal" data-chapter="01" data-chapter-title="Systems at scale">
+        <a href="wxo-canvas.html" class="featured-item featured-item--wide featured-item--lead featured-item--overlay reveal" data-chapter="01" data-chapter-title="Agentic workflow canvas">
           <div class="featured-item-img">
             <img loading="lazy" decoding="async"
-              src="images/document-processing-evaluation-results-placeholder.png" width="2400" height="1428"
-              alt="Document Processing evaluation results dashboard"
+              src="images/wxo-canvas/wxo-home-thumbnail.png" width="1024" height="686"
+              alt="Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
             >
           </div>
           <div class="featured-item-content">
-            <p class="section-label label-default">Product Design</p>
-            <h2 class="featured-item-title">Document Processing</h2>
-            <p class="featured-item-desc">Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.</p>
-            <span class="view-link">View Project</span>
+            <p class="section-label label-default">Product Systems</p>
+            <h2 class="featured-item-title">IBM watsonX Orchestrate</h2>
+            <p class="featured-item-desc">An agentic workflow canvas for building, inspecting, and improving AI workflows.</p>
+            <span class="view-link">View Case Study</span>
           </div>
         </a>
 
@@ -336,11 +308,6 @@
             <span class="view-link">View Project</span>
           </div>
         </a>
-
-        <header class="featured-chapter" data-chapter-marker="02">
-          <span>02</span>
-          <h3>Brand, publication, and community work</h3>
-        </header>
 
         <a href="pci.html" class="featured-item featured-item--span-5 reveal" data-chapter="02" data-chapter-title="Brand, publication, and community work">
           <div class="featured-item-img">
@@ -411,14 +378,13 @@
 
       <div class="featured-galleries reveal" id="galleries" aria-labelledby="galleriesHeading">
         <div class="featured-galleries-intro">
-          <p class="section-label label-default">Galleries</p>
-          <h3 id="galleriesHeading">Visual archive</h3>
-          <p>Personal work in illustration and graphic design, including posters, paintings, identity marks, and event graphics.</p>
+          <h3 id="galleriesHeading">Art &amp; Graphic Design</h3>
+          <p>Selected illustration, identity, print, and event work from across my creative practice.</p>
         </div>
 
         <div class="featured-gallery-list">
           <!-- generated:homepage-gallery-projects:start -->
-          <a href="artillustration.html" class="featured-item featured-item--gallery featured-item--span-7 featured-item--surface-orange reveal" data-chapter="03" data-chapter-title="Visual archive">
+          <a href="artillustration.html" class="featured-item featured-item--gallery featured-item--span-7 featured-item--surface-orange reveal" data-chapter="03" data-chapter-title="Art &amp; Graphic Design">
             <div class="featured-item-img">
               <img loading="lazy" decoding="async"
                 src="images/illus-glow.jpg" width="1117" height="1600"
@@ -433,7 +399,7 @@
             </div>
           </a>
 
-          <a href="graphicgallery.html" class="featured-item featured-item--gallery featured-item--span-5 featured-item--surface-purple reveal" data-chapter="03" data-chapter-title="Visual archive">
+          <a href="graphicgallery.html" class="featured-item featured-item--gallery featured-item--span-5 featured-item--surface-purple reveal" data-chapter="03" data-chapter-title="Art &amp; Graphic Design">
             <div class="featured-item-img">
               <img loading="lazy" decoding="async"
                 src="images/gg-edc-0.jpg" width="1600" height="1279"

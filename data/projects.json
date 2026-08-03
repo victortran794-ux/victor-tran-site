@@ -2,10 +2,10 @@
   "description": "Authoritative portfolio project order and metadata. scripts/generate-project-sections.mjs uses this file to generate the Work dropdown and homepage project cards, and scripts/validate-project-manifest.mjs checks the generated HTML/content output.",
   "projects": [
     {
-      "slug": "document-processing",
-      "title": "Document Processing",
-      "url": "document-processing.html",
-      "category": "Product Design",
+      "slug": "wxo-canvas",
+      "title": "IBM watsonX Orchestrate",
+      "url": "wxo-canvas.html",
+      "category": "Product Systems",
       "labelClass": "label-default",
       "type": "primary",
       "nav": true,
@@ -13,8 +13,37 @@
       "wide": true,
       "surface": "",
       "chapter": "01",
+      "chapterTitle": "Agentic workflow canvas",
+      "description": "An agentic workflow canvas for building, inspecting, and improving AI workflows.",
+      "cta": "View Case Study",
+      "images": [
+        {
+          "src": "images/wxo-canvas/wxo-home-thumbnail.png",
+          "width": 1024,
+          "height": 686,
+          "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
+        }
+      ],
+      "protected": true,
+      "noindex": true,
+      "sitemap": false,
+      "homepageVariant": "lead",
+      "homepageOverlay": true
+    },
+    {
+      "slug": "document-processing",
+      "title": "Document Processing",
+      "url": "document-processing.html",
+      "category": "Product Design",
+      "labelClass": "label-default",
+      "type": "primary",
+      "nav": false,
+      "homepage": false,
+      "wide": true,
+      "surface": "",
+      "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "Designing Accuracy Evaluation in watsonx Orchestrate so builders can measure AI extraction quality, find weak fields, and trust automation before production.",
+      "description": "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
       "cta": "View Project",
       "images": [
         {
@@ -223,7 +252,7 @@
       "wide": false,
       "surface": "orange",
       "chapter": "03",
-      "chapterTitle": "Visual archive",
+      "chapterTitle": "Art & Graphic Design",
       "description": "Standalone digital and traditional work, including posters, paintings, and personal series.",
       "cta": "View Gallery",
       "images": [
@@ -251,7 +280,7 @@
       "wide": false,
       "surface": "purple",
       "chapter": "03",
-      "chapterTitle": "Visual archive",
+      "chapterTitle": "Art & Graphic Design",
       "description": "Standalone identity, print, illustration, and event graphics.",
       "cta": "View Gallery",
       "images": [

@@ -7,7 +7,7 @@ const legacyHost = 'https://victortrandesign.com';
 const files = [
   'index.html', 'about.html', 'abilityexperience.html', 'artillustration.html',
   'document-processing.html', 'graphicgallery.html', 'ibm-patterns.html',
-  'ibmcloud.html', 'pci.html', 'pikappapp.html', 'salmagazine.html',
+  'ibmcloud.html', 'pci.html', 'pikappapp.html', 'salmagazine.html', 'wxo-canvas.html',
   'sitemap.xml', 'robots.txt', 'scripts/health-check.sh',
   '.github/workflows/health-check.yml', 'PORTFOLIO_SYSTEM.md',
   'case-studies/document-processing.md', 'CLAUDE.md', 'victor-tran-site.md',

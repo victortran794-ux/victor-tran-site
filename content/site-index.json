@@ -7,8 +7,8 @@
     "description": "Victor Tran. Visual designer at IBM. I design cool things with sincerity.",
     "contentFile": "content/index.md",
     "headings": [
-      "Product systems, publication work, and community-centered design.",
-      "Document Processing",
+      "Selected Work",
+      "IBM watsonX Orchestrate",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
       "Performance Contracting, Inc.",
@@ -24,8 +24,8 @@
         "alt": "Victor Tran, laughing"
       },
       {
-        "src": "images/document-processing-evaluation-results-placeholder.png",
-        "alt": "Document Processing evaluation results dashboard"
+        "src": "images/wxo-canvas/wxo-home-thumbnail.png",
+        "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
       },
       {
         "src": "images/ibm-thumb-light.png",
@@ -66,11 +66,11 @@
     ],
     "projects": [
       {
-        "title": "Document Processing",
-        "category": "Product Design",
-        "url": "document-processing",
-        "image": "images/document-processing-evaluation-results-placeholder.png",
-        "alt": "Document Processing evaluation results dashboard"
+        "title": "IBM watsonX Orchestrate",
+        "category": "Product Systems",
+        "url": "wxo-canvas",
+        "image": "images/wxo-canvas/wxo-home-thumbnail.png",
+        "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
       },
       {
         "title": "IBM Cloud Observability",

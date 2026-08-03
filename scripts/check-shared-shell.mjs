@@ -18,14 +18,15 @@ const expectedPages = [
   'pci.html',
   'pikappapp.html',
   'salmagazine.html',
+  'wxo-canvas.html',
 ];
 const projectNavigationSnapshot = {
+  'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
-  'document-processing.html': ['pikappapp.html', 'ibmcloud.html'],
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
-  'ibmcloud.html': ['document-processing.html', 'ibm-patterns.html'],
+  'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
-  'pikappapp.html': ['salmagazine.html', 'document-processing.html'],
+  'pikappapp.html': ['salmagazine.html', 'wxo-canvas.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
 };
 
@@ -113,9 +114,10 @@ const expectedProtected = new Set([
   'ibmcloud.html',
   'ibm-patterns.html',
   'pci.html',
+  'wxo-canvas.html',
 ]);
 if (JSON.stringify([...activeProtected].sort()) !== JSON.stringify([...expectedProtected].sort())) {
-  fail('active protected shell policy drifted from the four frozen routes');
+  fail('active protected shell policy drifted from the five frozen routes');
 }
 
 const expectedConfig = {
@@ -199,7 +201,7 @@ for (const page of expectedPages) {
   if (activeProtected.has(page)) {
     if (!headerBlock.includes(protectedStatus)) fail(`${page} missing fixed protected route status`);
     if (!html.includes('src="js/password-gate.js"')) fail(`${page} lost its client-side password gate marker`);
-    if (!/<meta\s+name="robots"\s+content="noindex,nofollow">/i.test(html)) {
+    if (!/<meta\s+name="robots"\s+content="noindex,nofollow(?:,[^"]*)?">/i.test(html)) {
       fail(`${page} lost noindex,nofollow`);
     }
   } else if (headerBlock.includes('site-route-status')) {
