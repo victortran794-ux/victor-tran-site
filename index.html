@@ -26,7 +26,7 @@
   <link rel="preload" as="image" href="images/hero/figure20.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-page">
 
   <!-- Custom cursor -->
   <div class="cursor-dot"  aria-hidden="true"></div>
@@ -46,7 +46,7 @@
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="document-processing.html">Document Processing</a></li>
+            <li><a href="wxo-canvas.html">wxO Canvas</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -249,55 +249,27 @@
       <span class="sr-only" aria-live="polite" data-hero-status></span>
     </section>
 
-    <!-- Divider strip -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span class="marquee-item">IBM</span>
-        <span class="marquee-item">Pi Kappa Phi</span>
-        <span class="marquee-item">sal magazine</span>
-        <span class="marquee-item">The Ability Experience</span>
-      </div>
-    </div>
-
     <!-- Featured Projects -->
-    <section class="featured" id="work">
-      <div class="featured-intro reveal" aria-labelledby="featuredHeading">
-        <div>
-          <p class="section-label label-default">Selected work</p>
-          <h2 class="featured-intro-title" id="featuredHeading">Product systems, publication work, and community-centered design.</h2>
-          <p class="now-playing-chip" aria-live="polite">
-            <span>Now playing</span>
-            <b data-now-playing-title>Systems at scale</b>
-            <strong data-now-playing-count>01/03</strong>
-          </p>
-        </div>
-        <ol class="featured-tracklist" aria-label="Portfolio sections">
-          <li class="is-active" data-chapter="01" aria-current="true"><span>01</span> Systems at scale</li>
-          <li data-chapter="02"><span>02</span> Brand, publication, and community work</li>
-          <li data-chapter="03"><span>03</span> Visual archive</li>
-        </ol>
-      </div>
+    <section class="featured" id="work" aria-labelledby="featuredHeading">
+      <header class="featured-heading">
+        <h2 id="featuredHeading">Selected Work</h2>
+      </header>
 
       <div class="featured-list">
 
         <!-- generated:homepage-primary-projects:start -->
-        <header class="featured-chapter" data-chapter-marker="01">
-          <span>01</span>
-          <h3>Systems at scale</h3>
-        </header>
-
-        <a href="document-processing.html" class="featured-item featured-item--wide featured-item--lead reveal" data-chapter="01" data-chapter-title="Systems at scale">
+        <a href="wxo-canvas.html" class="featured-item featured-item--wide featured-item--lead featured-item--overlay reveal" data-chapter="01" data-chapter-title="Systems at scale">
           <div class="featured-item-img">
             <img loading="lazy" decoding="async"
-              src="images/document-processing-evaluation-results-placeholder.png" width="2400" height="1428"
-              alt="Document Processing evaluation results dashboard"
+              src="images/wxo-canvas/wxo-home-thumbnail-placeholder.svg" width="1600" height="900"
+              alt="Sanitized editorial composition of current wxO Canvas flow controls and connectors"
             >
           </div>
           <div class="featured-item-content">
-            <p class="section-label label-default">Product Design</p>
-            <h2 class="featured-item-title">Document Processing</h2>
-            <p class="featured-item-desc">A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.</p>
-            <span class="view-link">View Project</span>
+            <p class="section-label label-default">Product Systems · Protected</p>
+            <h2 class="featured-item-title">wxO Canvas</h2>
+            <p class="featured-item-desc">A shared visual language for building, inspecting, and improving AI workflows.</p>
+            <span class="view-link">View Protected Case Study</span>
           </div>
         </a>
 
@@ -336,11 +308,6 @@
             <span class="view-link">View Project</span>
           </div>
         </a>
-
-        <header class="featured-chapter" data-chapter-marker="02">
-          <span>02</span>
-          <h3>Brand, publication, and community work</h3>
-        </header>
 
         <a href="pci.html" class="featured-item featured-item--span-5 reveal" data-chapter="02" data-chapter-title="Brand, publication, and community work">
           <div class="featured-item-img">

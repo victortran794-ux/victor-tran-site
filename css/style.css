@@ -649,6 +649,10 @@ main#main-content {
    between, lens-fill overlay as a brand signature.
    Tap/click anywhere on the hero to cycle portraits.)
 ══════════════════════════════════════════════ */
+.home-page {
+  --route02-x: clamp(48px, 5vw, 76.8px);
+}
+
 .hero {
   position: relative;
   width: 100%;
@@ -689,8 +693,8 @@ main#main-content {
 .hero-typeblock {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: var(--route02-x);
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -702,7 +706,7 @@ main#main-content {
   display: block;
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
-  font-size: var(--text-hero);
+  font-size: clamp(6.8rem, 14.2vw, 13.25rem);
   line-height: 0.86;
   letter-spacing: -0.025em;
   /* Track the active portrait's accent token so the words sit in the same
@@ -803,13 +807,13 @@ main#main-content {
 .hero-meta {
   position: absolute;
   top: calc(var(--nav-h) + var(--space-12));
-  left: var(--page-x);
+  left: var(--route02-x);
   z-index: 3;
-  max-width: 320px;
+  max-width: 280px;
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 12px;
 }
 
 .hero-eyebrow {
@@ -823,7 +827,7 @@ main#main-content {
 
 .hero-title {
   font-family: 'Barlow', sans-serif;
-  font-size: var(--text-body);
+  font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.45;
   color: var(--text-2);
@@ -833,7 +837,7 @@ main#main-content {
 
 .hero-subtitle {
   font-family: 'Barlow', sans-serif;
-  font-size: var(--text-label);
+  font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5;
   color: var(--text-2);
@@ -842,7 +846,7 @@ main#main-content {
 
 .hero-cta {
   font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-label);
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -859,8 +863,8 @@ main#main-content {
 /* Bottom service row — four labels evenly spaced edge-to-edge */
 .hero-services {
   position: absolute;
-  left: var(--page-x);
-  right: var(--page-x);
+  left: var(--route02-x);
+  right: var(--route02-x);
   bottom: var(--space-8);
   z-index: 3;
   display: flex;
@@ -886,18 +890,18 @@ main#main-content {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
+  gap: 8px;
   background: var(--bg);
   border: 1px solid var(--text-2);
   border-radius: var(--radius-pill);
-  padding: 0 var(--space-4);
+  padding: 0 12px;
   font: inherit;
   color: var(--text);
   cursor: pointer;
 }
 .hero-cycle-dots {
   display: inline-flex;
-  gap: 6px;
+  gap: 5px;
 }
 .hero-cycle-dot {
   width: 6px;
@@ -914,7 +918,7 @@ main#main-content {
 }
 .hero-cycle-label {
   font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -934,7 +938,7 @@ main#main-content {
 @media (max-width: 900px) {
   .hero-meta { max-width: 240px; top: calc(var(--nav-h) + var(--space-8)); }
   .hero-services { font-size: var(--text-caption); gap: var(--space-3); }
-  .hero-bigtype { font-size: clamp(6rem, 22vw, 16rem);  /* mobile hero override */ }
+  .hero-bigtype { font-size: clamp(5.8rem, 18vw, 10rem); }
 }
 
 /* Phone: stack meta above the type block; shrink portrait; 2x2 services. */
@@ -942,11 +946,11 @@ main#main-content {
   .hero { min-height: 580px; }
   .hero-typeblock {
     top: 58%;
-    left: var(--page-x);
+    left: var(--route02-x);
     transform: translateY(-50%);
     z-index: 1;
   }
-  .hero-bigtype { font-size: clamp(4.5rem, 23.5vw, 6.75rem);  /* mobile hero override */ line-height: 0.9; }
+  .hero-bigtype { font-size: clamp(4.5rem, 18.5vw, 5.4rem); line-height: 0.9; }
   .hero-bigtype + .hero-bigtype {
     color: var(--lens-color, var(--text));
     opacity: 0.72;
@@ -960,9 +964,9 @@ main#main-content {
   .hero-portrait-cutout,
   .hero-portrait::after,
   .hero-portrait-lens {
-    object-position: 86% bottom;
-    -webkit-mask-position: 86% bottom;
-            mask-position: 86% bottom;
+    object-position: 100% bottom;
+    -webkit-mask-position: 100% bottom;
+            mask-position: 100% bottom;
   }
   .hero-meta {
     top: var(--space-8);
@@ -977,7 +981,7 @@ main#main-content {
     flex-direction: column;
     align-items: flex-start;
     top: calc(58% + clamp(7.75rem, 33vw, 9.5rem));
-    left: var(--page-x);
+    left: var(--route02-x);
     right: auto;
     bottom: auto;
     gap: 2px;
@@ -1060,107 +1064,20 @@ main#main-content {
 ══════════════════════════════════════════════ */
 .featured { padding: 0 0 var(--section-y); }
 
-.featured-intro {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: var(--space-14) var(--page-x);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
-  gap: var(--space-10);
-  align-items: end;
+.featured-heading {
+  padding: var(--space-10) var(--route02-x);
   border-bottom: 1px solid var(--border);
+  background: var(--bg);
 }
 
-.featured-intro-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: var(--text-title);
-  line-height: var(--leading-title);
-  color: var(--text);
-  max-width: 560px;
-  margin-top: var(--space-3);
-}
-
-.now-playing-chip {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-  padding: 10px 14px;
-  width: fit-content;
-  max-width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg-2);
-  color: var(--text);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.now-playing-chip span,
-.now-playing-chip strong {
-  color: var(--text-2);
-  font-weight: 500;
-}
-
-.now-playing-chip b {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.now-playing-chip span::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: var(--space-2);
-  border-radius: 50%;
-  background: var(--pink);
-}
-
-.featured-tracklist {
-  list-style: none;
+.featured-heading h2 {
   margin: 0;
-  padding: 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.featured-tracklist li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-4);
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--border);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
-
-.featured-tracklist span {
-  color: var(--pink);
-}
-
-.featured-tracklist li.is-active {
   color: var(--text);
-}
-
-.featured-tracklist li.is-active span {
-  color: var(--pink);
-}
-
-@media (max-width: 800px) {
-  .featured-intro {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .now-playing-chip {
-    border-radius: var(--radius-md);
-  }
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .featured-list,
@@ -1169,32 +1086,6 @@ main#main-content {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 2px;
   background: var(--border);
-}
-
-.featured-chapter {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  gap: var(--space-8);
-  align-items: end;
-  padding: var(--space-12) var(--page-x);
-  background: var(--bg);
-  border-block: 1px solid var(--border);
-  scroll-margin-top: calc(var(--nav-h) + var(--space-8));
-}
-
-.featured-chapter span {
-  color: var(--pink);
-  font: 500 var(--text-caption)/1.4 'Source Code Pro', monospace;
-  letter-spacing: 0.12em;
-}
-
-.featured-chapter h3 {
-  color: var(--text);
-  font-family: 'DM Serif Display', serif;
-  font-size: var(--text-title);
-  font-weight: 400;
-  line-height: var(--leading-title);
 }
 
 .featured-galleries {
@@ -1307,6 +1198,42 @@ main#main-content {
 .featured-item--wide .featured-item-content {
   padding: 60px 56px;
   justify-content: center;
+}
+
+/* Selective overlay variant. It keeps the established image-plus-text card
+   anatomy while allowing one lead image to carry a compact text surface. */
+.featured-item--overlay {
+  position: relative;
+  display: block;
+  min-height: clamp(540px, 58vw, 780px);
+  isolation: isolate;
+}
+
+.featured-item--overlay .featured-item-img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  aspect-ratio: 16 / 9;
+}
+
+.featured-item--overlay .featured-item-img img {
+  object-fit: cover;
+}
+
+.featured-item--overlay .featured-item-content {
+  position: absolute;
+  left: var(--route02-x);
+  bottom: clamp(28px, 4vw, 56px);
+  z-index: 1;
+  width: min(500px, calc(100% - (2 * var(--route02-x))));
+  min-height: 0;
+  padding: clamp(28px, 3.5vw, 48px);
+  justify-content: flex-start;
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  color: var(--text);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .featured-item--gallery {
@@ -3223,6 +3150,10 @@ html[data-theme="dark"] .spotify-frame {
 }
 
 @media (max-width: 720px) {
+  .home-page {
+    --route02-x: 22px;
+  }
+
   .featured-list,
   .featured-gallery-list { grid-template-columns: 1fr; }
 
@@ -3230,11 +3161,22 @@ html[data-theme="dark"] .spotify-frame {
   .featured-item--span-7,
   .featured-item--span-5 { grid-column: 1 / -1; }
 
-  .featured-chapter {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-    padding-block: var(--space-10);
+  .featured-item--overlay {
+    min-height: 560px;
   }
+
+  .featured-item--overlay .featured-item-content {
+    left: var(--route02-x);
+    right: var(--route02-x);
+    bottom: var(--route02-x);
+    width: auto;
+    padding: 28px 24px;
+  }
+
+  .featured-item--overlay .featured-item-title {
+    font-size: clamp(2.35rem, 12vw, 3.5rem);
+  }
+
 }
 
 /* ══════════════════════════════════════════════

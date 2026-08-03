@@ -32,7 +32,7 @@ for (const phrase of [
   'class="lens-switcher"',
   'class="footer"',
   'class="project-nav"',
-  'href="document-processing.html"',
+  'href="wxo-canvas.html"',
   'href="ibm-patterns.html"',
   'I design complex enterprise workflows, stay close to implementation quality, and build visual methods intended to make complex work easier to understand and extend.',
   '2021–2023',

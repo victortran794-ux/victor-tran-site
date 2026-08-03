@@ -21,12 +21,12 @@ const expectedPages = [
   'wxo-canvas.html',
 ];
 const projectNavigationSnapshot = {
+  'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
-  'document-processing.html': ['pikappapp.html', 'ibmcloud.html'],
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
-  'ibmcloud.html': ['document-processing.html', 'ibm-patterns.html'],
+  'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
-  'pikappapp.html': ['salmagazine.html', 'document-processing.html'],
+  'pikappapp.html': ['salmagazine.html', 'wxo-canvas.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
 };
 

@@ -19,9 +19,9 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
-  'ibmcloud.html': '0259ff87b7a02752925043dffc6b30605ed37ebca48221661badd61612e09c7b',
-  'pci.html': '3758ecf6349e8a52e255d1a7b00d84058856e16ad40d15755023e30bb33eb45d',
-  'pikappapp.html': '689001df997e44d0967b4bdece2dfa23010a4cf3cebcc6586f72a2391b0ab1a4',
+  'ibmcloud.html': '088b8d217405441c068ac664946c09d111be6e9ccfc1c5c562779980396b9184',
+  'pci.html': '07339c35457b225989a2912d16777c65dd5b14402249b4dc8b500d098ec4d558',
+  'pikappapp.html': 'a1f6c9c7460d6c20662cfc6d5aaa9f90d019b7620ba0734c1d405f0b702bf6bb',
   'css/password-gate.css': '824beb80b8a4c11d30d675a99b72bc97880c94f10722319578bb2e1fd2f8788e',
   'js/password-gate.js': '5ecd4ebcc66f6673aafc4cc940c142d5eca9dbd872ea93a9529582d0412e8a77',
   'js/main.js': '3c1f3e755a200c1d56b51b137127b431d188a8c4b42707d086b4ab77091336cc',

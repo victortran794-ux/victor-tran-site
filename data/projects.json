@@ -2,14 +2,43 @@
   "description": "Authoritative portfolio project order and metadata. scripts/generate-project-sections.mjs uses this file to generate the Work dropdown and homepage project cards, and scripts/validate-project-manifest.mjs checks the generated HTML/content output.",
   "projects": [
     {
+      "slug": "wxo-canvas",
+      "title": "wxO Canvas",
+      "url": "wxo-canvas.html",
+      "category": "Product Systems · Protected",
+      "labelClass": "label-default",
+      "type": "primary",
+      "nav": true,
+      "homepage": true,
+      "wide": true,
+      "surface": "",
+      "chapter": "01",
+      "chapterTitle": "Systems at scale",
+      "description": "A shared visual language for building, inspecting, and improving AI workflows.",
+      "cta": "View Protected Case Study",
+      "images": [
+        {
+          "src": "images/wxo-canvas/wxo-home-thumbnail-placeholder.svg",
+          "width": 1600,
+          "height": 900,
+          "alt": "Sanitized editorial composition of current wxO Canvas flow controls and connectors"
+        }
+      ],
+      "protected": true,
+      "noindex": true,
+      "sitemap": false,
+      "homepageVariant": "lead",
+      "homepageOverlay": true
+    },
+    {
       "slug": "document-processing",
       "title": "Document Processing",
       "url": "document-processing.html",
       "category": "Product Design",
       "labelClass": "label-default",
       "type": "primary",
-      "nav": true,
-      "homepage": true,
+      "nav": false,
+      "homepage": false,
       "wide": true,
       "surface": "",
       "chapter": "01",

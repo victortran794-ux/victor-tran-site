@@ -91,33 +91,51 @@ html[data-theme='dark'] .workflow-pages {
 .wxo-orbits span:nth-child(2) { background: var(--wxo-green); top: 50%; right: -0.4rem; }
 .wxo-orbits span:nth-child(3) { background: var(--wxo-purple); bottom: 7%; left: 15%; }
 
-.wxo-review-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0 0 4rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
+.wxo-chapter-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 0 clamp(2.5rem, 6vw, 5rem);
+  border: 1px solid var(--border);
+  background: var(--border);
+  gap: 1px;
 }
 
-.wxo-review-controls button {
-  border: 1px solid var(--border);
+.wxo-chapter-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 64px;
+  padding: 1rem 1.25rem;
   background: var(--bg);
   color: var(--text);
-  min-height: 44px;
-  padding: 0.7rem 1rem;
-  font: inherit;
-  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
 }
 
-.wxo-review-controls button[aria-pressed='true'] {
+.wxo-chapter-nav a span {
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.wxo-chapter-nav a[aria-current='true'] {
   background: var(--text);
   color: var(--bg);
 }
 
-.wxo-review-controls button:focus-visible {
+.wxo-chapter-nav a[aria-current='true'] span {
+  color: inherit;
+}
+
+.wxo-chapter-nav a:focus-visible,
+.wxo-chapter-panel:focus-visible {
   outline: 3px solid var(--blue-text);
   outline-offset: 3px;
+}
+
+.wxo-chapter-panel[hidden] {
+  display: none;
 }
 
 .workflow-chapter {
@@ -211,46 +229,6 @@ html[data-theme='dark'] .workflow-pages {
   margin: 0 0 0.6rem;
 }
 
-.wxo-future {
-  background: #101310;
-  color: #f5f2e9;
-  padding: clamp(3rem, 7vw, 6rem);
-}
-
-.wxo-future .workflow-chapter-head,
-.wxo-future .workflow-chapter-head h2,
-.wxo-future .workflow-label,
-.wxo-future .workflow-chapter-lead {
-  color: inherit;
-}
-
-.wxo-future-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-.wxo-future .workflow-figure {
-  border-color: #343834;
-  background: #161a16;
-}
-
-.wxo-future .workflow-figure figcaption,
-.wxo-future .workflow-figure figcaption strong {
-  color: #ddd9cf;
-  border-color: #343834;
-}
-
-.wxo-explore-tag {
-  display: inline-flex;
-  margin: 1rem 0 2rem;
-  border: 1px solid #5a615a;
-  padding: 0.6rem 0.8rem;
-  font-family: var(--editorial-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
 
 .doc-processing-page .page-header {
   position: relative;
@@ -423,7 +401,6 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     grid-template-columns: 1fr;
   }
 
-  .wxo-future-grid,
   .doc-story-grid {
     grid-template-columns: 1fr;
   }
@@ -438,13 +415,14 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 }
 
 @media (max-width: 520px) {
+  .wxo-chapter-nav {
+    grid-template-columns: 1fr;
+  }
+
   .doc-processing-page .page-header {
     padding-inline: 1.1rem;
   }
 
-  .wxo-future {
-    padding-inline: 1rem;
-  }
 
   .doc-motion-bar {
     align-items: flex-start;

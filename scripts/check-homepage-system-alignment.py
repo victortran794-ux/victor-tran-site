@@ -68,8 +68,10 @@ for authored_copy in (
 
 need(index.count('images/hero/figure20.webp') >= 2, "portrait image and mask must remain figure20.webp")
 need(index.count('images/hero/figure20-lens.webp') == 1, "hero lens mask must remain present")
-need('class="marquee"' in index, "existing theatrical marquee transition must remain")
-need('class="featured-tracklist"' in index, "existing portfolio tracklist must remain")
+need('class="marquee"' not in index, "retired homepage marquee must remain removed")
+need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
+need(index.count('class="featured-heading"') == 1 and "Selected Work" in index,
+     "Route 02 needs one compact Selected Work heading")
 
 # Hero ambient cycle: known state, one render path, restrained timing, honest manual override.
 need("let i = 0" in js, "hero must begin from the known Pink state")
@@ -100,6 +102,7 @@ need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\
 
 # Canonical project facts and protection flags.
 expected = {
+    "wxo-canvas": ("wxO Canvas", "wxo-canvas.html", "A shared visual language for building, inspecting, and improving AI workflows."),
     "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
@@ -110,27 +113,31 @@ expected = {
     "artillustration": ("Art & Illustration", "artillustration.html", "Standalone digital and traditional work, including posters, paintings, and personal series."),
     "graphicgallery": ("Graphic Design", "graphicgallery.html", "Standalone identity, print, illustration, and event graphics."),
 }
-need(set(expected).issubset(by_slug), "all nine existing homepage projects must remain in the manifest")
+need(set(expected).issubset(by_slug), "all ten portfolio projects must remain in the manifest")
 for slug, (title, url, description) in expected.items():
     project = by_slug.get(slug, {})
     need(project.get("title") == title, f"project title changed: {slug}")
     need(project.get("url") == url, f"project route changed: {slug}")
     need(project.get("description") == description, f"project description changed: {slug}")
-    need(project.get("homepage") is True, f"homepage project was removed: {slug}")
+    expected_homepage = slug != "document-processing"
+    need(project.get("homepage") is expected_homepage, f"homepage visibility drifted: {slug}")
     escaped_title = title.replace("&", "&amp;")
-    need(escaped_title in index and url in index, f"generated homepage entry missing: {slug}")
+    if expected_homepage:
+        need(escaped_title in index and url in index, f"generated homepage entry missing: {slug}")
+    else:
+        need(f'href="{url}" class="featured-item' not in index, f"hidden homepage entry leaked: {slug}")
 
 protected = by_slug.get("document-processing", {})
 need(protected.get("protected") is True, "Document Processing must remain protected")
 need(protected.get("noindex") is True, "Document Processing must remain noindex")
 need(protected.get("sitemap") is False, "Document Processing must remain excluded from the sitemap")
-need("wxO Canvas" not in index and "A2UI" not in index, "homepage must not introduce wxO Canvas or A2UI claims")
+need("wxO Canvas" in index and "A2UI" not in index, "homepage needs wxO Canvas without A2UI claims")
 for private_rationale in ("Shared anatomy", "Project color is bounded", "Current behavior remains intact"):
     need(private_rationale not in index, f"private comparison rationale leaked into public copy: {private_rationale}")
 
 # Reproducible card hierarchy and chapter markers.
 expected_variants = {
-    "document-processing": "lead",
+    "wxo-canvas": "lead",
     "ibmcloud": "span-7",
     "ibm-patterns": "span-5",
     "pci": "span-5",
@@ -147,10 +154,12 @@ need(by_slug.get("abilityexperience", {}).get("surface") == "ability",
      "Ability homepage card needs its bounded approved identity surface")
 need("homepageVariant" in generator and "featured-item--" in generator,
      "generator must render explicit homepage variants")
-need("chapterMarkerMarkup" in generator,
-     "generator must emit semantic primary chapter markers")
-need(index.count('class="featured-chapter') == 2,
-     "generated primary work needs chapter 01 and 02 markers")
+need("chapterMarkerMarkup" not in generator,
+     "homepage generator must not emit chapter controls")
+need(index.count('class="featured-chapter') == 0,
+     "homepage chapter markers must remain removed")
+need(index.count("featured-item--overlay") == 1,
+     "wxO must remain the single homepage overlay variant")
 for variant in ("lead", "span-7", "span-5"):
     need(f"featured-item--{variant}" in index, f"generated cards missing variant class: {variant}")
 need("grid-template-columns: repeat(12" in css,

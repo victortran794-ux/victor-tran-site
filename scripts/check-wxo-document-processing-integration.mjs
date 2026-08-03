@@ -44,11 +44,17 @@ forbid(sitemap, /wxo-canvas|document-processing/i, 'Both protected routes must r
 for (const route of ['/wxo-canvas', '/wxo-canvas.html', '/document-processing', '/document-processing.html']) {
   requireText(robots, `Disallow: ${route}`, `robots.txt must disallow ${route}.`);
 }
-forbid(read('index.html'), /href=["']wxo-canvas\.html/i, 'wxO Canvas must not be added to public navigation or the public index.');
+const index = read('index.html');
+requireText(index, 'href="wxo-canvas.html"', 'The public homepage must link to the protected wxO gate.');
+forbid(index, /<a href="document-processing\.html" class="featured-item/i, 'Document Processing must not remain a standalone homepage card.');
 
 const documentProject = projects.projects.find((project) => project.slug === 'document-processing');
-if (!documentProject || documentProject.protected !== true || documentProject.noindex !== true || documentProject.sitemap !== false) {
-  fail('Document Processing manifest flags must remain protected=true, noindex=true, sitemap=false.');
+if (!documentProject || documentProject.protected !== true || documentProject.noindex !== true || documentProject.sitemap !== false || documentProject.homepage !== false || documentProject.nav !== false) {
+  fail('Document Processing must remain protected and hidden from homepage and primary navigation.');
+}
+const wxoProject = projects.projects.find((project) => project.slug === 'wxo-canvas');
+if (!wxoProject || wxoProject.protected !== true || wxoProject.noindex !== true || wxoProject.sitemap !== false || wxoProject.homepage !== true || wxoProject.nav !== true || wxoProject.homepageOverlay !== true) {
+  fail('wxO Canvas must be the protected public-gate entry and single homepage overlay project.');
 }
 const protectedEntries = new Map(exportPolicy.protectedPages.map((entry) => [entry.source, entry]));
 for (const source of ['wxo-canvas.html', 'document-processing.html']) {
@@ -61,38 +67,42 @@ requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use th
 
 for (const text of [
   'wxO Canvas · 2024–present',
-  'Document Processing is a feature thread',
+  'Document Processing is a focused chapter',
   'released in July 2026',
   'Canvas 1',
   'no shipment claim',
-  'Canvas Future',
-  'Exploration · not shipped evidence',
   'Product design, systems, specifications',
+  'href="#canvas"',
+  'href="#document-processing"',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
 
 for (const asset of [
   'canvas1-flow-controls-sanitized.png',
   'canvas1-connectors-sanitized.png',
   'document-processing-storyboard.png',
-  'future-inventory-sanitized.png',
-  'future-builder-sanitized.png',
-  'future-debug-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
+
+forbid(wxo, /Canvas Future|future-(inventory|builder|debug)-sanitized/i, 'Future-state material must remain withheld from the ordinary protected page.');
+for (const asset of [
+  'images/wxo-canvas/future-inventory-sanitized.png',
+  'images/wxo-canvas/future-builder-sanitized.png',
+  'images/wxo-canvas/future-debug-sanitized.png',
+]) {
+  if (fs.existsSync(asset)) fail(`Withheld future-state asset must not remain in the public repository: ${asset}.`);
+}
 
 const expectedWxoAssets = {
   'images/wxo-canvas/canvas1-connectors-sanitized.png': 'ef582f1b925602c4c54b783ce636acdc7ecd8cb32fa4f2692dbe61cbc31b7443',
   'images/wxo-canvas/canvas1-flow-controls-sanitized.png': 'c6c44d358e660055b1f47dfedb1872286500e334d2494f1dfd1fd3058fbad8d9',
   'images/wxo-canvas/document-processing-storyboard.png': '758d72c025a02073d5aa427a3ed7d855412284a3e9389c6c0f78b9415c5aac08',
-  'images/wxo-canvas/future-builder-sanitized.png': '54c0a66623538627dfa7d13c5459881e2d1db211adcb07d040672043374145fc',
-  'images/wxo-canvas/future-debug-sanitized.png': '766dcb6f5a1ca927def033a0c7807ec7a90def722d1e284c3258744e5606bc25',
-  'images/wxo-canvas/future-inventory-sanitized.png': '9757ff27d0fb0da91e0f8f6c9b06e1b0d9ca1bb19141a6dedd6b01aa41886436',
+  'images/wxo-canvas/wxo-home-thumbnail-placeholder.svg': '8812c178f8b84ba92fe91f2370fb4cee3b6fbf54615adf6eec56b66e4471ec03',
 };
 for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   if (!fs.existsSync(asset)) fail(`Missing approved wxO derivative ${asset}.`);
   else if (sha256(asset) !== expected) fail(`Approved wxO derivative changed: ${asset}.`);
 }
 
-if (count(wxo, /<img\b/gi) !== 7) fail('wxO Canvas must use exactly seven images: shared nav image plus six approved derivatives.');
+if (count(wxo, /<img\b/gi) !== 4) fail('wxO Canvas must use exactly four images: shared nav image plus three approved current/feature derivatives.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [

@@ -134,8 +134,8 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'wxO Canvas', mainImages: 6, current: null },
-  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: 'document-processing.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'wxO Canvas', mainImages: 3, current: 'wxo-canvas.html' },
+  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: null },
 };
 
 let cdp;
@@ -164,7 +164,7 @@ try {
   await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
 
   let checks = 0;
-  let lensChecks = 0;
+  let chapterChecks = 0;
   await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
   for (const [name, spec] of Object.entries(pages)) {
     for (const viewport of [
@@ -193,13 +193,13 @@ try {
           await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));
           const video=document.querySelector('main video');
           if(video){video.preload='metadata';video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}
-          const controls=[...document.querySelectorAll('.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.nav-dropdown-menu a,.nav-mobile-lens-btn,.footer-cta,.footer-social a,.footer-copy-email,.wxo-review-controls button,.workflow-companion-link a,.project-nav-item')]
+          const controls=[...document.querySelectorAll('.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.nav-dropdown-menu a,.nav-mobile-lens-btn,.footer-cta,.footer-social a,.footer-copy-email,.wxo-chapter-nav a,.workflow-companion-link a,.project-nav-item')]
             .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
             .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
           const status=document.querySelector('.site-route-status').getBoundingClientRect();
           const header=document.querySelector('.page-header .workflow-label').getBoundingClientRect();
-          const contrastTarget=document.querySelector(${name === 'wxo' ? "'.wxo-future h2'" : "'.doc-loop span'"});
-          const contrastSurface=document.querySelector(${name === 'wxo' ? "'.wxo-future'" : "'.doc-loop > div'"});
+          const contrastTarget=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop span'"});
+          const contrastSurface=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop > div'"});
           return {
             viewport:[innerWidth,innerHeight], theme:document.documentElement.dataset.theme, stored:localStorage.getItem('lens'),
             overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
@@ -211,8 +211,9 @@ try {
             failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
             videoReady:video?video.readyState:null, videoSources:video?[...video.querySelectorAll('source')].length:0,
             controls, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
-            wxoCurrent:document.querySelectorAll('[data-wxo-lens="current"]:not([hidden])').length,
-            wxoFuture:document.querySelectorAll('[data-wxo-lens="future"]:not([hidden])').length,
+            wxoCanvasVisible:!document.querySelector('#canvas')?.hidden,
+            wxoDocumentVisible:!document.querySelector('#document-processing')?.hidden,
+            wxoChapter:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
             docLoop:document.querySelectorAll('.doc-loop>div').length,
             reduced:getComputedStyle(document.querySelector('.reveal')||document.body).transitionDuration,
             contrastForeground:getComputedStyle(contrastTarget).color,
@@ -230,7 +231,7 @@ try {
         const ratio=contrastRatio(state.contrastForeground,state.contrastBackground);
         assert(ratio>=4.5, `${spec.file}: custom text contrast ${ratio.toFixed(2)}:1 failed at ${viewport.label} ${theme}`);
         assert(parseFloat(state.reduced)<=0.001, `${spec.file}: reduced-motion transition remained ${state.reduced} at ${viewport.label} ${theme}`);
-        if(name==='wxo') assert(state.wxoCurrent===4&&state.wxoFuture===1, `wxo-canvas.html: Both lens state failed ${JSON.stringify(state)}`);
+        if(name==='wxo') assert(state.wxoCanvasVisible&&!state.wxoDocumentVisible&&state.wxoChapter==='#canvas', `wxo-canvas.html: default Canvas chapter failed ${JSON.stringify(state)}`);
         if(name==='doc') assert(state.docLoop===5&&state.videoReady>=1&&state.videoSources===2, `document-processing.html: trust loop or video failed ${JSON.stringify(state)}`);
         if(viewport.mobile){
           const undersized=state.controls.filter((control)=>control.width<44||control.height<44);
@@ -240,46 +241,30 @@ try {
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
           await delay(60);
           await cdp.screenshot('wxo-canvas-390-light-opening.png');
-          await cdp.evaluate(`document.querySelector('[data-wxo-review="current"]').focus()`);
+          await cdp.evaluate(`document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-          const middleFocus=await cdp.evaluate(`document.activeElement===document.querySelector('[data-wxo-review="both"]')`);
-          assert(middleFocus, 'wxo-canvas.html: lens control keyboard focus order failed at Both');
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-          const focusStyle=await cdp.evaluate(`(()=>{const button=document.querySelector('[data-wxo-review="future"]');const style=getComputedStyle(button);return {active:document.activeElement===button,outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth,boxShadow:style.boxShadow}})()`);
-          assert(focusStyle.active&&(focusStyle.outlineStyle!=='none'&&parseFloat(focusStyle.outlineWidth)>0||focusStyle.boxShadow!=='none'), `wxo-canvas.html: lens control lacks visible keyboard focus ${JSON.stringify(focusStyle)}`);
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          const future=await cdp.evaluate(`({pressed:document.querySelector('[data-wxo-review="future"]').getAttribute('aria-pressed'),current:document.querySelectorAll('[data-wxo-lens="current"]:not([hidden])').length,future:document.querySelectorAll('[data-wxo-lens="future"]:not([hidden])').length})`);
-          assert(future.pressed==='true'&&future.current===0&&future.future===1, `wxo-canvas.html: Future lens keyboard interaction failed ${JSON.stringify(future)}`);
-          await cdp.evaluate(`document.querySelector('.wxo-future').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-100)`);
+          const focusStyle=await cdp.evaluate(`(()=>{const link=document.querySelector('[data-wxo-chapter="document-processing"]');const style=getComputedStyle(link);return {active:document.activeElement===link,outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth,boxShadow:style.boxShadow}})()`);
+          assert(focusStyle.active&&(focusStyle.outlineStyle!=='none'&&parseFloat(focusStyle.outlineWidth)>0||focusStyle.boxShadow!=='none'), `wxo-canvas.html: chapter link lacks visible keyboard focus ${JSON.stringify(focusStyle)}`);
+          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
+          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await delay(60);
-          await cdp.screenshot('wxo-canvas-390-light-future.png');
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9,modifiers:8});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9,modifiers:8});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9,modifiers:8});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9,modifiers:8});
-          const currentFocused=await cdp.evaluate(`document.activeElement===document.querySelector('[data-wxo-review="current"]')`);
-          assert(currentFocused, 'wxo-canvas.html: keyboard could not return focus to Current lens');
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          const current=await cdp.evaluate(`({pressed:document.querySelector('[data-wxo-review="current"]').getAttribute('aria-pressed'),current:document.querySelectorAll('[data-wxo-lens="current"]:not([hidden])').length,future:document.querySelectorAll('[data-wxo-lens="future"]:not([hidden])').length})`);
-          assert(current.pressed==='true'&&current.current===4&&current.future===0, `wxo-canvas.html: Current lens keyboard interaction failed ${JSON.stringify(current)}`);
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-          const bothFocused=await cdp.evaluate(`document.activeElement===document.querySelector('[data-wxo-review="both"]')`);
-          assert(bothFocused, 'wxo-canvas.html: keyboard could not advance focus to Both lens');
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:' ',code:'Space',windowsVirtualKeyCode:32});
-          const both=await cdp.evaluate(`({pressed:document.querySelector('[data-wxo-review="both"]').getAttribute('aria-pressed'),current:document.querySelectorAll('[data-wxo-lens="current"]:not([hidden])').length,future:document.querySelectorAll('[data-wxo-lens="future"]:not([hidden])').length})`);
-          assert(both.pressed==='true'&&both.current===4&&both.future===1, `wxo-canvas.html: Both lens keyboard interaction failed ${JSON.stringify(both)}`);
-          lensChecks+=1;
+          const documentChapter=await cdp.evaluate(`(()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom)}})()`);
+          assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
+          await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
+          await cdp.evaluate(`document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
+          await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
+          await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
+          await delay(60);
+          const canvasChapter=await cdp.evaluate(`({hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden})`);
+          assert(canvasChapter.hash==='#canvas'&&canvasChapter.current==='#canvas'&&canvasChapter.canvas&&!canvasChapter.document, `wxo-canvas.html: Canvas keyboard chapter failed ${JSON.stringify(canvasChapter)}`);
+          chapterChecks+=1;
         }
         if(name==='wxo'&&viewport.label==='1280'&&theme==='dark'){
-          await cdp.evaluate(`document.querySelector('.wxo-future').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-100)`);
+          await cdp.evaluate(`document.querySelector('#canvas .wxo-system-grid').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
-          await cdp.screenshot('wxo-canvas-1280-dark-future.png');
+          await cdp.screenshot('wxo-canvas-1280-dark-canvas-system.png');
         }
         if(name==='doc'&&viewport.label==='390'&&theme==='light'){
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
@@ -295,12 +280,12 @@ try {
       }
     }
   }
-  assert(lensChecks===1, `expected one wxO interactive lens check; found ${lensChecks}`);
+  assert(chapterChecks===1, `expected one wxO interactive chapter check; found ${chapterChecks}`);
   assert(cdp.exceptions.length===0, `browser exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(cdp.consoleErrors.length===0, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
   assert(cdp.httpErrors.length===0, `HTTP errors: ${JSON.stringify(cdp.httpErrors)}`);
   assert(cdp.networkFailures.length===0, `network failures: ${JSON.stringify(cdp.networkFailures)}`);
-  console.log(`WXO + DOCUMENT PROCESSING BROWSER CHECK: PASS states=${checks} lens=${lensChecks} evidence=${evidenceDir}`);
+  console.log(`WXO + DOCUMENT PROCESSING BROWSER CHECK: PASS states=${checks} chapters=${chapterChecks} evidence=${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}
   child.kill('SIGTERM');

@@ -200,11 +200,11 @@ try {
   await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').focus()`);
   await cdp.key('ArrowDown', 'ArrowDown', 40);
   const arrowDownHref = await cdp.evaluate(`document.activeElement?.getAttribute('href')`);
-  assert(arrowDownHref === 'document-processing.html', `ArrowDown did not focus the first Work link; focused=${arrowDownHref}`);
+  assert(arrowDownHref === 'wxo-canvas.html', `ArrowDown did not focus the first Work link; focused=${arrowDownHref}`);
   await cdp.key('End', 'End', 35);
   assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'graphicgallery.html', 'End did not focus the last Work link');
   await cdp.key('Home', 'Home', 36);
-  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'document-processing.html', 'Home did not focus the first Work link');
+  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'wxo-canvas.html', 'Home did not focus the first Work link');
   await cdp.key('Escape', 'Escape', 27);
   const escapeState = await cdp.evaluate(`({focused: document.activeElement?.classList.contains('nav-dropdown-toggle'), expanded: document.querySelector('.nav-dropdown-toggle').getAttribute('aria-expanded')})`);
   assert(escapeState.focused && escapeState.expanded === 'false', 'Escape did not close Work and restore trigger focus');
@@ -235,7 +235,7 @@ try {
     main: document.querySelector('main#main-content')?.getAttribute('tabindex')
   })`);
   assert(protectedState.cue === 'Private case studyAccess required' || protectedState.cue === 'Private case study Access required', 'protected route cue drifted');
-  assert(protectedState.robots === 'noindex,nofollow', 'protected route lost noindex,nofollow');
+  assert(protectedState.robots?.startsWith('noindex,nofollow'), 'protected route lost noindex,nofollow');
   assert(protectedState.gate, 'protected route lost password-gate script');
   assert(protectedState.overflow === 0, `protected route has ${protectedState.overflow}px root overflow at 390px`);
   assert(protectedState.main === '-1', 'protected route main target lost tabindex=-1');
