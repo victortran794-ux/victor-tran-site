@@ -71,7 +71,7 @@ const wxoProject = bySlug.get('wxo-canvas');
 requireCondition(Boolean(wxoProject), 'wxO Canvas must exist in the project manifest.');
 if (wxoProject) {
   for (const [key, value] of Object.entries({
-    title: 'wxO Canvas',
+    title: 'IBM watsonX Orchestrate',
     url: 'wxo-canvas.html',
     nav: true,
     homepage: true,
@@ -83,8 +83,8 @@ if (wxoProject) {
     homepageOverlay: true,
   })) requireCondition(wxoProject[key] === value, `wxO Canvas manifest ${key} must equal ${String(value)}.`);
   requireCondition(wxoProject.images?.length === 1, 'wxO homepage entry must use one thumbnail asset.');
-  requireCondition(wxoProject.images?.[0]?.src === 'images/wxo-canvas/wxo-home-thumbnail-placeholder.svg',
-    'wxO must use the approved current-Canvas placeholder thumbnail.');
+  requireCondition(wxoProject.images?.[0]?.src === 'images/wxo-canvas/wxo-home-thumbnail.png',
+    'IBM watsonX Orchestrate must use the approved Agentic workflow canvas thumbnail.');
 }
 const documentProject = bySlug.get('document-processing');
 requireCondition(documentProject?.homepage === false && documentProject?.nav === false,

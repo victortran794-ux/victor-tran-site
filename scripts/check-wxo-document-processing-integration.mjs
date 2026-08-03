@@ -24,7 +24,7 @@ const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
 
-for (const [name, html] of [['wxO Canvas', wxo], ['Document Processing', doc]]) {
+for (const [name, html] of [['IBM watsonX Orchestrate', wxo], ['Document Processing', doc]]) {
   requireText(html, 'sessionStorage.getItem(\'vtd-unlock\')', `${name} must preserve the session-only password gate.`);
   requireText(html, 'css/password-gate.css', `${name} must preserve the shared password-gate stylesheet.`);
   requireText(html, 'js/password-gate.js', `${name} must preserve the shared password-gate script.`);
@@ -66,7 +66,8 @@ requireText(workflowCss, "html[data-theme='dark'] .workflow-pages", 'Workflow st
 requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use the contrast-safe dark-theme blue token.');
 
 for (const text of [
-  'wxO Canvas · 2024–present',
+  'IBM watsonX Orchestrate · 2024–present',
+  'Agentic workflow canvas.',
   'Document Processing is a focused chapter',
   'released in July 2026',
   'Canvas 1',
@@ -95,7 +96,7 @@ const expectedWxoAssets = {
   'images/wxo-canvas/canvas1-connectors-sanitized.png': 'ef582f1b925602c4c54b783ce636acdc7ecd8cb32fa4f2692dbe61cbc31b7443',
   'images/wxo-canvas/canvas1-flow-controls-sanitized.png': 'c6c44d358e660055b1f47dfedb1872286500e334d2494f1dfd1fd3058fbad8d9',
   'images/wxo-canvas/document-processing-storyboard.png': '758d72c025a02073d5aa427a3ed7d855412284a3e9389c6c0f78b9415c5aac08',
-  'images/wxo-canvas/wxo-home-thumbnail-placeholder.svg': '8812c178f8b84ba92fe91f2370fb4cee3b6fbf54615adf6eec56b66e4471ec03',
+  'images/wxo-canvas/wxo-home-thumbnail.png': '690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee',
 };
 for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   if (!fs.existsSync(asset)) fail(`Missing approved wxO derivative ${asset}.`);

@@ -19,8 +19,8 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
-  'ibmcloud.html': '088b8d217405441c068ac664946c09d111be6e9ccfc1c5c562779980396b9184',
-  'pci.html': '07339c35457b225989a2912d16777c65dd5b14402249b4dc8b500d098ec4d558',
+  'ibmcloud.html': '80a71a6fd316d903f13ba7e2e197ce9cc5a035122e7c78cc9dbf53ae9bede38f',
+  'pci.html': '57061887744312eff1a172d31b94c4ea703ca3702f34dbe503af92cc18be376e',
   'pikappapp/demo.html': 'daf32161b516f022bc909e0b7a4ab48b227ec3b25e74f52a842a706538d41c18',
   'pikappapp/demo.bundle.css': '76eefcf312f2a097070f29ed9e3fbeaa5a3125ba2365178a09cc0e81c26a7ff5',
   'pikappapp/demo.bundle.js': '50b8336875a9181ccad7d6db2ce52f48cb7e0ee602aa0c75d2a53040fe62d22c',

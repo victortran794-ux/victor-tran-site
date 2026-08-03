@@ -134,7 +134,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'wxO Canvas', mainImages: 3, current: 'wxo-canvas.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 3, current: 'wxo-canvas.html' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: null },
 };
 

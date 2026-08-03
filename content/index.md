@@ -24,7 +24,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Featured Projects
 
-- wxO Canvas (Product Systems · Protected): wxo-canvas
+- IBM watsonX Orchestrate (Product Systems · Protected): wxo-canvas
 - IBM Cloud Observability (Product Design): ibmcloud
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting, Inc. (Brand & Print): pci
@@ -37,7 +37,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Section Headings
 
 - Selected Work
-- wxO Canvas
+- IBM watsonX Orchestrate
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting, Inc.
@@ -53,7 +53,7 @@ Victor Tran ®
 
 Visual designer working across brand, illustration, and product systems.
 
-A shared visual language for building, inspecting, and improving AI workflows.
+An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
 IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
 
@@ -83,7 +83,7 @@ Standalone identity, print, illustration, and event graphics.
 ## Images
 
 - Victor Tran, laughing: images/hero/figure20.webp
-- Sanitized editorial composition of current wxO Canvas flow controls and connectors: images/wxo-canvas/wxo-home-thumbnail-placeholder.svg
+- Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls: images/wxo-canvas/wxo-home-thumbnail.png
 - IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp

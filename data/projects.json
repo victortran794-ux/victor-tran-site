@@ -3,7 +3,7 @@
   "projects": [
     {
       "slug": "wxo-canvas",
-      "title": "wxO Canvas",
+      "title": "IBM watsonX Orchestrate",
       "url": "wxo-canvas.html",
       "category": "Product Systems · Protected",
       "labelClass": "label-default",
@@ -13,15 +13,15 @@
       "wide": true,
       "surface": "",
       "chapter": "01",
-      "chapterTitle": "Systems at scale",
-      "description": "A shared visual language for building, inspecting, and improving AI workflows.",
+      "chapterTitle": "Agentic workflow canvas",
+      "description": "An agentic workflow canvas for building, inspecting, and improving AI workflows.",
       "cta": "View Protected Case Study",
       "images": [
         {
-          "src": "images/wxo-canvas/wxo-home-thumbnail-placeholder.svg",
-          "width": 1600,
-          "height": 900,
-          "alt": "Sanitized editorial composition of current wxO Canvas flow controls and connectors"
+          "src": "images/wxo-canvas/wxo-home-thumbnail.png",
+          "width": 1024,
+          "height": 686,
+          "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
         }
       ],
       "protected": true,
