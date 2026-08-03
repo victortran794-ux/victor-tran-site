@@ -28,7 +28,8 @@
       "noindex": true,
       "sitemap": false,
       "homepageVariant": "lead",
-      "homepageOverlay": true
+      "homepageOverlay": true,
+      "homepageLock": true
     },
     {
       "slug": "document-processing",

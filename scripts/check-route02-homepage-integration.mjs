@@ -54,6 +54,10 @@ forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watso
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
 requireText(index, 'id="galleriesHeading">Art &amp; Graphic Design</h3>', 'Final gallery section needs the clear Art & Graphic Design heading.');
+requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 1,
+  'Homepage needs exactly one lock on the IBM watsonX Orchestrate card.');
+requireText(index, 'aria-label="Password required"', 'Homepage lock needs an accessible password-required label.');
+requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
 forbid(index, />Creative work<\/p>/i, 'Art & Graphic Design heading should not carry a redundant eyebrow label.');
 requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct paired-cover treatment.');
@@ -91,6 +95,7 @@ if (wxoProject) {
     sitemap: false,
     homepageVariant: 'lead',
     homepageOverlay: true,
+    homepageLock: true,
   })) requireCondition(wxoProject[key] === value, `wxO Canvas manifest ${key} must equal ${String(value)}.`);
   requireCondition(wxoProject.images?.length === 1, 'wxO homepage entry must use one thumbnail asset.');
   requireCondition(wxoProject.images?.[0]?.src === 'images/wxo-canvas/wxo-home-thumbnail.png',
