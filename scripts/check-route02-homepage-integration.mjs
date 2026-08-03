@@ -50,6 +50,14 @@ requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
   'Homepage needs exactly one compact Selected Work heading.');
 requireText(index, 'id="featuredHeading">Selected Work</h2>',
   'Compact homepage heading must say Selected Work.');
+forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonX Orchestrate as Protected.');
+forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
+requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
+requireText(index, 'id="galleriesHeading">Art &amp; Graphic Design</h3>', 'Final gallery section needs the clear Art & Graphic Design heading.');
+forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
+forbid(index, />Creative work<\/p>/i, 'Art & Graphic Design heading should not carry a redundant eyebrow label.');
+requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct paired-cover treatment.');
+requireText(css, 'grid-column: span 6;', 'Paired gallery covers need equal desktop weight.');
 
 // Preserve the live Ability and Star & Lamp card anatomy.
 requireCondition(/abilityexperience\.html" class="[^"]*featured-item--span-7[^"]*featured-item--surface-ability/.test(index),
@@ -73,6 +81,8 @@ if (wxoProject) {
   for (const [key, value] of Object.entries({
     title: 'IBM watsonX Orchestrate',
     url: 'wxo-canvas.html',
+    category: 'Product Systems',
+    cta: 'View Case Study',
     nav: true,
     homepage: true,
     wide: true,

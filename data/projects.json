@@ -5,7 +5,7 @@
       "slug": "wxo-canvas",
       "title": "IBM watsonX Orchestrate",
       "url": "wxo-canvas.html",
-      "category": "Product Systems · Protected",
+      "category": "Product Systems",
       "labelClass": "label-default",
       "type": "primary",
       "nav": true,
@@ -15,7 +15,7 @@
       "chapter": "01",
       "chapterTitle": "Agentic workflow canvas",
       "description": "An agentic workflow canvas for building, inspecting, and improving AI workflows.",
-      "cta": "View Protected Case Study",
+      "cta": "View Case Study",
       "images": [
         {
           "src": "images/wxo-canvas/wxo-home-thumbnail.png",
@@ -252,7 +252,7 @@
       "wide": false,
       "surface": "orange",
       "chapter": "03",
-      "chapterTitle": "Visual archive",
+      "chapterTitle": "Art & Graphic Design",
       "description": "Standalone digital and traditional work, including posters, paintings, and personal series.",
       "cta": "View Gallery",
       "images": [
@@ -280,7 +280,7 @@
       "wide": false,
       "surface": "purple",
       "chapter": "03",
-      "chapterTitle": "Visual archive",
+      "chapterTitle": "Art & Graphic Design",
       "description": "Standalone identity, print, illustration, and event graphics.",
       "cta": "View Gallery",
       "images": [

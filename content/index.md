@@ -24,7 +24,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Featured Projects
 
-- IBM watsonX Orchestrate (Product Systems · Protected): wxo-canvas
+- IBM watsonX Orchestrate (Product Systems): wxo-canvas
 - IBM Cloud Observability (Product Design): ibmcloud
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting, Inc. (Brand & Print): pci
@@ -67,7 +67,7 @@ Modernizing a century-old publication. I led the layout and art direction for th
 
 A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
 
-Personal work in illustration and graphic design, including posters, paintings, identity marks, and event graphics.
+Selected illustration, identity, print, and event work from across my creative practice.
 
 Standalone digital and traditional work, including posters, paintings, and personal series.
 

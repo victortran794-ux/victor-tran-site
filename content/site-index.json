@@ -67,7 +67,7 @@
     "projects": [
       {
         "title": "IBM watsonX Orchestrate",
-        "category": "Product Systems · Protected",
+        "category": "Product Systems",
         "url": "wxo-canvas",
         "image": "images/wxo-canvas/wxo-home-thumbnail.png",
         "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
