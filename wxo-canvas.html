@@ -163,17 +163,94 @@
               <p class="workflow-chapter-lead">Document Processing is a focused chapter inside the broader IBM watsonX Orchestrate story. Classification, extraction, human review, and evaluation tested whether specialized work could remain legible inside the shared workflow model.</p>
             </div>
           </div>
-          <div class="wxo-feature-grid">
-            <div>
-              <h3>Automation needed a path back to judgment.</h3>
-              <p>The combined Document Extractor and Evaluation experience released in July 2026. This sequence is bounded, sanitized evidence from the separately verified private package.</p>
-              <p>It supports a structural point: automated output, human review, and quality evaluation belong to one connected workflow.</p>
-              <p class="workflow-companion-link"><a href="document-processing.html">Open the focused feature story <span aria-hidden="true">→</span></a></p>
-            </div>
-            <figure class="workflow-figure">
-              <img src="images/wxo-canvas/document-processing-storyboard.png" width="2400" height="702" alt="Three sanitized Document Processing frames showing selection, human review, and evaluation states" loading="lazy" decoding="async">
-              <figcaption><strong>Verified feature derivative</strong>Document selection, review, and evaluation shown as one bounded sequence.</figcaption>
+          <h3>Make the trust loop visible.</h3>
+          <p>A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.</p>
+          <p>I joined the work in 2025 and ramped up alongside the existing design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
+          <dl class="case-study-meta wxo-doc-meta" aria-label="Document Processing contribution summary">
+            <div class="case-study-meta-item"><dt>Platform work</dt><dd>Classifier + Extractor specifications</dd></div>
+            <div class="case-study-meta-item"><dt>System work</dt><dd>HITL + shared patterns</dd></div>
+            <div class="case-study-meta-item"><dt>Release</dt><dd>Evaluation direction · released July 2026</dd></div>
+          </dl>
+          <p class="workflow-boundary"><strong>Evidence boundary:</strong> source notes include ambitious scale, accuracy, review-rate, and efficiency targets. This chapter treats those as requirements, not results. Source data and prototype values are physically removed from the media.</p>
+
+          <figure class="doc-motion-frame">
+            <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><span>10 seconds · sanitized source geometry</span></figcaption>
+            <video controls muted loop playsinline preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Sanitized Document Processing evaluation journey">
+              <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm" type="video/webm">
+              <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
+            </video>
+          </figure>
+
+          <div class="doc-story-grid" aria-label="Three-step Document Processing storyboard">
+            <figure class="doc-story-frame workflow-figure">
+              <img src="assets/document-processing/storyboard/01-select-training-documents-sanitized.png" width="1584" height="1042" alt="Sanitized source interface for selecting representative documents" loading="lazy" decoding="async">
+              <figcaption><strong>01 · Select</strong>Establish the working set used for training and evaluation.</figcaption>
             </figure>
+            <figure class="doc-story-frame workflow-figure">
+              <img src="assets/document-processing/storyboard/02-review-and-correct-sanitized.png" width="1584" height="1042" alt="Sanitized interface for reviewing extracted values and correcting low-confidence fields" loading="lazy" decoding="async">
+              <figcaption><strong>02 · Review</strong>Keep the source visible while a person confirms or corrects a result.</figcaption>
+            </figure>
+            <figure class="doc-story-frame workflow-figure">
+              <img src="assets/document-processing/storyboard/03-evaluation-details-sanitized.png" width="1584" height="1042" alt="Sanitized interface showing overall and field-level evaluation details" loading="lazy" decoding="async">
+              <figcaption><strong>03 · Evaluate</strong>Move from an overall view to fields and documents needing attention.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="workflow-chapter reveal" aria-labelledby="wxo-doc-loop-title">
+          <div class="workflow-chapter-head">
+            <span class="workflow-label">02.1 / Trust loop</span>
+            <div>
+              <h2 id="wxo-doc-loop-title">Uncertainty needed somewhere to go.</h2>
+              <p class="workflow-chapter-lead">A confidence score can flag risk, but it cannot resolve an incorrect document type, a missed field, or a misread table by itself. The workflow needed a path from automated output to human judgment and back into the next design decision.</p>
+            </div>
+          </div>
+          <div class="doc-loop" role="img" aria-label="Classify, extract, review, evaluate, and improve form the Document Processing trust loop">
+            <div class="doc-loop-item"><span>01</span><strong>Classify</strong><p>Identify the document type and prepare the right schema.</p></div>
+            <div class="doc-loop-item"><span>02</span><strong>Extract</strong><p>Read fields and table structures into usable data.</p></div>
+            <div class="doc-loop-item"><span>03</span><strong>Review</strong><p>Put low-confidence output beside the source for judgment.</p></div>
+            <div class="doc-loop-item"><span>04</span><strong>Evaluate</strong><p>Compare output with a known reference and locate errors.</p></div>
+            <div class="doc-loop-item"><span>05</span><strong>Improve</strong><p>Use the evidence to revise the schema or working set.</p></div>
+          </div>
+          <p class="case-study-thesis">classify → extract → review → evaluate → improve</p>
+        </section>
+
+        <section class="workflow-chapter reveal" aria-labelledby="wxo-doc-decisions-title">
+          <div class="workflow-chapter-head">
+            <span class="workflow-label">02.2 / Product decisions</span>
+            <div>
+              <h2 id="wxo-doc-decisions-title">Four decisions made the parts feel like one product.</h2>
+              <p class="workflow-chapter-lead">Different document types, schemas, tables, review states, and quality signals needed a consistent structure without flattening their specialized work.</p>
+            </div>
+          </div>
+          <div class="doc-decision-grid">
+            <article class="doc-decision-card"><h3>Keep source and output together</h3><p>Review works when a person can compare the document and extracted value without reconstructing context.</p></article>
+            <article class="doc-decision-card"><h3>Make uncertainty actionable</h3><p>Confidence and quality concepts needed to point toward the field, document, or configuration requiring attention.</p></article>
+            <article class="doc-decision-card"><h3>Reuse the workflow language</h3><p>Shared states and Carbon-aligned patterns kept specialized document work connected to the surrounding canvas.</p></article>
+            <article class="doc-decision-card"><h3>Separate goals from evidence</h3><p>Thresholds, table support, history, and assignment rules are described as design or technical scope, not demonstrated results.</p></article>
+          </div>
+        </section>
+
+        <section class="workflow-chapter reveal" aria-labelledby="wxo-doc-role-title">
+          <div class="workflow-chapter-head">
+            <span class="workflow-label">02.3 / Contribution</span>
+            <div>
+              <h2 id="wxo-doc-role-title">My role grew as the work moved from setup to trust.</h2>
+              <p class="workflow-chapter-lead">I joined a platform already in motion. My contribution expanded from translating and specifying Classifier and Extractor work to connecting review patterns and serving as lead designer for Accuracy Evaluation.</p>
+            </div>
+          </div>
+          <div class="workflow-role-grid">
+            <div class="doc-role-card"><h3>Classifier and Extractor</h3><p>I helped convert earlier concepts into the agent model and delivered interface specifications, interaction detail, Carbon alignment, and reusable patterns.</p></div>
+            <div class="doc-role-card"><h3>Human review</h3><p>I supported requirements and patterns where document context, low-confidence output, and a person's correction needed to stay together.</p></div>
+            <div class="doc-role-card"><h3>Accuracy Evaluation</h3><p>I led the design direction for the evaluation workflow, connecting test-set preparation, ground truth, review, and quality inspection.</p></div>
+            <div class="doc-role-card"><h3>Cross-team continuity</h3><p>I worked across adjacent product and system teams, and later carried additional Document Processing epics while design coverage was reduced.</p></div>
+          </div>
+          <div class="workflow-close-grid wxo-doc-outcome">
+            <h2>Trust comes from a workflow people can inspect.</h2>
+            <div>
+              <p>The combined Document Extractor and Evaluation experience released in July 2026. The release connected extraction with the quality-review direction described here.</p>
+              <p>Confidence alone is not enough. A person needs to see uncertainty in context, correct it without leaving the task, and understand whether the next version is better.</p>
+            </div>
           </div>
           <p class="workflow-boundary"><strong>Evidence boundary:</strong> this chapter connects the verified feature package to the broader workflow model. It does not expand the approved release or outcome claims.</p>
         </section>
