@@ -134,7 +134,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 3, current: 'wxo-canvas.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 5, current: 'wxo-canvas.html' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: null },
 };
 
@@ -198,6 +198,7 @@ try {
             .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
           const status=document.querySelector('.site-route-status').getBoundingClientRect();
           const header=document.querySelector('.page-header .workflow-label').getBoundingClientRect();
+          const chapterFirst=document.querySelector('.wxo-chapter-nav a')?.getBoundingClientRect();
           const contrastTarget=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop span'"});
           const contrastSurface=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop > div'"});
           return {
@@ -210,7 +211,8 @@ try {
             gate:Boolean(document.getElementById('vtd-gate')), images:images.length,
             failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
             videoReady:video?video.readyState:null, videoSources:video?[...video.querySelectorAll('source')].length:0,
-            controls, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
+            controls, statusPosition:getComputedStyle(document.querySelector('.site-route-status')).position, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
+            statusChapterOverlap:chapterFirst?!(status.right<=chapterFirst.left||status.left>=chapterFirst.right||status.bottom<=chapterFirst.top||status.top>=chapterFirst.bottom):false,
             wxoCanvasVisible:!document.querySelector('#canvas')?.hidden,
             wxoDocumentVisible:!document.querySelector('#document-processing')?.hidden,
             wxoChapter:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
@@ -226,8 +228,10 @@ try {
         assert(state.bodyClass.includes(spec.bodyClass)&&state.title.includes(spec.title), `${spec.file}: route identity failed`);
         assert(state.mainId==='main-content'&&state.tabindex==='-1'&&state.current===spec.current&&state.shell&&!state.gate, `${spec.file}: shared shell or unlocked state failed`);
         assert(state.noindex==='noindex,nofollow,noarchive,nosnippet,noimageindex', `${spec.file}: robots metadata drifted`);
-        assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: image failure ${JSON.stringify(state.failedImages)}`);
+        assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: expected ${spec.mainImages} main images, got ${state.images}; failures ${JSON.stringify(state.failedImages)}`);
+        if(name==='wxo') assert(state.statusPosition!=='fixed', `${spec.file}: protected status must not remain fixed over chapter content`);
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
+        if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);
         const ratio=contrastRatio(state.contrastForeground,state.contrastBackground);
         assert(ratio>=4.5, `${spec.file}: custom text contrast ${ratio.toFixed(2)}:1 failed at ${viewport.label} ${theme}`);
         assert(parseFloat(state.reduced)<=0.001, `${spec.file}: reduced-motion transition remained ${state.reduced} at ${viewport.label} ${theme}`);
@@ -249,10 +253,21 @@ try {
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await delay(60);
-          const documentChapter=await cdp.evaluate(`(()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom)}})()`);
+          const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,decisions:document.querySelectorAll('#document-processing .doc-decision-card').length,roles:document.querySelectorAll('#document-processing .doc-role-card').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
           assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(!documentChapter.firstChapterOccluded, `wxo-canvas.html: protected status occludes first chapter tab after chapter navigation ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.images===3&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
           assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
           await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-story-grid');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-390-light-document-storyboard.png');
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-loop');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-390-light-document-loop.png');
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .wxo-doc-outcome');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-390-light-document-outcome.png');
           await cdp.evaluate(`document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
@@ -265,6 +280,15 @@ try {
           await cdp.evaluate(`document.querySelector('#canvas .wxo-system-grid').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-canvas-system.png');
+          await cdp.evaluate(`document.querySelector('[data-wxo-chapter="document-processing"]').click();document.querySelector('#document-processing .doc-motion-frame').scrollIntoView({block:'start',behavior:'instant'})`);
+          await delay(120);
+          await cdp.screenshot('wxo-canvas-1280-dark-document-media.png');
+          await cdp.evaluate(`document.querySelector('#document-processing .doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-1280-dark-document-loop.png');
+          await cdp.evaluate(`document.querySelector('#document-processing .wxo-doc-outcome').scrollIntoView({block:'center',behavior:'instant'})`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-1280-dark-document-outcome.png');
         }
         if(name==='doc'&&viewport.label==='390'&&theme==='light'){
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);

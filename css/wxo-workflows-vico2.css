@@ -13,6 +13,10 @@ html[data-theme='dark'] .workflow-pages {
   --doc-blue: #78a9ff;
 }
 
+.wxo-page .site-route-status {
+  position: absolute;
+}
+
 .workflow-pages .page-header {
   padding-bottom: clamp(3.5rem, 8vw, 7rem);
 }
@@ -274,6 +278,16 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 .doc-processing-page .case-study-meta dt,
 .doc-processing-page .case-study-meta dd {
   color: inherit;
+}
+
+.wxo-doc-meta {
+  margin: 2.5rem 0 0;
+}
+
+.wxo-doc-outcome {
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding-top: clamp(3rem, 7vw, 6rem);
+  border-top: 1px solid var(--border);
 }
 
 .doc-motion-frame {

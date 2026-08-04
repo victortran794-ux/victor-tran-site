@@ -1,5 +1,12 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/document-processing",
+      "destination": "/wxo-canvas#document-processing",
+      "permanent": true
+    }
+  ]
 }

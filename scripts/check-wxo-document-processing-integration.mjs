@@ -23,6 +23,12 @@ const projects = JSON.parse(read('data/projects.json'));
 const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
+const vercel = JSON.parse(read('vercel.json'));
+
+const documentProcessingRedirect = vercel.redirects?.find((rule) => rule.source === '/document-processing');
+if (!documentProcessingRedirect || documentProcessingRedirect.destination !== '/wxo-canvas#document-processing' || documentProcessingRedirect.permanent !== true) {
+  fail('Vercel must permanently retire /document-processing into the wxO Document Processing chapter.');
+}
 
 for (const [name, html] of [['IBM watsonX Orchestrate', wxo], ['Document Processing', doc]]) {
   requireText(html, 'sessionStorage.getItem(\'vtd-unlock\')', `${name} must preserve the session-only password gate.`);
@@ -64,12 +70,22 @@ for (const source of ['wxo-canvas.html', 'document-processing.html']) {
 if (!shellConfig.pages.includes('wxo-canvas.html')) fail('wxO Canvas must be governed by the shared-shell generator.');
 requireText(workflowCss, "html[data-theme='dark'] .workflow-pages", 'Workflow styles must define dark-theme project tokens.');
 requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use the contrast-safe dark-theme blue token.');
+requireText(workflowCss, '.wxo-doc-meta {', 'The consolidated Document Processing summary must have scoped spacing.');
+requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Processing outcome must have scoped separation.');
+requireText(workflowCss, '.wxo-page .site-route-status {', 'The wxO protected status must scroll with the page instead of covering chapter content.');
 
 for (const text of [
   'IBM watsonX Orchestrate · 2024–present',
   'Agentic workflow canvas.',
   'Document Processing is a focused chapter',
   'released in July 2026',
+  'Make the trust loop visible.',
+  'Classifier + Extractor specifications',
+  'HITL + shared patterns',
+  'Evaluation direction · released July 2026',
+  'classify → extract → review → evaluate → improve',
+  'I joined the work in 2025',
+  'lead designer for Accuracy Evaluation',
   'Canvas 1',
   'no shipment claim',
   'Product design, systems, specifications',
@@ -80,8 +96,19 @@ for (const text of [
 for (const asset of [
   'canvas1-flow-controls-sanitized.png',
   'canvas1-connectors-sanitized.png',
-  'document-processing-storyboard.png',
+  'doc-pro-evaluation-loop-sanitized.webm',
+  'doc-pro-evaluation-loop-sanitized.mp4',
+  'doc-pro-poster-sanitized.png',
+  '01-select-training-documents-sanitized.png',
+  '02-review-and-correct-sanitized.png',
+  '03-evaluation-details-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
+
+forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
+if (count(wxo, /class="doc-loop-item"/gi) !== 5) fail('The wxO Document Processing chapter must show all five trust-loop steps.');
+if (count(wxo, /class="doc-story-frame/gi) !== 3) fail('The wxO Document Processing chapter must show the three approved storyboard frames.');
+if (count(wxo, /class="doc-decision-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded product decisions.');
+if (count(wxo, /class="doc-role-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded contribution cards.');
 
 forbid(wxo, /Canvas Future|future-(inventory|builder|debug)-sanitized/i, 'Future-state material must remain withheld from the ordinary protected page.');
 for (const asset of [
@@ -103,7 +130,7 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   else if (sha256(asset) !== expected) fail(`Approved wxO derivative changed: ${asset}.`);
 }
 
-if (count(wxo, /<img\b/gi) !== 4) fail('wxO Canvas must use exactly four images: shared nav image plus three approved current/feature derivatives.');
+if (count(wxo, /<img\b/gi) !== 6) fail('wxO Canvas must use exactly six images: shared nav image, two Canvas derivatives, and three Document Processing frames.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [
