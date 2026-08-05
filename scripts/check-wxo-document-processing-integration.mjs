@@ -23,12 +23,33 @@ const projects = JSON.parse(read('data/projects.json'));
 const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
+const passwordGate = read('js/password-gate.js');
+const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
 
 const documentProcessingRedirect = vercel.redirects?.find((rule) => rule.source === '/document-processing');
 if (!documentProcessingRedirect || documentProcessingRedirect.destination !== '/wxo-canvas#document-processing' || documentProcessingRedirect.permanent !== true) {
   fail('Vercel must permanently retire /document-processing into the wxO Document Processing chapter.');
 }
+
+for (const value of [
+  "const PROTECTED_HASH_STATE = 'vtdProtectedHash'",
+  'history.replaceState(stateWithoutProtectedHash()',
+  "window.dispatchEvent(new HashChangeEvent('hashchange'",
+  "input.focus({ preventScroll: true })",
+]) requireText(passwordGate, value, `Shared password gate missing protected deep-link behavior: ${value}`);
+
+for (const path of [
+  'vercel.json',
+  'scripts/check-wxo-document-processing-integration.mjs',
+  'scripts/check-wxo-document-processing-browser.mjs',
+]) {
+  if (count(healthWorkflow, new RegExp(path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) < 2) {
+    fail(`Health-check workflow must watch ${path} for push and pull requests.`);
+  }
+}
+requireText(healthWorkflow, 'npm run check:wxo-document-processing', 'Health-check workflow must run the wxO and Document Processing source contract.');
+requireText(healthWorkflow, 'npm run check:wxo-document-processing-browser', 'Health-check workflow must run the locked deep-link browser regression.');
 
 for (const [name, html] of [['IBM watsonX Orchestrate', wxo], ['Document Processing', doc]]) {
   requireText(html, 'sessionStorage.getItem(\'vtd-unlock\')', `${name} must preserve the session-only password gate.`);

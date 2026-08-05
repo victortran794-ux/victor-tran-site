@@ -127,6 +127,12 @@ class Cdp {
     await loaded;
     await delay(180);
   }
+  async reload() {
+    const loaded = this.event('Page.loadEventFired');
+    await this.call('Page.reload', { ignoreCache: true });
+    await loaded;
+    await delay(180);
+  }
   async screenshot(fileName) {
     const result = await this.call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
     fs.writeFileSync(path.join(evidenceDir, fileName), Buffer.from(result.data, 'base64'));
@@ -161,7 +167,105 @@ try {
     assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.focused === 'vtd-gate-input' && gate.contentHidden,
       `${spec.file}: password gate failed ${JSON.stringify(gate)}`);
   }
+
+  await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
+  await cdp.call('Emulation.setDeviceMetricsOverride', {
+    width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
+  });
+  await cdp.navigate(`${baseUrl}/wxo-canvas.html#document-processing`);
+  const lockedDeepLink = await cdp.evaluate(`({
+    locked:document.documentElement.classList.contains('locked'),
+    gate:Boolean(document.getElementById('vtd-gate')),
+    focused:document.activeElement?.id,
+    scrollY,
+    hash:location.hash,
+    pendingHash:history.state?.vtdProtectedHash || null,
+    historyLength:history.length
+  })`);
+  assert(lockedDeepLink.locked && lockedDeepLink.gate && lockedDeepLink.focused === 'vtd-gate-input' &&
+    lockedDeepLink.scrollY === 0 && lockedDeepLink.hash === '' && lockedDeepLink.pendingHash === '#document-processing',
+    `wxo-canvas.html: locked Document Processing deep link must preserve gate focus without fragment scrolling ${JSON.stringify(lockedDeepLink)}`);
+  await cdp.screenshot('wxo-document-processing-390-locked-deep-link.png');
+
   await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
+  await cdp.reload();
+  const restoredDeepLink = await cdp.evaluate(`({
+    locked:document.documentElement.classList.contains('locked'),
+    gate:Boolean(document.getElementById('vtd-gate')),
+    hash:location.hash,
+    pendingHash:history.state?.vtdProtectedHash || null,
+    current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
+    canvas:!document.querySelector('#canvas').hidden,
+    document:!document.querySelector('#document-processing').hidden,
+    focused:document.activeElement?.id,
+    scrollY,
+    historyLength:history.length,
+    viewportHeight:innerHeight,
+    panelTop:document.querySelector('#document-processing').getBoundingClientRect().top,
+    fixedBottom:Math.max(
+      document.querySelector('.nav').getBoundingClientRect().bottom,
+      document.querySelector('.site-route-status').getBoundingClientRect().bottom
+    )
+  })`);
+  assert(!restoredDeepLink.locked && !restoredDeepLink.gate && restoredDeepLink.hash === '#document-processing' &&
+    restoredDeepLink.pendingHash === null && restoredDeepLink.current === '#document-processing' &&
+    !restoredDeepLink.canvas && restoredDeepLink.document && restoredDeepLink.focused === 'document-processing' &&
+    restoredDeepLink.historyLength === lockedDeepLink.historyLength &&
+    restoredDeepLink.scrollY > 0 && restoredDeepLink.panelTop >= restoredDeepLink.fixedBottom + 8 &&
+    restoredDeepLink.panelTop <= restoredDeepLink.viewportHeight * 0.35,
+    `wxo-canvas.html: unlocked Document Processing deep link must restore its chapter ${JSON.stringify(restoredDeepLink)}`);
+  await cdp.screenshot('wxo-document-processing-390-restored-chapter.png');
+
+  await cdp.navigate(`${baseUrl}/document-processing.html`);
+  await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
+  await cdp.call('Emulation.setDeviceMetricsOverride', {
+    width: 1280, height: 577, deviceScaleFactor: 1, mobile: false,
+  });
+  await cdp.navigate(`${baseUrl}/wxo-canvas.html#document-processing`);
+  const lockedDesktopDeepLink = await cdp.evaluate(`({
+    locked:document.documentElement.classList.contains('locked'),
+    gate:Boolean(document.getElementById('vtd-gate')),
+    focused:document.activeElement?.id,
+    scrollY,
+    hash:location.hash,
+    pendingHash:history.state?.vtdProtectedHash || null,
+    historyLength:history.length
+  })`);
+  assert(lockedDesktopDeepLink.locked && lockedDesktopDeepLink.gate &&
+    lockedDesktopDeepLink.focused === 'vtd-gate-input' && lockedDesktopDeepLink.scrollY === 0 &&
+    lockedDesktopDeepLink.hash === '' && lockedDesktopDeepLink.pendingHash === '#document-processing',
+    `wxo-canvas.html: desktop locked Document Processing deep link failed ${JSON.stringify(lockedDesktopDeepLink)}`);
+  await cdp.screenshot('wxo-document-processing-1280-locked-deep-link.png');
+
+  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
+  await cdp.reload();
+  const restoredDesktopDeepLink = await cdp.evaluate(`({
+    locked:document.documentElement.classList.contains('locked'),
+    gate:Boolean(document.getElementById('vtd-gate')),
+    hash:location.hash,
+    pendingHash:history.state?.vtdProtectedHash || null,
+    current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
+    canvas:!document.querySelector('#canvas').hidden,
+    document:!document.querySelector('#document-processing').hidden,
+    focused:document.activeElement?.id,
+    scrollY,
+    historyLength:history.length,
+    viewportHeight:innerHeight,
+    panelTop:document.querySelector('#document-processing').getBoundingClientRect().top,
+    fixedBottom:Math.max(
+      document.querySelector('.nav').getBoundingClientRect().bottom,
+      document.querySelector('.site-route-status').getBoundingClientRect().bottom
+    )
+  })`);
+  assert(!restoredDesktopDeepLink.locked && !restoredDesktopDeepLink.gate &&
+    restoredDesktopDeepLink.hash === '#document-processing' && restoredDesktopDeepLink.pendingHash === null &&
+    restoredDesktopDeepLink.current === '#document-processing' && !restoredDesktopDeepLink.canvas &&
+    restoredDesktopDeepLink.document && restoredDesktopDeepLink.focused === 'document-processing' &&
+    restoredDesktopDeepLink.historyLength === lockedDesktopDeepLink.historyLength &&
+    restoredDesktopDeepLink.scrollY > 0 && restoredDesktopDeepLink.panelTop >= restoredDesktopDeepLink.fixedBottom + 8 &&
+    restoredDesktopDeepLink.panelTop <= restoredDesktopDeepLink.viewportHeight * 0.35,
+    `wxo-canvas.html: desktop unlocked Document Processing deep link failed ${JSON.stringify(restoredDesktopDeepLink)}`);
+  await cdp.screenshot('wxo-document-processing-1280-restored-chapter.png');
 
   let checks = 0;
   let chapterChecks = 0;

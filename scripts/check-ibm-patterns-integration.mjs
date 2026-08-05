@@ -23,7 +23,7 @@ const frozenFiles = {
   'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
   'pikappapp.html': '33dfa2bb4b272f1ed578e9796cefd8978580f562e120d48892ae7d2b53fc18d8',
   'css/password-gate.css': '824beb80b8a4c11d30d675a99b72bc97880c94f10722319578bb2e1fd2f8788e',
-  'js/password-gate.js': '5ecd4ebcc66f6673aafc4cc940c142d5eca9dbd872ea93a9529582d0412e8a77',
+  'js/password-gate.js': '20d9fbf4791f0231248fa46d3ca2174dddcc495d1d8802c200a4ade7b21b4977',
   'js/main.js': '3c1f3e755a200c1d56b51b137127b431d188a8c4b42707d086b4ab77091336cc',
 };
 for (const [relativePath, expected] of Object.entries(frozenFiles)) {
