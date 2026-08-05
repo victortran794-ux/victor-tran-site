@@ -138,7 +138,7 @@
       "surface": "",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "description": "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.",
+      "description": "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts.",
       "cta": "View Project",
       "images": [
         {
@@ -150,9 +150,9 @@
           "alt": "Performance Contracting, Inc."
         }
       ],
-      "protected": false,
-      "noindex": false,
-      "sitemap": true,
+      "protected": true,
+      "noindex": true,
+      "sitemap": false,
       "homepageVariant": "span-5"
     },
     {
