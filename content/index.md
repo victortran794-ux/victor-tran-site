@@ -59,7 +59,7 @@ IBM Cloud product and visual-systems work across complex workflows, implementati
 
 A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.
 
-A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide.
+Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts.
 
 Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.
 
