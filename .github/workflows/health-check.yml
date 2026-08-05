@@ -18,11 +18,14 @@ on:
       - "images/**"
       - "data/projects.json"
       - "data/content-export-policy.json"
+      - "content/about.md"
+      - "content/site-index.json"
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
+      - "scripts/check-about-semantics.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
@@ -54,11 +57,14 @@ on:
       - "images/**"
       - "data/projects.json"
       - "data/content-export-policy.json"
+      - "content/about.md"
+      - "content/site-index.json"
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
+      - "scripts/check-about-semantics.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
@@ -99,6 +105,8 @@ jobs:
           npm run verify:pikapp-demo
       - name: Production host regression check
         run: node scripts/check-production-host.mjs
+      - name: About semantic-heading contract
+        run: node scripts/check-about-semantics.mjs
       - name: Production artifact containment contract
         run: npm run check:artifact-containment
       - name: PCI claims and protection contract
