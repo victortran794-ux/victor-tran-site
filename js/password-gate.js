@@ -1,10 +1,58 @@
 (() => {
   const HASH = '577ceca1249a0d345bbc81098c47abe8825294b2cb4724735403188a01a1ade1';
   const KEY = 'vtd-unlock';
+  const PROTECTED_HASH_STATE = 'vtdProtectedHash';
+
+  const historyState = history.state && typeof history.state === 'object' ? history.state : {};
+  const savedHash = typeof historyState[PROTECTED_HASH_STATE] === 'string'
+    ? historyState[PROTECTED_HASH_STATE]
+    : '';
+
+  function stateWithoutProtectedHash() {
+    const nextState = { ...(history.state && typeof history.state === 'object' ? history.state : {}) };
+    delete nextState[PROTECTED_HASH_STATE];
+    return nextState;
+  }
+
+  function restoreProtectedHash(hash, focusTarget = false) {
+    if (!hash || location.hash) return;
+    const oldURL = location.href;
+    history.replaceState(stateWithoutProtectedHash(), '', `${location.pathname}${location.search}${hash}`);
+    window.dispatchEvent(new HashChangeEvent('hashchange', { oldURL, newURL: location.href }));
+    if (focusTarget) {
+      const positionTarget = () => {
+        const target = document.getElementById(hash.slice(1));
+        if (!target) return;
+        target.focus({ preventScroll: true });
+        const navOffset = document.querySelector('.nav')?.getBoundingClientRect().height || 0;
+        const targetTop = window.scrollY + target.getBoundingClientRect().top;
+        window.scrollTo({ top: Math.max(0, targetTop - navOffset - 16), behavior: 'instant' });
+      };
+      const queuePosition = () => requestAnimationFrame(() => requestAnimationFrame(positionTarget));
+
+      queuePosition();
+      if (document.readyState === 'complete') {
+        setTimeout(queuePosition, 0);
+      } else {
+        window.addEventListener('load', () => setTimeout(queuePosition, 0), { once: true });
+        window.addEventListener('pageshow', () => setTimeout(queuePosition, 0), { once: true });
+      }
+    }
+  }
 
   if (sessionStorage.getItem(KEY) === 'ok') {
     document.documentElement.classList.remove('locked');
+    restoreProtectedHash(savedHash, true);
     return;
+  }
+
+  const protectedHash = location.hash || savedHash;
+  if (location.hash) {
+    history.replaceState(
+      { ...historyState, [PROTECTED_HASH_STATE]: location.hash },
+      '',
+      `${location.pathname}${location.search}`
+    );
   }
 
   async function sha256(text) {
@@ -21,7 +69,12 @@
     const overlay = document.getElementById('vtd-gate');
     if (overlay) {
       overlay.classList.add('vtd-gate--out');
-      setTimeout(() => overlay.remove(), 320);
+      setTimeout(() => {
+        overlay.remove();
+        restoreProtectedHash(protectedHash, true);
+      }, 320);
+    } else {
+      restoreProtectedHash(protectedHash, true);
     }
   }
 
@@ -61,6 +114,16 @@
     const form = overlay.querySelector('.vtd-gate-form');
     const input = overlay.querySelector('#vtd-gate-input');
     const error = overlay.querySelector('.vtd-gate-error');
+    const focusGate = () => {
+      if (!input.isConnected) return;
+      window.scrollTo(0, 0);
+      input.focus({ preventScroll: true });
+    };
+
+    focusGate();
+    requestAnimationFrame(focusGate);
+    if (document.readyState === 'complete') setTimeout(focusGate, 0);
+    else window.addEventListener('load', () => requestAnimationFrame(focusGate), { once: true });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
