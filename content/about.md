@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "About"
+title: "About Victor Tran"
 source: "about.html"
 url: "/about"
 category: ""
 description: "About Victor Tran. Visual Designer at IBM, Austin TX."
 ---
 
-# About
+# About Victor Tran
 
 ## Description
 
