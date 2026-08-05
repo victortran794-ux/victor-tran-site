@@ -22,6 +22,8 @@ on:
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
+      - ".vercelignore"
+      - "scripts/check-production-artifact-containment.mjs"
       - "sitemap.xml"
       - "robots.txt"
       - ".github/workflows/health-check.yml"
@@ -51,6 +53,8 @@ on:
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
+      - ".vercelignore"
+      - "scripts/check-production-artifact-containment.mjs"
       - "sitemap.xml"
       - "robots.txt"
       - ".github/workflows/health-check.yml"
@@ -85,6 +89,8 @@ jobs:
           npm run verify:pikapp-demo
       - name: Production host regression check
         run: node scripts/check-production-host.mjs
+      - name: Production artifact containment contract
+        run: npm run check:artifact-containment
       - name: Lighthouse coverage regression check
         run: node scripts/check-lighthouse-coverage.mjs
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
