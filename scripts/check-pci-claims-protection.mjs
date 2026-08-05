@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const root = process.cwd();
 const errors = [];
@@ -55,6 +56,27 @@ const sitemap = read('sitemap.xml');
 const packageJson = read('package.json');
 const preflight = read('scripts/preflight.sh');
 const workflow = read('.github/workflows/health-check.yml');
+
+const bookletSamples = new Map([
+  ['images/pci-booklet-section-rhythm-desktop.jpg', '03fd70d2c3607e5a8410efee941a6b2183ba0b1cad25a4337b104d2ed9182fab'],
+  ['images/pci-booklet-section-rhythm-mobile.jpg', 'e4c434d1637b61797230f0a96797faba3fd76d7d0c369488b428093a985dcf95'],
+  ['images/pci-booklet-information-hierarchy-desktop.jpg', '6feac7fbac2257c037a29f218bb95a5093c3d75c9538208dd81e57bba403d7db'],
+  ['images/pci-booklet-information-hierarchy-mobile.jpg', '16ebccc1b647b090bb32a10a1353c567e92c1f583f02ab5742c92953424ff7c4'],
+]);
+for (const [relativePath, expectedHash] of bookletSamples) {
+  const absolutePath = path.join(root, relativePath);
+  if (!fs.existsSync(absolutePath)) {
+    fail(`PCI booklet sample is missing: ${relativePath}`);
+    continue;
+  }
+  const actualHash = crypto.createHash('sha256').update(fs.readFileSync(absolutePath)).digest('hex');
+  if (actualHash !== expectedHash) fail(`PCI booklet sample changed without privacy review: ${relativePath}`);
+  requireText(pciHtml, relativePath, 'PCI responsive booklet gallery');
+}
+requireText(pciHtml, 'Publication System in Use', 'PCI booklet gallery heading');
+if ((pciHtml.match(/<source media="\(max-width: 600px\)"/g) || []).length < 2) {
+  fail('PCI booklet gallery must provide two dedicated phone compositions');
+}
 
 if (!/<meta\s+name="robots"\s+content="noindex,nofollow">/i.test(pciHtml)) {
   fail('pci.html must remain noindex,nofollow');
