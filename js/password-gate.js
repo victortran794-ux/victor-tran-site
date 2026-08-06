@@ -2,6 +2,7 @@
   const HASH = '577ceca1249a0d345bbc81098c47abe8825294b2cb4724735403188a01a1ade1';
   const KEY = 'vtd-unlock';
   const PROTECTED_HASH_STATE = 'vtdProtectedHash';
+  let backgroundInertState = [];
 
   const historyState = history.state && typeof history.state === 'object' ? history.state : {};
   const savedHash = typeof historyState[PROTECTED_HASH_STATE] === 'string'
@@ -15,14 +16,13 @@
   }
 
   function restoreProtectedHash(hash, focusTarget = false) {
-    if (!hash || location.hash) return;
+    if (!hash || location.hash) return false;
     const oldURL = location.href;
     history.replaceState(stateWithoutProtectedHash(), '', `${location.pathname}${location.search}${hash}`);
     window.dispatchEvent(new HashChangeEvent('hashchange', { oldURL, newURL: location.href }));
-    if (focusTarget) {
+    const target = document.getElementById(hash.slice(1));
+    if (focusTarget && target) {
       const positionTarget = () => {
-        const target = document.getElementById(hash.slice(1));
-        if (!target) return;
         target.focus({ preventScroll: true });
         const navOffset = document.querySelector('.nav')?.getBoundingClientRect().height || 0;
         const targetTop = window.scrollY + target.getBoundingClientRect().top;
@@ -38,6 +38,28 @@
         window.addEventListener('pageshow', () => setTimeout(queuePosition, 0), { once: true });
       }
     }
+    return Boolean(target);
+  }
+
+  function focusMainContent() {
+    const main = document.querySelector('main');
+    if (!main) return;
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    main.focus({ preventScroll: true });
+  }
+
+  function setBackgroundInert(overlay, inert) {
+    if (inert) {
+      backgroundInertState = [...document.body.children]
+        .filter((element) => element !== overlay)
+        .map((element) => ({ element, wasInert: element.inert }));
+      backgroundInertState.forEach(({ element }) => { element.inert = true; });
+      return;
+    }
+    backgroundInertState.forEach(({ element, wasInert }) => {
+      if (element.isConnected) element.inert = wasInert;
+    });
+    backgroundInertState = [];
   }
 
   if (sessionStorage.getItem(KEY) === 'ok') {
@@ -70,11 +92,12 @@
     if (overlay) {
       overlay.classList.add('vtd-gate--out');
       setTimeout(() => {
+        setBackgroundInert(overlay, false);
         overlay.remove();
-        restoreProtectedHash(protectedHash, true);
+        if (!restoreProtectedHash(protectedHash, true)) focusMainContent();
       }, 320);
     } else {
-      restoreProtectedHash(protectedHash, true);
+      if (!restoreProtectedHash(protectedHash, true)) focusMainContent();
     }
   }
 
@@ -83,10 +106,10 @@
     overlay.id = 'vtd-gate';
     overlay.className = 'vtd-gate';
     overlay.innerHTML = `
-      <div class="vtd-gate-card" role="dialog" aria-modal="true" aria-labelledby="vtd-gate-title">
+      <div class="vtd-gate-card" role="dialog" aria-modal="true" aria-labelledby="vtd-gate-title" aria-describedby="vtd-gate-description">
         <p class="vtd-gate-eyebrow">Protected case study</p>
         <h1 id="vtd-gate-title" class="vtd-gate-title">This work is password-protected.</h1>
-        <p class="vtd-gate-body">
+        <p id="vtd-gate-description" class="vtd-gate-body">
           Enter the password to view this project. Don't have one?
           <a href="mailto:victortran794@gmail.com">Email me</a> and I'll send it over.
         </p>
@@ -102,7 +125,7 @@
             autofocus
             required>
           <button type="submit" class="vtd-gate-submit">Unlock</button>
-          <p class="vtd-gate-error" hidden>Incorrect password. Try again.</p>
+          <p class="vtd-gate-error" role="status" aria-live="assertive" aria-atomic="true" hidden>Incorrect password. Try again.</p>
         </form>
         <p class="vtd-gate-back">
           <a href="index.html">← Back to portfolio</a>
@@ -110,7 +133,9 @@
       </div>
     `;
     document.body.appendChild(overlay);
+    setBackgroundInert(overlay, true);
 
+    const dialog = overlay.querySelector('[role="dialog"]');
     const form = overlay.querySelector('.vtd-gate-form');
     const input = overlay.querySelector('#vtd-gate-input');
     const error = overlay.querySelector('.vtd-gate-error');
@@ -124,6 +149,22 @@
     requestAnimationFrame(focusGate);
     if (document.readyState === 'complete') setTimeout(focusGate, 0);
     else window.addEventListener('load', () => requestAnimationFrame(focusGate), { once: true });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])')]
+        .filter((element) => !element.hidden && element.getClientRects().length > 0);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
