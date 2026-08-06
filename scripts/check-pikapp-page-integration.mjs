@@ -17,6 +17,7 @@ const read = (relativePath) => {
 const text = (relativePath) => read(relativePath).toString('utf8');
 const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativePath)).digest('hex');
 const count = (value, needle) => value.split(needle).length - 1;
+const size = (relativePath) => read(relativePath).length;
 
 const frozenFiles = {
   'ibmcloud.html': '80a71a6fd316d903f13ba7e2e197ce9cc5a035122e7c78cc9dbf53ae9bede38f',
@@ -52,6 +53,7 @@ for (const [relativePath, expected] of Object.entries(assetHashes)) {
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
 const js = text('js/pikappapp.js');
+const workflow = text('.github/workflows/health-check.yml');
 
 for (const required of [
   '<link rel="canonical" href="https://www.victortrandesign.com/pikappapp">',
@@ -93,6 +95,30 @@ if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail('public Pi Kapp
 if (!text('sitemap.xml').includes('/pikappapp')) fail('public Pi Kapp route must remain in sitemap.xml');
 if (/Disallow:\s*\/pikappapp/i.test(text('robots.txt'))) fail('robots.txt must not disallow the public Pi Kapp route');
 
+for (const required of [
+  'expansion-archive-trigger',
+  'aria-haspopup="dialog"',
+  'aria-controls="expansion-archive-dialog"',
+  'aria-label="Open archive: Expansion Portfolio"',
+  '<dialog class="archive-dialog" id="expansion-archive-dialog"',
+  'aria-labelledby="expansion-archive-title"',
+  'data-archive-master="cover"',
+  'data-archive-master="context"',
+  'data-archive-view="cover"',
+  'data-archive-view="context"',
+  'aria-live="polite"',
+  'images/pikapp-case-study/expansion-cover-preview.jpg',
+  'data-src="images/pikapp-case-study/expansion-cover-detail.jpg"',
+]) {
+  if (!html.includes(required)) fail(`Pi Kapp archival view missing: ${required}`);
+}
+if (html.includes('<strong>Expansion context</strong>')) fail('expansion photo repeats the section label');
+if (html.includes('<strong>Expansion packet cover</strong>')) fail('expansion artifact repeats its caption hierarchy');
+if (/src="images\/pikapp-case-study\/expansion-cover\.png"/.test(html)) fail('3.3 MB source cover must not load in the initial page');
+if (/<button[^>]+data-archive-view[^>]*>[\s\S]*?<img[^>]+\ssrc=/i.test(html)) fail('archive view thumbnails must defer their image sources until the dialog opens');
+if (size('images/pikapp-case-study/expansion-cover-preview.jpg') > 350_000) fail('expansion cover preview exceeds 350 KB');
+if (size('images/pikapp-case-study/expansion-cover-detail.jpg') > 900_000) fail('expansion cover detail exceeds 900 KB');
+
 for (const forbidden of [
   'Private page review',
   'Private integrated review',
@@ -122,6 +148,11 @@ for (const required of [
   'min-height: 44px',
   'images/pikapp-case-study/pattern-dark-blue.svg',
   'scroll-margin-top:',
+  '.archive-dialog',
+  '.archive-trigger',
+  '.archive-master',
+  'object-fit:contain',
+  '.pikapp-page .expansion-artifact__sheet{transition:none}',
 ]) {
   if (!css.includes(required)) fail(`css/pikappapp.css missing required contract: ${required}`);
 }
@@ -135,10 +166,20 @@ for (const required of [
   "document.getElementById('phone-next')",
   "matchMedia('(prefers-reduced-motion: reduce)')",
   "document.addEventListener('visibilitychange'",
+  "document.querySelector('[data-archive-dialog]')",
+  'showModal()',
+  'returnFocus.focus()',
+  "document.body.classList.add('archive-open')",
+  "document.body.classList.remove('archive-open')",
 ]) {
   if (!js.includes(required)) fail(`js/pikappapp.js missing required viewer behavior: ${required}`);
 }
 if (js.includes('innerHTML') || js.includes('eval(') || js.includes('fetch(')) fail('Pi Kapp viewer script must not inject HTML or call external services');
+if (!workflow.includes('npm run check:pikapp-page')) fail('health-check workflow must run the Pi Kapp page contract');
+if (!workflow.includes('npm run check:pikapp-page-browser')) fail('health-check workflow must run the Pi Kapp browser contract');
+for (const contractPath of ['scripts/check-pikapp-page-integration.mjs', 'scripts/check-pikapp-page-browser.mjs']) {
+  if (count(workflow, `- "${contractPath}"`) !== 2) fail(`health-check push and pull_request paths must include ${contractPath}`);
+}
 
 const manifest = JSON.parse(text('data/projects.json'));
 const project = manifest.projects.find((entry) => entry.slug === 'pikappapp');

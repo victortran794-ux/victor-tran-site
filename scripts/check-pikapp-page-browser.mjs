@@ -99,10 +99,20 @@ class Cdp {
     const loaded = this.event('Page.loadEventFired');
     await this.call('Page.navigate', { url }); await loaded; await delay(120);
   }
-  async key(key, code, virtualKeyCode) {
-    const params = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode };
-    await this.call('Input.dispatchKeyEvent', { type: 'keyDown', ...params });
+  async key(key, code, virtualKeyCode, modifiers = 0) {
+    const params = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode, modifiers };
+    if (key === 'Enter') {
+      await this.call('Input.dispatchKeyEvent', { type: 'rawKeyDown', ...params });
+      await this.call('Input.dispatchKeyEvent', { type: 'char', ...params, text: '\r', unmodifiedText: '\r' });
+    } else {
+      await this.call('Input.dispatchKeyEvent', { type: 'keyDown', ...params });
+    }
     await this.call('Input.dispatchKeyEvent', { type: 'keyUp', ...params });
+  }
+  async clickAt(x, y) {
+    await this.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x, y });
+    await this.call('Input.dispatchMouseEvent', { type: 'mousePressed', x, y, button: 'left', clickCount: 1 });
+    await this.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x, y, button: 'left', clickCount: 1 });
   }
   async screenshot(fileName) {
     const result = await this.call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
@@ -129,7 +139,8 @@ try {
       await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
       const state = await cdp.evaluate(`(async()=>{
-        const images=[...document.querySelectorAll('.pikapp-page img')];
+        const images=[...document.querySelectorAll('.pikapp-page img[src]')];
+        const deferredImages=[...document.querySelectorAll('.pikapp-page img[data-src]:not([src])')];
         images.forEach((image)=>{image.loading='eager'});
         await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));
         const root=document.documentElement;
@@ -138,7 +149,7 @@ try {
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
         const page=document.querySelector('.pikapp-page');
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
-          images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
+          images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,
@@ -148,7 +159,7 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===11&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===11&&state.deferredImages===4&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===3&&state.codaScreens===3&&state.phoneSlides===3,'approved evidence counts drifted');
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
@@ -171,6 +182,58 @@ try {
     }
   }
 
+  const verifyArchive = async ({ label, width, height, mobile }) => {
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
+    await cdp.navigate(`${baseUrl}/pikappapp.html`);
+    await cdp.evaluate(`localStorage.setItem('lens','light')`);
+    await cdp.navigate(`${baseUrl}/pikappapp.html`);
+    const beforeArchive = await cdp.evaluate(`(()=>{const trigger=document.querySelector('.expansion-archive-trigger');trigger.scrollIntoView({block:'center',behavior:'instant'});const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('archive-open'),deferred:dialog.querySelectorAll('img[data-src]:not([src])').length,coverSource:dialog.querySelector('[data-archive-master="cover"]').getAttribute('src'),rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}})()`);
+    assert(!beforeArchive.open&&!beforeArchive.bodyLocked&&beforeArchive.deferred===4&&!beforeArchive.coverSource&&beforeArchive.rootOverflow===0,`${label}: archive loaded or locked before activation: ${JSON.stringify(beforeArchive)}`);
+    await delay(80);
+    await cdp.screenshot(`pikapp-archive-${label}-entry.png`);
+    const triggerPoint = await cdp.evaluate(`(()=>{const r=document.querySelector('.expansion-archive-trigger').getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,width:r.width,height:r.height}})()`);
+    assert(triggerPoint.width>=44&&triggerPoint.height>=44,`${label}: archival trigger is undersized`);
+    await cdp.clickAt(triggerPoint.x, triggerPoint.y);
+    await delay(180);
+    await cdp.evaluate(`Promise.all([...document.querySelectorAll('[data-archive-dialog] img[src]')].map(async(image)=>{try{await image.decode()}catch{}}))`);
+    const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const stage=dialog.querySelector('.archive-stage');const master=dialog.querySelector('[data-archive-master="cover"]');const context=dialog.querySelector('[data-archive-master="context"]');const layout=dialog.querySelector('.archive-layout');const dr=dialog.getBoundingClientRect();const sr=stage.getBoundingClientRect();const mr=master.getBoundingClientRect();const scrollRegions=[...dialog.querySelectorAll('*')].filter((element)=>{const style=getComputedStyle(element);return element.scrollHeight>element.clientHeight+2&&['auto','scroll'].includes(style.overflowY)}).map((element)=>element.className);return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),coverLoaded:master.getAttribute('src')?.endsWith('expansion-cover-detail.jpg'),contextDeferred:!context.hasAttribute('src'),thumbnailsLoaded:[...dialog.querySelectorAll('.archive-view img')].every((image)=>image.hasAttribute('src')),pressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed'),status:dialog.querySelector('.archive-status').textContent.trim(),objectFit:getComputedStyle(master).objectFit,contained:mr.left>=sr.left-1&&mr.right<=sr.right+1&&mr.top>=sr.top-1&&mr.bottom<=sr.bottom+1,dialogRect:{left:dr.left,top:dr.top,width:dr.width,height:dr.height},rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,scrollRegions,layoutScrollHeight:layout.scrollHeight,layoutClientHeight:layout.clientHeight}})()`);
+    assert(opened.open&&opened.focus.includes('archive-close')&&opened.bodyLocked,`${label}: dialog did not open with close focus and body lock: ${JSON.stringify(opened)}`);
+    assert(opened.coverLoaded&&opened.contextDeferred&&opened.thumbnailsLoaded,`${label}: deferred archive loading failed: ${JSON.stringify(opened)}`);
+    assert(opened.pressed==='true'&&opened.status==='Cover view selected.'&&opened.objectFit==='contain'&&opened.contained,`${label}: cover selection or containment failed: ${JSON.stringify(opened)}`);
+    assert(opened.rootOverflow===0&&opened.dialogRect.left>=-1&&opened.dialogRect.top>=-1&&opened.dialogRect.width<=width+1&&opened.dialogRect.height<=height+1,`${label}: dialog escaped viewport: ${JSON.stringify(opened)}`);
+    if (mobile) {
+      assert(opened.scrollRegions.length===1&&opened.scrollRegions[0].includes('archive-layout')&&opened.layoutScrollHeight>opened.layoutClientHeight,`${label}: mobile archive must expose one internal vertical scroll: ${JSON.stringify(opened)}`);
+    }
+    await cdp.screenshot(`pikapp-archive-${label}-cover.png`);
+    const contextPoint = await cdp.evaluate(`(()=>{const button=document.querySelector('[data-archive-view="context"]');button.scrollIntoView({block:'center',behavior:'instant'});const r=button.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()`);
+    await delay(60);
+    await cdp.clickAt(contextPoint.x, contextPoint.y);
+    await delay(140);
+    const switched = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const cover=dialog.querySelector('[data-archive-master="cover"]');const context=dialog.querySelector('[data-archive-master="context"]');return {coverHidden:cover.hidden,contextHidden:context.hidden,contextLoaded:context.getAttribute('src')?.endsWith('belltower-expansion.jpg'),coverPressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed'),contextPressed:dialog.querySelector('[data-archive-view="context"]').getAttribute('aria-pressed'),status:dialog.querySelector('.archive-status').textContent.trim()}})()`);
+    assert(switched.coverHidden&&!switched.contextHidden&&switched.contextLoaded&&switched.coverPressed==='false'&&switched.contextPressed==='true'&&switched.status==='Context view selected.',`${label}: related-view switch failed: ${JSON.stringify(switched)}`);
+    await cdp.key('Escape','Escape',27);
+    await delay(120);
+    const closed = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('archive-open'),focus:document.activeElement?.className,bodyPadding:document.body.style.getPropertyValue('--archive-scrollbar')}})()`);
+    assert(!closed.open&&!closed.bodyLocked&&closed.focus.includes('expansion-archive-trigger')&&!closed.bodyPadding,`${label}: Escape did not close, unlock, and restore focus: ${JSON.stringify(closed)}`);
+    await cdp.key('Enter','Enter',13);
+    await delay(120);
+    const keyboardOpen = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),layoutScrollTop:dialog.querySelector('.archive-layout').scrollTop,status:dialog.querySelector('.archive-status').textContent.trim(),coverPressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed')}})()`);
+    assert(keyboardOpen.open&&keyboardOpen.focus.includes('archive-close')&&keyboardOpen.bodyLocked&&keyboardOpen.layoutScrollTop<=1&&keyboardOpen.status==='Cover view selected.'&&keyboardOpen.coverPressed==='true',`${label}: Enter did not reactivate the archive in a synchronized cover state: ${JSON.stringify(keyboardOpen)}`);
+    await cdp.key('Tab','Tab',9);
+    await cdp.key('Tab','Tab',9);
+    await cdp.key('Tab','Tab',9);
+    const forwardTrap = await cdp.evaluate(`document.activeElement?.className || ''`);
+    assert(forwardTrap.includes('archive-close'),`${label}: forward Tab escaped the modal instead of cycling to Close: ${forwardTrap}`);
+    await cdp.key('Tab','Tab',9,8);
+    const reverseTrap = await cdp.evaluate(`document.activeElement?.dataset?.archiveView || ''`);
+    assert(reverseTrap==='context',`${label}: Shift+Tab did not cycle from Close to Context: ${reverseTrap}`);
+    await cdp.key('Escape','Escape',27);
+    await delay(80);
+  };
+
+  await verifyArchive({ label: '1280x720', width: 1280, height: 720, mobile: false });
+  await verifyArchive({ label: '390x844', width: 390, height: 844, mobile: true });
+
   await cdp.call('Emulation.setDeviceMetricsOverride', { width:390,height:844,deviceScaleFactor:1,mobile:true });
   await cdp.navigate(`${baseUrl}/pikappapp.html`);
   const before=await cdp.evaluate(`({index:[...document.querySelectorAll('.phone-slide')].findIndex((slide)=>slide.classList.contains('is-active')),count:document.getElementById('phone-story-count').textContent})`);
@@ -182,7 +245,7 @@ try {
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 reduced-motion=pass controls=pass`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

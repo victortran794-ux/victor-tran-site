@@ -42,6 +42,8 @@ on:
       - "scripts/check-production-host.mjs"
       - "scripts/install-lychee.ps1"
       - "scripts/check-pikapp-demo-build.mjs"
+      - "scripts/check-pikapp-page-integration.mjs"
+      - "scripts/check-pikapp-page-browser.mjs"
       - "package.json"
       - "package-lock.json"
       - "pikappapp/**"
@@ -81,6 +83,8 @@ on:
       - "scripts/check-production-host.mjs"
       - "scripts/install-lychee.ps1"
       - "scripts/check-pikapp-demo-build.mjs"
+      - "scripts/check-pikapp-page-integration.mjs"
+      - "scripts/check-pikapp-page-browser.mjs"
       - "package.json"
       - "package-lock.json"
       - "pikappapp/**"
@@ -103,6 +107,19 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm run verify:pikapp-demo
+      - name: Pi Kapp page integration contract
+        run: npm run check:pikapp-page
+      - name: Pi Kapp page browser contract
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pikapp-page-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            curl --fail --silent http://127.0.0.1:8765/pikappapp.html >/dev/null && break
+            sleep 0.25
+          done
+          curl --fail --silent http://127.0.0.1:8765/pikappapp.html >/dev/null
+          npm run check:pikapp-page-browser
       - name: Production host regression check
         run: node scripts/check-production-host.mjs
       - name: About semantic-heading contract

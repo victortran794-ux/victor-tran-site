@@ -30,6 +30,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - The earlier concepts showed how the member view was taking shape.
 - A formative start, not a finished product.
 - What I might do with the app today.
+- Expansion Portfolio
 
 ## Body Copy
 
@@ -89,10 +90,18 @@ The screens below turn the main lessons from the earlier concept into one delibe
 
 Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.
 
+Pi Kapp App archive
+
+An original portfolio cover presented unchanged, with its related environmental context available as a second view.
+
+Views
+
+Cover view selected.
+
 ## Images
 
 - Illuminated bell tower against a dark blue night sky: images/pikapp-case-study/belltower-expansion.jpg
-- Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover.png
+- Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
 - Original Pi Kapp App icon: a gold star over crossed swords: images/pikapp-case-study/app-icon.png
@@ -102,3 +111,5 @@ Illustrative and unvalidated. A small direction study, not a complete app, curre
 - Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light.png
 - Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark.png
 - Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light.png
+- Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
+- Illuminated bell tower connected with the Creighton University expansion work: images/pikapp-case-study/belltower-expansion.jpg
