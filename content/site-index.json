@@ -163,7 +163,8 @@
       "It still needed to look like Pi Kappa Phi.",
       "The earlier concepts showed how the member view was taking shape.",
       "A formative start, not a finished product.",
-      "What I might do with the app today."
+      "What I might do with the app today.",
+      "Expansion Portfolio"
     ],
     "images": [
       {
@@ -171,7 +172,7 @@
         "alt": "Illuminated bell tower against a dark blue night sky"
       },
       {
-        "src": "images/pikapp-case-study/expansion-cover.png",
+        "src": "images/pikapp-case-study/expansion-cover-preview.jpg",
         "alt": "Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       },
       {
@@ -209,6 +210,10 @@
       {
         "src": "images/pikapp-case-study/v2-chapter-light.png",
         "alt": "Light-theme Chapter screen showing shared chapter context and a restrained thank-you"
+      },
+      {
+        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
+        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       }
     ],
     "projects": []

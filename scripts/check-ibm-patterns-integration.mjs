@@ -21,7 +21,7 @@ const count = (value, needle) => value.split(needle).length - 1;
 const frozenFiles = {
   'ibmcloud.html': '80a71a6fd316d903f13ba7e2e197ce9cc5a035122e7c78cc9dbf53ae9bede38f',
   'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
-  'pikappapp.html': '33dfa2bb4b272f1ed578e9796cefd8978580f562e120d48892ae7d2b53fc18d8',
+  'pikappapp.html': 'd5cd1a686ce851b2ee580edd4fb3264a3b630014913bc9e503a3a9a79d1af029',
   'css/password-gate.css': '824beb80b8a4c11d30d675a99b72bc97880c94f10722319578bb2e1fd2f8788e',
   'js/password-gate.js': '20d9fbf4791f0231248fa46d3ca2174dddcc495d1d8802c200a4ade7b21b4977',
   'js/main.js': '3c1f3e755a200c1d56b51b137127b431d188a8c4b42707d086b4ab77091336cc',
