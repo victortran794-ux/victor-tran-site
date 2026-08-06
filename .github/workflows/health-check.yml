@@ -29,6 +29,7 @@ on:
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
       - "vercel.json"
@@ -70,6 +71,7 @@ on:
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
       - "vercel.json"
@@ -109,6 +111,8 @@ jobs:
           npm run verify:pikapp-demo
       - name: Pi Kapp page integration contract
         run: npm run check:pikapp-page
+      - name: IBM Patterns integration contract
+        run: npm run check:ibm-patterns
       - name: Pi Kapp page browser contract
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pikapp-page-server.log 2>&1 &

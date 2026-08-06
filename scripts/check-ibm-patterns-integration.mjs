@@ -22,8 +22,8 @@ const frozenFiles = {
   'ibmcloud.html': '80a71a6fd316d903f13ba7e2e197ce9cc5a035122e7c78cc9dbf53ae9bede38f',
   'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
   'pikappapp.html': 'd5cd1a686ce851b2ee580edd4fb3264a3b630014913bc9e503a3a9a79d1af029',
-  'css/password-gate.css': '824beb80b8a4c11d30d675a99b72bc97880c94f10722319578bb2e1fd2f8788e',
-  'js/password-gate.js': '20d9fbf4791f0231248fa46d3ca2174dddcc495d1d8802c200a4ade7b21b4977',
+  'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
+  'js/password-gate.js': '26ce94de00f5a6fd5ae06d67865a501f6d0afc8200166ea1fff68e2a1cebdae1',
   'js/main.js': '3c1f3e755a200c1d56b51b137127b431d188a8c4b42707d086b4ab77091336cc',
 };
 for (const [relativePath, expected] of Object.entries(frozenFiles)) {
@@ -56,6 +56,9 @@ const packageJson = JSON.parse(text('package.json'));
 if (packageJson.scripts?.['check:ibm-patterns'] !== 'node scripts/check-ibm-patterns-integration.mjs') fail('package.json missing IBM Patterns integration command');
 if (packageJson.scripts?.['check:ibm-patterns-browser'] !== 'node scripts/check-ibm-patterns-browser.mjs') fail('package.json missing IBM Patterns browser command');
 if (!text('scripts/preflight.sh').includes('npm run check:ibm-patterns')) fail('preflight must run the IBM Patterns integration contract');
+const healthWorkflow = text('.github/workflows/health-check.yml');
+if (count(healthWorkflow, '- "scripts/check-ibm-patterns-integration.mjs"') !== 2) fail('health workflow must watch the IBM Patterns integration contract for push and pull requests');
+if (!healthWorkflow.includes('run: npm run check:ibm-patterns')) fail('health workflow must execute the IBM Patterns integration contract');
 for (const required of [
   '<link rel="canonical" href="https://www.victortrandesign.com/ibm-patterns">',
   '<meta name="robots" content="noindex,nofollow">',

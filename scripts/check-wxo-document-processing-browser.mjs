@@ -82,7 +82,10 @@ class Cdp {
         this.consoleErrors.push(message.params.args.map((arg) => arg.value || arg.description).join(' '));
       }
       if (message.method === 'Network.responseReceived' && message.params.response.status >= 400) {
-        this.httpErrors.push(`${message.params.response.status} ${message.params.response.url}`);
+        const responseUrl = message.params.response.url;
+        const localVercelInsights = baseUrl.startsWith('http://127.0.0.1:') &&
+          responseUrl.startsWith(`${baseUrl}/_vercel/speed-insights/script.js`);
+        if (!localVercelInsights) this.httpErrors.push(`${message.params.response.status} ${responseUrl}`);
       }
       if (message.method === 'Network.loadingFailed' && !message.params.canceled) {
         this.networkFailures.push(`${message.params.errorText} ${message.params.blockedReason || ''}`.trim());
@@ -137,12 +140,21 @@ class Cdp {
     const result = await this.call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
     fs.writeFileSync(path.join(evidenceDir, fileName), Buffer.from(result.data, 'base64'));
   }
+  async key(key, code, virtualKeyCode, modifiers = 0) {
+    const event = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode, modifiers };
+    if (key === 'Enter') Object.assign(event, { text: '\r', unmodifiedText: '\r' });
+    await this.call('Input.dispatchKeyEvent', { type: 'keyDown', ...event });
+    await this.call('Input.dispatchKeyEvent', { type: 'keyUp', ...event });
+    await delay(40);
+  }
 }
 
 const pages = {
   wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 5, current: 'wxo-canvas.html' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: null },
 };
+const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
+  .protectedPages.map(({ source }) => ({ file: source }));
 
 let cdp;
 try {
@@ -153,21 +165,103 @@ try {
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
 
-  for (const spec of Object.values(pages)) {
+  let gateChecks = 0;
+  for (const viewport of [
+    { label: '1280', width: 1280, height: 720, mobile: false },
+    { label: '390', width: 390, height: 844, mobile: true },
+  ]) {
+    await cdp.call('Emulation.setDeviceMetricsOverride', {
+      width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile,
+    });
+    for (const spec of protectedPages) {
     await cdp.navigate(`${baseUrl}/${spec.file}`);
     await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
-    await cdp.navigate(`${baseUrl}/${spec.file}`);
+    await cdp.reload();
     const gate = await cdp.evaluate(`({
       locked:document.documentElement.classList.contains('locked'),
       gate:Boolean(document.getElementById('vtd-gate')),
       dialog:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-modal'),
+      labelledBy:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-labelledby'),
+      titleId:document.querySelector('.vtd-gate-title')?.id,
+      describedBy:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-describedby'),
+      descriptionId:document.querySelector('.vtd-gate-body')?.id,
+      errorLive:document.querySelector('.vtd-gate-error')?.getAttribute('aria-live'),
+      backgroundInert:[...document.body.children].filter((element)=>element.id!=='vtd-gate').every((element)=>element.inert),
       focused:document.activeElement?.id,
-      contentHidden:getComputedStyle(document.querySelector('main')).visibility==='hidden'
+      contentHidden:getComputedStyle(document.querySelector('main')).visibility==='hidden',
+      viewport:[innerWidth,innerHeight],
+      overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
+      cardRect:(()=>{const rect=document.querySelector('.vtd-gate-card').getBoundingClientRect();return {left:rect.left,right:rect.right,top:rect.top,width:rect.width}})()
     })`);
-    assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.focused === 'vtd-gate-input' && gate.contentHidden,
-      `${spec.file}: password gate failed ${JSON.stringify(gate)}`);
+    assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.labelledBy === gate.titleId &&
+      gate.describedBy === gate.descriptionId &&
+      gate.errorLive === 'assertive' && gate.backgroundInert && gate.focused === 'vtd-gate-input' && gate.contentHidden,
+      `${spec.file}: password gate failed at ${viewport.label} ${JSON.stringify(gate)}`);
+    assert(gate.viewport[0] === viewport.width && gate.viewport[1] === viewport.height && gate.overflow === 0 &&
+      gate.cardRect.left >= 0 && gate.cardRect.right <= viewport.width,
+      `${spec.file}: gate geometry failed at ${viewport.label} ${JSON.stringify(gate)}`);
+
+    await cdp.key('Tab', 'Tab', 9);
+    assert(await cdp.evaluate(`document.activeElement?.classList.contains('vtd-gate-submit')`),
+      `${spec.file}: Tab from password input must focus Unlock`);
+    const submitFocus = await cdp.evaluate(`(()=>{const style=getComputedStyle(document.activeElement);const surface=getComputedStyle(document.querySelector('.vtd-gate'));return {outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth,outlineColor:style.outlineColor,surface:surface.backgroundColor}})()`);
+    assert(submitFocus.outlineStyle !== 'none' && parseFloat(submitFocus.outlineWidth) >= 2 &&
+      contrastRatio(submitFocus.outlineColor, submitFocus.surface) >= 3,
+      `${spec.file}: Unlock focus indicator must have 3:1 contrast at ${viewport.label} ${JSON.stringify(submitFocus)}`);
+    await cdp.key('Tab', 'Tab', 9);
+    const afterUnlockTab = await cdp.evaluate(`({tag:document.activeElement?.tagName,id:document.activeElement?.id,className:document.activeElement?.className,text:document.activeElement?.textContent?.trim()})`);
+    assert(afterUnlockTab.tag === 'A' && afterUnlockTab.text?.includes('Back to portfolio'),
+      `${spec.file}: Tab from Unlock must focus Back to portfolio ${JSON.stringify(afterUnlockTab)}`);
+    await cdp.key('Tab', 'Tab', 9);
+    assert(await cdp.evaluate(`document.activeElement?.tagName==='A'&&Boolean(document.activeElement.closest('.vtd-gate-body'))`),
+      `${spec.file}: forward Tab must wrap from Back to portfolio to Email me`);
+    await cdp.key('Tab', 'Tab', 9);
+    assert(await cdp.evaluate(`document.activeElement?.id==='vtd-gate-input'`),
+      `${spec.file}: Tab from Email me must focus the password input`);
+    await cdp.key('Tab', 'Tab', 9, 8);
+    assert(await cdp.evaluate(`document.activeElement?.tagName==='A'&&Boolean(document.activeElement.closest('.vtd-gate-body'))`),
+      `${spec.file}: Shift+Tab from the password input must focus Email me without leaving the dialog`);
+    const focusVisible = await cdp.evaluate(`(()=>{const style=getComputedStyle(document.activeElement);return {outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth}})()`);
+    assert(focusVisible.outlineStyle !== 'none' && parseFloat(focusVisible.outlineWidth) >= 2,
+      `${spec.file}: keyboard focus must remain visibly outlined at ${viewport.label} ${JSON.stringify(focusVisible)}`);
+
+    await cdp.key('Tab', 'Tab', 9);
+    await cdp.key('Escape', 'Escape', 27);
+    const afterEscape = await cdp.evaluate(`({gate:Boolean(document.getElementById('vtd-gate')),focused:document.activeElement?.id})`);
+    assert(afterEscape.gate && afterEscape.focused === 'vtd-gate-input',
+      `${spec.file}: Escape must not bypass the protected gate ${JSON.stringify(afterEscape)}`);
+
+    await cdp.call('Input.insertText', { text: 'definitely-wrong' });
+    await cdp.key('Enter', 'Enter', 13);
+    await delay(100);
+    const invalid = await cdp.evaluate(`({
+      hidden:document.querySelector('.vtd-gate-error').hidden,
+      text:document.querySelector('.vtd-gate-error').textContent.trim(),
+      focused:document.activeElement?.id,
+      value:document.querySelector('#vtd-gate-input').value
+    })`);
+    assert(!invalid.hidden && invalid.text === 'Incorrect password. Try again.' &&
+      invalid.focused === 'vtd-gate-input' && invalid.value === '',
+      `${spec.file}: invalid password feedback failed ${JSON.stringify(invalid)}`);
+
+    const expectedDigest = Array.from(Buffer.from('577ceca1249a0d345bbc81098c47abe8825294b2cb4724735403188a01a1ade1', 'hex'));
+    await cdp.evaluate(`Object.defineProperty(crypto.subtle,'digest',{configurable:true,value:async()=>new Uint8Array(${JSON.stringify(expectedDigest)}).buffer})`);
+    await cdp.call('Input.insertText', { text: 'accepted-by-test-digest' });
+    await cdp.key('Enter', 'Enter', 13);
+    await delay(380);
+    const unlocked = await cdp.evaluate(`({
+      locked:document.documentElement.classList.contains('locked'),
+      gate:Boolean(document.getElementById('vtd-gate')),
+      mainInert:document.querySelector('main').inert,
+      focused:document.activeElement?.id
+    })`);
+    assert(!unlocked.locked && !unlocked.gate && !unlocked.mainInert && unlocked.focused === 'main-content',
+      `${spec.file}: unlock must restore the underlay and focus main content ${JSON.stringify(unlocked)}`);
+    gateChecks += 1;
+    }
   }
 
+  await cdp.navigate(`${baseUrl}/document-processing.html`);
   await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
   await cdp.call('Emulation.setDeviceMetricsOverride', {
     width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
@@ -408,12 +502,14 @@ try {
       }
     }
   }
+  assert(gateChecks === protectedPages.length * 2,
+    `expected ${protectedPages.length * 2} protected-gate checks; found ${gateChecks}`);
   assert(chapterChecks===1, `expected one wxO interactive chapter check; found ${chapterChecks}`);
   assert(cdp.exceptions.length===0, `browser exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(cdp.consoleErrors.length===0, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
   assert(cdp.httpErrors.length===0, `HTTP errors: ${JSON.stringify(cdp.httpErrors)}`);
   assert(cdp.networkFailures.length===0, `network failures: ${JSON.stringify(cdp.networkFailures)}`);
-  console.log(`WXO + DOCUMENT PROCESSING BROWSER CHECK: PASS states=${checks} chapters=${chapterChecks} evidence=${evidenceDir}`);
+  console.log(`WXO + DOCUMENT PROCESSING BROWSER CHECK: PASS gates=${gateChecks} states=${checks} chapters=${chapterChecks} evidence=${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}
   child.kill('SIGTERM');
