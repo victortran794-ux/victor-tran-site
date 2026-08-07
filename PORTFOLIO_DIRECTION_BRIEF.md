@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-07-31
-Status: Active direction brief; page approval, local verification, and VicO2 reconciliation now feed a controlled integration contract
+Last updated: 2026-08-07
+Status: Active direction brief aligned to Victor's August 7 master desk review and the VicO2 living-archive execution plan
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,30 +42,30 @@ Short version:
 
 ### Current posture
 
-The enhancement work now runs in two coordinated lanes. Page candidates move through visual approval and local verification while reusable decisions are harvested into VicO2. The homepage and Ability Experience remain live system references. Eight of the nine private package surfaces have Keep verdicts and passing local evidence: Pi Kapp App, wxO Canvas, IBM Cloud, IBM Patterns, Art & Illustration, Graphic Design, Document Processing, and Star & Lamp. PCI remains a verified private direction pending separately sanitized evidence completion. Art & Illustration and Graphic Design are visually approved and locally verified as distinct supporting archives. The existing home-page Design DNA overlay is already visitor-facing and remains stable while the pages establish the updated system. After page completion, reconcile VicO2, the design-system prose and token data, live CSS, and the existing DNA overlay. Then complete the Launch Integration Contract before shared-shell implementation or serial migration. Final whole-site review and explicit approval happen before any merge or launch. A2UI remains parked.
+Victor's August 7 desk review is the master source for the current enhancement cycle. It reopens Home and selected pages because Victor supplied new visual, voice, hierarchy, asset, and completeness evidence after the earlier Keep checkpoints. Earlier enhancement work remains valuable as an operational safety layer: current production source, approved package provenance, shared-shell contracts, privacy and generated-export rules, accessibility coverage, and rollback evidence all carry forward. Work begins with Home plus global components, proceeds through bounded page lanes, reassesses Design DNA after the VicO2 rollout is stable, and ends with whole-site privacy, route, consistency, preview, and release review. A2UI remains parked.
 
 Current working posture:
 
-1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded page candidates and one approved integration plan rather than a one-shot rewrite.
-2. Preserve page-level visual approval and local verification beside the reconciled private VicO2 system record.
-3. Use each approved candidate and its canonical package as the bounded source for future migration; preserve source, claim, privacy, and visibility contracts.
-4. Promote optional report-style chapters, artifact and process storytelling, technical diagrams, factual label-title relationships, and selective motion into VicO2 only after they survive real page use.
-5. Keep the existing home-page Design DNA overlay stable. The prose, token-role, evidence-state, behavior-contract, and project-native-variant layers are reconciled; refresh the overlay only after complete-site preview evidence. Keep broader Lens expansion conditional on demonstrated reader value.
-6. Keep A2UI parked under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/` and keep the standalone branch unmerged: `feat/a2ui-showcase-static-prototype` at `87ddb60`.
-7. Preserve the frozen local Launch Integration Contract. The bounded shared shell and named Art then Graphic local migration batch passed local verification on `feat/portfolio-integration-shell-2026-08-01`; all other migration, remote preview, commit, push, merge, and launch retain separate approval gates.
-8. Keep framework migration, generative chat UI, floating chat widgets, and uncontrolled rollout outside the active lane without a separately verified need and approval.
+1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded revisions rather than a one-shot rewrite.
+2. Use Victor's August 7 raw notes for content and presentation decisions. Use the dashboard and prior contracts to supply sequence, evidence, accessibility, privacy, and release safeguards.
+3. Use current `main` as the implementation baseline. Reuse current production behavior and approved media before consulting older candidates or worktrees.
+4. Treat prior Keep verdicts plus August 7 notes as bounded revision passes, not blank-slate redesigns.
+5. Preserve current protection during content and visual work. The desired final state of only wxO remaining locked requires separate page-by-page privacy, route, access, indexing, preview, and release decisions.
+6. Compare only the bounded Home portrait-lens connection to the existing DNA experience now. Keep broad DNA expansion conditional and defer full reassessment until the VicO2 rollout is stable.
+7. Keep PCI blocked until separately sanitized evidence intake is complete for every selected artifact.
+8. Keep A2UI, framework migration, generative chat UI, floating chat widgets, and uncontrolled rollout outside the active lane.
 
 ### Top active decisions
 
-1. Treat the live homepage and Ability Experience VicO2 translations as stable checkpoints; reopen them only with new evidence.
-2. Preserve approved and exact local candidates in isolated worktrees while PCI evidence completion remains separate.
-3. Preserve the reconciled VicO2 patterns, evidence states, behavior contracts, and intentional project-native variants.
-4. Preserve the local public-stub export policy for gated routes and verify real preview URLs before approving any deployment.
-5. Use the frozen Launch Integration Contract as the local authority for the approved bounded shared-shell implementation.
-6. Preserve the reviewed shared header, footer, and case-study chrome checkpoint on `feat/portfolio-integration-shell-2026-08-01`.
-7. Preserve the locally migrated Art and Graphic archives and their exact candidate identities. Complete independent read-only review before any further gate.
-8. Review the complete portfolio through an approved preview strategy and obtain explicit approval before merge or launch.
-9. Preserve protected-page gates, indexing, sitemap, navigation, media, claims, and generated-content boundaries unless the approved contract explicitly changes them.
+1. Reopen Home through a bounded Home/global lane because the August 7 review supplies new evidence. Preserve its theatrical Route 02 hero, shared shell, and current accessible behavior.
+2. Preserve The Ability Experience as the strongest live VicO2 reference except for the named mark/iconography/illustration/application sequence edit.
+3. Revise the current production Art and Graphic pages rather than replaying frozen worktrees.
+4. Preserve the reconciled VicO2 patterns, evidence states, behavior contracts, source fences, and intentional project-native variants.
+5. Preserve the public-stub export policy for every currently gated route and verify real preview URLs before approving any protection or deployment change.
+6. Keep wxO protected as the intended final locked umbrella. Keep Document Processing and the other currently gated pages protected until separate opening clearance passes.
+7. Audit IBM Cloud hiring-cut commit `fdac040` as a read-only source when that lane begins; do not merge it wholesale over current `main`.
+8. Complete PCI sanitized evidence intake before implementation.
+9. Review the complete portfolio through an approved preview strategy and obtain explicit approval before merge, protection changes, route changes, or launch.
 
 ---
 
@@ -100,7 +100,7 @@ The following patterns are live or explicitly decided. Mechanical review checks 
 4. **About page**
    - Reviewed and left as-is.
    - A local “Program note” treatment was reverted because the `Act I / Act II / Encore` labels did not fit.
-   - Current decision: no immediate About redesign.
+   - Historical decision through August 6: no immediate About redesign. Victor's August 7 review supersedes this only for the bounded current-work emphasis, education/body-copy, tag-area, Tetris, and music-line revisions.
 
 5. **A2UI**
    - Identified as a future track, then paused.
@@ -126,10 +126,10 @@ The following patterns are live or explicitly decided. Mechanical review checks 
 
 ### Current checkpoint
 
-- Practical enhancement slices are gated after PR #66 clarified the adjusted slice structure.
-- The latest dated checkpoint is `archive/planning/portfolio-enhancement-state-2026-07-12.md`.
-- Future work may move into future-concepts planning, but implementation remains opt-in and branch-sized.
-- If human review surfaces a concrete current-site issue, handle it as one narrow practical slice before returning to future concepts.
+- Victor's August 7 manual review supplied the concrete current-site issues needed to reopen bounded enhancement work.
+- The durable master notes and reconciliation record live under `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\`.
+- Earlier dated checkpoints remain source and verification context only.
+- Implementation remains opt-in, isolated, reviewable, and branch-sized, beginning with Home plus global components.
 
 ---
 
@@ -189,7 +189,7 @@ Potential expressions:
 
 ### Homepage cover refinement
 
-Victor review note, 2026-07-29. Treat this as an input to the controlled homepage redesign and Launch Integration Contract, not authorization for an isolated live edit.
+Victor review note, 2026-07-29. Treat this as retained input to the August 7 Home/global lane, not authorization for an isolated live edit.
 
 - Bring the `Visual` and `Designer` cover lines closer together.
 - Explore partial transparency on one line so the tighter lockup creates a deliberate overlap rather than a collision.
@@ -363,9 +363,9 @@ How it maps to the existing direction:
 
 This section replaces the older long phase roadmap. It separates what needs review now from what may come later.
 
-### Practical slices gated
+### Practical slices reopened by the August 7 review
 
-The current-site review gate found no mechanical blocker on 2026-06-06: homepage, About, Art & Illustration, Document Processing, and sitemap returned expected live states; preflight passed; selected public/protected pages had no missing local image references and no em-dash hits in the checked HTML files. Final objective closeout checks on 2026-06-07 confirmed the simplified About voiceover wording, current generated exports, preserved Document Processing guardrails, preserved sitemap omissions, and passing preflight. Human visual/tone review can still produce a narrow practical follow-up, but the practical tracks are not blocking future-concepts planning.
+The June mechanical and objective closeout checks remain useful baseline evidence. Victor's August 7 human review now supplies a master set of visual, voice, hierarchy, asset, and completeness concerns, so the named surfaces are reopened through the reconciled execution plan. The older slices below remain gap-fillers and safety checks, not a competing queue.
 
 If Victor flags a concrete issue, choose one of these narrow slices:
 
@@ -399,7 +399,7 @@ These are exploration candidates, not an automatic build queue. A2UI is parked a
    - Keep this as a structure/spec exercise before changing live pages.
 
 3. **Design DNA reconciliation and broader Lens expansion**
-   - The restrained home-page Design DNA overlay already exists and remains stable during page enhancement work.
+   - The restrained home-page Design DNA overlay already exists. The current Home lane may compare two bounded portrait-lens connections to this existing experience.
    - After candidate completion, reconcile its token, typography, spacing, shape, and component content against the accepted VicO2 system.
    - Keep broader project annotations, metadata, and why-this-is-built-this-way inspection behavior parked until a clear reader benefit is demonstrated.
 
@@ -481,15 +481,15 @@ Guardrails:
 
 ### Recommended next action
 
-1. Preserve approved and exact local candidates in their isolated worktrees.
-2. Complete PCI sanitized evidence intake before treating PCI as migration-ready.
-3. Preserve the private VicO2 harvest registry and completed specification reconciliation.
-4. Preserve the existing home-page Design DNA overlay until complete-site preview evidence exists.
-5. Use the frozen Launch Integration Contract defined in `PORTFOLIO_DASHBOARD.md` as the planning authority.
-6. Implement and verify the bounded shared header, footer, and case-study chrome on the authorized coordinated branch, then stop at the migration gate.
-7. After separate migration approval, migrate approved candidates serially into that branch while preserving protection, visibility, indexing, sitemap, media, generated-content, and claims contracts.
-8. Run the complete-site visual, tone, responsive, accessibility, metadata, privacy, and exposure review through an approved preview strategy; merge only after explicit approval.
-9. Keep A2UI, broader Lens expansion, framework migration, floating chat, and uncontrolled rollout parked until explicitly resumed.
+1. Preserve the August 7 master notes and enhancement-authority reconciliation as the active review sources.
+2. Create one clean Home/global worktree from current `origin/main`.
+3. Audit the shared-shell generator, current Home contracts, and current production behavior already in `main` before writing changes.
+4. Build the two-option lens-to-DNA comparison and Home/global contracts first, then stop for one batched Victor review.
+5. Continue through the dashboard's bounded page sequence using current production pages as the baseline and earlier candidates only as provenance/reference sources.
+6. Preserve all current protection until each page's separate privacy, claims, route, access, indexing, preview, and release gates pass.
+7. Complete PCI sanitized evidence intake before beginning its implementation lane.
+8. Run complete-site visual, tone, responsive, accessibility, metadata, privacy, and exposure review through an approved preview strategy; merge only after explicit approval.
+9. Keep A2UI, broad Lens expansion, framework migration, floating chat, and uncontrolled rollout parked until explicitly resumed.
 
 ---
 
