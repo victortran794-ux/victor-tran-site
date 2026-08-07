@@ -27,23 +27,31 @@ child.stderr.on('data', (chunk) => { chromeLog += chunk.toString(); });
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 
-async function fetchJson(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`${response.status} ${url}`);
-  return response.json();
+async function fetchJson(url, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) throw new Error(`${response.status} ${url}`);
+    return response.json();
+  } finally {
+    clearTimeout(timer);
+  }
 }
 async function waitForTarget() {
   let lastError;
-  for (let attempt = 0; attempt < 80; attempt += 1) {
+  const deadline = Date.now() + 20000;
+  while (Date.now() < deadline) {
     try {
-      const targets = await fetchJson(`http://127.0.0.1:${port}/json/list`);
+      const remaining = Math.max(1, deadline - Date.now());
+      const targets = await fetchJson(`http://127.0.0.1:${port}/json/list`, Math.min(1000, remaining));
       const page = targets.find((target) => target.type === 'page');
       if (page?.webSocketDebuggerUrl) return page;
     } catch (error) { lastError = error; }
     if (child.exitCode !== null) throw new Error(`Chrome exited ${child.exitCode}: ${chromeLog}`);
     await delay(100);
   }
-  throw lastError || new Error('Chrome DevTools target did not become ready');
+  throw new Error(`Chrome DevTools target did not become ready within 20s: ${lastError?.message || 'unknown error'}\n${chromeLog}`);
 }
 
 class Cdp {
