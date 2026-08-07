@@ -78,10 +78,6 @@
           <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
           <span class="lens-switcher-label">Dark</span>
         </button>
-        <button class="lens-switcher-btn dna-trigger" data-lens="dna" aria-pressed="false" aria-label="Open Design DNA" aria-haspopup="dialog">
-          <span class="lens-switcher-icon dna-trigger-icon" aria-hidden="true">&#x2726;</span>
-          <span class="lens-switcher-label dna-trigger-label">DNA</span>
-        </button>
       </div>
     </div>
   </nav>
@@ -221,6 +217,16 @@
             <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure20-lens.webp);"></span>
           </figure>
         </div>
+      </div>
+
+      <div class="hero-lens-hitarea">
+        <button class="hero-lens-portal dna-trigger" type="button"
+          aria-label="Open Design DNA through the portrait lens"
+          aria-describedby="heroLensTooltip"
+          aria-haspopup="dialog"
+          aria-controls="dnaOverlay">
+          <span class="hero-lens-tooltip" id="heroLensTooltip" role="tooltip">See the design DNA</span>
+        </button>
       </div>
 
       <div class="hero-meta">

@@ -78,9 +78,6 @@ function buildHeader({ config, projects, currentPage, protectedPage }) {
   const aboutAttributes = ['href="about.html"'];
   if (isAbout) aboutAttributes.push('class="active"', 'aria-current="page"');
   const workClass = isHome || isProject ? 'nav-dropdown is-active' : 'nav-dropdown';
-  const dnaButton = isHome
-    ? `\n        <button class="lens-switcher-btn dna-trigger" data-lens="dna" aria-pressed="false" aria-label="Open Design DNA" aria-haspopup="dialog">\n          <span class="lens-switcher-icon dna-trigger-icon" aria-hidden="true">&#x2726;</span>\n          <span class="lens-switcher-label dna-trigger-label">DNA</span>\n        </button>`
-    : '';
   const status = protectedPage
     ? `\n  <p class="site-route-status"><span>${escapeHtml(config.protectedLabel)}</span><small>${escapeHtml(config.protectedDetail)}</small></p>`
     : '';
@@ -120,7 +117,7 @@ ${buildNavProjects(projects, currentPage)}
         <button class="lens-switcher-btn" data-lens="dark" aria-pressed="false" aria-label="Dark mode">
           <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
           <span class="lens-switcher-label">Dark</span>
-        </button>${dnaButton}
+        </button>
       </div>
     </div>
   </nav>${status}

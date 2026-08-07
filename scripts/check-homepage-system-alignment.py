@@ -55,7 +55,7 @@ by_slug = {project.get("slug"): project for project in projects}
 for token in (
     'class="hero"', 'class="hero-stage"', 'class="hero-typeblock"',
     'class="hero-portraits"', 'class="hero-portrait is-active"',
-    'class="hero-portrait-lens"', 'class="hero-meta"',
+    'class="hero-portrait-lens"', 'class="hero-lens-portal dna-trigger"', 'class="hero-meta"',
     'class="hero-services"', 'class="hero-cycle"',
     'aria-label="Change color"',
 ):
@@ -68,6 +68,15 @@ for authored_copy in (
 
 need(index.count('images/hero/figure20.webp') >= 2, "portrait image and mask must remain figure20.webp")
 need(index.count('images/hero/figure20-lens.webp') == 1, "hero lens mask must remain present")
+need(index.count('class="hero-lens-portal dna-trigger"') == 1,
+     "the portrait lens must own the single Design DNA trigger")
+need('aria-label="Open Design DNA through the portrait lens"' in index and
+     'aria-controls="dnaOverlay"' in index and 'aria-haspopup="dialog"' in index,
+     "the lens portal needs an accessible dialog relationship")
+need('data-lens="dna"' not in index and 'dna-trigger-label' not in index,
+     "the homepage viewing-mode switcher must contain only Light and Dark")
+need('See the design DNA' in index,
+     "the lens portal must reveal its purpose on hover and keyboard focus")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
 need(index.count('class="featured-heading"') == 1 and "Selected Work" in index,
@@ -97,6 +106,10 @@ need("Vic Tran" not in index and "Victor Tran" in index,
 need("1800ms" in css, "hero color fields need the approved 1.8-second crossfade")
 need("min-width: 44px" in css and "min-height: 44px" in css,
      "manual hero color control must keep a 44px pointer target")
+need(re.search(r"\.hero-lens-portal\s*\{[^}]*min-width:\s*44px[^}]*min-height:\s*44px", css, re.S),
+     "the lens portal must keep a 44 by 44 minimum target")
+need(".hero-lens-portal:focus-visible" in css and ".hero-lens-tooltip" in css,
+     "the lens portal needs visible focus and tooltip styling")
 need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\S]*?transition:\s*none", css),
      "reduced-motion CSS must remove hero color transitions")
 
@@ -106,7 +119,7 @@ expected = {
     "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
-    "pci": ("Performance Contracting, Inc.", "pci.html", "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide."),
+    "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
     "abilityexperience": ("The Ability Experience", "abilityexperience.html", "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities."),
     "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine."),
     "pikappapp": ("Pi Kapp App", "pikappapp.html", "A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day."),
