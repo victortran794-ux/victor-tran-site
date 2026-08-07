@@ -99,7 +99,38 @@ fi
 
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
-run_required "wxO Canvas and Document Processing browser contract" npm run check:wxo-document-processing-browser
+
+run_wxo_browser_contract() {
+  local site_url="http://127.0.0.1:8898"
+  local server_log="${TMPDIR:-/tmp}/wxo-document-server-preflight.log"
+  local server_pid
+  local ready=0
+  local status=0
+
+  python3 -m http.server 8898 --bind 127.0.0.1 >"$server_log" 2>&1 &
+  server_pid=$!
+
+  for _attempt in {1..20}; do
+    if curl --fail --silent "$site_url/wxo-canvas.html" >/dev/null; then
+      ready=1
+      break
+    fi
+    sleep 0.25
+  done
+
+  if [ "$ready" -eq 1 ]; then
+    SITE_URL="$site_url" npm run check:wxo-document-processing-browser || status=$?
+  else
+    echo "  local wxO browser-contract server did not become ready"
+    status=1
+  fi
+
+  kill "$server_pid" 2>/dev/null || true
+  wait "$server_pid" 2>/dev/null || true
+  return "$status"
+}
+
+run_required "wxO Canvas and Document Processing browser contract" run_wxo_browser_contract
 
 section "Regenerating Markdown content exports"
 if [ -f "scripts/html-to-md.mjs" ]; then

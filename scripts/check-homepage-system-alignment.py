@@ -106,7 +106,7 @@ expected = {
     "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
-    "pci": ("Performance Contracting, Inc.", "pci.html", "A 42-page Principles of Business Conduct handbook and a banner system rolled out across PCG offices nationwide."),
+    "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
     "abilityexperience": ("The Ability Experience", "abilityexperience.html", "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities."),
     "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine."),
     "pikappapp": ("Pi Kapp App", "pikappapp.html", "A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day."),
