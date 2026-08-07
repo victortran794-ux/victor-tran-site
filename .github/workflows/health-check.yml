@@ -32,6 +32,11 @@ on:
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
+      - "scripts/check-home-lens-portal-browser.mjs"
+      - "scripts/check-homepage-system-alignment.py"
+      - "scripts/check-shared-shell.mjs"
+      - "scripts/generate-site-shell.mjs"
+      - "scripts/test-site-shell.mjs"
       - "vercel.json"
       - "sitemap.xml"
       - "robots.txt"
@@ -74,6 +79,11 @@ on:
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
+      - "scripts/check-home-lens-portal-browser.mjs"
+      - "scripts/check-homepage-system-alignment.py"
+      - "scripts/check-shared-shell.mjs"
+      - "scripts/generate-site-shell.mjs"
+      - "scripts/test-site-shell.mjs"
       - "vercel.json"
       - "sitemap.xml"
       - "robots.txt"
@@ -124,6 +134,12 @@ jobs:
           done
           curl --fail --silent http://127.0.0.1:8765/pikappapp.html >/dev/null
           npm run check:pikapp-page-browser
+      - name: Home lens portal contract
+        run: |
+          npm run test:site-shell
+          npm run check:site-shell
+          python3 scripts/check-homepage-system-alignment.py
+          npm run check:home-lens-portal-browser
       - name: Production host regression check
         run: node scripts/check-production-host.mjs
       - name: About semantic-heading contract

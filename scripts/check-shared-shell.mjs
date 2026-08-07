@@ -192,9 +192,8 @@ for (const page of expectedPages) {
     fail(`${page} must not claim an unrelated current navigation item`);
   }
 
-  const dnaCount = count(nav, 'dna-trigger');
-  if (page === 'index.html' ? dnaCount !== 3 : dnaCount !== 0) {
-    fail(`${page} must preserve the homepage-only Design DNA trigger boundary`);
+  if (nav.includes('data-lens="dna"') || nav.includes('dna-trigger')) {
+    fail(`${page} shared viewing-mode switcher must contain only Light and Dark`);
   }
 
   const protectedStatus = '<p class="site-route-status"><span>Private case study</span><small>Access required</small></p>';

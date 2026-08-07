@@ -98,6 +98,7 @@ else
 fi
 
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
+run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
 
 run_wxo_browser_contract() {

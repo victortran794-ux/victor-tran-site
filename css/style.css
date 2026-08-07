@@ -803,6 +803,87 @@ main#main-content {
   transition: background-color 1800ms ease;
 }
 
+/* The visible lens remains part of the decorative portrait stage. This
+   matching transparent geometry sits outside aria-hidden so the same lens can
+   act as the accessible entry point to the existing Design DNA dialog. */
+.hero-lens-hitarea {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  aspect-ratio: 1250 / 1800;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-lens-portal {
+  position: absolute;
+  left: 29.6%;
+  top: 27.1%;
+  width: 31.8%;
+  height: 10.4%;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-lens-portal::before {
+  content: '';
+  position: absolute;
+  inset: 7% 2%;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.hero-lens-portal:hover::before,
+.hero-lens-portal:focus-visible::before {
+  border-color: var(--text);
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--bg) 58%, transparent),
+    0 0 26px color-mix(in srgb, var(--lens-color, var(--pink)) 70%, transparent);
+  transform: scale(1.04);
+}
+
+.hero-lens-portal:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 5px;
+}
+
+.hero-lens-tooltip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  z-index: 2;
+  transform: translate(-50%, -4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 9px 13px;
+  border-radius: var(--radius-pill);
+  background: var(--text);
+  color: var(--bg);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.hero-lens-portal:hover .hero-lens-tooltip,
+.hero-lens-portal:focus-visible .hero-lens-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* Top-left meta block — eyebrow, supporting tagline, CTA */
 .hero-meta {
   position: absolute;
@@ -931,7 +1012,9 @@ main#main-content {
   .hero-portrait,
   .hero-portrait::after,
   .hero-portrait-lens,
-  .hero-cycle-dot { transform: none !important; transition: none; }
+  .hero-cycle-dot,
+  .hero-lens-portal::before,
+  .hero-lens-tooltip { transform: none !important; transition: none; }
 }
 
 /* Tablet: tighter scale on side meta blocks, shrink the giant type */
@@ -967,6 +1050,13 @@ main#main-content {
     object-position: 100% bottom;
     -webkit-mask-position: 100% bottom;
             mask-position: 100% bottom;
+  }
+  .hero-lens-hitarea {
+    height: min(60vh, 470px);
+  }
+  .hero-lens-tooltip {
+    top: auto;
+    bottom: calc(100% + 8px);
   }
   .hero-meta {
     top: var(--space-8);
@@ -3548,15 +3638,6 @@ html[data-theme="dark"] .spotify-frame {
 /* ══════════════════════════════════════════════
    Design DNA overlay (home page)
    ══════════════════════════════════════════════ */
-
-/* DNA segment within .lens-switcher — icon gets pink tint + rotation */
-.dna-trigger-icon {
-  display: inline-block;
-  font-size: var(--text-label);
-  color: var(--pink);
-  transition: transform 0.3s ease;
-}
-.lens-switcher-btn[data-lens="dna"]:hover .dna-trigger-icon { transform: rotate(90deg); }
 
 /* Overlay container */
 .dna-overlay {

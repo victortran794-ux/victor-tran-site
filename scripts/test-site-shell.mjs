@@ -103,7 +103,7 @@ try {
     assert.match(html, /<main class="page-content" id="main-content" tabindex="-1">/);
     assert.match(html, new RegExp(`data-fixture-body="${page}"`));
     assert.equal(count(html, 'class="site-route-status"'), page === 'protected.html' ? 1 : 0);
-    assert.equal(count(html, 'dna-trigger'), page === 'index.html' ? 3 : 0);
+    assert.equal(count(html, 'data-lens="dna"'), 0, 'the shared viewing-mode switcher must contain only Light and Dark');
     assert.match(html, /aria-controls="work-menu"/);
     assert.match(html, /id="work-menu" class="nav-dropdown-menu"/);
     assert.doesNotMatch(html, /role="menu(?:item)?"/);
