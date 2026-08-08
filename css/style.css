@@ -4477,7 +4477,7 @@ html[data-theme="dark"] .spotify-frame {
 .ability-diagram-path {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
   margin-top: var(--space-12);
   padding-top: var(--space-8);
@@ -4487,7 +4487,7 @@ html[data-theme="dark"] .spotify-frame {
   position: absolute;
   top: 7px;
   left: 7px;
-  right: 20%;
+  right: 25%;
   height: 2px;
   background: var(--blue-text);
 }
