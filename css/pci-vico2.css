@@ -16,18 +16,18 @@
   max-width: 760px;
 }
 
-.pci-story,
-.pci-native-note {
+.pci-vico2 .pci-story,
+.pci-vico2 .pci-native-note {
   width: min(100% - (2 * var(--page-x)), var(--max-w));
   margin-inline: auto;
 }
 
-.pci-artifact {
+.pci-vico2 .pci-artifact {
   margin: 0;
   scroll-margin-top: 9rem;
 }
 
-.pci-artifact img {
+.pci-vico2 .pci-artifact img {
   display: block;
   width: 100%;
   height: auto;
@@ -35,7 +35,7 @@
   border-radius: 0;
 }
 
-.pci-caption {
+.pci-vico2 .pci-caption {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 0.85rem;
@@ -46,7 +46,7 @@
   line-height: 1.6;
 }
 
-.pci-caption strong {
+.pci-vico2 .pci-caption strong {
   color: var(--pci-red);
   font-family: "Source Code Pro", monospace;
   font-size: 0.72rem;
@@ -54,7 +54,7 @@
   text-transform: uppercase;
 }
 
-.pci-hero {
+.pci-vico2 .pci-hero {
   position: relative;
   width: min(100% - (2 * var(--page-x)), 1440px);
   margin: 0 auto clamp(5rem, 11vw, 10rem);
@@ -64,13 +64,13 @@
   align-items: center;
 }
 
-.pci-hero-copy {
+.pci-vico2 .pci-hero-copy {
   position: relative;
   z-index: 1;
 }
 
-.pci-kicker,
-.pci-chapter-label {
+.pci-vico2 .pci-kicker,
+.pci-vico2 .pci-chapter-label {
   margin: 0 0 1.15rem;
   color: var(--pci-red);
   font-family: "Source Code Pro", monospace;
@@ -80,8 +80,8 @@
   text-transform: uppercase;
 }
 
-.pci-hero h2,
-.pci-story h2 {
+.pci-vico2 .pci-hero h2,
+.pci-vico2 .pci-story h2 {
   margin: 0;
   color: var(--text);
   font-family: "DM Serif Display", serif;
@@ -91,52 +91,52 @@
   line-height: 0.96;
 }
 
-.pci-hero-copy > p:last-child,
-.pci-story-copy > p,
-.pci-map-copy > p,
-.pci-banner-intro > p,
-.pci-outcome p {
+.pci-vico2 .pci-hero-copy > p:last-child,
+.pci-vico2 .pci-story-copy > p,
+.pci-vico2 .pci-map-copy > p,
+.pci-vico2 .pci-banner-intro > p,
+.pci-vico2 .pci-outcome p {
   color: var(--text-2);
   font-size: var(--text-lead);
   line-height: 1.75;
 }
 
-.pci-hero-copy > p:last-child {
+.pci-vico2 .pci-hero-copy > p:last-child {
   max-width: 32rem;
   margin-top: 1.75rem;
 }
 
-.pci-hero-art {
+.pci-vico2 .pci-hero-art {
   grid-row: 1;
   grid-column: 1;
 }
 
-.pci-hero-copy {
+.pci-vico2 .pci-hero-copy {
   grid-row: 1;
   grid-column: 2;
 }
 
-.pci-story {
+.pci-vico2 .pci-story {
   padding-block: clamp(5rem, 10vw, 10rem);
   border-top: 1px solid var(--pci-rule);
 }
 
-.pci-cover-layout {
+.pci-vico2 .pci-cover-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr);
   gap: clamp(2.5rem, 8vw, 9rem);
   align-items: center;
 }
 
-.pci-cover-layout .pci-artifact {
+.pci-vico2 .pci-cover-layout .pci-artifact {
   max-width: 560px;
 }
 
-.pci-story-copy h2 {
+.pci-vico2 .pci-story-copy h2 {
   font-size: clamp(2.45rem, 5vw, 5.1rem);
 }
 
-.pci-fact-list {
+.pci-vico2 .pci-fact-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
@@ -145,32 +145,32 @@
   border: 1px solid var(--pci-rule);
 }
 
-.pci-fact-list div {
+.pci-vico2 .pci-fact-list div {
   min-height: 9rem;
   padding: 1.25rem;
   background: var(--bg);
 }
 
-.pci-fact-list dt {
+.pci-vico2 .pci-fact-list dt {
   color: var(--pci-red);
   font: 500 0.72rem/1.4 "Source Code Pro", monospace;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.pci-fact-list dd {
+.pci-vico2 .pci-fact-list dd {
   margin: 0.8rem 0 0;
   color: var(--text);
   font-size: var(--text-body);
   line-height: 1.55;
 }
 
-.pci-publication-sequence {
+.pci-vico2 .pci-publication-sequence {
   padding-top: clamp(6rem, 11vw, 11rem);
 }
 
-.pci-publication-sequence > header,
-.pci-banner-intro {
+.pci-vico2 .pci-publication-sequence > header,
+.pci-vico2 .pci-banner-intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.62fr);
   gap: clamp(2rem, 8vw, 9rem);
@@ -178,21 +178,21 @@
   margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 
-.pci-publication-sequence > header h2,
-.pci-banner-intro h2 {
+.pci-vico2 .pci-publication-sequence > header h2,
+.pci-vico2 .pci-banner-intro h2 {
   font-size: clamp(2.5rem, 5.5vw, 5.6rem);
 }
 
-.pci-publication-sequence > header p,
-.pci-banner-intro p {
+.pci-vico2 .pci-publication-sequence > header p,
+.pci-vico2 .pci-banner-intro p {
   margin: 0;
 }
 
-.pci-publication-sequence > .pci-artifact + .pci-artifact {
+.pci-vico2 .pci-publication-sequence > .pci-artifact + .pci-artifact {
   margin-top: clamp(4.5rem, 10vw, 10rem);
 }
 
-.pci-artifact-quartet {
+.pci-vico2 .pci-artifact-quartet {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 3vw, 3rem);
@@ -200,7 +200,7 @@
   margin: clamp(4.5rem, 10vw, 10rem) auto 0;
 }
 
-.pci-quartet-note {
+.pci-vico2 .pci-quartet-note {
   grid-column: 1 / -1;
   max-width: 680px;
   margin: 0;
@@ -210,7 +210,7 @@
   line-height: 1.7;
 }
 
-.pci-map {
+.pci-vico2 .pci-map {
   width: min(100% - (2 * var(--page-x)), 1440px);
   margin: clamp(7rem, 14vw, 14rem) auto;
   display: grid;
@@ -219,54 +219,54 @@
   align-items: center;
 }
 
-.pci-map-copy h2 {
+.pci-vico2 .pci-map-copy h2 {
   margin: 0;
   color: var(--text);
   font: 400 clamp(2.4rem, 5vw, 5.2rem)/0.98 "DM Serif Display", serif;
   letter-spacing: -0.035em;
 }
 
-.pci-map-copy p {
+.pci-vico2 .pci-map-copy p {
   max-width: 32rem;
   margin-top: 1.5rem;
 }
 
-.pci-banners {
+.pci-vico2 .pci-banners {
   width: min(100% - (2 * var(--page-x)), 1440px);
   margin-inline: auto;
   padding-block: clamp(6rem, 12vw, 12rem);
   border-top: 1px solid var(--pci-rule);
 }
 
-.pci-banner-board-grid {
+.pci-vico2 .pci-banner-board-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: start;
 }
 
-.pci-banner-board-grid .pci-artifact:nth-child(3) {
+.pci-vico2 .pci-banner-board-grid .pci-artifact:nth-child(3) {
   grid-column: 1 / -1;
 }
 
-.pci-banner-board-grid .pci-artifact--portrait {
+.pci-vico2 .pci-banner-board-grid .pci-artifact--portrait {
   grid-column: 2;
   width: min(100%, 720px);
   justify-self: end;
 }
 
-.pci-outcome {
+.pci-vico2 .pci-outcome {
   width: min(100% - (2 * var(--page-x)), 880px);
   margin: 0 auto;
   padding-block: clamp(6rem, 12vw, 12rem);
   border-top: 3px solid var(--pci-red);
 }
 
-.pci-outcome h2 {
+.pci-vico2 .pci-outcome h2 {
   font-size: clamp(2.5rem, 5vw, 5rem);
 }
 
-.pci-native-note {
+.pci-vico2 .pci-native-note {
   margin-bottom: clamp(5rem, 9vw, 8rem);
   padding-top: 1.5rem;
   border-top: 1px solid var(--pci-rule);
@@ -301,65 +301,65 @@
     flex-basis: 100%;
   }
 
-  .pci-hero,
-  .pci-cover-layout,
-  .pci-publication-sequence > header,
-  .pci-banner-intro,
-  .pci-map {
+  .pci-vico2 .pci-hero,
+  .pci-vico2 .pci-cover-layout,
+  .pci-vico2 .pci-publication-sequence > header,
+  .pci-vico2 .pci-banner-intro,
+  .pci-vico2 .pci-map {
     grid-template-columns: 1fr;
   }
 
-  .pci-hero-art,
-  .pci-hero-copy {
+  .pci-vico2 .pci-hero-art,
+  .pci-vico2 .pci-hero-copy {
     grid-column: 1;
   }
 
-  .pci-hero-art {
+  .pci-vico2 .pci-hero-art {
     grid-row: 1;
   }
 
-  .pci-hero-copy {
+  .pci-vico2 .pci-hero-copy {
     grid-row: 2;
   }
 
-  .pci-cover-layout .pci-artifact {
+  .pci-vico2 .pci-cover-layout .pci-artifact {
     width: min(78vw, 520px);
   }
 
-  .pci-fact-list {
+  .pci-vico2 .pci-fact-list {
     grid-template-columns: 1fr;
   }
 
-  .pci-fact-list div {
+  .pci-vico2 .pci-fact-list div {
     min-height: 0;
   }
 
-  .pci-map-copy {
+  .pci-vico2 .pci-map-copy {
     order: -1;
   }
 }
 
 @media (max-width: 620px) {
-  .pci-artifact-quartet,
-  .pci-banner-board-grid {
+  .pci-vico2 .pci-artifact-quartet,
+  .pci-vico2 .pci-banner-board-grid {
     grid-template-columns: 1fr;
   }
 
-  .pci-quartet-note {
+  .pci-vico2 .pci-quartet-note {
     grid-column: 1;
   }
 
-  .pci-banner-board-grid .pci-artifact:nth-child(3),
-  .pci-banner-board-grid .pci-artifact--portrait {
+  .pci-vico2 .pci-banner-board-grid .pci-artifact:nth-child(3),
+  .pci-vico2 .pci-banner-board-grid .pci-artifact--portrait {
     grid-column: 1;
   }
 
-  .pci-banner-board-grid .pci-artifact--portrait {
+  .pci-vico2 .pci-banner-board-grid .pci-artifact--portrait {
     width: min(86vw, 520px);
     justify-self: start;
   }
 
-  .pci-caption {
+  .pci-vico2 .pci-caption {
     grid-template-columns: 1fr;
     gap: 0.3rem;
   }

@@ -144,6 +144,12 @@ for (const rejectedCopy of ["The CEO's Letter", 'miscellaneous assets']) {
 
 requireText(pciCss, '.pci-artifact img', 'PCI native-ratio image rule');
 requireText(pciCss, 'height: auto', 'PCI native-ratio image rule');
+const unscopedPciSelectors = pciCss
+  .split('\n')
+  .filter(line => /^\s*\.pci-(?!vico2\b)/.test(line));
+if (unscopedPciSelectors.length) {
+  fail(`PCI stylesheet selectors must be rooted in .pci-vico2 (${unscopedPciSelectors.length} unscoped selector lines)`);
+}
 if (/\.pci-artifact[^}]*background\s*:\s*(?:#fff(?:fff)?|white|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\))/i.test(pciCss)) {
   fail('PCI artifacts must not add a white frame or faux paper background');
 }
@@ -196,6 +202,17 @@ if (!/"check:pci-browser"\s*:\s*"node scripts\/check-pci-browser\.mjs"/.test(pac
 }
 if (!/npm run check:pci-browser/.test(workflow)) {
   fail('health-check workflow must run check:pci-browser');
+}
+for (const ownedServerGuard of [
+  "PCI_PORT=$(python3 -c 'import socket;",
+  'PCI_URL="http://127.0.0.1:${PCI_PORT}/pci.html"',
+  'sleep 0.1',
+  'if ! kill -0 "$SERVER_PID" 2>/dev/null; then',
+  'PCI_SERVER_READY=1',
+  'if [ "${PCI_SERVER_READY:-0}" -ne 1 ]; then',
+  'SITE_URL="http://127.0.0.1:${PCI_PORT}" npm run check:pci-browser',
+]) {
+  requireText(workflow, ownedServerGuard, 'PCI browser workflow owned-server guard');
 }
 for (const requiredPath of ['pci.html', 'css/pci-vico2.css', 'scripts/check-pci-browser.mjs']) {
   const pattern = new RegExp(`- ["']?${requiredPath.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}["']?`, 'g');
