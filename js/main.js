@@ -564,8 +564,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Design DNA overlay ─────────────────────────────
 (function initDesignDNA() {
   const overlay  = document.getElementById('dnaOverlay');
-  const trigger  = document.querySelector('.dna-trigger');
-  if (!overlay || !trigger) return;
+  const triggers = document.querySelectorAll('.dna-trigger');
+  if (!overlay || !triggers.length) return;
 
   // Read live values from CSS custom properties so this stays truthful as tokens evolve
   const rootStyles = getComputedStyle(document.documentElement);
@@ -681,8 +681,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const getFocusable = () => [...overlay.querySelectorAll(focusableSelector)]
     .filter((element) => !element.hidden && element.getClientRects().length > 0);
 
-  const open = () => {
-    lastFocus = document.activeElement;
+  const open = (event) => {
+    lastFocus = event?.currentTarget || document.activeElement;
     overlay.inert = false;
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('is-open');
@@ -704,7 +704,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   };
 
-  trigger.addEventListener('click', open);
+  triggers.forEach((trigger) => trigger.addEventListener('click', open));
   overlay.querySelectorAll('[data-dna-close]').forEach((el) => el.addEventListener('click', close));
   document.addEventListener('keydown', (e) => {
     if (!overlay.classList.contains('is-open')) return;

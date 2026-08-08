@@ -174,33 +174,47 @@ try {
     await cdp.navigate(`${baseUrl}/index.html`);
 
     const base = await cdp.evaluate(`(() => {
-      const portal = document.querySelector('.hero-lens-portal');
-      const rect = portal.getBoundingClientRect();
+      const portals = [...document.querySelectorAll('.hero-lens-portal')];
+      const targets = portals.map((portal) => {
+        const rect = portal.getBoundingClientRect();
+        const pseudo = getComputedStyle(portal, '::before');
+        return {
+          rect: [rect.left, rect.top, rect.width, rect.height],
+          visible: rect.right > 0 && rect.left < innerWidth && rect.bottom > 0 && rect.top < innerHeight,
+          label: portal.getAttribute('aria-label'),
+          controls: portal.getAttribute('aria-controls'),
+          hasPopup: portal.getAttribute('aria-haspopup'),
+          pseudoInset: [pseudo.top, pseudo.right, pseudo.bottom, pseudo.left],
+        };
+      });
       const portrait = document.querySelector('.hero-portrait-cutout');
       const switcher = document.querySelector('.lens-switcher');
       return {
         viewport: [innerWidth, innerHeight],
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        target: [rect.width, rect.height],
-        targetVisible: rect.right > 0 && rect.left < innerWidth && rect.bottom > 0 && rect.top < innerHeight,
+        targets,
         portrait: [portrait.complete, portrait.naturalWidth, portrait.naturalHeight],
         switcherButtons: switcher.querySelectorAll('.lens-switcher-btn').length,
         dnaTabs: switcher.querySelectorAll('[data-lens="dna"], .dna-trigger').length,
-        portalCount: document.querySelectorAll('.hero-lens-portal.dna-trigger').length,
-        controls: portal.getAttribute('aria-controls'),
-        hasPopup: portal.getAttribute('aria-haspopup'),
-        describedBy: portal.getAttribute('aria-describedby'),
-        tooltipId: document.querySelector('.hero-lens-tooltip')?.id,
+        portalCount: portals.length,
+        tooltipCount: document.querySelectorAll('.hero-lens-tooltip, [role="tooltip"]').length,
         overlayHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
       };
     })()`);
     assert(base.viewport[0] === viewport.width && base.viewport[1] === viewport.height, `${viewport.label}: viewport mismatch ${base.viewport}`);
     assert(base.overflow === 0, `${viewport.label}: horizontal overflow ${base.overflow}`);
-    assert(base.target[0] >= 44 && base.target[1] >= 44 && base.targetVisible, `${viewport.label}: invalid lens target ${base.target}`);
+    assert(base.targets.length === 2 && base.targets.every(target => target.rect[2] >= 44 && target.rect[3] >= 44 && target.visible),
+      `${viewport.label}: invalid lens targets ${JSON.stringify(base.targets)}`);
+    assert(base.targets.map(target => target.label).join('|') ===
+      'Open Design DNA through the left portrait lens|Open Design DNA through the right portrait lens',
+      `${viewport.label}: lens labels or order regressed ${JSON.stringify(base.targets)}`);
+    assert(base.targets.every(target => target.controls === 'dnaOverlay' && target.hasPopup === 'dialog' &&
+      target.pseudoInset.every(value => value === '-2px')),
+      `${viewport.label}: accessible relationship or two-pixel outline geometry failed ${JSON.stringify(base.targets)}`);
     assert(base.portrait[0] && base.portrait[1] > 0 && base.portrait[2] > 0, `${viewport.label}: portrait failed to decode ${base.portrait}`);
     assert(base.switcherButtons === 2 && base.dnaTabs === 0, `${viewport.label}: top switcher still contains DNA ${JSON.stringify(base)}`);
-    assert(base.portalCount === 1 && base.controls === 'dnaOverlay' && base.hasPopup === 'dialog' && base.describedBy === base.tooltipId,
-      `${viewport.label}: accessible lens portal relationship failed ${JSON.stringify(base)}`);
+    assert(base.portalCount === 2 && base.tooltipCount === 0,
+      `${viewport.label}: lens portals must be visually hidden and tooltip-free ${JSON.stringify(base)}`);
     assert(base.overlayHidden === 'true', `${viewport.label}: DNA overlay must begin closed`);
 
     await cdp.evaluate(`document.activeElement?.blur()`);
@@ -210,53 +224,90 @@ try {
       reachedPortal = await cdp.evaluate(`document.activeElement?.classList.contains('hero-lens-portal')`);
       if (reachedPortal) break;
     }
-    assert(reachedPortal, `${viewport.label}: keyboard navigation did not reach the lens portal`);
-    await delay(240);
-    const focusState = await cdp.evaluate(`(() => ({
-      tooltipOpacity: parseFloat(getComputedStyle(document.querySelector('.hero-lens-tooltip')).opacity),
-      outlineStyle: getComputedStyle(document.querySelector('.hero-lens-portal')).outlineStyle,
-      outlineWidth: getComputedStyle(document.querySelector('.hero-lens-portal')).outlineWidth,
-    }))()`);
-    assert(focusState.tooltipOpacity > 0.9 && focusState.outlineStyle !== 'none' && parseFloat(focusState.outlineWidth) >= 2,
-      `${viewport.label}: focus/tooltip state failed ${JSON.stringify(focusState)}`);
-    await cdp.screenshot(`${viewport.label}-light-focus.png`);
+    assert(reachedPortal, `${viewport.label}: keyboard navigation did not reach the left lens portal`);
 
-    await cdp.key('Enter', 'Enter', 13);
-    await delay(120);
-    const opened = await cdp.evaluate(`({
-      open: document.getElementById('dnaOverlay').classList.contains('is-open'),
-      ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
-      inert: document.getElementById('dnaOverlay').inert,
-      focused: document.activeElement?.className,
-    })`);
-    assert(opened.open && opened.ariaHidden === 'false' && !opened.inert && opened.focused.includes('dna-close'),
-      `${viewport.label}: Enter did not open the existing DNA overlay ${JSON.stringify(opened)}`);
-    await delay(520);
-    await cdp.screenshot(`${viewport.label}-overlay-open.png`);
-
-    await cdp.key('Escape', 'Escape', 27);
-    const closed = await cdp.evaluate(`({
-      open: document.getElementById('dnaOverlay').classList.contains('is-open'),
-      ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
-      inert: document.getElementById('dnaOverlay').inert,
-      portalFocused: document.activeElement?.classList.contains('hero-lens-portal'),
-    })`);
-    assert(!closed.open && closed.ariaHidden === 'true' && closed.inert && closed.portalFocused,
-      `${viewport.label}: Escape/focus return failed ${JSON.stringify(closed)}`);
-
-    if (viewport.mobile) {
-      const center = await cdp.evaluate(`(() => {
-        const rect = document.querySelector('.hero-lens-portal').getBoundingClientRect();
-        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    for (let lensIndex = 0; lensIndex < 2; lensIndex += 1) {
+      if (lensIndex === 1) await cdp.key('Tab', 'Tab', 9);
+      await delay(220);
+      const focusState = await cdp.evaluate(`(() => {
+        const portals = [...document.querySelectorAll('.hero-lens-portal')];
+        const activeIndex = portals.indexOf(document.activeElement);
+        const pseudo = getComputedStyle(portals[activeIndex], '::before');
+        return {
+          activeIndex,
+          borderColor: pseudo.borderTopColor,
+          boxShadow: pseudo.boxShadow,
+        };
       })()`);
-      await cdp.call('Input.dispatchTouchEvent', {
-        type: 'touchStart',
-        touchPoints: [{ x: center.x, y: center.y, radiusX: 4, radiusY: 4, force: 1, id: 1 }],
-      });
-      await cdp.call('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      assert(focusState.activeIndex === lensIndex && focusState.borderColor !== 'rgba(0, 0, 0, 0)' &&
+        focusState.borderColor !== 'transparent' && focusState.boxShadow === 'none',
+        `${viewport.label}: restrained focus outline failed for lens ${lensIndex} ${JSON.stringify(focusState)}`);
+      if (lensIndex === 0) await cdp.screenshot(`${viewport.label}-light-focus.png`);
+
+      await cdp.key('Enter', 'Enter', 13);
       await delay(120);
-      const touchOpened = await cdp.evaluate(`document.getElementById('dnaOverlay').classList.contains('is-open')`);
-      assert(touchOpened, `${viewport.label}: touch did not open the Design DNA overlay`);
+      const opened = await cdp.evaluate(`({
+        open: document.getElementById('dnaOverlay').classList.contains('is-open'),
+        ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
+        inert: document.getElementById('dnaOverlay').inert,
+        focused: document.activeElement?.className,
+      })`);
+      assert(opened.open && opened.ariaHidden === 'false' && !opened.inert && opened.focused.includes('dna-close'),
+        `${viewport.label}: Enter did not open from lens ${lensIndex} ${JSON.stringify(opened)}`);
+      if (lensIndex === 0) {
+        await delay(520);
+        await cdp.screenshot(`${viewport.label}-overlay-open.png`);
+      }
+
+      await cdp.key('Escape', 'Escape', 27);
+      const closed = await cdp.evaluate(`(() => {
+        const portals = [...document.querySelectorAll('.hero-lens-portal')];
+        return {
+          open: document.getElementById('dnaOverlay').classList.contains('is-open'),
+          ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
+          inert: document.getElementById('dnaOverlay').inert,
+          activeIndex: portals.indexOf(document.activeElement),
+        };
+      })()`);
+      assert(!closed.open && closed.ariaHidden === 'true' && closed.inert && closed.activeIndex === lensIndex,
+        `${viewport.label}: Escape/focus return failed for lens ${lensIndex} ${JSON.stringify(closed)}`);
+    }
+
+    const centers = await cdp.evaluate(`[...document.querySelectorAll('.hero-lens-portal')].map((portal) => {
+      const rect = portal.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    })`);
+    for (let lensIndex = 0; lensIndex < centers.length; lensIndex += 1) {
+      const center = centers[lensIndex];
+      if (viewport.mobile) {
+        await cdp.call('Input.dispatchTouchEvent', {
+          type: 'touchStart',
+          touchPoints: [{ x: center.x, y: center.y, radiusX: 4, radiusY: 4, force: 1, id: 1 }],
+        });
+        await cdp.call('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      } else {
+        await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: center.x, y: center.y });
+        await delay(220);
+        const hoverState = await cdp.evaluate(`(() => {
+          const hovered = document.querySelector('.hero-lens-portal:hover');
+          const portals = [...document.querySelectorAll('.hero-lens-portal')];
+          const pseudo = hovered ? getComputedStyle(hovered, '::before') : null;
+          return {
+            hoveredIndex: portals.indexOf(hovered),
+            borderColor: pseudo?.borderTopColor,
+            boxShadow: pseudo?.boxShadow,
+          };
+        })()`);
+        assert(hoverState.hoveredIndex === lensIndex && hoverState.borderColor !== 'rgba(0, 0, 0, 0)' &&
+          hoverState.borderColor !== 'transparent' && hoverState.boxShadow === 'none',
+          `${viewport.label}: hover outline failed for lens ${lensIndex} ${JSON.stringify(hoverState)}`);
+        await cdp.screenshot(`${viewport.label}-${lensIndex === 0 ? 'left' : 'right'}-hover.png`);
+        await cdp.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: center.x, y: center.y, button: 'left', clickCount: 1 });
+        await cdp.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: center.x, y: center.y, button: 'left', clickCount: 1 });
+      }
+      await delay(120);
+      const pointerOpened = await cdp.evaluate(`document.getElementById('dnaOverlay').classList.contains('is-open')`);
+      assert(pointerOpened, `${viewport.label}: pointer did not open from lens ${lensIndex}`);
       await cdp.key('Escape', 'Escape', 27);
     }
     await delay(420);
@@ -281,14 +332,12 @@ try {
     await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
     const reduced = await cdp.evaluate(`(() => {
       const pseudo = getComputedStyle(document.querySelector('.hero-lens-portal'), '::before');
-      const tooltip = getComputedStyle(document.querySelector('.hero-lens-tooltip'));
       return {
         matches: matchMedia('(prefers-reduced-motion: reduce)').matches,
         pseudoTransition: pseudo.transitionDuration,
-        tooltipTransition: tooltip.transitionDuration,
       };
     })()`);
-    assert(reduced.matches && parseFloat(reduced.pseudoTransition) <= 0.001 && parseFloat(reduced.tooltipTransition) <= 0.001,
+    assert(reduced.matches && parseFloat(reduced.pseudoTransition) <= 0.001,
       `${viewport.label}: reduced-motion lens state failed ${JSON.stringify(reduced)}`);
     states.push(`${viewport.width}x${viewport.height}`);
   }
