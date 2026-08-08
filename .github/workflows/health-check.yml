@@ -32,7 +32,10 @@ on:
       - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
+      - "pci.html"
+      - "css/pci-vico2.css"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-pci-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -87,7 +90,10 @@ on:
       - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
+      - "pci.html"
+      - "css/pci-vico2.css"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-pci-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -179,6 +185,33 @@ jobs:
         run: npm run check:artifact-containment
       - name: PCI claims and protection contract
         run: npm run check:pci-claims-protection
+      - name: PCI responsive browser contract
+        run: |
+          PCI_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
+          PCI_URL="http://127.0.0.1:${PCI_PORT}/pci.html"
+          python3 -m http.server "$PCI_PORT" --bind 127.0.0.1 >/tmp/pci-browser-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          sleep 0.1
+          PCI_SERVER_READY=0
+          for attempt in {1..20}; do
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+              cat /tmp/pci-browser-server.log
+              exit 1
+            fi
+            if curl --fail --silent "$PCI_URL" >/dev/null; then
+              PCI_SERVER_READY=1
+              break
+            fi
+            sleep 0.25
+          done
+          if [ "${PCI_SERVER_READY:-0}" -ne 1 ]; then
+            cat /tmp/pci-browser-server.log
+            exit 1
+          fi
+          kill -0 "$SERVER_PID"
+          curl --fail --silent "$PCI_URL" >/dev/null
+          SITE_URL="http://127.0.0.1:${PCI_PORT}" npm run check:pci-browser
       - name: Lighthouse coverage regression check
         run: node scripts/check-lighthouse-coverage.mjs
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
