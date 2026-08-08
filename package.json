@@ -6,6 +6,7 @@
     "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
     "check:pikapp-page-browser": "node scripts/check-pikapp-page-browser.mjs",
+    "check:ibmcloud-browser": "node scripts/check-ibmcloud-browser.mjs",
     "check:ibm-patterns": "node scripts/check-ibm-patterns-integration.mjs",
     "check:ibm-patterns-browser": "node scripts/check-ibm-patterns-browser.mjs",
     "check:wxo-document-processing": "node scripts/check-wxo-document-processing-integration.mjs",

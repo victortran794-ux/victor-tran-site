@@ -2,6 +2,7 @@
 
 [data-project="ibm-cloud"] .ibm-hiring-hero {
   padding-bottom: var(--space-12);
+  border-bottom: 0;
 }
 
 [data-project="ibm-cloud"] .ibm-hiring-position {
@@ -380,56 +381,28 @@
   line-height: 1.6;
 }
 
-[data-project="ibm-cloud"] .ibm-visual-atlas {
-  margin-top: clamp(64px, 9vw, 112px);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--border);
+[data-project="ibm-cloud"] .ibm-evidence-reservation {
+  max-width: 760px;
+  margin: clamp(40px, 6vw, 72px) 0 0 auto;
+  padding: var(--space-6);
+  border: 1px dashed var(--border);
+  background: var(--bg-2);
 }
 
-[data-project="ibm-cloud"] .ibm-visual-atlas > header {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr);
-  gap: var(--space-8);
-  align-items: start;
-  margin-bottom: var(--space-12);
+[data-project="ibm-cloud"] .ibm-evidence-reservation span {
+  color: var(--blue-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-[data-project="ibm-cloud"] .ibm-visual-atlas > header > p:last-child {
-  margin: 0;
+[data-project="ibm-cloud"] .ibm-evidence-reservation p {
+  max-width: 620px;
+  margin: var(--space-4) 0 0;
   color: var(--text-2);
   font-size: 0.95rem;
-  line-height: 1.55;
-}
-
-[data-project="ibm-cloud"] .ibm-atlas-feature {
-  margin: 0 0 var(--space-14);
-}
-
-[data-project="ibm-cloud"] .ibm-atlas-pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4);
-}
-
-[data-project="ibm-cloud"] .ibm-atlas-pair img {
-  width: 100%;
-  height: 360px;
-  border: 1px solid var(--border);
-  background: var(--bg-2);
-  object-fit: contain;
-}
-
-[data-project="ibm-cloud"] .ibm-atlas-pair--portrait img { height: 460px; }
-
-[data-project="ibm-cloud"] .ibm-atlas-feature figcaption {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: var(--space-6);
-}
-
-[data-project="ibm-cloud"] .ibm-atlas-feature figcaption strong {
-  color: var(--text);
-  font-weight: 500;
+  line-height: 1.6;
 }
 
 [data-project="ibm-cloud"] .ibm-hiring-close {
@@ -472,22 +445,18 @@
   [data-project="ibm-cloud"] .ibm-action-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(2) { border-right: 0; }
   [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-  [data-project="ibm-cloud"] .ibm-visual-atlas > header { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
-  [data-project="ibm-cloud"] .ibm-visual-atlas > header > p:last-child { grid-column: 2; }
 }
 
 @media (max-width: 720px) {
   [data-project="ibm-cloud"] .ibm-hiring-intro,
   [data-project="ibm-cloud"] .ibm-proof-header,
   [data-project="ibm-cloud"] .ibm-action-map > header,
-  [data-project="ibm-cloud"] .ibm-visual-atlas > header,
   [data-project="ibm-cloud"] .ibm-hiring-close > div { grid-template-columns: 1fr; }
 
   [data-project="ibm-cloud"] .ibm-hiring-intro h2,
   [data-project="ibm-cloud"] .ibm-hiring-intro-copy,
   [data-project="ibm-cloud"] .ibm-proof-header h2,
-  [data-project="ibm-cloud"] .ibm-proof-lede,
-  [data-project="ibm-cloud"] .ibm-visual-atlas > header > p:last-child { grid-column: 1; }
+  [data-project="ibm-cloud"] .ibm-proof-lede { grid-column: 1; }
 
   [data-project="ibm-cloud"] .ibm-hiring-intro-copy { grid-template-columns: 1fr; }
   [data-project="ibm-cloud"] .ibm-proof-index { grid-template-columns: 1fr; }
@@ -508,16 +477,10 @@
   [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(2) { border-bottom: 1px solid var(--border); }
   [data-project="ibm-cloud"] .ibm-action-steps article:last-child { border-bottom: 0; }
   [data-project="ibm-cloud"] .ibm-action-steps h4 { margin-top: var(--space-8); }
-  [data-project="ibm-cloud"] .ibm-atlas-pair img,
-  [data-project="ibm-cloud"] .ibm-atlas-pair--portrait img { height: 240px; }
-  [data-project="ibm-cloud"] .ibm-atlas-feature figcaption { grid-template-columns: 1fr; gap: var(--space-1); }
 }
 
 @media (max-width: 480px) {
   [data-project="ibm-cloud"] .ibm-flow-pair { grid-template-columns: 1fr; }
   [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen-label { min-height: 0; }
   [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen + .ibm-flow-screen { margin-top: var(--space-8); }
-  [data-project="ibm-cloud"] .ibm-atlas-pair { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-atlas-pair img,
-  [data-project="ibm-cloud"] .ibm-atlas-pair--portrait img { height: auto; max-height: 360px; }
 }
