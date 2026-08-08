@@ -24,7 +24,7 @@ const frozenFiles = {
   'pikappapp.html': 'd5cd1a686ce851b2ee580edd4fb3264a3b630014913bc9e503a3a9a79d1af029',
   'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
   'js/password-gate.js': '26ce94de00f5a6fd5ae06d67865a501f6d0afc8200166ea1fff68e2a1cebdae1',
-  'js/main.js': '3c1f3e755a200c1d56b51b137127b431d188a8c4b42707d086b4ab77091336cc',
+  'js/main.js': '06be7e65d14b7fa849939c53d323c93f2ce18451dcb3821c972fcb7b36b6975d',
 };
 for (const [relativePath, expected] of Object.entries(frozenFiles)) {
   if (sha256(relativePath) !== expected) fail(`${relativePath} changed outside the approved IBM Patterns scope`);

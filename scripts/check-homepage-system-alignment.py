@@ -55,7 +55,7 @@ by_slug = {project.get("slug"): project for project in projects}
 for token in (
     'class="hero"', 'class="hero-stage"', 'class="hero-typeblock"',
     'class="hero-portraits"', 'class="hero-portrait is-active"',
-    'class="hero-portrait-lens"', 'class="hero-lens-portal dna-trigger"', 'class="hero-meta"',
+    'class="hero-portrait-lens"', 'class="hero-meta"',
     'class="hero-services"', 'class="hero-cycle"',
     'aria-label="Change color"',
 ):
@@ -68,15 +68,29 @@ for authored_copy in (
 
 need(index.count('images/hero/figure20.webp') >= 2, "portrait image and mask must remain figure20.webp")
 need(index.count('images/hero/figure20-lens.webp') == 1, "hero lens mask must remain present")
-need(index.count('class="hero-lens-portal dna-trigger"') == 1,
-     "the portrait lens must own the single Design DNA trigger")
-need('aria-label="Open Design DNA through the portrait lens"' in index and
-     'aria-controls="dnaOverlay"' in index and 'aria-haspopup="dialog"' in index,
-     "the lens portal needs an accessible dialog relationship")
+need('class="hero-pointer-wash"' in index,
+     "the Home hero needs the approved decorative pointer wash layer")
+need(".hero-pointer-wash" in css and "radial-gradient" in css and
+     "@media (min-width: 761px)" in css,
+     "the pointer wash must stay feathered and limited to desktop viewports")
+need("hero.querySelector('.hero-pointer-wash')" in js and
+     "hero.addEventListener('pointermove'" in js and
+     "event.pointerType !== 'mouse'" in js and
+     "requestAnimationFrame(updatePointerWash)" in js,
+     "the pointer wash must use a mouse-only, hero-scoped rAF update path")
+need(index.count('class="hero-lens-portal dna-trigger') == 2,
+     "each portrait lens must own a Design DNA trigger")
+need(index.count('hero-lens-portal--left') == 1 and index.count('hero-lens-portal--right') == 1,
+     "the left and right portrait lenses need distinct trigger geometry")
+need('aria-label="Open Design DNA through the left portrait lens"' in index and
+     'aria-label="Open Design DNA through the right portrait lens"' in index and
+     index.count('aria-controls="dnaOverlay"') >= 2 and index.count('aria-haspopup="dialog"') >= 2,
+     "both lens portals need accessible dialog relationships")
+need('aria-describedby="heroLensTooltip"' not in index and 'hero-lens-tooltip' not in index and
+     'See the design DNA' not in index,
+     "the hidden lens interaction must not render a tooltip or visible button label")
 need('data-lens="dna"' not in index and 'dna-trigger-label' not in index,
      "the homepage viewing-mode switcher must contain only Light and Dark")
-need('See the design DNA' in index,
-     "the lens portal must reveal its purpose on hover and keyboard focus")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
 need(index.count('class="featured-heading"') == 1 and "Selected Work" in index,
@@ -108,8 +122,14 @@ need("min-width: 44px" in css and "min-height: 44px" in css,
      "manual hero color control must keep a 44px pointer target")
 need(re.search(r"\.hero-lens-portal\s*\{[^}]*min-width:\s*44px[^}]*min-height:\s*44px", css, re.S),
      "the lens portal must keep a 44 by 44 minimum target")
-need(".hero-lens-portal:focus-visible" in css and ".hero-lens-tooltip" in css,
-     "the lens portal needs visible focus and tooltip styling")
+need(".hero-lens-portal:focus-visible" in css and
+     ".hero-lens-portal:hover::before" in css and
+     re.search(r"\.hero-lens-portal::before\s*\{[^}]*inset:\s*-2px[^}]*border:\s*1px\s+solid\s+transparent", css, re.S),
+     "each lens portal needs a restrained two-pixel-offset hover and keyboard-focus outline")
+need('.hero-lens-tooltip' not in css,
+     "the retired lens tooltip must not leave styling behind")
+need("querySelectorAll('.dna-trigger')" in js and "triggers.forEach" in js,
+     "the Design DNA overlay must activate from either lens trigger")
 need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\S]*?transition:\s*none", css),
      "reduced-motion CSS must remove hero color transitions")
 
