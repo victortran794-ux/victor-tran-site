@@ -150,8 +150,8 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 5, current: 'wxo-canvas.html' },
-  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 3, current: null },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 2, current: 'wxo-canvas.html' },
+  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 0, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
   .protectedPages.map(({ source }) => ({ file: source }));
@@ -409,32 +409,35 @@ try {
             gate:Boolean(document.getElementById('vtd-gate')), images:images.length,
             failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
             videoReady:video?video.readyState:null, videoSources:video?[...video.querySelectorAll('source')].length:0,
-            controls, statusPosition:getComputedStyle(document.querySelector('.site-route-status')).position, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
+            videoAutoplay:video?video.autoplay&&video.muted&&video.loop&&video.playsInline&&!video.controls:null,
+            controls, statusDisplay:getComputedStyle(document.querySelector('.site-route-status')).display, statusPosition:getComputedStyle(document.querySelector('.site-route-status')).position, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
             statusChapterOverlap:chapterFirst?!(status.right<=chapterFirst.left||status.left>=chapterFirst.right||status.bottom<=chapterFirst.top||status.top>=chapterFirst.bottom):false,
             wxoCanvasVisible:!document.querySelector('#canvas')?.hidden,
             wxoDocumentVisible:!document.querySelector('#document-processing')?.hidden,
             wxoChapter:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
+            wxoChapterPosition:document.querySelector('.wxo-chapter-nav')?getComputedStyle(document.querySelector('.wxo-chapter-nav')).position:null,
+            wxoChapterRatio:(()=>{const links=[...document.querySelectorAll('.wxo-chapter-nav a')];if(links.length!==2)return null;return links[0].getBoundingClientRect().width/links[1].getBoundingClientRect().width})(),
             docLoop:document.querySelectorAll('.doc-loop>div').length,
             reduced:getComputedStyle(document.querySelector('.reveal')||document.body).transitionDuration,
             contrastForeground:getComputedStyle(contrastTarget).color,
             contrastBackground:getComputedStyle(contrastSurface).backgroundColor,
           };
         })()`);
-        assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height, `${spec.file}: viewport drift ${state.viewport}`);
+        assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height, `${spec.file}: viewport drift expected=${viewport.width}x${viewport.height} actual=${state.viewport} state=${JSON.stringify(state)}`);
         assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme, `${spec.file}: ${theme} theme failed`);
         assert(state.overflow===0, `${spec.file}: ${state.overflow}px overflow at ${viewport.label} ${theme}`);
         assert(state.bodyClass.includes(spec.bodyClass)&&state.title.includes(spec.title), `${spec.file}: route identity failed`);
         assert(state.mainId==='main-content'&&state.tabindex==='-1'&&state.current===spec.current&&state.shell&&!state.gate, `${spec.file}: shared shell or unlocked state failed`);
         assert(state.noindex==='noindex,nofollow,noarchive,nosnippet,noimageindex', `${spec.file}: robots metadata drifted`);
         assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: expected ${spec.mainImages} main images, got ${state.images}; failures ${JSON.stringify(state.failedImages)}`);
-        if(name==='wxo') assert(state.statusPosition!=='fixed', `${spec.file}: protected status must not remain fixed over chapter content`);
+        if(name==='wxo') assert(state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1, `${spec.file}: hidden status or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`);
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
         if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);
         const ratio=contrastRatio(state.contrastForeground,state.contrastBackground);
         assert(ratio>=4.5, `${spec.file}: custom text contrast ${ratio.toFixed(2)}:1 failed at ${viewport.label} ${theme}`);
         assert(parseFloat(state.reduced)<=0.001, `${spec.file}: reduced-motion transition remained ${state.reduced} at ${viewport.label} ${theme}`);
         if(name==='wxo') assert(state.wxoCanvasVisible&&!state.wxoDocumentVisible&&state.wxoChapter==='#canvas', `wxo-canvas.html: default Canvas chapter failed ${JSON.stringify(state)}`);
-        if(name==='doc') assert(state.docLoop===5&&state.videoReady>=1&&state.videoSources===2, `document-processing.html: trust loop or video failed ${JSON.stringify(state)}`);
+        if(name==='doc') assert(state.docLoop===5&&state.videoReady>=1&&state.videoSources===2&&state.videoAutoplay, `document-processing.html: trust loop or autoplay video failed ${JSON.stringify(state)}`);
         if(viewport.mobile){
           const undersized=state.controls.filter((control)=>control.width<44||control.height<44);
           assert(!undersized.length, `${spec.file}: undersized mobile controls ${JSON.stringify(undersized)}`);
@@ -454,12 +457,10 @@ try {
           const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,decisions:document.querySelectorAll('#document-processing .doc-decision-card').length,roles:document.querySelectorAll('#document-processing .doc-role-card').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
           assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
           assert(!documentChapter.firstChapterOccluded, `wxo-canvas.html: protected status occludes first chapter tab after chapter navigation ${JSON.stringify(documentChapter)}`);
-          assert(documentChapter.images===3&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.images===0&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
           assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
           await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
-          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-story-grid');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
-          await delay(80);
-          await cdp.screenshot('wxo-canvas-390-light-document-storyboard.png');
+
           await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-loop');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-390-light-document-loop.png');
@@ -478,7 +479,7 @@ try {
           await cdp.evaluate(`document.querySelector('#canvas .wxo-system-grid').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-canvas-system.png');
-          await cdp.evaluate(`document.querySelector('[data-wxo-chapter="document-processing"]').click();document.querySelector('#document-processing .doc-motion-frame').scrollIntoView({block:'start',behavior:'instant'})`);
+          await cdp.evaluate(`(()=>{document.querySelector('[data-wxo-chapter="document-processing"]').click();const frame=document.querySelector('#document-processing .doc-motion-frame');const navHeight=document.querySelector('.nav').getBoundingClientRect().height;const chapterHeight=document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height;scrollTo({top:frame.getBoundingClientRect().top+scrollY-navHeight-chapterHeight-16,behavior:'instant'})})()`);
           await delay(120);
           await cdp.screenshot('wxo-canvas-1280-dark-document-media.png');
           await cdp.evaluate(`document.querySelector('#document-processing .doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
@@ -492,6 +493,13 @@ try {
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
           await delay(60);
           await cdp.screenshot('document-processing-390-light-opening.png');
+          await cdp.evaluate(`(async()=>{const video=document.querySelector('.doc-motion-frame video');await video.play();document.querySelector('[data-doc-motion-toggle]').focus()})()`);
+          await cdp.key(' ', 'Space', 32);
+          const pausedMotion=await cdp.evaluate(`(()=>{const video=document.querySelector('.doc-motion-frame video');const button=document.querySelector('[data-doc-motion-toggle]');const rect=button.getBoundingClientRect();const style=getComputedStyle(button);return {paused:video.paused,label:button.textContent.trim(),pressed:button.getAttribute('aria-pressed'),focused:document.activeElement===button,width:rect.width,height:rect.height,outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth}})()`);
+          assert(pausedMotion.paused&&pausedMotion.label==='Play animation'&&pausedMotion.pressed==='true'&&pausedMotion.focused&&pausedMotion.width>=44&&pausedMotion.height>=44&&pausedMotion.outlineStyle!=='none'&&parseFloat(pausedMotion.outlineWidth)>0, `document-processing.html: keyboard motion pause control failed ${JSON.stringify(pausedMotion)}`);
+          await cdp.key('Enter', 'Enter', 13);
+          const resumedMotion=await cdp.evaluate(`(()=>{const video=document.querySelector('.doc-motion-frame video');const button=document.querySelector('[data-doc-motion-toggle]');return {paused:video.paused,label:button.textContent.trim(),pressed:button.getAttribute('aria-pressed')}})()`);
+          assert(!resumedMotion.paused&&resumedMotion.label==='Pause animation'&&resumedMotion.pressed==='false', `document-processing.html: keyboard motion resume control failed ${JSON.stringify(resumedMotion)}`);
         }
         if(name==='doc'&&viewport.label==='1280'&&theme==='dark'){
           await cdp.evaluate(`document.querySelector('.doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);

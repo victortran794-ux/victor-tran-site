@@ -20,6 +20,7 @@
   <script>if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
   <link rel="stylesheet" href="css/password-gate.css">
   <script src="js/password-gate.js" defer></script>
+  <script src="js/wxo-workflows-vico2.js" defer></script>
 </head>
 <body class="workflow-pages doc-processing-page">
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -86,7 +87,7 @@
         <div class="case-study-meta-item"><dt>Role</dt><dd>Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation</dd></div>
         <div class="case-study-meta-item"><dt>Period</dt><dd>Product design · 2025–2026</dd></div>
         <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier + Extractor specifications</dd></div>
-        <div class="case-study-meta-item"><dt>Throughline</dt><dd>HITL + shared patterns</dd></div>
+        <div class="case-study-meta-item"><dt>Throughline</dt><dd>Human-in-the-loop shared patterns</dd></div>
         <div class="case-study-meta-item"><dt>Release</dt><dd>Evaluation direction · released July 2026</dd></div>
       </dl>
     </header>
@@ -100,32 +101,15 @@
             <p class="workflow-chapter-lead">A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.</p>
           </div>
         </div>
-        <p>I joined the work in 2025 and ramped up alongside the existing design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
+        <p>I joined the work in 2025 and ramped up alongside the existing designer, Cate. Together, we made up the design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
         <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
-        <p class="workflow-boundary"><strong>Evidence boundary:</strong> source notes include ambitious scale, accuracy, review-rate, and efficiency targets. This case study treats those as requirements, not results. Source data and prototype values are physically removed from the media.</p>
-
         <figure class="doc-motion-frame">
-          <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><span>10 seconds · sanitized source geometry</span></figcaption>
-          <video controls muted loop playsinline preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Sanitized Document Processing evaluation journey">
+          <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><button type="button" class="doc-motion-toggle" data-doc-motion-toggle aria-controls="document-processing-motion" aria-pressed="false">Pause animation</button></figcaption>
+          <video autoplay muted loop playsinline id="document-processing-motion" preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Sanitized Document Processing evaluation journey">
             <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm" type="video/webm">
             <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
           </video>
         </figure>
-
-        <div class="doc-story-grid" aria-label="Three-step Document Processing storyboard">
-          <figure class="workflow-figure">
-            <img src="assets/document-processing/storyboard/01-select-training-documents-sanitized.png" width="1584" height="1042" alt="Sanitized source interface for selecting representative documents" loading="lazy" decoding="async">
-            <figcaption><strong>01 · Select</strong>Establish the working set used for training and evaluation.</figcaption>
-          </figure>
-          <figure class="workflow-figure">
-            <img src="assets/document-processing/storyboard/02-review-and-correct-sanitized.png" width="1584" height="1042" alt="Sanitized interface for reviewing extracted values and correcting low-confidence fields" loading="lazy" decoding="async">
-            <figcaption><strong>02 · Review</strong>Keep the source visible while a person confirms or corrects a result.</figcaption>
-          </figure>
-          <figure class="workflow-figure">
-            <img src="assets/document-processing/storyboard/03-evaluation-details-sanitized.png" width="1584" height="1042" alt="Sanitized interface showing overall and field-level evaluation details" loading="lazy" decoding="async">
-            <figcaption><strong>03 · Evaluate</strong>Move from an overall view to fields and documents needing attention.</figcaption>
-          </figure>
-        </div>
       </section>
 
       <section class="workflow-chapter reveal" aria-labelledby="doc-loop-title">
