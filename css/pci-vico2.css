@@ -1,0 +1,366 @@
+/* PCI VicO2: protected publication-led presentation */
+.pci-vico2 {
+  --pci-red: #bb1730;
+  --pci-red-deep: #7f1022;
+  --pci-paper: #f3efe7;
+  --pci-ink: #191919;
+  --pci-rule: color-mix(in srgb, var(--text) 18%, transparent);
+  overflow: clip;
+}
+
+.pci-vico2 .page-header {
+  padding-bottom: clamp(3rem, 7vw, 6.5rem);
+}
+
+.pci-vico2 .page-header-desc {
+  max-width: 760px;
+}
+
+.pci-story,
+.pci-native-note {
+  width: min(100% - (2 * var(--page-x)), var(--max-w));
+  margin-inline: auto;
+}
+
+.pci-artifact {
+  margin: 0;
+  scroll-margin-top: 9rem;
+}
+
+.pci-artifact img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+.pci-caption {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+  margin-top: 0.85rem;
+  color: var(--text-2);
+  font-size: var(--text-caption);
+  line-height: 1.6;
+}
+
+.pci-caption strong {
+  color: var(--pci-red);
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pci-hero {
+  position: relative;
+  width: min(100% - (2 * var(--page-x)), 1440px);
+  margin: 0 auto clamp(5rem, 11vw, 10rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.6fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: center;
+}
+
+.pci-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.pci-kicker,
+.pci-chapter-label {
+  margin: 0 0 1.15rem;
+  color: var(--pci-red);
+  font-family: "Source Code Pro", monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pci-hero h2,
+.pci-story h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(2.7rem, 6vw, 6.4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+}
+
+.pci-hero-copy > p:last-child,
+.pci-story-copy > p,
+.pci-map-copy > p,
+.pci-banner-intro > p,
+.pci-outcome p {
+  color: var(--text-2);
+  font-size: var(--text-lead);
+  line-height: 1.75;
+}
+
+.pci-hero-copy > p:last-child {
+  max-width: 32rem;
+  margin-top: 1.75rem;
+}
+
+.pci-hero-art {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.pci-hero-copy {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.pci-story {
+  padding-block: clamp(5rem, 10vw, 10rem);
+  border-top: 1px solid var(--pci-rule);
+}
+
+.pci-cover-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 8vw, 9rem);
+  align-items: center;
+}
+
+.pci-cover-layout .pci-artifact {
+  max-width: 560px;
+}
+
+.pci-story-copy h2 {
+  font-size: clamp(2.45rem, 5vw, 5.1rem);
+}
+
+.pci-fact-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 2.5rem 0 0;
+  background: var(--pci-rule);
+  border: 1px solid var(--pci-rule);
+}
+
+.pci-fact-list div {
+  min-height: 9rem;
+  padding: 1.25rem;
+  background: var(--bg);
+}
+
+.pci-fact-list dt {
+  color: var(--pci-red);
+  font: 500 0.72rem/1.4 "Source Code Pro", monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pci-fact-list dd {
+  margin: 0.8rem 0 0;
+  color: var(--text);
+  font-size: var(--text-body);
+  line-height: 1.55;
+}
+
+.pci-publication-sequence {
+  padding-top: clamp(6rem, 11vw, 11rem);
+}
+
+.pci-publication-sequence > header,
+.pci-banner-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.62fr);
+  gap: clamp(2rem, 8vw, 9rem);
+  align-items: end;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.pci-publication-sequence > header h2,
+.pci-banner-intro h2 {
+  font-size: clamp(2.5rem, 5.5vw, 5.6rem);
+}
+
+.pci-publication-sequence > header p,
+.pci-banner-intro p {
+  margin: 0;
+}
+
+.pci-publication-sequence > .pci-artifact + .pci-artifact {
+  margin-top: clamp(4.5rem, 10vw, 10rem);
+}
+
+.pci-artifact-quartet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 3vw, 3rem);
+  width: min(100%, 1240px);
+  margin: clamp(4.5rem, 10vw, 10rem) auto 0;
+}
+
+.pci-quartet-note {
+  grid-column: 1 / -1;
+  max-width: 680px;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--pci-rule);
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.pci-map {
+  width: min(100% - (2 * var(--page-x)), 1440px);
+  margin: clamp(7rem, 14vw, 14rem) auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.55fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.pci-map-copy h2 {
+  margin: 0;
+  color: var(--text);
+  font: 400 clamp(2.4rem, 5vw, 5.2rem)/0.98 "DM Serif Display", serif;
+  letter-spacing: -0.035em;
+}
+
+.pci-map-copy p {
+  max-width: 32rem;
+  margin-top: 1.5rem;
+}
+
+.pci-banners {
+  width: min(100% - (2 * var(--page-x)), 1440px);
+  margin-inline: auto;
+  padding-block: clamp(6rem, 12vw, 12rem);
+  border-top: 1px solid var(--pci-rule);
+}
+
+.pci-banner-board-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.pci-banner-board-grid .pci-artifact:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+.pci-banner-board-grid .pci-artifact--portrait {
+  grid-column: 2;
+  width: min(100%, 720px);
+  justify-self: end;
+}
+
+.pci-outcome {
+  width: min(100% - (2 * var(--page-x)), 880px);
+  margin: 0 auto;
+  padding-block: clamp(6rem, 12vw, 12rem);
+  border-top: 3px solid var(--pci-red);
+}
+
+.pci-outcome h2 {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+}
+
+.pci-native-note {
+  margin-bottom: clamp(5rem, 9vw, 8rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pci-rule);
+  color: var(--text-2);
+  font-size: var(--text-caption);
+  line-height: 1.7;
+}
+
+[data-theme="dark"] .pci-vico2 {
+  --pci-red: #ff6a7e;
+  --pci-red-deep: #ff8a9a;
+  --pci-paper: #171313;
+}
+
+@media (max-width: 800px) {
+  .pci-vico2 .page-header {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .pci-vico2 .page-header-desc {
+    line-height: 1.65;
+  }
+
+  .pci-vico2 .case-study-meta {
+    gap: 1.75rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  .pci-vico2 .case-study-meta-item:first-child {
+    flex-basis: 100%;
+  }
+
+  .pci-hero,
+  .pci-cover-layout,
+  .pci-publication-sequence > header,
+  .pci-banner-intro,
+  .pci-map {
+    grid-template-columns: 1fr;
+  }
+
+  .pci-hero-art,
+  .pci-hero-copy {
+    grid-column: 1;
+  }
+
+  .pci-hero-art {
+    grid-row: 1;
+  }
+
+  .pci-hero-copy {
+    grid-row: 2;
+  }
+
+  .pci-cover-layout .pci-artifact {
+    width: min(78vw, 520px);
+  }
+
+  .pci-fact-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pci-fact-list div {
+    min-height: 0;
+  }
+
+  .pci-map-copy {
+    order: -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .pci-artifact-quartet,
+  .pci-banner-board-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pci-quartet-note {
+    grid-column: 1;
+  }
+
+  .pci-banner-board-grid .pci-artifact:nth-child(3),
+  .pci-banner-board-grid .pci-artifact--portrait {
+    grid-column: 1;
+  }
+
+  .pci-banner-board-grid .pci-artifact--portrait {
+    width: min(86vw, 520px);
+    justify-self: start;
+  }
+
+  .pci-caption {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

@@ -20,7 +20,6 @@ const count = (value, needle) => value.split(needle).length - 1;
 const size = (relativePath) => read(relativePath).length;
 
 const frozenFiles = {
-  'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
   'pikappapp/demo.html': 'daf32161b516f022bc909e0b7a4ab48b227ec3b25e74f52a842a706538d41c18',
   'pikappapp/demo.bundle.css': '76eefcf312f2a097070f29ed9e3fbeaa5a3125ba2365178a09cc0e81c26a7ff5',
   'pikappapp/demo.bundle.js': '50b8336875a9181ccad7d6db2ce52f48cb7e0ee602aa0c75d2a53040fe62d22c',

@@ -20,7 +20,6 @@ const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
 
-  'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
   'pikappapp.html': 'd5cd1a686ce851b2ee580edd4fb3264a3b630014913bc9e503a3a9a79d1af029',
   'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
   'js/password-gate.js': '26ce94de00f5a6fd5ae06d67865a501f6d0afc8200166ea1fff68e2a1cebdae1',

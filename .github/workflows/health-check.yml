@@ -32,7 +32,10 @@ on:
       - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
+      - "pci.html"
+      - "css/pci-vico2.css"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-pci-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -87,7 +90,10 @@ on:
       - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
+      - "pci.html"
+      - "css/pci-vico2.css"
       - "scripts/check-pci-claims-protection.mjs"
+      - "scripts/check-pci-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -179,6 +185,16 @@ jobs:
         run: npm run check:artifact-containment
       - name: PCI claims and protection contract
         run: npm run check:pci-claims-protection
+      - name: PCI responsive browser contract
+        run: |
+          python3 -m http.server 8877 --bind 127.0.0.1 >/tmp/pci-browser-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            curl --fail --silent http://127.0.0.1:8877/pci.html >/dev/null && break
+            sleep 0.25
+          done
+          SITE_URL=http://127.0.0.1:8877 npm run check:pci-browser
       - name: Lighthouse coverage regression check
         run: node scripts/check-lighthouse-coverage.mjs
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
