@@ -242,7 +242,10 @@ function pageToMarkdown(file, html) {
     : firstMatch(cleanHtml, /<p[^>]*class="section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
   const pageIntro = firstMatch(cleanHtml, /<p[^>]*class="page-header-desc[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
   const metaItems = extractMetaItems(cleanHtml);
-  const headings = dedupeBy(allMatches(cleanHtml, /<h2[^>]*>([\s\S]*?)<\/h2>/gi), item => item);
+  const headingPattern = file === 'about.html'
+    ? /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi
+    : /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const headings = dedupeBy(allMatches(cleanHtml, headingPattern), item => item);
   const paragraphs = extractParagraphs(cleanHtml);
   const listItems = dedupeBy(allMatches(cleanHtml, /<li\b[^>]*>([\s\S]*?)<\/li>/gi), item => item)
     .filter(item => !['Home', 'About', 'Contact', 'Work', 'Galleries'].includes(item));
