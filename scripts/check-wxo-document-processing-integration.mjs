@@ -23,7 +23,7 @@ const projects = JSON.parse(read('data/projects.json'));
 const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
-const mainJs = read('js/main.js');
+const workflowJs = read('js/wxo-workflows-vico2.js');
 const passwordGate = read('js/password-gate.js');
 const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
@@ -44,6 +44,7 @@ for (const path of [
   'vercel.json',
   'scripts/check-wxo-document-processing-integration.mjs',
   'scripts/check-wxo-document-processing-browser.mjs',
+  'js/wxo-workflows-vico2.js',
 ]) {
   if (count(healthWorkflow, new RegExp(path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) < 2) {
     fail(`Health-check workflow must watch ${path} for push and pull requests.`);
@@ -97,7 +98,7 @@ requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Proces
 requireText(workflowCss, '.doc-processing-page .site-route-status {', 'The wxO and Document Processing pages must hide the redundant protected-status note.');
 requireText(workflowCss, 'display: none;', 'The redundant protected-status note must not render.');
 requireText(workflowCss, '.doc-motion-toggle {', 'The autoplay journey must expose a visible pause control.');
-requireText(mainJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the shared script.');
+requireText(workflowJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the scoped workflow script.');
 
 for (const text of [
   'IBM watsonX Orchestrate · 2024–present',
@@ -126,6 +127,7 @@ requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);'
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
 requireText(wxo, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(wxo, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
+requireText(wxo, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'wxO must load the scoped workflow behavior.');
 forbid(wxo, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 
 for (const asset of [
@@ -179,6 +181,7 @@ for (const text of [
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
 requireText(doc, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(doc, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
+requireText(doc, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'Document Processing must load the scoped workflow behavior.');
 forbid(doc, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 if (count(doc, /class="doc-story-grid/gi) !== 0) fail('The redundant standalone Document Processing storyboard must be removed.');
 
