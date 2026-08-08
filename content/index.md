@@ -63,7 +63,7 @@ Freelance publication and environmental design extending PCI's existing brand in
 
 Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.
 
-Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.
+Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.
 
 A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
 

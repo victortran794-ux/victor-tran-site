@@ -293,6 +293,10 @@
     ],
     "images": [
       {
+        "src": "images/thumb-sal.webp",
+        "alt": "Star & Lamp magazine covers arranged across five years"
+      },
+      {
         "src": "images/sal-f2020-connie-owen.jpg",
         "alt": "Fall 2020 Connie Owen portrait tribute spread"
       },
@@ -335,10 +339,6 @@
       {
         "src": "images/sal-common-bond-2.jpg",
         "alt": "A Common Bond interior spread"
-      },
-      {
-        "src": "images/sal-common-bond-3.jpg",
-        "alt": "A Common Bond closing spread"
       }
     ],
     "projects": []

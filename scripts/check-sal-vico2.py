@@ -9,6 +9,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "salmagazine.html"
 CSS = ROOT / "css/style.css"
+PROJECTS = ROOT / "data/projects.json"
 
 
 class Audit(HTMLParser):
@@ -29,6 +30,7 @@ class Audit(HTMLParser):
 def main() -> int:
     html = HTML.read_text(encoding="utf-8")
     css = CSS.read_text(encoding="utf-8")
+    projects = PROJECTS.read_text(encoding="utf-8")
     audit = Audit()
     audit.feed(html)
     failures: list[str] = []
@@ -38,7 +40,15 @@ def main() -> int:
             failures.append(message)
 
     # Shared site and generated-content hooks.
-    need('<main class="page-content" id="main-content">' in html, "main target must remain skip-link ready")
+    need(
+        any(
+            tag == "main"
+            and attrs.get("id") == "main-content"
+            and "page-content" in attrs.get("class", "").split()
+            for tag, attrs in audit.tags
+        ),
+        "main target must remain skip-link ready",
+    )
     need("page-header-title" in audit.classes, "generated-content title hook must remain")
     need("page-header-desc" in audit.classes, "generated-content description hook must remain")
     need("case-study-meta" in audit.classes, "generated metadata hook must remain")
@@ -82,7 +92,7 @@ def main() -> int:
         "From rinse-and-repeat brochure to industry award winner.",
         "First published in the fall of 1909, the Star &amp; Lamp is the magazine of Pi Kappa Phi Fraternity and is produced in-house.",
         "Five years of issues, archived in full on Issuu. Click any cover to read the issue.",
-        "Read the full archive on",
+        "View the complete issue archive",
         "Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.",
         '"A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.',
         '"Thirty Under 30" celebrates thirty alumni redefining what it means to lead.',
@@ -103,6 +113,27 @@ def main() -> int:
         "2018 · 3rd Place Overall Magazine Excellence",
     ]:
         need(award in html, f"missing verified award: {award}")
+
+    # August 7 bounded revision: distinct opener, aligned metadata,
+    # direct archive action, and third-person homepage voice.
+    need(
+        '<img src="images/thumb-sal.webp" width="1081" height="1081" alt="Star &amp; Lamp magazine covers arranged across five years" fetchpriority="high">' in html,
+        "SAL hero must use the distinct five-year cover composition",
+    )
+    need(
+        '<div class="sal-vico2-archive-cta reveal">' in html,
+        "archive needs the cleaner direct-action treatment",
+    )
+    need(
+        'class="sal-vico2-archive-link"' in html
+        and "View the complete issue archive" in html,
+        "archive action must clearly link readers to the complete issue archive",
+    )
+    need("sal-vico2-archive-note" not in html, "legacy padded archive note must be removed")
+    need(
+        '"description": "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."' in projects,
+        "homepage SAL description must use the approved third-person voice",
+    )
 
     required_images = [
         "sal-f2020-house-home.jpg", "sal-f2020-virtually.jpg", "sal-f2020-covid-heroes.jpg",
@@ -153,6 +184,16 @@ def main() -> int:
          "issue-cover focus must be scoped so the cover and caption column are not awkwardly outlined together")
     need(".sal-vico2-cover-wall a:focus-visible img" in sal_css,
          "issue-cover keyboard focus must remain visibly attached to the cover image")
+    need(
+        ".sal-vico2-meta .case-study-meta > div {" in sal_css
+        and "padding: var(--space-6) var(--space-5);" in sal_css,
+        "SAL metadata cells need explicit valid padding instead of the undefined shared space token",
+    )
+    need(
+        ".sal-vico2-archive-cta {" in sal_css
+        and ".sal-vico2-archive-link" in sal_css,
+        "SAL archive CTA needs its bounded layout and link treatment",
+    )
     need("box-shadow" not in sal_css, "SAL VicO2 slice must stay shadow-free")
     need("linear-gradient" not in sal_css, "SAL VicO2 slice must stay gradient-free")
 
