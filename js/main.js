@@ -285,6 +285,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const cycleBtn = hero.querySelector('.hero-cycle');
   const heroLabel = hero.querySelector('.hero-cycle-label');
   const heroStatus = hero.querySelector('[data-hero-status]');
+  const pointerWash = hero.querySelector('.hero-pointer-wash');
   const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const palette = [
     { session: '--pink', accent: '--blue' },
@@ -296,6 +297,35 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   let i = 0;
   let heroTimer = null;
   let manualPause = false;
+
+  if (pointerWash && !heroReducedMotion.matches) {
+    let pointerFrame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    function updatePointerWash() {
+      pointerFrame = 0;
+      const rect = hero.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((pointerX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((pointerY - rect.top) / rect.height) * 100));
+      pointerWash.style.setProperty('--wash-x', `${x.toFixed(2)}%`);
+      pointerWash.style.setProperty('--wash-y', `${y.toFixed(2)}%`);
+    }
+
+    hero.addEventListener('pointerenter', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      hero.dataset.pointerWash = 'active';
+    });
+    hero.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!pointerFrame) pointerFrame = requestAnimationFrame(updatePointerWash);
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      delete hero.dataset.pointerWash;
+    });
+  }
 
   function setHeroColor(next, announce = false) {
     i = (next + palette.length) % palette.length;

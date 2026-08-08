@@ -68,6 +68,16 @@ for authored_copy in (
 
 need(index.count('images/hero/figure20.webp') >= 2, "portrait image and mask must remain figure20.webp")
 need(index.count('images/hero/figure20-lens.webp') == 1, "hero lens mask must remain present")
+need('class="hero-pointer-wash"' in index,
+     "the Home hero needs the approved decorative pointer wash layer")
+need(".hero-pointer-wash" in css and "radial-gradient" in css and
+     "@media (min-width: 761px)" in css,
+     "the pointer wash must stay feathered and limited to desktop viewports")
+need("hero.querySelector('.hero-pointer-wash')" in js and
+     "hero.addEventListener('pointermove'" in js and
+     "event.pointerType !== 'mouse'" in js and
+     "requestAnimationFrame(updatePointerWash)" in js,
+     "the pointer wash must use a mouse-only, hero-scoped rAF update path")
 need(index.count('class="hero-lens-portal dna-trigger') == 2,
      "each portrait lens must own a Design DNA trigger")
 need(index.count('hero-lens-portal--left') == 1 and index.count('hero-lens-portal--right') == 1,

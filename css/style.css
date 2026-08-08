@@ -687,6 +687,32 @@ main#main-content {
   pointer-events: none;
 }
 
+/* A restrained revival of the original cursor-reactive hero wash. It stays
+   behind the type and portrait, follows fine pointers only, and borrows the
+   active hero palette so it supports the lens interaction without becoming a
+   second affordance. */
+.hero-pointer-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  contain: paint;
+  will-change: background-position, opacity;
+  background:
+    radial-gradient(
+      circle clamp(240px, 26vw, 420px) at var(--wash-x, 66%) var(--wash-y, 50%),
+      color-mix(in oklab, var(--accent-2, var(--blue)) 18%, transparent) 0%,
+      color-mix(in oklab, var(--lens-color, var(--pink)) 9%, transparent) 48%,
+      transparent 74%
+    );
+  transition: opacity 260ms ease;
+}
+
+@media (min-width: 761px) {
+  .hero[data-pointer-wash="active"] .hero-pointer-wash { opacity: 1; }
+}
+
 /* Giant headline — two words stacked tight, left-aligned, the whole block
    centered in the hero. Figure sits in front; the type wings peek out
    left/right of the silhouette. */
@@ -990,7 +1016,9 @@ main#main-content {
   .hero-portrait::after,
   .hero-portrait-lens,
   .hero-cycle-dot,
-  .hero-lens-portal::before { transform: none !important; transition: none; }
+  .hero-lens-portal::before,
+  .hero-pointer-wash { transform: none !important; transition: none; }
+  .hero-pointer-wash { display: none; }
 }
 
 /* Tablet: tighter scale on side meta blocks, shrink the giant type */
@@ -1030,6 +1058,7 @@ main#main-content {
   .hero-lens-hitarea {
     height: min(60vh, 470px);
   }
+  .hero-pointer-wash { display: none; }
   /* The 44px touch targets are intentionally larger than the rendered lenses
      at this breakpoint. Size the visible outline from the portrait container,
      not from that enlarged interactive box, so it continues to hug each lens. */

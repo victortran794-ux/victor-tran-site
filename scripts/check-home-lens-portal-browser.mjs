@@ -194,6 +194,9 @@ try {
       const portrait = document.querySelector('.hero-portrait-cutout');
       const switcher = document.querySelector('.lens-switcher');
       const hitarea = document.querySelector('.hero-lens-hitarea');
+      const wash = document.querySelector('.hero-pointer-wash');
+      const washStyle = getComputedStyle(wash);
+      const heroRect = document.querySelector('.hero').getBoundingClientRect();
       return {
         viewport: [innerWidth, innerHeight],
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -204,6 +207,8 @@ try {
         dnaTabs: switcher.querySelectorAll('[data-lens="dna"], .dna-trigger').length,
         portalCount: portals.length,
         tooltipCount: document.querySelectorAll('.hero-lens-tooltip, [role="tooltip"]').length,
+        wash: { display: washStyle.display, opacity: parseFloat(washStyle.opacity) },
+        heroRect: [heroRect.left, heroRect.top, heroRect.width, heroRect.height],
         overlayHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
       };
     })()`);
@@ -230,7 +235,48 @@ try {
     assert(base.switcherButtons === 2 && base.dnaTabs === 0, `${viewport.label}: top switcher still contains DNA ${JSON.stringify(base)}`);
     assert(base.portalCount === 2 && base.tooltipCount === 0,
       `${viewport.label}: lens portals must be visually hidden and tooltip-free ${JSON.stringify(base)}`);
+    assert(viewport.mobile ? base.wash.display === 'none' : base.wash.display !== 'none' && base.wash.opacity === 0,
+      `${viewport.label}: pointer wash baseline failed ${JSON.stringify(base.wash)}`);
     assert(base.overlayHidden === 'true', `${viewport.label}: DNA overlay must begin closed`);
+
+    if (!viewport.mobile) {
+      const washPoint = { x: viewport.width * 0.24, y: viewport.height * 0.58 };
+      await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: washPoint.x, y: washPoint.y });
+      await delay(300);
+      const washState = await cdp.evaluate(`(() => {
+        const hero = document.querySelector('.hero');
+        const wash = document.querySelector('.hero-pointer-wash');
+        const style = getComputedStyle(wash);
+        return {
+          active: hero.dataset.pointerWash,
+          x: parseFloat(wash.style.getPropertyValue('--wash-x')),
+          y: parseFloat(wash.style.getPropertyValue('--wash-y')),
+          opacity: parseFloat(style.opacity),
+          background: style.backgroundImage,
+        };
+      })()`);
+      const expectedWashX = ((washPoint.x - base.heroRect[0]) / base.heroRect[2]) * 100;
+      const expectedWashY = ((washPoint.y - base.heroRect[1]) / base.heroRect[3]) * 100;
+      assert(washState.active === 'active' && Math.abs(washState.x - expectedWashX) <= 0.5 &&
+        Math.abs(washState.y - expectedWashY) <= 0.5 && washState.opacity >= 0.99 &&
+        washState.background.includes('radial-gradient'),
+        `${viewport.label}: pointer wash did not track subtly across the hero ${JSON.stringify(washState)}`);
+      await cdp.screenshot(`${viewport.label}-pointer-wash-left.png`);
+
+      const washPointRight = { x: viewport.width * 0.76, y: viewport.height * 0.42 };
+      await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: washPointRight.x, y: washPointRight.y });
+      await delay(80);
+      const movedWash = await cdp.evaluate(`(() => {
+        const wash = document.querySelector('.hero-pointer-wash');
+        return {
+          x: parseFloat(wash.style.getPropertyValue('--wash-x')),
+          y: parseFloat(wash.style.getPropertyValue('--wash-y')),
+        };
+      })()`);
+      assert(Math.abs(movedWash.x - washState.x) >= 40 && Math.abs(movedWash.y - washState.y) >= 10,
+        `${viewport.label}: pointer wash did not travel across the hero ${JSON.stringify({ washState, movedWash })}`);
+      await cdp.screenshot(`${viewport.label}-pointer-wash-right.png`);
+    }
 
     await cdp.evaluate(`document.activeElement?.blur()`);
     let reachedPortal = false;
@@ -350,9 +396,10 @@ try {
       return {
         matches: matchMedia('(prefers-reduced-motion: reduce)').matches,
         pseudoTransition: pseudo.transitionDuration,
+        washDisplay: getComputedStyle(document.querySelector('.hero-pointer-wash')).display,
       };
     })()`);
-    assert(reduced.matches && parseFloat(reduced.pseudoTransition) <= 0.001,
+    assert(reduced.matches && parseFloat(reduced.pseudoTransition) <= 0.001 && reduced.washDisplay === 'none',
       `${viewport.label}: reduced-motion lens state failed ${JSON.stringify(reduced)}`);
     states.push(`${viewport.width}x${viewport.height}`);
   }
