@@ -184,14 +184,20 @@ try {
           label: portal.getAttribute('aria-label'),
           controls: portal.getAttribute('aria-controls'),
           hasPopup: portal.getAttribute('aria-haspopup'),
-          pseudoInset: [pseudo.top, pseudo.right, pseudo.bottom, pseudo.left],
+          pseudoInset: [pseudo.top, pseudo.left],
+          pseudoSize: [
+            parseFloat(pseudo.width) + parseFloat(pseudo.borderLeftWidth) + parseFloat(pseudo.borderRightWidth),
+            parseFloat(pseudo.height) + parseFloat(pseudo.borderTopWidth) + parseFloat(pseudo.borderBottomWidth),
+          ],
         };
       });
       const portrait = document.querySelector('.hero-portrait-cutout');
       const switcher = document.querySelector('.lens-switcher');
+      const hitarea = document.querySelector('.hero-lens-hitarea');
       return {
         viewport: [innerWidth, innerHeight],
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        hitareaHeight: hitarea.getBoundingClientRect().height,
         targets,
         portrait: [portrait.complete, portrait.naturalWidth, portrait.naturalHeight],
         switcherButtons: switcher.querySelectorAll('.lens-switcher-btn').length,
@@ -211,6 +217,15 @@ try {
     assert(base.targets.every(target => target.controls === 'dnaOverlay' && target.hasPopup === 'dialog' &&
       target.pseudoInset.every(value => value === '-2px')),
       `${viewport.label}: accessible relationship or two-pixel outline geometry failed ${JSON.stringify(base.targets)}`);
+    if (viewport.mobile) {
+      const expectedOutlineSizes = [
+        [base.hitareaHeight * 0.0756 + 4, base.hitareaHeight * 0.0756 + 4],
+        [base.hitareaHeight * 0.0811 + 4, base.hitareaHeight * 0.0761 + 4],
+      ];
+      assert(base.targets.every((target, index) => target.pseudoSize.every((value, axis) =>
+        Math.abs(value - expectedOutlineSizes[index][axis]) <= 0.75)),
+      `${viewport.label}: outline must follow the rendered lens instead of the enlarged touch target ${JSON.stringify({ targets: base.targets, expectedOutlineSizes })}`);
+    }
     assert(base.portrait[0] && base.portrait[1] > 0 && base.portrait[2] > 0, `${viewport.label}: portrait failed to decode ${base.portrait}`);
     assert(base.switcherButtons === 2 && base.dnaTabs === 0, `${viewport.label}: top switcher still contains DNA ${JSON.stringify(base)}`);
     assert(base.portalCount === 2 && base.tooltipCount === 0,

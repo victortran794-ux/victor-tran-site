@@ -812,6 +812,7 @@ main#main-content {
   bottom: 0;
   height: 100%;
   aspect-ratio: 1250 / 1800;
+  container-type: size;
   z-index: 4;
   pointer-events: none;
 }
@@ -1028,6 +1029,21 @@ main#main-content {
   }
   .hero-lens-hitarea {
     height: min(60vh, 470px);
+  }
+  /* The 44px touch targets are intentionally larger than the rendered lenses
+     at this breakpoint. Size the visible outline from the portrait container,
+     not from that enlarged interactive box, so it continues to hug each lens. */
+  .hero-lens-portal--left::before {
+    right: auto;
+    bottom: auto;
+    width: calc(7.56cqh + 2px);
+    height: calc(7.56cqh + 2px);
+  }
+  .hero-lens-portal--right::before {
+    right: auto;
+    bottom: auto;
+    width: calc(8.11cqh + 2px);
+    height: calc(7.61cqh + 2px);
   }
   .hero-meta {
     top: var(--space-8);
