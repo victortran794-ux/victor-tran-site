@@ -19,7 +19,7 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 
 const frozenFiles = {
-  'ibmcloud.html': '80a71a6fd316d903f13ba7e2e197ce9cc5a035122e7c78cc9dbf53ae9bede38f',
+
   'pci.html': '538337937e3d414313bc0dab4904edcc4002807a2f9ba080aaf4eaf913ab8895',
   'pikappapp.html': 'd5cd1a686ce851b2ee580edd4fb3264a3b630014913bc9e503a3a9a79d1af029',
   'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
@@ -49,6 +49,13 @@ for (const [relativePath, expected] of Object.entries(assetHashes)) {
 }
 
 const html = text('ibm-patterns.html');
+const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
+  .replace(/<(?:script|style|svg)\b[\s\S]*?<\/(?:script|style|svg)>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .trim()
+  .split(/\s+/)
+  .filter(Boolean).length;
+if (narrativeWords > 1080) fail(`IBM Patterns narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
 const css = text('css/ibm-patterns.css');
 const js = text('js/ibm-patterns.js');
 if (/^\ufeff?\d+\|/m.test(html)) fail('ibm-patterns.html contains line-number metadata from a file-reading tool');
@@ -80,9 +87,12 @@ for (const required of [
   'Make the next destination visible.',
   'How the routing model took shape.',
   'Making the front door feel more human.',
-  'The playback was part of the design.',
+  'Carry the work beyond the room.',
   'What carried forward.',
-  'If I revisited it now.',
+  'Five-person team',
+  'six-week concept',
+  'Visual Designer',
+  'did not become the production page',
   'This is not a designed, tested, or implemented AI system.',
   '<script src="js/ibm-patterns.js"></script>',
 ]) {
@@ -95,6 +105,19 @@ if (count(html, 'class="patterns-hero-study') !== 2) fail('IBM Patterns must ret
 if (count(html, 'class="patterns-atlas-item') !== 3) fail('IBM Patterns must retain exactly three final interface atlas views');
 if (count(html, 'images/ibm-patterns-case-study/') !== 12) fail('IBM Patterns must reference exactly twelve approved evidence images');
 if (!html.includes('loading="lazy" decoding="async"')) fail('IBM Patterns evidence media must use lazy asynchronous decoding');
+
+for (const removed of [
+  'class="patterns-eyebrow"',
+  'class="patterns-meta"',
+  'class="patterns-role-grid"',
+  'class="patterns-question-set"',
+  'class="patterns-playback-path"',
+  'class="patterns-coda"',
+  'rather than owning every part alone',
+  'The Saga As-Is',
+]) {
+  if (html.includes(removed)) fail(`ibm-patterns.html retained a removed editorial component or phrase: ${removed}`);
+}
 
 for (const forbidden of [
   '135,000', '135k', '13,000', '13k',
@@ -118,8 +141,8 @@ for (const required of [
 ]) {
   if (!css.includes(required)) fail(`css/ibm-patterns.css missing required contract: ${required}`);
 }
-for (const forbidden of ['.private-bar', '.local-warning', 'data:image/']) {
-  if (css.includes(forbidden)) fail(`css/ibm-patterns.css retained private-review implementation: ${forbidden}`);
+for (const forbidden of ['.private-bar', '.local-warning', 'data:image/', '.patterns-eyebrow', '.patterns-meta', '.patterns-role-grid', '.patterns-question-set', '.patterns-questions', '.patterns-playback-path', '.patterns-influence-list', '.patterns-coda']) {
+  if (css.includes(forbidden)) fail(`css/ibm-patterns.css retained removed/private implementation: ${forbidden}`);
 }
 for (const required of [
   "document.getElementById('patterns-motion-toggle')",

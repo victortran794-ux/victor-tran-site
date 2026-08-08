@@ -34,28 +34,25 @@ for (const phrase of [
   'class="project-nav"',
   'href="wxo-canvas.html"',
   'href="ibm-patterns.html"',
-  'I design complex enterprise workflows, stay close to implementation quality, and build visual methods intended to make complex work easier to understand and extend.',
+  'My journey into observability',
   '2021–2023',
   'id="product-work"',
   'id="team-action"',
   'id="visual-systems"',
+  'Pending protected asset selection',
   'Carried complex product work',
   'Turned review findings into team action',
   'Designed visual systems for reuse',
   'Event Notifications gave me one of my clearest opportunities to carry a complex workflow from framing through testing and recommendation.',
-  'fast-track concept',
+  'faster sequence through Details, Sources, Destinations, and Review',
   'four dark-mode issues',
   'Reconstructed working method',
   'Improvement Jam findings translated into a UX backlog.',
   'Figma illustration kit developed for pilot use',
   'Create leverage beyond the artifact.',
-  'Across IBM Cloud, my strongest work connected individual design decisions to the systems around them',
+  'Across IBM Cloud, I moved from needing the system explained to me',
   'images/ibm-thumb-light.png',
   'images/ibm-thumb-dark.png',
-  'images/ibm-p4-world-hifi.jpg',
-  'images/ibm-p4-world-01.jpg',
-  'images/ibm-p1-sketch.jpg',
-  'images/ibm-p1-devops.jpg',
 ]) {
   require(html.includes(phrase), `missing required protected hiring-page contract: ${phrase}`);
 }
@@ -70,22 +67,36 @@ for (const phrase of [
   'helped designers build complex assets faster',
   'reusable connected-experiences pattern',
   'Shipped complex product work',
+  'Some releases shipped',
   'PRIVATE REVIEW · NOT FOR PUBLICATION',
   'data:image/',
   'ibm-en-conditions.jpg',
   'ibm-en-custom-domains.jpg',
+  '<dt>Client</dt>',
+  'class="ibm-visual-atlas',
 ]) {
   require(!html.includes(phrase), `forbidden legacy/private phrase or asset remains: ${phrase}`);
 }
 
 const proofIds = [...html.matchAll(/<section\b[^>]*\bclass="[^"]*\bibm-proof\b[^"]*"[^>]*\bid="([^"]+)"/gi)].map(match => match[1]);
 require(JSON.stringify(proofIds) === JSON.stringify(['product-work', 'team-action', 'visual-systems']), `expected exactly three ordered proof sections, found: ${proofIds.join(', ')}`);
+const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
+  .replace(/<(?:script|style|svg)\b[\s\S]*?<\/(?:script|style|svg)>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .trim()
+  .split(/\s+/)
+  .filter(Boolean).length;
+require(narrativeWords <= 1150, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
+require((html.match(/class="[^"]*\bibm-evidence-reservation\b[^"]*"/g) || []).length === 2, 'expected exactly two honest pending evidence reservations');
+require((html.match(/data-media-slot data-asset-status="victor-selection-required"/g) || []).length === 2, 'pending slots must remain empty and explicitly require Victor selection');
+const pendingReservations = [...html.matchAll(/<aside\b[^>]*\bibm-evidence-reservation\b[^>]*>([\s\S]*?)<\/aside>/gi)].map(match => match[1]);
+require(pendingReservations.length === 2 && pendingReservations.every(slot => !/<(?:img|picture|svg)\b|\bsrc\s*=/i.test(slot)), 'pending evidence reservations must not impersonate selected media');
 
 const svgLabels = [...html.matchAll(/<svg\b[^>]*\baria-label="([^"]+)"/gi)].map(match => match[1]);
 require(svgLabels.length === 3, `expected three sanitized Event Notifications SVGs, found ${svgLabels.length}`);
 
 const images = [...html.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
-require(images.length >= 8, `expected production shell and selected evidence images, found ${images.length}`);
+require(images.length >= 3, `expected production shell and approved hero evidence images, found ${images.length}`);
 for (const tag of images) {
   require(/\bwidth="\d+"/i.test(tag), `image missing numeric width: ${tag.slice(0, 100)}`);
   require(/\bheight="\d+"/i.test(tag), `image missing numeric height: ${tag.slice(0, 100)}`);
@@ -96,6 +107,8 @@ require(fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css')), 'page-specifi
 if (fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css'))) {
   const css = read('css/ibmcloud-hiring.css');
   require(css.includes('[data-project="ibm-cloud"]'), 'IBM hiring CSS must be scoped by data-project');
+  require(css.includes('[data-project="ibm-cloud"] .ibm-hiring-hero {') && css.includes('border-bottom: 0;'), 'IBM Cloud must remove the crowded page-header divider');
+  require(css.includes('[data-project="ibm-cloud"] .ibm-evidence-reservation'), 'IBM Cloud pending evidence reservations are unstyled');
   require(!/var\(--(?:orange|fg|fg-muted|space-7)\b/.test(css), 'IBM hiring CSS uses an undefined or stale token');
 }
 

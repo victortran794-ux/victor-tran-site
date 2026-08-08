@@ -34,6 +34,9 @@ on:
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
+      - "scripts/check-ibm-patterns-browser.mjs"
+      - "scripts/check-ibmcloud-hiring-cut.mjs"
+      - "scripts/check-ibmcloud-browser.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
       - "js/wxo-workflows-vico2.js"
@@ -86,6 +89,9 @@ on:
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
+      - "scripts/check-ibm-patterns-browser.mjs"
+      - "scripts/check-ibmcloud-hiring-cut.mjs"
+      - "scripts/check-ibmcloud-browser.mjs"
       - "scripts/check-wxo-document-processing-integration.mjs"
       - "scripts/check-wxo-document-processing-browser.mjs"
       - "js/wxo-workflows-vico2.js"
@@ -133,6 +139,19 @@ jobs:
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract
         run: npm run check:ibm-patterns
+      - name: IBM Cloud and IBM Patterns browser contracts
+        run: |
+          node scripts/check-ibmcloud-hiring-cut.mjs
+          python3 -m http.server 8876 --bind 127.0.0.1 >/tmp/ibm-two-page-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            curl --fail --silent http://127.0.0.1:8876/ibmcloud.html >/dev/null && break
+            sleep 0.25
+          done
+          curl --fail --silent http://127.0.0.1:8876/ibmcloud.html >/dev/null
+          SITE_URL=http://127.0.0.1:8876 npm run check:ibmcloud-browser
+          SITE_URL=http://127.0.0.1:8876 npm run check:ibm-patterns-browser
       - name: Pi Kapp page browser contract
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pikapp-page-server.log 2>&1 &
