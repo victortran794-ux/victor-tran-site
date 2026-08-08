@@ -23,6 +23,7 @@ const projects = JSON.parse(read('data/projects.json'));
 const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
+const mainJs = read('js/main.js');
 const passwordGate = read('js/password-gate.js');
 const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
@@ -93,26 +94,39 @@ requireText(workflowCss, "html[data-theme='dark'] .workflow-pages", 'Workflow st
 requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use the contrast-safe dark-theme blue token.');
 requireText(workflowCss, '.wxo-doc-meta {', 'The consolidated Document Processing summary must have scoped spacing.');
 requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Processing outcome must have scoped separation.');
-requireText(workflowCss, '.wxo-page .site-route-status {', 'The wxO protected status must scroll with the page instead of covering chapter content.');
+requireText(workflowCss, '.doc-processing-page .site-route-status {', 'The wxO and Document Processing pages must hide the redundant protected-status note.');
+requireText(workflowCss, 'display: none;', 'The redundant protected-status note must not render.');
+requireText(workflowCss, '.doc-motion-toggle {', 'The autoplay journey must expose a visible pause control.');
+requireText(mainJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the shared script.');
 
 for (const text of [
   'IBM watsonX Orchestrate · 2024–present',
   'Agentic workflow canvas.',
   'Document Processing is a focused chapter',
+  'Visual Designer',
+  'Human-in-the-loop shared patterns',
+  'User activities',
   'released in July 2026',
   'Make the trust loop visible.',
   'Classifier + Extractor specifications',
-  'HITL + shared patterns',
   'Evaluation direction · released July 2026',
   'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
   'lead designer for Accuracy Evaluation',
   'Canvas 1',
   'no shipment claim',
-  'Product design, systems, specifications',
   'href="#canvas"',
   'href="#document-processing"',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
+
+forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role and period only.');
+forbid(wxo, /Evidence boundary:/i, 'wxO umbrella must not repeat evidence-boundary callouts.');
+forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Design to implementation/i, 'Deferred Canvas sections must not remain in the active story.');
+requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must weight Canvas and Document Processing 3:1.');
+requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
+requireText(wxo, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
+requireText(wxo, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
+forbid(wxo, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 
 for (const asset of [
   'canvas1-flow-controls-sanitized.png',
@@ -120,14 +134,11 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
-  '01-select-training-documents-sanitized.png',
-  '02-review-and-correct-sanitized.png',
-  '03-evaluation-details-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
 if (count(wxo, /class="doc-loop-item"/gi) !== 5) fail('The wxO Document Processing chapter must show all five trust-loop steps.');
-if (count(wxo, /class="doc-story-frame/gi) !== 3) fail('The wxO Document Processing chapter must show the three approved storyboard frames.');
+if (count(wxo, /class="doc-story-frame/gi) !== 0) fail('The redundant three-frame Document Processing storyboard must be removed.');
 if (count(wxo, /class="doc-decision-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded product decisions.');
 if (count(wxo, /class="doc-role-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded contribution cards.');
 
@@ -151,27 +162,30 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   else if (sha256(asset) !== expected) fail(`Approved wxO derivative changed: ${asset}.`);
 }
 
-if (count(wxo, /<img\b/gi) !== 6) fail('wxO Canvas must use exactly six images: shared nav image, two Canvas derivatives, and three Document Processing frames.');
+if (count(wxo, /<img\b/gi) !== 3) fail('wxO Canvas must use exactly three images: shared nav image and two Canvas derivatives.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [
   'Make the trust loop visible.',
   'Product design · 2025–2026',
   'Classifier + Extractor specifications',
-  'HITL + shared patterns',
+  'Human-in-the-loop shared patterns',
   'Evaluation direction · released July 2026',
   'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
   'lead designer for Accuracy Evaluation',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
+forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
+requireText(doc, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
+requireText(doc, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
+forbid(doc, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
+if (count(doc, /class="doc-story-grid/gi) !== 0) fail('The redundant standalone Document Processing storyboard must be removed.');
+
 for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
-  '01-select-training-documents-sanitized.png',
-  '02-review-and-correct-sanitized.png',
-  '03-evaluation-details-sanitized.png',
 ]) requireText(doc, asset, `Document Processing missing approved sanitized evidence ${asset}`);
 
 const expectedDocumentAssets = {
