@@ -97,12 +97,13 @@ Verified recognition
 
 The complete nine-issue archive remains accessible.
 
-Archive note
+Complete archive
 
-Read the full archive on Issuu, or visit pikapp.org for the latest issues.
+Read all nine issues from Victor's five-year run, then continue to the magazine's latest releases.
 
 ## Images
 
+- Star & Lamp magazine covers arranged across five years: images/thumb-sal.webp
 - Fall 2020 Connie Owen portrait tribute spread: images/sal-f2020-connie-owen.jpg
 - Fall 2020 House & Home spread: images/sal-f2020-house-home.jpg
 - Fall 2020 Virtually Impossible spread: images/sal-f2020-virtually.jpg

@@ -47,6 +47,7 @@ run_required "Protected IBM Cloud hiring-cut contract" node scripts/check-ibmclo
 run_required "Production-host regression check" node scripts/check-production-host.mjs
 run_required "Production artifact containment contract" npm run check:artifact-containment
 run_required "PCI claims and protection contract" npm run check:pci-claims-protection
+run_required "Star & Lamp bounded revision contract" npm run check:sal-vico2
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
 run_required "Gallery media regression check" node scripts/check-gallery-media.mjs
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs

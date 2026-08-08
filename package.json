@@ -17,6 +17,8 @@
     "check:artifact-containment": "node scripts/check-production-artifact-containment.mjs",
     "check:pci-claims-protection": "node scripts/check-pci-claims-protection.mjs",
     "check:pci-browser": "node scripts/check-pci-browser.mjs",
+    "check:sal-vico2": "python3 scripts/check-sal-vico2.py",
+    "check:sal-browser": "node scripts/check-sal-browser.mjs",
     "verify:pikapp-demo": "npm run build:pikapp-demo && git diff --exit-code -- pikappapp/demo.bundle.css pikappapp/demo.bundle.js && npm run check:pikapp-demo",
     "test:content-export-policy": "node scripts/test-html-to-md.mjs",
     "check:content-export-policy": "node scripts/check-protected-content-exports.mjs",
