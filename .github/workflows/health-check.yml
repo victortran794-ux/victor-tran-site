@@ -26,6 +26,10 @@ on:
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
       - "scripts/check-about-semantics.mjs"
+      - "scripts/check-about-browser.mjs"
+      - "scripts/about-browser-process.mjs"
+      - "scripts/test-about-browser-process.mjs"
+      - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
@@ -73,6 +77,10 @@ on:
       - "scripts/generate-responsive-images.py"
       - "scripts/preflight.sh"
       - "scripts/check-about-semantics.mjs"
+      - "scripts/check-about-browser.mjs"
+      - "scripts/about-browser-process.mjs"
+      - "scripts/test-about-browser-process.mjs"
+      - "scripts/html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "scripts/check-pci-claims-protection.mjs"
@@ -144,6 +152,8 @@ jobs:
         run: node scripts/check-production-host.mjs
       - name: About semantic-heading contract
         run: node scripts/check-about-semantics.mjs
+      - name: About voice-calibration browser contract
+        run: npm run check:about-browser
       - name: Production artifact containment contract
         run: npm run check:artifact-containment
       - name: PCI claims and protection contract

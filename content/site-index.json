@@ -138,8 +138,16 @@
     "description": "About Victor Tran. Visual Designer at IBM, Austin TX.",
     "contentFile": "content/about.md",
     "headings": [
+      "What I’m doing now",
+      "Visual Designer, IBM watsonx Orchestrate",
+      "User Experience Designer, IBM Cloud",
+      "What I design",
+      "Things I've done",
+      "Past work",
       "Right now I am...",
-      "Tetris, but soft",
+      "A little Tetris",
+      "Ready?",
+      "Game over",
       "A tour of my taste"
     ],
     "images": [
