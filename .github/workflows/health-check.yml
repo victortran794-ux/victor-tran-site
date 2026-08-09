@@ -35,6 +35,7 @@ on:
       - "scripts/about-browser-process.mjs"
       - "scripts/test-about-browser-process.mjs"
       - "scripts/html-to-md.mjs"
+      - "scripts/test-html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -102,6 +103,7 @@ on:
       - "scripts/about-browser-process.mjs"
       - "scripts/test-about-browser-process.mjs"
       - "scripts/html-to-md.mjs"
+      - "scripts/test-html-to-md.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -159,6 +161,8 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm run verify:pikapp-demo
+      - name: Content export generator policy fixture
+        run: npm run test:content-export-policy
       - name: Pi Kapp page integration contract
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract

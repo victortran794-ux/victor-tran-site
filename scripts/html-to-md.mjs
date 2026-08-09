@@ -90,8 +90,9 @@ function normalizeText(value = '') {
 }
 
 function getAttribute(tag, attr) {
-  const match = tag.match(new RegExp(`${attr}\\s*=\\s*["']([^"']+)["']`, 'i'));
-  return match ? decodeEntities(match[1].trim()) : '';
+  const match = tag.match(new RegExp(`${attr}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`, 'i'));
+  const value = match?.[1] ?? match?.[2] ?? '';
+  return decodeEntities(value.trim());
 }
 
 function firstMatch(html, pattern) {

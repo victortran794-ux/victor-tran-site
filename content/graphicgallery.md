@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "Graphic Design in motion."
+title: "Graphics. Design. Print."
 source: "graphicgallery.html"
 url: "/graphicgallery"
 category: "Graphic Design"
 description: "An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran."
 ---
 
-# Graphic Design in motion.
+# Graphics. Design. Print.
 
 ## Description
 
@@ -34,7 +34,7 @@ An energetic visual archive spanning identity, print, applications, presentation
 
 ## Body Copy
 
-Identity, print, presentations, and applications. Edited by format, scale, and visual energy.
+A fun plethora of side projects, explorations, and collaborations with neat people and ideas.
 
 Project graphics
 
@@ -46,13 +46,9 @@ Brand applications
 
 Event graphics
 
-Illustration
-
-Information design
-
 ## Images
 
-- Three illustrated Chantico bottle applications: images/graphic-archive-v2/chantico.webp
+- Chantico's Flame illustration: images/logos-2.jpg
 - EDC Boombox 3D: images/gg-edc-1.jpg
 - EDC Boombox illustration: images/gg-edc-0.jpg
 - EDC pink eye graphic: images/gg-edc-2.jpg
@@ -79,12 +75,12 @@ Information design
 - MTM Widescreen presentation slide: images/gg-slides-15.jpg
 - Presentation slide composition: images/gg-slides-16.jpg
 - Pi Kappa Phi Day of Giving: images/gg-day-of-giving.png
+- Day of Giving event identity: images/graphic-archive-v2/dog.webp
 - IBM Be Equal Pride fan: images/gg-ibm-fan.jpg
 - Collection of identity marks: images/logos-1.jpg
-- Logo sketches: images/logos-2.jpg
+- Three illustrated Chantico bottle applications: images/graphic-archive-v2/chantico.webp
 - STM banner: images/logos-3.jpg
 - Brand identity hero composition: images/logos-4.jpg
-- Day of Giving event identity: images/graphic-archive-v2/dog.webp
 - AbEx 40 event graphic: images/graphic-archive-v2/abex.webp
 - Little Shop: images/gg-illus-1.jpg
 - The Wiz: images/gg-illus-2.jpg

@@ -14,9 +14,9 @@
   <meta property="og:url" content="https://www.victortrandesign.com/graphicgallery">
   <meta property="og:title" content="Graphic Design · Victor Tran">
   <meta property="og:description" content="An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran.">
-  <meta property="og:image" content="https://www.victortrandesign.com/images/graphic-archive-v2/chantico.webp">
-  <meta property="og:image:width" content="2400">
-  <meta property="og:image:height" content="2000">
+  <meta property="og:image" content="https://www.victortrandesign.com/images/logos-2.jpg">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="960">
   <meta name="twitter:card" content="summary_large_image">
   <title>Graphic Design · Victor Tran Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,7 +94,8 @@
     .graphic-archive-v2 .graphic-sgla .is-half { grid-column: span 6; }
     .graphic-archive-v2 .graphic-sgla .is-full { grid-column: 1 / -1; }
     .graphic-archive-v2 .graphic-brand-grid .is-full { grid-column: 1 / -1; }
-    .graphic-archive-v2 .graphic-brand-grid .is-third { grid-column: span 4; }
+    .graphic-archive-v2 .graphic-brand-grid .is-third { grid-column: span 4; aspect-ratio: 4 / 3; display: grid; place-items: center; background: color-mix(in srgb, var(--cream) 12%, transparent); }
+    .graphic-archive-v2 .graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }
     .graphic-archive-v2 .graphic-brand-grid .is-four { grid-column: span 4; }
     .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
     .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
@@ -103,7 +104,6 @@
     .graphic-archive-v2 .graphic-slides.is-compact figure { break-inside: avoid; margin: 0 0 8px; }
     .graphic-archive-v2 .graphic-slides.is-compact img { width: 100%; }
     @media (min-width: 1200px) { .graphic-archive-v2 .graphic-slides.is-compact { columns: 5; } }
-    .graphic-archive-v2 .graphic-wide { border-bottom: 18px solid var(--pink); }
     .graphic-archive-v2 .archive-frame figcaption { color: var(--acid); }
     @media (max-width: 720px) {
       .graphic-archive-v2 .graphic-opening { min-height: auto; grid-template-columns: 1fr; }
@@ -196,11 +196,11 @@
         <header class="graphic-opening">
           <div>
             <p class="section-label archive-kicker label-design">Graphic Design</p>
-            <h1 class="archive-title" id="graphic-archive-title">Graphic Design in motion.</h1>
-            <p class="archive-lede">Identity, print, presentations, and applications. Edited by format, scale, and visual energy.</p>
+            <h1 class="archive-title" id="graphic-archive-title">Graphics. Design. Print.</h1>
+            <p class="archive-lede">A fun plethora of side projects, explorations, and collaborations with neat people and ideas.</p>
           </div>
           <figure class="archive-frame">
-            <img loading="eager" fetchpriority="high" decoding="async" src="images/graphic-archive-v2/chantico.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications">
+            <img loading="eager" fetchpriority="high" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Chantico's Flame illustration">
 
           </figure>
         </header>
@@ -252,9 +252,10 @@
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Brand applications</p><h2 id="graphic-live-marks-title">Marks and applications</h2></div>
           <div class="graphic-brand-grid">
             <figure class="archive-frame is-four" data-live-primary><img loading="lazy" decoding="async" src="images/gg-day-of-giving.png" width="1081" height="1080" alt="Pi Kappa Phi Day of Giving"></figure>
+            <figure class="archive-frame is-four" data-live-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/dog.webp" width="2400" height="2400" alt="Day of Giving event identity"></figure>
             <figure class="archive-frame is-eight" data-live-primary><img loading="lazy" decoding="async" src="images/gg-ibm-fan.jpg" width="1800" height="1350" alt="IBM Be Equal Pride fan"></figure>
             <figure class="archive-frame is-full" data-live-primary><img loading="lazy" decoding="async" src="images/logos-1.jpg" width="4000" height="2250" alt="Collection of identity marks"></figure>
-            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Logo sketches"></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/chantico.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications"></figure>
             <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-3.jpg" width="2500" height="1500" alt="STM banner"></figure>
             <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-4.jpg" width="1698" height="1080" alt="Brand identity hero composition"></figure>
           </div>
@@ -263,13 +264,12 @@
         <section class="archive-chapter" aria-labelledby="graphic-events-title">
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Event graphics</p><h2 id="graphic-events-title">Events and print</h2></div>
           <div class="graphic-events">
-            <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/dog.webp" width="2400" height="2400" alt="Day of Giving event identity"></figure>
             <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="AbEx 40 event graphic"></figure>
           </div>
         </section>
 
         <section class="archive-chapter" aria-labelledby="graphic-illustrations-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Illustration</p><h2 id="graphic-illustrations-title">Selected illustrations</h2></div>
+          <div class="archive-chapter-head"><h2 id="graphic-illustrations-title">Selected illustrations</h2></div>
           <div class="graphic-illustrations">
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop"></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz"></figure>
@@ -280,7 +280,7 @@
 
 
         <section class="archive-chapter" aria-labelledby="graphic-wide-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Information design</p><h2 id="graphic-wide-title">Wide-format information design</h2></div>
+          <div class="archive-chapter-head"><h2 id="graphic-wide-title">Wide-format information design</h2></div>
           <figure class="archive-frame graphic-wide" data-live-primary><img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Wide informational graphic"></figure>
         </section>
       </div>

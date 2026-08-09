@@ -344,7 +344,7 @@
     "projects": []
   },
   {
-    "title": "Graphic Design in motion.",
+    "title": "Graphics. Design. Print.",
     "source": "graphicgallery.html",
     "url": "/graphicgallery",
     "category": "Graphic Design",
@@ -361,8 +361,8 @@
     ],
     "images": [
       {
-        "src": "images/graphic-archive-v2/chantico.webp",
-        "alt": "Three illustrated Chantico bottle applications"
+        "src": "images/logos-2.jpg",
+        "alt": "Chantico's Flame illustration"
       },
       {
         "src": "images/gg-edc-1.jpg",
