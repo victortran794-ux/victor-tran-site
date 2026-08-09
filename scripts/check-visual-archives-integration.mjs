@@ -88,7 +88,7 @@ const pages = {
     bodyClass: 'visual-archive-page graphic-archive-v2',
     marker: 'data-archive="graphic-contact-sheet"',
     keepExtendedArchive: false,
-    headings: ['Graphic Design in motion.', 'EDC / Boombox', 'Southeastern Greek Leadership Association', 'Selected slide work', 'Marks and applications', 'Events and print', 'Selected illustrations', 'Wide-format information design'],
+    headings: ['Graphics. Design. Print.', 'EDC / Boombox', 'Southeastern Greek Leadership Association', 'Selected slide work', 'Marks and applications', 'Events and print', 'Selected illustrations', 'Wide-format information design'],
     selectedAssets: [
       'images/graphic-archive-v2/chantico.webp',
       'images/graphic-archive-v2/dog.webp',
@@ -288,6 +288,42 @@ expect(sharedCss.includes('outline-color: var(--orange)') && sharedCss.includes(
 
 if (scope !== 'art') {
 const graphic = read('graphicgallery.html');
+const graphicPrimary = primaryHtml(graphic);
+const graphicMarkdown = read('content/graphicgallery.md');
+const graphicIndexEntry = JSON.parse(read('content/site-index.json')).find((entry) => entry.source === 'graphicgallery.html');
+expect(graphicMarkdown.includes("- Chantico's Flame illustration: images/logos-2.jpg"),
+  'content/graphicgallery.md: preserve the full Chantico opener alt text, including its apostrophe.');
+expect(graphicIndexEntry?.images?.find((image) => image.src === 'images/logos-2.jpg')?.alt === "Chantico's Flame illustration",
+  'content/site-index.json: preserve the full Chantico opener alt text, including its apostrophe.');
+expect(graphicPrimary.includes('<h1 class="archive-title" id="graphic-archive-title">Graphics. Design. Print.</h1>'),
+  'graphicgallery.html: use the approved Graphic title verbatim.');
+expect(graphicPrimary.includes('<p class="archive-lede">A fun plethora of side projects, explorations, and collaborations with neat people and ideas.</p>'),
+  'graphicgallery.html: use the approved Graphic supporting copy verbatim.');
+expect(!graphicPrimary.includes('Graphic Design in motion.') && !graphicPrimary.includes('Identity, print, presentations, and applications. Edited by format, scale, and visual energy.'),
+  'graphicgallery.html: remove superseded Graphic opening copy.');
+expect(/<meta property="og:image" content="https:\/\/www\.victortrandesign\.com\/images\/logos-2\.jpg">/.test(graphic) &&
+  /<meta property="og:image:width" content="1600">/.test(graphic) &&
+  /<meta property="og:image:height" content="960">/.test(graphic),
+  'graphicgallery.html: align Open Graph image metadata with the new Chantico opener.');
+const opening = graphicPrimary.match(/<header class="graphic-opening">([\s\S]*?)<\/header>/i)?.[1] ?? '';
+expect(/src="images\/logos-2\.jpg" width="1600" height="960" alt="Chantico's Flame illustration"/.test(opening),
+  'graphicgallery.html: open with the standalone Chantico\'s Flame illustration and truthful metadata.');
+const marksStack = graphicPrimary.match(/<div class="graphic-brand-grid">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect(/src="images\/graphic-archive-v2\/chantico\.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications"/.test(marksStack) &&
+  !marksStack.includes('src="images/logos-2.jpg"') && (graphicPrimary.match(/src="images\/logos-2\.jpg"/g) ?? []).length === 1 &&
+  (graphicPrimary.match(/src="images\/graphic-archive-v2\/chantico\.webp"/g) ?? []).length === 1,
+  'graphicgallery.html: literally swap Chantico assets so each approved asset appears once in its new position.');
+expect(marksStack.indexOf('src="images/gg-day-of-giving.png"') >= 0 && marksStack.indexOf('src="images/graphic-archive-v2/dog.webp"') >= 0 &&
+  Math.abs(marksStack.indexOf('src="images/gg-day-of-giving.png"') - marksStack.indexOf('src="images/graphic-archive-v2/dog.webp"')) < 700,
+  'graphicgallery.html: keep the Day of Giving event graphic adjacent to its logo study in the visible marks group.');
+const eventsStack = graphicPrimary.match(/<div class="graphic-events">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+expect(!eventsStack.includes('dog.webp') && eventsStack.includes('abex.webp'),
+  'graphicgallery.html: rebalance events around AbEx after moving Day of Giving to its logo study.');
+expect(graphic.includes('.graphic-brand-grid .is-third { grid-column: span 4; aspect-ratio: 4 / 3; display: grid; place-items: center;') &&
+  graphic.includes('.graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }'),
+  'graphicgallery.html: normalize the three-across identity row with equal contain-fit frames.');
+expect(!/\.graphic-archive-v2 \.graphic-wide \{[^}]*border-bottom:\s*18px solid var\(--pink\)/i.test(graphic),
+  'graphicgallery.html: remove the pink bottom stripe from the wide infographic treatment.');
 expect(!primaryHtml(graphic).includes('—'), 'graphicgallery.html: primary copy must not use em dashes.');
 expect(!/<figcaption\b/i.test(primaryHtml(graphic)),
   'graphicgallery.html: primary artwork should not carry small object labels.');
@@ -295,15 +331,17 @@ expect(!primaryHtml(graphic).includes('class="archive-note"'),
   'graphicgallery.html: use the same clean label/title hierarchy as Art without explanatory header notes.');
 for (const [label, heading] of [
   ['Project graphics', 'EDC / Boombox'],
-  ['Identity and presentation', 'Southeastern Greek Leadership Association'],
+  ['Identity system', 'Southeastern Greek Leadership Association'],
   ['Presentation design', 'Selected slide work'],
   ['Brand applications', 'Marks and applications'],
   ['Event graphics', 'Events and print'],
-  ['Illustration', 'Selected illustrations'],
-  ['Information design', 'Wide-format information design'],
 ]) {
   expect(primaryHtml(graphic).includes(`class="graphic-section-kicker">${label}</p>`) && primaryHtml(graphic).includes(`>${heading}</h2>`),
     `graphicgallery.html: use the aligned text pair “${label} / ${heading}”.`);
+}
+for (const redundantLabel of ['Illustration', 'Information design']) {
+  expect(!graphicPrimary.includes(`class="graphic-section-kicker">${redundantLabel}</p>`),
+    `graphicgallery.html: remove the redundant Graphic kicker “${redundantLabel}”.`);
 }
 expect(graphic.includes('border-top: 2px solid var(--pink)') && graphic.includes('color: var(--acid)') &&
   graphic.includes('font-size: clamp(2.35rem, 4.5vw, 4.75rem)'),
@@ -320,6 +358,22 @@ for (let slide = 1; slide <= 16; slide += 1) {
   expect(presentationStack.includes(`src="images/gg-slides-${slide}.jpg"`),
     `graphicgallery.html: compact presentation grid is missing gg-slides-${slide}.jpg.`);
 }
+const sglaStack = graphic.match(/<div class="graphic-sgla">([\s\S]*?)<\/div>/i)?.[1] ?? '';
+for (const duplicateSlide of ['gg-slides-3.jpg', 'gg-slides-6.jpg', 'gg-slides-7.jpg', 'gg-slides-13.jpg']) {
+  expect(!sglaStack.includes(duplicateSlide),
+    `graphicgallery.html: remove duplicated presentation asset ${duplicateSlide} from the SGLA identity section.`);
+}
+for (const sglaAsset of [
+  'images/graphic-archive-v2/sgla-2024-identity-development.webp',
+  'images/graphic-archive-v2/sgla-2023-brand-guidelines.webp',
+  'images/graphic-archive-v2/sgla-2024-signage-system.webp',
+  'images/graphic-archive-v2/sgla-2024-ballroom-system.webp',
+]) {
+  expect((sglaStack.match(new RegExp(sglaAsset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) ?? []).length === 1,
+    `graphicgallery.html: SGLA identity section must contain ${sglaAsset} exactly once.`);
+}
+expect(graphic.includes('<p class="graphic-section-kicker">Identity system</p><h2 id="graphic-sgla-title">'),
+  'graphicgallery.html: describe SGLA as an identity system instead of repeating presentation work.');
 expect((primaryHtml(graphic).match(/data-sgla-primary/g) ?? []).length >= 5,
   'graphicgallery.html: replace the rejected logo row with a substantial SGLA grouping.');
 for (const genericAlt of ['alt="Logo"', 'alt="Hero"', 'alt="Slide 3"', 'alt="Infographic"']) {

@@ -9,7 +9,11 @@ ART_ASSETS = {
     'coffee.webp': 'coffee.webp',
 }
 GRAPHIC_ASSETS = {name: name for name in (
-    'chantico.webp', 'dog.webp', 'abex.webp'
+    'chantico.webp', 'dog.webp', 'abex.webp',
+    'sgla-2024-identity-development.webp',
+    'sgla-2023-brand-guidelines.webp',
+    'sgla-2024-signage-system.webp',
+    'sgla-2024-ballroom-system.webp',
 )}
 
 SHARED_CSS = r'''
@@ -142,7 +146,8 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .graphic-sgla .is-half { grid-column: span 6; }
     .graphic-archive-v2 .graphic-sgla .is-full { grid-column: 1 / -1; }
     .graphic-archive-v2 .graphic-brand-grid .is-full { grid-column: 1 / -1; }
-    .graphic-archive-v2 .graphic-brand-grid .is-third { grid-column: span 4; }
+    .graphic-archive-v2 .graphic-brand-grid .is-third { grid-column: span 4; aspect-ratio: 4 / 3; display: grid; place-items: center; background: color-mix(in srgb, var(--cream) 12%, transparent); }
+    .graphic-archive-v2 .graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }
     .graphic-archive-v2 .graphic-brand-grid .is-four { grid-column: span 4; }
     .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
     .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
@@ -151,7 +156,6 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .graphic-slides.is-compact figure { break-inside: avoid; margin: 0 0 8px; }
     .graphic-archive-v2 .graphic-slides.is-compact img { width: 100%; }
     @media (min-width: 1200px) { .graphic-archive-v2 .graphic-slides.is-compact { columns: 5; } }
-    .graphic-archive-v2 .graphic-wide { border-bottom: 18px solid var(--pink); }
     .graphic-archive-v2 .archive-frame figcaption { color: var(--acid); }
     @media (max-width: 720px) {
       .graphic-archive-v2 .graphic-opening { min-height: auto; grid-template-columns: 1fr; }
@@ -291,11 +295,11 @@ GRAPHIC_PRIMARY = r'''
         <header class="graphic-opening">
           <div>
             <p class="section-label archive-kicker label-design">Graphic Design</p>
-            <h1 class="archive-title" id="graphic-archive-title">Graphic Design in motion.</h1>
-            <p class="archive-lede">Identity, print, presentations, and applications. Edited by format, scale, and visual energy.</p>
+            <h1 class="archive-title" id="graphic-archive-title">Graphics. Design. Print.</h1>
+            <p class="archive-lede">A fun plethora of side projects, explorations, and collaborations with neat people and ideas.</p>
           </div>
           <figure class="archive-frame">
-            <img loading="eager" fetchpriority="high" decoding="async" src="images/graphic-archive-v2/chantico.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications">
+            <img loading="eager" fetchpriority="high" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Chantico's Flame illustration">
             <figcaption>Applications · Chantico</figcaption>
           </figure>
         </header>
@@ -311,13 +315,13 @@ GRAPHIC_PRIMARY = r'''
         </section>
 
         <section class="archive-chapter" aria-labelledby="graphic-sgla-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Identity and presentation</p><h2 id="graphic-sgla-title">Southeastern Greek Leadership Association</h2></div>
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Identity system</p><h2 id="graphic-sgla-title">Southeastern Greek Leadership Association</h2></div>
           <div class="graphic-sgla">
             <figure class="archive-frame is-logo" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/thumb-sgla.webp" width="1081" height="1081" alt="SGLA identity mark over a warm multicolor grid"><figcaption>SGLA identity</figcaption></figure>
-            <figure class="archive-frame is-feature" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-3.jpg" width="2400" height="1350" alt="Better Fraternity, Better You presentation graphic"><figcaption>Better Fraternity; Better You</figcaption></figure>
-            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-6.jpg" width="1600" height="900" alt="An Hour of Power presentation graphic"><figcaption>An Hour of Power</figcaption></figure>
-            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-7.jpg" width="3000" height="2250" alt="Leadership Out Loud presentation graphic"><figcaption>Leadership Out Loud</figcaption></figure>
-            <figure class="archive-frame is-full" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-13.jpg" width="2133" height="1200" alt="Transitions presentation graphic"><figcaption>Transitions</figcaption></figure>
+            <figure class="archive-frame is-feature" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-identity-development.webp" width="1225" height="792" alt="SGLA five-year anniversary identity explorations"><figcaption>Five-year identity explorations · 2024</figcaption></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2023-brand-guidelines.webp" width="2400" height="1504" alt="SGLA brand guideline cover, logo, color, and typography spreads"><figcaption>Brand guidelines · 2023</figcaption></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-ballroom-system.webp" width="2400" height="1350" alt="Blue, gold, and red SGLA five-year ballroom screen system"><figcaption>Ballroom screen system · 2024</figcaption></figure>
+            <figure class="archive-frame is-full" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-signage-system.webp" width="2400" height="960" alt="Blue, gold, and red SGLA environmental banner system"><figcaption>Environmental banner system · 2024</figcaption></figure>
           </div>
         </section>
 
@@ -347,9 +351,10 @@ GRAPHIC_PRIMARY = r'''
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Brand applications</p><h2 id="graphic-live-marks-title">Marks and applications</h2></div>
           <div class="graphic-brand-grid">
             <figure class="archive-frame is-four" data-live-primary><img loading="lazy" decoding="async" src="images/gg-day-of-giving.png" width="1081" height="1080" alt="Pi Kappa Phi Day of Giving"><figcaption>Day of Giving</figcaption></figure>
+            <figure class="archive-frame is-four" data-live-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/dog.webp" width="2400" height="2400" alt="Day of Giving event identity"><figcaption>Day of Giving event identity</figcaption></figure>
             <figure class="archive-frame is-eight" data-live-primary><img loading="lazy" decoding="async" src="images/gg-ibm-fan.jpg" width="1800" height="1350" alt="IBM Be Equal Pride fan"><figcaption>IBM Be Equal Pride fan</figcaption></figure>
             <figure class="archive-frame is-full" data-live-primary><img loading="lazy" decoding="async" src="images/logos-1.jpg" width="4000" height="2250" alt="Collection of identity marks"><figcaption>Identity collection</figcaption></figure>
-            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Logo sketches"><figcaption>Logo sketches</figcaption></figure>
+            <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/chantico.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications"><figcaption>Chantico bottle applications</figcaption></figure>
             <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-3.jpg" width="2500" height="1500" alt="STM banner"><figcaption>STM banner</figcaption></figure>
             <figure class="archive-frame is-third" data-live-primary><img loading="lazy" decoding="async" src="images/logos-4.jpg" width="1698" height="1080" alt="Brand identity hero composition"><figcaption>Identity application</figcaption></figure>
           </div>
@@ -358,13 +363,12 @@ GRAPHIC_PRIMARY = r'''
         <section class="archive-chapter" aria-labelledby="graphic-events-title">
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Event graphics</p><h2 id="graphic-events-title">Events and print</h2></div>
           <div class="graphic-events">
-            <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/dog.webp" width="2400" height="2400" alt="Day of Giving event identity"><figcaption>Day of Giving</figcaption></figure>
             <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="AbEx 40 event graphic"><figcaption>AbEx 40</figcaption></figure>
           </div>
         </section>
 
         <section class="archive-chapter" aria-labelledby="graphic-illustrations-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Illustration</p><h2 id="graphic-illustrations-title">Selected illustrations</h2></div>
+          <div class="archive-chapter-head"><h2 id="graphic-illustrations-title">Selected illustrations</h2></div>
           <div class="graphic-illustrations">
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop"><figcaption>Little Shop</figcaption></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz"><figcaption>The Wiz</figcaption></figure>
@@ -375,7 +379,7 @@ GRAPHIC_PRIMARY = r'''
 
 
         <section class="archive-chapter" aria-labelledby="graphic-wide-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Information design</p><h2 id="graphic-wide-title">Wide-format information design</h2></div>
+          <div class="archive-chapter-head"><h2 id="graphic-wide-title">Wide-format information design</h2></div>
           <figure class="archive-frame graphic-wide" data-live-primary><img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Wide informational graphic"><figcaption>Infographic</figcaption></figure>
         </section>
       </div>
@@ -485,7 +489,7 @@ if args.scope in {'graphic', 'all'}:
         'Extended graphic archive',
         'More identity, illustration, presentation, and information-design work from across the archive.',
         'An energetic visual archive spanning identity, print, applications, presentations, and information design by Victor Tran.',
-        'https://www.victortrandesign.com/images/graphic-archive-v2/chantico.webp', '2400', '2000',
+        'https://www.victortrandesign.com/images/logos-2.jpg', '1600', '960',
         {
           'alt="Logo"': 'alt="Collection of identity marks"',
           'alt="Hero"': 'alt="Brand identity hero composition"',

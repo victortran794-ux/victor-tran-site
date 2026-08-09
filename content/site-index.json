@@ -344,7 +344,7 @@
     "projects": []
   },
   {
-    "title": "Graphic Design in motion.",
+    "title": "Graphics. Design. Print.",
     "source": "graphicgallery.html",
     "url": "/graphicgallery",
     "category": "Graphic Design",
@@ -361,8 +361,8 @@
     ],
     "images": [
       {
-        "src": "images/graphic-archive-v2/chantico.webp",
-        "alt": "Three illustrated Chantico bottle applications"
+        "src": "images/logos-2.jpg",
+        "alt": "Chantico's Flame illustration"
       },
       {
         "src": "images/gg-edc-1.jpg",
@@ -385,20 +385,20 @@
         "alt": "SGLA identity mark over a warm multicolor grid"
       },
       {
-        "src": "images/gg-slides-3.jpg",
-        "alt": "Better Fraternity, Better You presentation graphic"
+        "src": "images/graphic-archive-v2/sgla-2024-identity-development.webp",
+        "alt": "SGLA five-year anniversary identity explorations"
       },
       {
-        "src": "images/gg-slides-6.jpg",
-        "alt": "An Hour of Power presentation graphic"
+        "src": "images/graphic-archive-v2/sgla-2023-brand-guidelines.webp",
+        "alt": "SGLA brand guideline cover, logo, color, and typography spreads"
       },
       {
-        "src": "images/gg-slides-7.jpg",
-        "alt": "Leadership Out Loud presentation graphic"
+        "src": "images/graphic-archive-v2/sgla-2024-ballroom-system.webp",
+        "alt": "Blue, gold, and red SGLA five-year ballroom screen system"
       },
       {
-        "src": "images/gg-slides-13.jpg",
-        "alt": "Transitions presentation graphic"
+        "src": "images/graphic-archive-v2/sgla-2024-signage-system.webp",
+        "alt": "Blue, gold, and red SGLA environmental banner system"
       },
       {
         "src": "images/gg-slides-1.jpg",

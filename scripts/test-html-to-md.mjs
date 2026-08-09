@@ -52,7 +52,7 @@ try {
     ],
   };
   write('data/content-export-policy.json', `${JSON.stringify(policy, null, 2)}\n`);
-  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p>');
+  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration">');
   write('about.html', '<title>Public About</title><h1>Public About</h1><p>PUBLIC-ABOUT-SENTINEL</p>');
 
   for (const [source, , sentinel] of protectedPages) {
@@ -70,7 +70,13 @@ try {
 
   const publicIndex = JSON.parse(read('content/site-index.json'));
   assert.match(read('content/index.md'), /PUBLIC-HOME-SENTINEL/);
+  assert.match(read('content/index.md'), /Chantico's Flame illustration: chantico\.jpg/);
   assert.equal(publicIndex.some(page => page.source === 'index.html'), true);
+  assert.deepEqual(
+    publicIndex.find(page => page.source === 'index.html')?.images,
+    [{ src: 'chantico.jpg', alt: "Chantico's Flame illustration" }],
+    'double-quoted attributes must preserve apostrophes inside values'
+  );
 
   for (const [source, slug, sentinel] of protectedPages) {
     const publicStub = read(`content/${slug}.md`);
