@@ -104,6 +104,39 @@ run_required "Home lens portal browser contract" npm run check:home-lens-portal-
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
 
+run_visual_archives_browser_contract() {
+  local port
+  port="$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')"
+  local site_url="http://127.0.0.1:${port}"
+  local server_log="${TMPDIR:-/tmp}/visual-archives-server-preflight.log"
+  local server_pid
+  local ready=0
+  local status=0
+
+  python3 -m http.server "$port" --bind 127.0.0.1 >"$server_log" 2>&1 &
+  server_pid=$!
+  for _attempt in {1..20}; do
+    if curl --fail --silent "$site_url/artillustration.html" >/dev/null; then
+      ready=1
+      break
+    fi
+    sleep 0.25
+  done
+
+  if [ "$ready" -eq 1 ]; then
+    SITE_URL="$site_url" VISUAL_ARCHIVES_EVIDENCE_DIR="$(mktemp -d)" npm run check:visual-archives-lightbox-browser || status=$?
+  else
+    echo "  local visual-archives browser-contract server did not become ready"
+    status=1
+  fi
+
+  kill "$server_pid" 2>/dev/null || true
+  wait "$server_pid" 2>/dev/null || true
+  return "$status"
+}
+
+run_required "Visual archives browser contract" run_visual_archives_browser_contract
+
 run_wxo_browser_contract() {
   local site_url="http://127.0.0.1:8898"
   local server_log="${TMPDIR:-/tmp}/wxo-document-server-preflight.log"

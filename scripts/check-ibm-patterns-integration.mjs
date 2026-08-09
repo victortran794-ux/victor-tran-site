@@ -23,7 +23,9 @@ const frozenFiles = {
   'pikappapp.html': '25b1d88f2d696ee6ae72bfec0f1e679e810e27349cc01f3b42cbb452276681ad',
   'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
   'js/password-gate.js': '26ce94de00f5a6fd5ae06d67865a501f6d0afc8200166ea1fff68e2a1cebdae1',
-  'js/main.js': '06be7e65d14b7fa849939c53d323c93f2ce18451dcb3821c972fcb7b36b6975d',
+  // Advanced by the later approved Art & Illustration lane: shared lightbox
+  // keyboard operation, focus containment/restoration, and background inerting.
+  'js/main.js': 'c5e8b140871ec0fd9558118c081a3d63d5deeb64deab0271d37aea1ad2cace88',
 };
 for (const [relativePath, expected] of Object.entries(frozenFiles)) {
   if (sha256(relativePath) !== expected) fail(`${relativePath} changed outside the approved IBM Patterns scope`);

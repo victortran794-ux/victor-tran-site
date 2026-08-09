@@ -3772,8 +3772,40 @@ html[data-theme="dark"] .spotify-frame {
 .gallery-grid img,
 .gallery-section img,
 .series-slideshow img,
-.gallery-feature img {
+.gallery-feature img,
+.art-archive-v2 .archive-frame > img,
+.graphic-archive-v2 .archive-frame > img {
   cursor: zoom-in;
+}
+
+.gallery-spotlight img:focus-visible,
+.gallery-grid img:focus-visible,
+.gallery-section img:focus-visible,
+.series-slideshow img:focus-visible,
+.gallery-feature img:focus-visible,
+.art-archive-v2 .archive-frame > img:focus-visible,
+.graphic-archive-v2 .archive-frame > img:focus-visible,
+.lightbox button:focus-visible {
+  outline: 3px solid rgba(240, 240, 238, 0.95);
+  outline-offset: 3px;
+}
+
+.art-archive-v2 .gallery-spotlight img:focus-visible,
+.art-archive-v2 .gallery-grid img:focus-visible,
+.art-archive-v2 .gallery-section img:focus-visible,
+.art-archive-v2 .series-slideshow img:focus-visible,
+.art-archive-v2 .gallery-feature img:focus-visible,
+.art-archive-v2 .archive-frame > img:focus-visible {
+  outline-color: var(--orange);
+}
+
+.graphic-archive-v2 .gallery-spotlight img:focus-visible,
+.graphic-archive-v2 .gallery-grid img:focus-visible,
+.graphic-archive-v2 .gallery-section img:focus-visible,
+.graphic-archive-v2 .series-slideshow img:focus-visible,
+.graphic-archive-v2 .gallery-feature img:focus-visible,
+.graphic-archive-v2 .archive-frame > img:focus-visible {
+  outline-color: var(--acid);
 }
 
 /* Mobile */

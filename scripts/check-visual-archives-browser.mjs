@@ -130,8 +130,8 @@ class Cdp {
     await delay(150);
   }
 
-  async key(key, code, virtualKeyCode) {
-    const params = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode };
+  async key(key, code, virtualKeyCode, modifiers = 0) {
+    const params = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode, modifiers };
     await this.call('Input.dispatchKeyEvent', { type: 'keyDown', ...params });
     await this.call('Input.dispatchKeyEvent', { type: 'keyUp', ...params });
     await delay(40);
@@ -145,6 +145,115 @@ class Cdp {
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+async function checkLightbox(spec) {
+  const trigger = await cdp.evaluate(`(() => {
+    const image = document.querySelector('.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img');
+    if (!image) return null;
+    window.__lightboxReviewTrigger = image;
+    const main = document.querySelector('main#main-content');
+    const footer = document.querySelector('footer.footer');
+    main.setAttribute('aria-hidden', 'false');
+    footer.inert = true;
+    image.focus();
+    return { role: image.getAttribute('role'), hasPopup: image.getAttribute('aria-haspopup'), tabindex: image.tabIndex };
+  })()`);
+  assert(trigger?.role === 'button' && trigger?.hasPopup === 'dialog' && trigger?.tabindex === 0,
+    `${spec.file}: gallery image is not a keyboard-operable dialog trigger: ${JSON.stringify(trigger)}`);
+  await cdp.key('Enter', 'Enter', 13);
+  const opened = await cdp.evaluate(`(() => {
+    const dialog = document.querySelector('.lightbox');
+    const main = document.querySelector('main#main-content');
+    const focusables = [...dialog.querySelectorAll('button:not([disabled])')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
+    return { open: dialog.classList.contains('is-open'), active: document.activeElement?.className, overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), focusables: focusables.map((element) => element.className) };
+  })()`);
+  assert(opened.open && opened.active.includes('lb-close') && opened.overflow === 'hidden' && opened.mainInert && opened.mainHidden === 'true',
+    `${spec.file}: lightbox initial-focus/background state failed: ${JSON.stringify(opened)}`);
+  assert(opened.focusables.length >= 4, `${spec.file}: lightbox controls are unexpectedly incomplete.`);
+  await cdp.evaluate(`document.querySelector('.lightbox .lb-thumb:last-child').focus()`);
+  await cdp.key('Tab', 'Tab', 9);
+  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-close')`), `${spec.file}: Tab escapes the visible lightbox controls.`);
+  await cdp.key('Tab', 'Tab', 9, 8);
+  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-thumb:last-child')`), `${spec.file}: Shift+Tab escapes the visible lightbox controls.`);
+  const countBefore = await cdp.evaluate(`document.querySelector('.lb-count').textContent`);
+  await cdp.key('ArrowRight', 'ArrowRight', 39);
+  const countAfterNext = await cdp.evaluate(`document.querySelector('.lb-count').textContent`);
+  await cdp.key('ArrowLeft', 'ArrowLeft', 37);
+  const countAfterPrev = await cdp.evaluate(`document.querySelector('.lb-count').textContent`);
+  assert(countBefore !== countAfterNext && countBefore === countAfterPrev, `${spec.file}: ArrowLeft/ArrowRight navigation regressed.`);
+  await cdp.key('Escape', 'Escape', 27);
+  const closed = await cdp.evaluate(`(() => {
+    const dialog = document.querySelector('.lightbox');
+    const main = document.querySelector('main#main-content');
+    const footer = document.querySelector('footer.footer');
+    return { open: dialog.classList.contains('is-open'), overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), footerInert: footer.inert, footerHidden: footer.getAttribute('aria-hidden'), exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger };
+  })()`);
+  assert(!closed.open && closed.overflow === '' && !closed.mainInert && closed.mainHidden === 'false' && closed.footerInert && closed.footerHidden === null && closed.exactTriggerFocused,
+    `${spec.file}: Escape did not restore page state and the exact image trigger: ${JSON.stringify(closed)}`);
+
+  const beforeSpace = await cdp.evaluate(`({ scrollY, exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger })`);
+  assert(beforeSpace.exactTriggerFocused, `${spec.file}: exact trigger focus was lost before the Space activation check.`);
+  await cdp.key(' ', 'Space', 32);
+  const openedWithSpace = await cdp.evaluate(`({ open: document.querySelector('.lightbox').classList.contains('is-open'), scrollY })`);
+  assert(openedWithSpace.open && openedWithSpace.scrollY === beforeSpace.scrollY,
+    `${spec.file}: Space did not open the lightbox without scrolling the page: ${JSON.stringify({ beforeSpace, openedWithSpace })}`);
+  await cdp.key('Escape', 'Escape', 27);
+  const spaceClosed = await cdp.evaluate(`(() => {
+    const main = document.querySelector('main#main-content');
+    const footer = document.querySelector('footer.footer');
+    const result = {
+      exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger,
+      mainInert: main.inert,
+      mainHidden: main.getAttribute('aria-hidden'),
+      footerInert: footer.inert,
+      footerHidden: footer.getAttribute('aria-hidden'),
+    };
+    main.removeAttribute('aria-hidden');
+    footer.inert = false;
+    delete window.__lightboxReviewTrigger;
+    return result;
+  })()`);
+  assert(spaceClosed.exactTriggerFocused && !spaceClosed.mainInert && spaceClosed.mainHidden === 'false' && spaceClosed.footerInert && spaceClosed.footerHidden === null,
+    `${spec.file}: Space activation did not preserve and restore the exact trigger/background state: ${JSON.stringify(spaceClosed)}`);
+}
+
+async function checkLiveSlideshowFocusRestoration() {
+  await cdp.call('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }],
+  });
+  await cdp.navigate(`${baseUrl}/artillustration.html`);
+  const trigger = await cdp.evaluate(`(() => {
+    const image = document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active');
+    window.__liveSlideshowTrigger = image;
+    image?.focus();
+    return image ? { src: image.currentSrc || image.src, tabindex: image.tabIndex } : null;
+  })()`);
+  assert(trigger?.tabindex === 0, `artillustration.html: live-motion Horned Woman trigger is unavailable: ${JSON.stringify(trigger)}`);
+  await cdp.key('Enter', 'Enter', 13);
+  await delay(3250);
+  const whileOpen = await cdp.evaluate(`(() => ({
+    dialogOpen: document.querySelector('.lightbox').classList.contains('is-open'),
+    sameSlideActive: window.__liveSlideshowTrigger?.classList.contains('is-active'),
+    triggerHidden: window.__liveSlideshowTrigger?.getAttribute('aria-hidden'),
+    triggerTabindex: window.__liveSlideshowTrigger?.tabIndex,
+  }))()`);
+  assert(whileOpen.dialogOpen && whileOpen.sameSlideActive && whileOpen.triggerHidden === null && whileOpen.triggerTabindex === 0,
+    `artillustration.html: slideshow advanced behind the open lightbox: ${JSON.stringify(whileOpen)}`);
+  await cdp.key('Escape', 'Escape', 27);
+  const afterClose = await cdp.evaluate(`(() => {
+    const result = {
+      exactTriggerFocused: document.activeElement === window.__liveSlideshowTrigger,
+      sameSlideActive: window.__liveSlideshowTrigger?.classList.contains('is-active'),
+    };
+    delete window.__liveSlideshowTrigger;
+    return result;
+  })()`);
+  assert(afterClose.exactTriggerFocused && afterClose.sameSlideActive,
+    `artillustration.html: live-motion lightbox did not restore the visible trigger: ${JSON.stringify(afterClose)}`);
+  await cdp.call('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+  });
 }
 
 const pageSpecs = {
@@ -180,7 +289,9 @@ try {
   for (const [name, spec] of selectedPages) {
     for (const viewport of [
       { label: '390', width: 390, height: 844, mobile: true },
+      { label: '768', width: 768, height: 900, mobile: false },
       { label: '1280', width: 1280, height: 720, mobile: false },
+      { label: '1440', width: 1440, height: 900, mobile: false },
     ]) {
       await cdp.call('Emulation.setDeviceMetricsOverride', {
         width: viewport.width,
@@ -215,6 +326,19 @@ try {
               const rect = element.getBoundingClientRect();
               return { label: element.getAttribute('aria-label') || element.textContent.trim().replace(/\\s+/g, ' ').slice(0, 60), width: rect.width, height: rect.height };
             });
+          const focusTarget = document.querySelector('.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img.is-active, .gallery-feature img, .archive-frame > img');
+          focusTarget?.focus();
+          const channels = (color) => (color.match(/[\\d.]+/g) || []).slice(0, 3).map(Number);
+          const luminance = (color) => {
+            const [r, g, b] = channels(color).map((channel) => {
+              const value = channel / 255;
+              return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+            });
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+          };
+          const outlineLum = luminance(getComputedStyle(focusTarget).outlineColor);
+          const surfaceLum = luminance(getComputedStyle(document.querySelector('.archive-primary')).backgroundColor);
+          const focusContrast = (Math.max(outlineLum, surfaceLum) + 0.05) / (Math.min(outlineLum, surfaceLum) + 0.05);
           return {
             width: innerWidth,
             height: innerHeight,
@@ -234,9 +358,12 @@ try {
             mainImages: images.length,
             failedImages: images.filter((image) => !image.complete || image.naturalWidth <= 0).map((image) => image.getAttribute('src')),
             controls,
+            focusContrast,
             artCharacters: document.querySelectorAll('.art-live-wall img').length,
             artTraditional: document.querySelectorAll('.art-restored-wall img').length,
             artHorned: document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img').length,
+            artHornedKeyboardTriggers: [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')]
+              .filter((image) => image.tabIndex === 0 && image.getAttribute('role') === 'button' && image.getAttribute('aria-haspopup') === 'dialog').length,
             graphicEdc: document.querySelectorAll('.graphic-edc img').length,
             graphicSlides: document.querySelectorAll('.graphic-slides.is-compact img').length,
             graphicColumns: document.querySelector('.graphic-slides.is-compact') ? getComputedStyle(document.querySelector('.graphic-slides.is-compact')).columnCount : null,
@@ -259,6 +386,8 @@ try {
         assert(state.captions === 0, `${spec.file}: expected zero primary captions; found ${state.captions}`);
         assert(state.mainImages === spec.mainImages, `${spec.file}: expected ${spec.mainImages} main images; found ${state.mainImages}`);
         assert(state.failedImages.length === 0, `${spec.file}: media failed to decode: ${JSON.stringify(state.failedImages)}`);
+        assert(state.focusContrast >= 3,
+          `${spec.file}: gallery focus indicator contrast is ${state.focusContrast.toFixed(2)}:1 at ${viewport.label}px ${theme}; expected at least 3:1.`);
 
         if (viewport.mobile) {
           const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
@@ -268,12 +397,17 @@ try {
           assert(state.artCharacters === 16, `artillustration.html: expected 16 Characters and worlds images; found ${state.artCharacters}`);
           assert(state.artTraditional === 5, `artillustration.html: expected 5 Traditional work images; found ${state.artTraditional}`);
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);
+          assert(state.artHornedKeyboardTriggers === 1,
+            `artillustration.html: exactly one visible Horned Woman image must be keyboard-operable; found ${state.artHornedKeyboardTriggers}`);
         } else {
           assert(state.graphicEdc === 4, `graphicgallery.html: expected 4 EDC tiles; found ${state.graphicEdc}`);
           assert(state.graphicSlides === 16, `graphicgallery.html: expected 16 presentation slides; found ${state.graphicSlides}`);
-          assert(state.graphicColumns === (viewport.mobile ? '2' : '5'),
-            `graphicgallery.html: expected ${viewport.mobile ? 2 : 5} presentation columns; found ${state.graphicColumns}`);
+          const expectedGraphicColumns = viewport.mobile ? '2' : viewport.width === 768 ? '4' : '5';
+          assert(state.graphicColumns === expectedGraphicColumns,
+            `graphicgallery.html: expected ${expectedGraphicColumns} presentation columns; found ${state.graphicColumns}`);
         }
+
+        if (theme === 'light' && !viewport.mobile) await checkLightbox(spec);
 
         if ((viewport.mobile && theme === 'light') || (!viewport.mobile && theme === 'dark')) {
           if (viewport.mobile) {
@@ -288,6 +422,8 @@ try {
       }
     }
   }
+
+  if (scope === 'all' || scope === 'art') await checkLiveSlideshowFocusRestoration();
 
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);
   console.log(`VISUAL ARCHIVES BROWSER CHECK: PASS scope=${scope} states=${checks} evidence=${evidenceDir}`);

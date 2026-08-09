@@ -190,7 +190,7 @@ ART_PRIMARY = r'''
           <div>
             <p class="section-label archive-kicker label-artwork">Art &amp; Illustration</p>
             <h1 class="archive-title" id="art-archive-title">An open studio wall.</h1>
-            <p class="archive-lede">I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.</p>
+            <p class="archive-lede">Come check out a variety of my digital and traditional artwork.</p>
           </div>
         </header>
 
