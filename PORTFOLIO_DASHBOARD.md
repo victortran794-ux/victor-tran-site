@@ -72,6 +72,7 @@ Current operational rules:
 - Treat `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\2026-07-31-portfolio-integration-readiness\` as a dated provenance and verification checkpoint, not the active sequence or production implementation source.
 - Treat current `main` as the source for every shipped page and shell behavior.
 - Do not resume the historical July 31 Art/Graphic worktree or any prior enhancement worktree. Create each remaining lane from newly synchronized `main`.
+- Historical candidate worktrees are Git-locked with explicit reason strings so they remain recoverable without looking active. The unique IBM Cloud `fdac040` worktree is locked as a read-only provenance reference.
 - Preserve tested public stubs for every currently gated route. Real preview URLs must be checked before any deployment approval.
 - Treat wxO as the protected umbrella and Document Processing as its focused thread. Keep Document Processing protected until its separate opening clearance passes.
 - Keep broader DNA reassessment parked until after Art, Graphic, and the carried-forward Home/global list.
