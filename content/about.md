@@ -38,7 +38,7 @@ Hi! I'm Victor, (or Vic). I am a first-gen college graduate with a BFA in Graphi
 
 Outside of work, I paint, play video games, travel, and try my best to do good in my community. Also: open to voice over work.
 
-I'm around, let's chat!
+I'm around, let's chat! You can reach me at victortran794@gmail.com.
 
 Today, I'm a Visual Designer at IBM in Austin, Texas, where my work has ranged from hybrid cloud products to agentic workflow design.
 

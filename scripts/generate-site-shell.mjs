@@ -165,7 +165,7 @@ function buildFooter(config, currentPage) {
         <span class="footer-copyright">${escapeHtml(config.copyright)}</span>
         <nav class="footer-social" aria-label="Contact options">
           <ul>
-            <li><a href="mailto:${escapeHtml(config.contactEmail)}" class="footer-email" aria-label="Email Victor Tran at ${escapeHtml(config.contactEmail)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>${escapeHtml(config.contactEmail)}</span></a></li>
+            <li><a href="mailto:${escapeHtml(config.contactEmail)}" class="footer-email" aria-label="Email Victor Tran at ${escapeHtml(config.contactEmail)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>Email</span></a></li>
             <li><a href="${escapeHtml(config.linkedInUrl)}" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </nav>

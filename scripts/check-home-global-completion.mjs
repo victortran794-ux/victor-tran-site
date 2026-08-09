@@ -9,6 +9,7 @@ const need = (condition, message) => {
 const count = (text, needle) => text.split(needle).length - 1;
 
 const index = read('index.html');
+const about = read('about.html');
 const css = read('css/style.css');
 const js = read('js/main.js');
 const manifest = JSON.parse(read('data/projects.json'));
@@ -83,6 +84,11 @@ need(!shellGenerator.includes('data-copy-email='), 'Generated footer must retire
 need(!shellGenerator.includes('data-copy-email-status'), 'Generated footer must retire the dead copy status region.');
 need(shellGenerator.includes('class="footer-email"'), 'Generated footer needs one direct email action.');
 need(shellGenerator.includes('<svg viewBox="0 0 24 24"'), 'Direct footer email action needs a mail icon.');
+need(shellGenerator.includes('<span>Email</span>') &&
+  !shellGenerator.includes('<span>${escapeHtml(config.contactEmail)}</span>'),
+  'Generated footer must show the concise Email label instead of writing out the address.');
+need(about.includes(`<a href="mailto:${shell.contactEmail}">${shell.contactEmail}</a>`),
+  'About page must retain one visible written-out email address.');
 need(!js.includes('[data-copy-email]') && !js.includes('navigator.clipboard') && !js.includes("execCommand('copy')"),
   'Retired copy-email JavaScript remains.');
 for (const [page, html] of shell.pages.map((page, index) => [page, pages[index]])) {
@@ -91,6 +97,7 @@ for (const [page, html] of shell.pages.map((page, index) => [page, pages[index]]
   need(!html.includes('>Copy email<'), `${page} still shows Copy email.`);
   need(!html.includes('data-copy-email='), `${page} still emits copy-email behavior.`);
   need(html.includes('class="footer-email"'), `${page} is missing the generated direct email action.`);
+  need(html.includes('<span>Email</span>'), `${page} footer must show Email instead of the written-out address.`);
 }
 
 if (failures.length) {
