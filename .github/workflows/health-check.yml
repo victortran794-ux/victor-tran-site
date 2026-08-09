@@ -20,6 +20,9 @@ on:
       - "data/site-shell.json"
       - "data/content-export-policy.json"
       - "content/about.md"
+      - "content/design-system.md"
+      - "content/design-system.json"
+      - "content/vico2-page-system.md"
       - "content/index.md"
       - "content/salmagazine.md"
       - "content/site-index.json"
@@ -32,6 +35,7 @@ on:
       - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
       - "scripts/check-home-global-completion.mjs"
+      - "scripts/check-design-dna-system.mjs"
       - "scripts/check-route02-homepage-integration.mjs"
       - "scripts/validate-project-manifest.mjs"
       - "scripts/check-about-semantics.mjs"
@@ -92,6 +96,9 @@ on:
       - "data/site-shell.json"
       - "data/content-export-policy.json"
       - "content/about.md"
+      - "content/design-system.md"
+      - "content/design-system.json"
+      - "content/vico2-page-system.md"
       - "content/index.md"
       - "content/salmagazine.md"
       - "content/site-index.json"
@@ -104,6 +111,7 @@ on:
       - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
       - "scripts/check-home-global-completion.mjs"
+      - "scripts/check-design-dna-system.mjs"
       - "scripts/check-route02-homepage-integration.mjs"
       - "scripts/validate-project-manifest.mjs"
       - "scripts/check-about-semantics.mjs"
@@ -167,6 +175,8 @@ jobs:
           cache: npm
       - name: Home/global completion contract
         run: npm run check:home-global-completion
+      - name: Design DNA and live-component system contract
+        run: npm run check:design-dna-system
       - name: Verify reproducible Pi Kapp demo build
         run: |
           npm ci --ignore-scripts

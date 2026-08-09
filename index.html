@@ -84,44 +84,49 @@
   <!-- generated:site-shell-header:end -->
 
   <!-- Design DNA overlay (home page only) -->
-  <div class="dna-overlay" id="dnaOverlay" role="dialog" aria-modal="true" aria-labelledby="dnaTitle" aria-hidden="true" inert>
+  <div class="dna-overlay" id="dnaOverlay" role="dialog" aria-modal="true" aria-labelledby="dnaTitle" aria-describedby="dnaIntro" aria-hidden="true" inert>
     <div class="dna-overlay-scrim" data-dna-close></div>
     <div class="dna-panel" role="document">
       <header class="dna-panel-head">
         <div>
           <p class="dna-eyebrow">Peek behind the curtain</p>
           <h2 class="dna-title" id="dnaTitle">Design <em>DNA</em></h2>
+          <p class="dna-intro" id="dnaIntro">A live inspection of the choices holding this portfolio together, plus the places each project keeps its own voice.</p>
         </div>
         <button class="dna-close" data-dna-close aria-label="Close design DNA overlay">
           <span aria-hidden="true">×</span>
         </button>
       </header>
 
-      <div class="dna-bento">
-
-        <!-- Colors card (2x2) -->
-        <section class="dna-card dna-card--colors" data-card="colors">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">01 · Palette</span>
-            <h3 class="dna-card-title">Colors</h3>
-            <p class="dna-card-desc">Live values pulled from <code>:root</code>. Hover a swatch to tint the preview.</p>
+      <div class="dna-sheet">
+        <section class="dna-section dna-section--palette" aria-labelledby="dnaPaletteTitle">
+          <header class="dna-section-head">
+            <span class="dna-section-index">01 / Palette</span>
+            <div>
+              <h3 id="dnaPaletteTitle">Color with a job.</h3>
+              <p>Active theme values from the live site. Orange pairs with blue, purple pairs with pink, and neutrals keep the work in charge.</p>
+            </div>
           </header>
-          <div class="dna-swatches" id="dnaSwatches"><!-- injected --></div>
-          <div class="dna-color-preview" id="dnaColorPreview">
-            <img src="images/dna-preview.jpg"
-              srcset="images/responsive/dna-preview-640.webp 640w, images/responsive/dna-preview-1200.webp 1200w"
-              sizes="(max-width: 720px) 90vw, 560px"
-              alt="" class="dna-color-preview-img" width="1600" height="900">
-            <div class="dna-color-preview-tint" aria-hidden="true"></div>
-            <span class="dna-color-preview-label" aria-live="polite">Hover a swatch</span>
+          <div class="dna-palette-field">
+            <div class="dna-swatches" id="dnaSwatches"><!-- injected --></div>
+            <div class="dna-color-preview" id="dnaColorPreview">
+              <img src="images/dna-preview.jpg"
+                srcset="images/responsive/dna-preview-640.webp 640w, images/responsive/dna-preview-1200.webp 1200w"
+                sizes="(max-width: 720px) 90vw, 560px"
+                alt="" class="dna-color-preview-img" width="1600" height="900">
+              <div class="dna-color-preview-tint" aria-hidden="true"></div>
+              <span class="dna-color-preview-label" aria-live="polite">Focus or hover a swatch</span>
+            </div>
           </div>
         </section>
 
-        <!-- Typography card (2x1) -->
-        <section class="dna-card dna-card--fonts" data-card="fonts">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">02 · Type</span>
-            <h3 class="dna-card-title">Typography</h3>
+        <section class="dna-section dna-section--type" aria-labelledby="dnaTypeTitle">
+          <header class="dna-section-head">
+            <span class="dna-section-index">02 / Type</span>
+            <div>
+              <h3 id="dnaTypeTitle">Editorial, direct, a little playful.</h3>
+              <p>One serif for authored moments, one sans for clarity, and one mono voice for the system underneath.</p>
+            </div>
           </header>
           <ul class="dna-fonts">
             <li class="dna-font" data-family="'DM Serif Display', serif" data-jitter="true">
@@ -140,18 +145,13 @@
               <span class="dna-font-use">Kickers &amp; labels</span>
             </li>
           </ul>
-        </section>
-
-        <!-- Type playground (2x1) -->
-        <section class="dna-card dna-card--playground" data-card="playground">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">03 · Easter egg</span>
-            <h3 class="dna-card-title">Type here</h3>
-            <p class="dna-card-desc">Click the headline. Type anything. Tap a pill to change face.</p>
-          </header>
           <div class="dna-playground">
-            <p class="dna-playground-text" id="dnaPlayText" contenteditable="true" spellcheck="false" style="font-family:'DM Serif Display',serif;">I design cool things with sincerity.</p>
-            <div class="dna-playground-controls">
+            <div class="dna-playground-head">
+              <span class="dna-section-index">Try the type</span>
+              <p>Click the sentence, type anything, then change its voice.</p>
+            </div>
+            <p class="dna-playground-text" id="dnaPlayText" contenteditable="true" spellcheck="false" aria-label="Editable typography sample" style="font-family:'DM Serif Display',serif;">I design cool things with sincerity.</p>
+            <div class="dna-playground-controls" aria-label="Typography sample controls">
               <button class="dna-chip is-active" data-font="'DM Serif Display', serif">Serif</button>
               <button class="dna-chip" data-font="'Barlow', sans-serif">Sans</button>
               <button class="dna-chip" data-font="'Source Code Pro', monospace">Mono</button>
@@ -160,43 +160,53 @@
           </div>
         </section>
 
-        <!-- Spacing card (1x1) -->
-        <section class="dna-card dna-card--scale" data-card="scale">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">04 · Rhythm</span>
-            <h3 class="dna-card-title">Spacing</h3>
+        <section class="dna-section dna-section--rhythm" aria-labelledby="dnaRhythmTitle">
+          <header class="dna-section-head">
+            <span class="dna-section-index">03 / Rhythm &amp; shape</span>
+            <div>
+              <h3 id="dnaRhythmTitle">Four-pixel rhythm. Mostly sharp edges.</h3>
+              <p>The scale stays systematic. Larger curves are reserved for controls, screen frames, and intentional soft moments.</p>
+            </div>
           </header>
-          <ol class="dna-scale" id="dnaScale"><!-- injected --></ol>
-        </section>
-
-        <!-- Radii card (1x1) -->
-        <section class="dna-card dna-card--radii" data-card="radii">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">05 · Shape</span>
-            <h3 class="dna-card-title">Radii</h3>
-          </header>
-          <div class="dna-radii">
-            <div class="dna-radius" style="--r:0">    <span>0</span></div>
-            <div class="dna-radius" style="--r:4px">  <span>4</span></div>
-            <div class="dna-radius" style="--r:12px"> <span>12</span></div>
-            <div class="dna-radius" style="--r:999px"><span>pill</span></div>
+          <div class="dna-rhythm-field">
+            <div>
+              <p class="dna-field-label">Spacing tokens</p>
+              <ol class="dna-scale" id="dnaScale"><!-- injected --></ol>
+              <dl class="dna-semantic-spacing" id="dnaSemanticSpacing"><!-- injected --></dl>
+            </div>
+            <div>
+              <p class="dna-field-label">Radius tokens</p>
+              <div class="dna-radii" id="dnaRadii"><!-- injected --></div>
+            </div>
           </div>
         </section>
 
-        <!-- Buttons card (1x1) -->
-        <section class="dna-card dna-card--ui" data-card="ui">
-          <header class="dna-card-head">
-            <span class="dna-card-kicker">06 · UI</span>
-            <h3 class="dna-card-title">Components</h3>
+        <section class="dna-section dna-section--components" aria-labelledby="dnaComponentsTitle">
+          <header class="dna-section-head">
+            <span class="dna-section-index">04 / Structure</span>
+            <div>
+              <h3 id="dnaComponentsTitle">Structure repeats. Identity doesn’t have to.</h3>
+              <p>The shell, labels, project facts, and transitions are shared. Art, product, editorial, and archive stories keep their own visual grammar.</p>
+            </div>
           </header>
-          <div class="dna-ui-grid">
-            <button class="dna-sample-btn dna-sample-btn--pill" type="button">◐ Pill</button>
-            <button class="dna-sample-btn dna-sample-btn--ghost" type="button">Ghost →</button>
-            <span class="dna-sample-tag">section · label</span>
-            <span class="dna-sample-dot" aria-hidden="true"></span>
+          <div class="dna-component-field">
+            <div class="dna-component-specimen">
+              <p class="section-label label-default">Selected system detail</p>
+              <dl class="case-study-meta dna-component-meta">
+                <div class="case-study-meta-item"><dt>Pattern</dt><dd>Project facts</dd></div>
+                <div class="case-study-meta-item"><dt>Use</dt><dd>Six live stories</dd></div>
+              </dl>
+            </div>
+            <ul class="dna-component-list">
+              <li><span>Shared shell</span><strong>Sitewide</strong></li>
+              <li><span>Section labels</span><strong>9 pages</strong></li>
+              <li><span>Project transitions</span><strong>7 pages</strong></li>
+              <li><span>Project metadata</span><strong>6 stories</strong></li>
+              <li><span>Editorial openers</span><strong>Project family</strong></li>
+            </ul>
           </div>
+          <p class="dna-component-note">Project-native variants stay first-class: the two visual archives, workflow stories, Star &amp; Lamp, Ability Experience, Pi Kapp, and protected IBM work are not forced into one template.</p>
         </section>
-
       </div>
     </div>
   </div>

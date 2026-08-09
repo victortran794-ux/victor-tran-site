@@ -21,6 +21,8 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Metadata
 
 - Category: Portfolio
+- Pattern: Project facts
+- Use: Six live stories
 
 ## Featured Projects
 
@@ -49,6 +51,10 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Body Copy
 
+The shell, labels, project facts, and transitions are shared. Art, product, editorial, and archive stories keep their own visual grammar.
+
+Project-native variants stay first-class: the two visual archives, workflow stories, Star & Lamp, Ability Experience, Pi Kapp, and protected IBM work are not forced into one template.
+
 Victor Tran ®
 
 Visual designer working across brand, illustration, and product systems.
@@ -73,6 +79,11 @@ Standalone identity, print, illustration, and event graphics.
 
 ## Lists And Tags
 
+- Shared shellSitewide
+- Section labels9 pages
+- Project transitions7 pages
+- Project metadata6 stories
+- Editorial openersProject family
 - Visual Design
 - Brand Identity
 - Art Direction

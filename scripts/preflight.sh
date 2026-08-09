@@ -100,6 +100,7 @@ else
 fi
 
 run_required "Home/global completion contract" npm run check:home-global-completion
+run_required "Design DNA and live-component system contract" npm run check:design-dna-system
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser

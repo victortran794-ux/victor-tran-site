@@ -13,6 +13,7 @@
     "check:wxo-document-processing-browser": "node scripts/check-wxo-document-processing-browser.mjs",
     "check:route02-homepage": "node scripts/check-route02-homepage-integration.mjs",
     "check:home-global-completion": "node scripts/check-home-global-completion.mjs",
+    "check:design-dna-system": "node scripts/check-design-dna-system.mjs",
     "check:home-lens-portal-browser": "node scripts/check-home-lens-portal-browser.mjs",
     "check:about-browser": "node scripts/test-about-browser-process.mjs && node scripts/check-about-browser.mjs",
     "check:artifact-containment": "node scripts/check-production-artifact-containment.mjs",
