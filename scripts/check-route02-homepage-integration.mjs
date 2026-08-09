@@ -55,13 +55,18 @@ requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
 forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonX Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
-requireText(index, 'id="galleriesHeading">Art &amp; Graphic Design</h3>', 'Final gallery section needs the clear Art & Graphic Design heading.');
+requireText(index, 'id="galleries" role="group" aria-label="Art and graphic design galleries"',
+  'Final gallery pair needs one concise accessible group name without another visible heading.');
+forbid(index, /class="featured-galleries-intro"/,
+  'Final gallery pair must not repeat Art and Graphic Design in a visible subgroup header and intro.');
+forbid(css, /\.featured-galleries-intro/,
+  'Removed gallery intro markup must not leave stale responsive CSS behind.');
 requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 1,
   'Homepage needs exactly one lock on the IBM watsonX Orchestrate card.');
 requireText(index, 'aria-label="Password required"', 'Homepage lock needs an accessible password-required label.');
 requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
-forbid(index, />Creative work<\/p>/i, 'Art & Graphic Design heading should not carry a redundant eyebrow label.');
+forbid(index, />Creative work<\/p>/i, 'Gallery pair must not carry a redundant eyebrow label.');
 requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct paired-cover treatment.');
 requireText(css, 'grid-column: span 6;', 'Paired gallery covers need equal desktop weight.');
 

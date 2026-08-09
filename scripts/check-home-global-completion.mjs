@@ -52,9 +52,10 @@ need(css.includes('.featured-item--surface-ibm-inverse .featured-item-content'),
 need(css.includes('.featured-list .featured-item--span-5 .featured-item-content'),
   'Narrow homepage cards need a deliberate compact content rhythm.');
 
+const art = bySlug.get('artillustration');
 const graphic = bySlug.get('graphicgallery');
-need(graphic?.homepageLabel === false,
-  'Graphic Design must suppress its duplicated homepage category label without invented replacement copy.');
+need(art?.homepageLabel === false && graphic?.homepageLabel === false,
+  'The paired Art and Graphic Design covers must rely on their titles without repetitive category labels.');
 need(projectGenerator.includes("project.homepageLabel === false"),
   'Homepage generator must reproduce optional bounded label suppression.');
 need(manifestValidator.includes("expected.homepageLabel === false ? ''"),
@@ -72,8 +73,9 @@ for (const dependency of [
 }
 need(count(healthWorkflow, 'run: npm run check:home-global-completion') === 1,
   'Health workflow must execute the Home/global completion contract exactly once.');
-need(count(index, '>Graphic Design</p>') === 0,
-  'Graphic Design gallery card must not repeat its title as the label.');
+need(!index.includes('class="featured-galleries-intro"') &&
+  index.includes('id="galleries" role="group" aria-label="Art and graphic design galleries"'),
+  'Homepage gallery ending must remove its repetitive visible subgroup header and preserve a concise accessible name.');
 
 need(shell.footerSubtitle === '', 'Footer must retire the repeated subtitle invitation.');
 need(shell.footerCta === "Let's chat.", 'Footer must use the approved casual invitation.');

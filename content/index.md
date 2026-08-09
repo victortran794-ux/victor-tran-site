@@ -31,7 +31,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - The Ability Experience (Brand Identity): abilityexperience
 - Star & Lamp Magazine (Art Direction): salmagazine
 - Pi Kapp App (Product Design): pikappapp
-- Art & Illustration (Artwork): artillustration
+- Art & Illustration: artillustration
 - Graphic Design: graphicgallery
 
 ## Section Headings
@@ -66,8 +66,6 @@ Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiat
 Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.
 
 A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
-
-Selected illustration, identity, print, and event work from across my creative practice.
 
 Standalone digital and traditional work, including posters, paintings, and personal series.
 
