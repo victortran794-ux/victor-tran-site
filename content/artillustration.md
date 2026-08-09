@@ -31,7 +31,7 @@ An evolving studio wall of character illustration, personal series, paintings, a
 
 ## Body Copy
 
-I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.
+Come check out a variety of my digital and traditional artwork.
 
 Selected illustrations
 

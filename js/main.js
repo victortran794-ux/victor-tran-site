@@ -389,7 +389,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img'
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img'
   ));
   if (!pageImgs.length) return;
 
@@ -433,6 +433,34 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const lbNext  = lb.querySelector('.lb-arrow--next');
 
   let thumbEls = [];
+  let lastTrigger = null;
+  let previousBodyOverflow = '';
+  const backgroundStates = new Map();
+
+  function setBackgroundInert(inert) {
+    const background = Array.from(document.body.children).filter((element) => element !== lb && element.tagName !== 'SCRIPT');
+    if (inert) {
+      background.forEach((element) => {
+        backgroundStates.set(element, { inert: element.inert, ariaHidden: element.getAttribute('aria-hidden') });
+        element.inert = true;
+        element.setAttribute('aria-hidden', 'true');
+      });
+      return;
+    }
+    backgroundStates.forEach((state, element) => {
+      element.inert = state.inert;
+      if (state.ariaHidden === null) element.removeAttribute('aria-hidden');
+      else element.setAttribute('aria-hidden', state.ariaHidden);
+    });
+    backgroundStates.clear();
+  }
+
+  function lightboxControls() {
+    return Array.from(lb.querySelectorAll('button:not([disabled])')).filter((element) => {
+      const style = getComputedStyle(element);
+      return style.display !== 'none' && style.visibility !== 'hidden';
+    });
+  }
 
   function buildThumbnails() {
     if (thumbEls.length) return;
@@ -478,21 +506,47 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     });
   }
 
-  function open(idx) {
+  function open(idx, trigger) {
     buildThumbnails();
     goTo(idx);
+    lastTrigger = trigger || document.activeElement;
+    lastTrigger?.dispatchEvent(new Event('gallery-lightbox-open', { bubbles: true }));
+    previousBodyOverflow = document.body.style.overflow;
     lb.classList.add('is-open');
+    setBackgroundInert(true);
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => lbClose.focus());
   }
 
   function close() {
+    if (!lb.classList.contains('is-open')) return;
     lb.classList.remove('is-open');
-    document.body.style.overflow = '';
+    document.body.style.overflow = previousBodyOverflow;
+    setBackgroundInert(false);
+    if (lastTrigger instanceof HTMLElement && document.contains(lastTrigger)) {
+      lastTrigger.dispatchEvent(new Event('gallery-lightbox-close', { bubbles: true }));
+      lastTrigger.focus();
+    }
   }
 
   // Wire gallery images
   pageImgs.forEach((img, i) => {
-    img.addEventListener('click', () => open(i));
+    const isInactiveSlideshowImage = img.classList.contains('series-slideshow-img') && !img.classList.contains('is-active');
+    if (!isInactiveSlideshowImage) {
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-haspopup', 'dialog');
+      img.tabIndex = 0;
+    } else {
+      img.tabIndex = -1;
+      img.setAttribute('aria-hidden', 'true');
+    }
+    img.addEventListener('click', () => open(i, img));
+    img.addEventListener('keydown', (event) => {
+      if (img.tabIndex < 0) return;
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      open(i, img);
+    });
   });
 
   lbClose.addEventListener('click', close);
@@ -501,9 +555,31 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('is-open')) return;
-    if (e.key === 'Escape')     close();
-    if (e.key === 'ArrowLeft')  goTo(current - 1);
-    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      goTo(current - 1);
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      goTo(current + 1);
+    }
+    if (e.key === 'Tab') {
+      const controls = lightboxControls();
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   // Expand cursor ring on lightbox buttons
@@ -529,18 +605,35 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
     let i = slides.findIndex(slide => slide.classList.contains('is-active'));
     if (i < 0) i = 0;
-    slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === i));
+    function syncSlideTriggers() {
+      slides.forEach((slide, idx) => {
+        const isActive = idx === i;
+        slide.classList.toggle('is-active', isActive);
+        slide.tabIndex = isActive ? 0 : -1;
+        if (isActive) {
+          slide.setAttribute('role', 'button');
+          slide.setAttribute('aria-haspopup', 'dialog');
+          slide.removeAttribute('aria-hidden');
+        } else {
+          slide.removeAttribute('role');
+          slide.removeAttribute('aria-haspopup');
+          slide.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+    syncSlideTriggers();
 
     let timer = null;
     let userPaused = reduceMotion;
+    let lightboxOpen = false;
+    let wasRunningBeforeLightbox = false;
 
     function advance() {
-      slides[i].classList.remove('is-active');
       i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
+      syncSlideTriggers();
     }
     function start() {
-      if (userPaused || timer) return;
+      if (userPaused || lightboxOpen || timer) return;
       timer = setInterval(advance, INTERVAL);
     }
     function stop() {
@@ -556,6 +649,16 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
     stage.addEventListener('mouseenter', stop);
     stage.addEventListener('mouseleave', start);
+    stage.addEventListener('gallery-lightbox-open', () => {
+      wasRunningBeforeLightbox = Boolean(timer);
+      lightboxOpen = true;
+      stop();
+    });
+    stage.addEventListener('gallery-lightbox-close', () => {
+      lightboxOpen = false;
+      if (wasRunningBeforeLightbox) start();
+      wasRunningBeforeLightbox = false;
+    });
 
     return { stage, start, stop, setUserPaused, get userPaused() { return userPaused; } };
   }).filter(Boolean);

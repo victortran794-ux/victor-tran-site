@@ -12,7 +12,7 @@ const buildFunction = js.slice(
   js.indexOf('function buildThumbnails()'),
   js.indexOf('function goTo(idx)'),
 );
-const openFunction = js.match(/function open\(idx\) \{([\s\S]*?)\n  \}/)?.[1] ?? '';
+const openFunction = js.match(/function open\([^)]*\) \{([\s\S]*?)\n  \}/)?.[1] ?? '';
 expect(buildFunction.startsWith('function buildThumbnails()'),
   'Gallery lightbox must defer thumbnail construction behind buildThumbnails().');
 expect(buildFunction.includes("btn.addEventListener('mouseenter'"),

@@ -199,6 +199,12 @@ if (artDarkPalette) {
     `artillustration.html: Dark kicker orange must meet WCAG AA 4.5:1 contrast (found ${contrastRatio(artDarkPalette[2], artDarkPalette[1]).toFixed(2)}:1).`);
 }
 expect(!primaryHtml(art).includes('—'), 'artillustration.html: primary copy must not use em dashes.');
+expect(primaryHtml(art).includes('Come check out a variety of my digital and traditional artwork.'),
+  'artillustration.html: use Victor’s approved Art opener verbatim.');
+expect(!primaryHtml(art).includes('I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.'),
+  'artillustration.html: remove the superseded Art opener.');
+expect((art.match(/<img\b/gi) ?? []).length === 47,
+  `artillustration.html: preserve the 47-image production baseline; found ${(art.match(/<img\b/gi) ?? []).length}.`);
 expect(!/<figcaption\b/i.test(primaryHtml(art)),
   'artillustration.html: artwork-only primary viewing should not show individual labels.');
 for (const restoredAsset of [
@@ -260,6 +266,25 @@ const diamondStack = art.match(/<div class="art-diamonds">([\s\S]*?)<\/div>/i)?.
 expect(Boolean(diamondStack), 'artillustration.html: preserve the Suit of Diamonds stack.');
 expect(!/<figcaption\b/i.test(diamondStack), 'artillustration.html: Diamond cards must not show individual labels.');
 }
+
+const sharedMain = read('js/main.js');
+expect(sharedMain.includes("img.setAttribute('role', 'button')") && sharedMain.includes("img.setAttribute('aria-haspopup', 'dialog')") && sharedMain.includes('img.tabIndex = 0'),
+  'js/main.js: gallery images must expose keyboard-operable dialog-trigger semantics.');
+expect(/pageImgs\.forEach\(\(img,\s*i\)\s*=>[\s\S]*?img\.addEventListener\('keydown'/m.test(sharedMain),
+  'js/main.js: gallery images must open from Enter and Space.');
+expect(sharedMain.includes('setBackgroundInert(true)') && sharedMain.includes('setBackgroundInert(false)'),
+  'js/main.js: the lightbox must inert and restore non-dialog page content.');
+expect(sharedMain.includes('lastTrigger') && sharedMain.includes('lastTrigger.focus()'),
+  'js/main.js: the lightbox must restore focus to the exact activating image.');
+expect(sharedMain.includes("'gallery-lightbox-open'") && sharedMain.includes("'gallery-lightbox-close'") && sharedMain.includes('wasRunningBeforeLightbox'),
+  'js/main.js: an activated slideshow image must remain visible until lightbox focus is restored.');
+expect(sharedMain.includes('lbClose.focus()') && sharedMain.includes("e.key === 'Tab'"),
+  'js/main.js: the lightbox must receive initial focus and contain Tab navigation.');
+const sharedCss = read('css/style.css');
+expect(sharedCss.includes('.gallery-spotlight img:focus-visible') && sharedCss.includes('.gallery-grid img:focus-visible'),
+  'css/style.css: gallery triggers need a visible keyboard focus indicator.');
+expect(sharedCss.includes('outline-color: var(--orange)') && sharedCss.includes('outline-color: var(--acid)'),
+  'css/style.css: Art and Graphic gallery focus indicators need high-contrast surface-specific colors.');
 
 if (scope !== 'art') {
 const graphic = read('graphicgallery.html');

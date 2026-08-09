@@ -26,6 +26,9 @@ on:
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
+      - "scripts/build-visual-archives-integration.py"
+      - "scripts/check-visual-archives-integration.mjs"
+      - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
       - "scripts/check-about-semantics.mjs"
       - "scripts/check-about-browser.mjs"
@@ -90,6 +93,9 @@ on:
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
       - "scripts/generate-responsive-images.py"
+      - "scripts/build-visual-archives-integration.py"
+      - "scripts/check-visual-archives-integration.mjs"
+      - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
       - "scripts/check-about-semantics.mjs"
       - "scripts/check-about-browser.mjs"
@@ -308,6 +314,19 @@ jobs:
         run: node scripts/check-responsive-images.mjs
       - name: Gallery media regression check
         run: node scripts/check-gallery-media.mjs
+      - name: Visual archives integration and browser contracts
+        run: |
+          node scripts/check-visual-archives-integration.mjs all
+          python3 -m http.server 8896 --bind 127.0.0.1 >/tmp/visual-archives-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            curl --fail --silent http://127.0.0.1:8896/artillustration.html >/dev/null && break
+            sleep 0.25
+          done
+          kill -0 "$SERVER_PID"
+          curl --fail --silent http://127.0.0.1:8896/artillustration.html >/dev/null
+          SITE_URL=http://127.0.0.1:8896 npm run check:visual-archives-lightbox-browser
       - name: Lychee link check
         uses: lycheeverse/lychee-action@v2
         with:
