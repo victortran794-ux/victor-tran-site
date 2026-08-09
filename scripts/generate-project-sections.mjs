@@ -42,10 +42,14 @@ function imageMarkup(project, indent) {
 
 function cardMarkup(project, indent = '        ') {
   const labelClass = project.labelClass || 'label-default';
+  const homepageLabel = project.homepageLabel === false ? '' : (project.homepageLabel || project.category);
+  const labelMarkup = homepageLabel
+    ? `${indent}    <p class="section-label ${escapeHtml(labelClass)}">${escapeHtml(homepageLabel)}</p>\n`
+    : '';
   const lock = project.homepageLock
     ? ' <span class="featured-item-lock" role="img" aria-label="Password required"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>'
     : '';
-  return `${indent}<a href="${escapeHtml(project.url)}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${indent}    <p class="section-label ${escapeHtml(labelClass)}">${escapeHtml(project.category)}</p>\n${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>\n${indent}  </div>\n${indent}</a>`;
+  return `${indent}<a href="${escapeHtml(project.url)}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${labelMarkup}${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>\n${indent}  </div>\n${indent}</a>`;
 }
 
 function generatedBlock(name, body, indent = '') {

@@ -32,11 +32,11 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Star & Lamp Magazine (Art Direction): salmagazine
 - Pi Kapp App (Product Design): pikappapp
 - Art & Illustration (Artwork): artillustration
-- Graphic Design (Graphic Design): graphicgallery
+- Graphic Design: graphicgallery
 
 ## Section Headings
 
-- Selected Work
+- Other cool things to check out
 - IBM watsonX Orchestrate
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
@@ -84,7 +84,6 @@ Standalone identity, print, illustration, and event graphics.
 
 - Victor Tran, laughing: images/hero/figure20.webp
 - Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls: images/wxo-canvas/wxo-home-thumbnail.png
-- IBM Cloud Observability: images/ibm-thumb-light.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp
 - Performance Contracting, Inc.: images/pci-handbook-1-cover.webp

@@ -112,11 +112,11 @@ ${buildNavProjects(projects, currentPage)}
       <div class="lens-switcher" role="group" aria-label="Viewing mode">
         <button class="lens-switcher-btn" data-lens="light" aria-pressed="true" aria-label="Light mode">
           <span class="lens-switcher-icon" aria-hidden="true">&#x25D0;</span>
-          <span class="lens-switcher-label">Light</span>
+          <span class="control-tooltip" aria-hidden="true">Light mode</span>
         </button>
         <button class="lens-switcher-btn" data-lens="dark" aria-pressed="false" aria-label="Dark mode">
           <span class="lens-switcher-icon" aria-hidden="true">&#x25CB;</span>
-          <span class="lens-switcher-label">Dark</span>
+          <span class="control-tooltip" aria-hidden="true">Dark mode</span>
         </button>
       </div>
     </div>
@@ -153,21 +153,21 @@ function buildProjectNav(projects, currentPage) {
 
 function buildFooter(config, currentPage) {
   const footerClass = currentPage === 'index.html' ? 'footer reveal' : 'footer';
+  const subtitle = config.footerSubtitle
+    ? `\n      <p class="footer-subtitle">${escapeHtml(config.footerSubtitle)}</p>`
+    : '';
   return `  <!-- generated:site-shell-footer:start -->
   <footer class="${footerClass}">
     <div class="footer-inner">
-      <h2 class="footer-tagline">${escapeHtml(config.footerTagline)}</h2>
-      <p class="footer-subtitle">${escapeHtml(config.footerSubtitle)}</p>
+      <h2 class="footer-tagline">${escapeHtml(config.footerTagline)}</h2>${subtitle}
       <a href="mailto:${escapeHtml(config.contactEmail)}" class="footer-cta">${escapeHtml(config.footerCta)}</a>
       <div class="footer-bottom">
         <span class="footer-copyright">${escapeHtml(config.copyright)}</span>
         <nav class="footer-social" aria-label="Contact options">
           <ul>
-            <li><a href="mailto:${escapeHtml(config.contactEmail)}">${escapeHtml(config.contactEmail)}</a></li>
-            <li><button type="button" class="footer-copy-email" data-copy-email="${escapeHtml(config.contactEmail)}">Copy email</button></li>
+            <li><a href="mailto:${escapeHtml(config.contactEmail)}" class="footer-email" aria-label="Email Victor Tran at ${escapeHtml(config.contactEmail)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>${escapeHtml(config.contactEmail)}</span></a></li>
             <li><a href="${escapeHtml(config.linkedInUrl)}" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
-          <span class="sr-only" data-copy-email-status aria-live="polite"></span>
         </nav>
       </div>
     </div>

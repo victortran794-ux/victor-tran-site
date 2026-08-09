@@ -37,7 +37,9 @@ requireText(css, 'font-size: clamp(6.8rem, 14.2vw, 13.25rem);',
 requireCondition(/@media\s*\(max-width:\s*600px\)[\s\S]*?\.hero-typeblock\s*\{[\s\S]*?left:\s*var\(--page-x\)/.test(css),
   'Mobile Visual Designer must remain on the shared grid token.');
 requireText(css, 'max-width: 280px;', 'Top-left hero content needs the approved compact width.');
-requireText(css, '.hero-cycle-label {', 'Hero color control label must remain available.');
+requireText(css, '.hero-cycle .control-tooltip {', 'Hero color control tooltip must remain available.');
+requireText(index, '<span class="control-tooltip" aria-hidden="true">Change color</span>',
+  'Hero tooltip must avoid duplicating the button accessible name.');
 requireText(css, 'min-width: 44px;', 'Hero color control must preserve its 44px target.');
 requireText(css, 'padding: 0 12px;', 'Hero color control needs the approved smaller visual shell.');
 
@@ -47,9 +49,9 @@ forbid(index, /featured-tracklist|now-playing-chip|data-now-playing-/,
   'Homepage chapter tracklist and now-playing controls must be removed.');
 forbid(index, /class="featured-chapter/, 'Large chapter headers must not interrupt the flush card grid.');
 requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
-  'Homepage needs exactly one compact Selected Work heading.');
-requireText(index, 'id="featuredHeading">Selected Work</h2>',
-  'Compact homepage heading must say Selected Work.');
+  'Homepage needs exactly one compact archive heading.');
+requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
+  'Compact homepage heading must preserve Victor’s approved casual phrase.');
 forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonX Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');

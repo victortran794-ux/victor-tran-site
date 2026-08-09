@@ -93,8 +93,8 @@ need('data-lens="dna"' not in index and 'dna-trigger-label' not in index,
      "the homepage viewing-mode switcher must contain only Light and Dark")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
-need(index.count('class="featured-heading"') == 1 and "Selected Work" in index,
-     "Route 02 needs one compact Selected Work heading")
+need(index.count('class="featured-heading"') == 1 and "Other cool things to check out" in index,
+     "Route 02 needs one compact archive heading in Victor’s approved voice")
 
 # Hero ambient cycle: known state, one render path, restrained timing, honest manual override.
 need("let i = 0" in js, "hero must begin from the known Pink state")
@@ -109,8 +109,11 @@ need("prefers-reduced-motion: reduce" in js and
      "hero must respond to reduced-motion changes at runtime")
 need("data-hero-status" in index and 'aria-live="polite"' in index,
      "manual hero color changes need a polite live-region announcement")
-need("hero-cycle-label" in js and "heroStatus" in js,
-     "hero render path must synchronize its visible label and status")
+need("hero-cycle-label" not in index and "hero-cycle-label" not in css and "hero-cycle-label" not in js,
+     "hero color control must not render or update a visible text label")
+need("heroStatus" in js and ".hero-cycle .control-tooltip" in css and
+     '<span class="control-tooltip" aria-hidden="true">Change color</span>' in index,
+     "hero color control must preserve its live announcement and non-duplicative tooltip")
 need("Change color" in index and "Color shift" not in index and "Color shift" not in js,
      "hero color control must use the neutral action label without a visible color name")
 need("state.name" not in js,
