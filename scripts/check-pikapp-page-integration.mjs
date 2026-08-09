@@ -41,6 +41,9 @@ const assetHashes = {
   'images/pikapp-case-study/v2-today-light.png': '209e14acf78cd9e6007f9814a4f432872d60e1f830646f3f9411e33aba482e29',
   'images/pikapp-case-study/v2-responsibility-detail-dark.png': 'a9b8821fc372c7f4185a97e2cddd9cc7b41de429f6e7361fca94c8cf0a78db14',
   'images/pikapp-case-study/v2-chapter-light.png': '96140e5afee9030d2fb09e6aacca5ac82bf7d59debbf1b686a296366c5551b65',
+  'images/pikapp-case-study/v2-today-light-square.png': '1c5661d087f392cf23dd2ac18ca1687726c7fd94c7a22fd593a5bf376eb578fe',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-square.png': '749d9a49ca30ec3ab9b8f233799ddb192374f192d53f3cc774e9cf654474243f',
+  'images/pikapp-case-study/v2-chapter-light-square.png': '8cd9cd9bbeb7285c470a1d6631ba79c6a8474d287a1d2df9719cc0bb13eeacb9',
   'images/pikapp-case-study/pattern-dark-blue.svg': 'c351c176e21cba2ec26506c444018502b9214ddd49036b1f2d07f6a5c7bb5436',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
@@ -78,6 +81,9 @@ for (const required of [
   'Test the model before polishing it',
   'Illustrative and unvalidated.',
   'A small direction study, not a complete app, current product proposal, or live service.',
+  'images/pikapp-case-study/v2-today-light-square.png',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-square.png',
+  'images/pikapp-case-study/v2-chapter-light-square.png',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
@@ -86,7 +92,8 @@ for (const required of [
 if (count(html, '<main') !== 1) fail('pikappapp.html must contain exactly one root main');
 if (count(html, '<h1') !== 1) fail('pikappapp.html must contain exactly one h1');
 if (count(html, 'class="future-principle"') !== 3) fail('Pi Kapp coda must contain exactly three future principles');
-if ([...html.matchAll(/class="[^"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fail('Pi Kapp coda must contain exactly three V2 screens');
+if ([...html.matchAll(/class="[^\"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fail('Pi Kapp coda must contain exactly three V2 screens');
+if (/src="images\/pikapp-case-study\/v2-(?:today-light|responsibility-detail-dark|chapter-light)\.png"/.test(html)) fail('Pi Kapp coda must use the square-corner display derivatives rather than the rounded source captures');
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
 if (count(html, 'class="member-card__avatar" aria-hidden="true"') !== 3) fail('Pi Kapp member cards must contain exactly three decorative user icons');
 if (!html.includes('loading="lazy" decoding="async"')) fail('Pi Kapp evidence media must use lazy asynchronous decoding');
