@@ -9,7 +9,11 @@ ART_ASSETS = {
     'coffee.webp': 'coffee.webp',
 }
 GRAPHIC_ASSETS = {name: name for name in (
-    'chantico.webp', 'dog.webp', 'abex.webp'
+    'chantico.webp', 'dog.webp', 'abex.webp',
+    'sgla-2024-identity-development.webp',
+    'sgla-2023-brand-guidelines.webp',
+    'sgla-2024-signage-system.webp',
+    'sgla-2024-ballroom-system.webp',
 )}
 
 SHARED_CSS = r'''
@@ -311,13 +315,13 @@ GRAPHIC_PRIMARY = r'''
         </section>
 
         <section class="archive-chapter" aria-labelledby="graphic-sgla-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Identity and presentation</p><h2 id="graphic-sgla-title">Southeastern Greek Leadership Association</h2></div>
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Identity system</p><h2 id="graphic-sgla-title">Southeastern Greek Leadership Association</h2></div>
           <div class="graphic-sgla">
             <figure class="archive-frame is-logo" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/thumb-sgla.webp" width="1081" height="1081" alt="SGLA identity mark over a warm multicolor grid"><figcaption>SGLA identity</figcaption></figure>
-            <figure class="archive-frame is-feature" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-3.jpg" width="2400" height="1350" alt="Better Fraternity, Better You presentation graphic"><figcaption>Better Fraternity; Better You</figcaption></figure>
-            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-6.jpg" width="1600" height="900" alt="An Hour of Power presentation graphic"><figcaption>An Hour of Power</figcaption></figure>
-            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-7.jpg" width="3000" height="2250" alt="Leadership Out Loud presentation graphic"><figcaption>Leadership Out Loud</figcaption></figure>
-            <figure class="archive-frame is-full" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/gg-slides-13.jpg" width="2133" height="1200" alt="Transitions presentation graphic"><figcaption>Transitions</figcaption></figure>
+            <figure class="archive-frame is-feature" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-identity-development.webp" width="1225" height="792" alt="SGLA five-year anniversary identity explorations"><figcaption>Five-year identity explorations · 2024</figcaption></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2023-brand-guidelines.webp" width="2400" height="1504" alt="SGLA brand guideline cover, logo, color, and typography spreads"><figcaption>Brand guidelines · 2023</figcaption></figure>
+            <figure class="archive-frame is-half" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-ballroom-system.webp" width="2400" height="1350" alt="Blue, gold, and red SGLA five-year ballroom screen system"><figcaption>Ballroom screen system · 2024</figcaption></figure>
+            <figure class="archive-frame is-full" data-live-primary data-sgla-primary><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-2024-signage-system.webp" width="2400" height="960" alt="Blue, gold, and red SGLA environmental banner system"><figcaption>Environmental banner system · 2024</figcaption></figure>
           </div>
         </section>
 

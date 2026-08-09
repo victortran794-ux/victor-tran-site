@@ -38,7 +38,7 @@ A fun plethora of side projects, explorations, and collaborations with neat peop
 
 Project graphics
 
-Identity and presentation
+Identity system
 
 Presentation design
 
@@ -54,10 +54,10 @@ Event graphics
 - EDC pink eye graphic: images/gg-edc-2.jpg
 - EDC green eye graphic: images/gg-edc-3.jpg
 - SGLA identity mark over a warm multicolor grid: images/thumb-sgla.webp
-- Better Fraternity, Better You presentation graphic: images/gg-slides-3.jpg
-- An Hour of Power presentation graphic: images/gg-slides-6.jpg
-- Leadership Out Loud presentation graphic: images/gg-slides-7.jpg
-- Transitions presentation graphic: images/gg-slides-13.jpg
+- SGLA five-year anniversary identity explorations: images/graphic-archive-v2/sgla-2024-identity-development.webp
+- SGLA brand guideline cover, logo, color, and typography spreads: images/graphic-archive-v2/sgla-2023-brand-guidelines.webp
+- Blue, gold, and red SGLA five-year ballroom screen system: images/graphic-archive-v2/sgla-2024-ballroom-system.webp
+- Blue, gold, and red SGLA environmental banner system: images/graphic-archive-v2/sgla-2024-signage-system.webp
 - MTM Widescreen 21 presentation slide: images/gg-slides-1.jpg
 - Bama 23 presentation slide: images/gg-slides-2.jpg
 - Better Fraternity presentation slide: images/gg-slides-3.jpg
