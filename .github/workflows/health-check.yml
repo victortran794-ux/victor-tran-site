@@ -40,6 +40,8 @@ on:
       - "scripts/check-pci-browser.mjs"
       - "scripts/check-sal-vico2.py"
       - "scripts/check-sal-browser.mjs"
+      - "scripts/check-ability-victor-carbon.py"
+      - "scripts/check-ability-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -102,6 +104,8 @@ on:
       - "scripts/check-pci-browser.mjs"
       - "scripts/check-sal-vico2.py"
       - "scripts/check-sal-browser.mjs"
+      - "scripts/check-ability-victor-carbon.py"
+      - "scripts/check-ability-browser.mjs"
       - "scripts/check-ibm-patterns-integration.mjs"
       - "scripts/check-ibm-patterns-browser.mjs"
       - "scripts/check-ibmcloud-hiring-cut.mjs"
@@ -249,6 +253,35 @@ jobs:
           kill -0 "$SERVER_PID"
           curl --fail --silent "$SAL_URL" >/dev/null
           SITE_URL="http://127.0.0.1:${SAL_PORT}" npm run check:sal-browser
+      - name: Ability Experience bounded sequence contract
+        run: npm run check:ability-vico2
+      - name: Ability Experience responsive browser contract
+        run: |
+          ABILITY_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
+          ABILITY_URL="http://127.0.0.1:${ABILITY_PORT}/abilityexperience.html"
+          python3 -m http.server "$ABILITY_PORT" --bind 127.0.0.1 >/tmp/ability-browser-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          sleep 0.1
+          ABILITY_SERVER_READY=0
+          for attempt in {1..20}; do
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+              cat /tmp/ability-browser-server.log
+              exit 1
+            fi
+            if curl --fail --silent "$ABILITY_URL" >/dev/null; then
+              ABILITY_SERVER_READY=1
+              break
+            fi
+            sleep 0.25
+          done
+          if [ "${ABILITY_SERVER_READY:-0}" -ne 1 ]; then
+            cat /tmp/ability-browser-server.log
+            exit 1
+          fi
+          kill -0 "$SERVER_PID"
+          curl --fail --silent "$ABILITY_URL" >/dev/null
+          SITE_URL="http://127.0.0.1:${ABILITY_PORT}" npm run check:ability-browser
       - name: Lighthouse coverage regression check
         run: node scripts/check-lighthouse-coverage.mjs
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0

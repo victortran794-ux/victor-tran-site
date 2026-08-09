@@ -33,7 +33,7 @@ def main():
     def need(ok,msg):
         if not ok: failures.append(msg)
 
-    need('<main class="page-content" id="main-content">' in html,'main target must remain identifiable and skip-link ready')
+    need(any(tag=='main' and attrs.get('id')=='main-content' and 'page-content' in (attrs.get('class') or '').split() for tag,attrs in audit.tags),'main target must remain identifiable and skip-link ready')
     need('class="ability-hero"' in html,'missing Ability Experience theatrical hero')
     need('class="ability-meta"' in html,'missing full-width project metadata strip')
     need(audit.classes.count('ability-chapter')==3,'expected exactly three numbered chapters')
@@ -43,7 +43,12 @@ def main():
         need(token in html,f'missing approved production component: {token}')
     for class_name in ['ability-kit-grid','ability-map-frame']:
         need(class_name in audit.classes,f'missing approved production component class: {class_name}')
-    need('role="img"' in html and 'aria-label="Anniversary moment connects to identity mark, iconography, illustrated print, and cycling kits"' in html,'technical diagram needs a concise text equivalent')
+    need('role="img"' in html and 'aria-label="Identity mark connects to iconography, illustration, and applied identity across cycling kits and event pieces"' in html,'technical diagram needs the approved four-part text equivalent')
+    need(audit.classes.count('ability-diagram-node')==4,'technical diagram must use exactly four artifact stages')
+    for token in ['<strong>Mark</strong>','<strong>Iconography</strong>','<strong>Illustration</strong>','<strong>Application</strong>']:
+        need(token in html,f'missing approved Ability sequence stage: {token}')
+    need('<strong>Anniversary</strong>' not in html,'anniversary must not remain a standalone diagram stage')
+    need('<strong>Cycling kits</strong>' not in html,'cycling kits must sit under the broader Application stage')
     need('A full brand package built around a single anniversary moment.' in html,'public thesis must remain')
     need('nearly 100 student riders' in html,'existing public rider wording must remain')
     legacy_print_copy="The illustrated print shows the origins of the philanthropy and tells the story of multiple volunteer projects from across the country. Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode from the West Coast to Washington D.C."
@@ -69,7 +74,8 @@ def main():
     need(bool(project_color and project_blue),'missing Ability project color tokens')
     if project_color and project_blue:
         need(contrast_ratio(project_color.group(1),project_blue.group(1))>=4.5,'Ability hero kicker must meet WCAG AA text contrast')
-    need('left: 7px;' in ability_css and 'right: 20%;' in ability_css,'desktop diagram line must connect the node sequence')
+    need('grid-template-columns: repeat(4, minmax(0, 1fr));' in ability_css,'desktop diagram must use the approved four-stage grid')
+    need('left: 7px;' in ability_css and 'right: 25%;' in ability_css,'desktop diagram line must connect the four-stage node sequence')
     need('bottom: 100px;' in ability_css,'mobile diagram line must terminate at the final node')
     need('box-shadow' not in ability_css,'Ability Experience slice must stay shadow-free')
     need('linear-gradient' not in ability_css,'Ability Experience slice must not add gradients')

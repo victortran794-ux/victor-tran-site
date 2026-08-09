@@ -25,9 +25,11 @@ async function fetchJson(url) {
   return response.json();
 }
 
+const targetReadyTimeoutMs = 30_000;
 async function waitForTarget() {
+  const startedAt = Date.now();
   let lastError;
-  for (let attempt = 0; attempt < 80; attempt += 1) {
+  while (Date.now() - startedAt < targetReadyTimeoutMs) {
     try {
       if (!port && fs.existsSync(devToolsPortFile)) {
         const candidate = Number.parseInt(fs.readFileSync(devToolsPortFile, 'utf8').split(/\r?\n/, 1)[0], 10);
