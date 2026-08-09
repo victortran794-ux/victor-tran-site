@@ -69,25 +69,17 @@
       "nav": true,
       "homepage": true,
       "wide": false,
-      "surface": "",
+      "surface": "ibm-inverse",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
       "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.",
       "cta": "View Project",
       "images": [
         {
-          "src": "images/ibm-thumb-light.png",
-          "width": 960,
-          "height": 540,
-          "alt": "IBM Cloud Observability",
-          "class": "theme-img-light"
-        },
-        {
           "src": "images/ibm-thumb-dark.png",
           "width": 960,
           "height": 540,
-          "alt": "IBM Cloud Observability",
-          "class": "theme-img-dark"
+          "alt": "IBM Cloud Observability"
         }
       ],
       "protected": true,
@@ -247,6 +239,7 @@
       "title": "Art & Illustration",
       "url": "artillustration.html",
       "category": "Artwork",
+      "homepageLabel": false,
       "labelClass": "label-artwork",
       "type": "gallery",
       "nav": true,
@@ -275,6 +268,7 @@
       "title": "Graphic Design",
       "url": "graphicgallery.html",
       "category": "Graphic Design",
+      "homepageLabel": false,
       "labelClass": "label-default",
       "type": "gallery",
       "nav": true,

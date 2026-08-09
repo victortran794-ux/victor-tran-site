@@ -17,6 +17,7 @@ on:
       - "js/**"
       - "images/**"
       - "data/projects.json"
+      - "data/site-shell.json"
       - "data/content-export-policy.json"
       - "content/about.md"
       - "content/index.md"
@@ -30,6 +31,9 @@ on:
       - "scripts/check-visual-archives-integration.mjs"
       - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
+      - "scripts/check-home-global-completion.mjs"
+      - "scripts/check-route02-homepage-integration.mjs"
+      - "scripts/validate-project-manifest.mjs"
       - "scripts/check-about-semantics.mjs"
       - "scripts/check-about-browser.mjs"
       - "scripts/about-browser-process.mjs"
@@ -85,6 +89,7 @@ on:
       - "js/**"
       - "images/**"
       - "data/projects.json"
+      - "data/site-shell.json"
       - "data/content-export-policy.json"
       - "content/about.md"
       - "content/index.md"
@@ -98,6 +103,9 @@ on:
       - "scripts/check-visual-archives-integration.mjs"
       - "scripts/check-visual-archives-browser.mjs"
       - "scripts/preflight.sh"
+      - "scripts/check-home-global-completion.mjs"
+      - "scripts/check-route02-homepage-integration.mjs"
+      - "scripts/validate-project-manifest.mjs"
       - "scripts/check-about-semantics.mjs"
       - "scripts/check-about-browser.mjs"
       - "scripts/about-browser-process.mjs"
@@ -157,6 +165,8 @@ jobs:
         with:
           node-version: "22.22.0"
           cache: npm
+      - name: Home/global completion contract
+        run: npm run check:home-global-completion
       - name: Verify reproducible Pi Kapp demo build
         run: |
           npm ci --ignore-scripts

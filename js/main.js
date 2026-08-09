@@ -283,7 +283,6 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   const dots = Array.from(hero.querySelectorAll('.hero-cycle-dot'));
   const cycleBtn = hero.querySelector('.hero-cycle');
-  const heroLabel = hero.querySelector('.hero-cycle-label');
   const heroStatus = hero.querySelector('[data-hero-status]');
   const pointerWash = hero.querySelector('.hero-pointer-wash');
   const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -339,7 +338,6 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     dots.forEach((dot, dotIndex) => {
       dot.classList.toggle('is-active', dotIndex === i);
     });
-    if (heroLabel) heroLabel.textContent = 'Change color';
     if (announce && heroStatus) {
       heroStatus.textContent = 'Hero color changed. Ambient cycling paused for this visit.';
     }
@@ -870,44 +868,3 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     btn.addEventListener('click', () => setTimeout(renderSwatches, 50));
   });
 })();
-
-
-// ── Copy email fallback ─────────────────────────────
-document.querySelectorAll('[data-copy-email]').forEach((button) => {
-  const email = button.dataset.copyEmail;
-  const status = button.parentElement.querySelector('[data-copy-email-status]');
-  const defaultLabel = button.textContent;
-
-  const copyWithFallback = () => {
-    const field = document.createElement('textarea');
-    field.value = email;
-    field.setAttribute('readonly', '');
-    field.style.position = 'fixed';
-    field.style.opacity = '0';
-    document.body.appendChild(field);
-    field.select();
-    const copied = document.execCommand('copy');
-    field.remove();
-    if (!copied) throw new Error('Copy command failed');
-  };
-
-  button.addEventListener('click', async () => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        copyWithFallback();
-      }
-      button.textContent = 'Copied';
-      button.dataset.copyState = 'copied';
-      if (status) status.textContent = `Copied ${email} to clipboard.`;
-      window.setTimeout(() => {
-        button.textContent = defaultLabel;
-        delete button.dataset.copyState;
-      }, 2000);
-    } catch (error) {
-      if (status) status.textContent = `Could not copy automatically. Email ${email}.`;
-      window.location.href = `mailto:${email}`;
-    }
-  });
-});

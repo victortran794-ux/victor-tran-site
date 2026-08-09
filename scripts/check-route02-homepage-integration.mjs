@@ -37,7 +37,9 @@ requireText(css, 'font-size: clamp(6.8rem, 14.2vw, 13.25rem);',
 requireCondition(/@media\s*\(max-width:\s*600px\)[\s\S]*?\.hero-typeblock\s*\{[\s\S]*?left:\s*var\(--page-x\)/.test(css),
   'Mobile Visual Designer must remain on the shared grid token.');
 requireText(css, 'max-width: 280px;', 'Top-left hero content needs the approved compact width.');
-requireText(css, '.hero-cycle-label {', 'Hero color control label must remain available.');
+requireText(css, '.hero-cycle .control-tooltip {', 'Hero color control tooltip must remain available.');
+requireText(index, '<span class="control-tooltip" aria-hidden="true">Change color</span>',
+  'Hero tooltip must avoid duplicating the button accessible name.');
 requireText(css, 'min-width: 44px;', 'Hero color control must preserve its 44px target.');
 requireText(css, 'padding: 0 12px;', 'Hero color control needs the approved smaller visual shell.');
 
@@ -47,19 +49,24 @@ forbid(index, /featured-tracklist|now-playing-chip|data-now-playing-/,
   'Homepage chapter tracklist and now-playing controls must be removed.');
 forbid(index, /class="featured-chapter/, 'Large chapter headers must not interrupt the flush card grid.');
 requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
-  'Homepage needs exactly one compact Selected Work heading.');
-requireText(index, 'id="featuredHeading">Selected Work</h2>',
-  'Compact homepage heading must say Selected Work.');
+  'Homepage needs exactly one compact archive heading.');
+requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
+  'Compact homepage heading must preserve Victor’s approved casual phrase.');
 forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonX Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
-requireText(index, 'id="galleriesHeading">Art &amp; Graphic Design</h3>', 'Final gallery section needs the clear Art & Graphic Design heading.');
+requireText(index, 'id="galleries" role="group" aria-label="Art and graphic design galleries"',
+  'Final gallery pair needs one concise accessible group name without another visible heading.');
+forbid(index, /class="featured-galleries-intro"/,
+  'Final gallery pair must not repeat Art and Graphic Design in a visible subgroup header and intro.');
+forbid(css, /\.featured-galleries-intro/,
+  'Removed gallery intro markup must not leave stale responsive CSS behind.');
 requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 1,
   'Homepage needs exactly one lock on the IBM watsonX Orchestrate card.');
 requireText(index, 'aria-label="Password required"', 'Homepage lock needs an accessible password-required label.');
 requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
-forbid(index, />Creative work<\/p>/i, 'Art & Graphic Design heading should not carry a redundant eyebrow label.');
+forbid(index, />Creative work<\/p>/i, 'Gallery pair must not carry a redundant eyebrow label.');
 requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct paired-cover treatment.');
 requireText(css, 'grid-column: span 6;', 'Paired gallery covers need equal desktop weight.');
 

@@ -23,8 +23,8 @@ const shellConfig = {
   contactEmail: 'victortran794@gmail.com',
   linkedInUrl: 'https://www.linkedin.com/in/victortrandesign/',
   footerTagline: 'Do more good things.',
-  footerSubtitle: 'See you soon.',
-  footerCta: "Let's build something together.",
+  footerSubtitle: '',
+  footerCta: "Let's chat.",
   copyright: '© Victor Tran 2026 All Rights Reserved',
 };
 const projects = {
@@ -109,7 +109,11 @@ try {
     assert.match(html, /id="work-menu" class="nav-dropdown-menu"/);
     assert.doesNotMatch(html, /role="menu(?:item)?"/);
     assert.equal(count(html, 'data-mobile-lens='), 2);
+    assert.doesNotMatch(html, /class="lens-switcher-label"/, 'desktop viewing controls must be icon-only');
     assert.match(html, /<h2 class="footer-tagline">/);
+    assert.match(html, /class="footer-cta">Let&#39;s chat\.<\/a>/);
+    assert.match(html, /class="footer-email"[^>]*><svg viewBox="0 0 24 24"/);
+    assert.doesNotMatch(html, /data-copy-email|data-copy-email-status|>Copy email</);
     assert.match(html, /<nav class="footer-social" aria-label="Contact options">/);
     if (['public.html', 'protected.html'].includes(page)) {
       assert.match(html, /<!-- generated:project-nav:start -->/);

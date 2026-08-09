@@ -147,7 +147,7 @@ const geometryExpression = `(() => {
   const selectors = [
     '.nav-logo', '.nav-dropdown-toggle', '.nav-links > li > a',
     '.nav-dropdown-menu a', '.nav-mobile-lens-btn', '.footer-cta',
-    '.footer-social a', '.footer-copy-email', '.project-nav-item'
+    '.footer-social a', '.footer-email', '.project-nav-item'
   ];
   const controls = [...document.querySelectorAll(selectors.join(','))]
     .filter((element) => {
@@ -196,6 +196,21 @@ try {
   assert(!undersized.length, `undersized 390px shell controls: ${JSON.stringify(undersized)}`);
   assert(mobile.controls.some((control) => control.label === 'Light mode'), 'mobile Light control is unavailable');
   assert(mobile.controls.some((control) => control.label === 'Dark mode'), 'mobile Dark control is unavailable');
+  const mobileContact = await cdp.evaluate(`(() => {
+    const footer = document.querySelector('footer');
+    const email = footer.querySelector('.footer-email');
+    return {
+      text: footer.textContent.replace(/\\s+/g, ' ').trim(),
+      emailHref: email?.getAttribute('href'),
+      emailLabel: email?.getAttribute('aria-label'),
+      hasMailIcon: Boolean(email?.querySelector('svg[aria-hidden="true"]')),
+      hasCopyBehavior: Boolean(footer.querySelector('[data-copy-email], [data-copy-email-status]')),
+    };
+  })()`);
+  assert(!mobileContact.text.includes('See you soon.') && !mobileContact.text.includes('Copy email'), 'mobile footer retained retired invitation or copy-email text');
+  assert(mobileContact.emailHref === 'mailto:victortran794@gmail.com', 'mobile footer email action is not direct mailto');
+  assert(mobileContact.emailLabel === 'Email Victor Tran at victortran794@gmail.com' && mobileContact.hasMailIcon, 'mobile footer email action lost its accessible icon treatment');
+  assert(!mobileContact.hasCopyBehavior, 'mobile footer retained dead copy-email behavior');
 
   await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').focus()`);
   await cdp.key('ArrowDown', 'ArrowDown', 40);
@@ -250,13 +265,43 @@ try {
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     current: document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
     desktopThemeVisible: getComputedStyle(document.querySelector('.nav-inner > .lens-switcher')).display !== 'none',
+    desktopThemeLabels: document.querySelectorAll('.nav-inner > .lens-switcher .lens-switcher-label').length,
+    desktopThemeButtons: [...document.querySelectorAll('.nav-inner > .lens-switcher .lens-switcher-btn')].map((button) => ({
+      width: button.getBoundingClientRect().width,
+      height: button.getBoundingClientRect().height,
+      label: button.getAttribute('aria-label'),
+      tooltip: button.querySelector('.control-tooltip')?.textContent.trim(),
+      tooltipHidden: button.querySelector('.control-tooltip')?.getAttribute('aria-hidden'),
+    })),
     previousLabel: document.querySelector('.project-nav-item--prev')?.getAttribute('aria-label'),
     nextLabel: document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')
   })`);
   assert(desktop.width === 1280 && desktop.overflow === 0, 'public case study failed desktop overflow check');
   assert(desktop.current === 'abilityexperience.html', 'public case study current-route state is wrong');
   assert(desktop.desktopThemeVisible, 'desktop Light/Dark controls are hidden');
+  assert(desktop.desktopThemeLabels === 0, 'desktop Light/Dark controls retained visible text labels');
+  assert(desktop.desktopThemeButtons.length === 2 && desktop.desktopThemeButtons.every((button) => button.width >= 44 && button.height >= 44), 'desktop Light/Dark controls lost 44px targets');
+  assert(desktop.desktopThemeButtons.every((button) => button.tooltip === button.label && button.tooltipHidden === 'true'), 'desktop viewing tooltips duplicate or drift from accessible labels');
   assert(desktop.previousLabel?.startsWith('Previous project:') && desktop.nextLabel?.startsWith('Next project:'), 'project navigation accessible labels are missing');
+  await cdp.evaluate(`document.querySelector('.skip-link').focus()`);
+  let focusedDesktopLens = false;
+  for (let step = 0; step < 10; step += 1) {
+    if (await cdp.evaluate(`document.activeElement?.matches('.nav-inner > .lens-switcher [data-lens="dark"]')`)) {
+      focusedDesktopLens = true;
+      break;
+    }
+    await cdp.key('Tab', 'Tab', 9);
+  }
+  assert(focusedDesktopLens, 'keyboard traversal did not reach the desktop Dark mode control');
+  await delay(250);
+  const desktopTooltip = await cdp.evaluate(`(() => {
+    const tooltip = document.querySelector('.nav-inner > .lens-switcher [data-lens="dark"] .control-tooltip');
+    const rect = tooltip.getBoundingClientRect();
+    const style = getComputedStyle(tooltip);
+    return { opacity: style.opacity, visibility: style.visibility, left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+  })()`);
+  assert(desktopTooltip.opacity === '1' && desktopTooltip.visibility === 'visible', 'desktop viewing tooltip is unavailable on keyboard focus');
+  assert(desktopTooltip.left >= 0 && desktopTooltip.right <= desktop.width && desktopTooltip.top >= 0 && desktopTooltip.bottom <= 720, 'desktop viewing tooltip is clipped outside the viewport');
   await cdp.screenshot('abilityexperience-1280-dark.png');
 
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);

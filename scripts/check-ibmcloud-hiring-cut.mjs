@@ -17,8 +17,9 @@ if (project) {
   require(project.noindex === true, 'IBM Cloud manifest must be noindex');
   require(project.sitemap === false, 'IBM Cloud manifest must be excluded from sitemap');
   require(project.url === 'ibmcloud.html', 'IBM Cloud route must remain ibmcloud.html');
-  require(project.images?.[0]?.src === 'images/ibm-thumb-light.png', 'light homepage thumbnail changed');
-  require(project.images?.[1]?.src === 'images/ibm-thumb-dark.png', 'dark homepage thumbnail changed');
+  require(project.surface === 'ibm-inverse', 'IBM Cloud homepage card must use the bounded inverse surface');
+  require(project.images?.length === 1, 'IBM Cloud homepage card must use one dominant thumbnail');
+  require(project.images?.[0]?.src === 'images/ibm-thumb-dark.png', 'IBM Cloud homepage thumbnail must use the existing dark-theme image');
 }
 
 for (const phrase of [

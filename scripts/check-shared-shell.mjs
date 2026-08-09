@@ -127,6 +127,9 @@ const expectedConfig = {
   protectedDetail: 'Access required',
   contactEmail: 'victortran794@gmail.com',
   linkedInUrl: 'https://www.linkedin.com/in/victortrandesign/',
+  footerTagline: 'Do more good things.',
+  footerSubtitle: '',
+  footerCta: "Let's chat.",
 };
 for (const [key, value] of Object.entries(expectedConfig)) {
   if (config[key] !== value) fail(`data/site-shell.json must set ${key} to ${JSON.stringify(value)}`);
@@ -207,12 +210,17 @@ for (const page of expectedPages) {
     fail(`${page} must not receive a protected route status`);
   }
 
-  if (!footerBlock.includes('class="footer-cta"')) fail(`${page} footer lost primary contact action`);
+  if (!footerBlock.includes('class="footer-cta">Let&#39;s chat.</a>')) fail(`${page} footer lost the casual primary invitation`);
   if (!footerBlock.includes('<h2 class="footer-tagline">')) fail(`${page} footer needs a local heading`);
   if (!footerBlock.includes('<nav class="footer-social" aria-label="Contact options">')) {
     fail(`${page} footer contact actions need semantic navigation`);
   }
-  if (!footerBlock.includes('data-copy-email="victortran794@gmail.com"')) fail(`${page} footer lost copy-email action`);
+  if (!footerBlock.includes('class="footer-email"') || !footerBlock.includes('<svg viewBox="0 0 24 24"')) {
+    fail(`${page} footer lost its direct icon-supported email action`);
+  }
+  if (footerBlock.includes('data-copy-email') || footerBlock.includes('data-copy-email-status') || footerBlock.includes('>Copy email<')) {
+    fail(`${page} footer must not regenerate retired copy-email behavior`);
+  }
   if (!footerBlock.includes('href="https://www.linkedin.com/in/victortrandesign/"')) fail(`${page} footer lost LinkedIn action`);
 
   if (projectNavigationSnapshot[page]) {

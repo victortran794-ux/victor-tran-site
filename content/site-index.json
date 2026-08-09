@@ -7,7 +7,7 @@
     "description": "Victor Tran. Visual designer at IBM. I design cool things with sincerity.",
     "contentFile": "content/index.md",
     "headings": [
-      "Selected Work",
+      "Other cool things to check out",
       "IBM watsonX Orchestrate",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
@@ -26,10 +26,6 @@
       {
         "src": "images/wxo-canvas/wxo-home-thumbnail.png",
         "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
-      },
-      {
-        "src": "images/ibm-thumb-light.png",
-        "alt": "IBM Cloud Observability"
       },
       {
         "src": "images/ibm-thumb-dark.png",
@@ -76,7 +72,7 @@
         "title": "IBM Cloud Observability",
         "category": "Product Design",
         "url": "ibmcloud",
-        "image": "images/ibm-thumb-light.png",
+        "image": "images/ibm-thumb-dark.png",
         "alt": "IBM Cloud Observability"
       },
       {
@@ -116,14 +112,14 @@
       },
       {
         "title": "Art & Illustration",
-        "category": "Artwork",
+        "category": "",
         "url": "artillustration",
         "image": "images/illus-glow.jpg",
         "alt": "Blue illustrated figure surrounded by orange creatures"
       },
       {
         "title": "Graphic Design",
-        "category": "Graphic Design",
+        "category": "",
         "url": "graphicgallery",
         "image": "images/gg-edc-0.jpg",
         "alt": "Purple boombox graphic with two illustrated eye panels"

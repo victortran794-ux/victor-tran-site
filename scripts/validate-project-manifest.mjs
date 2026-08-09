@@ -110,7 +110,8 @@ function validateCards(cards, expectedProjects, label) {
     const expected = expectedProjects[index];
     if (!expected) return;
     if (card.title !== expected.title) fail(`${label} title mismatch for ${expected.url}: ${card.title} !== ${expected.title}`);
-    if (card.category !== expected.category) fail(`${label} category mismatch for ${expected.url}: ${card.category} !== ${expected.category}`);
+    const expectedCategory = expected.homepageLabel === false ? '' : (expected.homepageLabel || expected.category);
+    if (card.category !== expectedCategory) fail(`${label} category mismatch for ${expected.url}: ${card.category} !== ${expectedCategory}`);
     if (card.chapter !== expected.chapter) fail(`${label} chapter mismatch for ${expected.url}: ${card.chapter} !== ${expected.chapter}`);
     if (card.chapterTitle !== expected.chapterTitle) fail(`${label} chapter title mismatch for ${expected.url}: ${card.chapterTitle} !== ${expected.chapterTitle}`);
     const expectedImage = expected.images?.[0] ?? { src: expected.image, alt: expected.alt };
