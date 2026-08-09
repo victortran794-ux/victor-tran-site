@@ -740,7 +740,7 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .coda__screen--primary .coda__frame{background:#1f70c1}
 
-.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:28px;box-shadow:0 24px 54px rgba(7,16,32,.25)}
+.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:0;box-shadow:none}
 
 .pikapp-page .coda__screen:not(.coda__screen--primary) .coda__image{max-width:300px}
 
@@ -779,8 +779,6 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 .pikapp-page .coda__lead{font-size:18px}
 
 .pikapp-page .coda__frame{padding:16px}
-
-.pikapp-page .coda__image{border-radius:22px}
 
 .pikapp-page .coda__boundary{font-size:13px}
 }

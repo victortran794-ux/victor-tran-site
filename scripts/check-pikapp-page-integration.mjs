@@ -162,6 +162,12 @@ for (const required of [
 for (const forbidden of ['.reviewbar', '.boundary__inner', '.decision']) {
   if (css.includes(forbidden)) fail(`css/pikappapp.css retained private-review selector: ${forbidden}`);
 }
+if (!css.includes('.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:0;box-shadow:none}')) {
+  fail('future-state screenshots must remain flat and crisp without an artificial rounded shadow treatment');
+}
+if (/\.pikapp-page \.coda__image\{[^}]*box-shadow:(?!none)/.test(css)) {
+  fail('future-state screenshots must not restore a fuzzy box shadow');
+}
 
 for (const required of [
   "document.querySelector('[data-phone-story]')",

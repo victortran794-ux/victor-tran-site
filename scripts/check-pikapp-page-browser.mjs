@@ -183,13 +183,14 @@ try {
         const boundaryElement=document.querySelector('.coda__boundary');
         const boundaryStyle=getComputedStyle(boundaryElement);
         const avatars=[...document.querySelectorAll('.member-card__avatar')].map((avatar)=>{const card=avatar.closest('.member-card');const ar=avatar.getBoundingClientRect();return {color:getComputedStyle(avatar).color,border:getComputedStyle(card).borderTopColor,width:ar.width,height:ar.height}});
+        const futureScreens=[...document.querySelectorAll('.coda__image')].map((image)=>{const style=getComputedStyle(image);return {borderRadius:style.borderRadius,boxShadow:style.boxShadow}});
         const cue=document.querySelector('.expansion-archive-cue');
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,
-          boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,
+          boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,futureScreens,
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
@@ -202,6 +203,7 @@ try {
       assert(state.principles===3&&state.codaScreens===3&&state.phoneSlides===3,'approved evidence counts drifted');
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
+      assert(state.futureScreens.length===3&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
       assert(state.archiveViewLabels.length===2&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
@@ -218,6 +220,8 @@ try {
         await cdp.screenshot('pikapp-390-light-members.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-coda.png');
+        await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-future-screens.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-boundary.png');
       }
@@ -226,6 +230,8 @@ try {
         await cdp.screenshot('pikapp-1280-dark-members.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-coda.png');
+        await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-future-screens.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-boundary.png');
       }
