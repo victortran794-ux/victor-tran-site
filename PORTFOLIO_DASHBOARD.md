@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-08-07
+Last updated: 2026-08-08
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -20,7 +20,7 @@ Consult next:
 
 ### Current active plan
 
-Victor's August 7 desk review is the master source for the current enhancement cycle. Earlier enhancement lists, the August 1 Launch Integration Contract, candidate packages, and verification checkpoints now fill operational gaps rather than setting a competing content agenda. Current `main` at `b582386d931be655529c9b0001a978aae6b16c76` is the implementation baseline. The review reopens Home and selected pages through bounded VicO2 revisions, begins with Home plus global components, preserves current production work instead of replaying stale branches, and ends with Design DNA and whole-site reconciliation. The desired final state is that only wxO remains password-locked, but every currently protected page keeps its existing gate, indexing, sitemap, and generated-export behavior until its own privacy, claims, route, preview, and release gates pass. A2UI remains parked.
+Victor's August 7 desk review remains the master content authority for the current enhancement cycle. The detailed August 7 plan remains the execution plan; this dashboard records its current checkpoint. Current production `main` is `de404074ee680f9cdccbf5ab85817562bc709ef6` after the verified Pi Kapp closeout. Home's Design DNA lens portal, About, wxO and Document Processing narrative, IBM Cloud, IBM Patterns, PCI, Star & Lamp, Ability Experience, and Pi Kapp have completed bounded production lanes. This does not mean every August 7 note is finished: Art & Illustration and Graphic Design are the next page lanes, Home/global has a carried-forward cleanup list, several protected stories still have Victor-supplied asset or release gates, and Design DNA plus whole-site reconciliation remain final. The desired final visibility is still that only wxO remains password-locked, but every currently protected page keeps its existing gate, indexing, sitemap, and export behavior until its own privacy, claims, route, preview, and release gates pass. A2UI remains parked.
 
 Master review and alignment records:
 
@@ -31,16 +31,14 @@ Master review and alignment records:
 
 ### Current next actions
 
-1. Preserve the August 7 master notes and reconciliation record as the content authority for this review cycle.
-2. Use current `main` as the implementation baseline. Audit existing generators, contracts, page media, and current production behavior before changing a lane.
-3. Begin one isolated Home/global worktree. Build only the two-option lens-to-DNA comparison and Home/global contracts first, then stop for one batched Victor review.
-4. Reopen About, wxO, Document Processing, IBM Cloud, IBM Patterns, PCI, Star & Lamp, Pi Kapp, Art, and Graphic Design only through the bounded notes recorded in the master review. Preserve The Ability Experience as the strongest VicO2 reference except for its named sequence edit.
-5. Treat the shipped shared shell and current Art/Graphic pages in `main` as production baselines. Do not replay the old shared-shell branch or frozen candidate worktrees.
-6. Audit unique IBM Cloud hiring-cut commit `fdac040` as a read-only reference when that lane begins. Recover approved ideas manually on current `main`; do not merge or cherry-pick the stale branch wholesale.
-7. Preserve current protection during visual/content work. Password, indexing, robots, sitemap, generated exports, routes, and navigation change only through separate page-specific clearance and release gates.
-8. Complete PCI sanitized evidence intake before any PCI implementation, unblurring, migration, or opening.
-9. Carry forward prior accessibility, privacy, claims, attribution, metadata, route, generated-export, rollback, and complete-site verification contracts as required gap-fillers.
-10. Keep broad Design DNA expansion, A2UI, framework migration, generative chat UI, uncontrolled rollout, merge, and production deployment outside the active Home/global lane.
+1. Tomorrow, synchronize from production `main` at or after `de404074ee680f9cdccbf5ab85817562bc709ef6`, create a fresh isolated Art & Illustration worktree, and implement only the bounded August 7 Art notes against current production. Notify Victor at the approval preview gate, not during routine implementation.
+2. After Art closeout, run the bounded Graphic Design lane from newly synchronized `main`. The July 31 Art/Graphic worktree is a historical frozen candidate and must not be resumed, merged, or treated as the current session.
+3. Before final Design DNA work, close the carried-forward Home/global review list: visible theme words, color-control wording, `Selected Work`, card rhythm/asset replacements where supplied, Art/Graphic ending labels, footer language, and visible `Copy email` treatment.
+4. Keep asset-dependent requests explicit rather than pretending they are complete: wxO replacement canvas arrangements, Document Processing approved final screens/component studies, IBM Cloud supporting images, IBM Patterns homepage thumbnail, Pi Kapp additional pages, and Heart of the Frozen Void source assets.
+5. Preserve all current protection during visual/content work. Passwords, indexing, robots, sitemap, generated exports, routes, and navigation change only through separate page-specific clearance and release gates.
+6. After Art, Graphic, and Home/global reconciliation, reassess Design DNA once and run a whole-site desktop/mobile, Light/Dark, keyboard, privacy, claims, generated-output, route, and production-health pass.
+7. Treat the July 24 `portfolio-dashboard checkpoint before PR 95 main sync` stash as historical recovery material only. Preserve it, but never apply it as current status or an active plan.
+8. Keep A2UI, framework migration, generative chat UI, broad new features, and uncontrolled rollout outside this enhancement cycle.
 
 ### Supporting historical context
 
@@ -51,7 +49,7 @@ Master review and alignment records:
 
 ## Current enhancement phase
 
-Status: the August 1 shared shell and Art/Graphic migration are already production-verified, and current `main` also includes later Home Route 02, wxO, Document Processing, IBM Patterns, PCI, Pi Kapp, About, and password-gate work through PR #112. Victor's August 7 review now reopens the named surfaces through bounded revisions. The next lane is no longer the old Launch Integration Contract implementation; it is a clean Home/global worktree based on current `main`, followed by the reconciled page sequence. Current protected generated exports remain source-independent public stubs omitted from the public index. Final preview, merge, protection changes, route changes, and launch remain separate approval gates.
+Status: production is clean through Pi Kapp PR #123. Bounded August 7 lanes are complete for the Home lens portal, About, wxO and Document Processing narrative, IBM Cloud, IBM Patterns, PCI, Star & Lamp, Ability Experience, and Pi Kapp. The next page lane is Art & Illustration, followed by Graphic Design. Home/global cleanup and the final Design DNA/whole-site reconciliation remain open and explicitly tracked rather than being assumed complete. Current protected generated exports remain source-independent public stubs omitted from the public index. Protection changes, route changes, and opening remain separate approval gates.
 
 Recent shipped work:
 
@@ -72,12 +70,13 @@ Current operational rules:
 - Use this dashboard as the current status cockpit and the August 7 master notes as the content authority.
 - Use the VicO2 checkpoint at `C:\Users\Victor\Documents\Website Items\Design Kits\2026-07-23-carbon-victor-system\README.md` for system scope and guardrails.
 - Treat `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\2026-07-31-portfolio-integration-readiness\` as a dated provenance and verification checkpoint, not the active sequence or production implementation source.
-- Treat current `main` as the source for shipped shell, Home, wxO, Document Processing, IBM Patterns, PCI, Pi Kapp, Art, and Graphic behavior.
-- Preserve historical worktrees during the Home/global lane. Most are fully ancestral to `main`; the IBM Cloud hiring-cut worktree is the only identified unique page reference and must remain read-only until its lane.
+- Treat current `main` as the source for every shipped page and shell behavior.
+- Do not resume the historical July 31 Art/Graphic worktree or any prior enhancement worktree. Create each remaining lane from newly synchronized `main`.
+- Historical candidate worktrees are Git-locked with explicit reason strings so they remain recoverable without looking active. The unique IBM Cloud `fdac040` worktree is locked as a read-only provenance reference.
 - Preserve tested public stubs for every currently gated route. Real preview URLs must be checked before any deployment approval.
 - Treat wxO as the protected umbrella and Document Processing as its focused thread. Keep Document Processing protected until its separate opening clearance passes.
-- Keep broader DNA reassessment parked until after the main VicO2 rollout; only the bounded Home lens comparison is active now.
-- Complete PCI sanitized evidence intake before implementing PCI visual changes.
+- Keep broader DNA reassessment parked until after Art, Graphic, and the carried-forward Home/global list.
+- PCI sanitized implementation is complete and production-verified; opening remains separately gated.
 - Use isolated branches/worktrees, run complete local QA, and require explicit approval for PR/preview, merge, protection changes, route changes, and launch.
 
 ## Retained enhancement guardrails and gap-fillers
@@ -238,20 +237,52 @@ Status: the existing home-page Design DNA overlay is live. A bounded lens-to-DNA
 - `live` — published on site
 - `paused` — intentionally not moving
 
+## August 7 review coverage audit
+
+Every item in `PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md` is classified below. Nothing is being silently treated as complete.
+
+### Production-verified bounded work
+
+- Home portrait-lens connection to Design DNA.
+- About current-role emphasis, first-generation/BFA body copy, restrained role/tag hierarchy, direct Tetris wording, and music wording.
+- wxO Visual Designer framing, weighted two-chapter narrative, and User activities focus.
+- Document Processing connection, team framing, trust-loop narrative, motion/reduced-motion treatment, and removal of redundant storyboard presentation.
+- IBM Cloud opener, employer framing, spacing/copy reduction, and honest reserved evidence slots.
+- IBM Patterns hierarchy/copy reduction, collaboration boundaries, removal of low-value/redundant treatments, and playback simplification.
+- PCI sanitized evidence composition and claims-safe protected story.
+- Star & Lamp opener, spacing, archive link, and homepage voice.
+- Ability Experience mark/iconography/illustration/application sequence.
+- Pi Kapp archive behavior, user icons, restrained evidence caption, corrected future-screen treatment, and Art next link.
+
+### Open and assigned to a remaining lane
+
+- Art & Illustration bounded opener and verified keyboard/focus fixes: next page lane.
+- Graphic Design bounded title/copy, image order, ratios, repeated labels, and pink-layer revision: queued after Art.
+- Remaining Home/global controls, headings, supplied card assets/rhythm, Art/Graphic ending, and footer/contact treatment: assigned before final Design DNA work.
+- Design DNA reassessment and the complete-site consistency pass: final lanes.
+
+### Explicitly asset-dependent or separately release-gated
+
+- Victor-supplied wxO canvas arrangements, Document Processing final screens/component studies, IBM Cloud supporting images, IBM Patterns homepage thumbnail, Pi Kapp additional pages, and Heart of the Frozen Void assets.
+- Document Processing, IBM Cloud, IBM Patterns, and PCI remain protected until separate privacy, claims, attribution, indexing, route, preview, and release gates pass. The desired eventual visibility does not count as approval to open them.
+- wxO remains the only intended final locked story.
+
 ## Project tracker
 
-| Project | Status | Visibility | Canonical package | Next action | Blockers / cautions |
+| Project | Current checkpoint | Visibility | Canonical package | Remaining action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Document Processing | live protected page plus wxO feature thread; reopened August 7 | protected, `noindex`, hidden from generated public index, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\Document Processing\` | Bounded content/media revision; retain protection until separate opening clearance | Preserve July 2026 release state, sanitized media, source-independent public stub, claims boundaries, and current gate during presentation work |
-| wxO Canvas | live protected umbrella; reopened August 7 | protected, `noindex`, homepage/Work visible with lock, omitted from sitemap | Current `main`, `Website Items\Portfolio Packages\wxO Canvas\`, and parked-branch closeout archive | Simplify the umbrella and defer section 03 onward pending Victor-selected canvas frames | Only intended final locked story; preserve current gate; Canvas Future remains exploratory and must not become the primary prototype |
-| IBM Cloud | current protected production baseline plus unique verified hiring-cut reference | protected, `noindex`, omitted from sitemap | Current `main`, `Website Items\Portfolio Packages\IBM Cloud\`, and read-only `fdac040` | Bounded August 7 revision from `main`; audit `fdac040` without wholesale integration | Opening remains bounded by IBM permission, naming, attribution, provenance, claims, and fresh privacy clearance |
-| IBM Patterns | live protected page; reopened August 7 | protected, `noindex`, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Patterns\` | Bounded copy/hierarchy revision from current production | Preserve source framing, six-week/five-person/non-shipped status, influence boundaries, current gate, and generated-export protection until opening clearance |
-| PCI | protected production claims baseline; August 7 visual direction reopened | protected, `noindex`, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\PCI\` | Complete sanitized evidence intake before any implementation | Hard stop on unblurring, migration, or opening until every selected artifact is Victor-cleared; preserve non-logo-authorship and concept boundaries |
-| Pi Kapp App | live public page; reopened narrowly August 7 | public | Current `main` plus `Website Items\Portfolio Packages\Pi Kapp\` | Bounded archive interaction, icon, caption, asset, and next-link revisions | Preserve historical webpage versus speculative V2 distinction, prototype-data labels, and non-shipped framing |
-| Star & Lamp / SAL Magazine | live public page; reopened narrowly August 7 | public | Current `main` plus `Website Items\Portfolio Packages\Star & Lamp\` | Bounded opener, spacing, archive-link, and homepage voice revisions | Preserve verified chronology, role, date, award language, issue links, and source-backed spreads |
-| Art & Illustration | production-verified supporting archive; reopened narrowly August 7 | public | Current `main` plus production checkpoint and package | Apply opener and verified technical fixes to current production only | Preserve 47-image production baseline, rights, authorship boundaries, viewer behavior, and artwork-first identity |
-| Graphic Design | production-verified supporting archive; reopened narrowly August 7 | public | Current `main` plus production checkpoint and package | Apply bounded copy, image-order, ratio, label, and pink-layer revisions to current production | Preserve current production source set, rights/client boundaries, editorial identity, and pairing with Art; Heart of the Frozen Void remains asset-gated |
-| Ability Experience | live production VicO2 reference; one bounded August 7 edit | public | Current production HTML | Adjust mark/iconography/illustration/application sequence only | Preserve the rest as the strongest live VicO2 reference |
+| Home + global shell | lens portal production-verified in PRs #114 and #116; broader August 7 list remains open | public | Current `main` plus August 7 master notes | After Art/Graphic, close visible theme words, color-control wording, `Selected Work`, supplied card assets/rhythm, Art/Graphic ending labels, footer language, and visible `Copy email`; then final responsive/theme/accessibility pass | Do not mistake the completed lens portal for completion of the full Home/global review |
+| About | bounded August 7 lane production-verified in PR #117 | public | Current `main` plus About package | No current content action; include in final whole-site QA | Preserve casual Victor voice, restrained role list, exact section-label pattern, Tetris, and Spotify framing |
+| wxO Canvas | bounded narrative/hierarchy lane production-verified in PR #118 | protected, `noindex`, homepage/Work visible with lock, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\wxO Canvas\` | Add Victor-selected replacement canvas arrangements if supplied; reconsider repeated visible protection/source-boundary copy in final pass | Only intended final locked story; Canvas Future remains exploratory and must not become the primary prototype |
+| Document Processing | bounded narrative lane production-verified in PR #118 | protected, `noindex`, hidden from generated public index, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\Document Processing\` | Add Victor-approved final Accuracy Evaluation screen and component studies if supplied; reconsider repeated visible protection/source-boundary copy; separate opening clearance | Preserve July 2026 release state, collaboration/claims boundaries, sanitized media, and source-independent public stub |
+| IBM Cloud | bounded hiring narrative production-verified in PR #119 | protected, `noindex`, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Cloud\` | Replace two honest protected-asset reservations when Victor supplies cleared supporting images; separate opening clearance | Preserve employer/customer distinction, attribution, provenance, and claims boundaries |
+| IBM Patterns | bounded copy/hierarchy lane production-verified in PR #119 | protected, `noindex`, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Patterns\` | Replace homepage thumbnail if Victor supplies one; separate opening clearance | Preserve six-week, five-person, non-shipped, influence, and collaboration boundaries |
+| PCI | sanitized bounded story production-verified in PR #120 | protected, `noindex`, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\PCI\` | Separate opening clearance only | Never unblur source files or imply logo authorship; preserve concept/composite boundaries |
+| Star & Lamp / SAL Magazine | bounded August 7 lane production-verified in PR #121 | public | Current `main` plus `Website Items\Portfolio Packages\Star & Lamp\` | No page action; include in final whole-site QA | Preserve verified chronology, role, date, award language, issue links, and source-backed spreads |
+| Ability Experience | bounded sequence edit production-verified in PR #122 | public | Current `main` | No page action; include in final whole-site QA | Preserve the rest as the strongest live VicO2 reference |
+| Pi Kapp App | bounded archive/future-screen lane production-verified in PR #123 | public | Current `main` plus `Website Items\Portfolio Packages\Pi Kapp\` | Additional app pages only if Victor supplies them; include in final whole-site QA | Preserve historical webpage versus speculative V2 distinction, prototype-data labels, non-shipped framing, and corrected square display derivatives |
+| Art & Illustration | next active page lane; current production remains baseline | public | Current `main` plus `Website Items\Portfolio Packages\Art & Illustration\` | Fresh worktree from synchronized `main`; apply only the bounded August 7 opener and verified technical fixes; notify Victor at preview | Do not resume the July 31 frozen worktree; preserve production image set, rights, authorship boundaries, viewer behavior, and artwork-first identity |
+| Graphic Design | queued after Art; current production remains baseline | public | Current `main` plus `Website Items\Portfolio Packages\Graphic Design\` | Apply bounded August 7 copy, order, ratio, label, and pink-layer revisions in a fresh lane | Preserve production source set, rights/client boundaries, editorial identity, and pairing with Art; Heart of the Frozen Void remains asset-gated |
 
 ## Current PC / Agent Setup
 
@@ -302,7 +333,8 @@ Current state from latest local audit:
 - Local health script exists at `scripts/health-check.sh`.
 - Local preflight currently runs the link check successfully from this PC/WSL setup.
 - Local Lighthouse remains remote/GitHub-only.
-- Current local image scan found no images over 1MB, though several were close in the historical `archive/planning/portfolio-upkeep-backlog-2026-05-17.md` snapshot.
+- Current local image inventory includes `images/pikapp-case-study/expansion-cover.png` at roughly 3.3 MB. It is not part of Pi Kapp's initial image load, but it remains a known optimization candidate rather than being reported as absent.
+- Post-merge Site Health passed for Pi Kapp production commit `de404074ee680f9cdccbf5ab85817562bc709ef6` in run `31291108193`.
 - Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` is live on Vercel, password-gated, noindex, and omitted from the sitemap.
 
 ## Preferred workflow
