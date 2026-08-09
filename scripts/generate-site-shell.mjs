@@ -128,8 +128,15 @@ function buildProjectNav(projects, currentPage) {
   const primary = projects.filter((project) => project.nav && project.type === 'primary');
   const currentIndex = primary.findIndex((project) => project.url === currentPage);
   if (currentIndex === -1) return '';
+  const current = primary[currentIndex];
   const previous = primary[(currentIndex - 1 + primary.length) % primary.length];
-  const next = primary[(currentIndex + 1) % primary.length];
+  const configuredNext = current.projectNavNext
+    ? projects.find((project) => project.nav && project.slug === current.projectNavNext)
+    : null;
+  if (current.projectNavNext && !configuredNext) {
+    fail(`${current.slug} projectNavNext does not resolve to a navigable project: ${current.projectNavNext}`);
+  }
+  const next = configuredNext || primary[(currentIndex + 1) % primary.length];
   return `  <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
     <a href="${escapeHtml(previous.url)}" class="project-nav-item project-nav-item--prev" aria-label="Previous project: ${escapeHtml(previous.title)}">
