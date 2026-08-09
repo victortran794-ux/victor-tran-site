@@ -531,9 +531,13 @@ html[data-theme="dark"] .pikapp-page .asset-note strong{color:#adc5fa}
 
 .pikapp-page .archive-trigger:hover .expansion-artifact__sheet{transform:translateY(-7px);box-shadow:0 32px 64px rgba(0,0,0,.4)}
 
-.pikapp-page .expansion-archive-cue{position:absolute;right:22px;bottom:22px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 14px;border:1px solid rgba(255,255,255,.74);border-radius:999px;background:rgba(7,29,55,.92);font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.pikapp-page .expansion-archive-cue{position:absolute;right:22px;bottom:22px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:1px solid rgba(255,255,255,.74);border-radius:50%;background:rgba(7,29,55,.92);opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
 
 .pikapp-page .expansion-archive-cue::before{content:"↗";font-size:16px;font-weight:400}
+
+.pikapp-page .archive-trigger:hover .expansion-archive-cue,.pikapp-page .archive-trigger:focus-visible .expansion-archive-cue{opacity:1;transform:translateY(0)}
+
+@media (hover:none){.pikapp-page .expansion-archive-cue{opacity:1;transform:translateY(0)}}
 
 .pikapp-page .expansion-artifact figcaption{grid-template-columns:1fr;gap:4px}
 
@@ -581,21 +585,25 @@ body.archive-open{overflow:hidden;padding-right:var(--archive-scrollbar,0px)}
 
 .pikapp-page .archive-view img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:0}
 
-.pikapp-page .archive-view span{display:block;padding:10px;font:700 10px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
-
 .pikapp-page .archive-view[aria-pressed="true"]{border:3px solid var(--blue-2)}
 
 .pikapp-page .member-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.5vw,30px);margin:0 0 clamp(44px,6vw,64px)}
 
-.pikapp-page .member-card{position:relative;min-height:290px;padding:28px 26px 26px;border:1px solid var(--line);border-top:8px solid var(--blue-2);background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.pikapp-page .member-card{--member-accent:var(--blue-2);position:relative;min-height:320px;padding:28px 26px 26px;border:1px solid var(--line);border-top:8px solid var(--member-accent);background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
 
-.pikapp-page .member-card:nth-child(2){border-top-color:var(--gold)}
+.pikapp-page .member-card:nth-child(2){--member-accent:var(--gold)}
 
-.pikapp-page .member-card:nth-child(3){border-top-color:#0495ce}
+.pikapp-page .member-card:nth-child(3){--member-accent:#0495ce}
 
 .pikapp-page .member-card__number{position:absolute;right:14px;top:-20px;font:700 116px/1 var(--serif);letter-spacing:-.08em;color:color-mix(in srgb,var(--blue-2) 10%,transparent);pointer-events:none}
 
-.pikapp-page .member-card__stage{position:relative;margin:0 0 48px;font:700 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-2)}
+.pikapp-page .member-card__stage{position:relative;margin:0 0 22px;font:700 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-2)}
+
+.pikapp-page .member-card__avatar{position:relative;display:block;width:42px;height:42px;margin:0 0 16px;border:1px solid color-mix(in srgb,var(--member-accent) 46%,transparent);border-radius:50%;background:color-mix(in srgb,var(--member-accent) 10%,transparent);color:var(--member-accent)}
+
+.pikapp-page .member-card__avatar::before{content:"";position:absolute;left:50%;top:8px;width:9px;height:9px;border-radius:50%;background:currentColor;transform:translateX(-50%)}
+
+.pikapp-page .member-card__avatar::after{content:"";position:absolute;left:50%;bottom:8px;width:20px;height:12px;border-radius:12px 12px 8px 8px;background:currentColor;transform:translateX(-50%)}
 
 html[data-theme="dark"] .pikapp-page .member-card__stage{color:#adc5fa}
 
@@ -720,9 +728,7 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .future-principle span{display:block;color:var(--muted);font-size:15px;line-height:1.55}
 
-.pikapp-page .coda__boundary{max-width:830px;margin:30px 0 0;padding:18px 20px;border-left:3px solid var(--gold);background:var(--paper);color:var(--muted);font-size:14px;line-height:1.55}
-
-.pikapp-page .coda__boundary strong{color:var(--ink)}
+.pikapp-page .coda__boundary{max-width:830px;margin:24px 0 0;padding:0;border:0;background:transparent;color:var(--muted);font-size:13px;line-height:1.55;font-style:italic}
 
 .pikapp-page .coda__screens{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);grid-template-rows:auto auto;gap:clamp(22px,3vw,38px);align-items:start}
 
@@ -734,7 +740,7 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .coda__screen--primary .coda__frame{background:#1f70c1}
 
-.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:28px;box-shadow:0 24px 54px rgba(7,16,32,.25)}
+.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:0;box-shadow:none}
 
 .pikapp-page .coda__screen:not(.coda__screen--primary) .coda__image{max-width:300px}
 
@@ -774,9 +780,7 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .coda__frame{padding:16px}
 
-.pikapp-page .coda__image{border-radius:22px}
-
-.pikapp-page .coda__boundary{padding:16px}
+.pikapp-page .coda__boundary{font-size:13px}
 }
 
 /* Production integration adjustments */

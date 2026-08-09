@@ -26,7 +26,7 @@ const projectNavigationSnapshot = {
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
   'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
-  'pikappapp.html': ['salmagazine.html', 'wxo-canvas.html'],
+  'pikappapp.html': ['salmagazine.html', 'artillustration.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
 };
 

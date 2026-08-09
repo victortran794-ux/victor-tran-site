@@ -26,6 +26,16 @@ const child = spawn(chrome, [
 child.stderr.on('data', (chunk) => { chromeLog += chunk.toString(); });
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
+async function stopChild(process, timeout = 2000) {
+  if (process.exitCode !== null) return;
+  let resolveExit;
+  const exited = new Promise((resolve) => { resolveExit = resolve; process.once('exit', resolve); });
+  if (process.exitCode !== null) { process.off('exit', resolveExit); return; }
+  process.kill('SIGTERM');
+  if (await Promise.race([exited.then(() => true), delay(timeout).then(() => false)])) return;
+  if (process.exitCode === null) process.kill('SIGKILL');
+  await Promise.race([exited, delay(1000)]);
+}
 
 async function fetchJson(url, timeoutMs) {
   const controller = new AbortController();
@@ -75,8 +85,21 @@ class Cdp {
       waiters.forEach((resolve) => resolve(message.params));
     });
     await new Promise((resolve, reject) => {
-      this.socket.addEventListener('open', resolve, { once: true });
-      this.socket.addEventListener('error', reject, { once: true });
+      let timer;
+      const finish = (callback, value) => {
+        clearTimeout(timer);
+        this.socket.removeEventListener('open', onOpen);
+        this.socket.removeEventListener('error', onError);
+        callback(value);
+      };
+      const onOpen = () => finish(resolve);
+      const onError = (event) => finish(reject, new Error(`WebSocket open failed: ${event.message || 'unknown error'}`));
+      this.socket.addEventListener('open', onOpen, { once: true });
+      this.socket.addEventListener('error', onError, { once: true });
+      timer = setTimeout(() => {
+        try { this.socket.close(); } catch {}
+        finish(reject, new Error('WebSocket open timed out'));
+      }, 10000);
     });
   }
   call(method, params = {}) {
@@ -146,6 +169,7 @@ try {
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
       await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
+      await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
       const state = await cdp.evaluate(`(async()=>{
         const images=[...document.querySelectorAll('.pikapp-page img[src]')];
         const deferredImages=[...document.querySelectorAll('.pikapp-page img[data-src]:not([src])')];
@@ -156,12 +180,19 @@ try {
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
         const page=document.querySelector('.pikapp-page');
+        const boundaryElement=document.querySelector('.coda__boundary');
+        const boundaryStyle=getComputedStyle(boundaryElement);
+        const avatars=[...document.querySelectorAll('.member-card__avatar')].map((avatar)=>{const card=avatar.closest('.member-card');const ar=avatar.getBoundingClientRect();return {color:getComputedStyle(avatar).color,border:getComputedStyle(card).borderTopColor,width:ar.width,height:ar.height}});
+        const futureScreens=[...document.querySelectorAll('.coda__image')].map((image)=>{const style=getComputedStyle(image);return {borderRadius:style.borderRadius,boxShadow:style.boxShadow}});
+        const cue=document.querySelector('.expansion-archive-cue');
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,
-          boundary:document.querySelector('.coda__boundary')?.textContent.trim().replace(/\\s+/g,' '),pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
+          boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,futureScreens,
+          cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
+          next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
       })()`);
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
@@ -171,6 +202,12 @@ try {
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===3&&state.codaScreens===3&&state.phoneSlides===3,'approved evidence counts drifted');
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
+      assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
+      assert(state.futureScreens.length===3&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
+      assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
+      assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
+      assert(state.archiveViewLabels.length===2&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
+      assert(state.next.href==='artillustration.html'&&state.next.label==='Next project: Art & Illustration',`Pi Kapp next-project route drifted: ${JSON.stringify(state.next)}`);
       assert(state.pattern.includes('pattern-dark-blue.svg'),'approved pattern hero failed to resolve');
       assert(!state.reviewUi&&!state.privateText,'private review UI or copy escaped production');
       if (viewport.mobile) {
@@ -179,12 +216,24 @@ try {
       }
       if (viewport.mobile&&theme==='light') {
         await cdp.screenshot('pikapp-390-light-opening.png');
+        await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-members.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-coda.png');
+        await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-future-screens.png');
+        await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-boundary.png');
       }
       if (!viewport.mobile&&theme==='dark') {
+        await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-members.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-coda.png');
+        await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-future-screens.png');
+        await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-boundary.png');
       }
       checks += 1;
     }
@@ -195,18 +244,23 @@ try {
     await cdp.navigate(`${baseUrl}/pikappapp.html`);
     await cdp.evaluate(`localStorage.setItem('lens','light')`);
     await cdp.navigate(`${baseUrl}/pikappapp.html`);
-    const beforeArchive = await cdp.evaluate(`(()=>{const trigger=document.querySelector('.expansion-archive-trigger');trigger.scrollIntoView({block:'center',behavior:'instant'});const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('archive-open'),deferred:dialog.querySelectorAll('img[data-src]:not([src])').length,coverSource:dialog.querySelector('[data-archive-master="cover"]').getAttribute('src'),rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}})()`);
-    assert(!beforeArchive.open&&!beforeArchive.bodyLocked&&beforeArchive.deferred===4&&!beforeArchive.coverSource&&beforeArchive.rootOverflow===0,`${label}: archive loaded or locked before activation: ${JSON.stringify(beforeArchive)}`);
-    await delay(80);
-    await cdp.screenshot(`pikapp-archive-${label}-entry.png`);
+    await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
+    const beforeArchive = await cdp.evaluate(`(()=>{const trigger=document.querySelector('.expansion-archive-trigger');trigger.scrollIntoView({block:'center',behavior:'instant'});const cue=trigger.querySelector('.expansion-archive-cue');const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('archive-open'),deferred:dialog.querySelectorAll('img[data-src]:not([src])').length,coverSource:dialog.querySelector('[data-archive-master="cover"]').getAttribute('src'),rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,cueText:cue.textContent.trim(),cueOpacity:getComputedStyle(cue).opacity,hoverNone:matchMedia('(hover: none)').matches}})()`);
+    assert(!beforeArchive.open&&!beforeArchive.bodyLocked&&beforeArchive.deferred===4&&!beforeArchive.coverSource&&beforeArchive.rootOverflow===0&&!beforeArchive.cueText&&beforeArchive.cueOpacity===((mobile||beforeArchive.hoverNone)?'1':'0'),`${label}: archive loaded, labeled, or locked before activation: ${JSON.stringify(beforeArchive)}`);
     const triggerPoint = await cdp.evaluate(`(()=>{const r=document.querySelector('.expansion-archive-trigger').getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,width:r.width,height:r.height}})()`);
     assert(triggerPoint.width>=44&&triggerPoint.height>=44,`${label}: archival trigger is undersized`);
+    await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: triggerPoint.x, y: triggerPoint.y });
+    await delay(240);
+    const hoveredCue = await cdp.evaluate(`getComputedStyle(document.querySelector('.expansion-archive-cue')).opacity`);
+    assert(hoveredCue==='1',`${label}: archive icon cue did not appear on hover/focus`);
+    await cdp.screenshot(`pikapp-archive-${label}-entry.png`);
     await cdp.clickAt(triggerPoint.x, triggerPoint.y);
     await delay(180);
     await cdp.evaluate(`Promise.all([...document.querySelectorAll('[data-archive-dialog] img[src]')].map(async(image)=>{try{await image.decode()}catch{}}))`);
-    const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const stage=dialog.querySelector('.archive-stage');const master=dialog.querySelector('[data-archive-master="cover"]');const context=dialog.querySelector('[data-archive-master="context"]');const layout=dialog.querySelector('.archive-layout');const dr=dialog.getBoundingClientRect();const sr=stage.getBoundingClientRect();const mr=master.getBoundingClientRect();const scrollRegions=[...dialog.querySelectorAll('*')].filter((element)=>{const style=getComputedStyle(element);return element.scrollHeight>element.clientHeight+2&&['auto','scroll'].includes(style.overflowY)}).map((element)=>element.className);return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),coverLoaded:master.getAttribute('src')?.endsWith('expansion-cover-detail.jpg'),contextDeferred:!context.hasAttribute('src'),thumbnailsLoaded:[...dialog.querySelectorAll('.archive-view img')].every((image)=>image.hasAttribute('src')),pressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed'),status:dialog.querySelector('.archive-status').textContent.trim(),objectFit:getComputedStyle(master).objectFit,contained:mr.left>=sr.left-1&&mr.right<=sr.right+1&&mr.top>=sr.top-1&&mr.bottom<=sr.bottom+1,dialogRect:{left:dr.left,top:dr.top,width:dr.width,height:dr.height},rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,scrollRegions,layoutScrollHeight:layout.scrollHeight,layoutClientHeight:layout.clientHeight}})()`);
+    const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const stage=dialog.querySelector('.archive-stage');const master=dialog.querySelector('[data-archive-master="cover"]');const context=dialog.querySelector('[data-archive-master="context"]');const layout=dialog.querySelector('.archive-layout');const dr=dialog.getBoundingClientRect();const sr=stage.getBoundingClientRect();const mr=master.getBoundingClientRect();const scrollRegions=[...dialog.querySelectorAll('*')].filter((element)=>{const style=getComputedStyle(element);return element.scrollHeight>element.clientHeight+2&&['auto','scroll'].includes(style.overflowY)}).map((element)=>element.className);return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),coverLoaded:master.getAttribute('src')?.endsWith('expansion-cover-detail.jpg'),contextDeferred:!context.hasAttribute('src'),thumbnailsLoaded:[...dialog.querySelectorAll('.archive-view img')].every((image)=>image.hasAttribute('src')),viewLabels:[...dialog.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),pressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed'),status:dialog.querySelector('.archive-status').textContent.trim(),objectFit:getComputedStyle(master).objectFit,contained:mr.left>=sr.left-1&&mr.right<=sr.right+1&&mr.top>=sr.top-1&&mr.bottom<=sr.bottom+1,dialogRect:{left:dr.left,top:dr.top,width:dr.width,height:dr.height},rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,scrollRegions,layoutScrollHeight:layout.scrollHeight,layoutClientHeight:layout.clientHeight}})()`);
     assert(opened.open&&opened.focus.includes('archive-close')&&opened.bodyLocked,`${label}: dialog did not open with close focus and body lock: ${JSON.stringify(opened)}`);
     assert(opened.coverLoaded&&opened.contextDeferred&&opened.thumbnailsLoaded,`${label}: deferred archive loading failed: ${JSON.stringify(opened)}`);
+    assert(opened.viewLabels.every((view)=>!view.text)&&opened.viewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`${label}: archive page labels or accessible names drifted: ${JSON.stringify(opened.viewLabels)}`);
     assert(opened.pressed==='true'&&opened.status==='Cover view selected.'&&opened.objectFit==='contain'&&opened.contained,`${label}: cover selection or containment failed: ${JSON.stringify(opened)}`);
     assert(opened.rootOverflow===0&&opened.dialogRect.left>=-1&&opened.dialogRect.top>=-1&&opened.dialogRect.width<=width+1&&opened.dialogRect.height<=height+1,`${label}: dialog escaped viewport: ${JSON.stringify(opened)}`);
     if (mobile) {
@@ -256,8 +310,7 @@ try {
   console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
-  if (cdp?.socket) cdp.socket.close();
-  child.kill('SIGTERM');
-  await delay(150);
+  try { cdp?.socket?.close(); } catch {}
+  await stopChild(child);
   try { fs.rmSync(profile,{recursive:true,force:true,maxRetries:4,retryDelay:100}); } catch {}
 }

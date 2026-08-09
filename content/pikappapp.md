@@ -108,8 +108,8 @@ Cover view selected.
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
-- Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light.png
-- Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark.png
-- Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light.png
+- Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light-square.png
+- Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark-square.png
+- Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light-square.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Illuminated bell tower connected with the Creighton University expansion work: images/pikapp-case-study/belltower-expansion.jpg

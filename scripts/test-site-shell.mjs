@@ -29,8 +29,9 @@ const shellConfig = {
 };
 const projects = {
   projects: [
-    { slug: 'public', title: 'Public project', url: 'public.html', type: 'primary', nav: true },
+    { slug: 'public', title: 'Public project', url: 'public.html', type: 'primary', nav: true, projectNavNext: 'gallery' },
     { slug: 'protected', title: 'Protected project', url: 'protected.html', type: 'primary', nav: true },
+    { slug: 'gallery', title: 'Gallery project', url: 'gallery.html', type: 'gallery', nav: true },
   ],
 };
 const policy = {
@@ -121,6 +122,7 @@ try {
   assert.doesNotMatch(home, /aria-current="page"/);
   const publicPage = fs.readFileSync(path.join(tempRoot, 'public.html'), 'utf8');
   assert.match(publicPage, /href="public\.html" class="active" aria-current="page"/);
+  assert.match(publicPage, /href="gallery\.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Gallery project"/);
   const about = fs.readFileSync(path.join(tempRoot, 'about.html'), 'utf8');
   assert.match(about, /href="about\.html" class="active" aria-current="page"/);
   const protectedPage = fs.readFileSync(path.join(tempRoot, 'protected.html'), 'utf8');

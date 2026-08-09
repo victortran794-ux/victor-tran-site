@@ -41,6 +41,9 @@ const assetHashes = {
   'images/pikapp-case-study/v2-today-light.png': '209e14acf78cd9e6007f9814a4f432872d60e1f830646f3f9411e33aba482e29',
   'images/pikapp-case-study/v2-responsibility-detail-dark.png': 'a9b8821fc372c7f4185a97e2cddd9cc7b41de429f6e7361fca94c8cf0a78db14',
   'images/pikapp-case-study/v2-chapter-light.png': '96140e5afee9030d2fb09e6aacca5ac82bf7d59debbf1b686a296366c5551b65',
+  'images/pikapp-case-study/v2-today-light-square.png': '1c5661d087f392cf23dd2ac18ca1687726c7fd94c7a22fd593a5bf376eb578fe',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-square.png': '749d9a49ca30ec3ab9b8f233799ddb192374f192d53f3cc774e9cf654474243f',
+  'images/pikapp-case-study/v2-chapter-light-square.png': '8cd9cd9bbeb7285c470a1d6631ba79c6a8474d287a1d2df9719cc0bb13eeacb9',
   'images/pikapp-case-study/pattern-dark-blue.svg': 'c351c176e21cba2ec26506c444018502b9214ddd49036b1f2d07f6a5c7bb5436',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
@@ -78,6 +81,9 @@ for (const required of [
   'Test the model before polishing it',
   'Illustrative and unvalidated.',
   'A small direction study, not a complete app, current product proposal, or live service.',
+  'images/pikapp-case-study/v2-today-light-square.png',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-square.png',
+  'images/pikapp-case-study/v2-chapter-light-square.png',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
@@ -86,8 +92,10 @@ for (const required of [
 if (count(html, '<main') !== 1) fail('pikappapp.html must contain exactly one root main');
 if (count(html, '<h1') !== 1) fail('pikappapp.html must contain exactly one h1');
 if (count(html, 'class="future-principle"') !== 3) fail('Pi Kapp coda must contain exactly three future principles');
-if ([...html.matchAll(/class="[^"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fail('Pi Kapp coda must contain exactly three V2 screens');
+if ([...html.matchAll(/class="[^\"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fail('Pi Kapp coda must contain exactly three V2 screens');
+if (/src="images\/pikapp-case-study\/v2-(?:today-light|responsibility-detail-dark|chapter-light)\.png"/.test(html)) fail('Pi Kapp coda must use the square-corner display derivatives rather than the rounded source captures');
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
+if (count(html, 'class="member-card__avatar" aria-hidden="true"') !== 3) fail('Pi Kapp member cards must contain exactly three decorative user icons');
 if (!html.includes('loading="lazy" decoding="async"')) fail('Pi Kapp evidence media must use lazy asynchronous decoding');
 if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail('public Pi Kapp route must remain indexable');
 if (!text('sitemap.xml').includes('/pikappapp')) fail('public Pi Kapp route must remain in sitemap.xml');
@@ -98,12 +106,13 @@ for (const required of [
   'aria-haspopup="dialog"',
   'aria-controls="expansion-archive-dialog"',
   'aria-label="Open archive: Expansion Portfolio"',
+  '<span class="expansion-archive-cue" aria-hidden="true"></span>',
   '<dialog class="archive-dialog" id="expansion-archive-dialog"',
   'aria-labelledby="expansion-archive-title"',
   'data-archive-master="cover"',
   'data-archive-master="context"',
-  'data-archive-view="cover"',
-  'data-archive-view="context"',
+  'data-archive-view="cover" aria-pressed="true" aria-label="View portfolio cover"',
+  'data-archive-view="context" aria-pressed="false" aria-label="View environmental context"',
   'aria-live="polite"',
   'images/pikapp-case-study/expansion-cover-preview.jpg',
   'data-src="images/pikapp-case-study/expansion-cover-detail.jpg"',
@@ -114,6 +123,7 @@ if (html.includes('<strong>Expansion context</strong>')) fail('expansion photo r
 if (html.includes('<strong>Expansion packet cover</strong>')) fail('expansion artifact repeats its caption hierarchy');
 if (/src="images\/pikapp-case-study\/expansion-cover\.png"/.test(html)) fail('3.3 MB source cover must not load in the initial page');
 if (/<button[^>]+data-archive-view[^>]*>[\s\S]*?<img[^>]+\ssrc=/i.test(html)) fail('archive view thumbnails must defer their image sources until the dialog opens');
+if (/<span>Open archive<\/span>|<span>Cover<\/span>|<span>Context<\/span>/i.test(html)) fail('archive controls must use icon or image cues without visible action/page labels');
 if (size('images/pikapp-case-study/expansion-cover-preview.jpg') > 350_000) fail('expansion cover preview exceeds 350 KB');
 if (size('images/pikapp-case-study/expansion-cover-detail.jpg') > 900_000) fail('expansion cover detail exceeds 900 KB');
 
@@ -151,11 +161,19 @@ for (const required of [
   '.archive-master',
   'object-fit:contain',
   '.pikapp-page .expansion-artifact__sheet{transition:none}',
+  '.member-card__avatar',
+  'font-style:italic',
 ]) {
   if (!css.includes(required)) fail(`css/pikappapp.css missing required contract: ${required}`);
 }
 for (const forbidden of ['.reviewbar', '.boundary__inner', '.decision']) {
   if (css.includes(forbidden)) fail(`css/pikappapp.css retained private-review selector: ${forbidden}`);
+}
+if (!css.includes('.pikapp-page .coda__image{display:block;width:100%;height:auto;max-width:390px;border-radius:0;box-shadow:none}')) {
+  fail('future-state screenshots must remain flat and crisp without an artificial rounded shadow treatment');
+}
+if (/\.pikapp-page \.coda__image\{[^}]*box-shadow:(?!none)/.test(css)) {
+  fail('future-state screenshots must not restore a fuzzy box shadow');
 }
 
 for (const required of [
@@ -194,6 +212,9 @@ const expectedProject = {
 for (const [key, value] of Object.entries(expectedProject)) {
   if (project?.[key] !== value) fail(`data/projects.json Pi Kapp ${key} drifted`);
 }
+if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
+if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
+if (!html.includes('<p class="coda__boundary">Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.</p>')) fail('Pi Kapp speculative boundary must be a restrained caption');
 
 if (failures.length) {
   console.error('PI KAPP PAGE INTEGRATION CONTRACT: FAIL');
