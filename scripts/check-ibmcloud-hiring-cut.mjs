@@ -223,8 +223,8 @@ if (fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css'))) {
 
 require(preflight.includes('node scripts/check-ibmcloud-hiring-cut.mjs'), 'IBM hiring-page contract is not wired into preflight');
 require(
-  dashboard.includes('eleven reviewed Figma artifacts are staged on `feat/ibm-cloud-cleared-supporting-images-2026-08-10` and pending Victor approval, merge, and production verification'),
-  'Portfolio dashboard must record the IBM Cloud supporting images as staged, not already on production main',
+  dashboard.includes('eleven-artifact Figma expansion production-verified in PR #135'),
+  'Portfolio dashboard must record the approved IBM Cloud supporting-image expansion as production-verified in PR #135',
 );
 
 if (failures.length) {
