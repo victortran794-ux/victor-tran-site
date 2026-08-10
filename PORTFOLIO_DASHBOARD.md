@@ -333,7 +333,7 @@ Current state from latest local audit:
 - Local health script exists at `scripts/health-check.sh`.
 - Local preflight currently runs the link check successfully from this PC/WSL setup.
 - Local Lighthouse remains remote/GitHub-only.
-- Current local image inventory includes `images/pikapp-case-study/expansion-cover.png` at roughly 3.3 MB. It is not part of Pi Kapp's initial image load, but it remains a known optimization candidate rather than being reported as absent.
+- The 3.3 MB `images/pikapp-case-study/expansion-cover.png` source master was removed from the deployable repository after checksum-preserved archival under `Website Items\Portfolio Packages\Pi Kapp\Source Masters\`. The live archive continues to use the verified 500 KB same-dimension detail derivative and 163 KB preview derivative.
 - Historical Pi Kapp post-merge Site Health passed in run `31291108193`; it is provenance, not the current production checkpoint.
 - Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` permanently redirects to the protected wxO Document Processing chapter and remains omitted from the sitemap.
 
