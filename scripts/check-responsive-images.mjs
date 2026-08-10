@@ -124,8 +124,8 @@ expect(
   'Outstanding asset list must not retain the supplied IBM Patterns thumbnail.',
 );
 expect(
-  dashboard.includes('Thumbnail replacement staged on `feat/ibm-patterns-presentation-cover-thumbnail-2026-08-10`; pending Victor approval, merge, and production verification'),
-  'Portfolio dashboard must record the IBM Patterns thumbnail as staged, not already on main.',
+  dashboard.includes('Homepage thumbnail replaced with the approved Final Playback cover and production-verified in PR #133'),
+  'Portfolio dashboard must record the IBM Patterns thumbnail as merged and production-verified.',
 );
 
 const about = read('about.html');
