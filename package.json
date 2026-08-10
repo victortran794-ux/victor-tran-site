@@ -27,6 +27,7 @@
     "test:content-export-policy": "node scripts/test-html-to-md.mjs",
     "check:content-export-policy": "node scripts/check-protected-content-exports.mjs",
     "check:final-site-reconciliation": "node scripts/check-final-site-reconciliation.mjs",
+    "check:public-archive-routes": "node scripts/check-public-archive-routes.mjs",
     "generate:private-content": "node scripts/html-to-md.mjs --mode private",
     "generate:site-shell": "node scripts/generate-site-shell.mjs",
     "test:site-shell": "node scripts/test-site-shell.mjs",

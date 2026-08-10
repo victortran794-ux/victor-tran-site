@@ -45,6 +45,7 @@ on:
       - "scripts/html-to-md.mjs"
       - "scripts/test-html-to-md.mjs"
       - "scripts/check-final-site-reconciliation.mjs"
+      - "scripts/check-public-archive-routes.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -124,6 +125,7 @@ on:
       - "scripts/html-to-md.mjs"
       - "scripts/test-html-to-md.mjs"
       - "scripts/check-final-site-reconciliation.mjs"
+      - "scripts/check-public-archive-routes.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -195,6 +197,8 @@ jobs:
         run: node scripts/validate-project-manifest.mjs
       - name: Final site reconciliation contract
         run: npm run check:final-site-reconciliation
+      - name: Public archive-route contract
+        run: npm run check:public-archive-routes
       - name: Pi Kapp page integration contract
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract
@@ -237,7 +241,7 @@ jobs:
         run: npm run check:about-browser
       - name: Production artifact containment contract
         run: npm run check:artifact-containment
-      - name: PCI claims and protection contract
+      - name: PCI claims and publication contract
         run: npm run check:pci-claims-protection
       - name: PCI responsive browser contract
         run: |
@@ -414,6 +418,9 @@ jobs:
             ${{ steps.url.outputs.base }}/abilityexperience
             ${{ steps.url.outputs.base }}/artillustration
             ${{ steps.url.outputs.base }}/graphicgallery
+            ${{ steps.url.outputs.base }}/ibmcloud
+            ${{ steps.url.outputs.base }}/ibm-patterns
+            ${{ steps.url.outputs.base }}/pci
             ${{ steps.url.outputs.base }}/pikappapp/demo
           uploadArtifacts: true
           artifactName: lighthouse-results-desktop
@@ -448,6 +455,9 @@ jobs:
             ${{ steps.url.outputs.base }}/
             ${{ steps.url.outputs.base }}/about
             ${{ steps.url.outputs.base }}/artillustration
+            ${{ steps.url.outputs.base }}/ibmcloud
+            ${{ steps.url.outputs.base }}/ibm-patterns
+            ${{ steps.url.outputs.base }}/pci
             ${{ steps.url.outputs.base }}/pikappapp/demo
           uploadArtifacts: true
           artifactName: lighthouse-results-mobile

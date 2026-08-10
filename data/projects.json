@@ -82,9 +82,9 @@
           "alt": "IBM Cloud Observability"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "span-7"
     },
     {
@@ -112,9 +112,9 @@
           "alt": "IBM Patterns: Contact Us"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "span-5"
     },
     {
@@ -142,9 +142,9 @@
           "alt": "Performance Contracting, Inc."
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "span-5"
     },
     {

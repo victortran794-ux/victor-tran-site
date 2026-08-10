@@ -108,11 +108,6 @@ try {
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
 
-  await cdp.navigate(`${baseUrl}/ibm-patterns.html`);
-  const gate = await cdp.evaluate(`({locked:document.documentElement.classList.contains('locked'),gate:Boolean(document.getElementById('vtd-gate')),dialog:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-modal'),focused:document.activeElement?.id})`);
-  assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.focused === 'vtd-gate-input', `password gate failed: ${JSON.stringify(gate)}`);
-  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
-
   let checks = 0;
   let motionChecks = 0;
   for (const viewport of [{ label: '390', width: 390, height: 844, mobile: true }, { label: '1280', width: 1280, height: 720, mobile: false }]) {
@@ -132,9 +127,6 @@ try {
         const captionFg=luminance(getComputedStyle(caption).color);
         const captionBg=luminance(getComputedStyle(caption.closest('.patterns-playback-single')).backgroundColor);
         const captionContrast=(Math.max(captionFg,captionBg)+.05)/(Math.min(captionFg,captionBg)+.05);
-        const heroRect=document.querySelector('.patterns-hero-copy h1').getBoundingClientRect();
-        const statusRect=document.querySelector('.site-route-status').getBoundingClientRect();
-        const statusOverlap=!(heroRect.right<=statusRect.left||heroRect.left>=statusRect.right||heroRect.bottom<=statusRect.top||heroRect.top>=statusRect.bottom);
         const controls=[...document.querySelectorAll('.patterns-motion-toggle,.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
@@ -142,8 +134,7 @@ try {
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),controls,
           main:document.querySelector('.patterns-page')?.id,tabindex:document.querySelector('.patterns-page')?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
-          process:document.querySelectorAll('.patterns-process-item').length,heroes:document.querySelectorAll('.patterns-hero-study').length,atlas:document.querySelectorAll('.patterns-atlas-item').length,
-          heroTop:heroRect.top,statusBottom:statusRect.bottom,statusOverlap,captionContrast,
+          process:document.querySelectorAll('.patterns-process-item').length,heroes:document.querySelectorAll('.patterns-hero-study').length,atlas:document.querySelectorAll('.patterns-atlas-item').length,captionContrast,
           reviewText:['Private humanized story','local review','not approved for production'].some((text)=>document.body.textContent.includes(text))};
       })()`);
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
@@ -151,8 +142,7 @@ try {
       assert(state.overflow === 0, `${state.overflow}px root overflow at ${viewport.label} ${theme}`);
       assert(state.images === 12 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main === 'main-content' && state.tabindex === '-1' && state.current === 'ibm-patterns.html' && state.shell, 'shell or route state failed');
-      assert(!state.gate && state.process === 4 && state.heroes === 2 && state.atlas === 3 && !state.reviewText, 'approved protected page state drifted');
-      assert(!state.statusOverlap, `route status overlaps hero content at ${viewport.label} ${theme}: ${JSON.stringify({heroTop:state.heroTop,statusBottom:state.statusBottom})}`);
+      assert(!state.gate && state.process === 4 && state.heroes === 2 && state.atlas === 3 && !state.reviewText, 'approved public page state drifted');
       assert(state.captionContrast >= 4.5, `playback caption contrast ${state.captionContrast.toFixed(2)}:1 at ${viewport.label} ${theme}`);
       if (viewport.mobile) {
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
@@ -188,7 +178,7 @@ try {
   assert(reduced.animation === 'none' && reduced.transform === 'none' && reduced.button === 'none', `reduced motion failed: ${JSON.stringify(reduced)}`);
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM PATTERNS BROWSER CONTRACT: PASS states=${checks} images=12 overflow=0 gate=pass reduced-motion=pass motion-toggle=${motionChecks} controls=pass`);
+  console.log(`IBM PATTERNS BROWSER CONTRACT: PASS states=${checks} images=12 overflow=0 public=pass reduced-motion=pass motion-toggle=${motionChecks} controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

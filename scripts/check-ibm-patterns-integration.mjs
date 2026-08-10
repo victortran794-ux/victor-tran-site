@@ -18,16 +18,6 @@ const text = (relativePath) => read(relativePath).toString('utf8');
 const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativePath)).digest('hex');
 const count = (value, needle) => value.split(needle).length - 1;
 
-const frozenFiles = {
-  // Keep this route contract composable: freeze only IBM Patterns-owned gate assets.
-  // Peer routes and shared runtime files have their own contracts and may advance in later approved lanes.
-  'css/password-gate.css': '57ac1cfd3666d908fee00b56e7001b3c47ee8b04a5213449da1273c7ac314d5f',
-  'js/password-gate.js': '26ce94de00f5a6fd5ae06d67865a501f6d0afc8200166ea1fff68e2a1cebdae1',
-};
-for (const [relativePath, expected] of Object.entries(frozenFiles)) {
-  if (sha256(relativePath) !== expected) fail(`${relativePath} changed outside the approved IBM Patterns scope`);
-}
-
 const assetHashes = {
   'images/ibm-patterns-case-study/hero-opening-support.webp': '1c0e25d904a30a10ba76801e5243ebad774c5bea864cd4f0537006be43d7faa4',
   'images/ibm-patterns-case-study/ibm-contact-before-form.webp': 'd14e3a1f0335327c08304f991bb1a64b8ca5165862a529d5b4ef336c1a13a380',
@@ -66,11 +56,6 @@ if (count(healthWorkflow, '- "scripts/check-ibm-patterns-integration.mjs"') !== 
 if (!healthWorkflow.includes('run: npm run check:ibm-patterns')) fail('health workflow must execute the IBM Patterns integration contract');
 for (const required of [
   '<link rel="canonical" href="https://www.victortrandesign.com/ibm-patterns">',
-  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
-  '<meta name="referrer" content="no-referrer">',
-  "if(sessionStorage.getItem('vtd-unlock')!=='ok')",
-  '<link rel="stylesheet" href="css/password-gate.css">',
-  '<script src="js/password-gate.js" defer></script>',
   '<link rel="stylesheet" href="css/ibm-patterns.css">',
   '<main class="page-content patterns-page" id="main-content" tabindex="-1">',
   '<!-- generated:site-shell-header:start -->',
@@ -119,6 +104,9 @@ for (const removed of [
 }
 
 for (const forbidden of [
+  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
+  '<meta name="referrer" content="no-referrer">',
+  "sessionStorage.getItem('vtd-unlock')", 'css/password-gate.css', 'js/password-gate.js', 'site-route-status',
   '135,000', '135k', '13,000', '13k',
   'Every path had a destination', 'no dead ends', 'The structure held', 'A page that finally did its job',
   'User testing confirmed', 'production integrations', 'shipped', 'adopted',
@@ -155,7 +143,7 @@ if (js.includes('innerHTML') || js.includes('eval(') || js.includes('fetch(')) f
 const manifest = JSON.parse(text('data/projects.json'));
 const project = manifest.projects.find((entry) => entry.slug === 'ibm-patterns');
 const safeDescription = "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.";
-const expectedProject = { title: 'IBM Patterns: Contact Us', url: 'ibm-patterns.html', description: safeDescription, type: 'primary', nav: true, homepage: true, protected: true, noindex: true, sitemap: false };
+const expectedProject = { title: 'IBM Patterns: Contact Us', url: 'ibm-patterns.html', description: safeDescription, type: 'primary', nav: true, homepage: true, protected: false, noindex: false, sitemap: true };
 for (const [key, value] of Object.entries(expectedProject)) {
   if (project?.[key] !== value) fail(`data/projects.json IBM Patterns ${key} drifted`);
 }
@@ -169,9 +157,9 @@ for (const relativePath of ['data/projects.json', 'index.html', 'content/index.m
   if (!text(relativePath).includes(safeDescription)) fail(`${relativePath} missing the bounded IBM Patterns listing description`);
 }
 const exportPolicy = JSON.parse(text('data/content-export-policy.json'));
-if (!exportPolicy.protectedPages.some((entry) => entry.source === 'ibm-patterns.html' && entry.slug === 'ibm-patterns')) fail('IBM Patterns protected export policy drifted');
-if (!text('robots.txt').includes('Disallow: /ibm-patterns')) fail('robots.txt must continue disallowing IBM Patterns');
-if (text('sitemap.xml').includes('ibm-patterns')) fail('sitemap must continue omitting IBM Patterns');
+if (exportPolicy.protectedPages.some((entry) => entry.source === 'ibm-patterns.html')) fail('IBM Patterns must not remain in the protected export policy');
+if (text('robots.txt').includes('Disallow: /ibm-patterns')) fail('robots.txt must allow IBM Patterns');
+if (!text('sitemap.xml').includes('<loc>https://www.victortrandesign.com/ibm-patterns</loc>')) fail('sitemap must include IBM Patterns');
 
 if (failures.length) {
   console.error('IBM PATTERNS INTEGRATION CONTRACT: FAIL');

@@ -9,9 +9,6 @@ const GENERATOR = path.join(REPO, 'scripts', 'html-to-md.mjs');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'html-to-md-policy-'));
 const protectedPages = [
   ['document-processing.html', 'document-processing', 'PRIVATE-DOCUMENT-PROCESSING-SENTINEL'],
-  ['ibmcloud.html', 'ibmcloud', 'PRIVATE-IBM-CLOUD-SENTINEL'],
-  ['ibm-patterns.html', 'ibm-patterns', 'PRIVATE-IBM-PATTERNS-SENTINEL'],
-  ['pci.html', 'pci', 'PRIVATE-PCI-SENTINEL'],
 ];
 
 function write(relative, content) {
@@ -54,6 +51,9 @@ try {
   write('data/content-export-policy.json', `${JSON.stringify(policy, null, 2)}\n`);
   write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration">');
   write('about.html', '<title>Public About</title><h1>Public About</h1><p>PUBLIC-ABOUT-SENTINEL</p>');
+  write('ibmcloud.html', '<title>Public IBM Cloud</title><h1>Public IBM Cloud</h1><p>PUBLIC-IBM-CLOUD-SENTINEL</p>');
+  write('ibm-patterns.html', '<title>Public IBM Patterns</title><h1>Public IBM Patterns</h1><p>PUBLIC-IBM-PATTERNS-SENTINEL</p>');
+  write('pci.html', '<title>Public PCI</title><h1>Public PCI</h1><p>PUBLIC-PCI-SENTINEL</p>');
 
   for (const [source, , sentinel] of protectedPages) {
     write(
@@ -77,6 +77,12 @@ try {
     [{ src: 'chantico.jpg', alt: "Chantico's Flame illustration" }],
     'double-quoted attributes must preserve apostrophes inside values'
   );
+  assert.match(read('content/ibmcloud.md'), /PUBLIC-IBM-CLOUD-SENTINEL/);
+  assert.match(read('content/ibm-patterns.md'), /PUBLIC-IBM-PATTERNS-SENTINEL/);
+  assert.match(read('content/pci.md'), /PUBLIC-PCI-SENTINEL/);
+  assert.equal(publicIndex.some(page => page.source === 'ibmcloud.html'), true);
+  assert.equal(publicIndex.some(page => page.source === 'ibm-patterns.html'), true);
+  assert.equal(publicIndex.some(page => page.source === 'pci.html'), true);
 
   for (const [source, slug, sentinel] of protectedPages) {
     const publicStub = read(`content/${slug}.md`);

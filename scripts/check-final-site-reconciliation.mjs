@@ -42,7 +42,7 @@ for (const [name, jobId] of [['desktop', 'lighthouse'], ['mobile', 'lighthouse-m
     continue;
   }
   requireText(block, 'temporaryPublicStorage: false', `${name} Lighthouse must disable temporary public storage`);
-  for (const route of ['wxo-canvas', 'document-processing', 'ibmcloud', 'ibm-patterns', 'pci']) {
+  for (const route of ['wxo-canvas', 'document-processing']) {
     forbid(block, new RegExp(`\\$\\{\\{ steps\\.url\\.outputs\\.base \\}\\}/${route}(?:\\s|$)`), `${name} Lighthouse must not audit protected /${route}`);
   }
   requireText(block, '${{ steps.url.outputs.base }}/pikappapp/demo', `${name} Lighthouse must retain public noindex Pi Kapp demo coverage`);
@@ -57,7 +57,7 @@ else {
   requireText(checkJob, 'npm run check:final-site-reconciliation', 'primary check job must run the final reconciliation contract');
 }
 
-const protectedPages = ['wxo-canvas.html', 'document-processing.html', 'ibmcloud.html', 'ibm-patterns.html', 'pci.html'];
+const protectedPages = ['wxo-canvas.html', 'document-processing.html'];
 for (const page of protectedPages) {
   const html = read(page);
   requireText(html, '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">', `${page} must use the full protected robots policy`);
@@ -108,7 +108,7 @@ for (const phrase of [
   'PR #127 approved icon-only theme control with accessible names and state',
   'visible `Email` action uses a direct `mailto:` link',
   'About retains the full email sentence',
-  'IBM Patterns and PCI are protected, `noindex`, and omitted from the sitemap',
+  'IBM Cloud, IBM Patterns, and the sanitized PCI story are approved as public archive projects',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
 
 if (failures.length) {

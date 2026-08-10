@@ -4,11 +4,4 @@ Disallow: /wxo-canvas.html
 Disallow: /wxo-canvas
 Disallow: /document-processing.html
 Disallow: /document-processing
-Disallow: /pci
-Disallow: /pci.html
-Disallow: /ibmcloud
-Disallow: /ibmcloud.html
-Disallow: /ibm-patterns
-Disallow: /ibm-patterns.html
-
 Sitemap: https://www.victortrandesign.com/sitemap.xml

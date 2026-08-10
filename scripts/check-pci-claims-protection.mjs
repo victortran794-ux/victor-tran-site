@@ -42,9 +42,9 @@ const pci = (manifest.projects || []).find(project => project.slug === 'pci');
 if (!pci) {
   fail('data/projects.json must define the PCI project');
 } else {
-  if (pci.protected !== true) fail('PCI manifest must set protected=true');
-  if (pci.noindex !== true) fail('PCI manifest must set noindex=true');
-  if (pci.sitemap !== false) fail('PCI manifest must set sitemap=false');
+  if (pci.protected !== false) fail('PCI manifest must set protected=false');
+  if (pci.noindex !== false) fail('PCI manifest must set noindex=false');
+  if (pci.sitemap !== true) fail('PCI manifest must set sitemap=true');
   requireText(pci.description || '', 'Freelance publication and environmental design', 'PCI manifest description');
   requireText(pci.description || '', 'recruitment banner concepts', 'PCI manifest description');
 }
@@ -160,23 +160,23 @@ if (/object-fit\s*:\s*cover/i.test(pciCss)) {
   fail('PCI scoped CSS must not crop artifacts with object-fit: cover');
 }
 
-if (!/<meta\s+name="robots"\s+content="noindex,nofollow,noarchive,nosnippet,noimageindex">/i.test(pciHtml)) {
-  fail('pci.html must retain the full protected robots policy');
+if (/<meta\s+name="robots"\s+content="noindex,nofollow,noarchive,nosnippet,noimageindex">/i.test(pciHtml)) {
+  fail('pci.html must not retain the protected robots policy');
 }
-if (!/<meta\s+name="referrer"\s+content="no-referrer">/i.test(pciHtml)) {
-  fail('pci.html must retain no-referrer metadata');
+if (/<meta\s+name="referrer"\s+content="no-referrer">/i.test(pciHtml)) {
+  fail('pci.html must not retain protected no-referrer metadata');
 }
-if (!/classList\.add\(['"]locked['"]\)/i.test(pciHtml) || !/password-gate\.js/i.test(pciHtml)) {
-  fail('pci.html must retain the client-side protected gate');
+if (/classList\.add\(['"]locked['"]\)|password-gate\.(?:js|css)/i.test(pciHtml)) {
+  fail('pci.html must not retain the client-side protected gate');
 }
-if (!(exportPolicy.protectedPages || []).some(entry => entry.source === 'pci.html' && entry.slug === 'pci')) {
-  fail('content export policy must retain PCI as protected');
+if ((exportPolicy.protectedPages || []).some(entry => entry.source === 'pci.html')) {
+  fail('content export policy must not retain PCI as protected');
 }
 for (const rule of ['Disallow: /pci', 'Disallow: /pci.html']) {
-  if (!robots.includes(rule)) fail(`robots.txt must include ${rule}`);
+  if (robots.includes(rule)) fail(`robots.txt must not include ${rule}`);
 }
-if (/<loc>[^<]*\/pci(?:\.html)?<\/loc>/i.test(sitemap)) {
-  fail('sitemap.xml must not include PCI');
+if (!/<loc>https:\/\/www\.victortrandesign\.com\/pci<\/loc>/i.test(sitemap)) {
+  fail('sitemap.xml must include PCI');
 }
 
 requireText(pciHtml, 'freelance designer', 'PCI role framing');
@@ -237,10 +237,10 @@ if (exportPolicyTriggers.length !== 2) {
 }
 
 if (errors.length) {
-  console.error('PCI CLAIMS AND PROTECTION CONTRACT: FAIL');
+  console.error('PCI CLAIMS AND PUBLICATION CONTRACT: FAIL');
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log('PCI CLAIMS AND PROTECTION CONTRACT: PASS');
-console.log('protection=aligned claims=bounded role=freelance banners=concepts');
+console.log('PCI CLAIMS AND PUBLICATION CONTRACT: PASS');
+console.log('publication=public claims=bounded role=freelance banners=concepts');
