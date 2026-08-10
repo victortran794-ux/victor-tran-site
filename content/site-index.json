@@ -162,11 +162,11 @@
     "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
     "contentFile": "content/ibmcloud.md",
     "headings": [
-      "Learn the system. Then help others move through it.",
-      "Carry the workflow, not just the screen.",
-      "Make critique survive the meeting.",
-      "Turn finished images into repeatable construction.",
-      "Create leverage beyond the artifact."
+      "Learning the system shaped how I learned to design.",
+      "Shape the flow before polishing the screen.",
+      "Make critique useful after the meeting.",
+      "Move from making images to defining a method.",
+      "Design the next step."
     ],
     "images": [
       {
@@ -176,6 +176,46 @@
       {
         "src": "images/ibm-thumb-dark.png",
         "alt": "IBM Cloud Observability abstract service illustration in dark mode"
+      },
+      {
+        "src": "images/ibm-cloud-routing-architecture.png",
+        "alt": "IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services"
+      },
+      {
+        "src": "images/ibm-cloud-event-flow-details.png",
+        "alt": "Event Notifications create-subscription flow on the Details step"
+      },
+      {
+        "src": "images/ibm-cloud-event-flow-condition-empty.png",
+        "alt": "Event Notifications condition panel before a rule is selected"
+      },
+      {
+        "src": "images/ibm-cloud-event-flow-condition-compound.png",
+        "alt": "Event Notifications condition panel with a second rule added"
+      },
+      {
+        "src": "images/ibm-cloud-research-framing.png",
+        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
+      },
+      {
+        "src": "images/ibm-cloud-research-findings.png",
+        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
+      },
+      {
+        "src": "images/ibm-cloud-card-component-design.png",
+        "alt": "IBM Cloud subscription card component explorations showing hierarchy, status, and connected services"
+      },
+      {
+        "src": "images/ibm-cloud-concept-to-final.png",
+        "alt": "IBM Cloud concept sketches progressing through shared isometric construction studies"
+      },
+      {
+        "src": "images/ibm-cloud-visual-system-foundations.png",
+        "alt": "IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules"
+      },
+      {
+        "src": "images/ibm-cloud-isometric-compositions.png",
+        "alt": "Four IBM Cloud isometric compositions using shared perspective, lighting, and product metaphors"
       }
     ],
     "projects": []
