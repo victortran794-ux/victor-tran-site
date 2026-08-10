@@ -155,6 +155,98 @@
     "projects": []
   },
   {
+    "title": "IBM Cloud",
+    "source": "ibmcloud.html",
+    "url": "/ibmcloud",
+    "category": "Product Design · Visual Systems",
+    "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
+    "contentFile": "content/ibmcloud.md",
+    "headings": [
+      "Learn the system. Then help others move through it.",
+      "Carry the workflow, not just the screen.",
+      "Make critique survive the meeting.",
+      "Turn finished images into repeatable construction.",
+      "Create leverage beyond the artifact."
+    ],
+    "images": [
+      {
+        "src": "images/ibm-thumb-light.png",
+        "alt": "IBM Cloud Observability abstract service illustration in light mode"
+      },
+      {
+        "src": "images/ibm-thumb-dark.png",
+        "alt": "IBM Cloud Observability abstract service illustration in dark mode"
+      }
+    ],
+    "projects": []
+  },
+  {
+    "title": "A route to someone real.",
+    "source": "ibm-patterns.html",
+    "url": "/ibm-patterns",
+    "category": "Product Design",
+    "description": "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.",
+    "contentFile": "content/ibm-patterns.md",
+    "headings": [
+      "Six weeks to imagine a better front door.",
+      "Useful if you already knew IBM.",
+      "Make the next destination visible.",
+      "Carry the work beyond the room.",
+      "What carried forward."
+    ],
+    "images": [
+      {
+        "src": "images/ibm-patterns-case-study/hero-opening-support.webp",
+        "alt": "2021 IBM Contact Us future-state opening with a warm welcome and support routes"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/ibm-contact-before-form.webp",
+        "alt": "Historical IBM Contact Us experience showing a list of destinations beside an empty general contact form"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/midfi-route-directory.png",
+        "alt": "Mid-fidelity Contact IBM exploration organizing support, sales, academic services, careers, directories, and MyIBM as explicit routes"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/midfi-topic-cards-form.png",
+        "alt": "Mid-fidelity Contact IBM exploration combining topic cards with a general contact form"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/midfi-routing-grid.png",
+        "alt": "Mid-fidelity Contact IBM exploration showing a grid of support destinations and direct contact routes"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/midfi-human-fallback.png",
+        "alt": "Mid-fidelity Contact IBM exploration with an expanded in-page human contact form"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/hero-study-collaboration.webp",
+        "alt": "XD prototype hero showing two people working together at a laptop beside the words Contact IBM, We're here to help"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/hero-study-welcome.webp",
+        "alt": "Preserved future-state hero showing a smiling person beside the words Contact IBM, We're here for you"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/sales-routes.webp",
+        "alt": "Close-up of the 2021 future-state Sales routes arranged as six destination cards"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/route-breadth.webp",
+        "alt": "Close-up of the 2021 future-state navigation for IBM Careers and Learn"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/human-fallback.webp",
+        "alt": "Close-up of contact information and the final general inquiry, IBM Support, and IBM Sales fallback routes"
+      },
+      {
+        "src": "images/ibm-patterns-case-study/final-playback-slide-36.jpg",
+        "alt": "Final playback chapter card showing Bradley and Paige in The Saga To-Be"
+      }
+    ],
+    "projects": []
+  },
+  {
     "title": "Pi Kapp App",
     "source": "pikappapp.html",
     "url": "/pikappapp",
@@ -218,6 +310,73 @@
       {
         "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
         "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
+      }
+    ],
+    "projects": []
+  },
+  {
+    "title": "Performance Contracting, Inc.",
+    "source": "pci.html",
+    "url": "/pci",
+    "category": "Publication & Environmental Design",
+    "description": "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts.",
+    "contentFile": "content/pci.md",
+    "headings": [
+      "Dense material, given room to move.",
+      "A publication system for consequential information.",
+      "Pacing first. Detail where it matters.",
+      "The hexagon becomes geography.",
+      "From page rhythm to environmental scale.",
+      "One implemented publication. One exploratory extension."
+    ],
+    "images": [
+      {
+        "src": "images/pci-handbook-2-interstitial.jpg",
+        "alt": "Red handbook interstitial with a field of overlapping hexagons"
+      },
+      {
+        "src": "images/pci-handbook-1-cover.jpg",
+        "alt": "Principles of Business Conduct handbook cover"
+      },
+      {
+        "src": "images/pci-booklet-section-rhythm-desktop.jpg",
+        "alt": "Three sanitized handbook chapter examples using photography, red hexagon overlays, and large section typography"
+      },
+      {
+        "src": "images/pci-booklet-statement-hierarchy.jpg",
+        "alt": "Sanitized handbook artifact showing statement hierarchy"
+      },
+      {
+        "src": "images/pci-booklet-icon-supported-principles.jpg",
+        "alt": "Sanitized handbook artifact showing icon-supported principles"
+      },
+      {
+        "src": "images/pci-booklet-pillar-diagram.jpg",
+        "alt": "Sanitized handbook artifact showing a four-pillar diagram"
+      },
+      {
+        "src": "images/pci-booklet-editorial-feature.jpg",
+        "alt": "Sanitized handbook artifact combining neutralized copy and a worker photograph"
+      },
+      {
+        "src": "images/pci-handbook-41-locations.jpg",
+        "alt": "Handbook map using state-coded hexagons to organize PCI locations"
+      },
+      {
+        "src": "images/pci-banners-1.jpg",
+        "alt": "Recruitment banner typography and asset exploration board"
+      },
+      {
+        "src": "images/pci-banners-2.jpg",
+        "alt": "Recruitment banner pattern and color exploration board"
+      },
+      {
+        "src": "images/pci-banners-3.jpg",
+        "alt": "Build the Future recruitment banner concept board"
+      },
+      {
+        "src": "images/pci-banners-4.jpg",
+        "alt": "Portrait board of environmental and collateral recruitment concepts"
       }
     ],
     "projects": []

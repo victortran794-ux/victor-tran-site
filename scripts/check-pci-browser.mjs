@@ -114,11 +114,6 @@ try {
   await cdp.call('Page.enable');
   await cdp.call('Runtime.enable');
 
-  await cdp.navigate(`${baseUrl}/pci.html`);
-  const gate = await cdp.evaluate(`({locked:document.documentElement.classList.contains('locked'),gate:Boolean(document.getElementById('vtd-gate')),dialog:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-modal'),focused:document.activeElement?.id})`);
-  assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.focused === 'vtd-gate-input', `password gate failed: ${JSON.stringify(gate)}`);
-  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
-
   let checks = 0;
   for (const viewport of [
     { label: '390', width: 390, height: 844, mobile: true },
@@ -179,7 +174,7 @@ try {
 
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PCI BROWSER CONTRACT: PASS states=${checks} images=12 artifacts=12 overflow=0 ratios=pass frames=pass gate=pass controls=pass`);
+  console.log(`PCI BROWSER CONTRACT: PASS states=${checks} images=12 artifacts=12 overflow=0 ratios=pass frames=pass public=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

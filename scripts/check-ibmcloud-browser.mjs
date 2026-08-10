@@ -116,11 +116,6 @@ try {
   await cdp.call('Page.enable');
   await cdp.call('Runtime.enable');
 
-  await cdp.navigate(`${baseUrl}/ibmcloud.html`);
-  const gate = await cdp.evaluate(`({locked:document.documentElement.classList.contains('locked'),gate:Boolean(document.getElementById('vtd-gate')),dialog:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-modal'),focused:document.activeElement?.id})`);
-  assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.focused === 'vtd-gate-input', `password gate failed: ${JSON.stringify(gate)}`);
-  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
-
   let checks = 0;
   for (const viewport of [
     { label: '390', width: 390, height: 844, mobile: true },
@@ -174,7 +169,7 @@ try {
 
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=3 proofs=3 reservations=2 overflow=0 gate=pass controls=pass`);
+  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=3 proofs=3 reservations=2 overflow=0 public=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

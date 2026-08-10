@@ -43,10 +43,11 @@ run_required "Whitespace/conflict marker check" git diff --check
 
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "About semantic-heading contract" node scripts/check-about-semantics.mjs
-run_required "Protected IBM Cloud hiring-cut contract" node scripts/check-ibmcloud-hiring-cut.mjs
+run_required "Public IBM Cloud hiring-cut contract" node scripts/check-ibmcloud-hiring-cut.mjs
+run_required "Public archive-route contract" npm run check:public-archive-routes
 run_required "Production-host regression check" node scripts/check-production-host.mjs
 run_required "Production artifact containment contract" npm run check:artifact-containment
-run_required "PCI claims and protection contract" npm run check:pci-claims-protection
+run_required "PCI claims and publication contract" npm run check:pci-claims-protection
 run_required "Star & Lamp bounded revision contract" npm run check:sal-vico2
 run_required "Ability Experience bounded sequence contract" npm run check:ability-vico2
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs

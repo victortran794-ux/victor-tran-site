@@ -111,13 +111,10 @@ const activeProtected = new Set(
 );
 const expectedProtected = new Set([
   'document-processing.html',
-  'ibmcloud.html',
-  'ibm-patterns.html',
-  'pci.html',
   'wxo-canvas.html',
 ]);
 if (JSON.stringify([...activeProtected].sort()) !== JSON.stringify([...expectedProtected].sort())) {
-  fail('active protected shell policy drifted from the five frozen routes');
+  fail('active protected shell policy drifted from the two approved routes');
 }
 
 const expectedConfig = {

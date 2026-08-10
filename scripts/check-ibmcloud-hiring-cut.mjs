@@ -13,9 +13,9 @@ const require = (condition, message) => { if (!condition) failures.push(message)
 const project = manifest.projects.find(item => item.slug === 'ibmcloud');
 require(Boolean(project), 'IBM Cloud project manifest entry is missing');
 if (project) {
-  require(project.protected === true, 'IBM Cloud manifest must be protected');
-  require(project.noindex === true, 'IBM Cloud manifest must be noindex');
-  require(project.sitemap === false, 'IBM Cloud manifest must be excluded from sitemap');
+  require(project.protected === false, 'IBM Cloud manifest must be public');
+  require(project.noindex === false, 'IBM Cloud manifest must be indexable');
+  require(project.sitemap === true, 'IBM Cloud manifest must be included in the sitemap');
   require(project.url === 'ibmcloud.html', 'IBM Cloud route must remain ibmcloud.html');
   require(project.surface === 'ibm-inverse', 'IBM Cloud homepage card must use the bounded inverse surface');
   require(project.images?.length === 1, 'IBM Cloud homepage card must use one dominant thumbnail');
@@ -23,11 +23,6 @@ if (project) {
 }
 
 for (const phrase of [
-  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
-  '<meta name="referrer" content="no-referrer">',
-  "sessionStorage.getItem('vtd-unlock')!=='ok'",
-  '<link rel="stylesheet" href="css/password-gate.css">',
-  '<script src="js/password-gate.js" defer></script>',
   '<link rel="stylesheet" href="css/ibmcloud-hiring.css">',
   'data-project="ibm-cloud"',
   'class="nav"',
@@ -60,6 +55,12 @@ for (const phrase of [
 }
 
 for (const phrase of [
+  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
+  '<meta name="referrer" content="no-referrer">',
+  "sessionStorage.getItem('vtd-unlock')",
+  'css/password-gate.css',
+  'js/password-gate.js',
+  'site-route-status',
   '2021–2024',
   'first project I owned end-to-end',
   'second-largest revenue-generating',
