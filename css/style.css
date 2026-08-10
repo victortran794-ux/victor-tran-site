@@ -3879,7 +3879,7 @@ html[data-theme="dark"] .spotify-frame {
   position: absolute;
   inset: 0;
   overflow-y: auto;
-  padding: clamp(28px, 5vw, 72px) var(--page-x) clamp(72px, 10vw, 144px);
+  padding: clamp(24px, 4vw, 52px) var(--page-x) clamp(56px, 8vw, 104px);
   background: var(--bg);
   transform: translateY(20px);
   transition: transform var(--duration-base) var(--ease-out);
@@ -3894,13 +3894,11 @@ html[data-theme="dark"] .spotify-frame {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 48px;
-  gap: var(--space-8);
+  gap: var(--space-6);
   align-items: start;
-  padding: var(--space-6) 0 clamp(64px, 9vw, 124px);
+  padding: var(--space-4) 0 clamp(48px, 6vw, 80px);
   border-top: 1px solid var(--text);
 }
-.dna-eyebrow,
-.dna-section-index,
 .dna-field-label,
 .dna-font-meta,
 .dna-component-list strong,
@@ -3912,19 +3910,18 @@ html[data-theme="dark"] .spotify-frame {
   line-height: 1.4;
   text-transform: uppercase;
 }
-.dna-eyebrow { margin-bottom: var(--space-4); color: var(--text-2); }
 .dna-title {
   margin: 0;
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(4.5rem, 10vw, 10rem);
+  font-size: clamp(4rem, 8vw, 8rem);
   font-weight: 400;
-  line-height: 0.78;
+  line-height: 0.82;
   letter-spacing: -0.055em;
 }
 .dna-title em { color: var(--pink); font-style: italic; }
 .dna-intro {
   max-width: 58ch;
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
   color: var(--text-2);
   font-size: var(--text-lead);
 }
@@ -3950,7 +3947,7 @@ html[data-theme="dark"] .spotify-frame {
   display: grid;
   grid-template-columns: minmax(130px, 2fr) minmax(0, 10fr);
   gap: 0 clamp(28px, 5vw, 72px);
-  padding: clamp(64px, 9vw, 116px) 0;
+  padding: clamp(48px, 6vw, 80px) 0;
   border-top: 1px solid var(--border);
 }
 .dna-section-head {
@@ -3959,24 +3956,25 @@ html[data-theme="dark"] .spotify-frame {
   grid-column: 1 / -1;
   gap: inherit;
   align-items: start;
-  margin-bottom: clamp(40px, 6vw, 72px);
+  margin-bottom: clamp(20px, 3vw, 28px);
 }
-.dna-section-index { color: var(--pink); }
 .dna-section-head > div { grid-column: 2; }
 .dna-section-head h3 {
-  max-width: 13ch;
+  max-width: none;
   margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 6vw, 6.4rem);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  color: var(--pink);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .dna-section-head p {
   max-width: 58ch;
-  margin-top: var(--space-6);
+  margin-top: var(--space-3);
   color: var(--text-2);
-  font-size: var(--text-lead);
+  font-size: var(--text-body);
 }
 .dna-section > :not(.dna-section-head) { grid-column: 2; }
 
@@ -4028,7 +4026,7 @@ html[data-theme="dark"] .spotify-frame {
 .dna-swatch-hex { color: var(--text-2); }
 .dna-color-preview {
   position: relative;
-  min-height: 420px;
+  min-height: 360px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg-2);
@@ -4068,7 +4066,7 @@ html[data-theme="dark"] .spotify-frame {
 .dna-font {
   display: grid;
   min-width: 0;
-  min-height: 260px;
+  min-height: 210px;
   padding: var(--space-5) var(--space-6) var(--space-6) 0;
   border-bottom: 1px solid var(--border);
   border-right: 1px solid var(--border);
@@ -4078,7 +4076,7 @@ html[data-theme="dark"] .spotify-frame {
 .dna-font-meta { color: var(--text-2); }
 .dna-font-sample {
   align-self: center;
-  font-size: clamp(5rem, 9vw, 9rem);
+  font-size: clamp(4.5rem, 8vw, 7.5rem);
   line-height: 0.8;
   letter-spacing: -0.06em;
   transition: color var(--duration-fast);
@@ -4086,8 +4084,8 @@ html[data-theme="dark"] .spotify-frame {
 .dna-font-use { align-self: end; color: var(--text-2); font-size: var(--text-label); }
 .dna-font[data-jitter="true"]:hover .dna-font-sample { color: var(--pink); font-style: italic; }
 .dna-playground {
-  margin-top: clamp(52px, 7vw, 88px);
-  padding: var(--space-6) 0 var(--space-8);
+  margin-top: clamp(40px, 5vw, 64px);
+  padding: var(--space-5) 0 var(--space-6);
   border-top: 1px solid var(--text);
   border-bottom: 1px solid var(--border);
 }
@@ -4100,9 +4098,9 @@ html[data-theme="dark"] .spotify-frame {
 .dna-playground-head p { font-size: var(--text-label); }
 .dna-playground-text {
   min-height: 1em;
-  margin: clamp(48px, 7vw, 88px) 0;
+  margin: clamp(36px, 5vw, 64px) 0;
   outline: none;
-  font-size: clamp(3.5rem, 8vw, 8.5rem);
+  font-size: clamp(3.25rem, 7vw, 7rem);
   line-height: 0.92;
   letter-spacing: -0.045em;
 }
@@ -4173,9 +4171,8 @@ html[data-theme="dark"] .spotify-frame {
   align-items: start;
 }
 .dna-component-specimen { padding: var(--space-8); border: 1px solid var(--border); background: var(--bg-2); }
-.dna-component-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: var(--space-8) 0 0; padding: 0; border: 0; }
-.dna-component-meta > div { padding: var(--space-5) var(--space-5) var(--space-5) 0; border-right: 1px solid var(--border); }
-.dna-component-meta > div + div { padding-left: var(--space-5); }
+.dna-component-meta { grid-template-columns: 1fr; margin: var(--space-6) 0 0; padding: 0; border: 0; }
+.dna-component-meta > div { padding: var(--space-4) 0; border-right: 0; }
 .dna-component-meta > div:last-child { border-right: 0; }
 .dna-component-list { margin: 0; padding: 0; border-top: 1px solid var(--text); list-style: none; }
 .dna-component-list li {
@@ -4203,26 +4200,24 @@ html[data-theme="dark"] .spotify-frame {
   .dna-rhythm-field { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  .dna-panel { padding: var(--space-5) var(--space-5) var(--space-16); }
-  .dna-panel-head { grid-template-columns: minmax(0, 1fr) 48px; padding-bottom: var(--space-16); }
-  .dna-title { font-size: clamp(4.25rem, 22vw, 6.5rem); }
+  .dna-panel { padding: var(--space-4) var(--space-5) var(--space-12); }
+  .dna-panel-head { grid-template-columns: minmax(0, 1fr) 48px; padding-bottom: var(--space-12); }
+  .dna-title { font-size: clamp(4rem, 20vw, 5.8rem); }
   .dna-intro { font-size: var(--text-body); }
-  .dna-section { display: block; padding: var(--space-16) 0; }
-  .dna-section-head { display: block; margin-bottom: var(--space-10); }
-  .dna-section-index { display: block; margin-bottom: var(--space-5); }
-  .dna-section-head h3 { font-size: clamp(3rem, 15vw, 4.5rem); }
+  .dna-section { display: block; padding: var(--space-12) 0; }
+  .dna-section-head { display: block; margin-bottom: var(--space-6); }
   .dna-section-head p { font-size: var(--text-body); }
   .dna-fonts { grid-template-columns: 1fr; }
-  .dna-font { min-height: 220px; padding: var(--space-5) 0; border-right: 0; }
+  .dna-font { min-height: 170px; padding: var(--space-4) 0; border-right: 0; }
   .dna-font + .dna-font { padding-left: 0; }
-  .dna-font-sample { font-size: clamp(5rem, 28vw, 8rem); }
+  .dna-font-sample { font-size: clamp(4.5rem, 24vw, 6.4rem); }
   .dna-playground-head { display: block; }
   .dna-playground-head p { margin-top: var(--space-3); }
-  .dna-playground-text { font-size: clamp(3rem, 17vw, 5.2rem); overflow-wrap: anywhere; }
+  .dna-playground-text { font-size: clamp(2.8rem, 15vw, 4.4rem); overflow-wrap: anywhere; }
   .dna-playground-controls { gap: var(--space-5); }
   .dna-scale-row { grid-template-columns: 82px minmax(0, 1fr) 44px; }
   .dna-radii { gap: var(--space-3); }
-  .dna-radius { min-height: 108px; }
+  .dna-radius { min-height: 92px; }
   .dna-component-specimen { padding: var(--space-5); }
   .dna-component-meta { grid-template-columns: 1fr; }
   .dna-component-meta > div,
