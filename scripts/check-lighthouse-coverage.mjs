@@ -10,10 +10,9 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const desktopRoutes = [
   '/', '/about', '/salmagazine', '/pikappapp', '/abilityexperience',
   '/artillustration', '/graphicgallery',
-  '/wxo-canvas', '/document-processing', '/ibmcloud', '/ibm-patterns', '/pci',
   '/pikappapp/demo',
 ];
-const mobileRoutes = ['/', '/about', '/artillustration', '/wxo-canvas', '/document-processing', '/pikappapp/demo'];
+const mobileRoutes = ['/', '/about', '/artillustration', '/pikappapp/demo'];
 
 function jobBlock(jobId) {
   const marker = `\n  ${jobId}:\n`;
@@ -47,6 +46,7 @@ expect(mobileJob.includes('artifactName: lighthouse-results-mobile'), 'Mobile Li
 expect(desktopJob.includes("if: github.event_name != 'pull_request'") && mobileJob.includes("if: github.event_name != 'pull_request'"),
   'Production Lighthouse jobs must skip pull requests.');
 for (const block of [desktopJob, mobileJob]) {
+  expect(block.includes('temporaryPublicStorage: false'), 'Lighthouse results must not use temporary public storage.');
   expect(block.includes('BASE_INPUT: ${{ github.event.inputs.url }}'), 'Dispatch URL must enter the shell through an environment variable.');
   expect(!block.includes('BASE="${{ github.event.inputs.url }}"'), 'Dispatch URL must never be interpolated directly into shell source.');
   expect(block.includes("$'\\n'") && block.includes("$'\\r'"), 'Dispatch URL must reject embedded newlines.');

@@ -44,6 +44,7 @@ on:
       - "scripts/test-about-browser-process.mjs"
       - "scripts/html-to-md.mjs"
       - "scripts/test-html-to-md.mjs"
+      - "scripts/check-final-site-reconciliation.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -85,6 +86,8 @@ on:
       - "case-studies/document-processing.md"
       - "CLAUDE.md"
       - "PORTFOLIO_SYSTEM.md"
+      - "PORTFOLIO_AGENT_WORKFLOWS.md"
+      - "PORTFOLIO_DASHBOARD.md"
       - "victor-tran-site.md"
   pull_request:
     paths:
@@ -120,6 +123,7 @@ on:
       - "scripts/test-about-browser-process.mjs"
       - "scripts/html-to-md.mjs"
       - "scripts/test-html-to-md.mjs"
+      - "scripts/check-final-site-reconciliation.mjs"
       - ".vercelignore"
       - "scripts/check-production-artifact-containment.mjs"
       - "pci.html"
@@ -161,6 +165,8 @@ on:
       - "case-studies/document-processing.md"
       - "CLAUDE.md"
       - "PORTFOLIO_SYSTEM.md"
+      - "PORTFOLIO_AGENT_WORKFLOWS.md"
+      - "PORTFOLIO_DASHBOARD.md"
       - "victor-tran-site.md"
 
 jobs:
@@ -183,6 +189,12 @@ jobs:
           npm run verify:pikapp-demo
       - name: Content export generator policy fixture
         run: npm run test:content-export-policy
+      - name: Current protected content export policy
+        run: npm run check:content-export-policy
+      - name: Current project manifest validation
+        run: node scripts/validate-project-manifest.mjs
+      - name: Final site reconciliation contract
+        run: npm run check:final-site-reconciliation
       - name: Pi Kapp page integration contract
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract
@@ -354,10 +366,9 @@ jobs:
       - name: Lychee link check
         uses: lycheeverse/lychee-action@v2
         with:
-          # Protected pages, including Document Processing, are expected to stay live,
-          # visitor-gated, noindex, and omitted from sitemap/indexing checks. Document
-          # Processing is currently linked from the Work dropdown; do not treat it as
-          # direct-link only unless navigation links are intentionally removed.
+          # Protected pages, including Document Processing, stay visitor-gated, noindex,
+          # and omitted from sitemap/indexing checks. Document Processing is omitted from
+          # Work and homepage navigation and is reached through the protected wxO chapter.
           args: >
             --no-progress
             --max-concurrency 8
@@ -403,15 +414,10 @@ jobs:
             ${{ steps.url.outputs.base }}/abilityexperience
             ${{ steps.url.outputs.base }}/artillustration
             ${{ steps.url.outputs.base }}/graphicgallery
-            ${{ steps.url.outputs.base }}/wxo-canvas
-            ${{ steps.url.outputs.base }}/document-processing
-            ${{ steps.url.outputs.base }}/ibmcloud
-            ${{ steps.url.outputs.base }}/ibm-patterns
-            ${{ steps.url.outputs.base }}/pci
             ${{ steps.url.outputs.base }}/pikappapp/demo
           uploadArtifacts: true
           artifactName: lighthouse-results-desktop
-          temporaryPublicStorage: true
+          temporaryPublicStorage: false
           configPath: ./.github/lighthouse-budget.json
 
   lighthouse-mobile:
@@ -442,12 +448,10 @@ jobs:
             ${{ steps.url.outputs.base }}/
             ${{ steps.url.outputs.base }}/about
             ${{ steps.url.outputs.base }}/artillustration
-            ${{ steps.url.outputs.base }}/wxo-canvas
-            ${{ steps.url.outputs.base }}/document-processing
             ${{ steps.url.outputs.base }}/pikappapp/demo
           uploadArtifacts: true
           artifactName: lighthouse-results-mobile
-          temporaryPublicStorage: true
+          temporaryPublicStorage: false
           configPath: ./.github/lighthouse-mobile.json
 
   images:

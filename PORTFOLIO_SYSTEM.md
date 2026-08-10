@@ -55,11 +55,12 @@ Do **not** put durable planning/source notes in `content/`; most of `content/` i
 
 ## Current case-study state
 
-- `document-processing.html` is intentionally live as a password-protected/noindex page that is currently linked from the Work dropdown and omitted from the sitemap. The password gate is the visitor-privacy layer, not an unresolved launch blocker.
+- `document-processing.html` is a raw `.html` implementation artifact for a protected Document Processing page. `data/projects.json` sets `manifest nav=false/homepage=false`; it is omitted from Work and homepage, while the protected wxO umbrella reaches its chapter. `/document-processing` intentionally permanently redirects to `/wxo-canvas#document-processing`.
 - `case-studies/document-processing.md` is the current package manifest for future Document Processing refinements.
 - `archive/doc-pro-case-study-handoff.md` is a historical Doc Pro handoff; the active Document Processing planning file is `case-studies/document-processing.md`.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
 - Preserve the password gate/noindex and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval.
+- The static client-side password gate is visitor deterrence and discovery reduction, not server-side access control. Served HTML can contain the page source. No material requiring true confidentiality may be added until a separately approved server-side protection or private-hosting architecture exists.
 
 ## Health automation currently present
 

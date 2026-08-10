@@ -160,8 +160,11 @@ if (/object-fit\s*:\s*cover/i.test(pciCss)) {
   fail('PCI scoped CSS must not crop artifacts with object-fit: cover');
 }
 
-if (!/<meta\s+name="robots"\s+content="noindex,nofollow">/i.test(pciHtml)) {
-  fail('pci.html must remain noindex,nofollow');
+if (!/<meta\s+name="robots"\s+content="noindex,nofollow,noarchive,nosnippet,noimageindex">/i.test(pciHtml)) {
+  fail('pci.html must retain the full protected robots policy');
+}
+if (!/<meta\s+name="referrer"\s+content="no-referrer">/i.test(pciHtml)) {
+  fail('pci.html must retain no-referrer metadata');
 }
 if (!/classList\.add\(['"]locked['"]\)/i.test(pciHtml) || !/password-gate\.js/i.test(pciHtml)) {
   fail('pci.html must retain the client-side protected gate');
