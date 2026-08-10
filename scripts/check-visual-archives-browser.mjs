@@ -256,6 +256,57 @@ async function checkLiveSlideshowFocusRestoration() {
   });
 }
 
+async function checkHornedWomanCadenceAndPause() {
+  await cdp.call('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }],
+  });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  await cdp.navigate(`${baseUrl}/artillustration.html`);
+  await cdp.evaluate(`localStorage.setItem('lens', 'light')`);
+  await cdp.navigate(`${baseUrl}/artillustration.html`);
+  const before = await cdp.evaluate(`(() => {
+    const stage = document.querySelector('[data-horned-slideshow] .series-slideshow-stage');
+    const button = stage?.querySelector('.slideshow-pause-btn');
+    const image = stage?.querySelector('.series-slideshow-img.is-active');
+    const stageRect = stage?.getBoundingClientRect();
+    const buttonRect = button?.getBoundingClientRect();
+    stage?.scrollIntoView({ block: 'center' });
+    return { interval: stage?.dataset.slideshowInterval, src: image?.getAttribute('src'), label: button?.textContent.trim(), pressed: button?.getAttribute('aria-pressed'), width: buttonRect?.width, height: buttonRect?.height, inlineInset: stageRect?.right - buttonRect?.right, blockInset: stageRect?.bottom - buttonRect?.bottom };
+  })()`);
+  assert(before.interval === '2000' && before.label === 'Pause' && before.pressed === 'false' && before.width >= 72 && before.height >= 44 && Math.abs(before.inlineInset - 12) <= 1 && Math.abs(before.blockInset - 12) <= 1,
+    `artillustration.html: Horned Woman cadence or initial pause state failed: ${JSON.stringify(before)}`);
+  await cdp.evaluate(`(() => { const button = document.querySelector('.slideshow-pause-btn'); const rect = button?.getBoundingClientRect(); if (rect) scrollTo({ top: scrollY + rect.bottom - innerHeight + 24, behavior: 'instant' }); })()`);
+  await delay(100);
+  await cdp.screenshot('art-390-light-motion.png');
+  await delay(2150);
+  const advanced = await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active')?.getAttribute('src')`);
+  assert(advanced && advanced !== before.src,
+    `artillustration.html: Horned Woman panel did not advance on its two-second cadence: ${JSON.stringify({ before: before.src, advanced })}`);
+  await cdp.evaluate(`document.querySelector('.slideshow-pause-btn').click()`);
+  const paused = await cdp.evaluate(`(() => {
+    const button = document.querySelector('.slideshow-pause-btn');
+    const image = document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active');
+    return { src: image?.getAttribute('src'), label: button?.textContent.trim(), pressed: button?.getAttribute('aria-pressed') };
+  })()`);
+  await delay(2150);
+  const afterPause = await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active')?.getAttribute('src')`);
+  assert(paused.label === 'Play' && paused.pressed === 'true' && afterPause === paused.src,
+    `artillustration.html: Horned Woman pause did not hold the current frame: ${JSON.stringify({ paused, afterPause })}`);
+  await cdp.evaluate(`document.querySelector('.slideshow-pause-btn').focus()`);
+  await cdp.key(' ', 'Space', 32);
+  const resumed = await cdp.evaluate(`(() => {
+    const button = document.querySelector('.slideshow-pause-btn');
+    return { label: button?.textContent.trim(), pressed: button?.getAttribute('aria-pressed'), focused: document.activeElement === button };
+  })()`);
+  await delay(2150);
+  const afterResume = await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active')?.getAttribute('src')`);
+  assert(resumed.label === 'Pause' && resumed.pressed === 'false' && resumed.focused && afterResume && afterResume !== afterPause,
+    `artillustration.html: keyboard resume did not restart the Horned Woman cadence: ${JSON.stringify({ resumed, afterPause, afterResume })}`);
+  await cdp.call('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+  });
+}
+
 const pageSpecs = {
   art: {
     file: 'artillustration.html',
@@ -423,7 +474,10 @@ try {
     }
   }
 
-  if (scope === 'all' || scope === 'art') await checkLiveSlideshowFocusRestoration();
+  if (scope === 'all' || scope === 'art') {
+    await checkHornedWomanCadenceAndPause();
+    await checkLiveSlideshowFocusRestoration();
+  }
 
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);
   console.log(`VISUAL ARCHIVES BROWSER CHECK: PASS scope=${scope} states=${checks} evidence=${evidenceDir}`);

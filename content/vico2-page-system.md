@@ -69,6 +69,19 @@ Art & Illustration and Graphic Design share an archive-field family:
 
 This is a paired visual-archive system, not a universal case-study template. Art keeps its warm, artwork-first field. Graphic Design keeps its violet, pink, acid-yellow, and cream contact-sheet identity.
 
+## Media motion controls
+
+The `.media-motion-toggle` primitive is shared by two live motion presentations: the Horned Woman slideshow in Art & Illustration and the scrolling historical deliverable on IBM Patterns.
+
+The shared layer owns only the proven control anatomy:
+
+- a consistent 12px bottom/end inset inside the media frame;
+- a stable 72 × 44px minimum control size;
+- centered Pause/Play labels and button semantics;
+- page-level color, typography, focus treatment, and motion behavior remain project-native.
+
+Slideshow cadence is configured per instance rather than imposed globally. The Horned Woman series advances every two seconds, while IBM Patterns retains its slower presentation pan. Both controls preserve pause/resume state, page-visibility handling, and reduced-motion behavior appropriate to their media type.
+
 ## Workflow-story family
 
 IBM watsonx Orchestrate and Document Processing share a bounded workflow-story family through `css/wxo-workflows-vico2.css` and `js/wxo-workflows-vico2.js`.
@@ -107,6 +120,7 @@ The production-backed shared inventory is:
 - project metadata;
 - project transitions;
 - Archive-field family;
+- Media motion controls;
 - Workflow-story family.
 
 Home's `.featured-item*` anatomy remains a one-page composition. It should not be promoted into a universal project card without a second real-page need.

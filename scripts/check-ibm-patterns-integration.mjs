@@ -45,6 +45,7 @@ const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
   .filter(Boolean).length;
 if (narrativeWords > 1080) fail(`IBM Patterns narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
 const css = text('css/ibm-patterns.css');
+const sharedCss = text('css/style.css');
 const js = text('js/ibm-patterns.js');
 if (/^\ufeff?\d+\|/m.test(html)) fail('ibm-patterns.html contains line-number metadata from a file-reading tool');
 const packageJson = JSON.parse(text('package.json'));
@@ -123,10 +124,14 @@ for (const required of [
   '@media (prefers-reduced-motion: reduce)',
   '@media (max-width: 900px)',
   '@media (max-width: 760px)',
-  'min-height: 44px',
   'scroll-margin-top:',
 ]) {
   if (!css.includes(required)) fail(`css/ibm-patterns.css missing required contract: ${required}`);
+}
+if (!html.includes('class="media-motion-toggle patterns-motion-toggle"') ||
+    !sharedCss.includes('.media-motion-toggle') ||
+    !sharedCss.includes('min-height: 44px')) {
+  fail('IBM Patterns motion control must inherit the shared 44px media-motion-toggle geometry');
 }
 for (const forbidden of ['.private-bar', '.local-warning', 'data:image/', '.patterns-eyebrow', '.patterns-meta', '.patterns-role-grid', '.patterns-question-set', '.patterns-questions', '.patterns-playback-path', '.patterns-influence-list', '.patterns-coda']) {
   if (css.includes(forbidden)) fail(`css/ibm-patterns.css retained removed/private implementation: ${forbidden}`);

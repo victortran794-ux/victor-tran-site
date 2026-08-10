@@ -240,6 +240,10 @@ expect(!primaryHtml(art).includes('id="art-horned-title"') && !primaryHtml(art).
 const hornedSlideshow = art.match(/<figure[^>]*data-horned-slideshow[\s\S]*?<\/figure>/i)?.[0] ?? '';
 expect((hornedSlideshow.match(/series-slideshow-img/g) ?? []).length === 7 && hornedSlideshow.includes('slideshow-pause-btn'),
   'artillustration.html: restore all seven Horned Woman versions as the original auto-crossfade slideshow.');
+expect(hornedSlideshow.includes('data-slideshow-interval="2000"'),
+  'artillustration.html: the Horned Woman panel must advance every two seconds.');
+expect(read('scripts/build-visual-archives-integration.py').includes('data-slideshow-interval="2000"'),
+  'visual archive generator: own the Horned Woman two-second interval in the canonical source.');
 for (const heading of ['Characters and worlds', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work']) {
   expect(primaryHtml(art).includes(heading), `artillustration.html: use the clear Art header “${heading}”.`);
 }
@@ -268,6 +272,8 @@ expect(!/<figcaption\b/i.test(diamondStack), 'artillustration.html: Diamond card
 }
 
 const sharedMain = read('js/main.js');
+expect(sharedMain.includes('stage.dataset.slideshowInterval') && !sharedMain.includes('const INTERVAL = 3000'),
+  'js/main.js: read each slideshow cadence from its canonical data attribute instead of one hardcoded interval.');
 expect(sharedMain.includes("img.setAttribute('role', 'button')") && sharedMain.includes("img.setAttribute('aria-haspopup', 'dialog')") && sharedMain.includes('img.tabIndex = 0'),
   'js/main.js: gallery images must expose keyboard-operable dialog-trigger semantics.');
 expect(/pageImgs\.forEach\(\(img,\s*i\)\s*=>[\s\S]*?img\.addEventListener\('keydown'/m.test(sharedMain),
