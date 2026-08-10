@@ -194,51 +194,58 @@ Those are the consistent moves. Everything else is in service of the work being 
 
 ---
 
-## Components (primitives)
+## Components and page anatomy
 
-The DNA panel hints at four primitives. They live as one-off styles in `css/style.css` rather than documented patterns:
+The live component system is deliberately small. A shared component must be proven across at least two real pages, or have a confirmed second-page need. One-off CSS and dormant selectors do not become system components merely because they have generic names.
 
-- **Pill button** — `.dna-sample-btn--pill`
-- **Ghost button** — `.dna-sample-btn--ghost`
-- **Section label** — `.section-label.label-default` / `.label-design`
-- **Tag / kicker** — small mono caps
-- **Dot indicator** — `.hero-cycle-dot`
+### Live shared anatomy
 
-Current shared primitives now include:
+- **Shared shell** — generated navigation, Work disclosure, Light/Dark controls, skip behavior, and footer contact hierarchy across the site.
+- **Section label / mono kicker** — `.section-label` and project-native label variants used across nine production pages.
+- **Editorial opener** — `.page-header`, `.page-header-title`, and `.page-header-desc`, used by the direct case-study family.
+- **Project facts** — `.case-study-meta` / `.case-study-meta-item`, used by six project pages.
+- **Project transition** — `.project-nav` / `.project-nav-item`, used across the primary case-study sequence.
+- **Archive-field family** — the paired Art & Illustration / Graphic Design chapter and archive anatomy.
+- **Workflow-story family** — the bounded wxO / Document Processing chapter and workflow anatomy.
 
-- `gallery-section-label` — removes repeated inline gallery label spacing
-- `stat-grid` / `stat-card` — reusable metric blocks, piloted on IBM Patterns
-- `callout-card` — reusable quote / HMW / thesis callout, piloted on IBM Patterns
-- `lens-switcher` — unified Light / Dark / DNA nav control; replaces the old separate `theme-toggle` + `dna-trigger` buttons
-- `screen-frame` — reusable UI/product screen display with accent border, `--radius-lg`, and variants: `--pair`, `--placeholder`, `--blur`
-- `color-punct-card` — selected colored editorial note for case-study rhythm; orange/purple surface variants borrow the homepage colored-box behavior without making whole pages loud
+The complete composition and adoption rules live in [`vico2-page-system.md`](vico2-page-system.md).
 
-Shared anatomy contracts accepted from approved candidate evidence, with implementation still pending:
+### Dormant or deferred candidates
 
-- chapter marker / long-form section
-- asymmetric project card
-- artifact / process card
-- media figure with provenance and evidence state
-- accessible technical relationship diagram
-- protected-page gate and safe generated-export behavior
+The following names exist in CSS or prior candidate documentation but are not used by current production root pages:
 
-These are documented contracts, not proof that matching shared CSS classes or shared-shell components already exist.
+- `gallery-section-label`;
+- `stat-grid` / `stat-card`;
+- `callout-card`;
+- `screen-frame`;
+- `color-punct-card`.
 
-Shared evidence anatomy may include media, a factual caption, provenance, evidence status, and a source boundary. When relevant, evidence status must distinguish original, sanitized, reconstructed, exploratory, and withheld material. Protected or unavailable evidence uses direct text and never relies on blur alone.
+They are not current shared primitives. Keep them classified as dormant candidates until approved content demonstrates a real second use, or remove them during a future CSS hygiene pass. Do not invent page content merely to justify adoption.
+
+Shared anatomy contracts still pending a real implementation need:
+
+- artifact / process evidence;
+- media figure with provenance and evidence state;
+- accessible technical relationship diagram;
+- protected-page gate anatomy beyond the existing route-specific implementation.
+
+Shared evidence anatomy may eventually include media, a factual caption, provenance, evidence status, and a source boundary. When relevant, evidence status must distinguish original, sanitized, reconstructed, exploratory, and withheld material. Protected or unavailable evidence uses direct text and never relies on blur alone.
 
 Project-native variants remain first-class system decisions rather than exceptions to erase:
 
 - Art and Illustration keeps its artwork-first field, warm serif hierarchy, and caption-free artwork groupings.
 - Graphic Design keeps its violet, pink, acid-yellow, and cream contact-sheet identity.
 - Pi Kapp App keeps its deep blue, gold star, and white shield language.
+- Star & Lamp and Ability Experience keep their editorial and identity-system story structures.
 - IBM and other protected product stories keep project-specific structural language plus explicit provenance and privacy states.
+- Home keeps its asymmetric archive cards and portrait-lens portal.
 
 Every accepted anatomy contract must specify Light/Dark behavior, exact-mobile collapse, keyboard and focus behavior where interactive, reduced motion where animated, decoded-media expectations, and zero root horizontal overflow.
 
 Known implementation gaps:
 
-- Provenance, withheld, protected, and unavailable states do not yet have a completed shared CSS or markup implementation.
-- Live CSS references including `--space-7`, `--tracking-label`, `--dur-med`, and `--text-small` need deliberate definition, replacement, or page-local isolation before JSON can be described as a complete mirror of live CSS.
+- Provenance, withheld, protected, and unavailable states do not yet have completed shared CSS or markup anatomy.
+- Live CSS references including `--space-7`, `--tracking-label`, `--dur-med`, and `--text-small` still need deliberate definition, replacement, or page-local isolation before JSON can be described as a complete mirror of live CSS.
 - Iconography and expanded imagery treatments remain TBD.
 
 ---

@@ -307,31 +307,64 @@ try {
 
       await cdp.key('Enter', 'Enter', 13);
       await delay(120);
-      const opened = await cdp.evaluate(`({
-        open: document.getElementById('dnaOverlay').classList.contains('is-open'),
-        ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
-        inert: document.getElementById('dnaOverlay').inert,
-        focused: document.activeElement?.className,
-      })`);
-      assert(opened.open && opened.ariaHidden === 'false' && !opened.inert && opened.focused.includes('dna-close'),
-        `${viewport.label}: Enter did not open from lens ${lensIndex} ${JSON.stringify(opened)}`);
+      const opened = await cdp.evaluate(`(() => {
+        const background = [...document.querySelectorAll('body > .skip-link, body > .nav, body > main, body > footer')];
+        return {
+          open: document.getElementById('dnaOverlay').classList.contains('is-open'),
+          ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
+          inert: document.getElementById('dnaOverlay').inert,
+          focused: document.activeElement?.className,
+          backgroundInert: background.every((element) => element.inert && element.getAttribute('aria-hidden') === 'true'),
+          backgroundStates: background.map((element) => ({
+            selector: element.tagName + '.' + element.className,
+            inert: element.inert,
+            ariaHidden: element.getAttribute('aria-hidden'),
+          })),
+        };
+      })()`);
+      assert(opened.open && opened.ariaHidden === 'false' && !opened.inert && opened.focused.includes('dna-close') && opened.backgroundInert,
+        `${viewport.label}: Enter did not open an isolated modal from lens ${lensIndex} ${JSON.stringify(opened)}`);
       if (lensIndex === 0) {
         await delay(520);
         await cdp.screenshot(`${viewport.label}-overlay-open.png`);
+        for (const [sectionName, selector] of [
+          ['palette', '.dna-section--palette'],
+          ['type', '.dna-section--type'],
+          ['rhythm', '.dna-section--rhythm'],
+          ['components', '.dna-section--components'],
+        ]) {
+          const sectionState = await cdp.evaluate(`(() => {
+            const panel = document.querySelector('.dna-panel');
+            const section = document.querySelector('${selector}');
+            panel.scrollTop = Math.max(0, section.offsetTop - 24);
+            return {
+              panelWidth: panel.clientWidth,
+              panelScrollWidth: panel.scrollWidth,
+              sectionWidth: section.getBoundingClientRect().width,
+            };
+          })()`);
+          await delay(90);
+          assert(sectionState.panelScrollWidth <= sectionState.panelWidth + 1,
+            `${viewport.label}: ${sectionName} section caused horizontal overflow ${JSON.stringify(sectionState)}`);
+          await cdp.screenshot(`${viewport.label}-overlay-${sectionName}.png`);
+        }
+        await cdp.evaluate(`document.querySelector('.dna-panel').scrollTop = 0`);
       }
 
       await cdp.key('Escape', 'Escape', 27);
       const closed = await cdp.evaluate(`(() => {
         const portals = [...document.querySelectorAll('.hero-lens-portal')];
+        const background = [...document.querySelectorAll('body > .skip-link, body > .nav, body > main, body > footer')];
         return {
           open: document.getElementById('dnaOverlay').classList.contains('is-open'),
           ariaHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
           inert: document.getElementById('dnaOverlay').inert,
           activeIndex: portals.indexOf(document.activeElement),
+          backgroundRestored: background.every((element) => !element.inert && !element.hasAttribute('aria-hidden')),
         };
       })()`);
-      assert(!closed.open && closed.ariaHidden === 'true' && closed.inert && closed.activeIndex === lensIndex,
-        `${viewport.label}: Escape/focus return failed for lens ${lensIndex} ${JSON.stringify(closed)}`);
+      assert(!closed.open && closed.ariaHidden === 'true' && closed.inert && closed.activeIndex === lensIndex && closed.backgroundRestored,
+        `${viewport.label}: Escape/background/focus return failed for lens ${lensIndex} ${JSON.stringify(closed)}`);
     }
 
     const centers = await cdp.evaluate(`[...document.querySelectorAll('.hero-lens-portal')].map((portal) => {

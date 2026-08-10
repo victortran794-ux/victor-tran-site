@@ -21,6 +21,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Metadata
 
 - Category: Portfolio
+- Use: Six live stories
 
 ## Featured Projects
 
@@ -49,6 +50,8 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Body Copy
 
+Project-native systems stay distinct.
+
 Victor Tran ®
 
 Visual designer working across brand, illustration, and product systems.
@@ -73,6 +76,11 @@ Standalone identity, print, illustration, and event graphics.
 
 ## Lists And Tags
 
+- Shared shellSitewide
+- Section labels9 pages
+- Transitions7 pages
+- Project facts6 stories
+- Editorial openersFamily-specific
 - Visual Design
 - Brand Identity
 - Art Direction

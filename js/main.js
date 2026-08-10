@@ -712,17 +712,17 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     return (r * 299 + g * 587 + b * 114) / 1000 > 170;
   };
 
-  // Build swatches
+  // Build swatches from active computed theme values
   const swatchKeys = [
-    { key: '--blue',   label: 'Blue'   },
-    { key: '--pink',   label: 'Pink'   },
-    { key: '--purple', label: 'Purple' },
-    { key: '--orange', label: 'Orange' },
-    { key: '--bg',     label: 'BG'     },
-    { key: '--bg-2',   label: 'BG2'    },
-    { key: '--text',   label: 'Text'   },
-    { key: '--text-2', label: 'Text2'  },
-    { key: '--border', label: 'Border' },
+    '--blue',
+    '--pink',
+    '--purple',
+    '--orange',
+    '--bg',
+    '--bg-2',
+    '--text',
+    '--text-2',
+    '--border',
   ];
 
   const swatchRoot = document.getElementById('dnaSwatches');
@@ -731,7 +731,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   const renderSwatches = () => {
     swatchRoot.innerHTML = '';
-    swatchKeys.forEach(({ key, label }) => {
+    swatchKeys.forEach((key) => {
       const value = readVar(key);
       if (!value) return;
       const btn = document.createElement('button');
@@ -739,33 +739,36 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       btn.className = 'dna-swatch';
       btn.style.setProperty('--swatch', value);
       btn.setAttribute('data-light', isLightHex(value));
-      btn.setAttribute('aria-label', `${label} ${value}`);
-      btn.innerHTML = `
-        <span class="dna-swatch-meta">
-          <span class="dna-swatch-name">${label}</span>
-          <span class="dna-swatch-hex">${value}</span>
-        </span>
-      `;
-      btn.addEventListener('mouseenter', () => {
+      btn.setAttribute('aria-label', `${key} ${value}`);
+      const name = document.createElement('span');
+      name.className = 'dna-swatch-name';
+      name.textContent = key;
+      const hex = document.createElement('span');
+      hex.className = 'dna-swatch-hex';
+      hex.textContent = value;
+      const meta = document.createElement('span');
+      meta.className = 'dna-swatch-meta';
+      meta.append(name, hex);
+      btn.append(meta);
+      const showTint = () => {
         preview.style.setProperty('--tint', value);
         preview.classList.add('is-tinted');
-        previewLbl.textContent = `${label} · ${value}`;
-      });
-      btn.addEventListener('focus', () => {
-        preview.style.setProperty('--tint', value);
-        preview.classList.add('is-tinted');
-        previewLbl.textContent = `${label} · ${value}`;
-      });
-      btn.addEventListener('mouseleave', () => {
+        previewLbl.textContent = `${key} · ${value}`;
+      };
+      const clearTint = () => {
         preview.classList.remove('is-tinted');
-        previewLbl.textContent = 'Hover a swatch';
-      });
+        previewLbl.textContent = 'Focus or hover a swatch';
+      };
+      btn.addEventListener('mouseenter', showTint);
+      btn.addEventListener('focus', showTint);
+      btn.addEventListener('mouseleave', clearTint);
+      btn.addEventListener('blur', clearTint);
       swatchRoot.appendChild(btn);
     });
   };
   renderSwatches();
 
-  // Build spacing scale
+  // Build spacing scale and semantic aliases from live values
   const scaleKeys = [1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 20];
   const scaleRoot = document.getElementById('dnaScale');
   const scaleValues = scaleKeys.map((n) => parseInt(readVar(`--space-${n}`), 10) || 0);
@@ -775,11 +778,25 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     const widthPct = Math.max(4, (px / scaleMax) * 100);
     return `
       <li class="dna-scale-row">
-        <span>--${n}</span>
+        <span>--space-${n}</span>
         <span class="dna-scale-bar" style="width:${widthPct}%"></span>
         <span class="dna-scale-px">${px}px</span>
       </li>
     `;
+  }).join('');
+
+  const semanticKeys = ['--page-x', '--section-y', '--gallery-x'];
+  const semanticRoot = document.getElementById('dnaSemanticSpacing');
+  semanticRoot.innerHTML = semanticKeys.map((key) => `
+    <div><dt>${key}</dt><dd>${readVar(key)}</dd></div>
+  `).join('');
+
+  const radiusKeys = ['0', 'sm', 'md', 'lg', 'xl', 'pill'];
+  const radiiRoot = document.getElementById('dnaRadii');
+  radiiRoot.innerHTML = radiusKeys.map((key) => {
+    const token = `--radius-${key}`;
+    const value = readVar(token);
+    return `<div class="dna-radius" style="--r:${value}"><span>${token}<br>${value}</span></div>`;
   }).join('');
 
   // Type playground
@@ -811,9 +828,18 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   ].join(',');
   const getFocusable = () => [...overlay.querySelectorAll(focusableSelector)]
     .filter((element) => !element.hidden && element.getClientRects().length > 0);
+  const backgroundRegions = [...document.querySelectorAll('body > .skip-link, body > .nav, body > main, body > footer')];
+  const isolateBackground = (isolated) => {
+    backgroundRegions.forEach((element) => {
+      element.inert = isolated;
+      if (isolated) element.setAttribute('aria-hidden', 'true');
+      else element.removeAttribute('aria-hidden');
+    });
+  };
 
   const open = (event) => {
     lastFocus = event?.currentTarget || document.activeElement;
+    isolateBackground(true);
     overlay.inert = false;
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('is-open');
@@ -829,9 +855,10 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     overlay.inert = true;
     overlay.setAttribute('aria-hidden', 'true');
     overlay.classList.remove('is-open');
+    isolateBackground(false);
     document.body.style.overflow = '';
     preview.classList.remove('is-tinted');
-    previewLbl.textContent = 'Hover a swatch';
+    previewLbl.textContent = 'Focus or hover a swatch';
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   };
 

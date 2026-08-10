@@ -253,7 +253,7 @@
       "lg": {
         "value": "20px",
         "css": "--radius-lg",
-        "use": "UI screen frames (.screen-frame), Tetris embed, Spotify frame — any larger soft container"
+        "use": "Tetris and Spotify frames use the large radius directly; the dormant .screen-frame candidate is reserved until a real second-page need is approved"
       },
       "xl": {
         "value": "32px",
@@ -334,28 +334,34 @@
     "treatments": []
   },
   "components": {
-    "$comment": "Existing lists implementation inventory. Anatomy contracts are accepted documentation contracts, not shared CSS classes or completed shared-shell components.",
-    "implementationStatus": "documentation-contracts-only",
+    "$comment": "This inventory distinguishes production-backed shared anatomy from dormant CSS candidates and deferred contracts.",
+    "implementationStatus": "reconciled-live-inventory",
     "existing": [
+      "shared-shell",
       "section-label",
-      "tag",
-      "featured-item",
+      "page-header",
       "case-study-meta",
+      "project-nav",
+      "archive-field-family",
+      "workflow-story-family"
+    ],
+    "dormantCandidates": [
       "gallery-section-label",
-      "callout-card",
       "stat-grid",
       "stat-card",
-      "lens-switcher",
+      "callout-card",
       "screen-frame",
       "color-punct-card"
     ],
+    "onePageCompositions": [
+      "featured-item",
+      "portrait-lens-design-dna-portal"
+    ],
     "anatomyContractsPendingImplementation": [
-      "chapter-marker",
-      "asymmetric-project-card",
-      "artifact-process-card",
+      "artifact-process-evidence",
       "media-figure-provenance-state",
       "technical-relationship-diagram",
-      "protected-page-gate"
+      "protected-page-gate-anatomy"
     ],
     "evidenceStates": [
       "original",
