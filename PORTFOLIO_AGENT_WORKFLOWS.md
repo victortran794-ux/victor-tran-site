@@ -114,7 +114,9 @@ The package manifest should make redesign handoff easy. At minimum it should tra
 - redesign notes: what must survive, what can be rethought, component needs, and future layout ideas;
 - agent boundaries: what agents may do and what requires Victor approval.
 
-Document Processing is a normal live project package with private visitor access. It is listed in guardrails only because protected media, claims, and visibility are easy for agents to accidentally change. A2UI is different: it is currently a dormant/future-track package, not an active case study or implementation priority.
+Document Processing is a normal live project package with protected visitor access. `data/projects.json` records `manifest nav=false/homepage=false`, so it is omitted from Work and homepage and is reached through the protected wxO umbrella/chapter. `/document-processing` intentionally permanently redirects to `/wxo-canvas#document-processing`; raw `.html` remains an implementation artifact. It is listed in guardrails only because protected media, claims, and visibility are easy for agents to accidentally change. A2UI is different: it is currently a dormant/future-track package, not an active case study or implementation priority.
+
+The static client-side password gate is visitor deterrence and discovery reduction, not server-side access control. Served HTML can contain the page source. No material requiring true confidentiality may be added until a separately approved server-side protection or private-hosting architecture exists.
 
 ## Default portfolio workflow
 
@@ -197,7 +199,7 @@ Role separation is responsibility-based, not a requirement to spawn six agents. 
 
 - Preserve password gates and noindex decisions.
 - Respect each project package's status, visibility, media rights, claims, and redesign notes from its package manifest.
-- Document Processing is live and intentionally password-protected/noindex. Treat the password gate as the visitor-privacy layer, not as an unresolved launch blocker. Do not change its current navigation/sitemap/homepage visibility, screenshots, metrics, launch claims, or major copy/media without approval.
+- Document Processing is live and intentionally password-protected/noindex. Treat the gate as visitor deterrence and discovery reduction, not confidentiality or an unresolved launch blocker. Do not change its current navigation/sitemap/homepage visibility, screenshots, metrics, launch claims, or major copy/media without approval.
 - A2UI is a dormant future-track package. Do not resume, promote, or implement it unless Victor explicitly selects it.
 - Avoid broad redesigns and vague “make it cooler” work.
 - Be strict with decorative em dash/en dash usage in public copy. Prefer periods, commas, colons, parentheses, or rewrites unless a dash is genuinely necessary.
@@ -242,7 +244,7 @@ Guardrails:
 - Do not resume A2UI unless explicitly selected by Victor.
 - Preserve password gates, noindex, sitemap decisions, and confidentiality protections.
 - Treat each portfolio project as a package whose status, visibility, media rights, claims, and redesign notes live in `case-studies/<slug>.md` when available.
-- Document Processing is live, intentionally password-protected for visitors, noindex, currently linked from the Work dropdown, and omitted from sitemap. Do not propose homepage/sitemap promotion, raw screenshots, metrics, launch claims, or major copy/media changes without explicit approval.
+- Document Processing is live, intentionally password-protected for visitors, noindex, omitted from Work and homepage, and omitted from sitemap. It is reached through the protected wxO umbrella/chapter. Do not propose homepage/sitemap promotion, raw screenshots, metrics, launch claims, or major copy/media changes without explicit approval.
 - Avoid protected/confidential pages for the first implementation slice.
 - Be strict with decorative em dash/en dash usage. Flag copy that reads agent-written because of dash rhythm.
 
@@ -296,7 +298,7 @@ Use this only if Victor explicitly reselects Document Processing media planning 
 
 Current planning status:
 
-- Document Processing remains live as a protected portfolio project page, password-gated, noindex, currently linked from the Work dropdown, and omitted from sitemap.
+- Document Processing remains live as a protected portfolio project page, password-gated, noindex, omitted from Work and homepage, and omitted from sitemap. The protected wxO umbrella/chapter is its intended route.
 - Temporary placeholder media has shipped; keep it stable unless Victor explicitly asks for a new refinement pass.
 - The current private Figma/media handoff is:
   `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`

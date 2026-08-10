@@ -23,7 +23,8 @@ if (project) {
 }
 
 for (const phrase of [
-  '<meta name="robots" content="noindex,nofollow">',
+  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
+  '<meta name="referrer" content="no-referrer">',
   "sessionStorage.getItem('vtd-unlock')!=='ok'",
   '<link rel="stylesheet" href="css/password-gate.css">',
   '<script src="js/password-gate.js" defer></script>',

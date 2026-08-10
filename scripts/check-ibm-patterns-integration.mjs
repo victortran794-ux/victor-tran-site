@@ -66,7 +66,8 @@ if (count(healthWorkflow, '- "scripts/check-ibm-patterns-integration.mjs"') !== 
 if (!healthWorkflow.includes('run: npm run check:ibm-patterns')) fail('health workflow must execute the IBM Patterns integration contract');
 for (const required of [
   '<link rel="canonical" href="https://www.victortrandesign.com/ibm-patterns">',
-  '<meta name="robots" content="noindex,nofollow">',
+  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
+  '<meta name="referrer" content="no-referrer">',
   "if(sessionStorage.getItem('vtd-unlock')!=='ok')",
   '<link rel="stylesheet" href="css/password-gate.css">',
   '<script src="js/password-gate.js" defer></script>',
