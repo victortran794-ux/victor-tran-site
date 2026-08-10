@@ -596,10 +596,11 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   if (!stages.length) return;
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const INTERVAL = 3000;
   const slideshows = stages.map(stage => {
     const slides = Array.from(stage.querySelectorAll('.series-slideshow-img'));
     if (slides.length < 2) return null;
+    const configuredInterval = Number.parseInt(stage.dataset.slideshowInterval ?? '', 10);
+    const intervalMs = Number.isFinite(configuredInterval) && configuredInterval >= 1000 ? configuredInterval : 3000;
 
     let i = slides.findIndex(slide => slide.classList.contains('is-active'));
     if (i < 0) i = 0;
@@ -632,7 +633,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     }
     function start() {
       if (userPaused || lightboxOpen || timer) return;
-      timer = setInterval(advance, INTERVAL);
+      timer = setInterval(advance, intervalMs);
     }
     function stop() {
       if (!timer) return;

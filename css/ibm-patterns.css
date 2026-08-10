@@ -75,7 +75,7 @@ html[data-theme="dark"] .patterns-page {
 .patterns-hero-frame { position: relative; height: clamp(420px, 42vw, 560px); overflow: hidden; border: 1px solid var(--patterns-line); background: #fff; box-shadow: 0 28px 80px rgba(18, 19, 22, 0.16); }
 .patterns-hero-image { --patterns-pan: -28%; position: absolute; left: -10%; top: 0; width: 120%; max-width: none; height: auto; animation: patterns-hero-pan 24s ease-in-out infinite; will-change: transform, opacity; }
 .patterns-hero-visual.is-paused .patterns-hero-image { animation-play-state: paused; }
-.patterns-motion-toggle { position: absolute; right: 0.65rem; bottom: 0.65rem; z-index: 2; min-width: 72px; min-height: 44px; border: 1px solid rgba(255,255,255,.72); background: rgba(7,30,73,.92); color: #fff; padding: 0.45rem 0.75rem; cursor: pointer; font: 600 10px "Source Code Pro", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.patterns-motion-toggle { border: 1px solid rgba(255,255,255,.72); background: rgba(7,30,73,.92); color: #fff; font: 600 10px "Source Code Pro", monospace; letter-spacing: .08em; }
 .patterns-motion-toggle:focus-visible { outline: 3px solid var(--patterns-pink); outline-offset: 2px; }
 @keyframes patterns-hero-pan { 0%,14% { transform: translateY(0); opacity: 1; } 80%,91% { transform: translateY(var(--patterns-pan)); opacity: 1; } 95% { transform: translateY(var(--patterns-pan)); opacity: 0; } 96% { transform: translateY(0); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 

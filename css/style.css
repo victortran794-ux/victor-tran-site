@@ -3186,21 +3186,29 @@ html[data-theme="dark"] .spotify-frame {
   .series-slideshow-img { transition: none; }
 }
 
-.slideshow-pause-btn {
+.media-motion-toggle {
   position: absolute;
-  bottom: var(--space-3);
-  right: var(--space-3);
+  inset-inline-end: var(--media-motion-inset, 12px);
+  inset-block-end: var(--media-motion-inset, 12px);
   z-index: 2;
-  min-width: 44px;
-  min-height: 36px;
+  min-width: 72px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.slideshow-pause-btn {
   background: var(--bg);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 3px;
-  padding: 5px 12px;
   font: 600 var(--text-caption) / 1.5 'Barlow', sans-serif;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   opacity: 1;
   transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }

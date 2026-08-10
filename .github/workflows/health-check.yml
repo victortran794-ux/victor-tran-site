@@ -29,6 +29,7 @@ on:
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
+      - "scripts/check-gallery-motion-system.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/build-visual-archives-integration.py"
       - "scripts/check-visual-archives-integration.mjs"
@@ -109,6 +110,7 @@ on:
       - "scripts/generate-project-sections.mjs"
       - "scripts/check-responsive-images.mjs"
       - "scripts/check-gallery-media.mjs"
+      - "scripts/check-gallery-motion-system.mjs"
       - "scripts/generate-responsive-images.py"
       - "scripts/build-visual-archives-integration.py"
       - "scripts/check-visual-archives-integration.mjs"
@@ -203,6 +205,8 @@ jobs:
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract
         run: npm run check:ibm-patterns
+      - name: Gallery motion system contract
+        run: npm run check:gallery-motion-system
       - name: IBM Cloud and IBM Patterns browser contracts
         run: |
           node scripts/check-ibmcloud-hiring-cut.mjs
