@@ -36,15 +36,15 @@
       "width": 640
     },
     "images/responsive/patterns-hero-1200.webp": {
-      "bytes": 44700,
+      "bytes": 17880,
       "height": 675,
-      "sha256": "1675a139b1a34c338a167b240b4760898936c02f1d253e6f0c97b2827f4ee8e3",
+      "sha256": "c68bd298639059349aa9174f1d7d2a224d4b1789c9c34f04f10900fa80ee958a",
       "width": 1200
     },
     "images/responsive/patterns-hero-640.webp": {
-      "bytes": 19586,
+      "bytes": 7788,
       "height": 360,
-      "sha256": "9b7d5bb3c22d965d16eb1732689368bf26b27adc8058108eeec4b38bb996976c",
+      "sha256": "3044b843494fa38e54f1acf1fe7bb8c6c89a14d2386bfbdc06585140fc7817b3",
       "width": 640
     },
     "images/responsive/pci-handbook-1-cover-1200.webp": {
@@ -81,8 +81,8 @@
       "sha256": "ec856141094bfb63d03132131c504bb8b5c69a5f5c096ab689f48ab742b326db"
     },
     "images/patterns-hero.webp": {
-      "bytes": 219526,
-      "sha256": "0aca7c892f52649548a0397a79f37a8a18359381c89c8acdc8f7bc741fb448e2"
+      "bytes": 85718,
+      "sha256": "25d3ae87436d367efbda585d5ecd9859ce813d1bcc98cdc961dcc0a2de965d89"
     },
     "images/pci-handbook-1-cover.webp": {
       "bytes": 262032,

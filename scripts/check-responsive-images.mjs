@@ -97,6 +97,37 @@ if (fs.existsSync(integrityPath)) {
   }
 }
 
+const expectedPatternsCoverHash = '25d3ae87436d367efbda585d5ecd9859ce813d1bcc98cdc961dcc0a2de965d89';
+const patternsCoverBytes = fs.readFileSync(path.join(root, 'images/patterns-hero.webp'));
+expect(
+  crypto.createHash('sha256').update(patternsCoverBytes).digest('hex') === expectedPatternsCoverHash,
+  'IBM Patterns homepage thumbnail must use the approved Contact Us Final Playback cover export.',
+);
+const patternsProvenancePath = path.join(root, 'case-studies/ibm-patterns.md');
+expect(fs.existsSync(patternsProvenancePath), 'IBM Patterns homepage thumbnail must retain a source provenance record.');
+if (fs.existsSync(patternsProvenancePath)) {
+  const provenance = fs.readFileSync(patternsProvenancePath, 'utf8');
+  for (const token of [
+    'Final Playback.pdf',
+    'page 1',
+    '7cc91d2efc56ee08a700508854c8c644ac7a4ec136fd9184ffd682ba33cadc23',
+    expectedPatternsCoverHash,
+  ]) {
+    expect(provenance.includes(token), `IBM Patterns provenance record must include ${token}.`);
+  }
+}
+
+const dashboard = read('PORTFOLIO_DASHBOARD.md');
+const outstandingAssetLine = dashboard.split('\n').find(line => line.startsWith('- Victor-supplied')) ?? '';
+expect(
+  !outstandingAssetLine.includes('IBM Patterns'),
+  'Outstanding asset list must not retain the supplied IBM Patterns thumbnail.',
+);
+expect(
+  dashboard.includes('Thumbnail replacement staged on `feat/ibm-patterns-presentation-cover-thumbnail-2026-08-10`; pending Victor approval, merge, and production verification'),
+  'Portfolio dashboard must record the IBM Patterns thumbnail as staged, not already on main.',
+);
+
 const about = read('about.html');
 expect(about.includes('about-vic-japan-480.webp 480w'), 'About portrait must provide a 480w source.');
 expect(about.includes('about-vic-japan-800.webp 800w'), 'About portrait must provide an 800w source.');
