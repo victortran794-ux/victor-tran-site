@@ -20,7 +20,7 @@ IBM Cloud product and visual-systems work across complex workflows, implementati
 
 ## Page Intro
 
-My journey into observability grew from learning a complex platform to helping teams make its workflows, reviews, and visual systems easier to understand.
+I learned a technical platform, then used product and visual design to make its systems easier to understand.
 
 ## Metadata
 
@@ -31,83 +31,90 @@ My journey into observability grew from learning a complex platform to helping t
 
 ## Section Headings
 
-- Learn the system. Then help others move through it.
-- Carry the workflow, not just the screen.
-- Make critique survive the meeting.
-- Turn finished images into repeatable construction.
-- Create leverage beyond the artifact.
+- Learning the system shaped how I learned to design.
+- Shape the flow before polishing the screen.
+- Make critique useful after the meeting.
+- Move from making images to defining a method.
+- Design the next step.
 
 ## Body Copy
 
-I joined IBM Cloud while learning a technical domain, a layered design system, and a large organization at the same time. Over three years, that learning became responsibility across product workflows, implementation quality, portfolio reviews, technical diagrams, and illustration methods.
+I joined IBM Cloud while learning observability, Carbon, and a large organization at the same time. Technical diagrams helped me map the environment before I started changing flows.
 
-The work did not follow one clean process. Some work reached implementation, some concepts changed direction, and some methods outlasted an individual screen. These three chapters show how my role expanded.
+Over three years, the work taught me to frame product problems, turn research into design choices, and build visual methods other designers could reuse.
 
-Proof 01 · Carried complex product work
+Events, metrics, and logs moved through a shared technical environment.
 
-Event Notifications is the clearest example of carrying a complex product problem through framing, co-design, prototyping, moderated testing, synthesis, and recommendation. Sysdig Secure and IBM Cloud Logs provide the release context around it.
+Proof 01 · First self-led product journey
 
-Event Notifications gave me one of my clearest opportunities to carry a complex workflow from framing through testing and recommendation.
+Event Notifications was my first self-led product-design journey. I worked from co-design and flow framing through a high-fidelity prototype, moderated testing, synthesis, and recommendation.
 
-The interface could rely on familiar IBM Cloud and Carbon components. The harder problem was sequencing the work: users had to understand sources, destinations, conditions, and the subscription they were building without carrying the entire system model in their heads.
+The work began with the sequence, not a new visual language.
 
-The existing creation experience required several setup steps before users could begin their task. I organized co-design workshops and helped consolidate the work into a faster sequence through Details, Sources, Destinations, and Review. The conditions builder needed the familiarity of an email filter while supporting compound event logic, so I focused on hierarchy, rule relationships, and progressive disclosure.
+Users had to understand sources, destinations, conditions, and the subscription they were building. I organized co-design workshops and helped consolidate setup into a faster sequence through Details, Sources, Destinations, and Review.
 
-I built a high-fidelity prototype, prepared and moderated sessions, synthesized the findings, and presented recommendations. The prototype made the workflow and its decision points concrete. Alongside this concept, I supported Sysdig Secure on IBM Cloud and IBM Cloud Logs through reviews, UI and icon work, Design Intent Review, and implementation follow-up, including four dark-mode issues resolved with the UI development team.
+For conditions, I used a familiar filter model and revealed compound logic only when needed. I built the high-fidelity prototype, prepared and moderated sessions, synthesized findings, and presented recommendations. The flow was the main body of work.
 
-Proof 02 · Turned review findings into team action
+Alongside it, I supported Sysdig Secure and IBM Cloud Logs through reviews, UI and icon work, Design Intent Review, and implementation follow-up. I worked with UI developers to resolve four dark-mode issues.
 
-Across Observability, reviews became useful when they produced a shared priority, a backlog, an implementation change, or an artifact another team could pick up.
+Testing the flow
 
-Finding an issue was only the beginning. The useful work was translating it into a form the team could act on.
+The first round framed the research questions around subscription structure and flow.
 
-I participated in D&UX reviews across Logging, Monitoring, and Security, contributed to Sysdig Secure interviews and synthesis, and brought findings back to squads and design leadership. Looking across products exposed repeated issues in navigation, instance pages, icon treatment, documentation, and implementation.
+The findings sharpened hierarchy, terminology, and expectations for reusable destinations and sources.
 
-An Improvement Jam turned that audit into a UX backlog, separating implementation fixes from broader product questions. The same method carried into Activity Tracker routing concepts, dark-mode reviews, Figma-library contributions, and a Monitoring heuristic evaluation: understand the issue's reach, bring in the right people, and leave behind a specific next move.
+I took this component into high fidelity, focusing on hierarchy, connection status, and actions.
 
-I also coordinated a technical-diagram uplift with the Observability documentation team and compared patterns with designers in CPaaS and Satellite. Selected diagrams were later used in TechXchange live labs. A useful review did more than describe quality; it created shared language and reduced the distance between a finding and the work required to address it.
+Proof 02 · Turned findings into action
+
+A review mattered when it left the team with a priority, a backlog item, or a clearer implementation choice.
+
+Finding the issue was only the first step.
+
+I joined D&UX reviews across Logging, Monitoring, and Security, then brought repeated findings back to squads and design leadership. An Improvement Jam separated implementation fixes from wider product questions and translated the work into a UX backlog.
+
+The same habit carried into Activity Tracker concepts, dark-mode reviews, Figma-library contributions, a Monitoring heuristic evaluation, and technical-diagram work with the Observability documentation team.
 
 Reconstructed working method
 
-Compare products, research, implementation, and documentation rather than treating each screen as an isolated case.
+Proof 03 · Built visual methods for reuse
 
-Use workshops and critique to separate local defects from patterns that affect the wider portfolio.
+The illustration work changed when I started documenting how another designer could build with the same language.
 
-Turn findings into a backlog item, design direction, diagram, library change, or implementation check.
+I began with individual assignments. The useful shift was making the construction repeatable.
 
-Work with development, documentation, and partner teams until the reasoning is usable outside the review room.
+In 2021, I developed Cloud and DevOps world-page assets, joined a Developer Services illustration squad, and facilitated a mini-jam about where the visual language could go next.
 
-Improvement Jam findings translated into a UX backlog.
-
-Carbon and dark-mode issues followed through with the UI development team.
-
-Technical diagrams continued into live-lab use at TechXchange.
-
-A future review will pair this chapter with one cleared artifact from the review, backlog, or technical-diagram work. No substitute image is being presented as evidence.
-
-Proof 03 · Designed visual systems for reuse
-
-The illustration work became more valuable when the method—not only the final scene—could travel to another designer.
-
-I stopped treating each illustration as a one-time solution and started designing the path another person could follow.
-
-I joined a Developer Services illustration squad in 2021, developing assets and guidance for Cloud and DevOps world pages and facilitating a mini-jam on how the visual language could support more products and stories. I later presented the process to the Cloud PAL Design Guild and contributed to guidance and animation research.
-
-In 2022, I mentored designers through the documentation, collaborated on the next phase of Cloud illustration, developed a Figma kit for pilot use, supported light-mode testing, and helped restart the Cloud Illustration Squad. The system had to keep each service recognizable while making construction, lighting, perspective, and reduced metaphors consistent enough to feel related.
-
-By 2023, that approach continued through collaborative Cloud PAL 2.0 documentation. The lasting value was not one hero image. It was a clearer path from concept to scene, from scene to reusable parts, and from individual craft to a language another designer could extend.
+By 2022, I was mentoring designers through the documentation, helping develop a Figma kit, supporting light-mode testing, and helping restart the Cloud Illustration Squad.
 
 Designed for reuse
 
-World-page assets established the visual range. Documentation, pilot playback, light-mode testing, and reduced service metaphors were intended to make the method easier to inspect and extend.
+Shared construction, lighting, perspective, and reduced metaphors made the work easier to inspect and extend.
 
-Victor will select one cleared illustration-system artifact for this chapter. The previous all-purpose atlas has been removed rather than treated as proof by volume.
+Early sketches narrowed composition, service metaphors, and hierarchy before final rendering.
 
-The throughline
+Shared base, shadow, color, gradient, and lighting rules made the illustration language inspectable and reusable.
 
-Across IBM Cloud, I moved from needing the system explained to me toward making complex work clearer for the next person: a user navigating a subscription, a team deciding what to fix, a developer implementing Carbon, or a designer extending a visual language.
+Shared perspective and lighting rules connected distinct product stories without making them identical.
+
+A reduced service-icon set carried the same geometry and color discipline into smaller surfaces.
+
+What changed
+
+IBM Cloud taught me to understand the system before proposing the screen. Over time, that became a habit: map the environment, frame the flow, test the idea, and leave the work clearer for the next person.
 
 ## Images
 
 - IBM Cloud Observability abstract service illustration in light mode: images/ibm-thumb-light.png
 - IBM Cloud Observability abstract service illustration in dark mode: images/ibm-thumb-dark.png
+- IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services: images/ibm-cloud-routing-architecture.png
+- Event Notifications create-subscription flow on the Details step: images/ibm-cloud-event-flow-details.png
+- Event Notifications condition panel before a rule is selected: images/ibm-cloud-event-flow-condition-empty.png
+- Event Notifications condition panel with a second rule added: images/ibm-cloud-event-flow-condition-compound.png
+- Event Notifications research roles and questions about subscription structure and creation flow: images/ibm-cloud-research-framing.png
+- Event Notifications findings about subscription structure, terminology, and creation flow: images/ibm-cloud-research-findings.png
+- IBM Cloud subscription card component explorations showing hierarchy, status, and connected services: images/ibm-cloud-card-component-design.png
+- IBM Cloud concept sketches progressing through shared isometric construction studies: images/ibm-cloud-concept-to-final.png
+- IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules: images/ibm-cloud-visual-system-foundations.png
+- Four IBM Cloud isometric compositions using shared perspective, lighting, and product metaphors: images/ibm-cloud-isometric-compositions.png
+- IBM Cloud service icons built from consistent isometric geometry and color: images/ibm-cloud-service-icons.png
