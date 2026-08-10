@@ -31,7 +31,8 @@ for (const [relativePath, expected] of Object.entries(frozenFiles)) {
 
 const assetHashes = {
   'images/pikapp-case-study/belltower-expansion.jpg': 'b977af8df532d2562ceeb0d9db85e7e985ceaa9e583b4940f37b71dac4f5c77f',
-  'images/pikapp-case-study/expansion-cover.png': 'e8cd56519fecd871074b4b2f7b8ff91a3572bf17981e744efa2027a93ae388c4',
+  'images/pikapp-case-study/expansion-cover-detail.jpg': '9c6ac629bfc4df01f25ebd75985f32b515f08469bbaeeb27c94b4bdf22650b01',
+  'images/pikapp-case-study/expansion-cover-preview.jpg': 'b82b43c973cc021dcca187e66033b36acae9d1b144fb89b85f3590973dd1970c',
   'images/pikapp-case-study/wireframes.png': 'bb4375af22d4bace1a26023b9b03b220ee2b3843a18f663357c62f5fec360f60',
   'images/pikapp-case-study/sitemap.png': 'd2661fc1909dbcab8d08d7e3868006fa67777e705b0d95ed4c93ea93e43ee90e',
   'images/pikapp-case-study/app-icon.png': 'b10917b50cb2e01cc5f981d9376d31ad242f403a381b1ab555861fc52e3ca22c',
@@ -49,6 +50,9 @@ const assetHashes = {
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
   const actual = sha256(relativePath);
   if (actual !== expected) fail(`${relativePath} does not match the approved evidence checksum`);
+}
+if (fs.existsSync(path.join(root, 'images/pikapp-case-study/expansion-cover.png'))) {
+  fail('unused 3.3 MB expansion-cover.png source master must stay outside the deployable repository');
 }
 
 const html = text('pikappapp.html');
