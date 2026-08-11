@@ -80,7 +80,7 @@ The sequence shows how the original identity, member dashboard, and milestone de
 
 Earlier interactive prototype
 
-This runnable concept predates the V2 artboards below. It preserves the earlier dashboard, chapter bulletin, milestones, and four-part navigation as an interactive artifact.
+This runnable snapshot preserves the earlier dashboard, bulletin, milestones, and navigation. It predates the V2 direction below.
 
 This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
 

@@ -187,6 +187,10 @@ try {
         const cue=document.querySelector('.expansion-archive-cue');
         const prototypeFrame=document.querySelector('.prototype-embed__frame');
         const prototypeRect=prototypeFrame?.getBoundingClientRect();
+        const prototypeDevice=document.querySelector('.prototype-embed__device');
+        const prototypeEmbed=document.querySelector('.prototype-embed');
+        const statePairs=[...document.querySelectorAll('.coda__state-pair')].map((pair)=>{const style=getComputedStyle(pair);const rect=pair.getBoundingClientRect();const children=[...pair.children].map((child)=>{const childRect=child.getBoundingClientRect();return {width:childRect.width,left:childRect.left,right:childRect.right}});return {display:style.display,overflowX:style.overflowX,snap:style.scrollSnapType,cue:getComputedStyle(pair,'::before').content,width:rect.width,clientWidth:pair.clientWidth,scrollWidth:pair.scrollWidth,children}});
+        const finaleRects=['.coda__head','.coda__screens','.coda__boundary','.project-nav-item--prev','.project-nav-item--next'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
@@ -195,7 +199,7 @@ try {
           boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,futureScreens,
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
-          prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},
+          prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,embedHeight:prototypeEmbed.getBoundingClientRect().height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},statePairs,finaleRects,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
       })()`);
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
@@ -208,7 +212,14 @@ try {
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
       assert(state.futureScreens.length===7&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
       assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier interactive Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts allow-same-origin'&&state.prototype.link==='pikappapp/demo.html',`prototype boundary drifted: ${JSON.stringify(state.prototype)}`);
-      assert(state.prototype.width>0&&state.prototype.width<=340&&Math.abs((state.prototype.width/state.prototype.height)-(390/844))<0.01,`prototype embed escaped its phone viewport: ${JSON.stringify(state.prototype)}`);
+      if (viewport.mobile) {
+        assert(state.prototype.deviceDisplay==='none'&&state.prototype.width===0&&state.prototype.height===0&&state.prototype.embedHeight<420,`mobile prototype must collapse to its standalone action: ${JSON.stringify(state.prototype)}`);
+        assert(state.statePairs.length===2&&state.statePairs.every((pair)=>pair.display==='flex'&&['auto','scroll'].includes(pair.overflowX)&&pair.snap.includes('x')&&pair.cue==='"Swipe to compare →"'&&pair.scrollWidth>pair.clientWidth&&pair.children.every((child)=>Math.abs(child.width-pair.clientWidth)<=1)),`mobile state pairs must become readable horizontal rails: ${JSON.stringify(state.statePairs)}`);
+        assert(state.finaleRects.every((rect)=>rect.left>=24-1&&rect.right<=viewport.width-24+1),`mobile finale gutter escaped 24px boundary: ${JSON.stringify(state.finaleRects)}`);
+      } else {
+        assert(state.prototype.deviceDisplay==='block'&&state.prototype.width>0&&state.prototype.width<=340&&Math.abs((state.prototype.width/state.prototype.height)-(390/844))<0.01,`desktop prototype embed escaped its phone viewport: ${JSON.stringify(state.prototype)}`);
+        assert(state.statePairs.every((pair)=>pair.display==='grid'&&pair.scrollWidth===pair.clientWidth),`desktop state-pair grid drifted: ${JSON.stringify(state.statePairs)}`);
+      }
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
       assert(state.archiveViewLabels.length===2&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
@@ -229,9 +240,9 @@ try {
         await cdp.screenshot('pikapp-390-light-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-future-screens.png');
-        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-90)`); await delay(80);
         await cdp.screenshot('pikapp-390-light-review-states.png');
-        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-90)`); await delay(80);
         await cdp.screenshot('pikapp-390-light-theme-states.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-boundary.png');
@@ -245,9 +256,9 @@ try {
         await cdp.screenshot('pikapp-1280-dark-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-future-screens.png');
-        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-90)`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-review-states.png');
-        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'});scrollBy(0,-90)`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-theme-states.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-boundary.png');
@@ -256,7 +267,7 @@ try {
     }
   }
 
-  await cdp.call('Emulation.setDeviceMetricsOverride', { width:390,height:844,deviceScaleFactor:1,mobile:true });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width:1280,height:720,deviceScaleFactor:1,mobile:false });
   await cdp.navigate(`${baseUrl}/pikappapp.html`);
   await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`);
   await delay(2200);
@@ -266,6 +277,14 @@ try {
   await delay(240);
   const prototypeChapter=await cdp.evaluate(`(()=>{const doc=document.querySelector('.prototype-embed__frame').contentDocument;const selected=[...doc.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:doc.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
   assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Brother roster, chapter-wide milestones, and weekly standings live here.'),`embedded prototype controls did not respond: ${JSON.stringify(prototypeChapter)}`);
+
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width:390,height:844,deviceScaleFactor:1,mobile:true });
+  await cdp.navigate(`${baseUrl}/pikappapp.html`);
+  await cdp.evaluate(`(()=>{const rail=document.querySelector('.coda__state-pair');rail.scrollIntoView({block:'center',behavior:'instant'});rail.focus();rail.scrollLeft=0})()`);
+  await cdp.key('ArrowRight','ArrowRight',39);
+  await delay(160);
+  const railKeyboard=await cdp.evaluate(`(()=>{const rail=document.querySelector('.coda__state-pair');return {focused:document.activeElement===rail,scrollLeft:rail.scrollLeft,max:rail.scrollWidth-rail.clientWidth}})()`);
+  assert(railKeyboard.focused&&railKeyboard.scrollLeft>0&&railKeyboard.max>0,`mobile comparison rail did not respond to keyboard scrolling: ${JSON.stringify(railKeyboard)}`);
 
   const verifyArchive = async ({ label, width, height, mobile }) => {
     await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
@@ -335,7 +354,7 @@ try {
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=15 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass prototype=pass`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=15 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass prototype=pass rails=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

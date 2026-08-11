@@ -689,9 +689,15 @@ html[data-theme="dark"] .pikapp-page .member-card__stage{color:#adc5fa}
 
 .pikapp-page .app-experience--final .phone-device{width:min(250px,100%)}
 
-.pikapp-page .prototype-embed{grid-template-columns:1fr;padding:24px 20px}
+.pikapp-page .prototype-embed{grid-template-columns:1fr;margin:32px 4px 0;padding:24px}
 
-.pikapp-page .prototype-embed__device{width:min(340px,100%)}
+.pikapp-page .prototype-embed__copy h3{margin-bottom:14px;font-size:clamp(32px,10vw,42px)}
+
+.pikapp-page .prototype-embed__copy>p:not(.eyebrow){font-size:16px;line-height:1.5}
+
+.pikapp-page .prototype-embed__link{margin-top:14px}
+
+.pikapp-page .prototype-embed__device{display:none}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -776,6 +782,10 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 @media (max-width: 800px){
 .pikapp-page .concept-history{margin-left:0}
 
+.pikapp-page .coda>.wrap{padding-inline:24px}
+
+.pikapp-page .project-nav{padding-inline:24px}
+
 .pikapp-page .future-principles{grid-template-columns:1fr}
 
 .pikapp-page .future-principle,
@@ -787,7 +797,13 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .coda__screen--primary{grid-row:auto}
 
-.pikapp-page .coda__state-pair{grid-column:auto;grid-template-columns:1fr}
+.pikapp-page .coda__state-pair{position:relative;grid-column:auto;display:flex;gap:16px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-padding-inline:0;padding-block:50px 12px;scrollbar-width:thin}
+
+.pikapp-page .coda__state-pair::before{content:"Swipe to compare →";position:absolute;top:24px;left:0;color:var(--muted);font:700 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+
+.pikapp-page .coda__state-pair:focus-visible{outline:2px solid var(--blue-2);outline-offset:4px}
+
+.pikapp-page .coda__state-pair>.coda__screen{flex:0 0 100%;scroll-snap-align:start}
 
 .pikapp-page .coda__screen--chapter{grid-column:auto}
 

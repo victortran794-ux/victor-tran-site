@@ -101,12 +101,14 @@ for (const required of [
   'images/pikapp-case-study/v2-all-caught-up-dark-square.png',
   'images/pikapp-case-study/v2-all-caught-up-light-square.png',
   'Earlier interactive prototype',
-  'This runnable concept predates the V2 artboards below.',
+  'This runnable snapshot preserves the earlier dashboard, bulletin, milestones, and navigation. It predates the V2 direction below.',
+  'role="region" aria-label="Update review and correction states" tabindex="0"',
+  'role="region" aria-label="All-caught-up state in dark and light themes" tabindex="0"',
   '<iframe class="prototype-embed__frame" src="pikappapp/demo.html"',
   'title="Earlier interactive Pi Kapp member-dashboard prototype"',
   'loading="lazy"',
   'sandbox="allow-scripts allow-same-origin"',
-  'Open the prototype in its own page',
+  'Open earlier prototype',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
