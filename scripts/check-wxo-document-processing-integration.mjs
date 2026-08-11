@@ -116,14 +116,15 @@ for (const text of [
   'Evaluation direction · released July 2026',
   'I joined the work in 2025',
   'Led Accuracy Evaluation',
-  'Canvas 1',
-  'no shipment claim',
+  'Canvas 1 · component study',
+  'Interface details use fictional sample data and are shown as design examples, not measured outcomes.',
   'href="#canvas"',
   'href="#document-processing"',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
 
 forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role and period only.');
 forbid(wxo, /Evidence boundary:/i, 'wxO umbrella must not repeat evidence-boundary callouts.');
+forbid(wxo, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'wxO viewer-facing copy must not expose internal release-gate language.');
 forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Design to implementation/i, 'Deferred Canvas sections must not remain in the active story.');
 requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must weight Canvas and Document Processing 3:1.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
@@ -183,7 +184,7 @@ if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay c
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
 forbid(wxo, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'The superseded one-off evaluation specimen must be replaced by the current four-stage story.');
-forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
+forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured (?:improvement|increase|decrease|impact|result)/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [
   'Make the trust loop visible.',
@@ -193,9 +194,11 @@ for (const text of [
   'Evaluation direction · released July 2026',
   'I joined the work in 2025',
   'Led Accuracy Evaluation',
+  'Interface details use fictional sample data and are shown as design examples, not measured outcomes.',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
+forbid(doc, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'Document Processing viewer-facing copy must not expose internal release-gate language.');
 requireText(doc, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(doc, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
 requireText(doc, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'Document Processing must load the scoped workflow behavior.');
