@@ -2,9 +2,9 @@
   "figmaFileKey": "FgPd6zpmuOVymcCypIiGPY",
   "figmaFileName": "Updates",
   "sourceSection": "7:99357",
-  "sourceSectionName": "📖 Story: Agentic Workflow Canvas (v1)",
+  "sourceSectionName": "\ud83d\udcd6 Story: Agentic Workflow Canvas (v1)",
   "sourceUrl": "https://www.figma.com/design/FgPd6zpmuOVymcCypIiGPY/Updates?node-id=7-99357",
-  "editorialRule": "Complete Figma arrangement sheets remain intact. Only Palette child frames are separated; identity markers receive bounded privacy treatment.",
+  "editorialRule": "Complete publication-ready Figma arrangement sheets remain intact. Palette child frames and the form tearsheet use exact child exports for responsive composition; the source-clipped connector sheet is omitted; identity markers receive bounded privacy treatment.",
   "assets": [
     {
       "file": "01-skill-studio-main.png",
@@ -119,7 +119,7 @@
         1024,
         674
       ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20×20 identity avatar replaced with a neutral marker",
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
       "privacyStatus": "top-right identity avatar neutralized",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
       "approvalState": "protected preview candidate",
@@ -167,26 +167,6 @@
       "sha256": "16298cabc6ac072a1e8048d6527d3b04cca29b85771996924f97936abfc76411"
     },
     {
-      "file": "09-connectors.png",
-      "role": "complete connector arrangement sheet",
-      "sourceNode": "7:99891",
-      "sourceFrame": "Connectors",
-      "sourceBounds": [
-        1612,
-        520
-      ],
-      "exportedDimensions": [
-        1024,
-        330
-      ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
-      "privacyStatus": "no identity or private annotation visible",
-      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
-      "approvalState": "protected preview candidate",
-      "bytes": 22486,
-      "sha256": "e9e759d6adc2b85059a6036f67c7418fe4c340cce02a5e936133149a08a0d673"
-    },
-    {
       "file": "10-palette-flow-controls.png",
       "role": "palette child frame: flow controls",
       "sourceNode": "7:99534",
@@ -205,26 +185,6 @@
       "approvalState": "protected preview candidate",
       "bytes": 6297,
       "sha256": "279a63ed2ba0114f2ac9417cb09ce44964975b186665583ffbc7005c93df51c2"
-    },
-    {
-      "file": "11-palette-form-menu.png",
-      "role": "palette child frame: form menu",
-      "sourceNode": "7:99498",
-      "sourceFrame": "Form interaction menu",
-      "sourceBounds": [
-        216,
-        228
-      ],
-      "exportedDimensions": [
-        228,
-        240
-      ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
-      "privacyStatus": "generic component labels only",
-      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
-      "approvalState": "protected preview candidate",
-      "bytes": 12145,
-      "sha256": "a9cdf2991e480ef609e64811d498f3bebaa39706482230ca25f9b267949f1465"
     },
     {
       "file": "12-palette-user-inputs.png",
@@ -259,7 +219,7 @@
         1024,
         674
       ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20×20 identity avatar replaced with a neutral marker",
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
       "privacyStatus": "top-right initials avatar neutralized",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
       "approvalState": "protected preview candidate",
@@ -279,7 +239,7 @@
         1024,
         674
       ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20×20 identity avatar replaced with a neutral marker",
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
       "privacyStatus": "top-right initials avatar neutralized",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
       "approvalState": "protected preview candidate",
@@ -287,24 +247,44 @@
       "sha256": "75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa"
     },
     {
-      "file": "15-user-activity-form.png",
-      "role": "complete form-authoring artboard",
-      "sourceNode": "7:100305",
-      "sourceFrame": "User activity (v2) form 1",
+      "file": "15-user-activity-form-canvas.png",
+      "role": "exact form-authoring tearsheet canvas child",
+      "sourceNode": "7:100477",
+      "sourceFrame": "_Tearsheet content - Wide",
       "sourceBounds": [
-        1584,
-        1042
+        824,
+        814
       ],
       "exportedDimensions": [
-        1024,
-        674
+        824,
+        814
       ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20×20 identity avatar replaced with a neutral marker",
-      "privacyStatus": "top-right initials avatar neutralized",
+      "treatment": "lossless metadata-free resave at exact Figma child bounds; paired with the side-panel child at the original 824:360 proportion; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic fictional interface content and a generic design annotation; no identity or private identifier visible",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
-      "approvalState": "protected preview candidate",
-      "bytes": 49172,
-      "sha256": "acf68cb38a2383739f3c6adbd29c9887ada1a024c80360e4b3ee21a74b113159"
+      "approvalState": "protected preview revision candidate",
+      "bytes": 23241,
+      "sha256": "7fe8cbb9d61d0b88df39dc1f3032e23ba6db9baa9e783d96c560661e23bb6c38"
+    },
+    {
+      "file": "15-user-activity-form-panel.png",
+      "role": "exact form-authoring tearsheet side-panel child",
+      "sourceNode": "7:111880",
+      "sourceFrame": "Tearsheet sidepanel",
+      "sourceBounds": [
+        360,
+        814
+      ],
+      "exportedDimensions": [
+        361,
+        814
+      ],
+      "treatment": "lossless metadata-free resave at exact Figma child bounds; paired with the canvas child at the original 824:360 proportion; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic fictional placeholder content; no identity or private identifier visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview revision candidate",
+      "bytes": 24454,
+      "sha256": "02685388dd7f6191294226a6c0a8b864cf6f8a719b62383e745c020314b19bbd"
     },
     {
       "file": "16-user-activity-complete.png",
@@ -319,7 +299,7 @@
         1024,
         674
       ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20×20 identity avatar replaced with a neutral marker",
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
       "privacyStatus": "top-right initials avatar neutralized",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
       "approvalState": "protected preview candidate",

@@ -233,9 +233,24 @@ html[data-theme='dark'] .workflow-pages {
   width: 100%;
 }
 
+.wxo-v1-connector-accent {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  margin: 0;
+  text-align: center;
+}
+
+.wxo-v1-connector-accent figcaption {
+  max-width: 30rem;
+  color: var(--text-2);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
 .wxo-v1-palette-stage {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 2fr) minmax(9rem, 0.6fr);
+  grid-template-columns: minmax(9rem, 0.58fr) minmax(0, 2fr);
   gap: clamp(1rem, 3vw, 3rem);
   align-items: center;
 }
@@ -247,7 +262,7 @@ html[data-theme='dark'] .workflow-pages {
 
 .wxo-v1-palette-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(9rem, 0.68fr) minmax(0, 1.1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2.5vw, 2rem);
   align-items: center;
 }
@@ -287,6 +302,23 @@ html[data-theme='dark'] .workflow-pages {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.wxo-v1-activity--wide {
+  grid-column: 1 / -1;
+}
+
+.wxo-v1-form-tearsheet {
+  display: grid;
+  grid-template-columns: minmax(0, 824fr) minmax(0, 361fr);
+  align-items: start;
+  overflow: hidden;
+}
+
+.workflow-figure .wxo-v1-form-tearsheet img {
+  width: 100%;
+  height: auto;
+  min-width: 0;
 }
 
 .wxo-v1-activity-grid .workflow-figure figcaption {
@@ -645,22 +677,11 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   }
 
   .wxo-v1-palette-stage {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .wxo-v1-palette-stage > .wxo-v1-illustration:first-child {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .wxo-v1-palette-stage > .wxo-v1-illustration:last-child {
-    grid-column: 2;
-    grid-row: 1;
+    grid-template-columns: 1fr;
   }
 
   .wxo-v1-palette-grid {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    grid-column: 1;
   }
 
   .wxo-chapter-nav a {
