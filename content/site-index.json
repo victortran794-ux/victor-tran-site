@@ -344,12 +344,12 @@
         "alt": "Dark-theme responsibility detail sheet showing source context and review controls"
       },
       {
-        "src": "images/pikapp-case-study/v2-chapter-light-square.png",
-        "alt": "Light-theme Chapter screen showing shared chapter context and a restrained thank-you"
+        "src": "images/pikapp-case-study/v2-update-review-dark-square.png",
+        "alt": "Dark-theme update review screen showing a proposed responsibility update before it is applied"
       },
       {
-        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
-        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
+        "src": "images/pikapp-case-study/v2-correction-requested-dark-square.png",
+        "alt": "Dark-theme correction-requested screen confirming that a review has been sent"
       }
     ],
     "projects": []

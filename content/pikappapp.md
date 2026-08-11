@@ -78,6 +78,10 @@ Earlier concept sequence
 
 The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda.
 
+Earlier interactive prototype
+
+This runnable concept predates the V2 artboards below. It preserves the earlier dashboard, chapter bulletin, milestones, and four-part navigation as an interactive artifact.
+
 This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
 
 HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization feel a little easier to reach. The fraternity members, recruitment staff, and HQ colleagues I presented it to responded positively. It felt current and met needs the recruitment team recognized, but it still needed to be fleshed out.
@@ -110,6 +114,10 @@ Cover view selected.
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
 - Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light-square.png
 - Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark-square.png
+- Dark-theme update review screen showing a proposed responsibility update before it is applied: images/pikapp-case-study/v2-update-review-dark-square.png
+- Dark-theme correction-requested screen confirming that a review has been sent: images/pikapp-case-study/v2-correction-requested-dark-square.png
+- Dark-theme Today screen showing an all-caught-up state without points or rankings: images/pikapp-case-study/v2-all-caught-up-dark-square.png
+- Light-theme Today screen showing the same all-caught-up state: images/pikapp-case-study/v2-all-caught-up-light-square.png
 - Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light-square.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Illuminated bell tower connected with the Creighton University expansion work: images/pikapp-case-study/belltower-expansion.jpg

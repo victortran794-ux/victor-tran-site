@@ -45,6 +45,14 @@ const assetHashes = {
   'images/pikapp-case-study/v2-today-light-square.png': '1c5661d087f392cf23dd2ac18ca1687726c7fd94c7a22fd593a5bf376eb578fe',
   'images/pikapp-case-study/v2-responsibility-detail-dark-square.png': '749d9a49ca30ec3ab9b8f233799ddb192374f192d53f3cc774e9cf654474243f',
   'images/pikapp-case-study/v2-chapter-light-square.png': '8cd9cd9bbeb7285c470a1d6631ba79c6a8474d287a1d2df9719cc0bb13eeacb9',
+  'images/pikapp-case-study/v2-update-review-dark.png': '1b02cc1541f071866b69183540cf57d4eb76a3cd218a9df59a1c47ee612fdb96',
+  'images/pikapp-case-study/v2-update-review-dark-square.png': '06fd46b0a1764b723a02a194d2b6e933370d85cebeec960d5b207db6ea6c8057',
+  'images/pikapp-case-study/v2-correction-requested-dark.png': 'bb8b7105a0ba965b6677646dd425146a22cd6766bca7c860c12fa94e3067c3cc',
+  'images/pikapp-case-study/v2-correction-requested-dark-square.png': '8e2edfb389395ac7806faaeedbe0341cb5cc277ea31a7014179e05a5a13967b0',
+  'images/pikapp-case-study/v2-all-caught-up-dark.png': '9cb3faeda869b9a9f49b960d5ff35e4b350c75832927c9a8249cba5bbcc626d4',
+  'images/pikapp-case-study/v2-all-caught-up-dark-square.png': 'e20fc532e3c7b9fdf2ebc898866bc57ce98301746bdf604b837cf1545cc72dde',
+  'images/pikapp-case-study/v2-all-caught-up-light.png': 'a4d0575ea8ead529fa70a2e912cdfed75c0ecea3f7b47e1250b37b6443da9090',
+  'images/pikapp-case-study/v2-all-caught-up-light-square.png': '16447d5ff96e106654de1670f444c833184369aa5abffc995634388eeb5b2c6f',
   'images/pikapp-case-study/pattern-dark-blue.svg': 'c351c176e21cba2ec26506c444018502b9214ddd49036b1f2d07f6a5c7bb5436',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
@@ -88,6 +96,17 @@ for (const required of [
   'images/pikapp-case-study/v2-today-light-square.png',
   'images/pikapp-case-study/v2-responsibility-detail-dark-square.png',
   'images/pikapp-case-study/v2-chapter-light-square.png',
+  'images/pikapp-case-study/v2-update-review-dark-square.png',
+  'images/pikapp-case-study/v2-correction-requested-dark-square.png',
+  'images/pikapp-case-study/v2-all-caught-up-dark-square.png',
+  'images/pikapp-case-study/v2-all-caught-up-light-square.png',
+  'Earlier interactive prototype',
+  'This runnable concept predates the V2 artboards below.',
+  '<iframe class="prototype-embed__frame" src="pikappapp/demo.html"',
+  'title="Earlier interactive Pi Kapp member-dashboard prototype"',
+  'loading="lazy"',
+  'sandbox="allow-scripts allow-same-origin"',
+  'Open the prototype in its own page',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
@@ -96,7 +115,7 @@ for (const required of [
 if (count(html, '<main') !== 1) fail('pikappapp.html must contain exactly one root main');
 if (count(html, '<h1') !== 1) fail('pikappapp.html must contain exactly one h1');
 if (count(html, 'class="future-principle"') !== 3) fail('Pi Kapp coda must contain exactly three future principles');
-if ([...html.matchAll(/class="[^\"]*\bcoda__screen(?:\s|\")/g)].length !== 3) fail('Pi Kapp coda must contain exactly three V2 screens');
+if ([...html.matchAll(/class="[^\"]*\bcoda__screen(?:\s|\")/g)].length !== 7) fail('Pi Kapp coda must contain exactly seven curated V2 screens');
 if (/src="images\/pikapp-case-study\/v2-(?:today-light|responsibility-detail-dark|chapter-light)\.png"/.test(html)) fail('Pi Kapp coda must use the square-corner display derivatives rather than the rounded source captures');
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
 if (count(html, 'class="member-card__avatar" aria-hidden="true"') !== 3) fail('Pi Kapp member cards must contain exactly three decorative user icons');
@@ -145,6 +164,9 @@ for (const forbidden of [
   'ranked percent',
   'current rank against',
   'browser-side Babel',
+  'Milestone Unlocked',
+  '4-Week Streak',
+  '+100 XP',
 ]) {
   if (html.toLowerCase().includes(forbidden.toLowerCase())) fail(`pikappapp.html retained forbidden review/legacy copy: ${forbidden}`);
 }
@@ -166,6 +188,9 @@ for (const required of [
   'object-fit:contain',
   '.pikapp-page .expansion-artifact__sheet{transition:none}',
   '.member-card__avatar',
+  '.prototype-embed',
+  '.prototype-embed__frame',
+  '.coda__state-pair',
   'font-style:italic',
 ]) {
   if (!css.includes(required)) fail(`css/pikappapp.css missing required contract: ${required}`);
@@ -225,4 +250,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=${Object.keys(assetHashes).length} principles=3 screens=3`);
+console.log(`PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=${Object.keys(assetHashes).length} principles=3 screens=7 prototype=embedded-earlier`);

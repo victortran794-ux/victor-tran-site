@@ -176,7 +176,7 @@ try {
         images.forEach((image)=>{image.loading='eager'});
         await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));
         const root=document.documentElement;
-        const controls=[...document.querySelectorAll('.phone-story__controls button,.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
+        const controls=[...document.querySelectorAll('.phone-story__controls button,.prototype-embed__link,.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
         const page=document.querySelector('.pikapp-page');
@@ -185,6 +185,8 @@ try {
         const avatars=[...document.querySelectorAll('.member-card__avatar')].map((avatar)=>{const card=avatar.closest('.member-card');const ar=avatar.getBoundingClientRect();return {color:getComputedStyle(avatar).color,border:getComputedStyle(card).borderTopColor,width:ar.width,height:ar.height}});
         const futureScreens=[...document.querySelectorAll('.coda__image')].map((image)=>{const style=getComputedStyle(image);return {borderRadius:style.borderRadius,boxShadow:style.boxShadow}});
         const cue=document.querySelector('.expansion-archive-cue');
+        const prototypeFrame=document.querySelector('.prototype-embed__frame');
+        const prototypeRect=prototypeFrame?.getBoundingClientRect();
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
@@ -193,17 +195,20 @@ try {
           boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,futureScreens,
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
+          prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
       })()`);
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===11&&state.deferredImages===4&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===15&&state.deferredImages===4&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
-      assert(state.principles===3&&state.codaScreens===3&&state.phoneSlides===3,'approved evidence counts drifted');
+      assert(state.principles===3&&state.codaScreens===7&&state.phoneSlides===3,'approved evidence counts drifted');
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
-      assert(state.futureScreens.length===3&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
+      assert(state.futureScreens.length===7&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
+      assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier interactive Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts allow-same-origin'&&state.prototype.link==='pikappapp/demo.html',`prototype boundary drifted: ${JSON.stringify(state.prototype)}`);
+      assert(state.prototype.width>0&&state.prototype.width<=340&&Math.abs((state.prototype.width/state.prototype.height)-(390/844))<0.01,`prototype embed escaped its phone viewport: ${JSON.stringify(state.prototype)}`);
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
       assert(state.archiveViewLabels.length===2&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
@@ -218,26 +223,49 @@ try {
         await cdp.screenshot('pikapp-390-light-opening.png');
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-members.png');
+        await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
+        await cdp.screenshot('pikapp-390-light-prototype.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-future-screens.png');
+        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-review-states.png');
+        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-theme-states.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-boundary.png');
       }
       if (!viewport.mobile&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-members.png');
+        await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
+        await cdp.screenshot('pikapp-1280-dark-prototype.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__screens').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-future-screens.png');
+        await cdp.evaluate(`document.querySelector('.coda__state-pair').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-review-states.png');
+        await cdp.evaluate(`document.querySelector('.coda__state-pair--theme').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-theme-states.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-boundary.png');
       }
       checks += 1;
     }
   }
+
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width:390,height:844,deviceScaleFactor:1,mobile:true });
+  await cdp.navigate(`${baseUrl}/pikappapp.html`);
+  await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`);
+  await delay(2200);
+  const prototypeReady=await cdp.evaluate(`(()=>{const frame=document.querySelector('.prototype-embed__frame');const doc=frame.contentDocument;const tabs=doc?[...doc.querySelectorAll('[role="tab"]')]:[];const text=doc?.body.textContent.toLowerCase()||'';return {sameOrigin:Boolean(doc),boot:Boolean(doc?.querySelector('.prototype-boot')),bulletin:text.includes('chapter bulletin'),milestones:text.includes('milestones'),selected:tabs.find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim()||''}})()`);
+  assert(prototypeReady.sameOrigin&&!prototypeReady.boot&&prototypeReady.bulletin&&prototypeReady.milestones&&prototypeReady.selected==='Member',`embedded prototype did not leave its loading state: ${JSON.stringify(prototypeReady)}`);
+  await cdp.evaluate(`(()=>{const doc=document.querySelector('.prototype-embed__frame').contentDocument;[...doc.querySelectorAll('[role="tab"]')].find((tab)=>tab.textContent.trim()==='Chapter')?.click()})()`);
+  await delay(240);
+  const prototypeChapter=await cdp.evaluate(`(()=>{const doc=document.querySelector('.prototype-embed__frame').contentDocument;const selected=[...doc.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:doc.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
+  assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Brother roster, chapter-wide milestones, and weekly standings live here.'),`embedded prototype controls did not respond: ${JSON.stringify(prototypeChapter)}`);
 
   const verifyArchive = async ({ label, width, height, mobile }) => {
     await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
@@ -307,7 +335,7 @@ try {
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=15 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass prototype=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}
