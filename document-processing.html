@@ -105,60 +105,69 @@
         <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
         <figure class="doc-motion-frame">
           <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><button type="button" class="doc-motion-toggle" data-doc-motion-toggle aria-controls="document-processing-motion" aria-pressed="false">Pause animation</button></figcaption>
-          <video autoplay muted loop playsinline id="document-processing-motion" preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Sanitized Document Processing evaluation journey">
+          <video autoplay muted loop playsinline id="document-processing-motion" preload="metadata" poster="assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Document Processing evaluation journey">
             <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm" type="video/webm">
             <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
           </video>
         </figure>
-      </section>
-
-      <section class="workflow-chapter reveal" aria-labelledby="doc-loop-title">
-        <div class="workflow-chapter-head">
-          <span class="workflow-label">02 / System model</span>
-          <div>
-            <h2 id="doc-loop-title">Uncertainty needed somewhere to go.</h2>
-            <p class="workflow-chapter-lead">A confidence score can flag risk, but it cannot resolve an incorrect document type, a missed field, or a misread table by itself. The workflow needed a path from automated output to human judgment and back into the next design decision.</p>
-          </div>
-        </div>
-        <div class="doc-loop" role="img" aria-label="Classify, extract, review, evaluate, and improve form the Document Processing trust loop">
-          <div><span>01</span><strong>Classify</strong><p>Identify the document type and prepare the right schema.</p></div>
-          <div><span>02</span><strong>Extract</strong><p>Read fields and table structures into usable data.</p></div>
-          <div><span>03</span><strong>Review</strong><p>Put low-confidence output beside the source for judgment.</p></div>
-          <div><span>04</span><strong>Evaluate</strong><p>Compare output with a known reference and locate errors.</p></div>
-          <div><span>05</span><strong>Improve</strong><p>Use the evidence to revise the schema or working set.</p></div>
-        </div>
-        <p class="case-study-thesis">classify → extract → review → evaluate → improve</p>
-      </section>
-
-      <section class="workflow-chapter reveal" aria-labelledby="doc-decisions-title">
-        <div class="workflow-chapter-head">
-          <span class="workflow-label">03 / Product decisions</span>
-          <div>
-            <h2 id="doc-decisions-title">Four decisions made the parts feel like one product.</h2>
-            <p class="workflow-chapter-lead">Different document types, schemas, tables, review states, and quality signals needed a consistent structure without flattening their specialized work.</p>
-          </div>
-        </div>
-        <div class="doc-decision-grid">
-          <article><h3>Keep source and output together</h3><p>Review works when a person can compare the document and extracted value without reconstructing context.</p></article>
-          <article><h3>Make uncertainty actionable</h3><p>Confidence and quality concepts needed to point toward the field, document, or configuration requiring attention.</p></article>
-          <article><h3>Reuse the workflow language</h3><p>Shared states and Carbon-aligned patterns kept specialized document work connected to the surrounding canvas.</p></article>
-          <article><h3>Separate goals from evidence</h3><p>Thresholds, table support, history, and assignment rules are described as design or technical scope, not demonstrated results.</p></article>
+        <div class="doc-current-story" aria-label="Current Document Processing screens from classify through evaluate">
+          <section class="doc-current-stage" aria-labelledby="doc-classify-title">
+            <header class="doc-current-stage-head"><span>01</span><h3 id="doc-classify-title">Classify</h3></header>
+            <div class="doc-current-solo">
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/classify-suggested-sanitized.png" width="1024" height="664" loading="lazy" decoding="async" alt="Current classifier screen with suggested document classes"><figcaption>Suggested classes</figcaption></figure>
+            </div>
+          </section>
+          <section class="doc-current-stage" aria-labelledby="doc-extract-title">
+            <header class="doc-current-stage-head"><span>02</span><h3 id="doc-extract-title">Extract</h3></header>
+            <div class="doc-current-pair">
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/extract-field-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen for adding a field"><figcaption>Field setup</figcaption></figure>
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/extract-error-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen with a document-level error"><figcaption>Extraction error</figcaption></figure>
+            </div>
+          </section>
+          <section class="doc-current-stage" aria-labelledby="doc-review-title">
+            <header class="doc-current-stage-head"><span>03</span><h3 id="doc-review-title">Review</h3></header>
+            <div class="doc-current-pair">
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/review-table-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen with editable table output"><figcaption>Table correction</figcaption></figure>
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/review-verified-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen showing verified output"><figcaption>Verified output</figcaption></figure>
+            </div>
+          </section>
+          <section class="doc-current-stage" aria-labelledby="doc-evaluate-title">
+            <header class="doc-current-stage-head"><span>04</span><h3 id="doc-evaluate-title">Evaluate</h3></header>
+            <div class="doc-current-evaluator-grid">
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-test-set-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen showing the uploaded test set"><figcaption>Test set</figcaption></figure>
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-rerun-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen prompting a rerun after extractor changes"><figcaption>Rerun and inspect</figcaption></figure>
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-results-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with field-level comparison"><figcaption>Evaluation results</figcaption></figure>
+              <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-indicators-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with extraction indicators on the source document"><figcaption>Field indicators</figcaption></figure>
+            </div>
+          </section>
+          <p class="doc-current-note">Interface details use fictional sample data and are shown as design examples, not measured outcomes.</p>
         </div>
       </section>
 
-      <section class="workflow-chapter reveal" aria-labelledby="doc-role-title">
+      <section class="workflow-chapter doc-ending reveal" aria-labelledby="doc-ending-title">
         <div class="workflow-chapter-head">
-          <span class="workflow-label">04 / Contribution</span>
+          <span class="workflow-label">02 / Decisions + contribution</span>
           <div>
-            <h2 id="doc-role-title">My role grew as the work moved from setup to trust.</h2>
-            <p class="workflow-chapter-lead">I joined a platform already in motion. My contribution expanded from translating and specifying Classifier and Extractor work to connecting review patterns and leading the Accuracy Evaluation direction.</p>
+            <h2 id="doc-ending-title">The screens carry the story.</h2>
           </div>
         </div>
-        <div class="workflow-role-grid">
-          <div><h3>Classifier and Extractor</h3><p>I helped convert earlier concepts into the agent model and delivered interface specifications, interaction detail, Carbon alignment, and reusable patterns.</p></div>
-          <div><h3>Human review</h3><p>I supported requirements and patterns where document context, low-confidence output, and a person's correction needed to stay together.</p></div>
-          <div><h3>Accuracy Evaluation</h3><p>I led the design direction for the evaluation workflow, connecting test-set preparation, ground truth, review, and quality inspection.</p></div>
-          <div><h3>Cross-team continuity</h3><p>I worked across adjacent product and system teams, and later carried additional Document Processing epics while design coverage was reduced.</p></div>
+        <div class="doc-ending-grid">
+          <section class="doc-ending-block" aria-labelledby="doc-decisions-title">
+            <p class="workflow-label doc-ending-label" id="doc-decisions-title">Product decisions</p>
+            <div class="doc-compact-list">
+              <article class="doc-decision-row"><h3>Keep source and output together</h3><p>Compare extracted values with the document in one view.</p></article>
+              <article class="doc-decision-row"><h3>Make uncertainty actionable</h3><p>Point to the field, document, or setup that needs attention.</p></article>
+              <article class="doc-decision-row"><h3>Reuse the workflow language</h3><p>Keep specialized document work connected to Carbon-aligned canvas states.</p></article>
+            </div>
+          </section>
+          <section class="doc-ending-block" aria-labelledby="doc-role-title">
+            <p class="workflow-label doc-ending-label" id="doc-role-title">Contribution</p>
+            <div class="doc-compact-list">
+              <article class="doc-contribution-row"><h3>Classifier + Extractor</h3><p>I joined the work in 2025, translating earlier concepts into agent-model specifications and reusable patterns.</p></article>
+              <article class="doc-contribution-row"><h3>Human review</h3><p>Connected low-confidence output, source context, and correction.</p></article>
+              <article class="doc-contribution-row"><h3>Led Accuracy Evaluation</h3><p>Shaped the workflow from test-set setup through quality inspection.</p></article>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -166,9 +175,8 @@
         <div class="workflow-close-grid">
           <h2 id="doc-close-title">Trust comes from a workflow people can inspect.</h2>
           <div>
-            <p>The combined Document Extractor and Evaluation experience released in July 2026. The release connected extraction with the quality-review direction described here.</p>
-            <p>Confidence alone is not enough. A person needs to see uncertainty in context, correct it without leaving the task, and understand whether the next version is better.</p>
-            <p class="workflow-small-print">Protected private candidate · source-backed copy · local sanitized assets · no public implementation authorized</p>
+            <p>Document Extractor and Evaluation released in July 2026, connecting extraction with a quality-review workflow people could inspect.</p>
+
           </div>
         </div>
       </section>

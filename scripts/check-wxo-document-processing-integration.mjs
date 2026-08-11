@@ -94,10 +94,13 @@ if (!shellConfig.pages.includes('wxo-canvas.html')) fail('wxO Canvas must be gov
 requireText(workflowCss, "html[data-theme='dark'] .workflow-pages", 'Workflow styles must define dark-theme project tokens.');
 requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use the contrast-safe dark-theme blue token.');
 requireText(workflowCss, '.wxo-doc-meta {', 'The consolidated Document Processing summary must have scoped spacing.');
-requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Processing outcome must have scoped separation.');
+requireText(workflowCss, '.doc-ending-grid {', 'The lean Document Processing ending must have a scoped two-part layout.');
+requireText(workflowCss, '.doc-compact-list {', 'The lean ending must use restrained decision and contribution rows.');
 requireText(workflowCss, '.doc-processing-page .site-route-status {', 'The wxO and Document Processing pages must hide the redundant protected-status note.');
 requireText(workflowCss, 'display: none;', 'The redundant protected-status note must not render.');
 requireText(workflowCss, '.doc-motion-toggle {', 'The autoplay journey must expose a visible pause control.');
+requireText(workflowCss, '.doc-current-story {', 'The current Document Processing evidence story must have a scoped layout.');
+requireText(workflowCss, '.doc-current-stage {', 'Each current Document Processing stage must have a scoped layout.');
 requireText(workflowJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the scoped workflow script.');
 
 for (const text of [
@@ -111,17 +114,17 @@ for (const text of [
   'Make the trust loop visible.',
   'Classifier + Extractor specifications',
   'Evaluation direction · released July 2026',
-  'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
-  'lead designer for Accuracy Evaluation',
-  'Canvas 1',
-  'no shipment claim',
+  'Led Accuracy Evaluation',
+  'Canvas 1 · component study',
+  'Interface details use fictional sample data and are shown as design examples, not measured outcomes.',
   'href="#canvas"',
   'href="#document-processing"',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
 
 forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role and period only.');
 forbid(wxo, /Evidence boundary:/i, 'wxO umbrella must not repeat evidence-boundary callouts.');
+forbid(wxo, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'wxO viewer-facing copy must not expose internal release-gate language.');
 forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Design to implementation/i, 'Deferred Canvas sections must not remain in the active story.');
 requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must weight Canvas and Document Processing 3:1.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
@@ -136,13 +139,23 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
+  'classify-suggested-sanitized.png',
+  'extract-field-sanitized.png',
+  'extract-error-sanitized.png',
+  'review-table-sanitized.png',
+  'review-verified-sanitized.png',
+  'evaluate-rerun-sanitized.png',
+  'evaluate-test-set-sanitized.png',
+  'evaluate-results-sanitized.png',
+  'evaluate-indicators-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
-if (count(wxo, /class="doc-loop-item"/gi) !== 5) fail('The wxO Document Processing chapter must show all five trust-loop steps.');
 if (count(wxo, /class="doc-story-frame/gi) !== 0) fail('The redundant three-frame Document Processing storyboard must be removed.');
-if (count(wxo, /class="doc-decision-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded product decisions.');
-if (count(wxo, /class="doc-role-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded contribution cards.');
+if (count(wxo, /class="doc-ending-grid"/gi) !== 1) fail('The wxO Document Processing chapter must use one lean ending grid.');
+if (count(wxo, /class="doc-decision-row"/gi) !== 3) fail('The wxO Document Processing chapter must show three concise product decisions.');
+if (count(wxo, /class="doc-contribution-row"/gi) !== 3) fail('The wxO Document Processing chapter must show three restrained contribution rows.');
+forbid(wxo, /wxo-doc-loop-title|class="doc-loop|class="doc-decision-card|class="doc-role-card|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from wxO.');
 
 forbid(wxo, /Canvas Future|future-(inventory|builder|debug)-sanitized/i, 'Future-state material must remain withheld from the ordinary protected page.');
 for (const asset of [
@@ -164,8 +177,14 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   else if (sha256(asset) !== expected) fail(`Approved wxO derivative changed: ${asset}.`);
 }
 
-if (count(wxo, /<img\b/gi) !== 3) fail('wxO Canvas must use exactly three images: shared nav image and two Canvas derivatives.');
-forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
+if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
+if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
+if (count(wxo, /<img\b/gi) !== 12) fail('wxO Canvas must use exactly twelve images: shared nav image, two Canvas derivatives, and nine current Document Processing frames.');
+if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
+requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
+forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
+forbid(wxo, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'The superseded one-off evaluation specimen must be replaced by the current four-stage story.');
+forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured (?:improvement|increase|decrease|impact|result)/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [
   'Make the trust loop visible.',
@@ -173,12 +192,13 @@ for (const text of [
   'Classifier + Extractor specifications',
   'Human-in-the-loop shared patterns',
   'Evaluation direction · released July 2026',
-  'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
-  'lead designer for Accuracy Evaluation',
+  'Led Accuracy Evaluation',
+  'Interface details use fictional sample data and are shown as design examples, not measured outcomes.',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
+forbid(doc, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'Document Processing viewer-facing copy must not expose internal release-gate language.');
 requireText(doc, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(doc, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
 requireText(doc, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'Document Processing must load the scoped workflow behavior.');
@@ -189,7 +209,26 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
+  'classify-suggested-sanitized.png',
+  'extract-field-sanitized.png',
+  'extract-error-sanitized.png',
+  'review-table-sanitized.png',
+  'review-verified-sanitized.png',
+  'evaluate-rerun-sanitized.png',
+  'evaluate-test-set-sanitized.png',
+  'evaluate-results-sanitized.png',
+  'evaluate-indicators-sanitized.png',
 ]) requireText(doc, asset, `Document Processing missing approved sanitized evidence ${asset}`);
+if (count(doc, /class="doc-current-stage"/gi) !== 4) fail('Document Processing must show four current evidence stages.');
+if (count(doc, /class="doc-current-frame"/gi) !== 9) fail('Document Processing must show nine curated current Figma frames.');
+if (count(doc, /<\/span><h3\b/gi) !== 4) fail('Standalone current stage headers must stay compact and text-light.');
+requireText(doc, 'class="doc-current-evaluator-grid"', 'The standalone Evaluate finale must use a distinct four-screen grid.');
+if (count(doc, /class="doc-ending-grid"/gi) !== 1) fail('Document Processing must use one lean ending grid.');
+if (count(doc, /class="doc-decision-row"/gi) !== 3) fail('Document Processing must show three concise product decisions.');
+if (count(doc, /class="doc-contribution-row"/gi) !== 3) fail('Document Processing must show three restrained contribution rows.');
+forbid(doc, /doc-loop-title|class="doc-loop|class="doc-decision-grid|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from Document Processing.');
+forbid(doc, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
+forbid(doc, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'Document Processing must replace the superseded one-off evaluation specimen.');
 
 const expectedDocumentAssets = {
   'assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm': '472376539f7fe8c8b10d1f8fe480b1052f95f6b5a8fadbeb16954396ceb4626e',
@@ -198,6 +237,15 @@ const expectedDocumentAssets = {
   'assets/document-processing/storyboard/01-select-training-documents-sanitized.png': '74078eb8e24ee8fd26de7a75d00b464c358a7d57fa18241c417fa6aa5e71dd8c',
   'assets/document-processing/storyboard/02-review-and-correct-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
   'assets/document-processing/storyboard/03-evaluation-details-sanitized.png': 'e60feb0d7b7de1105e2b40d640598d2a81250d48effd60747fd05e105589f1b9',
+  'assets/document-processing/current/classify-suggested-sanitized.png': '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933',
+  'assets/document-processing/current/extract-field-sanitized.png': 'c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab',
+  'assets/document-processing/current/extract-error-sanitized.png': 'a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e',
+  'assets/document-processing/current/review-table-sanitized.png': '3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240',
+  'assets/document-processing/current/review-verified-sanitized.png': 'e79069cd3e41a6ad3d14ae12c8e774d85756b34e378bf91cbf3c16265980ff95',
+  'assets/document-processing/current/evaluate-test-set-sanitized.png': 'c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0',
+  'assets/document-processing/current/evaluate-rerun-sanitized.png': 'bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283',
+  'assets/document-processing/current/evaluate-results-sanitized.png': '7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403',
+  'assets/document-processing/current/evaluate-indicators-sanitized.png': 'bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5',
 };
 for (const [asset, expected] of Object.entries(expectedDocumentAssets)) {
   if (!fs.existsSync(asset)) fail(`Missing approved Document Processing evidence ${asset}.`);
