@@ -181,6 +181,29 @@ html[data-theme='dark'] .workflow-pages {
   gap: 1rem;
 }
 
+.wxo-canvas-sequence {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.wxo-canvas-frame {
+  overflow: clip;
+}
+
+.wxo-canvas-frame--context {
+  width: min(100%, 68rem);
+  margin-inline: auto;
+}
+
+.wxo-canvas-frame--focus {
+  width: min(100%, 72rem);
+  margin-inline: auto;
+}
+
+.wxo-canvas-frame img {
+  background: #f4f4f4;
+}
+
 .workflow-figure {
   margin: 0;
   border: 1px solid var(--border);

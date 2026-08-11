@@ -172,7 +172,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 11, current: 'wxo-canvas.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 13, current: 'wxo-canvas.html' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 9, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
@@ -434,6 +434,8 @@ try {
             currentStages:document.querySelectorAll('.doc-current-stage').length,
             currentFrames:document.querySelectorAll('.doc-current-frame').length,
             currentFramesLoaded:[...document.querySelectorAll('.doc-current-frame img')].every((image)=>image.complete&&image.naturalWidth===1024&&[664,674,780].includes(image.naturalHeight)),
+            canvasFrames:document.querySelectorAll('.wxo-canvas-frame').length,
+            canvasFramesLoaded:[...document.querySelectorAll('.wxo-canvas-frame img')].every((image,index)=>image.complete&&[[1024,660],[1720,1320],[1300,710],[1300,660]].some(([width,height],expectedIndex)=>expectedIndex===index&&image.naturalWidth===width&&image.naturalHeight===height)),
             currentStoryGeometry:(()=>{const story=document.querySelector('.doc-current-story');if(!story||story.getClientRects().length===0)return null;const rect=story.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width}})(),
             currentPairColumns:[...document.querySelectorAll('.doc-current-pair')].filter((pair)=>pair.getClientRects().length).map((pair)=>getComputedStyle(pair).gridTemplateColumns.split(' ').length),
             currentEvaluatorColumns:[...document.querySelectorAll('.doc-current-evaluator-grid')].filter((grid)=>grid.getClientRects().length).map((grid)=>getComputedStyle(grid).gridTemplateColumns.split(' ').length),
@@ -464,7 +466,7 @@ try {
         assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: expected ${spec.mainImages} main images, got ${state.images}; failures ${JSON.stringify(state.failedImages)}`);
         assert(state.currentStages===4&&state.currentFrames===9&&state.currentFramesLoaded, `${spec.file}: current four-stage evidence story is incomplete or failed to decode ${JSON.stringify(state)}`);
         if(name==='doc') assert(state.currentStoryGeometry&&state.currentStoryGeometry.left>=0&&state.currentStoryGeometry.right<=viewport.width&&state.currentPairColumns.every((columns)=>columns===(viewport.width<=860?1:2))&&state.currentEvaluatorColumns.every((columns)=>columns===(viewport.width<=860?1:2)), `${spec.file}: current evidence geometry failed at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
-        if(name==='wxo') assert(state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1, `${spec.file}: hidden status or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`);
+        if(name==='wxo') assert(state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1&&state.canvasFrames===4&&state.canvasFramesLoaded, `${spec.file}: Canvas frames, hidden status, or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`);
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
         if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);
         const ratio=contrastRatio(state.contrastForeground,state.contrastBackground);
@@ -480,7 +482,17 @@ try {
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
           await delay(60);
           await cdp.screenshot('wxo-canvas-390-light-opening.png');
-          await cdp.evaluate(`document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
+          for (const [selector,fileName] of [
+            ['.wxo-canvas-frame--context','wxo-canvas-390-light-scenario-context.png'],
+            ['.wxo-canvas-frame--system','wxo-canvas-390-light-component-system.png'],
+            ['#wxo-human-title','wxo-canvas-390-light-human-work.png'],
+            ['#wxo-connectors-title','wxo-canvas-390-light-connector-states.png'],
+          ]) {
+            await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+            await delay(80);
+            await cdp.screenshot(fileName);
+          }
+          await cdp.evaluate(`scrollTo({top:0,behavior:'instant'});document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
           const focusStyle=await cdp.evaluate(`(()=>{const link=document.querySelector('[data-wxo-chapter="document-processing"]');const style=getComputedStyle(link);return {active:document.activeElement===link,outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth,boxShadow:style.boxShadow}})()`);
@@ -514,7 +526,7 @@ try {
           chapterChecks+=1;
         }
         if(name==='wxo'&&viewport.label==='1280'&&theme==='dark'){
-          await cdp.evaluate(`document.querySelector('#canvas .wxo-system-grid').scrollIntoView({block:'center',behavior:'instant'})`);
+          await cdp.evaluate(`document.querySelector('#canvas .wxo-canvas-sequence').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-canvas-system.png');
           await cdp.evaluate(`(()=>{document.querySelector('[data-wxo-chapter="document-processing"]').click();const frame=document.querySelector('#document-processing .doc-motion-frame');const navHeight=document.querySelector('.nav').getBoundingClientRect().height;const chapterHeight=document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height;scrollTo({top:frame.getBoundingClientRect().top+scrollY-navHeight-chapterHeight-16,behavior:'instant'})})()`);

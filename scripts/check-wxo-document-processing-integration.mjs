@@ -116,7 +116,6 @@ for (const text of [
   'Evaluation direction · released July 2026',
   'I joined the work in 2025',
   'Led Accuracy Evaluation',
-  'Canvas 1 · component study',
   'Interface details use fictional sample data and are shown as design examples, not measured outcomes.',
   'href="#canvas"',
   'href="#document-processing"',
@@ -134,8 +133,10 @@ requireText(wxo, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'wxO
 forbid(wxo, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 
 for (const asset of [
-  'canvas1-flow-controls-sanitized.png',
-  'canvas1-connectors-sanitized.png',
+  'current/01-book-a-flight-context.png',
+  'current/02-component-system-board.png',
+  'current/03-user-activity-form.png',
+  'current/04-straight-connector-states.png',
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
@@ -149,6 +150,17 @@ for (const asset of [
   'evaluate-results-sanitized.png',
   'evaluate-indicators-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
+
+for (const text of [
+  'Scenario context',
+  'Component system',
+  'Human work',
+  'Connector states',
+  'Shown side by side',
+]) requireText(wxo, text, `wxO Canvas missing current-system viewer phrase: ${text}`);
+if (count(wxo, /class="[^"]*\bwxo-canvas-frame\b[^"]*"/gi) !== 4) fail('wxO Canvas must show exactly four curated current-system figures.');
+forbid(wxo, /canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'The two older sparse Canvas plates must be replaced by the four-image current-system sequence.');
+forbid(wxo, /26:\d+|25:\d+|screen-visible|component-lineage proof|private provenance/i, 'wxO viewer-facing copy must not expose internal provenance identifiers or working labels.');
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
 if (count(wxo, /class="doc-story-frame/gi) !== 0) fail('The redundant three-frame Document Processing storyboard must be removed.');
@@ -166,9 +178,20 @@ for (const asset of [
   if (fs.existsSync(asset)) fail(`Withheld future-state asset must not remain in the public repository: ${asset}.`);
 }
 
+const wxoManifestPath = 'images/wxo-canvas/current/manifest.json';
+if (!fs.existsSync(wxoManifestPath)) fail('wxO current-system asset manifest must exist.');
+else {
+  const wxoManifest = JSON.parse(read(wxoManifestPath));
+  if (!Array.isArray(wxoManifest.assets) || wxoManifest.assets.length !== 4) fail('wxO current-system manifest must record exactly four curated assets.');
+  for (const entry of wxoManifest.assets ?? []) {
+    const assetPath = `images/wxo-canvas/current/${entry.file}`;
+    if (!entry.sourceClass || !entry.sourceLedger || !entry.transformation || !entry.privacyStatus || !entry.claimStatus || !entry.approvalState) fail(`wxO manifest entry ${entry.file ?? 'unknown'} is missing provenance, privacy, claims, or approval metadata.`);
+    if (!fs.existsSync(assetPath)) fail(`Missing wxO current-system derivative ${assetPath}.`);
+    else if (sha256(assetPath) !== entry.sha256) fail(`wxO current-system derivative hash changed: ${assetPath}.`);
+  }
+}
+
 const expectedWxoAssets = {
-  'images/wxo-canvas/canvas1-connectors-sanitized.png': 'ef582f1b925602c4c54b783ce636acdc7ecd8cb32fa4f2692dbe61cbc31b7443',
-  'images/wxo-canvas/canvas1-flow-controls-sanitized.png': 'c6c44d358e660055b1f47dfedb1872286500e334d2494f1dfd1fd3058fbad8d9',
   'images/wxo-canvas/document-processing-storyboard.png': '758d72c025a02073d5aa427a3ed7d855412284a3e9389c6c0f78b9415c5aac08',
   'images/wxo-canvas/wxo-home-thumbnail.png': '690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee',
 };
@@ -179,7 +202,7 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
 if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 12) fail('wxO Canvas must use exactly twelve images: shared nav image, two Canvas derivatives, and nine current Document Processing frames.');
+if (count(wxo, /<img\b/gi) !== 14) fail('wxO Canvas must use exactly fourteen images: shared nav image, four Canvas derivatives, and nine current Document Processing frames.');
 if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
