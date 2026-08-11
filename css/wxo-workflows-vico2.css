@@ -345,8 +345,9 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   display: grid;
   grid-template-columns: minmax(4rem, 0.22fr) minmax(0, 1fr);
   gap: clamp(1rem, 4vw, 3rem);
+  align-items: baseline;
   max-width: 54rem;
-  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
 }
 
 .doc-current-stage-head > span {
@@ -355,28 +356,27 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   letter-spacing: 0.1em;
 }
 
-.doc-current-stage-head h3,
-.doc-current-stage-head p {
-  margin: 0;
-}
-
 .doc-current-stage-head h3 {
+  margin: 0;
   font-family: var(--editorial-serif);
   font-size: clamp(2rem, 4vw, 3.6rem);
   font-weight: 400;
   line-height: 1;
 }
 
-.doc-current-stage-head p {
-  max-width: 38rem;
-  margin-top: 0.75rem;
-  color: var(--text-2);
-}
-
-.doc-current-pair {
+.doc-current-pair,
+.doc-current-evaluator-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.doc-current-evaluator-grid {
+  row-gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.doc-current-solo {
+  width: min(100%, 68rem);
 }
 
 .doc-current-frame {
@@ -495,7 +495,8 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     grid-template-columns: 1fr;
   }
 
-  .doc-current-pair {
+  .doc-current-pair,
+  .doc-current-evaluator-grid {
     grid-template-columns: 1fr;
   }
 

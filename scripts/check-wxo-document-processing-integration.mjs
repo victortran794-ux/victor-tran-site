@@ -120,7 +120,6 @@ for (const text of [
   'no shipment claim',
   'href="#canvas"',
   'href="#document-processing"',
-  'Move from an overall signal to the fields and document regions that need attention.',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
 
 forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role and period only.');
@@ -140,11 +139,12 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
   'classify-suggested-sanitized.png',
-  'classify-mapping-sanitized.png',
   'extract-field-sanitized.png',
   'extract-error-sanitized.png',
   'review-table-sanitized.png',
   'review-verified-sanitized.png',
+  'evaluate-rerun-sanitized.png',
+  'evaluate-test-set-sanitized.png',
   'evaluate-results-sanitized.png',
   'evaluate-indicators-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
@@ -176,8 +176,11 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 }
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
-if (count(wxo, /class="doc-current-frame"/gi) !== 8) fail('The wxO Document Processing chapter must show eight curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 11) fail('wxO Canvas must use exactly eleven images: shared nav image, two Canvas derivatives, and eight current Document Processing frames.');
+if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
+if (count(wxo, /<img\b/gi) !== 12) fail('wxO Canvas must use exactly twelve images: shared nav image, two Canvas derivatives, and nine current Document Processing frames.');
+if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
+requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
+forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
 forbid(wxo, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'The superseded one-off evaluation specimen must be replaced by the current four-stage story.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
@@ -190,7 +193,6 @@ for (const text of [
   'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
   'lead designer for Accuracy Evaluation',
-  'Move from an overall signal to the fields and document regions that need attention.',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
@@ -205,16 +207,20 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
   'classify-suggested-sanitized.png',
-  'classify-mapping-sanitized.png',
   'extract-field-sanitized.png',
   'extract-error-sanitized.png',
   'review-table-sanitized.png',
   'review-verified-sanitized.png',
+  'evaluate-rerun-sanitized.png',
+  'evaluate-test-set-sanitized.png',
   'evaluate-results-sanitized.png',
   'evaluate-indicators-sanitized.png',
 ]) requireText(doc, asset, `Document Processing missing approved sanitized evidence ${asset}`);
 if (count(doc, /class="doc-current-stage"/gi) !== 4) fail('Document Processing must show four current evidence stages.');
-if (count(doc, /class="doc-current-frame"/gi) !== 8) fail('Document Processing must show eight curated current Figma frames.');
+if (count(doc, /class="doc-current-frame"/gi) !== 9) fail('Document Processing must show nine curated current Figma frames.');
+if (count(doc, /<\/span><h3\b/gi) !== 4) fail('Standalone current stage headers must stay compact and text-light.');
+requireText(doc, 'class="doc-current-evaluator-grid"', 'The standalone Evaluate finale must use a distinct four-screen grid.');
+forbid(doc, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
 forbid(doc, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'Document Processing must replace the superseded one-off evaluation specimen.');
 
 const expectedDocumentAssets = {
@@ -225,11 +231,12 @@ const expectedDocumentAssets = {
   'assets/document-processing/storyboard/02-review-and-correct-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
   'assets/document-processing/storyboard/03-evaluation-details-sanitized.png': 'e60feb0d7b7de1105e2b40d640598d2a81250d48effd60747fd05e105589f1b9',
   'assets/document-processing/current/classify-suggested-sanitized.png': '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933',
-  'assets/document-processing/current/classify-mapping-sanitized.png': '324690c478ef672db5b85cb77b61ebcb499a21563e90e6259709f226c9a369a6',
   'assets/document-processing/current/extract-field-sanitized.png': 'c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab',
   'assets/document-processing/current/extract-error-sanitized.png': 'a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e',
   'assets/document-processing/current/review-table-sanitized.png': '3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240',
   'assets/document-processing/current/review-verified-sanitized.png': 'e79069cd3e41a6ad3d14ae12c8e774d85756b34e378bf91cbf3c16265980ff95',
+  'assets/document-processing/current/evaluate-test-set-sanitized.png': 'c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0',
+  'assets/document-processing/current/evaluate-rerun-sanitized.png': 'bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283',
   'assets/document-processing/current/evaluate-results-sanitized.png': '7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403',
   'assets/document-processing/current/evaluate-indicators-sanitized.png': 'bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5',
 };

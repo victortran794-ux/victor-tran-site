@@ -2,7 +2,7 @@
   "source": "Figma Updates / Document Processing section 7:103917",
   "classification": "current Figma derivatives with fictional prototype data",
   "dataStatus": "Victor confirmed the document records, workflow names, values, metrics, and model labels shown in these prototype screens are fictional.",
-  "sanitation": "The full top-right prototype identity area is neutralized on every frame, and one internal design annotation is obscured; fictional interface data remains visible to preserve the design evidence.",
+  "sanitation": "Actual top-right prototype identity markers are neutralized on every frame, and one internal design annotation is obscured; fictional interface data remains visible to preserve the design evidence.",
   "assets": [
     {
       "file": "assets/document-processing/current/classify-suggested-sanitized.png",
@@ -11,34 +11,6 @@
       "outputSha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
       "operations": [
         "Top-right prototype identity marker neutralized"
-      ],
-      "dimensions": [
-        1024,
-        664
-      ],
-      "identityNeutralization": [
-        [
-          925,
-          0,
-          1024,
-          30
-        ],
-        [
-          925,
-          30,
-          1024,
-          70
-        ]
-      ]
-    },
-    {
-      "file": "assets/document-processing/current/classify-mapping-sanitized.png",
-      "figmaNode": "7:104202",
-      "sourceSha256": "ba1b844142cd0baa2f5d6f393817bde41463c78de479672f0de6a1623085c075",
-      "outputSha256": "324690c478ef672db5b85cb77b61ebcb499a21563e90e6259709f226c9a369a6",
-      "operations": [
-        "Top-right prototype identity marker neutralized",
-        "Internal design annotation obscured"
       ],
       "dimensions": [
         1024,
@@ -220,6 +192,50 @@
           70
         ]
       ]
+    },
+    {
+      "file": "assets/document-processing/current/evaluate-rerun-sanitized.png",
+      "figmaNode": "7:105171",
+      "sourceSha256": "8c7247fbfd2ef3a6b8c796f9bbab162ea0e1250b2688fa6a157472ea81b3d80f",
+      "outputSha256": "bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283",
+      "operations": [
+        "Top-right prototype identity marker neutralized with a narrow color-matched top-bar band"
+      ],
+      "dimensions": [
+        1024,
+        674
+      ],
+      "identityNeutralization": [
+        [
+          986,
+          0,
+          1024,
+          30
+        ]
+      ]
+    },
+    {
+      "file": "assets/document-processing/current/evaluate-test-set-sanitized.png",
+      "figmaNode": "7:105417",
+      "sourceSha256": "51343d7433ea60a1e9b80af9ca0ca60d82c6801a5ef2019beeb583b84d2bb0e6",
+      "outputSha256": "c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0",
+      "operations": [
+        "Top-right prototype identity marker neutralized with a narrow color-matched top-bar band"
+      ],
+      "dimensions": [
+        1024,
+        674
+      ],
+      "identityNeutralization": [
+        [
+          986,
+          0,
+          1024,
+          30
+        ]
+      ]
     }
-  ]
+  ],
+  "selection": "Nine current Figma frames: one Classify setup, two Extract states, two Review states, and a four-screen Evaluate finale.",
+  "excluded": "Classifier data mapping was removed after visual review because it duplicated setup evidence without strengthening the story."
 }
