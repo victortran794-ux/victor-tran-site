@@ -175,33 +175,133 @@ html[data-theme='dark'] .workflow-pages {
   color: var(--text-2);
 }
 
-.wxo-system-grid {
+.wxo-v1-opening,
+.wxo-v1-transition,
+.wxo-v1-closing {
+  margin: 0;
+}
+
+.wxo-v1-opening {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.34fr);
+  align-items: end;
+  gap: clamp(1.25rem, 4vw, 4rem);
+  margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 
-.wxo-canvas-sequence {
-  display: grid;
-  gap: clamp(1.5rem, 4vw, 4rem);
+.wxo-v1-opening figcaption {
+  max-width: 18rem;
+  padding-bottom: 0.5rem;
+  color: var(--text-2);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
 }
 
-.wxo-canvas-frame {
-  overflow: clip;
+.wxo-v1-illustration,
+.wxo-v1-palette-piece {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-.wxo-canvas-frame--context {
-  width: min(100%, 68rem);
-  margin-inline: auto;
+.wxo-v1-illustration--opening {
+  width: 100%;
 }
 
-.wxo-canvas-frame--focus {
-  width: min(100%, 72rem);
-  margin-inline: auto;
+.wxo-v1-arrangement {
+  overflow: hidden;
 }
 
-.wxo-canvas-frame img {
+.wxo-v1-arrangement img {
+  object-fit: contain;
   background: #f4f4f4;
+}
+
+.wxo-v1-arrangement--key {
+  width: min(100%, 76rem);
+  margin-inline: auto;
+}
+
+.wxo-v1-node-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.wxo-v1-arrangement--wide {
+  width: 100%;
+}
+
+.wxo-v1-palette-stage {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 2fr) minmax(9rem, 0.6fr);
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: center;
+}
+
+.wxo-v1-illustration--orbital {
+  width: min(100%, 18rem);
+  justify-self: center;
+}
+
+.wxo-v1-palette-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(9rem, 0.68fr) minmax(0, 1.1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: center;
+}
+
+.wxo-v1-palette-grid figure {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  margin: 0;
+}
+
+.wxo-v1-palette-piece {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.wxo-v1-palette-grid figcaption {
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wxo-v1-transition {
+  width: min(100%, 76rem);
+  margin: clamp(1rem, 3vw, 3rem) auto clamp(3rem, 8vw, 7rem);
+}
+
+.wxo-v1-illustration--transition,
+.wxo-v1-illustration--closing {
+  width: 100%;
+}
+
+.wxo-v1-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.wxo-v1-activity-grid .workflow-figure figcaption {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+}
+
+.wxo-v1-activity-grid .workflow-figure figcaption strong {
+  margin: 0;
+}
+
+.wxo-v1-closing {
+  width: min(100%, 72rem);
+  margin: 0 auto clamp(3rem, 8vw, 7rem);
 }
 
 .workflow-figure {
@@ -534,8 +634,33 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     padding: 2rem 0 0;
   }
 
-  .wxo-system-grid {
+  .wxo-v1-opening,
+  .wxo-v1-node-grid,
+  .wxo-v1-activity-grid {
     grid-template-columns: 1fr;
+  }
+
+  .wxo-v1-opening figcaption {
+    max-width: 32rem;
+  }
+
+  .wxo-v1-palette-stage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wxo-v1-palette-stage > .wxo-v1-illustration:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .wxo-v1-palette-stage > .wxo-v1-illustration:last-child {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .wxo-v1-palette-grid {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   .wxo-chapter-nav a {
@@ -559,6 +684,19 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 @media (max-width: 520px) {
   .doc-processing-page .page-header {
     padding-inline: 1.1rem;
+  }
+
+  .wxo-v1-palette-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wxo-v1-palette-grid figure {
+    width: min(100%, 24rem);
+    justify-self: center;
+  }
+
+  .wxo-v1-illustration--orbital {
+    width: min(100%, 10rem);
   }
 
   .doc-motion-bar {

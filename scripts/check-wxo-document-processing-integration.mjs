@@ -132,11 +132,44 @@ requireText(wxo, 'data-doc-motion-toggle', 'Document Processing journey must pro
 requireText(wxo, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'wxO must load the scoped workflow behavior.');
 forbid(wxo, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 
+const currentCanvasAssets = [
+  '01-skill-studio-main.png',
+  '02-header-image.png',
+  '03-main-illustration.png',
+  '04-orbital-card.png',
+  '05-orbital-insert.png',
+  '06-key-screen.png',
+  '07-agent-node-explorations.png',
+  '08-node-color-enhancements.png',
+  '09-connectors.png',
+  '10-palette-flow-controls.png',
+  '11-palette-form-menu.png',
+  '12-palette-user-inputs.png',
+  '13-user-activity-created.png',
+  '14-user-activity-configure.png',
+  '15-user-activity-form.png',
+  '16-user-activity-complete.png',
+];
+const expectedCurrentCanvasHashes = {
+  '01-skill-studio-main.png': '6da44c427299af93c60a581d044956c1dbbdc4d7e669fb0db4a2b721917071be',
+  '02-header-image.png': '9274a98802718b7b4c700bc73a88da70865583b35c6412e5b259ab69585cae68',
+  '03-main-illustration.png': '28a1a333063a68fba1eb91a6685a7f7137182042dc72ebf4606be2a7f5197e5e',
+  '04-orbital-card.png': '82e9e4aee554de71a5868ed06036cd10bf66fb21bc47f969b73944484a5ae51e',
+  '05-orbital-insert.png': 'e0f2c09fd4e1eda19e3c9cabdcbb56571e83fa1c5244f4de6f3929840f546f2a',
+  '06-key-screen.png': 'a5a6aaaed7e6798a3a8b2b0f960c4a4fc272a07e8b6e822daa062f53ae52b8c7',
+  '07-agent-node-explorations.png': '4d1db072b43dc861524e4164b4bcac1ca18be259b4dfc36828ab378d074edbb9',
+  '08-node-color-enhancements.png': '16298cabc6ac072a1e8048d6527d3b04cca29b85771996924f97936abfc76411',
+  '09-connectors.png': 'e9e759d6adc2b85059a6036f67c7418fe4c340cce02a5e936133149a08a0d673',
+  '10-palette-flow-controls.png': '279a63ed2ba0114f2ac9417cb09ce44964975b186665583ffbc7005c93df51c2',
+  '11-palette-form-menu.png': 'a9cdf2991e480ef609e64811d498f3bebaa39706482230ca25f9b267949f1465',
+  '12-palette-user-inputs.png': '8074bafc2f525d8d1ba35bdc32a069653d3cc4c41373ac987bea18a82d199487',
+  '13-user-activity-created.png': '6d2ac52a2c14fd166d6064c117e2e2a3cc01189e93993b92294b4b410f32aab6',
+  '14-user-activity-configure.png': '75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa',
+  '15-user-activity-form.png': 'acf68cb38a2383739f3c6adbd29c9887ada1a024c80360e4b3ee21a74b113159',
+  '16-user-activity-complete.png': '9064113da7bfd832382c1b2d4e048aa3aea9c8b5dcba5faab0633e3b9334319f',
+};
 for (const asset of [
-  'current/01-book-a-flight-context.png',
-  'current/02-component-system-board.png',
-  'current/03-user-activity-form.png',
-  'current/04-straight-connector-states.png',
+  ...currentCanvasAssets.map((file) => `current/${file}`),
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
@@ -152,15 +185,17 @@ for (const asset of [
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
 
 for (const text of [
-  'Scenario context',
-  'Component system',
-  'Human work',
-  'Connector states',
-  'Shown side by side',
-]) requireText(wxo, text, `wxO Canvas missing current-system viewer phrase: ${text}`);
-if (count(wxo, /class="[^"]*\bwxo-canvas-frame\b[^"]*"/gi) !== 4) fail('wxO Canvas must show exactly four curated current-system figures.');
-forbid(wxo, /canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'The two older sparse Canvas plates must be replaced by the four-image current-system sequence.');
-forbid(wxo, /26:\d+|25:\d+|screen-visible|component-lineage proof|private provenance/i, 'wxO viewer-facing copy must not expose internal provenance identifiers or working labels.');
+  'Full canvas',
+  'Node language',
+  'Connection grammar',
+  'Palette pieces',
+  'Human work in the flow',
+]) requireText(wxo, text, `wxO Canvas missing V1 viewer phrase: ${text}`);
+if (count(wxo, /class="[^"]*\bwxo-v1-illustration\b[^"]*"/gi) !== 5) fail('wxO Canvas must place exactly five authored V1 illustration accents.');
+if (count(wxo, /class="[^"]*\bwxo-v1-arrangement\b[^"]*"/gi) !== 8) fail('wxO Canvas must show eight complete V1 arrangement sheets.');
+if (count(wxo, /class="[^"]*\bwxo-v1-palette-piece\b[^"]*"/gi) !== 3) fail('wxO Canvas must compose three Palette child frames individually.');
+forbid(wxo, /01-book-a-flight-context\.png|02-component-system-board\.png|03-user-activity-form\.png|04-straight-connector-states\.png|canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'Superseded crops, reconstructed boards, zooms, and sparse plates must not remain referenced.');
+forbid(wxo, /7:\d+|26:\d+|25:\d+|screen-visible|component-lineage proof|private provenance/i, 'wxO viewer-facing copy must not expose internal provenance identifiers or working labels.');
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
 if (count(wxo, /class="doc-story-frame/gi) !== 0) fail('The redundant three-frame Document Processing storyboard must be removed.');
@@ -178,16 +213,27 @@ for (const asset of [
   if (fs.existsSync(asset)) fail(`Withheld future-state asset must not remain in the public repository: ${asset}.`);
 }
 
-const wxoManifestPath = 'images/wxo-canvas/current/manifest.json';
-if (!fs.existsSync(wxoManifestPath)) fail('wxO current-system asset manifest must exist.');
+const wxoPublicManifestPath = 'images/wxo-canvas/current/manifest.json';
+if (fs.existsSync(wxoPublicManifestPath)) fail('Detailed wxO provenance must not exist in the publicly deployable image directory.');
+const vercelIgnore = read('.vercelignore');
+if (!/^data\/$/m.test(vercelIgnore)) fail('Vercel deployment must exclude the repository-only data provenance directory.');
+const wxoManifestPath = 'data/wxo-canvas-current-provenance.json';
+if (!fs.existsSync(wxoManifestPath)) fail('Repository-only wxO V1 provenance manifest must exist outside the public artifact tree.');
 else {
   const wxoManifest = JSON.parse(read(wxoManifestPath));
-  if (!Array.isArray(wxoManifest.assets) || wxoManifest.assets.length !== 4) fail('wxO current-system manifest must record exactly four curated assets.');
+  if (wxoManifest.figmaFileKey !== 'FgPd6zpmuOVymcCypIiGPY' || wxoManifest.sourceSection !== '7:99357') fail('wxO manifest must identify the linked Agentic Workflow Canvas V1 source.');
+  if (!Array.isArray(wxoManifest.assets) || wxoManifest.assets.length !== currentCanvasAssets.length) fail(`wxO current-system manifest must record exactly ${currentCanvasAssets.length} curated assets.`);
+  const manifestFiles = (wxoManifest.assets ?? []).map((entry) => entry.file);
+  if (JSON.stringify(manifestFiles) !== JSON.stringify(currentCanvasAssets)) fail('wxO manifest assets must remain in the approved V1 narrative order.');
   for (const entry of wxoManifest.assets ?? []) {
     const assetPath = `images/wxo-canvas/current/${entry.file}`;
-    if (!entry.sourceClass || !entry.sourceLedger || !entry.transformation || !entry.privacyStatus || !entry.claimStatus || !entry.approvalState) fail(`wxO manifest entry ${entry.file ?? 'unknown'} is missing provenance, privacy, claims, or approval metadata.`);
+    if (!entry.sourceNode || !entry.sourceFrame || !Array.isArray(entry.sourceBounds) || !Array.isArray(entry.exportedDimensions) || !entry.treatment || !entry.privacyStatus || !entry.claimStatus || !entry.approvalState) fail(`wxO manifest entry ${entry.file ?? 'unknown'} is missing Figma provenance, dimensions, treatment, privacy, claims, or approval metadata.`);
     if (!fs.existsSync(assetPath)) fail(`Missing wxO current-system derivative ${assetPath}.`);
-    else if (sha256(assetPath) !== entry.sha256) fail(`wxO current-system derivative hash changed: ${assetPath}.`);
+    else {
+      const actualHash = sha256(assetPath);
+      if (actualHash !== entry.sha256) fail(`wxO current-system derivative hash changed from its manifest: ${assetPath}.`);
+      if (actualHash !== expectedCurrentCanvasHashes[entry.file]) fail(`wxO current-system derivative changed from the independently approved snapshot: ${assetPath}.`);
+    }
   }
 }
 
@@ -202,7 +248,7 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
 if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 14) fail('wxO Canvas must use exactly fourteen images: shared nav image, four Canvas derivatives, and nine current Document Processing frames.');
+if (count(wxo, /<img\b/gi) !== 26) fail('wxO Canvas must use exactly twenty-six images: shared nav image, sixteen V1 Canvas exports, and nine current Document Processing frames.');
 if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
