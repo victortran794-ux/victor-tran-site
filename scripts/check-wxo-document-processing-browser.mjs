@@ -5,7 +5,9 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 
 const root = process.cwd();
-const baseUrl = process.env.SITE_URL || 'http://127.0.0.1:8898';
+const ownsServer = !process.env.SITE_URL;
+const sitePort = 8800 + (process.pid % 800);
+const baseUrl = process.env.SITE_URL || `http://127.0.0.1:${sitePort}`;
 const evidenceDir = process.env.WXO_DOCUMENT_EVIDENCE_DIR || path.join(root, '.hermes', 'evidence', 'wxo-document-processing');
 const chrome = [process.env.CHROME_BIN, '/home/victortran794/.agent-browser/browsers/chrome-149.0.7827.55/chrome', '/usr/bin/google-chrome', '/usr/bin/chromium']
   .filter(Boolean).find((candidate) => fs.existsSync(candidate));
@@ -14,6 +16,11 @@ if (!chrome) throw new Error('Chrome binary not found; set CHROME_BIN');
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'wxo-document-browser-'));
 const port = 9900 + (process.pid % 90);
 let chromeLog = '';
+let serverLog = '';
+const server = ownsServer
+  ? spawn('python3', ['-m', 'http.server', String(sitePort), '--bind', '127.0.0.1'], { cwd: root, stdio: ['ignore', 'ignore', 'pipe'] })
+  : null;
+server?.stderr.on('data', (chunk) => { serverLog += chunk.toString(); });
 const child = spawn(chrome, [
   '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
   '--remote-allow-origins=*', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`,
@@ -52,6 +59,21 @@ async function waitForTarget() {
     await delay(100);
   }
   throw lastError || new Error('Chrome DevTools target did not become ready');
+}
+
+async function waitForSite() {
+  if (!ownsServer) return;
+  let lastError;
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    try {
+      const response = await fetch(`${baseUrl}/wxo-canvas.html`);
+      if (response.ok) return;
+      lastError = new Error(`${response.status} ${baseUrl}/wxo-canvas.html`);
+    } catch (error) { lastError = error; }
+    if (server?.exitCode !== null) throw new Error(`Local server exited ${server.exitCode}: ${serverLog}`);
+    await delay(100);
+  }
+  throw lastError || new Error(`Local server did not become ready at ${baseUrl}`);
 }
 
 class Cdp {
@@ -150,8 +172,8 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 2, current: 'wxo-canvas.html' },
-  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 0, current: null },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 3, current: 'wxo-canvas.html' },
+  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 1, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
   .protectedPages.map(({ source }) => ({ file: source }));
@@ -159,6 +181,7 @@ const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'conte
 let cdp;
 try {
   fs.mkdirSync(evidenceDir, { recursive: true });
+  await waitForSite();
   cdp = new Cdp((await waitForTarget()).webSocketDebuggerUrl);
   await cdp.open();
   await cdp.call('Page.enable');
@@ -408,6 +431,10 @@ try {
             shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.site-route-status')),
             gate:Boolean(document.getElementById('vtd-gate')), images:images.length,
             failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
+            specimens:document.querySelectorAll('.doc-evaluation-specimen').length,
+            specimenLoaded:[...document.querySelectorAll('.doc-evaluation-specimen img')].every((image)=>image.complete&&image.naturalWidth===1584&&image.naturalHeight===1042),
+            specimenGeometry:(()=>{const specimen=document.querySelector('.doc-evaluation-specimen');if(!specimen||specimen.getClientRects().length===0)return null;const rect=specimen.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width,columns:getComputedStyle(specimen).gridTemplateColumns.split(' ').length}})(),
+            specimenMedia:(()=>{const media=document.querySelector('.doc-evaluation-specimen-media');const image=media?.querySelector('img');if(!media||!image||media.getClientRects().length===0)return null;const mediaRect=media.getBoundingClientRect();const imageRect=image.getBoundingClientRect();return {overflow:getComputedStyle(media).overflow,imageRatio:imageRect.width/mediaRect.width}})(),
             videoReady:video?video.readyState:null, videoSources:video?[...video.querySelectorAll('source')].length:0,
             videoAutoplay:video?video.autoplay&&video.muted&&video.loop&&video.playsInline&&!video.controls:null,
             controls, statusDisplay:getComputedStyle(document.querySelector('.site-route-status')).display, statusPosition:getComputedStyle(document.querySelector('.site-route-status')).position, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
@@ -430,6 +457,10 @@ try {
         assert(state.mainId==='main-content'&&state.tabindex==='-1'&&state.current===spec.current&&state.shell&&!state.gate, `${spec.file}: shared shell or unlocked state failed`);
         assert(state.noindex==='noindex,nofollow,noarchive,nosnippet,noimageindex', `${spec.file}: robots metadata drifted`);
         assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: expected ${spec.mainImages} main images, got ${state.images}; failures ${JSON.stringify(state.failedImages)}`);
+        assert(state.specimens===1&&state.specimenLoaded, `${spec.file}: focused evaluation specimen missing or failed to decode ${JSON.stringify(state)}`);
+        if(name==='doc') assert(state.specimenGeometry&&state.specimenGeometry.left>=0&&state.specimenGeometry.right<=viewport.width&&state.specimenGeometry.columns===(viewport.width<=860?1:2), `${spec.file}: focused evaluation specimen geometry failed at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
+        if(name==='doc'&&viewport.width<=520) assert(state.specimenMedia&&state.specimenMedia.overflow==='hidden'&&state.specimenMedia.imageRatio>=1.55, `${spec.file}: mobile evaluation detail must use the focused crop at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
+        if(name==='doc'&&viewport.width>520) assert(state.specimenMedia&&state.specimenMedia.imageRatio<=1, `${spec.file}: tablet and desktop evaluation detail must preserve the full frame at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
         if(name==='wxo') assert(state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1, `${spec.file}: hidden status or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`);
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
         if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);
@@ -457,9 +488,13 @@ try {
           const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,decisions:document.querySelectorAll('#document-processing .doc-decision-card').length,roles:document.querySelectorAll('#document-processing .doc-role-card').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
           assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
           assert(!documentChapter.firstChapterOccluded, `wxo-canvas.html: protected status occludes first chapter tab after chapter navigation ${JSON.stringify(documentChapter)}`);
-          assert(documentChapter.images===0&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.images===1&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
           assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
           await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
+
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-evaluation-specimen');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-390-light-document-evaluation-specimen.png');
 
           await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-loop');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
           await delay(80);
@@ -482,6 +517,9 @@ try {
           await cdp.evaluate(`(()=>{document.querySelector('[data-wxo-chapter="document-processing"]').click();const frame=document.querySelector('#document-processing .doc-motion-frame');const navHeight=document.querySelector('.nav').getBoundingClientRect().height;const chapterHeight=document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height;scrollTo({top:frame.getBoundingClientRect().top+scrollY-navHeight-chapterHeight-16,behavior:'instant'})})()`);
           await delay(120);
           await cdp.screenshot('wxo-canvas-1280-dark-document-media.png');
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-evaluation-specimen');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+          await delay(80);
+          await cdp.screenshot('wxo-canvas-1280-dark-document-evaluation-specimen.png');
           await cdp.evaluate(`document.querySelector('#document-processing .doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-document-loop.png');
@@ -521,7 +559,12 @@ try {
 } finally {
   try { cdp?.socket?.close(); } catch {}
   child.kill('SIGTERM');
+  server?.kill('SIGTERM');
   await Promise.race([new Promise((resolve)=>child.once('exit',resolve)),delay(1500)]);
   if(child.exitCode===null) child.kill('SIGKILL');
+  if(server){
+    await Promise.race([new Promise((resolve)=>server.once('exit',resolve)),delay(1500)]);
+    if(server.exitCode===null) server.kill('SIGKILL');
+  }
   try { fs.rmSync(profile,{recursive:true,force:true,maxRetries:5,retryDelay:100}); } catch {}
 }

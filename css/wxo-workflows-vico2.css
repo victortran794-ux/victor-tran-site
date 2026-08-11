@@ -331,6 +331,59 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   background: #111;
 }
 
+.doc-evaluation-specimen {
+  display: grid;
+  grid-template-columns: minmax(0, 2.35fr) minmax(15rem, 1fr);
+  margin: clamp(2rem, 5vw, 4rem) 0 0;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.doc-evaluation-specimen-media {
+  display: grid;
+  min-width: 0;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  place-items: center;
+  background: #e8e8e8;
+}
+
+.doc-evaluation-specimen-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.doc-evaluation-specimen-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.doc-evaluation-specimen-caption h3 {
+  margin: 0;
+  font-family: var(--editorial-serif);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.doc-evaluation-specimen-caption p {
+  margin: 0;
+  color: var(--text-2);
+}
+
+.doc-evaluation-specimen-note {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--editorial-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
 
 .doc-loop {
   display: grid;
@@ -410,7 +463,8 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   .workflow-chapter-head,
   .wxo-feature-grid,
   .workflow-role-grid,
-  .workflow-close-grid {
+  .workflow-close-grid,
+  .doc-evaluation-specimen {
     grid-template-columns: 1fr;
   }
 
@@ -451,6 +505,18 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     padding-inline: 1.1rem;
   }
 
+  .doc-evaluation-specimen-media {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    padding: 0.5rem;
+  }
+
+  .doc-evaluation-specimen-media img {
+    width: 172%;
+    max-width: none;
+    transform: translate(-17%, -8%);
+  }
 
   .doc-motion-bar {
     align-items: flex-start;

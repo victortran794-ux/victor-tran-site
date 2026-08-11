@@ -98,6 +98,7 @@ requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Proces
 requireText(workflowCss, '.doc-processing-page .site-route-status {', 'The wxO and Document Processing pages must hide the redundant protected-status note.');
 requireText(workflowCss, 'display: none;', 'The redundant protected-status note must not render.');
 requireText(workflowCss, '.doc-motion-toggle {', 'The autoplay journey must expose a visible pause control.');
+requireText(workflowCss, '.doc-evaluation-specimen {', 'The focused evaluation specimen must have a scoped layout.');
 requireText(workflowJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the scoped workflow script.');
 
 for (const text of [
@@ -118,6 +119,7 @@ for (const text of [
   'no shipment claim',
   'href="#canvas"',
   'href="#document-processing"',
+  'From a signal to the field that needs attention.',
 ]) requireText(wxo, text, `wxO Canvas missing required source-safe phrase: ${text}`);
 
 forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role and period only.');
@@ -136,6 +138,7 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
+  '03-evaluation-details-sanitized.png',
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
@@ -164,7 +167,8 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
   else if (sha256(asset) !== expected) fail(`Approved wxO derivative changed: ${asset}.`);
 }
 
-if (count(wxo, /<img\b/gi) !== 3) fail('wxO Canvas must use exactly three images: shared nav image and two Canvas derivatives.');
+if (count(wxo, /class="doc-evaluation-specimen"/gi) !== 1) fail('The wxO Document Processing chapter must show one focused evaluation specimen.');
+if (count(wxo, /<img\b/gi) !== 4) fail('wxO Canvas must use exactly four images: shared nav image, two Canvas derivatives, and one focused Document Processing specimen.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|Canvas 1 shipped|Canvas Future shipped|measured outcome/i, 'wxO Canvas must not claim unsupported shipment, adoption, or outcomes.');
 
 for (const text of [
@@ -176,6 +180,7 @@ for (const text of [
   'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
   'lead designer for Accuracy Evaluation',
+  'From a signal to the field that needs attention.',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
@@ -189,7 +194,9 @@ for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
+  '03-evaluation-details-sanitized.png',
 ]) requireText(doc, asset, `Document Processing missing approved sanitized evidence ${asset}`);
+if (count(doc, /class="doc-evaluation-specimen"/gi) !== 1) fail('Document Processing must show one focused evaluation specimen.');
 
 const expectedDocumentAssets = {
   'assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm': '472376539f7fe8c8b10d1f8fe480b1052f95f6b5a8fadbeb16954396ceb4626e',
