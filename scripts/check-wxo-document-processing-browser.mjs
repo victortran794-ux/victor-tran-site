@@ -172,8 +172,8 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 3, current: 'wxo-canvas.html' },
-  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 1, current: null },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 10, current: 'wxo-canvas.html' },
+  doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 8, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
   .protectedPages.map(({ source }) => ({ file: source }));
@@ -431,10 +431,11 @@ try {
             shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.site-route-status')),
             gate:Boolean(document.getElementById('vtd-gate')), images:images.length,
             failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
-            specimens:document.querySelectorAll('.doc-evaluation-specimen').length,
-            specimenLoaded:[...document.querySelectorAll('.doc-evaluation-specimen img')].every((image)=>image.complete&&image.naturalWidth===1584&&image.naturalHeight===1042),
-            specimenGeometry:(()=>{const specimen=document.querySelector('.doc-evaluation-specimen');if(!specimen||specimen.getClientRects().length===0)return null;const rect=specimen.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width,columns:getComputedStyle(specimen).gridTemplateColumns.split(' ').length}})(),
-            specimenMedia:(()=>{const media=document.querySelector('.doc-evaluation-specimen-media');const image=media?.querySelector('img');if(!media||!image||media.getClientRects().length===0)return null;const mediaRect=media.getBoundingClientRect();const imageRect=image.getBoundingClientRect();return {overflow:getComputedStyle(media).overflow,imageRatio:imageRect.width/mediaRect.width}})(),
+            currentStages:document.querySelectorAll('.doc-current-stage').length,
+            currentFrames:document.querySelectorAll('.doc-current-frame').length,
+            currentFramesLoaded:[...document.querySelectorAll('.doc-current-frame img')].every((image)=>image.complete&&image.naturalWidth===1024&&[664,674,780].includes(image.naturalHeight)),
+            currentStoryGeometry:(()=>{const story=document.querySelector('.doc-current-story');if(!story||story.getClientRects().length===0)return null;const rect=story.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width}})(),
+            currentPairColumns:[...document.querySelectorAll('.doc-current-pair')].filter((pair)=>pair.getClientRects().length).map((pair)=>getComputedStyle(pair).gridTemplateColumns.split(' ').length),
             videoReady:video?video.readyState:null, videoSources:video?[...video.querySelectorAll('source')].length:0,
             videoAutoplay:video?video.autoplay&&video.muted&&video.loop&&video.playsInline&&!video.controls:null,
             controls, statusDisplay:getComputedStyle(document.querySelector('.site-route-status')).display, statusPosition:getComputedStyle(document.querySelector('.site-route-status')).position, statusOverlap:!(status.right<=header.left||status.left>=header.right||status.bottom<=header.top||status.top>=header.bottom),
@@ -457,10 +458,8 @@ try {
         assert(state.mainId==='main-content'&&state.tabindex==='-1'&&state.current===spec.current&&state.shell&&!state.gate, `${spec.file}: shared shell or unlocked state failed`);
         assert(state.noindex==='noindex,nofollow,noarchive,nosnippet,noimageindex', `${spec.file}: robots metadata drifted`);
         assert(state.images===spec.mainImages&&!state.failedImages.length, `${spec.file}: expected ${spec.mainImages} main images, got ${state.images}; failures ${JSON.stringify(state.failedImages)}`);
-        assert(state.specimens===1&&state.specimenLoaded, `${spec.file}: focused evaluation specimen missing or failed to decode ${JSON.stringify(state)}`);
-        if(name==='doc') assert(state.specimenGeometry&&state.specimenGeometry.left>=0&&state.specimenGeometry.right<=viewport.width&&state.specimenGeometry.columns===(viewport.width<=860?1:2), `${spec.file}: focused evaluation specimen geometry failed at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
-        if(name==='doc'&&viewport.width<=520) assert(state.specimenMedia&&state.specimenMedia.overflow==='hidden'&&state.specimenMedia.imageRatio>=1.55, `${spec.file}: mobile evaluation detail must use the focused crop at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
-        if(name==='doc'&&viewport.width>520) assert(state.specimenMedia&&state.specimenMedia.imageRatio<=1, `${spec.file}: tablet and desktop evaluation detail must preserve the full frame at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
+        assert(state.currentStages===4&&state.currentFrames===8&&state.currentFramesLoaded, `${spec.file}: current four-stage evidence story is incomplete or failed to decode ${JSON.stringify(state)}`);
+        if(name==='doc') assert(state.currentStoryGeometry&&state.currentStoryGeometry.left>=0&&state.currentStoryGeometry.right<=viewport.width&&state.currentPairColumns.every((columns)=>columns===(viewport.width<=860?1:2)), `${spec.file}: current evidence geometry failed at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
         if(name==='wxo') assert(state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1, `${spec.file}: hidden status or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`);
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
         if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);
@@ -488,13 +487,13 @@ try {
           const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,decisions:document.querySelectorAll('#document-processing .doc-decision-card').length,roles:document.querySelectorAll('#document-processing .doc-role-card').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
           assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
           assert(!documentChapter.firstChapterOccluded, `wxo-canvas.html: protected status occludes first chapter tab after chapter navigation ${JSON.stringify(documentChapter)}`);
-          assert(documentChapter.images===1&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.images===8&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
           assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
           await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
 
-          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-evaluation-specimen');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-current-story');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
           await delay(80);
-          await cdp.screenshot('wxo-canvas-390-light-document-evaluation-specimen.png');
+          await cdp.screenshot('wxo-canvas-390-light-document-current-story.png');
 
           await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-loop');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
           await delay(80);
@@ -517,9 +516,9 @@ try {
           await cdp.evaluate(`(()=>{document.querySelector('[data-wxo-chapter="document-processing"]').click();const frame=document.querySelector('#document-processing .doc-motion-frame');const navHeight=document.querySelector('.nav').getBoundingClientRect().height;const chapterHeight=document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height;scrollTo({top:frame.getBoundingClientRect().top+scrollY-navHeight-chapterHeight-16,behavior:'instant'})})()`);
           await delay(120);
           await cdp.screenshot('wxo-canvas-1280-dark-document-media.png');
-          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-evaluation-specimen');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-current-story');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
           await delay(80);
-          await cdp.screenshot('wxo-canvas-1280-dark-document-evaluation-specimen.png');
+          await cdp.screenshot('wxo-canvas-1280-dark-document-current-story.png');
           await cdp.evaluate(`document.querySelector('#document-processing .doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-document-loop.png');

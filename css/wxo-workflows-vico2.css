@@ -331,57 +331,85 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   background: #111;
 }
 
-.doc-evaluation-specimen {
+.doc-current-story {
+  margin-top: clamp(3rem, 7vw, 6rem);
+  border-top: 1px solid var(--border);
+}
+
+.doc-current-stage {
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-current-stage-head {
   display: grid;
-  grid-template-columns: minmax(0, 2.35fr) minmax(15rem, 1fr);
-  margin: clamp(2rem, 5vw, 4rem) 0 0;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  grid-template-columns: minmax(4rem, 0.22fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  max-width: 54rem;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
 }
 
-.doc-evaluation-specimen-media {
-  display: grid;
-  min-width: 0;
-  padding: clamp(0.75rem, 2vw, 1.5rem);
-  place-items: center;
-  background: #e8e8e8;
+.doc-current-stage-head > span {
+  color: var(--doc-blue);
+  font: 700 0.7rem/1.4 var(--editorial-mono);
+  letter-spacing: 0.1em;
 }
 
-.doc-evaluation-specimen-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.doc-evaluation-specimen-caption {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 1rem;
-  min-width: 0;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.doc-evaluation-specimen-caption h3 {
+.doc-current-stage-head h3,
+.doc-current-stage-head p {
   margin: 0;
+}
+
+.doc-current-stage-head h3 {
   font-family: var(--editorial-serif);
-  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3.6rem);
   font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  line-height: 1;
 }
 
-.doc-evaluation-specimen-caption p {
-  margin: 0;
+.doc-current-stage-head p {
+  max-width: 38rem;
+  margin-top: 0.75rem;
   color: var(--text-2);
 }
 
-.doc-evaluation-specimen-note {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+.doc-current-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.doc-current-frame {
+  margin: 0;
+  min-width: 0;
+}
+
+.doc-current-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  background: #393939;
+}
+
+.doc-current-frame figcaption,
+.doc-current-note {
   font-family: var(--editorial-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   line-height: 1.5;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.doc-current-frame figcaption {
+  padding-top: 0.75rem;
+  color: var(--text-2);
+}
+
+.doc-current-note {
+  max-width: 50rem;
+  margin: 2rem 0 0;
+  color: var(--text-2);
 }
 
 
@@ -463,8 +491,11 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   .workflow-chapter-head,
   .wxo-feature-grid,
   .workflow-role-grid,
-  .workflow-close-grid,
-  .doc-evaluation-specimen {
+  .workflow-close-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-current-pair {
     grid-template-columns: 1fr;
   }
 
@@ -503,19 +534,6 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 @media (max-width: 520px) {
   .doc-processing-page .page-header {
     padding-inline: 1.1rem;
-  }
-
-  .doc-evaluation-specimen-media {
-    display: block;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    padding: 0.5rem;
-  }
-
-  .doc-evaluation-specimen-media img {
-    width: 172%;
-    max-width: none;
-    transform: translate(-17%, -8%);
   }
 
   .doc-motion-bar {

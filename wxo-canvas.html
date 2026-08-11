@@ -158,17 +158,37 @@
               <source src="assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
             </video>
           </figure>
-          <figure class="doc-evaluation-specimen">
-            <div class="doc-evaluation-specimen-media">
-              <img src="assets/document-processing/storyboard/03-evaluation-details-sanitized.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Sanitized Document Processing evaluation interface with overall quality signals and field-level test cases">
-            </div>
-            <figcaption class="doc-evaluation-specimen-caption">
-              <span class="workflow-label">Focused evidence / Evaluation details</span>
-              <h3>From a signal to the field that needs attention.</h3>
-              <p>Overall signals were only a starting point. The evaluation view connected them to fields and documents a builder could inspect next.</p>
-              <p class="doc-evaluation-specimen-note">Sanitized source interface. Prototype values are withheld and are not reported outcomes.</p>
-            </figcaption>
-          </figure>
+          <div class="doc-current-story" aria-label="Current Document Processing screens from classify through evaluate">
+            <section class="doc-current-stage" aria-labelledby="wxo-doc-classify-title">
+              <header class="doc-current-stage-head"><span>01</span><div><h3 id="wxo-doc-classify-title">Classify</h3><p>Choose document classes, then connect the classifier to the workflow data it needs.</p></div></header>
+              <div class="doc-current-pair">
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/classify-suggested-sanitized.png" width="1024" height="664" loading="lazy" decoding="async" alt="Current classifier screen with suggested document classes"><figcaption>Suggested classes</figcaption></figure>
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/classify-mapping-sanitized.png" width="1024" height="664" loading="lazy" decoding="async" alt="Current classifier data-mapping screen"><figcaption>Data mapping</figcaption></figure>
+              </div>
+            </section>
+            <section class="doc-current-stage" aria-labelledby="wxo-doc-extract-title">
+              <header class="doc-current-stage-head"><span>02</span><div><h3 id="wxo-doc-extract-title">Extract</h3><p>Define the fields to extract and keep document-level failures visible inside the setup flow.</p></div></header>
+              <div class="doc-current-pair">
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/extract-field-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen for adding a field"><figcaption>Field setup</figcaption></figure>
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/extract-error-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen with a document-level error"><figcaption>Extraction error</figcaption></figure>
+              </div>
+            </section>
+            <section class="doc-current-stage" aria-labelledby="wxo-doc-review-title">
+              <header class="doc-current-stage-head"><span>03</span><div><h3 id="wxo-doc-review-title">Review</h3><p>Keep source, extracted structure, correction controls, and verification status in one workspace.</p></div></header>
+              <div class="doc-current-pair">
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/review-table-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen with editable table output"><figcaption>Table correction</figcaption></figure>
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/review-verified-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen showing verified output"><figcaption>Verified output</figcaption></figure>
+              </div>
+            </section>
+            <section class="doc-current-stage" aria-labelledby="wxo-doc-evaluate-title">
+              <header class="doc-current-stage-head"><span>04</span><div><h3 id="wxo-doc-evaluate-title">Evaluate</h3><p>Move from an overall signal to the fields and document regions that need attention.</p></div></header>
+              <div class="doc-current-pair">
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-results-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with field-level comparison"><figcaption>Evaluation results</figcaption></figure>
+                <figure class="doc-current-frame"><img src="assets/document-processing/current/evaluate-indicators-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with extraction indicators on the source document"><figcaption>Field indicators</figcaption></figure>
+              </div>
+            </section>
+            <p class="doc-current-note">Current Figma source. Fictional prototype data shown; not reported outcomes.</p>
+          </div>
         </section>
 
         <section class="workflow-chapter reveal" aria-labelledby="wxo-doc-loop-title">
