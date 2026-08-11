@@ -420,8 +420,8 @@ try {
           const status=document.querySelector('.site-route-status').getBoundingClientRect();
           const header=document.querySelector('.page-header .workflow-label').getBoundingClientRect();
           const chapterFirst=document.querySelector('.wxo-chapter-nav a')?.getBoundingClientRect();
-          const contrastTarget=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop span'"});
-          const contrastSurface=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-loop > div'"});
+          const contrastTarget=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-ending-label'"});
+          const contrastSurface=document.querySelector(${name === 'wxo' ? "'.wxo-chapter-nav a[aria-current=\"true\"]'" : "'.doc-ending-grid'"});
           return {
             viewport:[innerWidth,innerHeight], theme:document.documentElement.dataset.theme, stored:localStorage.getItem('lens'),
             overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
@@ -447,6 +447,9 @@ try {
             wxoChapterPosition:document.querySelector('.wxo-chapter-nav')?getComputedStyle(document.querySelector('.wxo-chapter-nav')).position:null,
             wxoChapterRatio:(()=>{const links=[...document.querySelectorAll('.wxo-chapter-nav a')];if(links.length!==2)return null;return links[0].getBoundingClientRect().width/links[1].getBoundingClientRect().width})(),
             docLoop:document.querySelectorAll('.doc-loop>div').length,
+            endingGrids:document.querySelectorAll('.doc-ending-grid').length,
+            decisionRows:document.querySelectorAll('.doc-decision-row').length,
+            contributionRows:document.querySelectorAll('.doc-contribution-row').length,
             reduced:getComputedStyle(document.querySelector('.reveal')||document.body).transitionDuration,
             contrastForeground:getComputedStyle(contrastTarget).color,
             contrastBackground:getComputedStyle(contrastSurface).backgroundColor,
@@ -468,7 +471,7 @@ try {
         assert(ratio>=4.5, `${spec.file}: custom text contrast ${ratio.toFixed(2)}:1 failed at ${viewport.label} ${theme}`);
         assert(parseFloat(state.reduced)<=0.001, `${spec.file}: reduced-motion transition remained ${state.reduced} at ${viewport.label} ${theme}`);
         if(name==='wxo') assert(state.wxoCanvasVisible&&!state.wxoDocumentVisible&&state.wxoChapter==='#canvas', `wxo-canvas.html: default Canvas chapter failed ${JSON.stringify(state)}`);
-        if(name==='doc') assert(state.docLoop===5&&state.videoReady>=1&&state.videoSources===2&&state.videoAutoplay, `document-processing.html: trust loop or autoplay video failed ${JSON.stringify(state)}`);
+        if(name==='doc') assert(state.docLoop===0&&state.endingGrids===1&&state.decisionRows===3&&state.contributionRows===3&&state.videoReady>=1&&state.videoSources===2&&state.videoAutoplay, `document-processing.html: lean ending or autoplay video failed ${JSON.stringify(state)}`);
         if(viewport.mobile){
           const undersized=state.controls.filter((control)=>control.width<44||control.height<44);
           assert(!undersized.length, `${spec.file}: undersized mobile controls ${JSON.stringify(undersized)}`);
@@ -485,10 +488,10 @@ try {
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await delay(60);
-          const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,decisions:document.querySelectorAll('#document-processing .doc-decision-card').length,roles:document.querySelectorAll('#document-processing .doc-role-card').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
+          const documentChapter=await cdp.evaluate(`(async()=>{const panel=document.querySelector('#document-processing').getBoundingClientRect();const nav=document.querySelector('.nav').getBoundingClientRect();const status=document.querySelector('.site-route-status').getBoundingClientRect();const firstChapter=document.querySelector('.wxo-chapter-nav a');const firstChapterRect=firstChapter.getBoundingClientRect();const hit=document.elementFromPoint(Math.min(firstChapterRect.right-8,firstChapterRect.left+150),firstChapterRect.top+firstChapterRect.height/2);const images=[...document.querySelectorAll('#document-processing img')];await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const video=document.querySelector('#document-processing video');if(video){video.load();await Promise.race([new Promise((resolve)=>video.addEventListener('loadedmetadata',resolve,{once:true})),new Promise((resolve)=>setTimeout(resolve,3000))]);}return {hash:location.hash,current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),canvas:!document.querySelector('#canvas').hidden,document:!document.querySelector('#document-processing').hidden,focused:document.activeElement?.id,panelTop:panel.top,fixedBottom:Math.max(nav.bottom,status.bottom),firstChapterRect:{left:firstChapterRect.left,right:firstChapterRect.right,top:firstChapterRect.top,bottom:firstChapterRect.bottom},statusRect:{left:status.left,right:status.right,top:status.top,bottom:status.bottom},hitTag:hit?.tagName,hitClass:hit?.className,firstChapterOccluded:!firstChapter.contains(hit),images:images.length,failedImages:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.src),loop:document.querySelectorAll('#document-processing .doc-loop-item').length,endingGrids:document.querySelectorAll('#document-processing .doc-ending-grid').length,decisions:document.querySelectorAll('#document-processing .doc-decision-row').length,roles:document.querySelectorAll('#document-processing .doc-contribution-row').length,videoReady:video?.readyState,videoSources:video?.querySelectorAll('source').length};})()`);
           assert(documentChapter.hash==='#document-processing'&&documentChapter.current==='#document-processing'&&!documentChapter.canvas&&documentChapter.document&&documentChapter.focused==='document-processing', `wxo-canvas.html: Document Processing keyboard chapter failed ${JSON.stringify(documentChapter)}`);
           assert(!documentChapter.firstChapterOccluded, `wxo-canvas.html: protected status occludes first chapter tab after chapter navigation ${JSON.stringify(documentChapter)}`);
-          assert(documentChapter.images===9&&!documentChapter.failedImages.length&&documentChapter.loop===5&&documentChapter.decisions===4&&documentChapter.roles===4&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
+          assert(documentChapter.images===9&&!documentChapter.failedImages.length&&documentChapter.loop===0&&documentChapter.endingGrids===1&&documentChapter.decisions===3&&documentChapter.roles===3&&documentChapter.videoReady>=1&&documentChapter.videoSources===2, `wxo-canvas.html: consolidated Document Processing chapter failed ${JSON.stringify(documentChapter)}`);
           assert(documentChapter.panelTop>=documentChapter.fixedBottom+8, `wxo-canvas.html: focused Document Processing chapter is obscured by fixed UI ${JSON.stringify(documentChapter)}`);
           await cdp.screenshot('wxo-canvas-390-light-document-processing.png');
 
@@ -499,12 +502,9 @@ try {
           await delay(80);
           await cdp.screenshot('wxo-canvas-390-light-document-evaluate.png');
 
-          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-loop');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-ending');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
           await delay(80);
-          await cdp.screenshot('wxo-canvas-390-light-document-loop.png');
-          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .wxo-doc-outcome');scrollTo(0,el.getBoundingClientRect().top+scrollY-80)})()`);
-          await delay(80);
-          await cdp.screenshot('wxo-canvas-390-light-document-outcome.png');
+          await cdp.screenshot('wxo-canvas-390-light-document-ending.png');
           await cdp.evaluate(`document.querySelector('[data-wxo-chapter="canvas"]').focus()`);
           await cdp.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
           await cdp.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
@@ -526,12 +526,9 @@ try {
           await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-current-stage:nth-of-type(4)');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
           await delay(80);
           await cdp.screenshot('wxo-canvas-1280-dark-document-evaluate.png');
-          await cdp.evaluate(`document.querySelector('#document-processing .doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('#document-processing .doc-ending');const offset=document.querySelector('.nav').getBoundingClientRect().height+document.querySelector('.wxo-chapter-nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
           await delay(80);
-          await cdp.screenshot('wxo-canvas-1280-dark-document-loop.png');
-          await cdp.evaluate(`document.querySelector('#document-processing .wxo-doc-outcome').scrollIntoView({block:'center',behavior:'instant'})`);
-          await delay(80);
-          await cdp.screenshot('wxo-canvas-1280-dark-document-outcome.png');
+          await cdp.screenshot('wxo-canvas-1280-dark-document-ending.png');
         }
         if(name==='doc'&&viewport.label==='390'&&theme==='light'){
           await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
@@ -544,11 +541,14 @@ try {
           await cdp.key('Enter', 'Enter', 13);
           const resumedMotion=await cdp.evaluate(`(()=>{const video=document.querySelector('.doc-motion-frame video');const button=document.querySelector('[data-doc-motion-toggle]');return {paused:video.paused,label:button.textContent.trim(),pressed:button.getAttribute('aria-pressed')}})()`);
           assert(!resumedMotion.paused&&resumedMotion.label==='Pause animation'&&resumedMotion.pressed==='false', `document-processing.html: keyboard motion resume control failed ${JSON.stringify(resumedMotion)}`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('.doc-ending');const offset=document.querySelector('.nav').getBoundingClientRect().height+12;scrollTo({top:el.getBoundingClientRect().top+scrollY-offset,behavior:'instant'})})()`);
+          await delay(80);
+          await cdp.screenshot('document-processing-390-light-ending.png');
         }
         if(name==='doc'&&viewport.label==='1280'&&theme==='dark'){
-          await cdp.evaluate(`document.querySelector('.doc-loop').scrollIntoView({block:'center',behavior:'instant'})`);
+          await cdp.evaluate(`(()=>{const el=document.querySelector('.doc-ending');scrollTo({top:el.getBoundingClientRect().top+scrollY-80,behavior:'instant'})})()`);
           await delay(80);
-          await cdp.screenshot('document-processing-1280-dark-loop.png');
+          await cdp.screenshot('document-processing-1280-dark-ending.png');
         }
         checks+=1;
       }

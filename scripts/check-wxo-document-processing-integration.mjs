@@ -94,7 +94,8 @@ if (!shellConfig.pages.includes('wxo-canvas.html')) fail('wxO Canvas must be gov
 requireText(workflowCss, "html[data-theme='dark'] .workflow-pages", 'Workflow styles must define dark-theme project tokens.');
 requireText(workflowCss, '--doc-blue: #78a9ff', 'Document Processing must use the contrast-safe dark-theme blue token.');
 requireText(workflowCss, '.wxo-doc-meta {', 'The consolidated Document Processing summary must have scoped spacing.');
-requireText(workflowCss, '.wxo-doc-outcome {', 'The consolidated Document Processing outcome must have scoped separation.');
+requireText(workflowCss, '.doc-ending-grid {', 'The lean Document Processing ending must have a scoped two-part layout.');
+requireText(workflowCss, '.doc-compact-list {', 'The lean ending must use restrained decision and contribution rows.');
 requireText(workflowCss, '.doc-processing-page .site-route-status {', 'The wxO and Document Processing pages must hide the redundant protected-status note.');
 requireText(workflowCss, 'display: none;', 'The redundant protected-status note must not render.');
 requireText(workflowCss, '.doc-motion-toggle {', 'The autoplay journey must expose a visible pause control.');
@@ -113,9 +114,8 @@ for (const text of [
   'Make the trust loop visible.',
   'Classifier + Extractor specifications',
   'Evaluation direction · released July 2026',
-  'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
-  'lead designer for Accuracy Evaluation',
+  'Led Accuracy Evaluation',
   'Canvas 1',
   'no shipment claim',
   'href="#canvas"',
@@ -150,10 +150,11 @@ for (const asset of [
 ]) requireText(wxo, asset, `wxO Canvas missing approved derivative ${asset}`);
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
-if (count(wxo, /class="doc-loop-item"/gi) !== 5) fail('The wxO Document Processing chapter must show all five trust-loop steps.');
 if (count(wxo, /class="doc-story-frame/gi) !== 0) fail('The redundant three-frame Document Processing storyboard must be removed.');
-if (count(wxo, /class="doc-decision-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded product decisions.');
-if (count(wxo, /class="doc-role-card/gi) !== 4) fail('The wxO Document Processing chapter must show four bounded contribution cards.');
+if (count(wxo, /class="doc-ending-grid"/gi) !== 1) fail('The wxO Document Processing chapter must use one lean ending grid.');
+if (count(wxo, /class="doc-decision-row"/gi) !== 3) fail('The wxO Document Processing chapter must show three concise product decisions.');
+if (count(wxo, /class="doc-contribution-row"/gi) !== 3) fail('The wxO Document Processing chapter must show three restrained contribution rows.');
+forbid(wxo, /wxo-doc-loop-title|class="doc-loop|class="doc-decision-card|class="doc-role-card|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from wxO.');
 
 forbid(wxo, /Canvas Future|future-(inventory|builder|debug)-sanitized/i, 'Future-state material must remain withheld from the ordinary protected page.');
 for (const asset of [
@@ -190,9 +191,8 @@ for (const text of [
   'Classifier + Extractor specifications',
   'Human-in-the-loop shared patterns',
   'Evaluation direction · released July 2026',
-  'classify → extract → review → evaluate → improve',
   'I joined the work in 2025',
-  'lead designer for Accuracy Evaluation',
+  'Led Accuracy Evaluation',
 ]) requireText(doc, text, `Document Processing missing required source-safe phrase: ${text}`);
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
@@ -220,6 +220,10 @@ if (count(doc, /class="doc-current-stage"/gi) !== 4) fail('Document Processing m
 if (count(doc, /class="doc-current-frame"/gi) !== 9) fail('Document Processing must show nine curated current Figma frames.');
 if (count(doc, /<\/span><h3\b/gi) !== 4) fail('Standalone current stage headers must stay compact and text-light.');
 requireText(doc, 'class="doc-current-evaluator-grid"', 'The standalone Evaluate finale must use a distinct four-screen grid.');
+if (count(doc, /class="doc-ending-grid"/gi) !== 1) fail('Document Processing must use one lean ending grid.');
+if (count(doc, /class="doc-decision-row"/gi) !== 3) fail('Document Processing must show three concise product decisions.');
+if (count(doc, /class="doc-contribution-row"/gi) !== 3) fail('Document Processing must show three restrained contribution rows.');
+forbid(doc, /doc-loop-title|class="doc-loop|class="doc-decision-grid|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from Document Processing.');
 forbid(doc, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
 forbid(doc, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'Document Processing must replace the superseded one-off evaluation specimen.');
 
