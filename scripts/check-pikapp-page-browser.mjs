@@ -5,7 +5,8 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 
 const root = process.cwd();
-const baseUrl = process.env.SITE_URL || 'http://127.0.0.1:8765';
+const localSitePort = 8765 + (process.pid % 500);
+const baseUrl = process.env.SITE_URL || `http://127.0.0.1:${localSitePort}`;
 const evidenceDir = process.env.PIKAPP_EVIDENCE_DIR || path.join(root, '.hermes', 'evidence', 'pikapp-page');
 const chrome = [
   process.env.CHROME_BIN,
@@ -18,6 +19,8 @@ if (!chrome) throw new Error('Chrome binary not found; set CHROME_BIN');
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'pikapp-page-browser-'));
 const port = 9400 + (process.pid % 400);
 let chromeLog = '';
+let siteChild;
+let siteLog = '';
 const child = spawn(chrome, [
   '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
   '--remote-allow-origins=*', `--remote-debugging-port=${port}`,
@@ -48,6 +51,23 @@ async function fetchJson(url, timeoutMs) {
     clearTimeout(timer);
   }
 }
+async function ensureSite() {
+  if (process.env.SITE_URL) return;
+  siteChild = spawn('python3', ['-m', 'http.server', String(localSitePort), '--bind', '127.0.0.1'], { cwd: root, stdio: ['ignore', 'ignore', 'pipe'] });
+  siteChild.stderr.on('data', (chunk) => { siteLog += chunk.toString(); });
+  const deadline = Date.now() + 10000;
+  let lastError;
+  while (Date.now() < deadline) {
+    try {
+      const response = await fetch(`${baseUrl}/pikappapp.html`);
+      if (response.ok) return;
+      lastError = new Error(`${response.status} ${response.statusText}`);
+    } catch (error) { lastError = error; }
+    if (siteChild.exitCode !== null) throw new Error(`Local site server exited ${siteChild.exitCode}: ${siteLog}`);
+    await delay(100);
+  }
+  throw new Error(`Local site server did not become ready within 10s: ${lastError?.message || 'unknown error'}\n${siteLog}`);
+}
 async function waitForTarget() {
   let lastError;
   const deadline = Date.now() + 20000;
@@ -65,7 +85,7 @@ async function waitForTarget() {
 }
 
 class Cdp {
-  constructor(url) { this.url = url; this.nextId = 1; this.pending = new Map(); this.waiters = new Map(); this.exceptions = []; this.consoleErrors = []; }
+  constructor(url) { this.url = url; this.nextId = 1; this.pending = new Map(); this.waiters = new Map(); this.exceptions = []; this.consoleErrors = []; this.contextsByFrame = new Map(); this.mainFrameId = null; }
   async open() {
     this.socket = new WebSocket(this.url);
     this.socket.addEventListener('message', (event) => {
@@ -78,6 +98,14 @@ class Cdp {
         else pending.resolve(message.result);
         return;
       }
+      if (message.method === 'Runtime.executionContextCreated') {
+        const context = message.params.context;
+        if (context.auxData?.isDefault && context.auxData.frameId) this.contextsByFrame.set(context.auxData.frameId, context.id);
+      }
+      if (message.method === 'Runtime.executionContextDestroyed') {
+        for (const [frameId, contextId] of this.contextsByFrame) if (contextId === message.params.executionContextId) this.contextsByFrame.delete(frameId);
+      }
+      if (message.method === 'Runtime.executionContextsCleared') this.contextsByFrame.clear();
       if (message.method === 'Runtime.exceptionThrown') this.exceptions.push(message.params.exceptionDetails);
       if (message.method === 'Runtime.consoleAPICalled' && message.params.type === 'error') this.consoleErrors.push(message.params.args.map((arg) => arg.value || arg.description).join(' '));
       const waiters = this.waiters.get(message.method) || [];
@@ -102,11 +130,11 @@ class Cdp {
       }, 10000);
     });
   }
-  call(method, params = {}) {
+  call(method, params = {}, sessionId = null) {
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
       this.pending.set(id, { resolve, reject, method });
-      this.socket.send(JSON.stringify({ id, method, params }));
+      this.socket.send(JSON.stringify({ id, method, params, ...(sessionId ? { sessionId } : {}) }));
       setTimeout(() => {
         if (!this.pending.has(id)) return;
         this.pending.delete(id);
@@ -121,14 +149,36 @@ class Cdp {
       setTimeout(() => reject(new Error(`${method} event timed out`)), timeout);
     });
   }
-  async evaluate(expression) {
-    const result = await this.call('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
+  async waitForContext(frameId, timeout = 5000) {
+    const deadline = Date.now() + timeout;
+    while (Date.now() < deadline) {
+      const contextId = this.contextsByFrame.get(frameId);
+      if (contextId) return contextId;
+      await delay(20);
+    }
+    throw new Error(`Default execution context did not become ready for frame ${frameId}`);
+  }
+  async evaluateInFrame(frameId, expression) {
+    const contextId = await this.waitForContext(frameId);
+    const result = await this.call('Runtime.evaluate', { expression, contextId, awaitPromise: true, returnByValue: true });
     if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text || JSON.stringify(result.exceptionDetails));
     return result.result.value;
   }
+  async evaluateInSession(sessionId, expression) {
+    const result = await this.call('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, sessionId);
+    if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text || JSON.stringify(result.exceptionDetails));
+    return result.result.value;
+  }
+  async evaluate(expression) {
+    if (!this.mainFrameId) throw new Error('Main frame is not initialized');
+    return this.evaluateInFrame(this.mainFrameId, expression);
+  }
   async navigate(url) {
+    this.contextsByFrame.clear();
     const loaded = this.event('Page.loadEventFired');
-    await this.call('Page.navigate', { url }); await loaded; await delay(120);
+    const navigation = await this.call('Page.navigate', { url });
+    this.mainFrameId = navigation.frameId;
+    await loaded; await this.waitForContext(this.mainFrameId); await delay(120);
   }
   async key(key, code, virtualKeyCode, modifiers = 0) {
     const params = { key, code, windowsVirtualKeyCode: virtualKeyCode, nativeVirtualKeyCode: virtualKeyCode, modifiers };
@@ -153,6 +203,7 @@ class Cdp {
 
 let cdp;
 try {
+  await ensureSite();
   fs.mkdirSync(evidenceDir, { recursive: true });
   const target = await waitForTarget();
   cdp = new Cdp(target.webSocketDebuggerUrl); await cdp.open();
@@ -167,6 +218,8 @@ try {
     await cdp.call('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile });
     for (const theme of ['light', 'dark']) {
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
+      const topContext = await cdp.evaluate(`({href:location.href,origin:location.origin,isTop:window===top})`);
+      assert(topContext.href===`${baseUrl}/pikappapp.html`&&topContext.isTop,`main-frame context drifted before theme setup: ${JSON.stringify(topContext)}`);
       await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
       await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
@@ -211,7 +264,7 @@ try {
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
       assert(state.futureScreens.length===7&&state.futureScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'),`future-state screenshots regained an artificial rounded shadow: ${JSON.stringify(state.futureScreens)}`);
-      assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier interactive Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts allow-same-origin'&&state.prototype.link==='pikappapp/demo.html',`prototype boundary drifted: ${JSON.stringify(state.prototype)}`);
+      assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier interactive Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts'&&state.prototype.link==='pikappapp/demo.html',`prototype boundary drifted: ${JSON.stringify(state.prototype)}`);
       if (viewport.mobile) {
         assert(state.prototype.deviceDisplay==='none'&&state.prototype.width===0&&state.prototype.height===0&&state.prototype.embedHeight<420,`mobile prototype must collapse to its standalone action: ${JSON.stringify(state.prototype)}`);
         assert(state.statePairs.length===2&&state.statePairs.every((pair)=>pair.display==='flex'&&['auto','scroll'].includes(pair.overflowX)&&pair.snap.includes('x')&&pair.cue==='"Swipe to compare →"'&&pair.scrollWidth>pair.clientWidth&&pair.children.every((child)=>Math.abs(child.width-pair.clientWidth)<=1)),`mobile state pairs must become readable horizontal rails: ${JSON.stringify(state.statePairs)}`);
@@ -271,12 +324,28 @@ try {
   await cdp.navigate(`${baseUrl}/pikappapp.html`);
   await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`);
   await delay(2200);
-  const prototypeReady=await cdp.evaluate(`(()=>{const frame=document.querySelector('.prototype-embed__frame');const doc=frame.contentDocument;const tabs=doc?[...doc.querySelectorAll('[role="tab"]')]:[];const text=doc?.body.textContent.toLowerCase()||'';return {sameOrigin:Boolean(doc),boot:Boolean(doc?.querySelector('.prototype-boot')),bulletin:text.includes('chapter bulletin'),milestones:text.includes('milestones'),selected:tabs.find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim()||''}})()`);
-  assert(prototypeReady.sameOrigin&&!prototypeReady.boot&&prototypeReady.bulletin&&prototypeReady.milestones&&prototypeReady.selected==='Member',`embedded prototype did not leave its loading state: ${JSON.stringify(prototypeReady)}`);
-  await cdp.evaluate(`(()=>{const doc=document.querySelector('.prototype-embed__frame').contentDocument;[...doc.querySelectorAll('[role="tab"]')].find((tab)=>tab.textContent.trim()==='Chapter')?.click()})()`);
+  const { frameTree } = await cdp.call('Page.getFrameTree');
+  const { targetInfos } = await cdp.call('Target.getTargets');
+  const flattenFrames = (node) => [node.frame, ...(node.childFrames || []).flatMap(flattenFrames)];
+  const prototypeFrame = flattenFrames(frameTree).find((frame) => frame.url.endsWith('/pikappapp/demo.html'));
+  const prototypeTarget = targetInfos.find((target) => target.type==='iframe'&&target.url.endsWith('/pikappapp/demo.html'));
+  assert(prototypeFrame||prototypeTarget,`sandboxed prototype was not attached: frames=${JSON.stringify(flattenFrames(frameTree).map((frame)=>frame.url))} targets=${JSON.stringify(targetInfos.map((target)=>({type:target.type,url:target.url,attached:target.attached})))}`);
+  let prototypeSessionId;
+  let prototypeEvaluate;
+  if (prototypeFrame) {
+    prototypeEvaluate = (expression) => cdp.evaluateInFrame(prototypeFrame.id, expression);
+  } else {
+    ({ sessionId: prototypeSessionId } = await cdp.call('Target.attachToTarget', { targetId: prototypeTarget.targetId, flatten: true }));
+    await cdp.call('Runtime.enable', {}, prototypeSessionId);
+    prototypeEvaluate = (expression) => cdp.evaluateInSession(prototypeSessionId, expression);
+  }
+  const prototypeReady=await prototypeEvaluate(`(()=>{const tabs=[...document.querySelectorAll('[role="tab"]')];const text=document.body.textContent.toLowerCase();return {boot:Boolean(document.querySelector('.prototype-boot')),bulletin:text.includes('chapter bulletin'),milestones:text.includes('milestones'),selected:tabs.find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim()||''}})()`);
+  assert(!prototypeReady.boot&&prototypeReady.bulletin&&prototypeReady.milestones&&prototypeReady.selected==='Member',`sandboxed embedded prototype did not leave its loading state: ${JSON.stringify(prototypeReady)}`);
+  await prototypeEvaluate(`[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.textContent.trim()==='Chapter')?.click()`);
   await delay(240);
-  const prototypeChapter=await cdp.evaluate(`(()=>{const doc=document.querySelector('.prototype-embed__frame').contentDocument;const selected=[...doc.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:doc.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
-  assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Brother roster, chapter-wide milestones, and weekly standings live here.'),`embedded prototype controls did not respond: ${JSON.stringify(prototypeChapter)}`);
+  const prototypeChapter=await prototypeEvaluate(`(()=>{const selected=[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:document.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
+  assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Brother roster, chapter-wide milestones, and weekly standings live here.'),`sandboxed embedded prototype controls did not respond: ${JSON.stringify(prototypeChapter)}`);
+  if (prototypeSessionId) await cdp.call('Target.detachFromTarget', { sessionId: prototypeSessionId });
 
   await cdp.call('Emulation.setDeviceMetricsOverride', { width:390,height:844,deviceScaleFactor:1,mobile:true });
   await cdp.navigate(`${baseUrl}/pikappapp.html`);
@@ -359,5 +428,6 @@ try {
 } finally {
   try { cdp?.socket?.close(); } catch {}
   await stopChild(child);
+  if (siteChild) await stopChild(siteChild);
   try { fs.rmSync(profile,{recursive:true,force:true,maxRetries:4,retryDelay:100}); } catch {}
 }

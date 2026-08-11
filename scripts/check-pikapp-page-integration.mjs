@@ -20,7 +20,7 @@ const count = (value, needle) => value.split(needle).length - 1;
 const size = (relativePath) => read(relativePath).length;
 
 const frozenFiles = {
-  'pikappapp/demo.html': 'daf32161b516f022bc909e0b7a4ab48b227ec3b25e74f52a842a706538d41c18',
+  'pikappapp/demo.html': '6c2621e62c0e8dc4626dffff7ebfba97d2a4f1ff326240d25c9822a583c80ab4',
   'pikappapp/demo.bundle.css': '76eefcf312f2a097070f29ed9e3fbeaa5a3125ba2365178a09cc0e81c26a7ff5',
   'pikappapp/demo.bundle.js': '50b8336875a9181ccad7d6db2ce52f48cb7e0ee602aa0c75d2a53040fe62d22c',
 };
@@ -53,6 +53,13 @@ const assetHashes = {
   'images/pikapp-case-study/v2-all-caught-up-dark-square.png': 'e20fc532e3c7b9fdf2ebc898866bc57ce98301746bdf604b837cf1545cc72dde',
   'images/pikapp-case-study/v2-all-caught-up-light.png': 'a4d0575ea8ead529fa70a2e912cdfed75c0ecea3f7b47e1250b37b6443da9090',
   'images/pikapp-case-study/v2-all-caught-up-light-square.png': '16447d5ff96e106654de1670f444c833184369aa5abffc995634388eeb5b2c6f',
+  'images/pikapp-case-study/v2-today-light-clean.png': '1ddbc06bb9d4ff1ff542e6f71698bf400d9c0cc6ba8a6f66a441e97a59790103',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-clean.png': '945577aa42d95cfe14d0c258028488f96d01b069b7973b903c2a07b3e9c7372c',
+  'images/pikapp-case-study/v2-update-review-dark-clean.png': '997b246e8ce2252f3dccf9459b0acbb57702c839a879ff41def74c5a1dbf3c0d',
+  'images/pikapp-case-study/v2-correction-requested-dark-clean.png': 'f65eba0f9bf4ec7d58b102016a0cc8a4613f3d1d994cdc82aa31e3f53e63d157',
+  'images/pikapp-case-study/v2-all-caught-up-dark-clean.png': 'fee611f2495f7b16411372839a3cc99a0936bc89b2cfe8076a02d7c85711db6c',
+  'images/pikapp-case-study/v2-all-caught-up-light-clean.png': '8f5aa2ee9586ab354823d9af8282684d3a3a0eba4a9585584fd409fcfa4c2482',
+  'images/pikapp-case-study/v2-chapter-light-clean.png': 'ee4b7c9daaa2afbd808b1c97ddd11f0aaebe4378bbdd0bca6c2d4c3bb93b945f',
   'images/pikapp-case-study/pattern-dark-blue.svg': 'c351c176e21cba2ec26506c444018502b9214ddd49036b1f2d07f6a5c7bb5436',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
@@ -65,6 +72,21 @@ if (fs.existsSync(path.join(root, 'images/pikapp-case-study/expansion-cover.png'
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+
+const cleanDisplayAssets = [
+  'v2-today-light-clean.png',
+  'v2-responsibility-detail-dark-clean.png',
+  'v2-update-review-dark-clean.png',
+  'v2-correction-requested-dark-clean.png',
+  'v2-all-caught-up-dark-clean.png',
+  'v2-all-caught-up-light-clean.png',
+  'v2-chapter-light-clean.png',
+];
+for (const filename of cleanDisplayAssets) {
+  if (!html.includes(`images/pikapp-case-study/${filename}`)) {
+    fail(`pikappapp.html must use cleaned V2 display derivative: ${filename}`);
+  }
+}
 const js = text('js/pikappapp.js');
 const workflow = text('.github/workflows/health-check.yml');
 
@@ -93,13 +115,13 @@ for (const required of [
   'Test the model before polishing it',
   'Illustrative and unvalidated.',
   'A small direction study, not a complete app, current product proposal, or live service.',
-  'images/pikapp-case-study/v2-today-light-square.png',
-  'images/pikapp-case-study/v2-responsibility-detail-dark-square.png',
-  'images/pikapp-case-study/v2-chapter-light-square.png',
-  'images/pikapp-case-study/v2-update-review-dark-square.png',
-  'images/pikapp-case-study/v2-correction-requested-dark-square.png',
-  'images/pikapp-case-study/v2-all-caught-up-dark-square.png',
-  'images/pikapp-case-study/v2-all-caught-up-light-square.png',
+  'images/pikapp-case-study/v2-today-light-clean.png',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-clean.png',
+  'images/pikapp-case-study/v2-chapter-light-clean.png',
+  'images/pikapp-case-study/v2-update-review-dark-clean.png',
+  'images/pikapp-case-study/v2-correction-requested-dark-clean.png',
+  'images/pikapp-case-study/v2-all-caught-up-dark-clean.png',
+  'images/pikapp-case-study/v2-all-caught-up-light-clean.png',
   'Earlier interactive prototype',
   'This runnable snapshot preserves the earlier dashboard, bulletin, milestones, and navigation. It predates the V2 direction below.',
   'role="region" aria-label="Update review and correction states" tabindex="0"',
@@ -107,7 +129,7 @@ for (const required of [
   '<iframe class="prototype-embed__frame" src="pikappapp/demo.html"',
   'title="Earlier interactive Pi Kapp member-dashboard prototype"',
   'loading="lazy"',
-  'sandbox="allow-scripts allow-same-origin"',
+  'sandbox="allow-scripts"',
   'Open earlier prototype',
   '<script src="js/pikappapp.js"></script>',
 ]) {
@@ -118,7 +140,7 @@ if (count(html, '<main') !== 1) fail('pikappapp.html must contain exactly one ro
 if (count(html, '<h1') !== 1) fail('pikappapp.html must contain exactly one h1');
 if (count(html, 'class="future-principle"') !== 3) fail('Pi Kapp coda must contain exactly three future principles');
 if ([...html.matchAll(/class="[^\"]*\bcoda__screen(?:\s|\")/g)].length !== 7) fail('Pi Kapp coda must contain exactly seven curated V2 screens');
-if (/src="images\/pikapp-case-study\/v2-(?:today-light|responsibility-detail-dark|chapter-light)\.png"/.test(html)) fail('Pi Kapp coda must use the square-corner display derivatives rather than the rounded source captures');
+if (/src="images\/pikapp-case-study\/v2-(?:today-light|responsibility-detail-dark|chapter-light)\.png"/.test(html)) fail('Pi Kapp coda must use the cleaned display derivatives rather than the rounded source captures');
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
 if (count(html, 'class="member-card__avatar" aria-hidden="true"') !== 3) fail('Pi Kapp member cards must contain exactly three decorative user icons');
 if (!html.includes('loading="lazy" decoding="async"')) fail('Pi Kapp evidence media must use lazy asynchronous decoding');

@@ -36,8 +36,12 @@ expect(html.includes('href="/images/favicon-32.png"'),
   'Pi Kapp demo must declare the existing favicon explicitly.');
 expect(html.includes('href="/pikappapp/demo.bundle.css"'),
   'Pi Kapp demo must load its compiled local stylesheet.');
-expect(html.includes('src="/pikappapp/demo.bundle.js"'),
-  'Pi Kapp demo must load its compiled local module bundle.');
+expect(html.includes('<script defer src="/pikappapp/demo.bundle.js"></script>'),
+  'Pi Kapp demo must load its self-contained bundle as a deferred classic script so the opaque sandbox does not require CORS.');
+expect(!html.includes('<script type="module" src="/pikappapp/demo.bundle.js"></script>'),
+  'Pi Kapp demo must not load its bundle as a module inside the opaque-origin sandbox.');
+expect(!/(?:^|[;}]\s*)(?:import|export)\s/m.test(generatedJs) && !generatedJs.includes('import.meta'),
+  'Pi Kapp classic bundle must remain self-contained without module-only syntax.');
 expect(source.includes('tracking-[0.24em] text-pikapp-ink/65'),
   'Pi Kapp section headings must preserve the verified WCAG AA contrast treatment.');
 expect(source.includes('text-[11px] text-pikapp-ink/65">{item.when}'),
