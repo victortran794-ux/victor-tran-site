@@ -1,0 +1,295 @@
+{
+  "figmaFileKey": "FgPd6zpmuOVymcCypIiGPY",
+  "figmaFileName": "Updates",
+  "sourceSection": "7:99357",
+  "sourceSectionName": "\ud83d\udcd6 Story: Agentic Workflow Canvas (v1)",
+  "sourceUrl": "https://www.figma.com/design/FgPd6zpmuOVymcCypIiGPY/Updates?node-id=7-99357",
+  "editorialRule": "Complete publication-ready Figma arrangement sheets remain intact. Palette uses coherent child frames; the form-authoring step uses one complete audited source frame; the source-clipped connector sheet is omitted; identity markers and external annotations receive bounded privacy treatment.",
+  "assets": [
+    {
+      "file": "01-skill-studio-main.png",
+      "role": "opening illustration",
+      "sourceNode": "7:99370",
+      "sourceFrame": "Skill Studio Main",
+      "sourceBounds": [
+        2487,
+        1665
+      ],
+      "exportedDimensions": [
+        1024,
+        686
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "no identity or private annotation visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 77091,
+      "sha256": "6da44c427299af93c60a581d044956c1dbbdc4d7e669fb0db4a2b721917071be"
+    },
+    {
+      "file": "02-header-image.png",
+      "role": "section transition illustration",
+      "sourceNode": "7:100873",
+      "sourceFrame": "Header image",
+      "sourceBounds": [
+        870,
+        546
+      ],
+      "exportedDimensions": [
+        870,
+        546
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "no identity or private annotation visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 109495,
+      "sha256": "9274a98802718b7b4c700bc73a88da70865583b35c6412e5b259ab69585cae68"
+    },
+    {
+      "file": "03-main-illustration.png",
+      "role": "closing illustration",
+      "sourceNode": "7:100968",
+      "sourceFrame": "Main 1",
+      "sourceBounds": [
+        870,
+        546
+      ],
+      "exportedDimensions": [
+        870,
+        546
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "no identity or private annotation visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 20887,
+      "sha256": "28a1a333063a68fba1eb91a6685a7f7137182042dc72ebf4606be2a7f5197e5e"
+    },
+    {
+      "file": "04-orbital-card.png",
+      "role": "palette accent illustration",
+      "sourceNode": "7:99387",
+      "sourceFrame": "Frame 12344665",
+      "sourceBounds": [
+        322,
+        322
+      ],
+      "exportedDimensions": [
+        323,
+        322
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "no identity or private annotation visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 7936,
+      "sha256": "82e9e4aee554de71a5868ed06036cd10bf66fb21bc47f969b73944484a5ae51e"
+    },
+    {
+      "file": "05-orbital-insert.png",
+      "role": "connection accent illustration",
+      "sourceNode": "7:99407",
+      "sourceFrame": "Frame 12344666",
+      "sourceBounds": [
+        322,
+        322
+      ],
+      "exportedDimensions": [
+        322,
+        322
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "no identity or private annotation visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 6198,
+      "sha256": "e0f2c09fd4e1eda19e3c9cabdcbb56571e83fa1c5244f4de6f3929840f546f2a"
+    },
+    {
+      "file": "06-key-screen.png",
+      "role": "full canvas context",
+      "sourceNode": "7:100703",
+      "sourceFrame": "Key screen template (Detach this)",
+      "sourceBounds": [
+        1584,
+        1042
+      ],
+      "exportedDimensions": [
+        1024,
+        674
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
+      "privacyStatus": "top-right identity avatar neutralized",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 65049,
+      "sha256": "a5a6aaaed7e6798a3a8b2b0f960c4a4fc272a07e8b6e822daa062f53ae52b8c7"
+    },
+    {
+      "file": "07-agent-node-explorations.png",
+      "role": "complete node exploration sheet",
+      "sourceNode": "7:101018",
+      "sourceFrame": "Agent node explorations 10.21.25",
+      "sourceBounds": [
+        2196,
+        2601
+      ],
+      "exportedDimensions": [
+        865,
+        1024
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic exploratory annotations retained; no private identifiers visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 63756,
+      "sha256": "4d1db072b43dc861524e4164b4bcac1ca18be259b4dfc36828ab378d074edbb9"
+    },
+    {
+      "file": "08-node-color-enhancements.png",
+      "role": "complete node color and semantics sheet",
+      "sourceNode": "7:101982",
+      "sourceFrame": "Node color enhancements",
+      "sourceBounds": [
+        1514,
+        1195
+      ],
+      "exportedDimensions": [
+        1024,
+        809
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic labels retained; no private identifiers visible",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 92131,
+      "sha256": "16298cabc6ac072a1e8048d6527d3b04cca29b85771996924f97936abfc76411"
+    },
+    {
+      "file": "10-palette-flow-controls.png",
+      "role": "palette child frame: flow controls",
+      "sourceNode": "7:99534",
+      "sourceFrame": "Side panel | Carbon for IBM Products / Flow controls",
+      "sourceBounds": [
+        392,
+        160
+      ],
+      "exportedDimensions": [
+        392,
+        160
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic component labels only",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 6297,
+      "sha256": "279a63ed2ba0114f2ac9417cb09ce44964975b186665583ffbc7005c93df51c2"
+    },
+    {
+      "file": "12-palette-user-inputs.png",
+      "role": "palette child frame: user input choices",
+      "sourceNode": "7:99608",
+      "sourceFrame": "Side panel | Carbon for IBM Products / user inputs",
+      "sourceBounds": [
+        392,
+        346
+      ],
+      "exportedDimensions": [
+        392,
+        346
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
+      "privacyStatus": "generic component labels only",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 16525,
+      "sha256": "8074bafc2f525d8d1ba35bdc32a069653d3cc4c41373ac987bea18a82d199487"
+    },
+    {
+      "file": "13-user-activity-created.png",
+      "role": "complete User Activity creation artboard",
+      "sourceNode": "7:100287",
+      "sourceFrame": "User activity (v2) 1",
+      "sourceBounds": [
+        1584,
+        1042
+      ],
+      "exportedDimensions": [
+        1024,
+        674
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
+      "privacyStatus": "top-right initials avatar neutralized",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 32218,
+      "sha256": "6d2ac52a2c14fd166d6064c117e2e2a3cc01189e93993b92294b4b410f32aab6"
+    },
+    {
+      "file": "14-user-activity-configure.png",
+      "role": "complete User Activity configuration artboard",
+      "sourceNode": "7:100072",
+      "sourceFrame": "User activity (v2) 3",
+      "sourceBounds": [
+        1584,
+        1042
+      ],
+      "exportedDimensions": [
+        1024,
+        674
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
+      "privacyStatus": "top-right initials avatar neutralized",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 53138,
+      "sha256": "75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa"
+    },
+    {
+      "file": "15-user-activity-form-filled.png",
+      "role": "complete populated form-authoring frame with configuration panel",
+      "sourceFileKey": "xCDC70RQXCft14QJmDTmrW",
+      "sourceFileName": "wxO",
+      "sourceNode": "6:11024",
+      "sourceFrame": "Form filled, third authored state in the User Activity form sequence",
+      "sourceUrl": "https://www.figma.com/design/xCDC70RQXCft14QJmDTmrW/wxO?node-id=6-11024",
+      "sourceBounds": [
+        1024,
+        674
+      ],
+      "exportedDimensions": [
+        900,
+        592
+      ],
+      "treatment": "complete uncropped authored frame extracted from frame 3 of the audited four-frame review GIF; existing review export uniformly scaled the 1024x674 source to 900x592; external developer-note overlay removed only from blank #f4f4f4 canvas pixels; top-right initials avatar replaced with a neutral marker; form and side-panel geometry untouched; metadata-free PNG resave",
+      "privacyStatus": "top-right initials avatar neutralized; external developer annotation removed; fictional interface content retained",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "user-approved replacement",
+      "sourceArtifact": "Portfolio Handoffs/wxO Canvas/2026-08-03-flow1-source-screen-review/assets/07-form-build.gif",
+      "sourceArtifactSha256": "cd33e7d462fc759c4b659da48fe8d05aed83660d6b505a59cbbe17ca6dca590f",
+      "bytes": 44257,
+      "sha256": "8039484c6274a0e59be05cd692e8631300a5eb00275b8cd862ea424e692ca403"
+    },
+    {
+      "file": "16-user-activity-complete.png",
+      "role": "complete returned-to-canvas artboard",
+      "sourceNode": "7:100485",
+      "sourceFrame": "User activity (v2) + form complete",
+      "sourceBounds": [
+        1584,
+        1042
+      ],
+      "exportedDimensions": [
+        1024,
+        674
+      ],
+      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling; top-right 20\u00d720 identity avatar replaced with a neutral marker",
+      "privacyStatus": "top-right initials avatar neutralized",
+      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
+      "approvalState": "protected preview candidate",
+      "bytes": 57279,
+      "sha256": "9064113da7bfd832382c1b2d4e048aa3aea9c8b5dcba5faab0633e3b9334319f"
+    }
+  ]
+}
