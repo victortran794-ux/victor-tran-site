@@ -308,17 +308,11 @@ html[data-theme='dark'] .workflow-pages {
   grid-column: 1 / -1;
 }
 
-.wxo-v1-form-tearsheet {
-  display: grid;
-  grid-template-columns: minmax(0, 824fr) minmax(0, 361fr);
-  align-items: start;
-  overflow: hidden;
-}
-
-.workflow-figure .wxo-v1-form-tearsheet img {
-  width: 100%;
+.workflow-figure .wxo-v1-form-frame {
+  display: block;
+  width: min(100%, 900px);
   height: auto;
-  min-width: 0;
+  margin-inline: auto;
 }
 
 .wxo-v1-activity-grid .workflow-figure figcaption {

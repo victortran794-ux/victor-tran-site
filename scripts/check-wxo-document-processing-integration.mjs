@@ -145,8 +145,7 @@ const currentCanvasAssets = [
   '12-palette-user-inputs.png',
   '13-user-activity-created.png',
   '14-user-activity-configure.png',
-  '15-user-activity-form-canvas.png',
-  '15-user-activity-form-panel.png',
+  '15-user-activity-form-filled.png',
   '16-user-activity-complete.png',
 ];
 const expectedCurrentCanvasHashes = {
@@ -162,8 +161,7 @@ const expectedCurrentCanvasHashes = {
   '12-palette-user-inputs.png': '8074bafc2f525d8d1ba35bdc32a069653d3cc4c41373ac987bea18a82d199487',
   '13-user-activity-created.png': '6d2ac52a2c14fd166d6064c117e2e2a3cc01189e93993b92294b4b410f32aab6',
   '14-user-activity-configure.png': '75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa',
-  '15-user-activity-form-canvas.png': '7fe8cbb9d61d0b88df39dc1f3032e23ba6db9baa9e783d96c560661e23bb6c38',
-  '15-user-activity-form-panel.png': '02685388dd7f6191294226a6c0a8b864cf6f8a719b62383e745c020314b19bbd',
+  '15-user-activity-form-filled.png': '8039484c6274a0e59be05cd692e8631300a5eb00275b8cd862ea424e692ca403',
   '16-user-activity-complete.png': '9064113da7bfd832382c1b2d4e048aa3aea9c8b5dcba5faab0633e3b9334319f',
 };
 for (const asset of [
@@ -189,13 +187,14 @@ for (const text of [
   'Palette pieces',
   'Human work in the flow',
   'Role and state',
-  'class="wxo-v1-form-tearsheet"',
+  '15-user-activity-form-filled.png',
 ]) requireText(wxo, text, `wxO Canvas missing V1 viewer phrase: ${text}`);
 if (count(wxo, /class="[^"]*\bwxo-v1-illustration\b[^"]*"/gi) !== 5) fail('wxO Canvas must place exactly five authored V1 illustration accents.');
 if (count(wxo, /class="[^"]*\bwxo-v1-arrangement\b[^"]*"/gi) !== 7) fail('wxO Canvas must show seven complete V1 arrangement figures after removing the flawed connector sheet.');
 if (count(wxo, /class="[^"]*\bwxo-v1-palette-piece\b[^"]*"/gi) !== 2) fail('wxO Canvas must compose only the two approved Palette child frames.');
 forbid(wxo, /01-book-a-flight-context\.png|02-component-system-board\.png|03-user-activity-form\.png|04-straight-connector-states\.png|canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'Superseded crops, reconstructed boards, zooms, and sparse plates must not remain referenced.');
-forbid(wxo, /09-connectors\.png|11-palette-form-menu\.png|15-user-activity-form\.png|Refined language|Contextual actions/i, 'User-rejected connector, contextual-action, form-parent exports, and captions must not remain referenced.');
+forbid(wxo, /09-connectors\.png|11-palette-form-menu\.png|15-user-activity-form(?:-canvas|-panel)?\.png|wxo-v1-form-tearsheet|Refined language|Contextual actions/i, 'User-rejected connector, contextual-action, split form exports, and captions must not remain referenced.');
+forbid(workflowCss, /wxo-v1-form-tearsheet/i, 'The rejected split-form layout styling must be removed.');
 forbid(wxo, /7:\d+|26:\d+|25:\d+|screen-visible|component-lineage proof|private provenance/i, 'wxO viewer-facing copy must not expose internal provenance identifiers or working labels.');
 
 forbid(wxo, /href="document-processing\.html"/i, 'The wxO chapter must not link out to the retired standalone Document Processing story.');
@@ -226,6 +225,14 @@ else {
   if (!Array.isArray(wxoManifest.assets) || wxoManifest.assets.length !== currentCanvasAssets.length) fail(`wxO current-system manifest must record exactly ${currentCanvasAssets.length} curated assets.`);
   const manifestFiles = (wxoManifest.assets ?? []).map((entry) => entry.file);
   if (JSON.stringify(manifestFiles) !== JSON.stringify(currentCanvasAssets)) fail('wxO manifest assets must remain in the approved V1 narrative order.');
+  const formFrame = (wxoManifest.assets ?? []).find((entry) => entry.file === '15-user-activity-form-filled.png');
+  if (!formFrame || formFrame.sourceFileKey !== 'xCDC70RQXCft14QJmDTmrW' || formFrame.sourceNode !== '6:11024' ||
+      JSON.stringify(formFrame.sourceBounds) !== JSON.stringify([1024, 674]) ||
+      JSON.stringify(formFrame.exportedDimensions) !== JSON.stringify([900, 592]) ||
+      formFrame.sourceArtifactSha256 !== 'cd33e7d462fc759c4b659da48fe8d05aed83660d6b505a59cbbe17ca6dca590f' ||
+      !/complete uncropped authored frame/i.test(formFrame.treatment) || !/developer-note overlay removed/i.test(formFrame.treatment)) {
+    fail('The approved Form filled frame must retain its original wxO source, full-frame dimensions, audited artifact hash, and bounded annotation cleanup provenance.');
+  }
   for (const entry of wxoManifest.assets ?? []) {
     const assetPath = `images/wxo-canvas/current/${entry.file}`;
     if (!entry.sourceNode || !entry.sourceFrame || !Array.isArray(entry.sourceBounds) || !Array.isArray(entry.exportedDimensions) || !entry.treatment || !entry.privacyStatus || !entry.claimStatus || !entry.approvalState) fail(`wxO manifest entry ${entry.file ?? 'unknown'} is missing Figma provenance, dimensions, treatment, privacy, claims, or approval metadata.`);
@@ -249,7 +256,7 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
 if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 25) fail('wxO Canvas must use exactly twenty-five images: shared nav image, fifteen V1 Canvas exports, and nine current Document Processing frames.');
+if (count(wxo, /<img\b/gi) !== 24) fail('wxO Canvas must use exactly twenty-four images: shared nav image, fourteen V1 Canvas exports, and nine current Document Processing frames.');
 if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');

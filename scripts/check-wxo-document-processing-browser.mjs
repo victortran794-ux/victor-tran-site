@@ -172,7 +172,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 24, current: 'wxo-canvas.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 23, current: 'wxo-canvas.html' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 9, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
@@ -187,6 +187,7 @@ try {
   await cdp.call('Page.enable');
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
+  await cdp.call('Network.setCacheDisabled', { cacheDisabled: true });
 
   let gateChecks = 0;
   for (const viewport of [
@@ -435,14 +436,13 @@ try {
             currentFrames:document.querySelectorAll('.doc-current-frame').length,
             currentFramesLoaded:[...document.querySelectorAll('.doc-current-frame img')].every((image)=>image.complete&&image.naturalWidth===1024&&[664,674,780].includes(image.naturalHeight)),
             canvasArrangements:document.querySelectorAll('.wxo-v1-arrangement').length,
-            canvasArrangementsLoaded:(()=>{const expected=[[1024,674],[865,1024],[1024,809],[1024,674],[1024,674],[824,814],[361,814],[1024,674]];return [...document.querySelectorAll('.wxo-v1-arrangement img')].every((image,index)=>image.complete&&image.naturalWidth===expected[index]?.[0]&&image.naturalHeight===expected[index]?.[1])})(),
+            canvasArrangementsLoaded:(()=>{const expected=[[1024,674],[865,1024],[1024,809],[1024,674],[1024,674],[900,592],[1024,674]];const images=[...document.querySelectorAll('.wxo-v1-arrangement img')];return images.length===expected.length&&images.every((image,index)=>image.complete&&image.naturalWidth===expected[index]?.[0]&&image.naturalHeight===expected[index]?.[1])})(),
             canvasArrangementRatios:[...document.querySelectorAll('.wxo-v1-arrangement img')].map((image)=>{const rect=image.getBoundingClientRect();return {rendered:rect.width/rect.height,natural:image.naturalWidth/image.naturalHeight,left:rect.left,right:rect.right}}),
             canvasIllustrations:document.querySelectorAll('.wxo-v1-illustration').length,
             canvasIllustrationsLoaded:(()=>{const expected=[[1024,686],[322,322],[323,322],[870,546],[870,546]];return [...document.querySelectorAll('.wxo-v1-illustration')].every((image,index)=>image.complete&&image.naturalWidth===expected[index]?.[0]&&image.naturalHeight===expected[index]?.[1])})(),
             canvasPalettePieces:document.querySelectorAll('.wxo-v1-palette-piece').length,
             canvasPaletteLoaded:(()=>{const expected=[[392,160],[392,346]];return [...document.querySelectorAll('.wxo-v1-palette-piece')].every((image,index)=>image.complete&&image.naturalWidth===expected[index]?.[0]&&image.naturalHeight===expected[index]?.[1])})(),
-            canvasFormColumns:(()=>{const grid=document.querySelector('.wxo-v1-form-tearsheet');return grid?getComputedStyle(grid).gridTemplateColumns.split(' ').length:null})(),
-            canvasFormTrackRatio:(()=>{const images=[...document.querySelectorAll('.wxo-v1-form-tearsheet img')];return images.length===2?images[0].getBoundingClientRect().width/images[1].getBoundingClientRect().width:null})(),
+            canvasFormFrame:(()=>{const image=document.querySelector('img[src$="15-user-activity-form-filled.png"]');if(!image)return null;const rect=image.getBoundingClientRect();const figure=image.closest('.wxo-v1-arrangement')?.getBoundingClientRect();return {natural:[image.naturalWidth,image.naturalHeight],renderedRatio:rect.width/rect.height,naturalRatio:image.naturalWidth/image.naturalHeight,left:rect.left,right:rect.right,width:rect.width,figureWidth:figure?.width??null,leftGap:figure?rect.left-figure.left:null,rightGap:figure?figure.right-rect.right:null}})(),
             canvasActivityGridWidth:document.querySelector('.wxo-v1-activity-grid')?.getBoundingClientRect().width??null,
             canvasWideActivityWidths:[...document.querySelectorAll('.wxo-v1-activity--wide')].map((figure)=>figure.getBoundingClientRect().width),
             canvasNodeColumns:(()=>{const grid=document.querySelector('.wxo-v1-node-grid');return grid?getComputedStyle(grid).gridTemplateColumns.split(' ').length:null})(),
@@ -482,8 +482,11 @@ try {
         if(name==='wxo') assert(
           state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1&&
           state.canvasArrangements===7&&state.canvasArrangementsLoaded&&state.canvasIllustrations===5&&state.canvasIllustrationsLoaded&&
-          state.canvasPalettePieces===2&&state.canvasPaletteLoaded&&state.canvasFormColumns===2&&state.canvasWideActivityWidths.length===2&&
-          Math.abs(state.canvasFormTrackRatio-(824/361))<0.015&&
+          state.canvasPalettePieces===2&&state.canvasPaletteLoaded&&state.canvasWideActivityWidths.length===2&&
+          state.canvasFormFrame&&state.canvasFormFrame.natural[0]===900&&state.canvasFormFrame.natural[1]===592&&
+          Math.abs(state.canvasFormFrame.renderedRatio-state.canvasFormFrame.naturalRatio)<0.015&&
+          state.canvasFormFrame.left>=0&&state.canvasFormFrame.right<=viewport.width&&state.canvasFormFrame.width<=900.5&&
+          Math.abs(state.canvasFormFrame.leftGap-state.canvasFormFrame.rightGap)<=1&&
           state.canvasWideActivityWidths.every((width)=>Math.abs(width-state.canvasActivityGridWidth)<=1)&&
           state.canvasArrangementRatios.every(({rendered,natural,left,right})=>Math.abs(rendered-natural)<0.015&&left>=0&&right<=viewport.width)&&
           state.canvasNodeColumns===(viewport.width<=860?1:2)&&state.canvasActivityColumns===(viewport.width<=860?1:2)&&
