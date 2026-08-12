@@ -51,7 +51,7 @@ Event Notifications was the first project where I was assigned to conduct the en
 
 The opportunity was to consolidate two related concepts into one without losing an effective way to complete the task.
 
-The proposed structure also made it easier to store and reuse the different demographics or groups that notifications were sent to. I explored the sequence through co-design, a high-fidelity prototype, moderated concept testing, synthesis, and recommendations.
+The proposed structure also made it easier to store and reuse the different demographics or groups that notifications were sent to. I explored the sequence through co-design, a high-fidelity prototype, and concept testing.
 
 For conditions, I used a familiar filter model and revealed compound logic only when needed. This was a proposed and concept-tested alternative, not a claim that the original was defective or that the alternative shipped.
 
