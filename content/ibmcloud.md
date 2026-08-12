@@ -71,7 +71,7 @@ Review the product, then use the findings to scope a credible next move.
 
 My first major Monitoring review followed an established heuristic-evaluation path. I already understood the broader Observability space, but I was new to this specific product. The review logged a large number of visual and UX issues for the team to investigate.
 
-IBM Cloud Logs was based on Coralogix, an external white-label observability product. In Figma, I explored how it could adapt to IBM branding and IBM Cloud product conventions across color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes.
+IBM Cloud Logs was based on Coralogix's white-label observability offering. In Figma, I explored how it could adapt to IBM branding and IBM Cloud product conventions across color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes.
 
 Those explorations tested visual consistency and identified where the first overhaul would need manual intervention. These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.
 
