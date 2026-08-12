@@ -30,6 +30,7 @@ An energetic visual archive spanning identity, print, applications, presentation
 - Marks and applications
 - Events and print
 - Selected illustrations
+- Mendenhall
 - Wide-format information design
 
 ## Body Copy
@@ -45,6 +46,12 @@ Presentation design
 Brand applications
 
 Event graphics
+
+Type design · 2015
+
+Type-design exploration by Victor Tran, developed while studying Graphic Design at Western Michigan University. The display alphabet translates glacier ice into rigid strokes, cut corners, and angled terminals.
+
+Look closer: the square poster already tucked into this Graphic Design archive reads “from the heart of the frozen glacier.” Switch views to trace that detail back through the alphabet, specimen, and physical studies.
 
 ## Images
 
@@ -86,4 +93,8 @@ Event graphics
 - The Wiz: images/gg-illus-2.jpg
 - Tran Designer: images/gg-illus-3.jpg
 - Tran Type: images/gg-illus-4.jpg
+- Mendenhall letterforms spelling from the heart of the frozen glacier: images/mendenhall/type-thumbnail.png
+- Complete Mendenhall lowercase alphabet and poster composition: images/mendenhall/mendenhall-layout.png
+- Tall Mendenhall type specimen with alphabet and glacier-inspired composition: images/mendenhall/tran-type-2.jpg
+- Hand-built Mendenhall letter studies exploring geometric strokes and angled terminals: images/mendenhall/mendenhall-sketches.png
 - Wide informational graphic: images/gg-infographic.jpg
