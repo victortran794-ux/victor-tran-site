@@ -4,9 +4,17 @@ Last reviewed: 2026-08-10
 
 ## Publication boundary
 
-The public case study may use only the eleven artifacts below. They come from the supplied Figma Updates file or from the documented derivatives listed here. Customer names, participant identities, account or resource IDs, credentials, private URLs, internal metrics, and sole-authorship claims remain excluded.
+The case study uses the eleven artifacts below. They come from the supplied Figma Updates file or from the documented derivatives listed here. Customer names, participant identities, account or resource IDs, credentials, private URLs, internal metrics, and sole-authorship claims remain excluded.
 
-Event Notifications was Victor's first self-led product-design journey. The flow is the primary body of work. Component, research, technical-environment, and illustration evidence support that story without implying sole ownership of the wider IBM Cloud platform or team output.
+The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Notifications is framed as his first assigned end-to-end research and design process, followed by concept testing. The flow is proposed and tested work, not a claim of shipment. Monitoring and IBM Cloud Logs are described as review and adaptation explorations, while the published evidence remains generalized or sanitized. The illustration method remains explicitly collaborative.
+
+## Narrative source
+
+- Raw-note capture: `C:\Users\Victor\Documents\Website Items\Portfolio Reviews\2026-08-11\IBM_CLOUD_RAW_NOTE_CAPTURE_2026-08-11.md`
+- Monitoring framing: first major heuristic review of the specific Monitoring product, using an established evaluation path while already familiar with Observability more broadly.
+- IBM Cloud Logs framing: IBM Cloud Logs was based on Coralogix's white-label product. Victor's Figma work explored IBM product conventions and scoped manual overhaul work. Explored states are not automatically shipped states.
+- Illustration framing: collaborative workgroup, early Sketch-to-Figma trial, co-design and contribution across concepts, reusable components, guidance, documentation, review, light-mode adaptation, and mentoring.
+- Closing reflection: research and exploration can save time by reducing uncertainty and uncovering valuable information, while visual craft can create clarity and moments of delight.
 
 ## Reviewed artifacts
 
@@ -88,13 +96,16 @@ Event Notifications was Victor's first self-led product-design journey. The flow
 
 ## Claim boundaries
 
-- Describe Event Notifications as Victor's first self-led product-design journey, with collaborative attribution.
-- Present the authentic flow as the main work and the high-fidelity component as supporting work.
+- Describe Event Notifications as Victor's first assigned end-to-end research and design process, with product-manager and design-lead collaboration.
+- State that the alternative was proposed and concept-tested. Do not claim the original flow was defective or that the alternative shipped.
+- Present the authentic flow as the main Event Notifications evidence and the high-fidelity component as supporting work.
+- Present the Monitoring work as a heuristic evaluation of a specific product, not Victor's introduction to Observability generally.
+- Describe IBM Cloud Logs accurately as based on Coralogix's white-label product. The Figma explorations tested IBM consistency and scoped manual work; they do not prove every explored state shipped.
 - Do not use the phrase `clearest example`.
 - Do not imply Sysdig Secure or IBM Cloud Logs are release context for Event Notifications.
 - Keep the technical diagram contextual and visually subordinate.
 - Keep anonymous research evidence attached to Event Notifications.
-- Describe the illustration system as collaborative, reusable method-building rather than sole ownership of IBM Cloud's visual language.
+- Describe the illustration system as a collaborative workgroup and reusable method-building effort rather than Victor's sole ownership of IBM Cloud's visual language.
 
 ## Required verification
 

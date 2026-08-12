@@ -20,7 +20,7 @@ IBM Cloud product and visual-systems work across complex workflows, implementati
 
 ## Page Intro
 
-I learned a technical platform, then used product and visual design to make its systems easier to understand.
+I learned the technical system, then used research, product design, and visual storytelling to help other people understand it.
 
 ## Metadata
 
@@ -31,31 +31,29 @@ I learned a technical platform, then used product and visual design to make its 
 
 ## Section Headings
 
-- Learning the system shaped how I learned to design.
-- Shape the flow before polishing the screen.
-- Make critique useful after the meeting.
+- Learn the system, then help other people see it.
+- Use research to find a more focused path.
+- Use exploration to understand the work ahead.
 - Move from making images to defining a method.
-- Design the next step.
+- Research, exploration, and moments of delight.
 
 ## Body Copy
 
-I joined IBM Cloud while learning observability, Carbon, and a large organization at the same time. Technical diagrams helped me map the environment before I started changing flows.
+I ramped up on cloud infrastructure, observability, UX and UI design, and enterprise development. Documentation and hands-on product exploration helped the pieces come together.
 
-Over three years, the work taught me to frame product problems, turn research into design choices, and build visual methods other designers could reuse.
+I learned to apply that technical understanding through product flows, illustrations, narratives, and presentations. The goal was not to simplify the technology away. It was to make the system easier to understand and act on.
 
 Events, metrics, and logs moved through a shared technical environment.
 
-Proof 01 · First self-led product journey
+Proof 01 · End-to-end research and design
 
-Event Notifications was my first self-led product-design journey. I worked from co-design and flow framing through a high-fidelity prototype, moderated testing, synthesis, and recommendation.
+Event Notifications was the first project where I was assigned to conduct the end-to-end research and design process, then concept-test the design. I worked with the product manager and my design lead to propose an alternative way to send a notification.
 
-The work began with the sequence, not a new visual language.
+The opportunity was to consolidate two related concepts into one without losing an effective way to complete the task.
 
-Users had to understand sources, destinations, conditions, and the subscription they were building. I organized co-design workshops and helped consolidate setup into a faster sequence through Details, Sources, Destinations, and Review.
+The proposed structure also made it easier to store and reuse the different demographics or groups that notifications were sent to. I explored the sequence through co-design, a high-fidelity prototype, moderated concept testing, synthesis, and recommendations.
 
-For conditions, I used a familiar filter model and revealed compound logic only when needed. I built the high-fidelity prototype, prepared and moderated sessions, synthesized findings, and presented recommendations. The flow was the main body of work.
-
-Alongside it, I supported Sysdig Secure and IBM Cloud Logs through reviews, UI and icon work, Design Intent Review, and implementation follow-up. I worked with UI developers to resolve four dark-mode issues.
+For conditions, I used a familiar filter model and revealed compound logic only when needed. This was a proposed and concept-tested alternative, not a claim that the original was defective or that the alternative shipped.
 
 Testing the flow
 
@@ -65,27 +63,29 @@ The findings sharpened hierarchy, terminology, and expectations for reusable des
 
 I took this component into high fidelity, focusing on hierarchy, connection status, and actions.
 
-Proof 02 · Turned findings into action
+Proof 02 · Review and adaptation
 
-A review mattered when it left the team with a priority, a backlog item, or a clearer implementation choice.
+A Monitoring heuristic evaluation revealed a large set of visual and UX issues. Later, IBM Cloud Logs explorations tested how an external product could align with IBM Cloud and helped expose the manual work an overhaul would require.
 
-Finding the issue was only the first step.
+Review the product, then use the findings to scope a credible next move.
 
-I joined D&UX reviews across Logging, Monitoring, and Security, then brought repeated findings back to squads and design leadership. An Improvement Jam separated implementation fixes from wider product questions and translated the work into a UX backlog.
+My first major Monitoring review followed an established heuristic-evaluation path. I already understood the broader Observability space, but I was new to this specific product. The review logged a large number of visual and UX issues for the team to investigate.
 
-The same habit carried into Activity Tracker concepts, dark-mode reviews, Figma-library contributions, a Monitoring heuristic evaluation, and technical-diagram work with the Observability documentation team.
+IBM Cloud Logs was based on Coralogix, an external white-label observability product. In Figma, I explored how it could adapt to IBM branding and IBM Cloud product conventions across color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes.
 
-Reconstructed working method
+Those explorations tested visual consistency and identified where the first overhaul would need manual intervention. These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.
+
+Working method
 
 Proof 03 · Built visual methods for reuse
 
-The illustration work changed when I started documenting how another designer could build with the same language.
+The illustration work began as a collaborative workgroup and an early trial of moving the illustration workflow from Sketch to Figma.
 
-I began with individual assignments. The useful shift was making the construction repeatable.
+We began with illustrations for our own products, then developed a method that other designers could inspect and extend.
 
-In 2021, I developed Cloud and DevOps world-page assets, joined a Developer Services illustration squad, and facilitated a mini-jam about where the visual language could go next.
+I participated as a co-designer. My contributions included product illustrations and visual concepts, reusable Figma components, construction and styling guidance, documentation, reviews of other designers' work, light-mode adaptation, and mentoring or onboarding contributors.
 
-By 2022, I was mentoring designers through the documentation, helping develop a Figma kit, supporting light-mode testing, and helping restart the Cloud Illustration Squad.
+Over time, the work expanded across Developer Services and more broadly across IBM Cloud. The artifacts below show the shared construction logic and range without presenting the system as my sole creation.
 
 Designed for reuse
 
@@ -101,7 +101,9 @@ A reduced service-icon set carried the same geometry and color discipline into s
 
 What changed
 
-IBM Cloud taught me to understand the system before proposing the screen. Over time, that became a habit: map the environment, frame the flow, test the idea, and leave the work clearer for the next person.
+I ramped up quickly in my technical knowledge and learned to apply it through illustrations, narratives, and presentations that made technical ideas easier to understand.
+
+Design can save time by reducing uncertainty, uncover valuable information, and turn what we learn into something useful and compelling. It can also make room for great, neat things that bring delight to a technical experience.
 
 ## Images
 
