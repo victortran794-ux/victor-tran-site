@@ -388,7 +388,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
     '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img'
-  ));
+  )).filter((img) => !img.closest('[aria-controls="mendenhall-archive-dialog"]'));
   if (!pageImgs.length) return;
 
   let current = 0;

@@ -152,6 +152,48 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
     .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
     .graphic-archive-v2 .graphic-illustrations { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.7rem, 2vw, 1.5rem); align-items: start; }
+    .graphic-archive-v2 .mendenhall-gallery-poster { background: color-mix(in srgb, var(--cream) 7%, transparent); }
+    .graphic-archive-v2 .mendenhall-archive-trigger { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 933 / 1600; padding: clamp(.35rem, .7vw, .7rem); border: 0; background: transparent; color: inherit; cursor: zoom-in; overflow: hidden; }
+    .graphic-archive-v2 .mendenhall-archive-trigger > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .graphic-archive-v2 .mendenhall-archive-cue { position: absolute; right: .75rem; bottom: .75rem; display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid rgba(255,255,255,.76); border-radius: 50%; background: rgba(17,17,17,.86); color: #fff; opacity: 0; transition: opacity .2s ease; }
+    .graphic-archive-v2 .mendenhall-archive-cue::before { content: "↗"; font-size: .9rem; }
+    .graphic-archive-v2 .mendenhall-archive-trigger:hover .mendenhall-archive-cue,
+    .graphic-archive-v2 .mendenhall-archive-trigger:focus-visible .mendenhall-archive-cue { opacity: 1; }
+    body.mendenhall-archive-open { overflow: hidden; padding-right: var(--mendenhall-scrollbar, 0); }
+    .graphic-archive-v2 .mendenhall-archive-dialog { width: min(1480px, calc(100vw - 42px)); height: min(900px, calc(100dvh - 42px)); max-width: none; max-height: none; margin: auto; padding: 0; border: 0; background: #fff9ea; color: #073f49; box-shadow: 0 30px 100px rgba(0,0,0,.52); overflow: hidden; }
+    .graphic-archive-v2 .mendenhall-archive-dialog::backdrop { background: rgba(7,18,22,.8); backdrop-filter: blur(7px); }
+    .graphic-archive-v2 .mendenhall-archive-topbar { height: 72px; padding: 0 22px 0 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(7,63,73,.24); background: #fff9ea; }
+    .graphic-archive-v2 .mendenhall-archive-topbar p { margin: 0; font: 700 11px/1.2 'Source Code Pro', monospace; letter-spacing: .11em; text-transform: uppercase; }
+    .graphic-archive-v2 .mendenhall-archive-close { width: 48px; height: 48px; border: 1px solid #073f49; border-radius: 50%; background: transparent; color: #073f49; font-size: 22px; cursor: pointer; }
+    .graphic-archive-v2 .mendenhall-archive-close:hover { background: #073f49; color: #fff9ea; }
+    .graphic-archive-v2 .mendenhall-archive-layout { height: calc(100% - 72px); display: grid; grid-template-columns: minmax(0,1fr) minmax(320px,390px); }
+    .graphic-archive-v2 .mendenhall-archive-stage { position: relative; min-width: 0; min-height: 0; padding: 30px; background: #073f49; overflow: hidden; }
+    .graphic-archive-v2 .mendenhall-archive-master { position: absolute; inset: 30px; display: block; width: calc(100% - 60px) !important; height: calc(100% - 60px) !important; max-width: none; max-height: none; object-fit: contain; border: 0; background: transparent; box-shadow: 0 22px 58px rgba(0,0,0,.35); }
+    .graphic-archive-v2 .mendenhall-archive-master[hidden] { display: none; }
+    .graphic-archive-v2 .mendenhall-archive-details { overflow: auto; padding: 42px 34px 36px; border-left: 1px solid rgba(7,63,73,.24); background: #fff9ea; }
+    .graphic-archive-v2 .mendenhall-archive-kicker { margin: 0 0 12px; color: #a5232b; font: 700 10px/1.35 'Source Code Pro', monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .graphic-archive-v2 .mendenhall-archive-details h2 { margin: 0 0 14px; font: clamp(38px,3.2vw,52px)/1 'Playfair Display', Georgia, serif; letter-spacing: -.025em; }
+    .graphic-archive-v2 .mendenhall-archive-lede { margin: 0 0 28px; color: #365d63; font: 16px/1.55 'Playfair Display', Georgia, serif; }
+    .graphic-archive-v2 .mendenhall-archive-metadata { display: grid; gap: 12px; margin: 0 0 34px; padding: 20px 0; border-top: 1px solid rgba(7,63,73,.24); border-bottom: 1px solid rgba(7,63,73,.24); }
+    .graphic-archive-v2 .mendenhall-archive-metadata div { display: grid; grid-template-columns: 82px 1fr; gap: 12px; }
+    .graphic-archive-v2 .mendenhall-archive-metadata dt,
+    .graphic-archive-v2 .mendenhall-archive-views-title { font: 700 10px/1.35 'Source Code Pro', monospace; letter-spacing: .08em; text-transform: uppercase; color: #365d63; }
+    .graphic-archive-v2 .mendenhall-archive-metadata dd { margin: 0; font: 14px/1.4 Inter, sans-serif; }
+    .graphic-archive-v2 .mendenhall-archive-views-title { margin: 0 0 12px; color: #073f49; }
+    .graphic-archive-v2 .mendenhall-archive-views { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .graphic-archive-v2 .mendenhall-archive-view { min-height: 48px; padding: 0; border: 1px solid rgba(7,63,73,.28); background: #fff9ea; color: #073f49; cursor: pointer; }
+    .graphic-archive-v2 .mendenhall-archive-view img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #073f49; }
+    .graphic-archive-v2 .mendenhall-archive-view[aria-pressed="true"] { border: 3px solid #d62d36; }
+    @media (hover: none) { .graphic-archive-v2 .mendenhall-archive-cue { opacity: 1; } }
+    @media (max-width: 800px) {
+      .graphic-archive-v2 .mendenhall-archive-dialog { width: 100vw; height: 100dvh; margin: 0; }
+      .graphic-archive-v2 .mendenhall-archive-topbar { height: 64px; padding-left: 18px; }
+      .graphic-archive-v2 .mendenhall-archive-layout { height: calc(100% - 64px); display: block; overflow: auto; }
+      .graphic-archive-v2 .mendenhall-archive-stage { height: 62dvh; padding: 18px; }
+      .graphic-archive-v2 .mendenhall-archive-master { inset: 18px; width: calc(100% - 36px) !important; height: calc(100% - 36px) !important; box-shadow: none; }
+      .graphic-archive-v2 .mendenhall-archive-details { overflow: visible; padding: 28px 20px 42px; border: 0; }
+      .graphic-archive-v2 .mendenhall-archive-details h2 { font-size: 38px; }
+    }
     .graphic-archive-v2 .graphic-slides.is-compact { display: block; columns: 4; column-gap: 8px; }
     .graphic-archive-v2 .graphic-slides.is-compact figure { break-inside: avoid; margin: 0 0 8px; }
     .graphic-archive-v2 .graphic-slides.is-compact img { width: 100%; }
@@ -373,17 +415,46 @@ GRAPHIC_PRIMARY = r'''
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop"><figcaption>Little Shop</figcaption></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz"><figcaption>The Wiz</figcaption></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-3.jpg" width="1120" height="1600" alt="Tran Designer"><figcaption>Tran Designer</figcaption></figure>
-            <figure class="archive-frame" data-live-primary data-viewer-title="Mendenhall">
-              <img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Mendenhall type specimen reading from the heart of the frozen glacier">
-              <template data-viewer-picks>
-                <img data-viewer-pick src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Mendenhall letterforms spelling from the heart of the frozen glacier">
-                <img data-viewer-pick src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Complete Mendenhall lowercase alphabet and poster composition">
-                <img data-viewer-pick src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Hand-built Mendenhall letter studies exploring geometric strokes and angled terminals">
-              </template>
-              <figcaption>Mendenhall</figcaption>
+            <figure class="archive-frame mendenhall-gallery-poster" data-live-primary>
+              <button type="button" class="mendenhall-archive-trigger" aria-haspopup="dialog" aria-controls="mendenhall-archive-dialog" aria-label="Open archive: Mendenhall type design">
+                <img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Complete Mendenhall type specimen poster">
+                <span class="mendenhall-archive-cue" aria-hidden="true"></span>
+              </button>
             </figure>
           </div>
         </section>
+        <dialog class="mendenhall-archive-dialog" id="mendenhall-archive-dialog" data-mendenhall-dialog aria-labelledby="mendenhall-archive-title">
+          <div class="mendenhall-archive-topbar">
+            <p>Graphic Design archive</p>
+            <button type="button" class="mendenhall-archive-close" aria-label="Close Mendenhall archival view" autofocus><span aria-hidden="true">×</span></button>
+          </div>
+          <div class="mendenhall-archive-layout">
+            <div class="mendenhall-archive-stage">
+              <img class="mendenhall-archive-master" data-mendenhall-master="poster" data-src="images/gg-illus-4.jpg" width="933" height="1600" alt="Complete Mendenhall type specimen poster">
+              <img class="mendenhall-archive-master" data-mendenhall-master="sentence" data-src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Mendenhall sentence specimen reading from the heart of the frozen glacier" hidden>
+              <img class="mendenhall-archive-master" data-mendenhall-master="alphabet" data-src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Complete Mendenhall lowercase alphabet and type specimen sheet" hidden>
+              <img class="mendenhall-archive-master" data-mendenhall-master="sketches" data-src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Hand-built Mendenhall letterform sketches and physical studies" hidden>
+            </div>
+            <aside class="mendenhall-archive-details" aria-label="Mendenhall project details">
+              <p class="mendenhall-archive-kicker">2015 type design exploration</p>
+              <h2 id="mendenhall-archive-title">Mendenhall</h2>
+              <p class="mendenhall-archive-lede">A student type-design study shaped around geometric letterforms, a glacier-inspired sentence specimen, and hands-on form studies.</p>
+              <dl class="mendenhall-archive-metadata">
+                <div><dt>Role</dt><dd>Type designer</dd></div>
+                <div><dt>Format</dt><dd>Poster and letterform studies</dd></div>
+                <div><dt>Status</dt><dd>Student exploration</dd></div>
+              </dl>
+              <p class="mendenhall-archive-views-title">Project views</p>
+              <div class="mendenhall-archive-views" aria-label="Available Mendenhall views">
+                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="poster" aria-pressed="true" aria-label="View complete type poster"><img loading="lazy" decoding="async" data-src="images/gg-illus-4.jpg" width="933" height="1600" alt="Complete Mendenhall poster thumbnail"></button>
+                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="sentence" aria-pressed="false" aria-label="View sentence specimen"><img loading="lazy" decoding="async" data-src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Sentence specimen thumbnail"></button>
+                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="alphabet" aria-pressed="false" aria-label="View complete alphabet specimen"><img loading="lazy" decoding="async" data-src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Alphabet specimen thumbnail"></button>
+                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="sketches" aria-pressed="false" aria-label="View sketches and physical studies"><img loading="lazy" decoding="async" data-src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Letterform studies thumbnail"></button>
+              </div>
+              <p class="mendenhall-archive-status sr-only" aria-live="polite">Complete poster view selected.</p>
+            </aside>
+          </div>
+        </dialog>
         <section class="archive-chapter" aria-labelledby="graphic-wide-title">
           <div class="archive-chapter-head"><h2 id="graphic-wide-title">Wide-format information design</h2></div>
           <figure class="archive-frame graphic-wide" data-live-primary><img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Wide informational graphic"><figcaption>Infographic</figcaption></figure>
@@ -470,6 +541,8 @@ def build(file_name: str, body_classes: str, data_archive: str, primary: str, sk
     html = replace_one(html, r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{og_image}">', 'Open Graph image', re.I)
     html = replace_one(html, r'<meta property="og:image:width" content="[^"]*">', f'<meta property="og:image:width" content="{og_width}">', 'Open Graph image width', re.I)
     html = replace_one(html, r'<meta property="og:image:height" content="[^"]*">', f'<meta property="og:image:height" content="{og_height}">', 'Open Graph image height', re.I)
+    if file_name == 'graphicgallery.html':
+        html = replace_one(html, r'</body>', '  <script src="js/graphicgallery.js"></script>\n</body>', 'graphic archive script insertion', re.I)
     page.write_text(html, encoding='utf-8')
 
 
