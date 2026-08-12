@@ -95,6 +95,8 @@ Early sketches narrowed composition, service metaphors, and hierarchy before fin
 
 Shared base, shadow, color, gradient, and lighting rules made the illustration language inspectable and reusable.
 
+Complete exports for six product stories show how shared perspective and lighting adapted across themes without flattening each service into the same composition.
+
 Shared perspective and lighting rules connected distinct product stories without making them identical.
 
 A reduced service-icon set carried the same geometry and color discipline into smaller surfaces.
@@ -118,5 +120,17 @@ Design can save time by reducing uncertainty, uncover valuable information, and 
 - IBM Cloud subscription card component explorations showing hierarchy, status, and connected services: images/ibm-cloud-card-component-design.png
 - IBM Cloud concept sketches progressing through shared isometric construction studies: images/ibm-cloud-concept-to-final.png
 - IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules: images/ibm-cloud-visual-system-foundations.png
+- Code Engine illustration in the light theme: images/ibm-cloud-code-engine-light.png
+- Code Engine illustration in the dark theme: images/ibm-cloud-code-engine-dark.png
+- Observability illustration in the light theme: images/ibm-cloud-observability-light.png
+- Observability illustration in the dark theme: images/ibm-cloud-observability-dark.png
+- Container Registry illustration in the light theme: images/ibm-cloud-registry-light.png
+- Container Registry illustration in the dark theme: images/ibm-cloud-registry-dark.png
+- Satellite illustration in the light theme: images/ibm-cloud-satellite-light.png
+- Satellite illustration in the dark theme: images/ibm-cloud-satellite-dark.png
+- IBM Cloud Kubernetes Service illustration in the light theme: images/ibm-cloud-iks-light.png
+- IBM Cloud Kubernetes Service illustration in the dark theme: images/ibm-cloud-iks-dark.png
+- Red Hat OpenShift on IBM Cloud illustration in the light theme: images/ibm-cloud-roks-light.png
+- Red Hat OpenShift on IBM Cloud illustration in the dark theme: images/ibm-cloud-roks-dark.png
 - Four IBM Cloud isometric compositions using shared perspective, lighting, and product metaphors: images/ibm-cloud-isometric-compositions.png
 - IBM Cloud service icons built from consistent isometric geometry and color: images/ibm-cloud-service-icons.png

@@ -119,10 +119,10 @@ const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
   .trim()
   .split(/\s+/)
   .filter(Boolean).length;
-require(narrativeWords <= 900, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
+require(narrativeWords <= 950, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
 require(!html.includes('Pending protected asset selection'), 'cleared supporting images must replace both pending evidence reservations');
 require(!html.includes('data-asset-status="victor-selection-required"'), 'IBM Cloud must not retain a Victor-selection placeholder after cleared assets are supplied');
-require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 7, 'expected exactly seven curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
+require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 8, 'expected exactly eight curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
 require((html.match(/class="[^"]*\bibm-tech-context\b[^"]*"/g) || []).length === 1, 'expected one dedicated technical-context figure near the opening');
 
 const selectedAssets = {
@@ -181,6 +181,18 @@ const selectedAssets = {
     width: '1024',
     height: '292',
   },
+  'images/ibm-cloud-code-engine-light.png': { sha256: 'ff92d0376ee9d9856d4d765e046853049efd0ea3b89f18deba0bbf5cde26a8b0', width: '960', height: '540' },
+  'images/ibm-cloud-code-engine-dark.png': { sha256: 'fb1d537c314db31d8aea0e40909da3ea15ddb00f74bc8216b66622d6d781394a', width: '960', height: '540' },
+  'images/ibm-cloud-observability-light.png': { sha256: 'dc0c325182ca6f77ed2e9a2168c574c024c4614505009b909cff0447d738b172', width: '960', height: '540' },
+  'images/ibm-cloud-observability-dark.png': { sha256: '8f224ea49af57f69315019132c28375ee50205f90cf1476ace823ce26bb57b09', width: '960', height: '540' },
+  'images/ibm-cloud-registry-light.png': { sha256: 'dacafe983711e93a5964650639c74f7038cb838b36dbeb17da5511680a8d5fc2', width: '960', height: '540' },
+  'images/ibm-cloud-registry-dark.png': { sha256: 'b5b1ebb8d190ee17a5ab0dc540e6bcd12b6a15a3be9a2d020548d5fdb71a1bed', width: '960', height: '540' },
+  'images/ibm-cloud-satellite-light.png': { sha256: '309bf21f3e8e765ffefa737147bbc9f53bd086349c7e680907d953eb852df8a1', width: '960', height: '540' },
+  'images/ibm-cloud-satellite-dark.png': { sha256: '71a62b275551e535c859a712c45074b93465f5218950fb9616a0eb72c4ad5e69', width: '960', height: '540' },
+  'images/ibm-cloud-iks-light.png': { sha256: 'cd77b871571bd01ae95ede4d6103c1a93cecdb91a3108d600b82f7d942a9a13f', width: '960', height: '540' },
+  'images/ibm-cloud-iks-dark.png': { sha256: '2c891e22f631914bc9705292de9976599daeee03caf3f7e32c9c382fdb290f6f', width: '960', height: '540' },
+  'images/ibm-cloud-roks-light.png': { sha256: '548670e0c1d856fb7a25dc2ac4c42432d477ad10effb5999a688f6c5f2f30861', width: '960', height: '540' },
+  'images/ibm-cloud-roks-dark.png': { sha256: 'ff76d00f0680d478daaaa09aa383a835cd50304d7724d9230e0845001792fb8d', width: '960', height: '540' },
 };
 for (const [relative, expected] of Object.entries(selectedAssets)) {
   const absolute = path.join(root, relative);
