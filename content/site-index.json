@@ -162,11 +162,11 @@
     "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
     "contentFile": "content/ibmcloud.md",
     "headings": [
-      "Learning the system shaped how I learned to design.",
-      "Shape the flow before polishing the screen.",
-      "Make critique useful after the meeting.",
+      "Learn the system, then help other people see it.",
+      "Use research to find a more focused path.",
+      "Use exploration to understand the work ahead.",
       "Move from making images to defining a method.",
-      "Design the next step."
+      "Research, exploration, and moments of delight."
     ],
     "images": [
       {
@@ -214,8 +214,8 @@
         "alt": "IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules"
       },
       {
-        "src": "images/ibm-cloud-isometric-compositions.png",
-        "alt": "Four IBM Cloud isometric compositions using shared perspective, lighting, and product metaphors"
+        "src": "images/ibm-cloud-code-engine-light.png",
+        "alt": "Code Engine illustration in the light theme"
       }
     ],
     "projects": []

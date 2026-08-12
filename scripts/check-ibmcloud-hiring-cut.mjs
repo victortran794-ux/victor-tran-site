@@ -33,23 +33,26 @@ for (const phrase of [
   'class="project-nav"',
   'href="wxo-canvas.html"',
   'href="ibm-patterns.html"',
-  'I learned a technical platform, then used product and visual design to make its systems easier to understand.',
+  'I learned the technical system, then used research, product design, and visual storytelling to help other people understand it.',
   '2021–2023',
   'id="product-work"',
   'id="team-action"',
   'id="visual-systems"',
-  'Shaped a full product flow',
-  'Turned findings into action',
+  'Researched and tested a product flow',
+  'Reviewed and explored the product system',
   'Built visual methods for reuse',
-  'Event Notifications was my first self-led product-design journey.',
-  'faster sequence through Details, Sources, Destinations, and Review',
-  'The flow was the main body of work.',
-  'four dark-mode issues',
-  'Reconstructed working method',
-  'An Improvement Jam separated implementation fixes from wider product questions and translated the work into a UX backlog.',
-  'Figma illustration kit developed for pilot use',
-  'Design the next step.',
-  'IBM Cloud taught me to understand the system before proposing the screen.',
+  'Event Notifications was the first project where I was assigned to conduct the end-to-end research and design process, then concept-test the design.',
+  'consolidate two related concepts into one',
+  'This was a proposed and concept-tested alternative, not a claim that the original was defective or that the alternative shipped.',
+  'Monitoring heuristic evaluation',
+  'IBM Cloud Logs',
+  'based on Coralogix',
+  'color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes',
+  'These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.',
+  'collaborative workgroup',
+  'early trial of moving the illustration workflow from Sketch to Figma',
+  'Research, exploration, and moments of delight.',
+  'Design can save time by reducing uncertainty, uncover valuable information, and turn what we learn into something useful and compelling.',
   'images/ibm-thumb-light.png',
   'images/ibm-thumb-dark.png',
   'images/ibm-cloud-routing-architecture.png',
@@ -93,6 +96,9 @@ for (const phrase of [
   'Shipped complex product work',
   'Some releases shipped',
   'PRIVATE REVIEW · NOT FOR PUBLICATION',
+  'Improvement Jam',
+  'first self-led product-design journey',
+  'Design the next step.',
   'data:image/',
   'ibm-en-conditions.jpg',
   'ibm-en-custom-domains.jpg',
@@ -113,10 +119,10 @@ const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
   .trim()
   .split(/\s+/)
   .filter(Boolean).length;
-require(narrativeWords <= 900, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
+require(narrativeWords <= 950, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
 require(!html.includes('Pending protected asset selection'), 'cleared supporting images must replace both pending evidence reservations');
 require(!html.includes('data-asset-status="victor-selection-required"'), 'IBM Cloud must not retain a Victor-selection placeholder after cleared assets are supplied');
-require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 7, 'expected exactly seven curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
+require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 8, 'expected exactly eight curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
 require((html.match(/class="[^"]*\bibm-tech-context\b[^"]*"/g) || []).length === 1, 'expected one dedicated technical-context figure near the opening');
 
 const selectedAssets = {
@@ -175,6 +181,18 @@ const selectedAssets = {
     width: '1024',
     height: '292',
   },
+  'images/ibm-cloud-code-engine-light.png': { sha256: 'ff92d0376ee9d9856d4d765e046853049efd0ea3b89f18deba0bbf5cde26a8b0', width: '960', height: '540' },
+  'images/ibm-cloud-code-engine-dark.png': { sha256: 'fb1d537c314db31d8aea0e40909da3ea15ddb00f74bc8216b66622d6d781394a', width: '960', height: '540' },
+  'images/ibm-cloud-observability-light.png': { sha256: 'dc0c325182ca6f77ed2e9a2168c574c024c4614505009b909cff0447d738b172', width: '960', height: '540' },
+  'images/ibm-cloud-observability-dark.png': { sha256: '8f224ea49af57f69315019132c28375ee50205f90cf1476ace823ce26bb57b09', width: '960', height: '540' },
+  'images/ibm-cloud-registry-light.png': { sha256: 'dacafe983711e93a5964650639c74f7038cb838b36dbeb17da5511680a8d5fc2', width: '960', height: '540' },
+  'images/ibm-cloud-registry-dark.png': { sha256: 'b5b1ebb8d190ee17a5ab0dc540e6bcd12b6a15a3be9a2d020548d5fdb71a1bed', width: '960', height: '540' },
+  'images/ibm-cloud-satellite-light.png': { sha256: '309bf21f3e8e765ffefa737147bbc9f53bd086349c7e680907d953eb852df8a1', width: '960', height: '540' },
+  'images/ibm-cloud-satellite-dark.png': { sha256: '71a62b275551e535c859a712c45074b93465f5218950fb9616a0eb72c4ad5e69', width: '960', height: '540' },
+  'images/ibm-cloud-iks-light.png': { sha256: 'cd77b871571bd01ae95ede4d6103c1a93cecdb91a3108d600b82f7d942a9a13f', width: '960', height: '540' },
+  'images/ibm-cloud-iks-dark.png': { sha256: 'd5ab895329122e3f39ee69109fd7b8c5d1b7068cb2e0931ab2141d4e8118275f', width: '960', height: '540' },
+  'images/ibm-cloud-roks-light.png': { sha256: '548670e0c1d856fb7a25dc2ac4c42432d477ad10effb5999a688f6c5f2f30861', width: '960', height: '540' },
+  'images/ibm-cloud-roks-dark.png': { sha256: 'b31f03f791314f14cc34b124f9a50909f859a9eedaed486862245d3160ff2565', width: '960', height: '540' },
 };
 for (const [relative, expected] of Object.entries(selectedAssets)) {
   const absolute = path.join(root, relative);

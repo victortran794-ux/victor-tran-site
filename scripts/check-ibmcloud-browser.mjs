@@ -145,8 +145,8 @@ try {
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
       assert((theme === 'dark' ? state.theme === 'dark' : !state.theme || state.theme === 'light') && state.stored === theme, `theme failed ${viewport.label} ${theme}`);
       assert(state.overflow === 0, `${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images === 14 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
-      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 7 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.images === 26 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 8 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
       assert(state.heroBorder === '0px', `crowded header divider returned at ${viewport.label} ${theme}`);
       if (viewport.width === 390) {
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
@@ -162,6 +162,14 @@ try {
         await cdp.evaluate(`document.getElementById('team-action').scrollIntoView({block:'start',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-1440-dark-team-action.png');
+        await cdp.evaluate(`document.querySelector('.ibm-theme-family').scrollIntoView({block:'start',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('ibm-cloud-1440-dark-theme-family.png');
+      }
+      if (viewport.width === 390 && theme === 'dark') {
+        await cdp.evaluate(`document.querySelector('.ibm-theme-family').scrollIntoView({block:'start',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('ibm-cloud-390-dark-theme-family.png');
       }
       checks += 1;
     }
@@ -169,7 +177,7 @@ try {
 
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=14 proofs=3 artifacts=7 tech_context=1 reservations=0 overflow=0 public=pass controls=pass`);
+  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=26 proofs=3 artifacts=8 tech_context=1 reservations=0 overflow=0 public=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();
