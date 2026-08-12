@@ -362,7 +362,7 @@ try {
         }
 
         const state = await cdp.evaluate(`(async () => {
-          const images = [...document.querySelectorAll('main img')];
+          const images = [...document.querySelectorAll('main img:not(dialog img)')];
           images.forEach((image) => { image.loading = 'eager'; });
           await Promise.all(images.map(async (image) => {
             try { await image.decode(); } catch {}
@@ -418,6 +418,10 @@ try {
             graphicEdc: document.querySelectorAll('.graphic-edc img').length,
             graphicSlides: document.querySelectorAll('.graphic-slides.is-compact img').length,
             graphicColumns: document.querySelector('.graphic-slides.is-compact') ? getComputedStyle(document.querySelector('.graphic-slides.is-compact')).columnCount : null,
+            mendenhallButtons: document.querySelectorAll('[data-mendenhall-picker] button').length,
+            mendenhallPoster: document.querySelectorAll('.mendenhall-archive-trigger > img').length,
+            mendenhallViews: document.querySelectorAll('[data-mendenhall-view]').length,
+            mendenhallFit: document.querySelector('.mendenhall-archive-trigger > img') ? getComputedStyle(document.querySelector('.mendenhall-archive-trigger > img')).objectFit : null,
           };
         })()`);
 
@@ -456,6 +460,39 @@ try {
           const expectedGraphicColumns = viewport.mobile ? '2' : viewport.width === 768 ? '4' : '5';
           assert(state.graphicColumns === expectedGraphicColumns,
             `graphicgallery.html: expected ${expectedGraphicColumns} presentation columns; found ${state.graphicColumns}`);
+          assert(state.mendenhallButtons === 0 && state.mendenhallPoster === 1 && state.mendenhallViews === 4 && state.mendenhallFit === 'contain',
+            `graphicgallery.html: Mendenhall gallery/archive contract drifted: ${JSON.stringify({ buttons: state.mendenhallButtons, poster: state.mendenhallPoster, views: state.mendenhallViews, fit: state.mendenhallFit })}`);
+          if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
+            const mendenhall = await cdp.evaluate(`(async () => {
+              const trigger = document.querySelector('.mendenhall-archive-trigger');
+              trigger.click();
+              await new Promise((resolve) => setTimeout(resolve, 240));
+              const dialog = document.querySelector('[data-mendenhall-dialog]');
+              const buttons = [...dialog.querySelectorAll('[data-mendenhall-view]')];
+              const picks = [];
+              for (const button of buttons) {
+                button.click();
+                await new Promise((resolve) => setTimeout(resolve, 240));
+                const image = dialog.querySelector('[data-mendenhall-master]:not([hidden])');
+                try { await image.decode(); } catch {}
+                const stage = dialog.querySelector('.mendenhall-archive-stage').getBoundingClientRect();
+                const rect = image.getBoundingClientRect();
+                picks.push({ src: image.getAttribute('src'), loaded: image.complete && image.naturalWidth > 0, fit: getComputedStyle(image).objectFit, contained: rect.left >= stage.left - 1 && rect.right <= stage.right + 1 && rect.top >= stage.top - 1 && rect.bottom <= stage.bottom + 1 });
+              }
+              const posterButton = dialog.querySelector('[data-mendenhall-view="poster"]');
+              posterButton.click();
+              await new Promise((resolve) => setTimeout(resolve, 180));
+              const posterImage = dialog.querySelector('[data-mendenhall-master="poster"]');
+              try { await posterImage.decode(); } catch {}
+              return { open: dialog.open, title: dialog.querySelector('h2').textContent, focus: document.activeElement?.className || '', bodyLocked: document.body.classList.contains('mendenhall-archive-open'), views: buttons.length, selected: posterButton.getAttribute('aria-pressed'), posterVisible: !posterImage.hidden, picks };
+            })()`);
+            assert(mendenhall.open && mendenhall.title === 'Mendenhall' && mendenhall.bodyLocked && mendenhall.views === 4 && mendenhall.selected === 'true' && mendenhall.posterVisible && mendenhall.picks.every((pick) => pick.loaded && pick.fit === 'contain' && pick.contained),
+              `graphicgallery.html: expanded Mendenhall archive failed: ${JSON.stringify(mendenhall)}`);
+            await cdp.screenshot(`graphic-mendenhall-archive-${viewport.label}-${theme}.png`);
+            await cdp.key('Escape', 'Escape', 27);
+            const restored = await cdp.evaluate(`({ open: document.querySelector('[data-mendenhall-dialog]').open, locked: document.body.classList.contains('mendenhall-archive-open'), focus: document.activeElement?.className || '' })`);
+            assert(!restored.open && !restored.locked && restored.focus.includes('mendenhall-archive-trigger'), `graphicgallery.html: archive close/focus restoration failed: ${JSON.stringify(restored)}`);
+          }
         }
 
         if (theme === 'light' && !viewport.mobile) await checkLightbox(spec);

@@ -30,6 +30,7 @@ An energetic visual archive spanning identity, print, applications, presentation
 - Marks and applications
 - Events and print
 - Selected illustrations
+- Mendenhall
 - Wide-format information design
 
 ## Body Copy
@@ -45,6 +46,16 @@ Presentation design
 Brand applications
 
 Event graphics
+
+Graphic Design archive
+
+2015 type design exploration
+
+A student type-design study shaped around geometric letterforms, a glacier-inspired sentence specimen, and hands-on form studies.
+
+Project views
+
+Complete poster view selected.
 
 ## Images
 
@@ -85,5 +96,12 @@ Event graphics
 - Little Shop: images/gg-illus-1.jpg
 - The Wiz: images/gg-illus-2.jpg
 - Tran Designer: images/gg-illus-3.jpg
-- Tran Type: images/gg-illus-4.jpg
+- Complete Mendenhall type specimen poster: images/gg-illus-4.jpg
+- Mendenhall sentence specimen reading from the heart of the frozen glacier: images/mendenhall/type-thumbnail.png
+- Complete Mendenhall lowercase alphabet and type specimen sheet: images/mendenhall/mendenhall-layout.png
+- Hand-built Mendenhall letterform sketches and physical studies: images/mendenhall/mendenhall-sketches.png
+- Complete Mendenhall poster thumbnail: images/gg-illus-4.jpg
+- Sentence specimen thumbnail: images/mendenhall/type-thumbnail.png
+- Alphabet specimen thumbnail: images/mendenhall/mendenhall-layout.png
+- Letterform studies thumbnail: images/mendenhall/mendenhall-sketches.png
 - Wide informational graphic: images/gg-infographic.jpg
