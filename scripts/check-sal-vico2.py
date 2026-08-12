@@ -178,6 +178,27 @@ def main() -> int:
     need(".vico2-case-study img { height: auto; }" in shared_css, "responsive VicO2 images must override fixed HTML height attributes")
     need(".vico2-case-study figcaption," not in shared_css, "long figcaptions must not inherit the mono uppercase label treatment")
     need("--sal-project" in sal_css and "--sal-project-blue" in sal_css, "missing SAL project skin tokens")
+    for undefined_token in ["--space-7", "--tracking-label", "--text-small", "--dur-med"]:
+        need(
+            f"var({undefined_token})" not in shared_css + sal_css,
+            f"VicO2 CSS must not reference undefined token: {undefined_token}",
+        )
+    need(
+        "padding: var(--space-6) var(--space-5) var(--space-6) 0" in shared_css,
+        "shared VicO2 metadata must use the existing 24px spacing token",
+    )
+    need(
+        "letter-spacing: 0.08em" in shared_css and "letter-spacing: 0.08em" in sal_css,
+        "VicO2 labels must use the established uppercase tracking",
+    )
+    need(
+        "font-size: var(--text-label)" in sal_css,
+        "SAL archive labels must use the existing 13px label token",
+    )
+    need(
+        "transition: transform var(--duration-base) var(--ease-out)" in sal_css,
+        "SAL cover motion must use the existing base duration token",
+    )
     need(".sal-vico2-hero,\n.sal-vico2-case-study {" in sal_css, "SAL skin tokens must reach both hero and case-study components")
     need("@media (max-width: 700px)" in sal_css, "SAL layer needs narrow recomposition")
     need(".sal-vico2-cover-wall a:focus-visible" in sal_css,

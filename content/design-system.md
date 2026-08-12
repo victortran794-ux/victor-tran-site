@@ -245,7 +245,7 @@ Every accepted anatomy contract must specify Light/Dark behavior, exact-mobile c
 Known implementation gaps:
 
 - Provenance, withheld, protected, and unavailable states do not yet have completed shared CSS or markup anatomy.
-- Live CSS references including `--space-7`, `--tracking-label`, `--dur-med`, and `--text-small` still need deliberate definition, replacement, or page-local isolation before JSON can be described as a complete mirror of live CSS.
+- The August 11 shared-token hygiene pass replaced the unresolved `--space-7`, `--tracking-label`, `--dur-med`, and `--text-small` references with the existing spacing, label, and motion scale. JSON still requires a separate completeness review before it can be described as a full mirror of live CSS.
 - Iconography and expanded imagery treatments remain TBD.
 
 ---
