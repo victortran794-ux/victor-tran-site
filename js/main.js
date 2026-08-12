@@ -393,6 +393,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   let current = 0;
   const pageTitle = (document.querySelector('.page-header-title')?.textContent || 'Gallery').trim();
+  const defaultItems = pageImgs.map((img) => ({ src: img.src, alt: img.alt }));
+  let activeItems = defaultItems;
 
   // Build DOM
   const lb = document.createElement('div');
@@ -461,15 +463,14 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   }
 
   function buildThumbnails() {
-    if (thumbEls.length) return;
-
-    pageImgs.forEach((img, i) => {
+    lbStrip.replaceChildren();
+    activeItems.forEach((item, i) => {
       const btn = document.createElement('button');
       btn.className = 'lb-thumb';
       btn.setAttribute('aria-label', `Go to image ${i + 1}`);
       const ti = document.createElement('img');
-      ti.src = img.src;
-      ti.alt = img.alt;
+      ti.src = item.src;
+      ti.alt = item.alt;
       ti.loading = 'lazy';
       btn.appendChild(ti);
       btn.addEventListener('click', () => goTo(i));
@@ -484,9 +485,9 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   }
 
   function goTo(idx) {
-    current = (idx + pageImgs.length) % pageImgs.length;
-    const src = pageImgs[current].src;
-    const alt = pageImgs[current].alt;
+    current = (idx + activeItems.length) % activeItems.length;
+    const src = activeItems[current].src;
+    const alt = activeItems[current].alt;
 
     lbImg.classList.add('is-fading');
     setTimeout(() => {
@@ -495,7 +496,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       lbImg.classList.remove('is-fading');
     }, 180);
 
-    lbCount.textContent = `${current + 1} / ${pageImgs.length}`;
+    lbCount.textContent = `${current + 1} / ${activeItems.length}`;
     thumbEls.forEach((t, i) => t.classList.toggle('is-active', i === current));
     thumbEls[current].scrollIntoView({
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
@@ -505,6 +506,17 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   }
 
   function open(idx, trigger) {
+    const viewer = trigger?.closest('[data-viewer-title]');
+    const supplemental = viewer?.querySelector('template[data-viewer-picks]');
+    if (supplemental) {
+      const picks = Array.from(supplemental.content.querySelectorAll('[data-viewer-pick]'));
+      activeItems = [{ src: trigger.src, alt: trigger.alt }, ...picks.map((pick) => ({ src: pick.src, alt: pick.alt }))];
+      idx = 0;
+      lb.querySelector('.lb-title').textContent = viewer.dataset.viewerTitle || pageTitle;
+    } else {
+      activeItems = defaultItems;
+      lb.querySelector('.lb-title').textContent = pageTitle;
+    }
     buildThumbnails();
     goTo(idx);
     lastTrigger = trigger || document.activeElement;

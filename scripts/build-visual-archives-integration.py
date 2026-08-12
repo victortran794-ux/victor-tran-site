@@ -151,23 +151,6 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .graphic-brand-grid .is-four { grid-column: span 4; }
     .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
     .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
-    .graphic-archive-v2 .mendenhall-feature { --mendenhall-red: #d62d36; --mendenhall-ice: #a9c8ee; --mendenhall-peach: #ffb483; --mendenhall-ink: #073f49; --mendenhall-label: #fff9ea; margin-inline: calc(var(--page-x) * -1); padding: clamp(4rem, 8vw, 8rem) var(--page-x); background: var(--mendenhall-red); color: #fff9ea; }
-    .graphic-archive-v2 .mendenhall-feature .archive-chapter-head { border-color: var(--mendenhall-peach); }
-    .graphic-archive-v2 .mendenhall-feature .graphic-section-kicker { color: var(--mendenhall-label); }
-    .graphic-archive-v2 .mendenhall-intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(17rem, .75fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: end; }
-    .graphic-archive-v2 .mendenhall-intro p { max-width: 35rem; margin: 0; font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.55; }
-    .graphic-archive-v2 .mendenhall-picker { display: flex; flex-wrap: wrap; gap: .55rem; margin: 2rem 0 1rem; }
-    .graphic-archive-v2 .mendenhall-picker button { min-height: 44px; padding: .72rem 1rem; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: 700 .72rem/1 'Source Code Pro', monospace; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
-    .graphic-archive-v2 .mendenhall-picker button[aria-pressed="true"] { background: var(--mendenhall-ice); color: var(--mendenhall-ink); border-color: var(--mendenhall-ice); }
-    .graphic-archive-v2 .mendenhall-stage { min-height: clamp(28rem, 50vw, 46rem); background: var(--mendenhall-ink); overflow: hidden; }
-    .graphic-archive-v2 .mendenhall-view { display: none; width: 100%; min-height: inherit; margin: 0; place-items: center; }
-    .graphic-archive-v2 .mendenhall-view.is-active { display: grid; }
-    .graphic-archive-v2 .mendenhall-view img { width: 100%; height: auto; max-height: min(78vh, 56rem); object-fit: contain; }
-    .graphic-archive-v2 .mendenhall-view[data-mendenhall-view="poster"] img { width: min(100%, 54rem); max-height: none; }
-    .graphic-archive-v2 .mendenhall-view[data-mendenhall-view="specimen"] { padding: clamp(1rem, 4vw, 4rem); background: var(--mendenhall-ice); }
-    .graphic-archive-v2 .mendenhall-view[data-mendenhall-view="specimen"] img { width: min(100%, 31rem); max-height: none; }
-    .graphic-archive-v2 .mendenhall-view[data-mendenhall-view="studies"] { background: #f3eee6; }
-    .graphic-archive-v2 .mendenhall-caption { margin: 1rem 0 0; color: #fff9ea; font: 600 .74rem/1.5 'Source Code Pro', monospace; }
     .graphic-archive-v2 .graphic-illustrations { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.7rem, 2vw, 1.5rem); align-items: start; }
     .graphic-archive-v2 .graphic-slides.is-compact { display: block; columns: 4; column-gap: 8px; }
     .graphic-archive-v2 .graphic-slides.is-compact figure { break-inside: avoid; margin: 0 0 8px; }
@@ -198,9 +181,6 @@ GRAPHIC_CSS = r'''
       .graphic-archive-v2 .graphic-slides.is-compact { columns: 2; }
       .graphic-archive-v2 .graphic-illustrations { grid-template-columns: 1fr 1fr; }
       .graphic-archive-v2 .graphic-events { grid-template-columns: 1fr; }
-      .graphic-archive-v2 .mendenhall-intro { grid-template-columns: 1fr; }
-      .graphic-archive-v2 .mendenhall-stage { min-height: 18rem; }
-      .graphic-archive-v2 .mendenhall-picker { display: grid; grid-template-columns: 1fr 1fr; }
       .graphic-archive-v2 .archive-chapter-head { gap: .55rem; }
       .graphic-archive-v2 .archive-chapter-head h2 { font-size: clamp(2.35rem, 10.5vw, 3.8rem); }
     }
@@ -393,32 +373,17 @@ GRAPHIC_PRIMARY = r'''
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-1.jpg" width="1117" height="1600" alt="Little Shop"><figcaption>Little Shop</figcaption></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-2.jpg" width="1034" height="1600" alt="The Wiz"><figcaption>The Wiz</figcaption></figure>
             <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-3.jpg" width="1120" height="1600" alt="Tran Designer"><figcaption>Tran Designer</figcaption></figure>
-            <figure class="archive-frame" data-live-primary><img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Tran Type"><figcaption>Tran Type</figcaption></figure>
+            <figure class="archive-frame" data-live-primary data-viewer-title="Mendenhall">
+              <img loading="lazy" decoding="async" src="images/gg-illus-4.jpg" width="933" height="1600" alt="Mendenhall type specimen reading from the heart of the frozen glacier">
+              <template data-viewer-picks>
+                <img data-viewer-pick src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Mendenhall letterforms spelling from the heart of the frozen glacier">
+                <img data-viewer-pick src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Complete Mendenhall lowercase alphabet and poster composition">
+                <img data-viewer-pick src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Hand-built Mendenhall letter studies exploring geometric strokes and angled terminals">
+              </template>
+              <figcaption>Mendenhall</figcaption>
+            </figure>
           </div>
         </section>
-        <section class="archive-chapter mendenhall-feature" id="mendenhall-type" aria-labelledby="mendenhall-title">
-          <div class="mendenhall-intro">
-            <div class="archive-chapter-head">
-              <p class="graphic-section-kicker">Type design · 2015</p>
-              <h2 id="mendenhall-title">Mendenhall</h2>
-            </div>
-            <p>Type-design exploration by Victor Tran, developed while studying Graphic Design at Western Michigan University. The display alphabet translates glacier ice into rigid strokes, cut corners, and angled terminals.</p>
-          </div>
-          <div class="mendenhall-picker" data-mendenhall-picker role="group" aria-label="Choose a Mendenhall artifact">
-            <button type="button" aria-pressed="true" data-mendenhall-target="poster">Poster phrase</button>
-            <button type="button" aria-pressed="false" data-mendenhall-target="alphabet">Alphabet</button>
-            <button type="button" aria-pressed="false" data-mendenhall-target="specimen">Specimen</button>
-            <button type="button" aria-pressed="false" data-mendenhall-target="studies">Studies</button>
-          </div>
-          <div class="mendenhall-stage" aria-live="polite">
-            <figure class="mendenhall-view is-active" data-mendenhall-view="poster"><img loading="lazy" decoding="async" src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Mendenhall letterforms spelling from the heart of the frozen glacier"></figure>
-            <figure class="mendenhall-view" data-mendenhall-view="alphabet" hidden><img loading="lazy" decoding="async" src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Complete Mendenhall lowercase alphabet and poster composition"></figure>
-            <figure class="mendenhall-view" data-mendenhall-view="specimen" hidden><img loading="lazy" decoding="async" src="images/mendenhall/tran-type-2.jpg" width="2500" height="4286" alt="Tall Mendenhall type specimen with alphabet and glacier-inspired composition"></figure>
-            <figure class="mendenhall-view" data-mendenhall-view="studies" hidden><img loading="lazy" decoding="async" src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Hand-built Mendenhall letter studies exploring geometric strokes and angled terminals"></figure>
-          </div>
-          <p class="mendenhall-caption"><strong>Look closer:</strong> the square poster already tucked into this Graphic Design archive reads “from the heart of the frozen glacier.” Switch views to trace that detail back through the alphabet, specimen, and physical studies.</p>
-        </section>
-
         <section class="archive-chapter" aria-labelledby="graphic-wide-title">
           <div class="archive-chapter-head"><h2 id="graphic-wide-title">Wide-format information design</h2></div>
           <figure class="archive-frame graphic-wide" data-live-primary><img loading="lazy" decoding="async" src="images/gg-infographic.jpg" width="2400" height="959" alt="Wide informational graphic"><figcaption>Infographic</figcaption></figure>
@@ -498,15 +463,13 @@ def build(file_name: str, body_classes: str, data_archive: str, primary: str, sk
     html = replace_one(html, r'(?m)^[ \t]*<main\b[^>]*>[\s\S]*?</main>', new_main, 'main region', re.I)
     html = re.sub(r'\s*<style id="visual-archive-v2-styles">[\s\S]*?</style>\s*', '\n', html, flags=re.I)
     html = re.sub(r'\s*<style id="(?:art|graphic)-archive-v2-skin">[\s\S]*?</style>\s*', '\n', html, flags=re.I)
+    html = re.sub(r'\s*<script src="js/graphicgallery.js"></script>\s*', '\n', html, flags=re.I)
     html = replace_one(html, r'</head>', SHARED_CSS + skin_css + '</head>', 'head close tag', re.I)
     html = replace_one(html, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{meta_desc}">', 'description metadata', re.I)
     html = replace_one(html, r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{meta_desc}">', 'Open Graph description', re.I)
     html = replace_one(html, r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{og_image}">', 'Open Graph image', re.I)
     html = replace_one(html, r'<meta property="og:image:width" content="[^"]*">', f'<meta property="og:image:width" content="{og_width}">', 'Open Graph image width', re.I)
     html = replace_one(html, r'<meta property="og:image:height" content="[^"]*">', f'<meta property="og:image:height" content="{og_height}">', 'Open Graph image height', re.I)
-    if file_name == 'graphicgallery.html':
-        html = re.sub(r'\s*<script src="js/graphicgallery.js"></script>\s*', '\n', html, flags=re.I)
-        html = replace_one(html, r'</body>', '  <script src="js/graphicgallery.js"></script>\n</body>', 'body close tag', re.I)
     page.write_text(html, encoding='utf-8')
 
 

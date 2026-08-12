@@ -318,7 +318,7 @@ const pageSpecs = {
     file: 'graphicgallery.html',
     bodyClass: 'graphic-archive-v2',
     archive: 'graphic-contact-sheet',
-    mainImages: 43,
+    mainImages: 39,
   },
 };
 
@@ -419,7 +419,8 @@ try {
             graphicSlides: document.querySelectorAll('.graphic-slides.is-compact img').length,
             graphicColumns: document.querySelector('.graphic-slides.is-compact') ? getComputedStyle(document.querySelector('.graphic-slides.is-compact')).columnCount : null,
             mendenhallButtons: document.querySelectorAll('[data-mendenhall-picker] button').length,
-            mendenhallActive: document.querySelectorAll('[data-mendenhall-view].is-active:not([hidden])').length,
+            mendenhallPoster: document.querySelectorAll('[data-viewer-title="Mendenhall"] > img').length,
+            mendenhallPicks: document.querySelector('[data-viewer-title="Mendenhall"] template[data-viewer-picks]')?.content.querySelectorAll('[data-viewer-pick]').length ?? 0,
           };
         })()`);
 
@@ -458,35 +459,28 @@ try {
           const expectedGraphicColumns = viewport.mobile ? '2' : viewport.width === 768 ? '4' : '5';
           assert(state.graphicColumns === expectedGraphicColumns,
             `graphicgallery.html: expected ${expectedGraphicColumns} presentation columns; found ${state.graphicColumns}`);
-          assert(state.mendenhallButtons === 4 && state.mendenhallActive === 1,
-            `graphicgallery.html: Mendenhall picker state drifted: ${JSON.stringify({ buttons: state.mendenhallButtons, active: state.mendenhallActive })}`);
-          const mendenhall = await cdp.evaluate(`(async () => {
-            const section = document.querySelector('#mendenhall-type');
-            section.scrollIntoView({ block: 'start', behavior: 'instant' });
-            const states = [];
-            for (const button of section.querySelectorAll('[data-mendenhall-target]')) {
-              button.click();
-              await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-              const view = section.querySelector('[data-mendenhall-view].is-active:not([hidden])');
-              const image = view?.querySelector('img');
-              try { await image?.decode(); } catch {}
-              const rect = image?.getBoundingClientRect();
-              states.push({
-                target: button.dataset.mendenhallTarget,
-                pressed: button.getAttribute('aria-pressed'),
-                active: view?.dataset.mendenhallView,
-                loaded: Boolean(image?.complete && image?.naturalWidth),
-                ratioDelta: rect && image?.naturalWidth ? Math.abs((rect.width / rect.height) - (image.naturalWidth / image.naturalHeight)) : 99,
-              });
-            }
-            return { states, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
-          })()`);
-          assert(mendenhall.overflow === 0 && mendenhall.states.length === 4 && mendenhall.states.every((entry) => entry.pressed === 'true' && entry.target === entry.active && entry.loaded && entry.ratioDelta < .025),
-            `graphicgallery.html: Mendenhall artifact switcher failed: ${JSON.stringify(mendenhall)}`);
+          assert(state.mendenhallButtons === 0 && state.mendenhallPoster === 1 && state.mendenhallPicks === 3,
+            `graphicgallery.html: Mendenhall gallery/viewer contract drifted: ${JSON.stringify({ buttons: state.mendenhallButtons, poster: state.mendenhallPoster, picks: state.mendenhallPicks })}`);
           if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
-            await cdp.evaluate(`document.querySelector('[data-mendenhall-target="poster"]').click()`);
-            await delay(100);
-            await cdp.screenshot(`graphic-mendenhall-${viewport.label}-${theme}.png`);
+            const mendenhall = await cdp.evaluate(`(async () => {
+              const poster = document.querySelector('[data-viewer-title="Mendenhall"] > img');
+              poster.click();
+              await new Promise((resolve) => setTimeout(resolve, 240));
+              const thumbs = [...document.querySelectorAll('.lightbox .lb-thumb')];
+              const picks = [];
+              for (const thumb of thumbs) {
+                thumb.click();
+                await new Promise((resolve) => setTimeout(resolve, 240));
+                const image = document.querySelector('.lightbox .lb-img');
+                try { await image.decode(); } catch {}
+                picks.push({ src: image.getAttribute('src'), loaded: image.complete && image.naturalWidth > 0 });
+              }
+              return { open: document.querySelector('.lightbox').classList.contains('is-open'), title: document.querySelector('.lb-title').textContent, count: document.querySelector('.lb-count').textContent, thumbs: thumbs.length, picks };
+            })()`);
+            assert(mendenhall.open && mendenhall.title === 'Mendenhall' && mendenhall.count === '4 / 4' && mendenhall.thumbs === 4 && mendenhall.picks.every((pick) => pick.loaded),
+              `graphicgallery.html: expanded Mendenhall viewer failed: ${JSON.stringify(mendenhall)}`);
+            await cdp.screenshot(`graphic-mendenhall-viewer-${viewport.label}-${theme}.png`);
+            await cdp.key('Escape', 'Escape', 27);
           }
         }
 
