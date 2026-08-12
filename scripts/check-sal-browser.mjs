@@ -136,9 +136,20 @@ try {
         const hero=document.querySelector('.sal-vico2-hero-media img');
         const cta=document.querySelector('.sal-vico2-archive-cta');
         const actions=[...document.querySelectorAll('.sal-vico2-archive-actions a')];
+        const artifactLabel=document.querySelector('.sal-vico2-artifact-copy dt');
+        const awardLabel=document.querySelector('.sal-vico2-awards p');
+        const archiveLabel=document.querySelector('.sal-vico2-archive-link');
+        const cover=document.querySelector('.sal-vico2-cover-wall img');
+        const computed=(element,properties)=>Object.fromEntries(properties.map((property)=>[property,getComputedStyle(element)[property]]));
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           hero:hero?.getAttribute('src'),heroNatural:[hero?.naturalWidth,hero?.naturalHeight],cells:cells.length,padding,
+          tokenOutcomes:{
+            artifactLabel:computed(artifactLabel,['fontSize','letterSpacing']),
+            awardLabel:computed(awardLabel,['fontSize','letterSpacing']),
+            archiveLabel:computed(archiveLabel,['fontSize','letterSpacing']),
+            cover:computed(cover,['transitionProperty','transitionDuration']),
+          },
           cta:Boolean(cta),actions:actions.map((a)=>({text:a.textContent.trim(),href:a.href,target:a.target,rel:a.rel})),
           duplicateConnie:[...document.querySelectorAll('img[src="images/sal-f2020-connie-owen.jpg"]')].length,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav'))};
@@ -149,6 +160,10 @@ try {
       assert(state.images === 32 && !state.failed.length, `media failure at ${viewport.label} ${theme}: count=${state.images} failed=${JSON.stringify(state.failed)}`);
       assert(state.hero === 'images/thumb-sal.webp' && state.heroNatural[0] === 1081 && state.heroNatural[1] === 1081, `hero drifted: ${JSON.stringify(state)}`);
       assert(state.cells === 4 && state.padding.every((values)=>[values[0],values[2],values[3]].every((value)=>Number.parseFloat(value)>0)) && (viewport.width <= 700 || state.padding.every((values)=>Number.parseFloat(values[1])>0)), `metadata padding failed at ${viewport.label}: ${JSON.stringify(state.padding)}`);
+      assert(state.tokenOutcomes.artifactLabel.fontSize==='13px'&&state.tokenOutcomes.artifactLabel.letterSpacing==='1.04px',`artifact label token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
+      assert(state.tokenOutcomes.awardLabel.fontSize==='13px'&&state.tokenOutcomes.awardLabel.letterSpacing==='1.04px',`award label token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
+      assert(state.tokenOutcomes.archiveLabel.fontSize==='13px',`archive label token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
+      assert(state.tokenOutcomes.cover.transitionProperty==='transform'&&state.tokenOutcomes.cover.transitionDuration==='0.3s',`cover motion token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
       assert(state.cta && state.actions.length === 2 && state.actions.every((action)=>action.target === '_blank' && action.rel.includes('noopener')), `archive actions failed: ${JSON.stringify(state.actions)}`);
       assert(state.duplicateConnie === 1 && state.shell, `page structure drifted: ${JSON.stringify(state)}`);
       if (viewport.width === 390 && theme === 'light') {
@@ -166,6 +181,11 @@ try {
       checks += 1;
     }
   }
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
+  await cdp.navigate(`${baseUrl}/salmagazine.html`);
+  const reducedMotion = await cdp.evaluate(`(()=>{const cover=document.querySelector('.sal-vico2-cover-wall img');const style=getComputedStyle(cover);return {duration:style.transitionDuration,property:style.transitionProperty}})()`);
+  assert(reducedMotion.property==='transform'&&reducedMotion.duration==='1e-05s',`reduced-motion cover transition failed: ${JSON.stringify(reducedMotion)}`);
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `Console errors: ${JSON.stringify(cdp.consoleErrors)}`);
   console.log(`SAL BROWSER CONTRACT: PASS states=${checks} images=32 padding=pass overflow=0 archive=pass`);
