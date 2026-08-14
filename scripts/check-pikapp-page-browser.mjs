@@ -258,7 +258,7 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===15&&state.deferredImages===4&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===15&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===3&&state.codaScreens===7&&state.phoneSlides===3,'approved evidence counts drifted');
       assert(state.boundary==='Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.','boundary copy drifted');
@@ -275,7 +275,7 @@ try {
       }
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
-      assert(state.archiveViewLabels.length===2&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
+      assert(state.archiveViewLabels.length===8&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View Creighton opener|View expansion timeline|View post-expansion support|View national statistics|View regional map|View event application|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
       assert(state.next.href==='artillustration.html'&&state.next.label==='Next project: Art & Illustration',`Pi Kapp next-project route drifted: ${JSON.stringify(state.next)}`);
       assert(state.pattern.includes('pattern-dark-blue.svg'),'approved pattern hero failed to resolve');
       assert(!state.reviewUi&&!state.privateText,'private review UI or copy escaped production');
@@ -362,7 +362,7 @@ try {
     await cdp.navigate(`${baseUrl}/pikappapp.html`);
     await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
     const beforeArchive = await cdp.evaluate(`(()=>{const trigger=document.querySelector('.expansion-archive-trigger');trigger.scrollIntoView({block:'center',behavior:'instant'});const cue=trigger.querySelector('.expansion-archive-cue');const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('archive-open'),deferred:dialog.querySelectorAll('img[data-src]:not([src])').length,coverSource:dialog.querySelector('[data-archive-master="cover"]').getAttribute('src'),rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,cueText:cue.textContent.trim(),cueOpacity:getComputedStyle(cue).opacity,hoverNone:matchMedia('(hover: none)').matches}})()`);
-    assert(!beforeArchive.open&&!beforeArchive.bodyLocked&&beforeArchive.deferred===4&&!beforeArchive.coverSource&&beforeArchive.rootOverflow===0&&!beforeArchive.cueText&&beforeArchive.cueOpacity===((mobile||beforeArchive.hoverNone)?'1':'0'),`${label}: archive loaded, labeled, or locked before activation: ${JSON.stringify(beforeArchive)}`);
+    assert(!beforeArchive.open&&!beforeArchive.bodyLocked&&beforeArchive.deferred===16&&!beforeArchive.coverSource&&beforeArchive.rootOverflow===0&&!beforeArchive.cueText&&beforeArchive.cueOpacity===((mobile||beforeArchive.hoverNone)?'1':'0'),`${label}: archive loaded, labeled, or locked before activation: ${JSON.stringify(beforeArchive)}`);
     const triggerPoint = await cdp.evaluate(`(()=>{const r=document.querySelector('.expansion-archive-trigger').getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,width:r.width,height:r.height}})()`);
     assert(triggerPoint.width>=44&&triggerPoint.height>=44,`${label}: archival trigger is undersized`);
     await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: triggerPoint.x, y: triggerPoint.y });
@@ -376,13 +376,29 @@ try {
     const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const stage=dialog.querySelector('.archive-stage');const master=dialog.querySelector('[data-archive-master="cover"]');const context=dialog.querySelector('[data-archive-master="context"]');const layout=dialog.querySelector('.archive-layout');const dr=dialog.getBoundingClientRect();const sr=stage.getBoundingClientRect();const mr=master.getBoundingClientRect();const scrollRegions=[...dialog.querySelectorAll('*')].filter((element)=>{const style=getComputedStyle(element);return element.scrollHeight>element.clientHeight+2&&['auto','scroll'].includes(style.overflowY)}).map((element)=>element.className);return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),coverLoaded:master.getAttribute('src')?.endsWith('expansion-cover-detail.jpg'),contextDeferred:!context.hasAttribute('src'),thumbnailsLoaded:[...dialog.querySelectorAll('.archive-view img')].every((image)=>image.hasAttribute('src')),viewLabels:[...dialog.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),pressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed'),status:dialog.querySelector('.archive-status').textContent.trim(),objectFit:getComputedStyle(master).objectFit,contained:mr.left>=sr.left-1&&mr.right<=sr.right+1&&mr.top>=sr.top-1&&mr.bottom<=sr.bottom+1,dialogRect:{left:dr.left,top:dr.top,width:dr.width,height:dr.height},rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,scrollRegions,layoutScrollHeight:layout.scrollHeight,layoutClientHeight:layout.clientHeight}})()`);
     assert(opened.open&&opened.focus.includes('archive-close')&&opened.bodyLocked,`${label}: dialog did not open with close focus and body lock: ${JSON.stringify(opened)}`);
     assert(opened.coverLoaded&&opened.contextDeferred&&opened.thumbnailsLoaded,`${label}: deferred archive loading failed: ${JSON.stringify(opened)}`);
-    assert(opened.viewLabels.every((view)=>!view.text)&&opened.viewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View environmental context',`${label}: archive page labels or accessible names drifted: ${JSON.stringify(opened.viewLabels)}`);
+    assert(opened.viewLabels.length===8&&opened.viewLabels.every((view)=>!view.text)&&opened.viewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View Creighton opener|View expansion timeline|View post-expansion support|View national statistics|View regional map|View event application|View environmental context',`${label}: archive page labels or accessible names drifted: ${JSON.stringify(opened.viewLabels)}`);
     assert(opened.pressed==='true'&&opened.status==='Cover view selected.'&&opened.objectFit==='contain'&&opened.contained,`${label}: cover selection or containment failed: ${JSON.stringify(opened)}`);
     assert(opened.rootOverflow===0&&opened.dialogRect.left>=-1&&opened.dialogRect.top>=-1&&opened.dialogRect.width<=width+1&&opened.dialogRect.height<=height+1,`${label}: dialog escaped viewport: ${JSON.stringify(opened)}`);
     if (mobile) {
       assert(opened.scrollRegions.length===1&&opened.scrollRegions[0].includes('archive-layout')&&opened.layoutScrollHeight>opened.layoutClientHeight,`${label}: mobile archive must expose one internal vertical scroll: ${JSON.stringify(opened)}`);
     }
     await cdp.screenshot(`pikapp-archive-${label}-cover.png`);
+    const authoredViews = [
+      ['creighton', 'expansion-creighton-opener.webp', 'Creighton opener view selected.'],
+      ['timeline', 'expansion-timeline.webp', 'Expansion timeline view selected.'],
+      ['support', 'expansion-post-support.webp', 'Post-expansion support view selected.'],
+      ['statistics', 'expansion-national-statistics.webp', 'National statistics view selected.'],
+      ['map', 'expansion-regional-map.webp', 'Regional map view selected.'],
+      ['event', 'expansion-event-application.webp', 'Event application view selected.'],
+    ];
+    for (const [view, filename, expectedStatus] of authoredViews) {
+      const viewPoint = await cdp.evaluate(`(()=>{const button=document.querySelector('[data-archive-view="${view}"]');button.scrollIntoView({block:'center',behavior:'instant'});const r=button.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()`);
+      await delay(60);
+      await cdp.clickAt(viewPoint.x, viewPoint.y);
+      await delay(100);
+      const selected = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');const master=dialog.querySelector('[data-archive-master="${view}"]');return {visible:!master.hidden,loaded:master.getAttribute('src')?.endsWith('${filename}'),pressed:dialog.querySelector('[data-archive-view="${view}"]').getAttribute('aria-pressed'),activeMasters:[...dialog.querySelectorAll('[data-archive-master]')].filter((image)=>!image.hidden).map((image)=>image.dataset.archiveMaster),status:dialog.querySelector('.archive-status').textContent.trim()}})()`);
+      assert(selected.visible&&selected.loaded&&selected.pressed==='true'&&selected.activeMasters.length===1&&selected.activeMasters[0]===view&&selected.status===expectedStatus,`${label}: ${view} archive selection failed: ${JSON.stringify(selected)}`);
+    }
     const contextPoint = await cdp.evaluate(`(()=>{const button=document.querySelector('[data-archive-view="context"]');button.scrollIntoView({block:'center',behavior:'instant'});const r=button.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()`);
     await delay(60);
     await cdp.clickAt(contextPoint.x, contextPoint.y);
@@ -397,14 +413,12 @@ try {
     await delay(120);
     const keyboardOpen = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-archive-dialog]');return {open:dialog.open,focus:document.activeElement?.className,bodyLocked:document.body.classList.contains('archive-open'),layoutScrollTop:dialog.querySelector('.archive-layout').scrollTop,status:dialog.querySelector('.archive-status').textContent.trim(),coverPressed:dialog.querySelector('[data-archive-view="cover"]').getAttribute('aria-pressed')}})()`);
     assert(keyboardOpen.open&&keyboardOpen.focus.includes('archive-close')&&keyboardOpen.bodyLocked&&keyboardOpen.layoutScrollTop<=1&&keyboardOpen.status==='Cover view selected.'&&keyboardOpen.coverPressed==='true',`${label}: Enter did not reactivate the archive in a synchronized cover state: ${JSON.stringify(keyboardOpen)}`);
-    await cdp.key('Tab','Tab',9);
-    await cdp.key('Tab','Tab',9);
-    await cdp.key('Tab','Tab',9);
+    for (let index = 0; index < 9; index += 1) await cdp.key('Tab','Tab',9);
     const forwardTrap = await cdp.evaluate(`document.activeElement?.className || ''`);
     assert(forwardTrap.includes('archive-close'),`${label}: forward Tab escaped the modal instead of cycling to Close: ${forwardTrap}`);
     await cdp.key('Tab','Tab',9,8);
     const reverseTrap = await cdp.evaluate(`document.activeElement?.dataset?.archiveView || ''`);
-    assert(reverseTrap==='context',`${label}: Shift+Tab did not cycle from Close to Context: ${reverseTrap}`);
+    assert(reverseTrap==='context',`${label}: Shift+Tab did not cycle from Close to final archive view: ${reverseTrap}`);
     await cdp.key('Escape','Escape',27);
     await delay(80);
   };
@@ -423,7 +437,7 @@ try {
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=15 overflow=0 archive=2 keyboard=pass reduced-motion=pass controls=pass prototype=pass rails=pass`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=15 overflow=0 archive=8 keyboard=pass reduced-motion=pass controls=pass prototype=pass rails=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

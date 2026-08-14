@@ -77,6 +77,16 @@
   const viewButtons = [...dialog.querySelectorAll('[data-archive-view]')];
   const thumbnails = [...dialog.querySelectorAll('.archive-view img[data-src]')];
   const status = dialog.querySelector('.archive-status');
+  const labels = {
+    cover: 'Cover',
+    creighton: 'Creighton opener',
+    timeline: 'Expansion timeline',
+    support: 'Post-expansion support',
+    statistics: 'National statistics',
+    map: 'Regional map',
+    event: 'Event application',
+    context: 'Context',
+  };
   let returnFocus = null;
 
   if (!trigger || !closeButton || !layout || !stage || !masters.length || !viewButtons.length || !status) return;
@@ -90,7 +100,7 @@
     viewButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(button.dataset.archiveView === name));
     });
-    if (announce) status.textContent = `${name === 'cover' ? 'Cover' : 'Context'} view selected.`;
+    if (announce) status.textContent = `${labels[name]} view selected.`;
   }
 
   trigger.addEventListener('click', () => {

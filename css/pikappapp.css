@@ -583,7 +583,7 @@ body.archive-open{overflow:hidden;padding-right:var(--archive-scrollbar,0px)}
 
 .pikapp-page .archive-view{min-height:48px;padding:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left}
 
-.pikapp-page .archive-view img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:0}
+.pikapp-page .archive-view img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border:0;background:#071e37}
 
 .pikapp-page .archive-view[aria-pressed="true"]{border:3px solid var(--blue-2)}
 

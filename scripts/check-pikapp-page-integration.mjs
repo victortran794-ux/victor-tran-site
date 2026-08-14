@@ -33,6 +33,12 @@ const assetHashes = {
   'images/pikapp-case-study/belltower-expansion.jpg': 'b977af8df532d2562ceeb0d9db85e7e985ceaa9e583b4940f37b71dac4f5c77f',
   'images/pikapp-case-study/expansion-cover-detail.jpg': '9c6ac629bfc4df01f25ebd75985f32b515f08469bbaeeb27c94b4bdf22650b01',
   'images/pikapp-case-study/expansion-cover-preview.jpg': 'b82b43c973cc021dcca187e66033b36acae9d1b144fb89b85f3590973dd1970c',
+  'images/pikapp-case-study/expansion-creighton-opener.webp': '835620694f771fa103669f58d52a7c16fee953b42972878d21a7d5103d7a396a',
+  'images/pikapp-case-study/expansion-timeline.webp': 'ec3907db025d5dbb22eba9e89ca8d087c50487fc307a155b24213c79fd97b698',
+  'images/pikapp-case-study/expansion-post-support.webp': '84eb60197c45566d90fd4c0f2764a911425d6ec2a2e7b985aea62316ea40722c',
+  'images/pikapp-case-study/expansion-national-statistics.webp': '248151860ee631ff259cb0ac017fa8b23161267e9123ac4cab00eafa45169091',
+  'images/pikapp-case-study/expansion-regional-map.webp': 'ab1b853edb00ce39dec87934a291f22a4b93126a407c6b0ab13ad28f8c49f868',
+  'images/pikapp-case-study/expansion-event-application.webp': '1c138124a858d2e42104bb36c2836d88b6e15bb47120dffabf5d1bb183a44064',
   'images/pikapp-case-study/wireframes.png': 'bb4375af22d4bace1a26023b9b03b220ee2b3843a18f663357c62f5fec360f60',
   'images/pikapp-case-study/sitemap.png': 'd2661fc1909dbcab8d08d7e3868006fa67777e705b0d95ed4c93ea93e43ee90e',
   'images/pikapp-case-study/app-icon.png': 'b10917b50cb2e01cc5f981d9376d31ad242f403a381b1ab555861fc52e3ca22c',
@@ -148,6 +154,17 @@ if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail('public Pi Kapp
 if (!text('sitemap.xml').includes('/pikappapp')) fail('public Pi Kapp route must remain in sitemap.xml');
 if (/Disallow:\s*\/pikappapp/i.test(text('robots.txt'))) fail('robots.txt must not disallow the public Pi Kapp route');
 
+const archiveViews = [
+  ['cover', 'View portfolio cover', 'expansion-cover-detail.jpg'],
+  ['creighton', 'View Creighton opener', 'expansion-creighton-opener.webp'],
+  ['timeline', 'View expansion timeline', 'expansion-timeline.webp'],
+  ['support', 'View post-expansion support', 'expansion-post-support.webp'],
+  ['statistics', 'View national statistics', 'expansion-national-statistics.webp'],
+  ['map', 'View regional map', 'expansion-regional-map.webp'],
+  ['event', 'View event application', 'expansion-event-application.webp'],
+  ['context', 'View environmental context', 'belltower-expansion.jpg'],
+];
+
 for (const required of [
   'expansion-archive-trigger',
   'aria-haspopup="dialog"',
@@ -156,15 +173,22 @@ for (const required of [
   '<span class="expansion-archive-cue" aria-hidden="true"></span>',
   '<dialog class="archive-dialog" id="expansion-archive-dialog"',
   'aria-labelledby="expansion-archive-title"',
-  'data-archive-master="cover"',
-  'data-archive-master="context"',
-  'data-archive-view="cover" aria-pressed="true" aria-label="View portfolio cover"',
-  'data-archive-view="context" aria-pressed="false" aria-label="View environmental context"',
   'aria-live="polite"',
   'images/pikapp-case-study/expansion-cover-preview.jpg',
-  'data-src="images/pikapp-case-study/expansion-cover-detail.jpg"',
 ]) {
   if (!html.includes(required)) fail(`Pi Kapp archival view missing: ${required}`);
+}
+for (const [key, label, filename] of archiveViews) {
+  if (!html.includes(`data-archive-master="${key}"`)) fail(`Pi Kapp archive missing master: ${key}`);
+  if (!html.includes(`data-archive-view="${key}" aria-pressed="${key === 'cover'}" aria-label="${label}"`)) fail(`Pi Kapp archive missing view control: ${key}`);
+  if (!html.includes(`data-src="images/pikapp-case-study/${filename}"`)) fail(`Pi Kapp archive missing deferred asset: ${filename}`);
+}
+if (count(html, 'data-archive-master=') !== 8) fail('Expansion archive must contain exactly eight complete authored views');
+if (count(html, 'data-archive-view=') !== 8) fail('Expansion archive must contain exactly eight view controls');
+if (!/\.pikapp-page \.archive-view img\{[^}]*object-fit:contain/.test(css)) fail('Expansion archive thumbnails must preserve complete authored pages without cropping');
+for (const filename of archiveViews.slice(1, -1).map(([, , filename]) => filename)) {
+  const relativePath = `images/pikapp-case-study/${filename}`;
+  if (size(relativePath) > 900_000) fail(`${filename} exceeds 900 KB`);
 }
 if (html.includes('<strong>Expansion context</strong>')) fail('expansion photo repeats the section label');
 if (html.includes('<strong>Expansion packet cover</strong>')) fail('expansion artifact repeats its caption hierarchy');

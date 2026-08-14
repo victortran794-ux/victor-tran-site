@@ -96,7 +96,7 @@ Illustrative and unvalidated. A small direction study, not a complete app, curre
 
 Pi Kapp App archive
 
-An original portfolio cover presented unchanged, with its related environmental context available as a second view.
+A selected sequence of complete pages from the original Creighton University expansion packet, with its related environmental context.
 
 Views
 
@@ -120,4 +120,10 @@ Cover view selected.
 - Light-theme Today screen showing the same all-caught-up state: images/pikapp-case-study/v2-all-caught-up-light-clean.png
 - Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light-clean.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
+- Complete Creighton University opener from the Expansion Portfolio: images/pikapp-case-study/expansion-creighton-opener.webp
+- Complete expansion timeline page from the Expansion Portfolio: images/pikapp-case-study/expansion-timeline.webp
+- Complete post-expansion support opener from the Expansion Portfolio: images/pikapp-case-study/expansion-post-support.webp
+- Complete national statistics page from the Expansion Portfolio: images/pikapp-case-study/expansion-national-statistics.webp
+- Complete regional chapter map from the Expansion Portfolio: images/pikapp-case-study/expansion-regional-map.webp
+- Complete event photograph page showing Pi Kappa Phi stage branding: images/pikapp-case-study/expansion-event-application.webp
 - Illuminated bell tower connected with the Creighton University expansion work: images/pikapp-case-study/belltower-expansion.jpg
