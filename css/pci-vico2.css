@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(3rem, 7vw, 7rem) var(--page-x);
+  padding: clamp(2.75rem, 4.5vw, 4.75rem) var(--page-x);
   border-top: 3px solid var(--pci-red);
   border-bottom: 1px solid var(--pci-rule);
   border-left: 1px solid var(--pci-rule);

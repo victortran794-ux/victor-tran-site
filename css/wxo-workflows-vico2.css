@@ -101,9 +101,9 @@ html[data-theme='dark'] .workflow-pages {
 
 .wxo-chapter-nav {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
   position: sticky;
-  top: calc(var(--nav-h) + 1rem);
+  top: 58px;
   z-index: 12;
   margin: 0 0 clamp(2.5rem, 6vw, 5rem);
   border: 1px solid var(--border);
@@ -174,6 +174,59 @@ html[data-theme='dark'] .workflow-pages {
 
 .wxo-chapter-panel[hidden] {
   display: none;
+}
+
+.wxo-future-preview {
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--border);
+}
+
+.wxo-future-preview h2 {
+  max-width: 64rem;
+  margin: 0 auto clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(2.35rem, 4.8vw, 4.75rem);
+  line-height: 1;
+}
+
+.wxo-future-preview figure {
+  width: min(100%, 64rem);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.wxo-future-preview video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1024 / 676;
+  background: #161616;
+}
+
+.wxo-future-preview figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: var(--text-caption);
+}
+
+.wxo-future-motion-toggle {
+  min-height: 44px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.wxo-future-motion-toggle:hover,
+.wxo-future-motion-toggle:focus-visible {
+  border-color: var(--text);
 }
 
 .workflow-chapter {
@@ -262,10 +315,16 @@ html[data-theme='dark'] .workflow-pages {
 
 .wxo-v1-connector-accent {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   justify-items: center;
   margin: 0;
   text-align: center;
+}
+
+.wxo-v1-illustration--direction {
+  width: min(100%, 54.375rem);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: 1rem;
 }
 
 .wxo-v1-connector-accent figcaption {
@@ -715,6 +774,7 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   .wxo-chapter-nav a[data-wxo-chapter='document-processing'] span {
     display: none;
   }
+
 
   .doc-decision-row,
   .doc-contribution-row {

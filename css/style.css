@@ -2313,6 +2313,25 @@ main#main-content {
   border-top: 1px solid var(--border);
 }
 
+.about-role-history {
+  max-width: var(--max-w);
+  margin: calc(-1 * var(--space-10)) auto 0;
+  padding: 0 var(--page-x) var(--section-y);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: clamp(var(--space-10), 7vw, var(--space-20));
+  align-items: start;
+}
+
+.about-role-history > h2 {
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .about-role {
   display: grid;
   grid-template-columns: 12px minmax(0, 1fr) auto;
@@ -2371,6 +2390,11 @@ main#main-content {
 @media (max-width: 800px) {
   .about-current {
     grid-template-columns: 1fr;
+  }
+
+  .about-role-history {
+    grid-template-columns: 1fr;
+    margin-top: 0;
   }
 
   .about-role {

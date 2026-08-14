@@ -28,7 +28,7 @@ An energetic visual archive spanning identity, print, applications, presentation
 - Southeastern Greek Leadership Association
 - Selected slide work
 - Marks and applications
-- Events and print
+- Campaigns and illustration systems
 - Selected illustrations
 - Mendenhall
 - Wide-format information design
@@ -45,7 +45,7 @@ Presentation design
 
 Brand applications
 
-Event graphics
+Selected visual systems
 
 Graphic Design archive
 
@@ -93,9 +93,9 @@ Complete poster view selected.
 - STM banner: images/logos-3.jpg
 - Brand identity hero composition: images/logos-4.jpg
 - Ability Experience fortieth anniversary event graphic: images/graphic-archive-v2/abex.webp
-- Chicago event graphic for the fifty-sixth Supreme Chapter: images/graphic-archive-v2/sc56-chicago-event.webp
-- Hazing prevention awareness poster: images/graphic-archive-v2/hazing-prevention-poster.webp
-- Southeastern Greek Leadership Association event signage system: images/graphic-archive-v2/sgla-event-signage-system.webp
+- Three coordinated Instagram campaign panels for the fifty-sixth Supreme Chapter in Chicago: images/graphic-archive-v2/sc56-instagram-panel-series.webp
+- IBM Cloud PALtron illustration system sheet with separated assets, color treatments, and object explorations: images/graphic-archive-v2/ibm-paltron-illustration-system.webp
+- IBM watsonx Orchestrate illustration composition with people, gestures, gradients, paths, and interface motifs: images/graphic-archive-v2/wxo-illustration-system.webp
 - Little Shop: images/gg-illus-1.jpg
 - The Wiz: images/gg-illus-2.jpg
 - Tran Designer: images/gg-illus-3.jpg

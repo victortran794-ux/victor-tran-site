@@ -21,10 +21,11 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 ## Section Headings
 
 - What I’m doing now
-- Visual Designer, IBM watsonx Orchestrate
-- User Experience Designer, IBM Cloud
+- Visual Designer, IBM watsonx Orchestrate | AI & Automation
+- Previously at IBM
+- User Experience Designer, IBM Cloud | Observability
 - What I design
-- Things I've done
+- How I work
 - Past work
 - Right now I am...
 - A little Tetris
@@ -34,21 +35,25 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 
 ## Body Copy
 
-Hi! I'm Victor, (or Vic). I am a first-gen college graduate with a BFA in Graphic Design from Western Michigan University. My design career began at Pi Kappa Phi, where I served as the in-house designer and later as Assistant Executive Director of Communication.
+Hi! I’m Victor, or Vic. I’m a visual designer at IBM working across enterprise AI, automation, and complex product workflows. I use visual craft, UX thinking, reusable systems, research, and close collaboration to make technical products easier to understand, use, and build.
+
+My background spans enterprise product design, design systems, brand systems, editorial, and illustration. Before IBM watsonx Orchestrate, I worked on IBM Cloud Observability. Earlier, I grew from graphic designer into communications leadership at Pi Kappa Phi and The Ability Experience.
+
+I was the first person in my family to graduate from college and earned a BFA in Graphic Design from Western Michigan University. That visual foundation still shapes how I work: understand the system, care about the details, and make the result useful to both the people using it and the people building it.
 
 Outside of work, I paint, play video games, travel, and try my best to do good in my community. Also: open to voice over work.
 
 I'm around, let's chat! You can reach me at victortran794@gmail.com.
 
-Today, I'm a Visual Designer at IBM in Austin, Texas, where my work has ranged from hybrid cloud products to agentic workflow design.
+Today, I’m a Visual Designer at IBM in Austin, Texas, focused on enterprise AI and automation workflows while staying close to design systems and implementation.
 
 Now
 
-AI & Automation
+Enterprise product workflows
 
-Also at IBM
+Previous role
 
-Observability
+Enterprise cloud products
 
 Clients & employers
 
@@ -96,15 +101,16 @@ A few songs from various phases of listening. Enjoy the eclectic mix.
 - Holmes Murphy
 - Atrium Health
 - Elevate
-- UI/UX
-- Web
-- Print
-- Illustration
-- Brand & identity
-- Photo/Video
-- Non-profit Comms
-- Acting
-- Voiceover
+- Brand systems
+- Design systems
+- Product & UX/UI
+- Editorial & illustration
+- AI-assisted workflows
+- Visual craft
+- Systems thinking
+- Research
+- Mentoring
+- Product & engineering collaboration
 
 ## Images
 

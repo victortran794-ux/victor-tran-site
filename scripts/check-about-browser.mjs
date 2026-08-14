@@ -179,6 +179,8 @@ try {
         const root = document.documentElement;
         const current = document.querySelector('.about-current');
         const currentTitle = document.querySelector('.about-current-heading h2');
+        const history = document.querySelector('.about-role-history');
+        const historyTitle = history?.querySelector('h2');
         const skills = document.querySelector('.about-skills');
         const skillsTitle = document.querySelector('.about-skills-section h3');
         const work = document.querySelector('.about-work');
@@ -198,13 +200,14 @@ try {
           overflow: root.scrollWidth - root.clientWidth,
           outliers,
           h1Count: document.querySelectorAll('main h1').length,
-          order: [current, skills, work].map(element => element?.offsetTop ?? -1),
+          order: [current, history, skills, work].map(element => element?.offsetTop ?? -1),
           currentRegion: current?.getAttribute('aria-labelledby'),
-          sectionLabelStyles: [currentTitle, skillsTitle].map(title => {
+          sectionLabelStyles: [currentTitle, historyTitle, skillsTitle].map(title => {
             const style = getComputedStyle(title);
             return [style.fontFamily, style.fontSize, style.fontWeight, style.letterSpacing, style.textTransform];
           }),
-          roleCount: current?.querySelectorAll('.about-role').length,
+          currentRoleCount: current?.querySelectorAll('.about-role').length,
+          historyRoleCount: history?.querySelectorAll('.about-role').length,
           roleSizes: [parseFloat(getComputedStyle(primaryTitle).fontSize), parseFloat(getComputedStyle(secondaryTitle).fontSize)],
           roleRows: [primaryTitle, secondaryTitle].map(title => {
             const role = title.closest('.about-role');
@@ -227,12 +230,12 @@ try {
       assert(state.theme === theme, `${viewport.label}/${theme}: theme did not settle (${state.theme})`);
       assert(state.overflow === 0 && state.outliers.length === 0,
         `${viewport.label}/${theme}: horizontal geometry failed ${JSON.stringify(state)}`);
-      assert(state.h1Count === 1 && state.currentRegion === 'about-current-title' && state.roleCount === 2,
+      assert(state.h1Count === 1 && state.currentRegion === 'about-current-title' && state.currentRoleCount === 1 && state.historyRoleCount === 1,
         `${viewport.label}/${theme}: About structure failed ${JSON.stringify(state)}`);
-      assert(JSON.stringify(state.sectionLabelStyles[0]) === JSON.stringify(state.sectionLabelStyles[1]),
-        `${viewport.label}/${theme}: “What I’m doing now” must match “What I design” ${JSON.stringify(state.sectionLabelStyles)}`);
-      assert(state.order[0] < state.order[1] && state.order[1] < state.order[2],
-        `${viewport.label}/${theme}: current/skills/past order failed ${state.order}`);
+      assert(state.sectionLabelStyles.every(style => JSON.stringify(style) === JSON.stringify(state.sectionLabelStyles[0])),
+        `${viewport.label}/${theme}: About section labels must share one editorial treatment ${JSON.stringify(state.sectionLabelStyles)}`);
+      assert(state.order[0] < state.order[1] && state.order[1] < state.order[2] && state.order[2] < state.order[3],
+        `${viewport.label}/${theme}: current/history/skills/past order failed ${state.order}`);
       assert(state.roleSizes[0] > state.roleSizes[1],
         `${viewport.label}/${theme}: current role must be visually stronger ${state.roleSizes}`);
       assert(state.roleSizes[0] <= (viewport.mobile ? 34 : 38),
@@ -254,7 +257,7 @@ try {
       await cdp.evaluate(`(() => { const target = document.querySelector('.about-current'); scrollTo(0, target.offsetTop - 88); })()`);
       await delay(100);
       await cdp.screenshot(`${viewport.label}-${theme}-current.png`);
-      await cdp.evaluate(`(() => { const target = document.querySelector('.about-role-primary'); scrollTo(0, target.offsetTop - 88); })()`);
+      await cdp.evaluate(`(() => { const target = document.querySelector('.about-role-history'); scrollTo(0, target.offsetTop - 88); })()`);
       await delay(100);
       await cdp.screenshot(`${viewport.label}-${theme}-roles.png`);
       await cdp.evaluate(`(() => { const target = document.querySelector('.about-skills'); scrollTo(0, target.offsetTop - 88); })()`);

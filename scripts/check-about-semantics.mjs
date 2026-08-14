@@ -40,8 +40,14 @@ expect(html.includes('Visual Designer, IBM watsonx Orchestrate'),
   'About must preserve Victor’s current IBM watsonx Orchestrate role.');
 expect(html.includes('User Experience Designer, IBM Cloud'),
   'About must preserve Victor’s IBM Cloud role history.');
-expect(/class="about-current"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
-  'Current work must precede skills and past work in the About narrative.');
+const currentPractice = html.match(/<section\b[^>]*class="[^"]*\babout-current\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
+const roleHistory = html.match(/<section\b[^>]*class="[^"]*\babout-role-history\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
+expect(currentPractice.includes('Visual Designer, IBM watsonx Orchestrate') && !currentPractice.includes('User Experience Designer, IBM Cloud'),
+  'The current-practice section must contain only Victor’s current IBM watsonx Orchestrate role.');
+expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('User Experience Designer, IBM Cloud'),
+  'IBM Cloud must be labeled and contained as previous role history.');
+expect(/class="about-current"[\s\S]*class="about-role-history"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
+  'Current work and IBM role history must precede skills and past work in the About narrative.');
 expect(html.includes('While you’re here, enjoy some Tetris because I like Tetris.'),
   'About must use Victor’s approved direct Tetris invitation.');
 expect(html.includes('A few songs from various phases of listening. Enjoy the eclectic mix.'),
