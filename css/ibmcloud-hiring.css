@@ -328,6 +328,9 @@
 
 [data-project="ibm-cloud"] .ibm-research-pair .ibm-evidence-artifact {
   margin-top: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--bg-2);
 }
 
 [data-project="ibm-cloud"] .ibm-component-artifact {

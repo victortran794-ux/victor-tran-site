@@ -25,6 +25,7 @@ html[data-theme='dark'] .workflow-pages {
 }
 
 .workflow-pages .case-study-meta {
+  padding-bottom: var(--space-8);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -100,7 +101,7 @@ html[data-theme='dark'] .workflow-pages {
 
 .wxo-chapter-nav {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   position: sticky;
   top: calc(var(--nav-h) + 1rem);
   z-index: 12;
@@ -108,19 +109,32 @@ html[data-theme='dark'] .workflow-pages {
   border: 1px solid var(--border);
   background: var(--border);
   gap: 1px;
+  overflow: hidden;
 }
 
 .wxo-chapter-nav a {
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
   min-width: 0;
-  gap: 1rem;
-  min-height: 64px;
+  gap: 0 1rem;
+  min-height: 72px;
   padding: 1rem 1.25rem;
   background: var(--bg);
   color: var(--text);
   text-decoration: none;
   font-weight: 700;
+}
+
+.wxo-chapter-nav a::after {
+  content: '';
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0;
+  left: 1.25rem;
+  height: 3px;
+  background: transparent;
 }
 
 .wxo-chapter-nav a span {
@@ -130,14 +144,27 @@ html[data-theme='dark'] .workflow-pages {
   letter-spacing: 0.1em;
 }
 
+.wxo-chapter-nav a strong { font-weight: 700; }
+
+.wxo-chapter-nav a small {
+  grid-column: 2;
+  margin-top: 0.3rem;
+  color: var(--text-2);
+  font-family: var(--editorial-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .wxo-chapter-nav a[aria-current='true'] {
   background: var(--text);
   color: var(--bg);
 }
 
-.wxo-chapter-nav a[aria-current='true'] span {
-  color: inherit;
-}
+.wxo-chapter-nav a[aria-current='true']::after { background: var(--blue-text); }
+.wxo-chapter-nav a[aria-current='true'] span,
+.wxo-chapter-nav a[aria-current='true'] small { color: inherit; }
 
 .wxo-chapter-nav a:focus-visible,
 .wxo-chapter-panel:focus-visible {

@@ -112,6 +112,10 @@ function urlFromFile(file) {
   return file === 'index.html' ? '/' : `/${slugFromFile(file)}`;
 }
 
+function canonicalProjectUrl(href) {
+  return href.split(/[?#]/, 1)[0].replace(/\.html$/, '');
+}
+
 function contentFileFromHtml(file) {
   return `${slugFromFile(file)}.md`;
 }
@@ -198,7 +202,7 @@ function extractHomeProjects(html) {
       projects.push({
         title,
         category,
-        url: match[1].replace(/\.html$/, ''),
+        url: canonicalProjectUrl(match[1]),
         image,
         alt,
       });

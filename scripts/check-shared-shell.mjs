@@ -24,7 +24,7 @@ const projectNavigationSnapshot = {
   'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
-  'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
+  'ibmcloud.html': ['wxo-canvas.html?lock=1', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
   'pikappapp.html': ['salmagazine.html', 'artillustration.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
@@ -104,7 +104,7 @@ if (JSON.stringify(actualPages) !== JSON.stringify(expectedPages)) {
 }
 
 const navProjects = (manifest.projects || []).filter((project) => project.nav);
-const expectedNavUrls = navProjects.map((project) => project.url);
+const expectedNavUrls = navProjects.map((project) => project.entryUrl || project.url);
 const policyEntries = policy.protectedPages || [];
 const activeProtected = new Set(
   policyEntries.filter((entry) => !entry.provisional).map((entry) => entry.source),
@@ -179,7 +179,7 @@ for (const page of expectedPages) {
 
   const project = navProjects.find((item) => item.url === page);
   if (project) {
-    const escapedUrl = project.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escapedUrl = (project.entryUrl || project.url).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const activePattern = new RegExp(`<a\\b(?=[^>]*href="${escapedUrl}")(?=[^>]*aria-current="page")[^>]*>`);
     if (!activePattern.test(nav)) fail(`${page} current Work link needs aria-current="page"`);
   } else if (page === 'about.html') {

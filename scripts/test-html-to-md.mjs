@@ -49,7 +49,7 @@ try {
     ],
   };
   write('data/content-export-policy.json', `${JSON.stringify(policy, null, 2)}\n`);
-  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration">');
+  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration"><a href="wxo-canvas.html?lock=1" class="featured-item"><h2 class="featured-item-title">Protected project</h2><p class="section-label">Product Systems</p><img src="protected-thumb.jpg" alt="Protected project thumbnail"></a>');
   write('about.html', '<title>Public About</title><h1>Public About</h1><p>PUBLIC-ABOUT-SENTINEL</p>');
   write('ibmcloud.html', '<title>Public IBM Cloud</title><h1>Public IBM Cloud</h1><p>PUBLIC-IBM-CLOUD-SENTINEL</p>');
   write('ibm-patterns.html', '<title>Public IBM Patterns</title><h1>Public IBM Patterns</h1><p>PUBLIC-IBM-PATTERNS-SENTINEL</p>');
@@ -73,8 +73,16 @@ try {
   assert.match(read('content/index.md'), /Chantico's Flame illustration: chantico\.jpg/);
   assert.equal(publicIndex.some(page => page.source === 'index.html'), true);
   assert.deepEqual(
+    publicIndex.find(page => page.source === 'index.html')?.projects?.map(project => project.url),
+    ['wxo-canvas'],
+    'protected entry queries must not leak into canonical content-index project URLs'
+  );
+  assert.deepEqual(
     publicIndex.find(page => page.source === 'index.html')?.images,
-    [{ src: 'chantico.jpg', alt: "Chantico's Flame illustration" }],
+    [
+      { src: 'chantico.jpg', alt: "Chantico's Flame illustration" },
+      { src: 'protected-thumb.jpg', alt: 'Protected project thumbnail' },
+    ],
     'double-quoted attributes must preserve apostrophes inside values'
   );
   assert.match(read('content/ibmcloud.md'), /PUBLIC-IBM-CLOUD-SENTINEL/);

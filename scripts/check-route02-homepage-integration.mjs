@@ -92,6 +92,7 @@ if (wxoProject) {
   for (const [key, value] of Object.entries({
     title: 'IBM watsonX Orchestrate',
     url: 'wxo-canvas.html',
+    entryUrl: 'wxo-canvas.html?lock=1',
     category: 'Product Systems',
     cta: 'View Case Study',
     nav: true,
@@ -115,7 +116,7 @@ requireCondition(documentProject?.protected === true && documentProject?.noindex
   'Document Processing privacy flags must remain protected.');
 requireCondition((index.match(/featured-item--overlay/g) ?? []).length === 1,
   'Homepage must contain exactly one overlaid card variant.');
-requireCondition(/wxo-canvas\.html" class="[^"]*featured-item--lead[^"]*featured-item--overlay/.test(index),
+requireCondition(/wxo-canvas\.html\?lock=1" class="[^"]*featured-item--lead[^"]*featured-item--overlay/.test(index),
   'wxO must own the full-width overlay card.');
 requireText(generator, "if (project.homepageOverlay) classes.push('featured-item--overlay');",
   'Manifest generator must reproduce the wxO overlay class.');

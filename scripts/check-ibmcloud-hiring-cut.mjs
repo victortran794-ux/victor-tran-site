@@ -31,7 +31,7 @@ for (const phrase of [
   'class="lens-switcher"',
   'class="footer"',
   'class="project-nav"',
-  'href="wxo-canvas.html"',
+  'href="wxo-canvas.html?lock=1"',
   'href="ibm-patterns.html"',
   'I learned the technical system, then used research, product design, and visual storytelling to help other people understand it.',
   '2021–2023',
@@ -236,6 +236,7 @@ if (fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css'))) {
   for (const selector of ['.ibm-tech-context', '.ibm-research-pair', '.ibm-visual-sequence']) {
     require(css.includes(`[data-project="ibm-cloud"] ${selector}`), `IBM Cloud revised evidence sequence is missing styles for ${selector}`);
   }
+  require(css.includes('grid-template-rows: auto 1fr;'), 'IBM Cloud research cards must absorb unequal caption height without a white bar');
   require(!/var\(--(?:orange|fg|fg-muted|space-7)\b/.test(css), 'IBM hiring CSS uses an undefined or stale token');
 }
 

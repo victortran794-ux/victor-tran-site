@@ -38,6 +38,9 @@ for (const value of [
   'history.replaceState(stateWithoutProtectedHash()',
   "window.dispatchEvent(new HashChangeEvent('hashchange'",
   "input.focus({ preventScroll: true })",
+  "const FORCE_LOCK = new URLSearchParams(location.search).get('lock') === '1'",
+  'if (FORCE_LOCK) sessionStorage.removeItem(KEY)',
+  "url.searchParams.delete('lock')",
 ]) requireText(passwordGate, value, `Shared password gate missing protected deep-link behavior: ${value}`);
 
 for (const path of [
@@ -74,7 +77,7 @@ for (const route of ['/wxo-canvas', '/wxo-canvas.html', '/document-processing', 
   requireText(robots, `Disallow: ${route}`, `robots.txt must disallow ${route}.`);
 }
 const index = read('index.html');
-requireText(index, 'href="wxo-canvas.html"', 'The public homepage must link to the protected wxO gate.');
+requireText(index, 'href="wxo-canvas.html?lock=1"', 'The public homepage must force a fresh protected wxO gate.');
 forbid(index, /<a href="document-processing\.html" class="featured-item/i, 'Document Processing must not remain a standalone homepage card.');
 
 const documentProject = projects.projects.find((project) => project.slug === 'document-processing');
@@ -82,7 +85,7 @@ if (!documentProject || documentProject.protected !== true || documentProject.no
   fail('Document Processing must remain protected and hidden from homepage and primary navigation.');
 }
 const wxoProject = projects.projects.find((project) => project.slug === 'wxo-canvas');
-if (!wxoProject || wxoProject.protected !== true || wxoProject.noindex !== true || wxoProject.sitemap !== false || wxoProject.homepage !== true || wxoProject.nav !== true || wxoProject.homepageOverlay !== true) {
+if (!wxoProject || wxoProject.entryUrl !== 'wxo-canvas.html?lock=1' || wxoProject.protected !== true || wxoProject.noindex !== true || wxoProject.sitemap !== false || wxoProject.homepage !== true || wxoProject.nav !== true || wxoProject.homepageOverlay !== true) {
   fail('wxO Canvas must be the protected public-gate entry and single homepage overlay project.');
 }
 const protectedEntries = new Map(exportPolicy.protectedPages.map((entry) => [entry.source, entry]));
@@ -125,7 +128,8 @@ forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role an
 forbid(wxo, /Evidence boundary:/i, 'wxO umbrella must not repeat evidence-boundary callouts.');
 forbid(wxo, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'wxO viewer-facing copy must not expose internal release-gate language.');
 forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Design to implementation/i, 'Deferred Canvas sections must not remain in the active story.');
-requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must weight Canvas and Document Processing 3:1.');
+requireText(workflowCss, 'grid-template-columns: repeat(2, minmax(0, 1fr));', 'wxO chapter selector must give both case-study views equal visibility.');
+requireText(wxo, 'data-wxo-tab-status>Current view</small>', 'wxO chapter selector must identify the current view.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
 requireText(wxo, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(wxo, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');

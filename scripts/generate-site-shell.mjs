@@ -49,7 +49,7 @@ function assertSafePage(rootReal, page) {
 
 function navItem(project, currentPage) {
   const active = project.url === currentPage;
-  const attributes = [`href="${escapeHtml(project.url)}"`];
+  const attributes = [`href="${escapeHtml(project.entryUrl || project.url)}"`];
   if (active) attributes.push('class="active"', 'aria-current="page"');
   return `            <li><a ${attributes.join(' ')}>${escapeHtml(project.title)}</a></li>`;
 }
@@ -139,11 +139,11 @@ function buildProjectNav(projects, currentPage) {
   const next = configuredNext || primary[(currentIndex + 1) % primary.length];
   return `  <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
-    <a href="${escapeHtml(previous.url)}" class="project-nav-item project-nav-item--prev" aria-label="Previous project: ${escapeHtml(previous.title)}">
+    <a href="${escapeHtml(previous.entryUrl || previous.url)}" class="project-nav-item project-nav-item--prev" aria-label="Previous project: ${escapeHtml(previous.title)}">
       <span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span>
       <span class="project-nav-title">${escapeHtml(previous.title)}</span>
     </a>
-    <a href="${escapeHtml(next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
+    <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
       <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
       <span class="project-nav-title">${escapeHtml(next.title)}</span>
     </a>

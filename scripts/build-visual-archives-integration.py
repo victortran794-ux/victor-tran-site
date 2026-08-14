@@ -10,6 +10,7 @@ ART_ASSETS = {
 }
 GRAPHIC_ASSETS = {name: name for name in (
     'chantico.webp', 'dog.webp', 'abex.webp',
+    'sc56-chicago-event.webp', 'hazing-prevention-poster.webp', 'sgla-event-signage-system.webp',
     'sgla-2024-identity-development.webp',
     'sgla-2023-brand-guidelines.webp',
     'sgla-2024-signage-system.webp',
@@ -150,7 +151,10 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }
     .graphic-archive-v2 .graphic-brand-grid .is-four { grid-column: span 4; }
     .graphic-archive-v2 .graphic-brand-grid .is-eight { grid-column: span 8; }
-    .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(1rem, 4vw, 4rem); align-items: start; }
+    .graphic-archive-v2 .graphic-events { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1rem, 4vw, 4rem); align-items: start; }
+    .graphic-archive-v2 .graphic-events .is-event-tall { grid-column: span 5; }
+    .graphic-archive-v2 .graphic-events .is-event-wide { grid-column: span 7; }
+    .graphic-archive-v2 .graphic-events img { width: 100%; height: auto; }
     .graphic-archive-v2 .graphic-illustrations { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.7rem, 2vw, 1.5rem); align-items: start; }
     .graphic-archive-v2 .mendenhall-gallery-poster { background: color-mix(in srgb, var(--cream) 7%, transparent); }
     .graphic-archive-v2 .mendenhall-archive-trigger { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 933 / 1600; padding: clamp(.35rem, .7vw, .7rem); border: 0; background: transparent; color: inherit; cursor: zoom-in; overflow: hidden; }
@@ -223,6 +227,8 @@ GRAPHIC_CSS = r'''
       .graphic-archive-v2 .graphic-slides.is-compact { columns: 2; }
       .graphic-archive-v2 .graphic-illustrations { grid-template-columns: 1fr 1fr; }
       .graphic-archive-v2 .graphic-events { grid-template-columns: 1fr; }
+      .graphic-archive-v2 .graphic-events .is-event-tall,
+      .graphic-archive-v2 .graphic-events .is-event-wide { grid-column: 1; }
       .graphic-archive-v2 .archive-chapter-head { gap: .55rem; }
       .graphic-archive-v2 .archive-chapter-head h2 { font-size: clamp(2.35rem, 10.5vw, 3.8rem); }
     }
@@ -405,7 +411,10 @@ GRAPHIC_PRIMARY = r'''
         <section class="archive-chapter" aria-labelledby="graphic-events-title">
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Event graphics</p><h2 id="graphic-events-title">Events and print</h2></div>
           <div class="graphic-events">
-            <figure class="archive-frame"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="AbEx 40 event graphic"><figcaption>AbEx 40</figcaption></figure>
+            <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="Ability Experience fortieth anniversary event graphic"><figcaption>AbEx 40</figcaption></figure>
+            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sc56-chicago-event.webp" width="2400" height="1476" alt="Chicago event graphic for the fifty-sixth Supreme Chapter"><figcaption>Supreme Chapter Chicago</figcaption></figure>
+            <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/hazing-prevention-poster.webp" width="1553" height="2400" alt="Hazing prevention awareness poster"><figcaption>Hazing prevention</figcaption></figure>
+            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-event-signage-system.webp" width="2222" height="1914" alt="Southeastern Greek Leadership Association event signage system"><figcaption>SGLA event signage</figcaption></figure>
           </div>
         </section>
 

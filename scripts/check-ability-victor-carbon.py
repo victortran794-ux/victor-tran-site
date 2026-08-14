@@ -55,7 +55,7 @@ def main():
     need(legacy_print_copy in html,'existing public print-and-rider narrative must remain verbatim')
     need('Brand Designer' in html and 'Identity &amp; Collateral' in html,'public metadata must remain')
 
-    required_images=['thumb-abex.webp','abex-print.jpg','abex-40logo.jpg','abex-icons-1.jpg','abex-icons-2.jpg','abex-kits-1.jpg','abex-kits-2.jpg','abex-kits-3.jpg','abex-map.jpg']
+    required_images=['thumb-abex.webp','abex-print.jpg','abex-40logo.jpg','abex-icons-1.jpg','abex-icons-2.jpg','abex-kits-1.jpg','abex-kits-2.jpg','abex-kits-3.jpg','abex-map.jpg','abex-2019-handout-1.webp','abex-2019-handout-2.webp']
     sources=[Path(i.get('src','')).name for i in audit.images]
     for name in required_images: need(name in sources,f'missing approved public image: {name}')
     for image in audit.images:
@@ -69,6 +69,7 @@ def main():
     ability_css=css[slice_start:slice_end] if slice_start!=-1 and slice_end!=-1 else ''
     need('@media (max-width: 700px)' in ability_css,'missing page-specific narrow recomposition')
     need('.ability-diagram' in css and '.ability-artifact' in css,'missing production component styles')
+    need('.ability-collateral-grid' in css and 'Recruitment collateral · 2019' in html,'missing the bounded 2019 collateral addition')
     project_color=re.search(r'--ability-project:\s*(#[0-9a-fA-F]{6})',ability_css)
     project_blue=re.search(r'--ability-project-blue:\s*(#[0-9a-fA-F]{6})',ability_css)
     need(bool(project_color and project_blue),'missing Ability project color tokens')
