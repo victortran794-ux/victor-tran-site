@@ -57,6 +57,10 @@ System relationship
 
 The public artifacts form one connected identity story without adding operational claims or impact metrics.
 
+Recruitment collateral · 2019
+
+The identity moved into a two-sided recruitment piece that paired program stories, participant photography, and a clear next step.
+
 03 / Cycling kits
 
 Each summer kit sets the branding standard for The Ability Experience's team events.
@@ -72,6 +76,8 @@ For each new year of team summer events, The Ability Experience designs a cyclin
 - The Ability Experience 40th anniversary primary logo, alternate logo, and early explorations: images/abex-40logo.jpg
 - Early Ability Experience iconography sketches: images/abex-icons-2.jpg
 - Final orange Ability Experience iconography combining places, events, values, and cycling symbols: images/abex-icons-1.jpg
+- Outside panels of the 2019 Ability Experience recruitment handout: images/ability-experience/abex-2019-handout-1.webp
+- Inside panels of the 2019 Ability Experience recruitment handout: images/ability-experience/abex-2019-handout-2.webp
 - Ability Experience cycling kit in use during a team ride: images/abex-kits-3.jpg
 - Ability Experience cycling kit front: images/abex-kits-1.jpg
 - Ability Experience cycling kit back: images/abex-kits-2.jpg

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/wxo-workflows-vico2.css">
   <!-- password gate -->
-  <script>if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
+  <script>if(new URLSearchParams(location.search).get('lock')==='1'){sessionStorage.removeItem('vtd-unlock');}if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
   <link rel="stylesheet" href="css/password-gate.css">
   <script src="js/password-gate.js" defer></script>
   <script src="js/wxo-workflows-vico2.js" defer></script>
@@ -39,7 +39,7 @@
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="wxo-canvas.html" class="active" aria-current="page">IBM watsonX Orchestrate</a></li>
+            <li><a href="wxo-canvas.html?lock=1" class="active" aria-current="page">IBM watsonX Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -96,9 +96,9 @@
       </dl>
     </header>
 
-    <nav class="wxo-chapter-nav" aria-label="wxO case-study chapters">
-      <a href="#canvas" data-wxo-chapter="canvas" aria-current="true"><span>01</span> Agentic workflow canvas</a>
-      <a href="#document-processing" data-wxo-chapter="document-processing"><span>02</span> Document Processing</a>
+    <nav class="wxo-chapter-nav" aria-label="wxO case-study views">
+      <a href="#canvas" data-wxo-chapter="canvas" aria-current="true"><span>01</span><strong>Agentic workflow canvas</strong><small data-wxo-tab-status>Current view</small></a>
+      <a href="#document-processing" data-wxo-chapter="document-processing"><span>02</span><strong>Document Processing</strong><small data-wxo-tab-status>View chapter</small></a>
     </nav>
 
     <article class="case-study">
@@ -340,8 +340,11 @@
       const showChapter = (chapter, updateHistory = false) => {
         const selected = valid.has(chapter) ? chapter : 'canvas';
         links.forEach((link) => {
-          if (link.dataset.wxoChapter === selected) link.setAttribute('aria-current', 'true');
+          const current = link.dataset.wxoChapter === selected;
+          if (current) link.setAttribute('aria-current', 'true');
           else link.removeAttribute('aria-current');
+          const status = link.querySelector('[data-wxo-tab-status]');
+          if (status) status.textContent = current ? 'Current view' : 'View chapter';
         });
         panels.forEach((panel) => {
           panel.hidden = panel.dataset.wxoChapterPanel !== selected;

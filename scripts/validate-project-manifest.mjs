@@ -104,7 +104,7 @@ function homepageSections(indexHtml) {
 }
 
 function validateCards(cards, expectedProjects, label) {
-  assertSame(`${label} order`, cards.map(card => card.href), expectedProjects.map(project => project.url));
+  assertSame(`${label} order`, cards.map(card => card.href), expectedProjects.map(project => project.entryUrl || project.url));
 
   cards.forEach((card, index) => {
     const expected = expectedProjects[index];
@@ -182,8 +182,8 @@ if (!fs.existsSync(manifestPath)) {
   uniqueValues(projects, 'slug');
   uniqueValues(projects, 'url');
 
-  assertSame('Work dropdown primary order', nav.primary, navPrimary.map(project => project.url));
-  assertSame('Work dropdown gallery order', nav.gallery, navGalleries.map(project => project.url));
+  assertSame('Work dropdown primary order', nav.primary, navPrimary.map(project => project.entryUrl || project.url));
+  assertSame('Work dropdown gallery order', nav.gallery, navGalleries.map(project => project.entryUrl || project.url));
   validateCards(homepage.primary, primary, 'Homepage primary cards');
   validateCards(homepage.gallery, galleries, 'Homepage gallery cards');
   validateGeneratedContent([...primary, ...galleries]);

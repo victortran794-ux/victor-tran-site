@@ -318,7 +318,7 @@ const pageSpecs = {
     file: 'graphicgallery.html',
     bodyClass: 'graphic-archive-v2',
     archive: 'graphic-contact-sheet',
-    mainImages: 39,
+    mainImages: 42,
   },
 };
 

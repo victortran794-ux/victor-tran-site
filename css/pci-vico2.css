@@ -56,17 +56,25 @@
 
 .pci-vico2 .pci-hero {
   position: relative;
-  width: min(100% - (2 * var(--page-x)), 1440px);
+  width: 100%;
   margin: 0 auto clamp(5rem, 11vw, 10rem);
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.6fr);
-  gap: clamp(2rem, 6vw, 7rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: 0;
+  align-items: stretch;
 }
 
 .pci-vico2 .pci-hero-copy {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 7vw, 7rem) var(--page-x);
+  border-top: 3px solid var(--pci-red);
+  border-bottom: 1px solid var(--pci-rule);
+  border-left: 1px solid var(--pci-rule);
+  background: var(--bg-2);
 }
 
 .pci-vico2 .pci-kicker,
@@ -109,6 +117,12 @@
 .pci-vico2 .pci-hero-art {
   grid-row: 1;
   grid-column: 1;
+}
+
+.pci-vico2 .pci-hero-art img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .pci-vico2 .pci-hero-copy {
@@ -318,8 +332,14 @@
     grid-row: 1;
   }
 
+  .pci-vico2 .pci-hero-art img {
+    height: auto;
+    min-height: 0;
+  }
+
   .pci-vico2 .pci-hero-copy {
     grid-row: 2;
+    border-left: 0;
   }
 
   .pci-vico2 .pci-cover-layout .pci-artifact {

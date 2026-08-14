@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/wxo-workflows-vico2.css">
   <!-- password gate -->
-  <script>if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
+  <script>if(new URLSearchParams(location.search).get('lock')==='1'){sessionStorage.removeItem('vtd-unlock');}if(sessionStorage.getItem('vtd-unlock')!=='ok'){document.documentElement.classList.add('locked');}</script>
   <link rel="stylesheet" href="css/password-gate.css">
   <script src="js/password-gate.js" defer></script>
   <script src="js/wxo-workflows-vico2.js" defer></script>
@@ -39,7 +39,7 @@
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="wxo-canvas.html">IBM watsonX Orchestrate</a></li>
+            <li><a href="wxo-canvas.html?lock=1">IBM watsonX Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>

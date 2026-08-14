@@ -4491,6 +4491,14 @@ html[data-theme="dark"] .spotify-frame {
 .ability-diagram-node strong { display: block; font-family: 'DM Serif Display', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.1; }
 .ability-diagram-node small { display: block; margin-top: var(--space-2); color: var(--text-2); }
 
+.ability-collateral { margin-top: clamp(72px, 9vw, 128px); padding-top: var(--space-8); border-top: 3px solid var(--blue-text); }
+.ability-collateral-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 0.65fr); gap: var(--space-8); align-items: end; }
+.ability-collateral-heading h3 { font-family: 'DM Serif Display', serif; font-size: clamp(2.25rem, 4vw, 4rem); font-weight: 400; line-height: 0.98; }
+.ability-collateral-heading > p { color: var(--text-2); font-size: var(--text-lead); line-height: var(--leading-body); }
+.ability-collateral-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); margin-top: var(--space-10); }
+.ability-collateral-grid figure { min-width: 0; padding: var(--space-4); border: 1px solid var(--border); background: var(--bg); }
+.ability-collateral-grid img { display: block; width: 100%; height: auto; }
+
 .ability-kit-feature {
   display: grid;
   grid-template-columns: minmax(300px, 0.65fr) minmax(0, 1.35fr);
@@ -4516,7 +4524,8 @@ html[data-theme="dark"] .spotify-frame {
   .ability-thesis { position: static; }
   .ability-artifact { grid-row: auto; }
   .ability-icon-card--final { margin-left: 0; }
-  .ability-diagram-heading { grid-template-columns: 1fr; }
+  .ability-diagram-heading,
+  .ability-collateral-heading { grid-template-columns: 1fr; }
   .ability-kit-copy { order: -1; }
 }
 
@@ -4546,7 +4555,8 @@ html[data-theme="dark"] .spotify-frame {
   .ability-diagram-path::before { top: 8px; bottom: 100px; left: 7px; right: auto; width: 2px; height: auto; }
   .ability-diagram-node { padding: 0 0 var(--space-8); }
   .ability-diagram-node::before { top: 2px; left: calc(-1 * var(--space-12)); }
-  .ability-kit-grid { grid-template-columns: 1fr; }
+  .ability-kit-grid,
+  .ability-collateral-grid { grid-template-columns: 1fr; }
 }
 /* ABILITY EXPERIENCE: END */
 

@@ -1,6 +1,7 @@
 (() => {
   const HASH = '577ceca1249a0d345bbc81098c47abe8825294b2cb4724735403188a01a1ade1';
   const KEY = 'vtd-unlock';
+  const FORCE_LOCK = new URLSearchParams(location.search).get('lock') === '1';
   const PROTECTED_HASH_STATE = 'vtdProtectedHash';
   let backgroundInertState = [];
 
@@ -62,6 +63,8 @@
     backgroundInertState = [];
   }
 
+  if (FORCE_LOCK) sessionStorage.removeItem(KEY);
+
   if (sessionStorage.getItem(KEY) === 'ok') {
     document.documentElement.classList.remove('locked');
     restoreProtectedHash(savedHash, true);
@@ -88,6 +91,11 @@
   function unlock() {
     sessionStorage.setItem(KEY, 'ok');
     document.documentElement.classList.remove('locked');
+    if (FORCE_LOCK) {
+      const url = new URL(location.href);
+      url.searchParams.delete('lock');
+      history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
+    }
     const overlay = document.getElementById('vtd-gate');
     if (overlay) {
       overlay.classList.add('vtd-gate--out');

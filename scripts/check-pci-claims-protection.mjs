@@ -144,6 +144,8 @@ for (const rejectedCopy of ["The CEO's Letter", 'miscellaneous assets']) {
 
 requireText(pciCss, '.pci-artifact img', 'PCI native-ratio image rule');
 requireText(pciCss, 'height: auto', 'PCI native-ratio image rule');
+requireText(pciCss, 'width: 100%;', 'PCI edge-touching hero width');
+requireText(pciCss, 'grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);', 'PCI dominant hero artwork scale');
 const unscopedPciSelectors = pciCss
   .split('\n')
   .filter(line => /^\s*\.pci-(?!vico2\b)/.test(line));

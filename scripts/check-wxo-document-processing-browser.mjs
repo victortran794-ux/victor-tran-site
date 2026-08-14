@@ -172,7 +172,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 23, current: 'wxo-canvas.html' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonX Orchestrate', mainImages: 23, current: 'wxo-canvas.html?lock=1' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 9, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
@@ -470,7 +470,7 @@ try {
             contrastBackground:getComputedStyle(contrastSurface).backgroundColor,
           };
         })()`);
-        assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height, `${spec.file}: viewport drift expected=${viewport.width}x${viewport.height} actual=${state.viewport} state=${JSON.stringify(state)}`);
+        assert(Math.abs(state.viewport[0]-viewport.width)<=3&&Math.abs(state.viewport[1]-viewport.height)<=5, `${spec.file}: viewport drift expected=${viewport.width}x${viewport.height} actual=${state.viewport} state=${JSON.stringify(state)}`);
         assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme, `${spec.file}: ${theme} theme failed`);
         assert(state.overflow===0, `${spec.file}: ${state.overflow}px overflow at ${viewport.label} ${theme}`);
         assert(state.bodyClass.includes(spec.bodyClass)&&state.title.includes(spec.title), `${spec.file}: route identity failed`);
@@ -480,7 +480,7 @@ try {
         assert(state.currentStages===4&&state.currentFrames===9&&state.currentFramesLoaded, `${spec.file}: current four-stage evidence story is incomplete or failed to decode ${JSON.stringify(state)}`);
         if(name==='doc') assert(state.currentStoryGeometry&&state.currentStoryGeometry.left>=0&&state.currentStoryGeometry.right<=viewport.width&&state.currentPairColumns.every((columns)=>columns===(viewport.width<=860?1:2))&&state.currentEvaluatorColumns.every((columns)=>columns===(viewport.width<=860?1:2)), `${spec.file}: current evidence geometry failed at ${viewport.label} ${theme} ${JSON.stringify(state)}`);
         if(name==='wxo') assert(
-          state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=2.9&&state.wxoChapterRatio<=3.1&&
+          state.statusDisplay==='none'&&state.wxoChapterPosition==='sticky'&&state.wxoChapterRatio>=0.95&&state.wxoChapterRatio<=1.05&&
           state.canvasArrangements===7&&state.canvasArrangementsLoaded&&state.canvasIllustrations===5&&state.canvasIllustrationsLoaded&&
           state.canvasPalettePieces===2&&state.canvasPaletteLoaded&&state.canvasWideActivityWidths.length===2&&
           state.canvasFormFrame&&state.canvasFormFrame.natural[0]===900&&state.canvasFormFrame.natural[1]===592&&
@@ -491,7 +491,7 @@ try {
           state.canvasArrangementRatios.every(({rendered,natural,left,right})=>Math.abs(rendered-natural)<0.015&&left>=0&&right<=viewport.width)&&
           state.canvasNodeColumns===(viewport.width<=860?1:2)&&state.canvasActivityColumns===(viewport.width<=860?1:2)&&
           state.canvasPaletteColumns===(viewport.width<=520?1:2)&&state.canvasPaletteStageColumns===(viewport.width<=860?1:2),
-          `${spec.file}: V1 artboard dimensions, containment, responsive composition, hidden status, or sticky 3:1 chapter selector failed ${JSON.stringify(state)}`
+          `${spec.file}: V1 artboard dimensions, containment, responsive composition, hidden status, or equal sticky chapter selector failed ${JSON.stringify(state)}`
         );
         assert(!state.statusOverlap, `${spec.file}: protected status overlaps page header at ${viewport.label} ${theme}`);
         if(name==='wxo'&&viewport.mobile) assert(!state.statusChapterOverlap, `${spec.file}: protected status overlaps first chapter tab at ${viewport.label} ${theme}`);

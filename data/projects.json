@@ -5,6 +5,7 @@
       "slug": "wxo-canvas",
       "title": "IBM watsonX Orchestrate",
       "url": "wxo-canvas.html",
+      "entryUrl": "wxo-canvas.html?lock=1",
       "category": "Product Systems",
       "labelClass": "label-default",
       "type": "primary",
