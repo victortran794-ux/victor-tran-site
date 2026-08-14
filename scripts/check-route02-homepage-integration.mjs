@@ -29,6 +29,22 @@ for (const token of [
   '>Designer</span>',
   'I design cool things with sincerity.',
 ]) requireText(index, token, `Route 02 must preserve the signature hero token: ${token}`);
+
+// Keep the homepage's social preview on a dedicated LinkedIn/Open Graph crop rather than
+// asking crawlers to resize and crop the taller on-page hero asset.
+const socialCardPath = 'images/victor-tran-social-card.jpg';
+for (const token of [
+  '<meta property="og:image" content="https://www.victortrandesign.com/images/victor-tran-social-card.jpg">',
+  '<meta property="og:image:width" content="1200">',
+  '<meta property="og:image:height" content="627">',
+  '<meta property="og:image:type" content="image/jpeg">',
+  '<meta name="twitter:image" content="https://www.victortrandesign.com/images/victor-tran-social-card.jpg">',
+]) requireText(index, token, `Homepage social-preview metadata is missing: ${token}`);
+requireCondition(fs.existsSync(socialCardPath), 'Homepage social-preview image must exist.');
+if (fs.existsSync(socialCardPath)) {
+  requireCondition(fs.statSync(socialCardPath).size > 100_000, 'Homepage social-preview image is unexpectedly small and may be blurry.');
+}
+
 requireText(css, '.hero-typeblock {', 'Route 02 hero type block CSS is missing.');
 requireCondition(/\.hero-typeblock\s*\{[\s\S]*?left:\s*var\(--page-x\);[\s\S]*?transform:\s*translateY\(-50%\)/.test(css),
   'Visual Designer must use the same left grid token as the hero copy.');

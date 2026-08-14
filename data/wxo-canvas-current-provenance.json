@@ -86,26 +86,7 @@
       "bytes": 7936,
       "sha256": "82e9e4aee554de71a5868ed06036cd10bf66fb21bc47f969b73944484a5ae51e"
     },
-    {
-      "file": "05-orbital-insert.png",
-      "role": "connection accent illustration",
-      "sourceNode": "7:99407",
-      "sourceFrame": "Frame 12344666",
-      "sourceBounds": [
-        322,
-        322
-      ],
-      "exportedDimensions": [
-        322,
-        322
-      ],
-      "treatment": "lossless metadata-free resave at complete Figma screenshot bounds; no crop, reconstruction, or scaling",
-      "privacyStatus": "no identity or private annotation visible",
-      "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
-      "approvalState": "protected preview candidate",
-      "bytes": 6198,
-      "sha256": "e0f2c09fd4e1eda19e3c9cabdcbb56571e83fa1c5244f4de6f3929840f546f2a"
-    },
+
     {
       "file": "06-key-screen.png",
       "role": "full canvas context",

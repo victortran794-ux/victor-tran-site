@@ -10,7 +10,7 @@ ART_ASSETS = {
 }
 GRAPHIC_ASSETS = {name: name for name in (
     'chantico.webp', 'dog.webp', 'abex.webp',
-    'sc56-chicago-event.webp', 'hazing-prevention-poster.webp', 'sgla-event-signage-system.webp',
+    'sc56-instagram-panel-series.webp', 'ibm-paltron-illustration-system.webp', 'wxo-illustration-system.webp',
     'sgla-2024-identity-development.webp',
     'sgla-2023-brand-guidelines.webp',
     'sgla-2024-signage-system.webp',
@@ -409,12 +409,12 @@ GRAPHIC_PRIMARY = r'''
         </section>
 
         <section class="archive-chapter" aria-labelledby="graphic-events-title">
-          <div class="archive-chapter-head"><p class="graphic-section-kicker">Event graphics</p><h2 id="graphic-events-title">Events and print</h2></div>
+          <div class="archive-chapter-head"><p class="graphic-section-kicker">Selected visual systems</p><h2 id="graphic-events-title">Campaigns and illustration systems</h2></div>
           <div class="graphic-events">
             <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="Ability Experience fortieth anniversary event graphic"><figcaption>AbEx 40</figcaption></figure>
-            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sc56-chicago-event.webp" width="2400" height="1476" alt="Chicago event graphic for the fifty-sixth Supreme Chapter"><figcaption>Supreme Chapter Chicago</figcaption></figure>
-            <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/hazing-prevention-poster.webp" width="1553" height="2400" alt="Hazing prevention awareness poster"><figcaption>Hazing prevention</figcaption></figure>
-            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sgla-event-signage-system.webp" width="2222" height="1914" alt="Southeastern Greek Leadership Association event signage system"><figcaption>SGLA event signage</figcaption></figure>
+            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sc56-instagram-panel-series.webp" width="2400" height="1432" alt="Three coordinated Instagram campaign panels for the fifty-sixth Supreme Chapter in Chicago"><figcaption>Supreme Chapter social campaign</figcaption></figure>
+            <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/ibm-paltron-illustration-system.webp" width="2400" height="4168" alt="IBM Cloud PALtron illustration system sheet with separated assets, color treatments, and object explorations"><figcaption>IBM Cloud PALtron illustration system</figcaption></figure>
+            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/wxo-illustration-system.webp" width="2400" height="1920" alt="IBM watsonx Orchestrate illustration composition with people, gestures, gradients, paths, and interface motifs"><figcaption>IBM watsonx Orchestrate illustration system</figcaption></figure>
           </div>
         </section>
 

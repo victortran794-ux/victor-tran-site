@@ -88,14 +88,14 @@ const pages = {
     bodyClass: 'visual-archive-page graphic-archive-v2',
     marker: 'data-archive="graphic-contact-sheet"',
     keepExtendedArchive: false,
-    headings: ['Graphics. Design. Print.', 'EDC / Boombox', 'Southeastern Greek Leadership Association', 'Selected slide work', 'Marks and applications', 'Events and print', 'Selected illustrations', 'Wide-format information design'],
+    headings: ['Graphics. Design. Print.', 'EDC / Boombox', 'Southeastern Greek Leadership Association', 'Selected slide work', 'Marks and applications', 'Campaigns and illustration systems', 'Selected illustrations', 'Wide-format information design'],
     selectedAssets: [
       'images/graphic-archive-v2/chantico.webp',
       'images/graphic-archive-v2/dog.webp',
       'images/graphic-archive-v2/abex.webp',
-      'images/graphic-archive-v2/sc56-chicago-event.webp',
-      'images/graphic-archive-v2/hazing-prevention-poster.webp',
-      'images/graphic-archive-v2/sgla-event-signage-system.webp',
+      'images/graphic-archive-v2/sc56-instagram-panel-series.webp',
+      'images/graphic-archive-v2/ibm-paltron-illustration-system.webp',
+      'images/graphic-archive-v2/wxo-illustration-system.webp',
     ],
     rejectedAssets: [
       'images/graphic-archive-v2/taste.webp',
@@ -328,8 +328,8 @@ expect(marksStack.indexOf('src="images/gg-day-of-giving.png"') >= 0 && marksStac
 const eventsStack = graphicPrimary.match(/<div class="graphic-events">([\s\S]*?)<\/div>/i)?.[1] ?? '';
 expect(!eventsStack.includes('dog.webp') && eventsStack.includes('abex.webp'),
   'graphicgallery.html: rebalance events around AbEx after moving Day of Giving to its logo study.');
-for (const eventAsset of ['sc56-chicago-event.webp', 'hazing-prevention-poster.webp', 'sgla-event-signage-system.webp']) {
-  expect(eventsStack.includes(eventAsset), `graphicgallery.html: Events and print is missing ${eventAsset}.`);
+for (const eventAsset of ['sc56-instagram-panel-series.webp', 'ibm-paltron-illustration-system.webp', 'wxo-illustration-system.webp']) {
+  expect(eventsStack.includes(eventAsset), `graphicgallery.html: Campaigns and illustration systems is missing ${eventAsset}.`);
 }
 expect(graphic.includes('.graphic-brand-grid .is-third { grid-column: span 4; aspect-ratio: 4 / 3; display: grid; place-items: center;') &&
   graphic.includes('.graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }'),
@@ -346,7 +346,7 @@ for (const [label, heading] of [
   ['Identity system', 'Southeastern Greek Leadership Association'],
   ['Presentation design', 'Selected slide work'],
   ['Brand applications', 'Marks and applications'],
-  ['Event graphics', 'Events and print'],
+  ['Selected visual systems', 'Campaigns and illustration systems'],
 ]) {
   expect(primaryHtml(graphic).includes(`class="graphic-section-kicker">${label}</p>`) && primaryHtml(graphic).includes(`>${heading}</h2>`),
     `graphicgallery.html: use the aligned text pair “${label} / ${heading}”.`);

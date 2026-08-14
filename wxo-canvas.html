@@ -150,8 +150,8 @@
           </div>
         </div>
         <figure class="wxo-v1-connector-accent">
-          <img class="wxo-v1-illustration wxo-v1-illustration--orbital" src="images/wxo-canvas/current/05-orbital-insert.png" width="322" height="322" alt="Illustrated hand selecting an insertion point between workflow cards" loading="lazy" decoding="async">
-          <figcaption>Connection grammar keeps insertion visible at the moment it matters.</figcaption>
+          <img class="wxo-v1-illustration wxo-v1-illustration--direction" src="images/wxo-canvas/current/03-main-illustration.png" width="870" height="546" alt="Illustrated person facing an open field of branching blue workflow paths" loading="lazy" decoding="async">
+          <figcaption>Branching paths remain legible as the workflow expands.</figcaption>
         </figure>
       </section>
 
@@ -195,9 +195,16 @@
         </div>
       </section>
 
-      <figure class="wxo-v1-closing reveal">
-        <img class="wxo-v1-illustration wxo-v1-illustration--closing" src="images/wxo-canvas/current/03-main-illustration.png" width="870" height="546" alt="Illustrated person facing an open field of branching workflow paths" loading="lazy" decoding="async">
-      </figure>
+      <section class="wxo-future-preview reveal" aria-labelledby="wxo-future-title">
+        <h2 id="wxo-future-title">Future state explorations</h2>
+        <figure class="wxo-future-motion-frame">
+          <video autoplay muted loop playsinline id="wxo-future-canvas-motion" preload="metadata" poster="assets/wxo-canvas-future/future-canvas-poster.webp" width="1024" height="676" aria-describedby="wxo-future-caption">
+            <source src="assets/wxo-canvas-future/future-canvas-loop.webm" type="video/webm">
+            <source src="assets/wxo-canvas-future/future-canvas-loop.mp4" type="video/mp4">
+          </video>
+          <figcaption id="wxo-future-caption"><span>Coming soon</span><button type="button" class="wxo-future-motion-toggle" data-future-motion-toggle aria-controls="wxo-future-canvas-motion" aria-pressed="false">Pause animation</button></figcaption>
+        </figure>
+      </section>
       </section>
 
       <section class="wxo-chapter-panel" id="document-processing" data-wxo-chapter-panel="document-processing" aria-labelledby="wxo-doc-title" tabindex="-1" hidden>
@@ -360,6 +367,27 @@
       }));
       window.addEventListener('hashchange', () => showChapter(location.hash.slice(1)));
       showChapter(location.hash.slice(1));
+
+      const futureMotion = document.querySelector('#wxo-future-canvas-motion');
+      const futureMotionToggle = document.querySelector('[data-future-motion-toggle]');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const syncFutureMotionToggle = () => {
+        if (!futureMotion || !futureMotionToggle) return;
+        const paused = futureMotion.paused;
+        futureMotionToggle.textContent = paused ? 'Play animation' : 'Pause animation';
+        futureMotionToggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      };
+      if (futureMotion && futureMotionToggle) {
+        if (reducedMotion.matches) futureMotion.pause();
+        futureMotionToggle.addEventListener('click', () => {
+          if (futureMotion.paused) futureMotion.play();
+          else futureMotion.pause();
+          syncFutureMotionToggle();
+        });
+        futureMotion.addEventListener('play', syncFutureMotionToggle);
+        futureMotion.addEventListener('pause', syncFutureMotionToggle);
+        syncFutureMotionToggle();
+      }
     })();
   </script>
 </body>

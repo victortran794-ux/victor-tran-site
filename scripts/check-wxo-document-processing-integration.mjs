@@ -27,6 +27,10 @@ const workflowJs = read('js/wxo-workflows-vico2.js');
 const passwordGate = read('js/password-gate.js');
 const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
+const deployIgnore = read('.vercelignore');
+const futureManifest = JSON.parse(read('data/wxo-canvas-future-provenance.json'));
+if (fs.existsSync('assets/wxo-canvas-future/manifest.json')) fail('Future Canvas internal provenance must not live in the publicly deployed assets tree.');
+requireText(deployIgnore, 'data/', 'Repository-only Future Canvas provenance must remain excluded from deployment.');
 
 const documentProcessingRedirect = vercel.redirects?.find((rule) => rule.source === '/document-processing');
 if (!documentProcessingRedirect || documentProcessingRedirect.destination !== '/wxo-canvas#document-processing' || documentProcessingRedirect.permanent !== true) {
@@ -128,7 +132,33 @@ forbid(wxo, /<dt>Scope<\/dt>|<dt>Status<\/dt>/i, 'wxO hero must keep the role an
 forbid(wxo, /Evidence boundary:/i, 'wxO umbrella must not repeat evidence-boundary callouts.');
 forbid(wxo, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'wxO viewer-facing copy must not expose internal release-gate language.');
 forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Design to implementation/i, 'Deferred Canvas sections must not remain in the active story.');
-requireText(workflowCss, 'grid-template-columns: repeat(2, minmax(0, 1fr));', 'wxO chapter selector must give both case-study views equal visibility.');
+requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must preserve the smaller Document Processing tab.');
+requireText(workflowCss, 'top: 58px;', 'The sticky wxO selector must meet the scrolled 58px site navigation without exposing the page background.');
+forbid(wxo, /data-wxo-chapter="future-canvas"/i, 'Future Canvas must not appear as a peer chapter tab.');
+requireText(wxo, 'class="wxo-future-preview reveal"', 'Future Canvas must appear at the end of the Agentic Workflow Canvas chapter.');
+requireText(wxo, '>Future state explorations</h2>', 'Future Canvas must use the concise approved heading.');
+requireText(wxo, '<span>Coming soon</span>', 'Future Canvas must remain clearly labeled as upcoming exploratory work.');
+forbid(wxo, /A ten-second look at where the canvas was heading|This short prototype walkthrough|Future-direction prototype · exploration only/i, 'Future Canvas must not restore the rejected long ending copy.');
+for (const asset of ['future-canvas-loop.webm', 'future-canvas-loop.mp4', 'future-canvas-poster.webp']) {
+  requireText(wxo, `assets/wxo-canvas-future/${asset}`, `Future Canvas missing motion derivative ${asset}.`);
+  if (!fs.existsSync(`assets/wxo-canvas-future/${asset}`)) fail(`Future Canvas motion derivative does not exist: ${asset}`);
+}
+if (futureManifest.source?.figmaFileKey !== 'xCDC70RQXCft14QJmDTmrW' || futureManifest.source?.nodes?.inventory !== '26:267748') {
+  fail('Future Canvas motion must trace to the original wxO file and linked inventory node.');
+}
+if (futureManifest.cameraMotion !== 'none' || futureManifest.durationSeconds !== 10) {
+  fail('Future Canvas motion must remain a ten-second full-frame sequence without camera zoom.');
+}
+for (const [asset, expectedHash] of Object.entries({
+  'future-inventory-sanitized.png': '9757ff27d0fb0da91e0f8f6c9b06e1b0d9ca1bb19141a6dedd6b01aa41886436',
+  'future-builder-sanitized.png': '54c0a66623538627dfa7d13c5459881e2d1db211adcb07d040672043374145fc',
+  'future-debug-sanitized.png': '766dcb6f5a1ca927def033a0c7807ec7a90def722d1e284c3258744e5606bc25',
+})) {
+  const assetPath = `assets/wxo-canvas-future/${asset}`;
+  if (!fs.existsSync(assetPath)) fail(`Future Canvas approved full-frame derivative is missing: ${asset}`);
+  else if (sha256(assetPath) !== expectedHash) fail(`Future Canvas approved derivative changed unexpectedly: ${asset}`);
+}
+requireText(wxo, 'data-future-motion-toggle', 'Future Canvas motion must provide a visible pause control.');
 requireText(wxo, 'data-wxo-tab-status>Current view</small>', 'wxO chapter selector must identify the current view.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
 requireText(wxo, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
@@ -141,7 +171,6 @@ const currentCanvasAssets = [
   '02-header-image.png',
   '03-main-illustration.png',
   '04-orbital-card.png',
-  '05-orbital-insert.png',
   '06-key-screen.png',
   '07-agent-node-explorations.png',
   '08-node-color-enhancements.png',
@@ -157,7 +186,6 @@ const expectedCurrentCanvasHashes = {
   '02-header-image.png': '9274a98802718b7b4c700bc73a88da70865583b35c6412e5b259ab69585cae68',
   '03-main-illustration.png': '28a1a333063a68fba1eb91a6685a7f7137182042dc72ebf4606be2a7f5197e5e',
   '04-orbital-card.png': '82e9e4aee554de71a5868ed06036cd10bf66fb21bc47f969b73944484a5ae51e',
-  '05-orbital-insert.png': 'e0f2c09fd4e1eda19e3c9cabdcbb56571e83fa1c5244f4de6f3929840f546f2a',
   '06-key-screen.png': 'a5a6aaaed7e6798a3a8b2b0f960c4a4fc272a07e8b6e822daa062f53ae52b8c7',
   '07-agent-node-explorations.png': '4d1db072b43dc861524e4164b4bcac1ca18be259b4dfc36828ab378d074edbb9',
   '08-node-color-enhancements.png': '16298cabc6ac072a1e8048d6527d3b04cca29b85771996924f97936abfc76411',
@@ -193,7 +221,8 @@ for (const text of [
   'Role and state',
   '15-user-activity-form-filled.png',
 ]) requireText(wxo, text, `wxO Canvas missing V1 viewer phrase: ${text}`);
-if (count(wxo, /class="[^"]*\bwxo-v1-illustration\b[^"]*"/gi) !== 5) fail('wxO Canvas must place exactly five authored V1 illustration accents.');
+if (count(wxo, /class="[^"]*\bwxo-v1-illustration\b[^"]*"/gi) !== 4) fail('wxO Canvas must place exactly four authored V1 illustration accents.');
+requireText(wxo, 'src="images/wxo-canvas/current/03-main-illustration.png" width="870" height="546"', 'Direction stays visible must feature the predominantly blue branching-path illustration at native aspect ratio.');
 if (count(wxo, /class="[^"]*\bwxo-v1-arrangement\b[^"]*"/gi) !== 7) fail('wxO Canvas must show seven complete V1 arrangement figures after removing the flawed connector sheet.');
 if (count(wxo, /class="[^"]*\bwxo-v1-palette-piece\b[^"]*"/gi) !== 2) fail('wxO Canvas must compose only the two approved Palette child frames.');
 forbid(wxo, /01-book-a-flight-context\.png|02-component-system-board\.png|03-user-activity-form\.png|04-straight-connector-states\.png|canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'Superseded crops, reconstructed boards, zooms, and sparse plates must not remain referenced.');
@@ -260,7 +289,8 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
 if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 24) fail('wxO Canvas must use exactly twenty-four images: shared nav image, fourteen V1 Canvas exports, and nine current Document Processing frames.');
+if (count(wxo, /<img\b/gi) !== 23) fail('wxO Canvas must use exactly twenty-three images: shared nav image, thirteen V1 Canvas exports, and nine current Document Processing frames.');
+if (count(wxo, /<video\b/gi) !== 2) fail('wxO Canvas must use exactly two bounded motion loops: Document Processing and Future Canvas.');
 if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');
