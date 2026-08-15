@@ -312,7 +312,7 @@
       "It still needed to look like Pi Kappa Phi.",
       "The earlier concepts showed how the member view was taking shape.",
       "A formative start, not a finished product.",
-      "What I might do with the app today.",
+      "What I would do with the app today.",
       "Expansion Portfolio"
     ],
     "images": [
@@ -349,20 +349,20 @@
         "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-case-study/v2-today-light-clean.png",
-        "alt": "Light-theme Today screen showing chapter context, responsibilities, and an Update us field"
+        "src": "images/pikapp-case-study/remaster-attention.png",
+        "alt": "Dark-blue Today screen showing illustrative responsibilities ordered by what needs attention"
       },
       {
-        "src": "images/pikapp-case-study/v2-responsibility-detail-dark-clean.png",
-        "alt": "Dark-theme responsibility detail sheet showing source context and review controls"
+        "src": "images/pikapp-case-study/remaster-trust.png",
+        "alt": "Dark-blue responsibility detail showing illustrative source, visibility, status, and correction controls"
       },
       {
-        "src": "images/pikapp-case-study/v2-update-review-dark-clean.png",
-        "alt": "Dark-theme update review screen showing a proposed responsibility update before it is applied"
+        "src": "images/pikapp-case-study/remaster-chapter-context.png",
+        "alt": "Dark-blue Chapter screen showing illustrative shared work and recognition without rankings"
       },
       {
-        "src": "images/pikapp-case-study/v2-correction-requested-dark-clean.png",
-        "alt": "Dark-theme correction-requested screen confirming that a review has been sent"
+        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
+        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       }
     ],
     "projects": []

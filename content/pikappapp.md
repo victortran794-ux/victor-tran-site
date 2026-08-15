@@ -29,7 +29,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - It still needed to look like Pi Kappa Phi.
 - The earlier concepts showed how the member view was taking shape.
 - A formative start, not a finished product.
-- What I might do with the app today.
+- What I would do with the app today.
 - Expansion Portfolio
 
 ## Body Copy
@@ -78,9 +78,9 @@ Earlier concept sequence
 
 The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda.
 
-Earlier interactive prototype
+Earlier V2 prototype
 
-This runnable snapshot preserves the earlier dashboard, bulletin, milestones, and navigation. It predates the V2 direction below.
+This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.
 
 This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
 
@@ -88,11 +88,11 @@ HQ could feel distant from day-to-day chapter life. The app was one attempt to m
 
 I still do not have usability testing or evidence that the concept was adopted. It remained an experimental study, but it was a neat start and it changed how I thought about meeting an audience halfway.
 
-Present-day exploration | speculative V2 concept
+Present-day exploration | Source-faithful remaster concept
 
-The screens below turn the main lessons from the earlier concept into one deliberately small present-day direction.
+I would reorganize the app around three moments: knowing what needs attention, understanding where a responsibility comes from, and seeing how individual work connects to the chapter. This source-faithful remaster preserves the original blue-and-gold identity while tightening the hierarchy, spacing, and interaction details. It is speculative, illustrative, and not researched or shipped.
 
-Illustrative and unvalidated. A small direction study, not a complete app, current product proposal, or live service.
+Speculative remaster concept. Illustrative information. Not researched or shipped.
 
 Pi Kapp App archive
 
@@ -112,13 +112,9 @@ Cover view selected.
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
-- Light-theme Today screen showing chapter context, responsibilities, and an Update us field: images/pikapp-case-study/v2-today-light-clean.png
-- Dark-theme responsibility detail sheet showing source context and review controls: images/pikapp-case-study/v2-responsibility-detail-dark-clean.png
-- Dark-theme update review screen showing a proposed responsibility update before it is applied: images/pikapp-case-study/v2-update-review-dark-clean.png
-- Dark-theme correction-requested screen confirming that a review has been sent: images/pikapp-case-study/v2-correction-requested-dark-clean.png
-- Dark-theme Today screen showing an all-caught-up state without points or rankings: images/pikapp-case-study/v2-all-caught-up-dark-clean.png
-- Light-theme Today screen showing the same all-caught-up state: images/pikapp-case-study/v2-all-caught-up-light-clean.png
-- Light-theme Chapter screen showing shared chapter context and a restrained thank-you: images/pikapp-case-study/v2-chapter-light-clean.png
+- Dark-blue Today screen showing illustrative responsibilities ordered by what needs attention: images/pikapp-case-study/remaster-attention.png
+- Dark-blue responsibility detail showing illustrative source, visibility, status, and correction controls: images/pikapp-case-study/remaster-trust.png
+- Dark-blue Chapter screen showing illustrative shared work and recognition without rankings: images/pikapp-case-study/remaster-chapter-context.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Complete Creighton University opener from the Expansion Portfolio: images/pikapp-case-study/expansion-creighton-opener.webp
 - Complete expansion timeline page from the Expansion Portfolio: images/pikapp-case-study/expansion-timeline.webp
