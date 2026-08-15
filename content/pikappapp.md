@@ -67,27 +67,45 @@ About the integrations: I planned around tools Pi Kapp already used, including i
 
 The strongest direction came from treating the mark, color, pattern, type, and interface states as one kit, then carrying those cues into each screen.
 
-System overview
+Pi Kapp App
 
-Deep blue carried information, bright cyan added energy, and gold signaled progress. The crest and hex field gave the interface a recognizable Pi Kapp rhythm without asking every screen to look the same.
+The source-authored kit behind V1. Color, type, mark, pattern, and a handful of interface states gave the screens one shared vocabulary.
 
-Color roles
+Four roles, one recognizable palette
 
-Pattern language
+Information, navigation, and structure
 
-A flexible texture for depth, movement, and quieter branded surfaces.
+Entry points, energy, and emphasis
+
+Progress, completion, and focus
+
+Content surfaces and breathing room
+
+Display, interface, and status
+
+Display role
+
+Interface roles
+
+Direct labels keep milestones, updates, and the next action easy to scan.
+
+One mark, a flexible field
+
+Original star + swords crest
+
+Large at entry, quieter inside the member flow.
+
+Hex field
+
+Reusable states from the member flow
 
 Navigation set
 
-A compact icon family kept the four main areas easy to scan.
+Task checkbox
 
-Progress states
+Milestone ring
 
-Empty, active, and complete states make the next action easier to find.
-
-Type roles
-
-Large display moments, direct interface copy, and compact status labels each had one job.
+Empty, active, and complete use one consistent state model.
 
 From system to screen
 
@@ -149,7 +167,7 @@ Cover view selected.
 - Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
-- Original Pi Kapp App star-and-swords crest: images/pikapp-case-study/app-crest.png
+- Original Pi Kapp App crest shown as the primary app mark: images/pikapp-case-study/app-crest.png
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
