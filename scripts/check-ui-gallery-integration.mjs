@@ -31,6 +31,9 @@ need(Boolean(css), 'css/ui-gallery.css must exist.');
 for (const token of [
   '<title>UI Gallery | Victor Tran</title>',
   '<link rel="canonical" href="https://www.victortrandesign.com/uigallery">',
+  '<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">',
+  '<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">',
+  '<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">',
   '<body class="visual-archive-page ui-gallery-page">',
   '<main class="page-content" id="main-content" tabindex="-1" data-archive="ui-gallery">',
   '<p class="ui-gallery-kicker">UI Gallery</p>',
@@ -177,6 +180,8 @@ needText(browserContract, "file: 'uigallery.html'", 'The browser harness must ta
 need(packageJson.scripts?.['check:ui-gallery-browser'] === 'node scripts/check-visual-archives-browser.mjs ui', 'package.json must register a focused UI Gallery browser command.');
 needText(preflight, 'check:visual-archives-lightbox-browser', 'Preflight must run the all-gallery browser harness that includes UI Gallery.');
 needText(workflow, 'check:visual-archives-lightbox-browser', 'Health workflow must run the all-gallery browser harness that includes UI Gallery.');
+needText(workflow, '--exclude "${{ github.event_name == \'pull_request\' && \'www.victortrandesign.com/uigallery\' || \'a^\' }}"',
+  'Health workflow must defer the not-yet-live UI Gallery canonical URL only on pull requests.');
 needText(sharedShellContract, "'uigallery.html'", 'Shared shell contract must include UI Gallery in the route set.');
 needText(a11yContract, "'uigallery.html'", 'Accessibility quick-wins contract must include UI Gallery.');
 needText(assetRequirements, 'Pillow==12.3.0', 'UI Gallery asset requirements must pin the verified Pillow version.');

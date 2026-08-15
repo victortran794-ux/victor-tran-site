@@ -399,6 +399,7 @@ jobs:
             --exclude "linkedin.com"
             --exclude "pikappapp/demo"
             --exclude "${{ github.event_name == 'pull_request' && 'www.victortrandesign.com/wxo-canvas' || 'a^' }}"
+            --exclude "${{ github.event_name == 'pull_request' && 'www.victortrandesign.com/uigallery' || 'a^' }}"
             "./*.html"
           fail: true
 
