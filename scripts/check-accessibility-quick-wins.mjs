@@ -6,7 +6,7 @@ const activePages = [
   'index.html', 'about.html', '404.html', 'abilityexperience.html',
   'artillustration.html', 'document-processing.html', 'graphicgallery.html',
   'ibm-patterns.html', 'ibmcloud.html', 'pci.html', 'pikappapp.html',
-  'salmagazine.html', 'wxo-canvas.html',
+  'salmagazine.html', 'uigallery.html', 'wxo-canvas.html',
 ];
 const failures = [];
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');

@@ -7,8 +7,8 @@ import { spawn } from 'node:child_process';
 
 const root = process.cwd();
 const scope = process.argv[2] ?? 'all';
-if (!['art', 'graphic', 'all'].includes(scope)) {
-  throw new Error('Usage: node scripts/check-visual-archives-browser.mjs [art|graphic|all]');
+if (!['art', 'graphic', 'ui', 'all'].includes(scope)) {
+  throw new Error('Usage: node scripts/check-visual-archives-browser.mjs [art|graphic|ui|all]');
 }
 const baseUrl = process.env.SITE_URL || 'http://127.0.0.1:8896';
 const evidenceDir = process.env.VISUAL_ARCHIVES_EVIDENCE_DIR || path.join(root, '.hermes', 'evidence', 'visual-archives');
@@ -147,9 +147,22 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function waitForScrollSettle() {
+  let last = await cdp.evaluate('scrollY');
+  let stableFrames = 0;
+  for (let attempt = 0; attempt < 24; attempt += 1) {
+    await delay(50);
+    const current = await cdp.evaluate('scrollY');
+    stableFrames = Math.abs(current - last) <= 0.5 ? stableFrames + 1 : 0;
+    if (stableFrames >= 3) return current;
+    last = current;
+  }
+  return last;
+}
+
 async function checkLightbox(spec) {
   const trigger = await cdp.evaluate(`(() => {
-    const image = document.querySelector('.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img');
+    const image = document.querySelector('.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img, .ui-gallery-page .archive-frame > img:not([data-ui-scroll-image])');
     if (!image) return null;
     window.__lightboxReviewTrigger = image;
     const main = document.querySelector('main#main-content');
@@ -192,6 +205,8 @@ async function checkLightbox(spec) {
   assert(!closed.open && closed.overflow === '' && !closed.mainInert && closed.mainHidden === 'false' && closed.footerInert && closed.footerHidden === null && closed.exactTriggerFocused,
     `${spec.file}: Escape did not restore page state and the exact image trigger: ${JSON.stringify(closed)}`);
 
+  // Let the site's smooth focus-restoration scroll settle before measuring Space activation.
+  await waitForScrollSettle();
   const beforeSpace = await cdp.evaluate(`({ scrollY, exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger })`);
   assert(beforeSpace.exactTriggerFocused, `${spec.file}: exact trigger focus was lost before the Space activation check.`);
   await cdp.key(' ', 'Space', 32);
@@ -307,6 +322,32 @@ async function checkHornedWomanCadenceAndPause() {
   });
 }
 
+async function checkHomepageGalleryChapter() {
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  await cdp.navigate(`${baseUrl}/index.html`);
+  const mobile = await cdp.evaluate(`(() => {
+    document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+    const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => {
+      const rect = card.getBoundingClientRect();
+      return { left: Math.round(rect.left), width: Math.round(rect.width) };
+    });
+    return { title: document.querySelector('.featured-galleries-title')?.textContent.trim(), cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+  })()`);
+  assert(mobile.title === 'And some galleries.' && mobile.cards.length === 3 && mobile.overflow === 0,
+    `index.html: mobile three-gallery chapter contract drifted: ${JSON.stringify(mobile)}`);
+  assert(mobile.cards.every((card) => card.width >= 340) && mobile.cards.every((card) => Math.abs(card.left - mobile.cards[0].left) <= 1),
+    `index.html: mobile gallery cards must share one full-width column: ${JSON.stringify(mobile.cards)}`);
+
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+  await cdp.navigate(`${baseUrl}/index.html`);
+  const desktop = await cdp.evaluate(`(() => {
+    const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => Math.round(card.getBoundingClientRect().width));
+    return { cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+  })()`);
+  assert(desktop.cards.length === 3 && desktop.overflow === 0 && Math.abs(desktop.cards[0] - desktop.cards[1]) <= 1 && desktop.cards[2] > desktop.cards[0],
+    `index.html: desktop gallery hierarchy drifted: ${JSON.stringify(desktop)}`);
+}
+
 const pageSpecs = {
   art: {
     file: 'artillustration.html',
@@ -319,6 +360,13 @@ const pageSpecs = {
     bodyClass: 'graphic-archive-v2',
     archive: 'graphic-contact-sheet',
     mainImages: 42,
+  },
+  ui: {
+    file: 'uigallery.html',
+    bodyClass: 'ui-gallery-page',
+    archive: 'ui-gallery',
+    mainImages: 3,
+    captions: 0,
   },
 };
 
@@ -422,6 +470,38 @@ try {
             mendenhallPoster: document.querySelectorAll('.mendenhall-archive-trigger > img').length,
             mendenhallViews: document.querySelectorAll('[data-mendenhall-view]').length,
             mendenhallFit: document.querySelector('.mendenhall-archive-trigger > img') ? getComputedStyle(document.querySelector('.mendenhall-archive-trigger > img')).objectFit : null,
+            uiViews: document.querySelectorAll('[data-ui-study-view]').length,
+            uiBackground: getComputedStyle(document.body).backgroundColor,
+            uiViewNames: [...document.querySelectorAll('[data-ui-study-view]')].map((view) => view.dataset.uiStudyView),
+            uiImageSources: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => image.getAttribute('src')),
+            uiImageDimensions: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => ({
+              src: image.getAttribute('src'),
+              naturalWidth: image.naturalWidth,
+              naturalHeight: image.naturalHeight,
+              declaredWidth: Number(image.getAttribute('width')),
+              declaredHeight: Number(image.getAttribute('height')),
+            })),
+            uiImageLayout: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => {
+              const rect = image.getBoundingClientRect();
+              return { width: Math.round(rect.width), height: Math.round(rect.height) };
+            }),
+            uiScrollScreen: (() => {
+              const screen = document.querySelector('[data-ui-scroll-screen]');
+              if (!screen) return null;
+              const rect = screen.getBoundingClientRect();
+              return {
+                width: Math.round(rect.width),
+                height: Math.round(rect.height),
+                clientHeight: screen.clientHeight,
+                scrollHeight: screen.scrollHeight,
+                overflowY: getComputedStyle(screen).overflowY,
+                tabindex: screen.tabIndex,
+              };
+            })(),
+            uiLayout: [...document.querySelectorAll('[data-ui-study-view]')].map((view) => {
+              const rect = view.getBoundingClientRect();
+              return { left: Math.round(rect.left), top: Math.round(rect.top), width: Math.round(rect.width) };
+            }),
           };
         })()`);
 
@@ -438,7 +518,7 @@ try {
         assert(!state.projectNav, `${spec.file}: gallery gained primary case-study previous/next navigation`);
         assert(!state.designDna, `${spec.file}: Design DNA escaped the homepage`);
         assert(!state.extendedArchive, `${spec.file}: duplicate hidden archive returned`);
-        assert(state.captions === 0, `${spec.file}: expected zero primary captions; found ${state.captions}`);
+        assert(state.captions === (spec.captions ?? 0), `${spec.file}: expected ${spec.captions ?? 0} primary captions; found ${state.captions}`);
         assert(state.mainImages === spec.mainImages, `${spec.file}: expected ${spec.mainImages} main images; found ${state.mainImages}`);
         assert(state.failedImages.length === 0, `${spec.file}: media failed to decode: ${JSON.stringify(state.failedImages)}`);
         assert(state.focusContrast >= 3,
@@ -454,7 +534,7 @@ try {
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);
           assert(state.artHornedKeyboardTriggers === 1,
             `artillustration.html: exactly one visible Horned Woman image must be keyboard-operable; found ${state.artHornedKeyboardTriggers}`);
-        } else {
+        } else if (name === 'graphic') {
           assert(state.graphicEdc === 4, `graphicgallery.html: expected 4 EDC tiles; found ${state.graphicEdc}`);
           assert(state.graphicSlides === 16, `graphicgallery.html: expected 16 presentation slides; found ${state.graphicSlides}`);
           const expectedGraphicColumns = viewport.mobile ? '2' : viewport.width === 768 ? '4' : '5';
@@ -493,6 +573,47 @@ try {
             const restored = await cdp.evaluate(`({ open: document.querySelector('[data-mendenhall-dialog]').open, locked: document.body.classList.contains('mendenhall-archive-open'), focus: document.activeElement?.className || '' })`);
             assert(!restored.open && !restored.locked && restored.focus.includes('mendenhall-archive-trigger'), `graphicgallery.html: archive close/focus restoration failed: ${JSON.stringify(restored)}`);
           }
+        } else if (name === 'ui') {
+          const expectedUiBackground = theme === 'dark' ? 'rgb(12, 17, 22)' : 'rgb(238, 241, 239)';
+          assert(state.uiBackground === expectedUiBackground,
+            `uigallery.html: ${theme} palette did not apply; expected ${expectedUiBackground}, found ${state.uiBackground}`);
+          assert(state.uiViews === 3 && state.uiLayout.length === 3,
+            `uigallery.html: expected exactly three static UI study views; found ${state.uiViews}`);
+          assert(JSON.stringify(state.uiViewNames) === JSON.stringify([
+            'ekos-desktop', 'magi-architecture', 'magi-overview',
+          ]), `uigallery.html: minimal gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
+          assert(JSON.stringify(state.uiImageSources) === JSON.stringify([
+            'images/ui-gallery/ekos-desktop.webp',
+            'images/ui-gallery/magi-architecture.webp',
+            'images/ui-gallery/magi-overview.webp',
+          ]), `uigallery.html: minimal gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
+          assert(state.uiImageDimensions.every((image) => image.naturalWidth === image.declaredWidth && image.naturalHeight === image.declaredHeight),
+            `uigallery.html: declared dimensions do not match decoded media: ${JSON.stringify(state.uiImageDimensions)}`);
+          assert(state.uiImageLayout.slice(1).every((image) => Math.abs((image.width / image.height) - 1.6) <= 0.03),
+            `uigallery.html: Magi screen ratios drifted: ${JSON.stringify(state.uiImageLayout)}`);
+          const expectedScrollRatio = viewport.mobile ? (4 / 5) : 1.6;
+          assert(state.uiScrollScreen && Math.abs((state.uiScrollScreen.width / state.uiScrollScreen.height) - expectedScrollRatio) <= 0.03 &&
+            state.uiScrollScreen.scrollHeight > state.uiScrollScreen.clientHeight && state.uiScrollScreen.overflowY === 'auto' && state.uiScrollScreen.tabindex === 0,
+            `uigallery.html: Ekos screen is not a keyboard-focusable, scrollable responsive viewport: ${JSON.stringify(state.uiScrollScreen)}`);
+          const scrolledEkos = await cdp.evaluate(`(() => {
+            const screen = document.querySelector('[data-ui-scroll-screen]');
+            screen.scrollTop = screen.scrollHeight;
+            const moved = screen.scrollTop;
+            screen.scrollTop = 0;
+            return moved;
+          })()`);
+          assert(scrolledEkos > 0, `uigallery.html: Ekos screen did not scroll through the complete page.`);
+          const [ekosDesktop, magiArchitecture, magiOverview] = state.uiLayout;
+          if (viewport.mobile) {
+            assert(Math.abs(magiArchitecture.left - magiOverview.left) <= 1 && magiArchitecture.top < magiOverview.top,
+              `uigallery.html: mobile Magi studies do not stack architecture first: ${JSON.stringify(state.uiLayout)}`);
+          } else {
+            const magiRatio = magiArchitecture.width / (magiArchitecture.width + magiOverview.width);
+            assert(Math.abs(magiArchitecture.top - magiOverview.top) <= 1 && magiArchitecture.left < magiOverview.left && magiRatio >= 0.63 && magiRatio <= 0.69,
+              `uigallery.html: desktop Magi studies must remain an architecture-led 65/35 pair: ${JSON.stringify({ magiRatio, layout: state.uiLayout })}`);
+            assert(ekosDesktop.width > magiArchitecture.width,
+              `uigallery.html: the single Ekos screen must remain the full-width gallery lead: ${JSON.stringify(state.uiLayout)}`);
+          }
         }
 
         if (theme === 'light' && !viewport.mobile) await checkLightbox(spec);
@@ -514,6 +635,9 @@ try {
   if (scope === 'all' || scope === 'art') {
     await checkHornedWomanCadenceAndPause();
     await checkLiveSlideshowFocusRestoration();
+  }
+  if (scope === 'all' || scope === 'ui') {
+    await checkHomepageGalleryChapter();
   }
 
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);

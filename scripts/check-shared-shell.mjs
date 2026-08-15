@@ -18,6 +18,7 @@ const expectedPages = [
   'pci.html',
   'pikappapp.html',
   'salmagazine.html',
+  'uigallery.html',
   'wxo-canvas.html',
 ];
 const projectNavigationSnapshot = {

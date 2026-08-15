@@ -283,12 +283,12 @@ expect(/pageImgs\.forEach\(\(img,\s*i\)\s*=>[\s\S]*?img\.addEventListener\('keyd
   'js/main.js: gallery images must open from Enter and Space.');
 expect(sharedMain.includes('setBackgroundInert(true)') && sharedMain.includes('setBackgroundInert(false)'),
   'js/main.js: the lightbox must inert and restore non-dialog page content.');
-expect(sharedMain.includes('lastTrigger') && sharedMain.includes('lastTrigger.focus()'),
-  'js/main.js: the lightbox must restore focus to the exact activating image.');
+expect(sharedMain.includes('lastTrigger') && sharedMain.includes('lastTrigger.focus({ preventScroll: true })'),
+  'js/main.js: the lightbox must restore focus to the exact activating image without moving the page.');
 expect(sharedMain.includes("'gallery-lightbox-open'") && sharedMain.includes("'gallery-lightbox-close'") && sharedMain.includes('wasRunningBeforeLightbox'),
   'js/main.js: an activated slideshow image must remain visible until lightbox focus is restored.');
-expect(sharedMain.includes('lbClose.focus()') && sharedMain.includes("e.key === 'Tab'"),
-  'js/main.js: the lightbox must receive initial focus and contain Tab navigation.');
+expect(sharedMain.includes('lbClose.focus({ preventScroll: true })') && sharedMain.includes("e.key === 'Tab'") && sharedMain.includes('preservedScrollY'),
+  'js/main.js: the lightbox must receive initial focus, contain Tab navigation, and preserve page position.');
 const sharedCss = read('css/style.css');
 expect(sharedCss.includes('.gallery-spotlight img:focus-visible') && sharedCss.includes('.gallery-grid img:focus-visible'),
   'css/style.css: gallery triggers need a visible keyboard focus indicator.');

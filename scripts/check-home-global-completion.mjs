@@ -55,8 +55,9 @@ need(css.includes('.featured-list .featured-item--span-5 .featured-item-content'
 
 const art = bySlug.get('artillustration');
 const graphic = bySlug.get('graphicgallery');
-need(art?.homepageLabel === false && graphic?.homepageLabel === false,
-  'The paired Art and Graphic Design covers must rely on their titles without repetitive category labels.');
+const uiGallery = bySlug.get('uigallery');
+need(art?.homepageLabel === false && graphic?.homepageLabel === false && uiGallery?.homepageLabel === false,
+  'The Art, Graphic Design, and UI Gallery covers must rely on their titles without repetitive category labels.');
 need(projectGenerator.includes("project.homepageLabel === false"),
   'Homepage generator must reproduce optional bounded label suppression.');
 need(manifestValidator.includes("expected.homepageLabel === false ? ''"),
@@ -75,8 +76,9 @@ for (const dependency of [
 need(count(healthWorkflow, 'run: npm run check:home-global-completion') === 1,
   'Health workflow must execute the Home/global completion contract exactly once.');
 need(!index.includes('class="featured-galleries-intro"') &&
-  index.includes('id="galleries" role="group" aria-label="Art and graphic design galleries"'),
-  'Homepage gallery ending must remove its repetitive visible subgroup header and preserve a concise accessible name.');
+  index.includes('<h3 class="featured-galleries-title">And some galleries.</h3>') &&
+  index.includes('id="galleries" role="group" aria-label="Art, graphic design, and UI galleries"'),
+  'Homepage gallery ending must use the approved casual chapter name and preserve an explicit accessible name.');
 
 need(shell.footerSubtitle === '', 'Footer must retire the repeated subtitle invitation.');
 need(shell.footerCta === "Let's chat.", 'Footer must use the approved casual invitation.');

@@ -1,0 +1,221 @@
+.ui-gallery-page {
+  --ui-bg: #eef1ef;
+  --ui-panel: #f8f8f3;
+  --ui-ink: #101820;
+  --ui-muted: #53616a;
+  --ui-line: rgba(16, 24, 32, 0.18);
+  --ui-accent: #baff50;
+  background: var(--ui-bg);
+  color: var(--ui-ink);
+}
+
+html[data-theme="dark"] .ui-gallery-page {
+  --ui-bg: #0c1116;
+  --ui-panel: #151b22;
+  --ui-ink: #f2f2e9;
+  --ui-muted: #aeb8bd;
+  --ui-line: rgba(242, 242, 233, 0.18);
+  --ui-accent: #baff50;
+}
+
+.ui-gallery-page .page-content {
+  overflow: clip;
+}
+
+.ui-gallery-hero {
+  min-height: min(72vh, 760px);
+  display: grid;
+  align-content: end;
+  padding: clamp(150px, 20vh, 230px) var(--page-x) clamp(64px, 8vw, 112px);
+  border-bottom: 1px solid var(--ui-line);
+}
+
+.ui-gallery-kicker {
+  margin: 0 0 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ui-gallery-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 10px;
+  background: var(--ui-accent);
+  border: 1px solid var(--ui-ink);
+}
+
+.ui-gallery-hero h1 {
+  max-width: 1100px;
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 9.6rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+}
+
+.ui-gallery-intro {
+  max-width: 530px;
+  margin: clamp(34px, 5vw, 64px) 0 0 auto;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--ui-muted);
+}
+
+.ui-study {
+  padding: clamp(84px, 10vw, 150px) clamp(20px, 6vw, 96px);
+  border-bottom: 0;
+  background: var(--ui-bg);
+}
+
+.ui-study--magi {
+  background: var(--ui-panel);
+}
+
+.ui-study-view > img[role="button"]:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 3px solid #101820;
+  outline-offset: -6px;
+}
+
+html[data-theme="dark"] .ui-study-view > img[role="button"]:focus-visible {
+  outline-color: var(--ui-accent);
+}
+
+.ui-study-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.65fr);
+  gap: clamp(40px, 8vw, 120px);
+  align-items: end;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.ui-study-heading h2 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(3rem, 6vw, 6.4rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.ui-study-summary {
+  margin: 0;
+  max-width: 660px;
+  font-size: clamp(1.05rem, 1.35vw, 1.28rem);
+  line-height: 1.58;
+  color: var(--ui-muted);
+}
+
+.ui-study-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  align-items: start;
+}
+
+.ui-study-view {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+
+.ui-study-view--desktop {
+  grid-column: 1 / -1;
+}
+
+.ui-scroll-screen {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  background: #101820;
+}
+
+.ui-scroll-screen:focus-visible {
+  outline: 3px solid #101820;
+  outline-offset: 5px;
+}
+
+html[data-theme="dark"] .ui-scroll-screen:focus-visible {
+  outline-color: var(--ui-accent);
+}
+
+.ui-scroll-screen > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ui-study-grid--magi .ui-study-view--architecture {
+  grid-column: span 8;
+}
+
+.ui-study-grid--magi .ui-study-view--overview {
+  grid-column: span 4;
+}
+
+.ui-study-view--architecture > img,
+.ui-study-view--overview > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  transition: filter 180ms ease;
+}
+
+.ui-study-view:hover > img {
+  filter: brightness(0.94);
+}
+
+@media (max-width: 760px) {
+  .ui-gallery-hero {
+    min-height: 640px;
+    padding-top: 130px;
+  }
+
+  .ui-gallery-hero h1 {
+    font-size: clamp(3.7rem, 17vw, 5.9rem);
+  }
+
+  .ui-gallery-intro {
+    margin-left: 0;
+  }
+
+  .ui-study-heading,
+  .ui-study-grid--ekos,
+  .ui-study-grid--magi {
+    grid-template-columns: 1fr;
+  }
+
+  .ui-study-heading {
+    align-items: start;
+  }
+
+  .ui-study-view--desktop,
+  .ui-study-grid--magi .ui-study-view--architecture,
+  .ui-study-grid--magi .ui-study-view--overview {
+    grid-column: 1;
+  }
+
+  .ui-scroll-screen {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-study-view > img {
+    transition: none;
+  }
+}

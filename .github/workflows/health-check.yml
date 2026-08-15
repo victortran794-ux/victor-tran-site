@@ -34,6 +34,11 @@ on:
       - "scripts/build-visual-archives-integration.py"
       - "scripts/check-visual-archives-integration.mjs"
       - "scripts/check-visual-archives-browser.mjs"
+      - "scripts/check-ui-gallery-integration.mjs"
+      - "scripts/build-ui-gallery-assets.py"
+      - "uigallery.html"
+      - "css/ui-gallery.css"
+      - "images/ui-gallery/**"
       - "scripts/preflight.sh"
       - "scripts/check-home-global-completion.mjs"
       - "scripts/check-design-dna-system.mjs"
@@ -115,6 +120,11 @@ on:
       - "scripts/build-visual-archives-integration.py"
       - "scripts/check-visual-archives-integration.mjs"
       - "scripts/check-visual-archives-browser.mjs"
+      - "scripts/check-ui-gallery-integration.mjs"
+      - "scripts/build-ui-gallery-assets.py"
+      - "uigallery.html"
+      - "css/ui-gallery.css"
+      - "images/ui-gallery/**"
       - "scripts/preflight.sh"
       - "scripts/check-home-global-completion.mjs"
       - "scripts/check-design-dna-system.mjs"
@@ -358,6 +368,8 @@ jobs:
         run: node scripts/check-responsive-images.mjs
       - name: Gallery media regression check
         run: node scripts/check-gallery-media.mjs
+      - name: UI Gallery integration contract
+        run: npm run check:ui-gallery
       - name: Visual archives integration and browser contracts
         run: |
           node scripts/check-visual-archives-integration.mjs all
@@ -422,6 +434,7 @@ jobs:
             ${{ steps.url.outputs.base }}/abilityexperience
             ${{ steps.url.outputs.base }}/artillustration
             ${{ steps.url.outputs.base }}/graphicgallery
+            ${{ steps.url.outputs.base }}/uigallery
             ${{ steps.url.outputs.base }}/ibmcloud
             ${{ steps.url.outputs.base }}/ibm-patterns
             ${{ steps.url.outputs.base }}/pci
@@ -459,6 +472,7 @@ jobs:
             ${{ steps.url.outputs.base }}/
             ${{ steps.url.outputs.base }}/about
             ${{ steps.url.outputs.base }}/artillustration
+            ${{ steps.url.outputs.base }}/uigallery
             ${{ steps.url.outputs.base }}/ibmcloud
             ${{ steps.url.outputs.base }}/ibm-patterns
             ${{ steps.url.outputs.base }}/pci

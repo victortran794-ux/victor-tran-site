@@ -14,6 +14,7 @@ const PAGES = [
   'salmagazine.html',
   'graphicgallery.html',
   'artillustration.html',
+  'uigallery.html',
 ];
 
 function parseArgs(argv) {

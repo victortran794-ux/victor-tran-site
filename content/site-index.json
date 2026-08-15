@@ -16,7 +16,8 @@
       "Star & Lamp Magazine",
       "Pi Kapp App",
       "Art & Illustration",
-      "Graphic Design"
+      "Graphic Design",
+      "UI Gallery"
     ],
     "images": [
       {
@@ -58,6 +59,10 @@
       {
         "src": "images/gg-edc-0.jpg",
         "alt": "Purple boombox graphic with two illustrated eye panels"
+      },
+      {
+        "src": "images/ui-gallery/ekos-cover.webp",
+        "alt": "Ekos Con interface study with drafting-grid structure and bright campaign colors"
       }
     ],
     "projects": [
@@ -123,6 +128,13 @@
         "url": "graphicgallery",
         "image": "images/gg-edc-0.jpg",
         "alt": "Purple boombox graphic with two illustrated eye panels"
+      },
+      {
+        "title": "UI Gallery",
+        "category": "",
+        "url": "uigallery",
+        "image": "images/ui-gallery/ekos-cover.webp",
+        "alt": "Ekos Con interface study with drafting-grid structure and bright campaign colors"
       }
     ]
   },
@@ -677,6 +689,33 @@
       {
         "src": "images/illus-untitled-2.jpg",
         "alt": "Golden mask"
+      }
+    ],
+    "projects": []
+  },
+  {
+    "title": "Interfaces, in view.",
+    "source": "uigallery.html",
+    "url": "/uigallery",
+    "category": "",
+    "description": "Selected interface studies by Victor Tran, including a high-fidelity Ekos Con visual study.",
+    "contentFile": "content/uigallery.md",
+    "headings": [
+      "Ekos Con 2018",
+      "Magi dashboard"
+    ],
+    "images": [
+      {
+        "src": "images/ui-gallery/ekos-desktop.webp",
+        "alt": "Complete Ekos Con desktop landing-page cleanup with drafting-grid construction, event details, brewery photograph, pricing, and lodging information"
+      },
+      {
+        "src": "images/ui-gallery/magi-architecture.webp",
+        "alt": "Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes"
+      },
+      {
+        "src": "images/ui-gallery/magi-overview.webp",
+        "alt": "Sanitized dark Magi dashboard study showing an illustrative work docket and disconnected operations state"
       }
     ],
     "projects": []

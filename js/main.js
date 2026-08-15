@@ -387,8 +387,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img'
-  )).filter((img) => !img.closest('[aria-controls="mendenhall-archive-dialog"]'));
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img, .ui-gallery-page .archive-frame > img'
+  )).filter((img) => !img.closest('[aria-controls="mendenhall-archive-dialog"]') && !img.hasAttribute('data-ui-scroll-image'));
   if (!pageImgs.length) return;
 
   let current = 0;
@@ -435,6 +435,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   let thumbEls = [];
   let lastTrigger = null;
   let previousBodyOverflow = '';
+  let preservedScrollX = 0;
+  let preservedScrollY = 0;
   const backgroundStates = new Map();
 
   function setBackgroundInert(inert) {
@@ -521,11 +523,16 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     goTo(idx);
     lastTrigger = trigger || document.activeElement;
     lastTrigger?.dispatchEvent(new Event('gallery-lightbox-open', { bubbles: true }));
+    preservedScrollX = window.scrollX;
+    preservedScrollY = window.scrollY;
     previousBodyOverflow = document.body.style.overflow;
     lb.classList.add('is-open');
     setBackgroundInert(true);
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => lbClose.focus());
+    requestAnimationFrame(() => {
+      lbClose.focus({ preventScroll: true });
+      window.scrollTo({ left: preservedScrollX, top: preservedScrollY, behavior: 'instant' });
+    });
   }
 
   function close() {
@@ -535,8 +542,9 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     setBackgroundInert(false);
     if (lastTrigger instanceof HTMLElement && document.contains(lastTrigger)) {
       lastTrigger.dispatchEvent(new Event('gallery-lightbox-close', { bubbles: true }));
-      lastTrigger.focus();
+      lastTrigger.focus({ preventScroll: true });
     }
+    window.scrollTo({ left: preservedScrollX, top: preservedScrollY, behavior: 'instant' });
   }
 
   // Wire gallery images
