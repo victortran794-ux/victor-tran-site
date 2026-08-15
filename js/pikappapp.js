@@ -13,7 +13,7 @@
   let phoneIndex = 0;
   let phoneTimer = 0;
 
-  function setPhone(index) {
+  function setPhone(index, direction = 1, animate = true) {
     phoneIndex = (index + phoneSlides.length) % phoneSlides.length;
     phoneSlides.forEach((slide, slideIndex) => {
       const active = slideIndex === phoneIndex;
@@ -25,6 +25,13 @@
     phoneTitle.textContent = current.dataset.title;
     phoneDescription.textContent = current.dataset.description;
     phoneCount.textContent = `${phoneIndex + 1} / ${phoneSlides.length}`;
+
+    phoneStory.dataset.direction = direction < 0 ? 'previous' : 'next';
+    phoneStory.classList.remove('is-advancing');
+    if (animate && !reducedMotion.matches) {
+      void phoneStory.offsetWidth;
+      phoneStory.classList.add('is-advancing');
+    }
   }
 
   function stopPhoneAuto() {
@@ -37,16 +44,16 @@
     stopPhoneAuto();
     const interacting = phoneStory.matches(':hover') || phoneStory.contains(document.activeElement);
     if (!reducedMotion.matches && !document.hidden && !interacting) {
-      phoneTimer = window.setInterval(() => setPhone(phoneIndex + 1), interval);
+      phoneTimer = window.setInterval(() => setPhone(phoneIndex + 1, 1), interval);
     }
   }
 
   previousButton.addEventListener('click', () => {
-    setPhone(phoneIndex - 1);
+    setPhone(phoneIndex - 1, -1);
     restartPhoneAuto();
   });
   nextButton.addEventListener('click', () => {
-    setPhone(phoneIndex + 1);
+    setPhone(phoneIndex + 1, 1);
     restartPhoneAuto();
   });
   phoneStory.addEventListener('mouseenter', stopPhoneAuto);
@@ -61,7 +68,7 @@
     else restartPhoneAuto();
   });
 
-  setPhone(0);
+  setPhone(0, 1, false);
   restartPhoneAuto();
 })();
 

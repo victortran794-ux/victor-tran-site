@@ -253,6 +253,11 @@ try {
         const prototypeRect=prototypeFrame?.getBoundingClientRect();
         const prototypeDevice=document.querySelector('.prototype-embed__device');
         const prototypeEmbed=document.querySelector('.prototype-embed');
+        const identityHero=document.querySelector('.identity-system__hero');
+        const identitySpecimenGrid=document.querySelector('.identity-system__specimens');
+        const identityHandoff=document.querySelector('.identity-handoff');
+        const identityHandoffList=document.querySelector('.identity-handoff ol');
+        const identityRects=['.identity-system__hero','.identity-system__specimens','.identity-handoff'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
         const finaleRects=['.coda__head','.coda__triptych','.coda__boundary','.project-nav-item--prev','.project-nav-item--next'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
@@ -261,6 +266,7 @@ try {
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,explorationStudyCount:explorationStudies.length,explorationScreenCount:explorationScreens.length,
           boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,remasterScreens,explorationScreens,explorationStudies,explorationBoundary:explorationBoundary?.textContent.trim().replace(/\\s+/g,' '),explorationFlow:{display:explorationFlowStyle.display,columns:explorationFlowStyle.gridTemplateColumns,overflowX:explorationFlowStyle.overflowX,clientWidth:explorationFlow.clientWidth,scrollWidth:explorationFlow.scrollWidth,tabindex:explorationFlow.getAttribute('tabindex')},explorationMontage:{display:explorationMontageStyle.display,columns:explorationMontageStyle.gridTemplateColumns},
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
+          identity:{swatches:document.querySelectorAll('.identity-swatch').length,specimens:document.querySelectorAll('.system-specimen').length,icons:document.querySelectorAll('.system-icons svg').length,steps:document.querySelectorAll('.identity-handoff li').length,heroColumns:getComputedStyle(identityHero).gridTemplateColumns,specimenColumns:getComputedStyle(identitySpecimenGrid).gridTemplateColumns,handoffColumns:getComputedStyle(identityHandoff).gridTemplateColumns,stepColumns:getComputedStyle(identityHandoffList).gridTemplateColumns,rects:identityRects},
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,embedHeight:prototypeEmbed.getBoundingClientRect().height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX},finaleRects,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
@@ -271,6 +277,13 @@ try {
       assert(state.images===18&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===0&&state.codaScreens===3&&state.phoneSlides===3&&state.explorationStudyCount===2&&state.explorationScreenCount===5,'approved evidence counts drifted');
+      assert(state.identity.swatches===4&&state.identity.specimens===4&&state.identity.icons===4&&state.identity.steps===3,`identity-system inventory drifted: ${JSON.stringify(state.identity)}`);
+      assert(state.identity.rects.every((rect)=>rect.width>0&&rect.height>0&&rect.left>=20-1&&rect.right<=viewport.width-20+1),`identity-system escaped the page boundary: ${JSON.stringify(state.identity.rects)}`);
+      const identityColumnCount=(value)=>value.split(' ').filter(Boolean).length;
+      assert(identityColumnCount(state.identity.heroColumns)===(viewport.width<=800?1:2),`identity hero columns drifted at ${viewport.label}: ${state.identity.heroColumns}`);
+      assert(identityColumnCount(state.identity.specimenColumns)===(viewport.width<=600?1:viewport.width<=1100?2:4),`identity specimen columns drifted at ${viewport.label}: ${state.identity.specimenColumns}`);
+      assert(identityColumnCount(state.identity.handoffColumns)===(viewport.width<=800?1:2),`identity handoff columns drifted at ${viewport.label}: ${state.identity.handoffColumns}`);
+      assert(identityColumnCount(state.identity.stepColumns)===(viewport.width<=600?1:3),`identity handoff step columns drifted at ${viewport.label}: ${state.identity.stepColumns}`);
       assert(state.explorationBoundary==='AI-assisted studies. Illustrative information. Not researched or shipped.','exploration boundary copy drifted');
       assert(state.boundary==='Source-faithful remaster. Illustrative information. Not researched or shipped.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
@@ -311,8 +324,12 @@ try {
         await cdp.screenshot('pikapp-390-light-opening.png');
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-members.png');
-        await cdp.evaluate(`document.querySelector('.identity-source').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-identity-opening.png');
+        await cdp.evaluate(`document.querySelector('.identity-system').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-identity.png');
+        await cdp.evaluate(`document.querySelector('.identity-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-identity-handoff.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-390-light-prototype.png');
         await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
@@ -331,8 +348,12 @@ try {
       if (viewport.label==='1280'&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-members.png');
-        await cdp.evaluate(`document.querySelector('.identity-source').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-identity-opening.png');
+        await cdp.evaluate(`document.querySelector('.identity-system').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-identity.png');
+        await cdp.evaluate(`document.querySelector('.identity-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-identity-handoff.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-1280-dark-prototype.png');
         await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
@@ -466,12 +487,18 @@ try {
   await delay(5400);
   const afterWait=await cdp.evaluate(`({index:[...document.querySelectorAll('.phone-slide')].findIndex((slide)=>slide.classList.contains('is-active')),count:document.getElementById('phone-story-count').textContent})`);
   assert(before.index===afterWait.index&&before.count===afterWait.count,'reduced-motion mode did not stop auto-rotation');
-  const semantics=await cdp.evaluate(`(()=>{const button=document.getElementById('phone-next');button.click();return {tag:button.tagName,type:button.type,label:button.getAttribute('aria-label'),index:[...document.querySelectorAll('.phone-slide')].findIndex((slide)=>slide.classList.contains('is-active')),count:document.getElementById('phone-story-count').textContent}})()`);
+  const semantics=await cdp.evaluate(`(()=>{const button=document.getElementById('phone-next');button.click();return {tag:button.tagName,type:button.type,label:button.getAttribute('aria-label'),index:[...document.querySelectorAll('.phone-slide')].findIndex((slide)=>slide.classList.contains('is-active')),count:document.getElementById('phone-story-count').textContent,advancing:document.querySelector('[data-phone-story]').classList.contains('is-advancing')}})()`);
   assert(semantics.tag==='BUTTON'&&semantics.type==='button'&&semantics.label==='Next app screen','phone control lost native keyboard semantics');
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
+  assert(!semantics.advancing,'reduced-motion mode must not add the transition state');
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
+  const motion=await cdp.evaluate(`(()=>{const story=document.querySelector('[data-phone-story]');document.getElementById('phone-next').click();const active=story.querySelector('.phone-slide.is-active');const index=[...story.querySelectorAll('.phone-slide')].indexOf(active);return {direction:story.dataset.direction,advancing:story.classList.contains('is-advancing'),screenAnimation:getComputedStyle(active).animationName,titleAnimation:getComputedStyle(document.getElementById('phone-story-title')).animationName,index,count:document.getElementById('phone-story-count').textContent}})()`);
+  assert(motion.direction==='next'&&motion.advancing&&motion.screenAnimation==='phone-enter-next'&&motion.titleAnimation==='phone-copy-rise',`normal-motion transition failed: ${JSON.stringify(motion)}`);
+  const previousMotion=await cdp.evaluate(`(()=>{const story=document.querySelector('[data-phone-story]');document.getElementById('phone-prev').click();const active=story.querySelector('.phone-slide.is-active');const index=[...story.querySelectorAll('.phone-slide')].indexOf(active);return {direction:story.dataset.direction,advancing:story.classList.contains('is-advancing'),screenAnimation:getComputedStyle(active).animationName,titleAnimation:getComputedStyle(document.getElementById('phone-story-title')).animationName,index,count:document.getElementById('phone-story-count').textContent}})()`);
+  assert(previousMotion.index===(motion.index+2)%3&&previousMotion.count===`${previousMotion.index+1} / 3`&&previousMotion.direction==='previous'&&previousMotion.advancing&&previousMotion.screenAnimation==='phone-enter-previous'&&previousMotion.titleAnimation==='phone-copy-rise',`previous normal-motion transition failed: ${JSON.stringify({motion,previousMotion})}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=18 overflow=0 archive=8 reduced-motion=pass controls=pass prototype=pass explorations=7 remaster=3`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=18 overflow=0 archive=8 reduced-motion=pass transitions=pass controls=pass prototype=pass explorations=7 remaster=3`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

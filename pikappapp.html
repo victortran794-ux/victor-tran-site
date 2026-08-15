@@ -91,7 +91,96 @@
 
       <section class="chapter" id="chapter-2" data-chapter><div class="wrap"><div class="chapter-head"><div class="chapter-no"><span>Chapter 02</span><span class="chapter-kicker">From paper to one structure</span></div><div><h2>There was already a system. It was just spread everywhere.</h2><p>Chapter work moved through spreadsheets, Drive folders, PDFs, documents, financial tools, and the existing gateway. I was not trying to replace all of it. I wanted the member-facing part to feel more like one place.</p></div></div><div class="chapter-copy"><div class="chapter-copy__body"><p>I sketched the main surfaces first, then mapped the content into four destinations: Member, Chapter, National HQ, and Settings.</p><p>The member view held personal progress and chapter updates. The other tabs kept chapter standing, national information, and account details nearby without making the dashboard do everything.</p><p class="plain-note"><strong>About the integrations:</strong> I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.</p></div></div><figure class="media sitemap-focus"><img loading="lazy" decoding="async" src="images/pikapp-case-study/sitemap.png" width="1660" height="795" alt="Label-free crop of the original Pi Kapp App sitemap"><figcaption><strong>Give it a structure</strong><span>The map brought Member, Chapter, National HQ, and Settings into one proposed path.</span></figcaption></figure></div></section>
 
-      <section class="chapter" id="chapter-3" data-chapter><div class="wrap"><div class="chapter-head"><div class="chapter-no">Chapter 03</div><div><h2>It still needed to look like Pi Kappa Phi.</h2><p>I did not need to invent another identity. The app already had a strong mark, clear colors, and a hex pattern I could keep pushing.</p></div></div><div class="identity-source"><img loading="lazy" decoding="async" class="identity-source__mark" src="images/pikapp-case-study/app-crest.png" width="294" height="276" alt="Original Pi Kapp App star-and-swords crest"><div><h3>The app mark already had enough personality.</h3><p>I used deep blue for the main information, bright blue when a screen needed more energy, and gold for progress. The star, swords, and hexagons gave me enough to vary the screens without losing the Pi Kapp feel.</p></div></div><div class="identity-riff" aria-label="Playful interpretation of the app's original blue, gold, and hexagon vocabulary"><span></span><span></span><span></span><span></span><span></span></div></div></section>
+      <section class="chapter" id="chapter-3" data-chapter>
+        <div class="wrap">
+          <div class="chapter-head">
+            <div class="chapter-no"><span>Chapter 03</span><span class="chapter-kicker">One visual kit</span></div>
+            <div>
+              <h2>It still needed to look like Pi Kappa Phi.</h2>
+              <p>The strongest direction came from treating the mark, color, pattern, type, and interface states as one kit, then carrying those cues into each screen.</p>
+            </div>
+          </div>
+
+          <div class="identity-system">
+            <div class="identity-system__hero">
+              <div class="identity-system__mark-panel">
+                <span class="identity-system__label">Original app mark</span>
+                <img loading="lazy" decoding="async" class="identity-source__mark" src="images/pikapp-case-study/app-crest.png" width="294" height="276" alt="Original Pi Kapp App star-and-swords crest">
+                <span class="identity-system__mark-name">Star + swords</span>
+              </div>
+              <div class="identity-system__intro">
+                <p class="eyebrow">System overview</p>
+                <h3>One kit, repeated across the experience.</h3>
+                <p>Deep blue carried information, bright cyan added energy, and gold signaled progress. The crest and hex field gave the interface a recognizable Pi Kapp rhythm without asking every screen to look the same.</p>
+                <p class="identity-swatches__label">Color roles</p>
+                <div class="identity-swatches" role="group" aria-label="Source palette color roles">
+                  <div class="identity-swatch identity-swatch--deep"><span aria-hidden="true"></span><strong>Deep blue</strong><small>Information</small></div>
+                  <div class="identity-swatch identity-swatch--cyan"><span aria-hidden="true"></span><strong>Bright cyan</strong><small>Energy</small></div>
+                  <div class="identity-swatch identity-swatch--gold"><span aria-hidden="true"></span><strong>Gold</strong><small>Progress</small></div>
+                  <div class="identity-swatch identity-swatch--cream"><span aria-hidden="true"></span><strong>Cream</strong><small>Surface</small></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="identity-system__specimens">
+              <article class="system-specimen system-specimen--pattern">
+                <p class="system-specimen__label">Pattern language</p>
+                <div class="system-pattern" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+                <h3>Hex field</h3>
+                <p>A flexible texture for depth, movement, and quieter branded surfaces.</p>
+              </article>
+
+              <article class="system-specimen system-specimen--icons">
+                <p class="system-specimen__label">Navigation set</p>
+                <div class="system-icons" role="group" aria-label="Member, Chapter, Milestone, and Settings interface icons">
+                  <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"></circle><path d="M5 21v-2a7 7 0 0 1 14 0v2"></path></svg><small>Member</small></span>
+                  <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5v1"></path></svg><small>Chapter</small></span>
+                  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 8.6l6.2-.9z"></path></svg><small>Milestone</small></span>
+                  <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1z"></path></svg><small>Settings</small></span>
+                </div>
+                <h3>Simple destinations</h3>
+                <p>A compact icon family kept the four main areas easy to scan.</p>
+              </article>
+
+              <article class="system-specimen system-specimen--states">
+                <p class="system-specimen__label">Progress states</p>
+                <div class="system-states" role="group" aria-label="Illustrative empty, active, and complete progress states">
+                  <span class="system-ring system-ring--empty"><b>0/4</b></span>
+                  <span class="system-ring system-ring--active"><b>2/4</b></span>
+                  <span class="system-ring system-ring--complete"><b aria-label="Complete">✓</b></span>
+                </div>
+                <div class="system-check"><span aria-hidden="true">✓</span><div><strong>Milestone complete</strong><small>Gold confirms the state</small></div></div>
+                <h3>Progress at a glance</h3>
+                <p>Empty, active, and complete states make the next action easier to find.</p>
+              </article>
+
+              <article class="system-specimen system-specimen--type">
+                <p class="system-specimen__label">Type roles</p>
+                <div class="system-type-samples" role="group" aria-label="Display, interface, and status type roles">
+                  <span class="system-type system-type--display">Pi Kapp</span>
+                  <span class="system-type system-type--interface">Member progress</span>
+                  <span class="system-type system-type--status">03 / COMPLETE</span>
+                </div>
+                <h3>Hierarchy before decoration</h3>
+                <p>Large display moments, direct interface copy, and compact status labels each had one job.</p>
+              </article>
+            </div>
+
+            <div class="identity-handoff">
+              <div>
+                <p class="eyebrow">From system to screen</p>
+                <h3>The ingredients became useful when they guided the flow.</h3>
+              </div>
+              <ol>
+                <li><span aria-hidden="true" class="identity-handoff__symbol identity-handoff__symbol--mark">★</span><strong>Mark to welcome</strong><small>The crest anchors the entry point.</small></li>
+                <li><span aria-hidden="true" class="identity-handoff__symbol identity-handoff__symbol--progress">2/4</span><strong>Gold to progress</strong><small>Status becomes easier to scan.</small></li>
+                <li><span aria-hidden="true" class="identity-handoff__symbol identity-handoff__symbol--hex"></span><strong>Hex to depth</strong><small>Texture carries the identity between views.</small></li>
+              </ol>
+              <p class="identity-handoff__next">Those choices move directly into the earlier V1 login, member dashboard, and milestone detail below.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section class="chapter" id="chapter-4" data-chapter><div class="wrap"><div class="chapter-head"><div class="chapter-no"><span>Chapter 04</span><span class="chapter-kicker">Earlier concepts and V1</span></div><div><h2>The earlier concepts showed how the member view was taking shape.</h2><p>The Figma explorations and V1 screens brought progress, chapter updates, milestones, and the Pi Kapp identity into a member-facing concept. They were useful for showing direction, but they were not a current product or a finished system.</p></div></div><div class="chapter-copy"><div class="chapter-copy__body"><p>I now treat these screens as supporting material: snapshots of how I was organizing the idea at the time. They help explain what carried forward, what I would simplify, and why the present-day coda takes a different approach.</p></div></div><p class="concept-history"><strong>Supporting material</strong>These screens are supporting evidence from earlier concept directions, not the current app.</p><div class="app-experience app-experience--final"><div class="phone-story" data-phone-story><div class="phone-story__copy"><p class="eyebrow">Earlier concept sequence</p><h3 id="phone-story-title" aria-live="polite">V1 concept screens.</h3><p id="phone-story-description">The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda.</p></div><div class="phone-stage"><div class="phone-device" id="phone-slides"><figure class="phone-slide is-active" data-title="V1 concept screens." data-description="The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda."><img loading="lazy" decoding="async" src="images/pikapp-case-study/login-screen.png" width="286" height="575" alt="Original Pi Kapp App login screen, cropped to remove the captured phone hardware"></figure><figure class="phone-slide" data-title="See where you stand." data-description="The member view brought term progress, chapter bulletins, and the main destinations into one screen."><img loading="lazy" decoding="async" src="images/pikapp-case-study/member.png" width="414" height="896" alt="Original Pi Kapp App member dashboard screen"></figure><figure class="phone-slide" data-title="Open what is behind a milestone." data-description="The expanded view revealed the tasks behind a milestone without losing the larger term context."><img loading="lazy" decoding="async" src="images/pikapp-case-study/task-expand.png" width="414" height="896" alt="Original Pi Kapp App expanded milestone screen"></figure></div><div class="phone-story__controls"><button type="button" id="phone-prev" aria-label="Previous app screen" aria-controls="phone-slides">&lt;</button><span class="phone-story__count" id="phone-story-count" aria-live="polite">1 / 3</span><button type="button" id="phone-next" aria-label="Next app screen" aria-controls="phone-slides">&gt;</button></div></div></div></div><div class="prototype-embed" aria-labelledby="prototype-embed-title"><div class="prototype-embed__copy"><p class="eyebrow">Earlier V2 prototype</p><h3 id="prototype-embed-title">A runnable snapshot of the V2 member model.</h3><p>This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.</p><a class="prototype-embed__link" href="pikappapp/demo.html" target="_blank" rel="noopener">Open V2 prototype <span aria-hidden="true">↗</span></a></div><div class="prototype-embed__device"><iframe class="prototype-embed__frame" src="pikappapp/demo.html" title="Earlier V2 Pi Kapp member-dashboard prototype" loading="lazy" sandbox="allow-scripts"></iframe></div></div></div></section>
 

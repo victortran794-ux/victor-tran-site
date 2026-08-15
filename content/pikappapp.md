@@ -65,9 +65,33 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-I did not need to invent another identity. The app already had a strong mark, clear colors, and a hex pattern I could keep pushing.
+The strongest direction came from treating the mark, color, pattern, type, and interface states as one kit, then carrying those cues into each screen.
 
-I used deep blue for the main information, bright blue when a screen needed more energy, and gold for progress. The star, swords, and hexagons gave me enough to vary the screens without losing the Pi Kapp feel.
+System overview
+
+Deep blue carried information, bright cyan added energy, and gold signaled progress. The crest and hex field gave the interface a recognizable Pi Kapp rhythm without asking every screen to look the same.
+
+Color roles
+
+Pattern language
+
+A flexible texture for depth, movement, and quieter branded surfaces.
+
+Navigation set
+
+A compact icon family kept the four main areas easy to scan.
+
+Progress states
+
+Empty, active, and complete states make the next action easier to find.
+
+Type roles
+
+Large display moments, direct interface copy, and compact status labels each had one job.
+
+From system to screen
+
+Those choices move directly into the earlier V1 login, member dashboard, and milestone detail below.
 
 The Figma explorations and V1 screens brought progress, chapter updates, milestones, and the Pi Kapp identity into a member-facing concept. They were useful for showing direction, but they were not a current product or a finished system.
 
@@ -112,6 +136,12 @@ A selected sequence of complete pages from the original Creighton University exp
 Views
 
 Cover view selected.
+
+## Lists And Tags
+
+- ★Mark to welcomeThe crest anchors the entry point.
+- 2/4Gold to progressStatus becomes easier to scan.
+- Hex to depthTexture carries the identity between views.
 
 ## Images
 
