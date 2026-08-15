@@ -310,10 +310,10 @@
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
       "It still needed to look like Pi Kappa Phi.",
-      "The earlier concepts showed how the member view was taking shape.",
-      "A formative start, not a finished product.",
+      "A smorgasbord of explorations showed what could carry forward.",
       "A smorgasbord of directions, not one shipped system.",
-      "What I would do with the app today.",
+      "The final remaster brings the app back to its source.",
+      "A formative start, not a finished product.",
       "Expansion Portfolio"
     ],
     "images": [
@@ -334,8 +334,8 @@
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-case-study/app-crest.png",
-        "alt": "Original Pi Kapp App crest shown as the primary app mark"
+        "src": "images/pikapp-case-study/app-star-shield.svg",
+        "alt": "Original vector Pi Kapp App Star Shield"
       },
       {
         "src": "images/pikapp-case-study/login-screen.png",
@@ -350,20 +350,20 @@
         "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-case-study/exploration-placeholder.webp",
-        "alt": "AI-assisted Chapter placeholder explicitly showing that no live roster, standings, or member records are present"
-      },
-      {
-        "src": "images/pikapp-case-study/exploration-design-system.webp",
-        "alt": "AI-assisted visual study of Pi Kapp colors, typography, marks, patterns, and interface components"
-      },
-      {
         "src": "images/pikapp-case-study/exploration-today.png",
         "alt": "Illustrative dark-blue Today screen organizing sample priorities and updates"
       },
       {
         "src": "images/pikapp-case-study/exploration-responsibility.png",
         "alt": "Illustrative responsibility-detail screen showing sample source and visibility states"
+      },
+      {
+        "src": "images/pikapp-case-study/exploration-chapter.png",
+        "alt": "Illustrative Chapter screen exploring shared focus and recognition"
+      },
+      {
+        "src": "images/pikapp-case-study/exploration-support.png",
+        "alt": "Illustrative Support screen connecting sample responsibilities with resources"
       }
     ],
     "projects": []

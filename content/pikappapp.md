@@ -27,10 +27,10 @@ A mobile application concept for undergraduate fraternity members to track miles
 - Every year looked a little different. The same stuff still had to get done.
 - There was already a system. It was just spread everywhere.
 - It still needed to look like Pi Kappa Phi.
-- The earlier concepts showed how the member view was taking shape.
-- A formative start, not a finished product.
+- A smorgasbord of explorations showed what could carry forward.
 - A smorgasbord of directions, not one shipped system.
-- What I would do with the app today.
+- The final remaster brings the app back to its source.
+- A formative start, not a finished product.
 - Expansion Portfolio
 
 ## Body Copy
@@ -65,55 +65,61 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-The strongest direction came from treating the mark, color, pattern, type, and interface states as one kit, then carrying those cues into each screen.
+The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept. This chapter collects only the pieces that move forward into the final three screens.
 
 Pi Kapp App
 
-The source-authored kit behind V1. Color, type, mark, pattern, and a handful of interface states gave the screens one shared vocabulary.
+The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept.
 
-Four roles, one recognizable palette
+Brand foundation and interface layers
 
-Information, navigation, and structure
+Official identity and recognition
 
-Entry points, energy, and emphasis
+Primary actions and progress
 
-Progress, completion, and focus
+Entry field and member view
 
-Content surfaces and breathing room
+Structure and detail layers
 
-Display, interface, and status
+Fields, rows, and clear reading
 
-Display role
+Brand, interface, and status roles
 
-Interface roles
+Web-safe brand voice
 
-Direct labels keep milestones, updates, and the next action easy to scan.
+Interface hierarchy
 
-One mark, a flexible field
+Short labels keep the next action clear. Supporting text explains only what the member needs in that moment.
 
-Original star + swords crest
+Original vector mark on its intended field
 
-Large at entry, quieter inside the member flow.
+Original app Star Shield
 
-Hex field
+Kept small and crisp inside the app, not enlarged as a standalone illustration.
 
-Reusable states from the member flow
+Cyan hex field
 
-Navigation set
+Only the pieces used by the final remaster
 
-Task checkbox
+Form controls
 
-Milestone ring
+Member progress card
 
-Empty, active, and complete use one consistent state model.
+Bulletin row
+
+Illustrative information appears here with a clear source and next step.
+
+Milestone states
+
+Bottom navigation
 
 From system to screen
 
-Those choices move directly into the earlier V1 login, member dashboard, and milestone detail below.
+Chapter 4 shows the earlier paths I explored. Chapter 5 returns to these exact ingredients for the final remaster.
 
-The Figma explorations and V1 screens brought progress, chapter updates, milestones, and the Pi Kapp identity into a member-facing concept. They were useful for showing direction, but they were not a current product or a finished system.
+The original V1 screens, runnable earlier V2, and later visual studies tested different ways to organize progress, chapter information, milestones, and support. Together they show the paths considered before the final remaster.
 
-I now treat these screens as supporting material: snapshots of how I was organizing the idea at the time. They help explain what carried forward, what I would simplify, and why the present-day coda takes a different approach.
+I treat these as supporting material rather than one continuous product history. V1 established the member flow, V2 made part of that model runnable, and the later AI-assisted studies widened the visual possibilities without proving a shipped system.
 
 Supporting materialThese screens are supporting evidence from earlier concept directions, not the current app.
 
@@ -125,27 +131,27 @@ Earlier V2 prototype
 
 This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.
 
+AI-assisted flow studies
+
+These studies helped me test visual tone, components, information hierarchy, and alternate app flows. They are exploratory and illustrative, not research findings or a shipped application.
+
+Five equal mobile studies
+
+AI-assisted studies. Illustrative information. Not researched or shipped.
+
+Chapter 05
+
+Final design | Source-faithful remaster
+
+The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility. It is illustrative and not shipped.
+
+Source-faithful remaster. Illustrative information. Not researched or shipped.
+
 This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
 
 HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization feel a little easier to reach. The fraternity members, recruitment staff, and HQ colleagues I presented it to responded positively. It felt current and met needs the recruitment team recognized, but it still needed to be fleshed out.
 
 I still do not have usability testing or evidence that the concept was adopted. It remained an experimental study, but it was a neat start and it changed how I thought about meeting an audience halfway.
-
-AI-assisted explorations
-
-These studies helped me test visual tone, components, information hierarchy, and alternate app flows. They are exploratory and illustrative, not research findings or a shipped application.
-
-Visual direction studies
-
-App flow studies
-
-AI-assisted studies. Illustrative information. Not researched or shipped.
-
-What I would do today | Source-faithful remaster
-
-I would return to the original cyan field, star-and-swords mark, hex texture, and member flow, then rebuild the pixels for current screens. This remaster keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility. It is illustrative and not shipped.
-
-Source-faithful remaster. Illustrative information. Not researched or shipped.
 
 Pi Kapp App archive
 
@@ -157,9 +163,9 @@ Cover view selected.
 
 ## Lists And Tags
 
-- ★Mark to welcomeThe crest anchors the entry point.
-- 2/4Gold to progressStatus becomes easier to scan.
-- Hex to depthTexture carries the identity between views.
+- 01Brand field to welcomeThe vector mark, hex texture, fields, and gold action form the login.
+- 02Progress card to dashboardProgress, bulletin rows, and navigation organize the member view.
+- 03Task states to detailOpen and complete rows carry the member into milestone detail.
 
 ## Images
 
@@ -167,12 +173,10 @@ Cover view selected.
 - Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
-- Original Pi Kapp App crest shown as the primary app mark: images/pikapp-case-study/app-crest.png
+- Original vector Pi Kapp App Star Shield: images/pikapp-case-study/app-star-shield.svg
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
-- AI-assisted Chapter placeholder explicitly showing that no live roster, standings, or member records are present: images/pikapp-case-study/exploration-placeholder.webp
-- AI-assisted visual study of Pi Kapp colors, typography, marks, patterns, and interface components: images/pikapp-case-study/exploration-design-system.webp
 - Illustrative dark-blue Today screen organizing sample priorities and updates: images/pikapp-case-study/exploration-today.png
 - Illustrative responsibility-detail screen showing sample source and visibility states: images/pikapp-case-study/exploration-responsibility.png
 - Illustrative Chapter screen exploring shared focus and recognition: images/pikapp-case-study/exploration-chapter.png
