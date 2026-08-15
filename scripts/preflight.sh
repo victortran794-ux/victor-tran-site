@@ -105,6 +105,7 @@ fi
 run_required "Home/global completion contract" npm run check:home-global-completion
 run_required "Design DNA and live-component system contract" npm run check:design-dna-system
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
+run_required "UI Gallery integration contract" npm run check:ui-gallery
 run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all

@@ -1,0 +1,6 @@
+# Reproduce the UI Gallery asset build with:
+# uv run --isolated --with-requirements scripts/requirements-ui-gallery-assets.txt \
+#   scripts/build-ui-gallery-assets.py \
+#   --ekos-source <approved-ekos-preview-directory> \
+#   --expanded-source <audited-expanded-study-kit>
+Pillow==12.3.0

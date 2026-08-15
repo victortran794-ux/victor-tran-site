@@ -38,7 +38,9 @@
     "check:visual-archives": "node scripts/check-visual-archives-integration.mjs all",
     "check:visual-archives-lightbox": "node scripts/check-visual-archives-integration.mjs all",
     "check:visual-archives-browser": "node scripts/check-visual-archives-browser.mjs all",
-    "check:visual-archives-lightbox-browser": "node scripts/check-visual-archives-browser.mjs all"
+    "check:visual-archives-lightbox-browser": "node scripts/check-visual-archives-browser.mjs all",
+    "check:ui-gallery": "node scripts/check-ui-gallery-integration.mjs",
+    "check:ui-gallery-browser": "node scripts/check-visual-archives-browser.mjs ui"
   },
   "devDependencies": {
     "esbuild": "0.28.1",

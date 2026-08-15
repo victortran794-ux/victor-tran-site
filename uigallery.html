@@ -1,87 +1,30 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Page not found.">
-
+  <title>UI Gallery | Victor Tran</title>
+  <meta name="description" content="Selected interface studies by Victor Tran, including a high-fidelity Ekos Con visual study.">
+  <link rel="canonical" href="https://www.victortrandesign.com/uigallery">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UI Gallery | Victor Tran">
+  <meta property="og:description" content="Selected interface studies by Victor Tran.">
+  <meta property="og:url" content="https://www.victortrandesign.com/uigallery">
+  <meta property="og:image" content="https://www.victortrandesign.com/images/ui-gallery/ekos-cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UI Gallery | Victor Tran">
+  <meta name="twitter:description" content="Selected interface studies by Victor Tran.">
+  <meta name="twitter:image" content="https://www.victortrandesign.com/images/ui-gallery/ekos-cover.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <meta name="robots" content="noindex">
-  <title>Page not found · Victor Tran Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@400;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .notfound-main {
-      min-height: calc(100vh - 80px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--section-y) var(--page-x);
-    }
-    .notfound-card {
-      max-width: 560px;
-      text-align: left;
-    }
-    .notfound-eyebrow {
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      margin: 0 0 16px;
-    }
-    .notfound-title {
-      font-family: 'DM Serif Display', serif;
-      font-weight: 400;
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      line-height: 1.05;
-      margin: 0 0 24px;
-    }
-    .notfound-body {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: var(--text-2);
-      margin: 0 0 32px;
-    }
-    .notfound-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-    .notfound-link {
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 12px 20px;
-      border: 1px solid var(--text);
-      color: var(--text);
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-    .notfound-link.primary {
-      background: var(--text);
-      color: var(--bg);
-    }
-    .notfound-link.primary:hover {
-      background: transparent;
-      color: var(--text);
-    }
-    .notfound-link:not(.primary):hover {
-      background: var(--text);
-      color: var(--bg);
-    }
-  </style>
+  <link rel="stylesheet" href="css/ui-gallery.css">
 </head>
-<body>
+<body class="visual-archive-page ui-gallery-page">
+  <div class="cursor-dot" aria-hidden="true"></div>
 
-  <div class="cursor-dot"  aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-
-    <!-- generated:site-shell-header:start -->
+  <!-- generated:site-shell-header:start -->
   <a class="skip-link" href="#main-content">Skip to content</a>
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
@@ -90,7 +33,7 @@
         <span class="nav-logo-name">Victor Tran</span>
       </a>
       <ul class="nav-links">
-        <li class="nav-dropdown">
+        <li class="nav-dropdown is-active">
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
@@ -104,7 +47,7 @@
             <li class="nav-dropdown-separator" aria-hidden="true"></li>
             <li><a href="artillustration.html">Art &amp; Illustration</a></li>
             <li><a href="graphicgallery.html">Graphic Design</a></li>
-            <li><a href="uigallery.html">UI Gallery</a></li>
+            <li><a href="uigallery.html" class="active" aria-current="page">UI Gallery</a></li>
             <!-- generated:projects-nav:end -->
             <li class="nav-mobile-theme">
               <span class="nav-mobile-theme-label">Theme</span>
@@ -132,22 +75,53 @@
   </nav>
   <!-- generated:site-shell-header:end -->
 
-  <main class="notfound-main" id="main-content" tabindex="-1">
-    <div class="notfound-card">
-      <p class="notfound-eyebrow">404 · Off the page</p>
-      <h1 class="notfound-title">This one's a sketch I haven't finished yet.</h1>
-      <p class="notfound-body">
-        The page you're looking for doesn't exist. It may have moved, or it was never here to begin with.
-        Head back to the work, or drop me a note if you were looking for something specific.
-      </p>
-      <div class="notfound-links">
-        <a href="index.html" class="notfound-link primary">Back to portfolio</a>
-        <a href="mailto:victortran794@gmail.com" class="notfound-link">Email me</a>
+  <main class="page-content" id="main-content" tabindex="-1" data-archive="ui-gallery">
+    <header class="ui-gallery-hero">
+      <p class="ui-gallery-kicker">UI Gallery</p>
+      <h1>Interfaces, in view.</h1>
+      <p class="ui-gallery-intro">A few interface studies and small experiments I liked enough to keep around.</p>
+    </header>
+
+    <section class="ui-study ui-study--ekos archive-primary" aria-labelledby="ekos-study-title">
+      <div class="ui-study-heading">
+        <h2 id="ekos-study-title">Ekos Con 2018</h2>
+        <p class="ui-study-summary">An event-site concept with a cleaner interface treatment. Scroll through the screen to see the full page. Registration is illustrative.</p>
       </div>
-    </div>
+
+      <div class="ui-study-grid ui-study-grid--ekos">
+        <figure class="archive-frame ui-study-view ui-study-view--desktop" data-ui-study-view="ekos-desktop">
+          <div class="ui-scroll-screen" data-ui-scroll-screen tabindex="0" aria-label="Scroll through the complete Ekos Con desktop page">
+            <img data-ui-study-image data-ui-scroll-image loading="lazy" decoding="async"
+              src="images/ui-gallery/ekos-desktop.webp" width="1320" height="2724"
+              alt="Complete Ekos Con desktop landing-page cleanup with drafting-grid construction, event details, brewery photograph, pricing, and lodging information">
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="ui-study ui-study--magi" aria-labelledby="magi-study-title">
+      <div class="ui-study-heading">
+        <h2 id="magi-study-title">Magi dashboard</h2>
+        <p class="ui-study-summary">A private dashboard experiment built from a small set of reusable UI pieces. This public version is static and sanitized.</p>
+      </div>
+
+      <div class="ui-study-grid ui-study-grid--magi">
+        <figure class="archive-frame ui-study-view ui-study-view--architecture" data-ui-study-view="magi-architecture">
+          <img data-ui-study-image loading="lazy" decoding="async"
+            src="images/ui-gallery/magi-architecture.webp" width="1440" height="1000"
+            alt="Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes">
+        </figure>
+
+        <figure class="archive-frame ui-study-view ui-study-view--overview" data-ui-study-view="magi-overview">
+          <img data-ui-study-image loading="lazy" decoding="async"
+            src="images/ui-gallery/magi-overview.webp" width="1440" height="1000"
+            alt="Sanitized dark Magi dashboard study showing an illustrative work docket and disconnected operations state">
+        </figure>
+      </div>
+    </section>
   </main>
 
-    <!-- generated:site-shell-footer:start -->
+  <!-- generated:site-shell-footer:start -->
   <footer class="footer">
     <div class="footer-inner">
       <h2 class="footer-tagline">Do more good things.</h2>
@@ -166,10 +140,7 @@
   <!-- generated:site-shell-footer:end -->
 
   <script src="js/main.js"></script>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

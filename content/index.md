@@ -34,6 +34,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Pi Kapp App (Product Design): pikappapp
 - Art & Illustration: artillustration
 - Graphic Design: graphicgallery
+- UI Gallery: uigallery
 
 ## Section Headings
 
@@ -47,6 +48,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Pi Kapp App
 - Art & Illustration
 - Graphic Design
+- UI Gallery
 
 ## Body Copy
 
@@ -74,6 +76,8 @@ Standalone digital and traditional work, including posters, paintings, and perso
 
 Standalone identity, print, illustration, and event graphics.
 
+Static screen studies focused on interface craft, visual refinement, and responsive presentation.
+
 ## Lists And Tags
 
 - Shared shellSitewide
@@ -98,3 +102,4 @@ Standalone identity, print, illustration, and event graphics.
 - Pi Kapp App: images/thumb-pikapp.webp
 - Blue illustrated figure surrounded by orange creatures: images/illus-glow.jpg
 - Purple boombox graphic with two illustrated eye panels: images/gg-edc-0.jpg
+- Ekos Con interface study with drafting-grid structure and bright campaign colors: images/ui-gallery/ekos-cover.webp
