@@ -53,8 +53,20 @@ for (const token of [
   'This public version is static and sanitized.',
   'data-ui-study-view="magi-architecture"',
   'data-ui-study-view="magi-overview"',
+  '<div class="cursor-dot" aria-hidden="true"></div>',
+  '<div class="cursor-ring" aria-hidden="true"></div>',
   '<script src="js/main.js"></script>',
 ]) needText(html, token, `UI Gallery is missing: ${token}`);
+
+for (const token of [
+  'body.ui-gallery-page .cursor-dot{background:var(--ui-accent);box-shadow:0 0 0 1px #101820}',
+  'body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}',
+  'body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}',
+  'html[data-theme="dark"] .ui-study-grid--magi .ui-study-view{box-shadow:0 0 0 1px rgba(242,242,233,.24)}',
+]) needText(css, token, `UI Gallery dark-polish CSS is missing: ${token}`);
+
+forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
+  'Magi screen edge must remain dark-theme-only.');
 
 need(count(html, /data-ui-study-view=/g) === 3, 'UI Gallery must contain exactly three static study views.');
 need(count(html, /<img\b[^>]*data-ui-study-image/g) === 3, 'Each UI Gallery view must be a static image.');
@@ -62,7 +74,7 @@ need(count(html, /loading="lazy"/g) >= 3, 'All UI Gallery study images must use 
 for (const [asset, width, height] of [
   ['magi-overview.webp', 1440, 1000],
   ['magi-architecture.webp', 1440, 1000],
-  ['ekos-desktop.webp', 1320, 2724],
+  ['ekos-desktop.webp', 1320, 2715],
 
 ]) need(new RegExp(`src="images/ui-gallery/${asset}"\\s+width="${width}"\\s+height="${height}"`).test(html),
   `UI Gallery must declare truthful intrinsic dimensions for ${asset}.`);
@@ -114,7 +126,7 @@ forbid(css, /ui-study--teaser|ui-study-grid--teaser|ui-study-teaser-copy|ui-stud
   'UI Gallery CSS must not retain obsolete teaser, metadata, caption, or duplicate Ekos-view styling.');
 
 for (const token of [
-  'ekos-polished-desktop-v3-2.png',
+  'ekos-polished-desktop-v3-3.png',
 
   '01-magi-dashboard-overview-public.png',
   '02-magi-architecture-public.png',
