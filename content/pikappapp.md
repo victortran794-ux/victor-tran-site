@@ -29,6 +29,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - It still needed to look like Pi Kappa Phi.
 - The earlier concepts showed how the member view was taking shape.
 - A formative start, not a finished product.
+- A smorgasbord of directions, not one shipped system.
 - What I would do with the app today.
 - Expansion Portfolio
 
@@ -88,11 +89,21 @@ HQ could feel distant from day-to-day chapter life. The app was one attempt to m
 
 I still do not have usability testing or evidence that the concept was adopted. It remained an experimental study, but it was a neat start and it changed how I thought about meeting an audience halfway.
 
-Present-day exploration | Source-faithful remaster concept
+AI-assisted explorations
 
-I would reorganize the app around three moments: knowing what needs attention, understanding where a responsibility comes from, and seeing how individual work connects to the chapter. This source-faithful remaster preserves the original blue-and-gold identity while tightening the hierarchy, spacing, and interaction details. It is speculative, illustrative, and not researched or shipped.
+These studies helped me test visual tone, components, information hierarchy, and alternate app flows. They are exploratory and illustrative, not research findings or a shipped application.
 
-Speculative remaster concept. Illustrative information. Not researched or shipped.
+Visual direction studies
+
+App flow studies
+
+AI-assisted studies. Illustrative information. Not researched or shipped.
+
+What I would do today | Source-faithful remaster
+
+I would return to the original cyan field, star-and-swords mark, hex texture, and member flow, then rebuild the pixels for current screens. This remaster keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility. It is illustrative and not shipped.
+
+Source-faithful remaster. Illustrative information. Not researched or shipped.
 
 Pi Kapp App archive
 
@@ -108,13 +119,20 @@ Cover view selected.
 - Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
-- Original Pi Kapp App icon: a gold star over crossed swords: images/pikapp-case-study/app-icon.png
+- Original Pi Kapp App star-and-swords crest: images/pikapp-case-study/app-crest.png
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
-- Dark-blue Today screen showing illustrative responsibilities ordered by what needs attention: images/pikapp-case-study/remaster-attention.png
-- Dark-blue responsibility detail showing illustrative source, visibility, status, and correction controls: images/pikapp-case-study/remaster-trust.png
-- Dark-blue Chapter screen showing illustrative shared work and recognition without rankings: images/pikapp-case-study/remaster-chapter-context.png
+- AI-assisted Chapter placeholder explicitly showing that no live roster, standings, or member records are present: images/pikapp-case-study/exploration-placeholder.webp
+- AI-assisted visual study of Pi Kapp colors, typography, marks, patterns, and interface components: images/pikapp-case-study/exploration-design-system.webp
+- Illustrative dark-blue Today screen organizing sample priorities and updates: images/pikapp-case-study/exploration-today.png
+- Illustrative responsibility-detail screen showing sample source and visibility states: images/pikapp-case-study/exploration-responsibility.png
+- Illustrative Chapter screen exploring shared focus and recognition: images/pikapp-case-study/exploration-chapter.png
+- Illustrative Support screen connecting sample responsibilities with resources: images/pikapp-case-study/exploration-support.png
+- Illustrative profile screen exploring visibility, themes, and connected services: images/pikapp-case-study/exploration-profile.png
+- Source-faithful Pi Kapp login remaster with cyan hex field and original star-and-swords mark: images/pikapp-case-study/remaster-login.png
+- Source-faithful Pi Kapp member dashboard remaster with progress, bulletin, and milestone sections: images/pikapp-case-study/remaster-dashboard.png
+- Source-faithful Pi Kapp milestone-detail remaster with expanded task states: images/pikapp-case-study/remaster-milestones.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Complete Creighton University opener from the Expansion Portfolio: images/pikapp-case-study/expansion-creighton-opener.webp
 - Complete expansion timeline page from the Expansion Portfolio: images/pikapp-case-study/expansion-timeline.webp

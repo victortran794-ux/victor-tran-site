@@ -239,6 +239,13 @@ try {
         const boundaryStyle=getComputedStyle(boundaryElement);
         const avatars=[...document.querySelectorAll('.member-card__avatar')].map((avatar)=>{const card=avatar.closest('.member-card');const ar=avatar.getBoundingClientRect();return {color:getComputedStyle(avatar).color,border:getComputedStyle(card).borderTopColor,width:ar.width,height:ar.height}});
         const remasterScreens=[...document.querySelectorAll('.coda__screen')].map((screen)=>{const image=screen.querySelector('.coda__image');const caption=screen.querySelector('figcaption');const step=screen.querySelector('.coda__step');const imageStyle=getComputedStyle(image);const screenRect=screen.getBoundingClientRect();const imageRect=image.getBoundingClientRect();const captionRect=caption.getBoundingClientRect();return {step:step.textContent.trim(),screen:{left:screenRect.left,right:screenRect.right,top:screenRect.top,width:screenRect.width},image:{left:imageRect.left,right:imageRect.right,top:imageRect.top,bottom:imageRect.bottom,width:imageRect.width,height:imageRect.height},caption:{top:captionRect.top,left:captionRect.left,width:captionRect.width},borderRadius:imageStyle.borderRadius,boxShadow:imageStyle.boxShadow,objectFit:imageStyle.objectFit,aspect:imageRect.width/imageRect.height}});
+        const explorationScreens=[...document.querySelectorAll('.exploration-screen')].map((screen)=>{const image=screen.querySelector('img');const screenRect=screen.getBoundingClientRect();const imageRect=image.getBoundingClientRect();const imageStyle=getComputedStyle(image);return {screen:{left:screenRect.left,right:screenRect.right,width:screenRect.width,top:screenRect.top},image:{left:imageRect.left,right:imageRect.right,width:imageRect.width,height:imageRect.height},objectFit:imageStyle.objectFit,borderRadius:imageStyle.borderRadius,boxShadow:imageStyle.boxShadow,aspect:imageRect.width/imageRect.height}});
+        const explorationStudies=[...document.querySelectorAll('.exploration-study')].map((study)=>{const image=study.querySelector('img');const rect=image.getBoundingClientRect();return {width:rect.width,height:rect.height,objectFit:getComputedStyle(image).objectFit}});
+        const explorationFlow=document.querySelector('.exploration-flow');
+        const explorationFlowStyle=getComputedStyle(explorationFlow);
+        const explorationMontage=document.querySelector('.exploration-montage');
+        const explorationMontageStyle=getComputedStyle(explorationMontage);
+        const explorationBoundary=document.querySelector('.exploration-boundary');
         const triptych=document.querySelector('.coda__triptych');
         const triptychStyle=getComputedStyle(triptych);
         const cue=document.querySelector('.expansion-archive-cue');
@@ -251,8 +258,8 @@ try {
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),
-          principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,
-          boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,remasterScreens,
+          principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,explorationStudyCount:explorationStudies.length,explorationScreenCount:explorationScreens.length,
+          boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,remasterScreens,explorationScreens,explorationStudies,explorationBoundary:explorationBoundary?.textContent.trim().replace(/\\s+/g,' '),explorationFlow:{display:explorationFlowStyle.display,columns:explorationFlowStyle.gridTemplateColumns,overflowX:explorationFlowStyle.overflowX,clientWidth:explorationFlow.clientWidth,scrollWidth:explorationFlow.scrollWidth,tabindex:explorationFlow.getAttribute('tabindex')},explorationMontage:{display:explorationMontageStyle.display,columns:explorationMontageStyle.gridTemplateColumns},
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,embedHeight:prototypeEmbed.getBoundingClientRect().height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX},finaleRects,
@@ -261,24 +268,34 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===11&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===18&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
-      assert(state.principles===0&&state.codaScreens===3&&state.phoneSlides===3,'approved evidence counts drifted');
-      assert(state.boundary==='Speculative remaster concept. Illustrative information. Not researched or shipped.','boundary copy drifted');
+      assert(state.principles===0&&state.codaScreens===3&&state.phoneSlides===3&&state.explorationStudyCount===2&&state.explorationScreenCount===5,'approved evidence counts drifted');
+      assert(state.explorationBoundary==='AI-assisted studies. Illustrative information. Not researched or shipped.','exploration boundary copy drifted');
+      assert(state.boundary==='Source-faithful remaster. Illustrative information. Not researched or shipped.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
-      assert(state.remasterScreens.length===3&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 Attention|02 Trust|03 Chapter context',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
+      assert(state.remasterScreens.length===3&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 Welcome|02 Member view|03 Milestone detail',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.remasterScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete flat 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
+      assert(state.explorationScreens.every((screen)=>screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`exploration screens lost complete flat 390/844 treatment: ${JSON.stringify(state.explorationScreens)}`);
+      assert(state.explorationStudies.every((study)=>study.width>0&&study.height>0&&study.objectFit==='contain'),`broad exploration studies failed complete rendering: ${JSON.stringify(state.explorationStudies)}`);
+      assert(state.explorationFlow.tabindex==='0'&&state.explorationFlow.display==='grid',`exploration flow lost keyboard-scroll boundary: ${JSON.stringify(state.explorationFlow)}`);
       assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier V2 Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts'&&state.prototype.link==='pikappapp/demo.html',`prototype boundary drifted: ${JSON.stringify(state.prototype)}`);
       if (viewport.mobile||viewport.compact) {
         assert(state.prototype.deviceDisplay==='none'&&state.prototype.width===0&&state.prototype.height===0&&state.prototype.embedHeight<420,`mobile prototype must collapse to its standalone action: ${JSON.stringify(state.prototype)}`);
         assert(state.finaleRects.every((rect)=>rect.left>=24-1&&rect.right<=viewport.width-24+1),`compact finale gutter escaped 24px boundary: ${JSON.stringify(state.finaleRects)}`);
         assert(state.triptych.display==='grid'&&state.triptych.columns.split(' ').length===1,`compact remaster must be one column: ${JSON.stringify(state.triptych)}`);
+        assert(state.explorationMontage.display==='grid'&&state.explorationMontage.columns.split(' ').length===1,`compact broad studies must be one column: ${JSON.stringify(state.explorationMontage)}`);
+        assert(state.explorationFlow.overflowX==='auto'&&state.explorationFlow.scrollWidth>state.explorationFlow.clientWidth,`compact exploration run must scroll within its own boundary: ${JSON.stringify(state.explorationFlow)}`);
+        const explorationWidths=state.explorationScreens.map((screen)=>screen.image.width);
+        assert(Math.max(...explorationWidths)-Math.min(...explorationWidths)<=1&&state.explorationScreens.every((screen)=>screen.image.width>=260),`compact exploration screens lost equal specimen geometry: ${JSON.stringify(state.explorationScreens)}`);
         const widths=state.remasterScreens.map((screen)=>screen.image.width); const gaps=state.remasterScreens.map((screen)=>screen.caption.top-screen.image.bottom);
         assert(Math.max(...widths)-Math.min(...widths)<=1&&Math.max(...gaps)-Math.min(...gaps)<=1&&state.remasterScreens.every((screen)=>screen.image.left>=24-1&&screen.image.right<=viewport.width-24+1),`compact remaster frames or captions lost equal alignment: ${JSON.stringify(state.remasterScreens)}`);
       } else {
         assert(state.prototype.deviceDisplay==='block'&&state.prototype.width>0&&state.prototype.width<=340&&Math.abs((state.prototype.width/state.prototype.height)-(390/844))<0.01,`desktop prototype embed escaped its phone viewport: ${JSON.stringify(state.prototype)}`);
         const widths=state.remasterScreens.map((screen)=>screen.image.width); const heights=state.remasterScreens.map((screen)=>screen.image.height); const tops=state.remasterScreens.map((screen)=>screen.image.top); const captions=state.remasterScreens.map((screen)=>screen.caption.top);
         assert(state.triptych.display==='grid'&&Math.max(...widths)-Math.min(...widths)<=1&&Math.max(...heights)-Math.min(...heights)<=1&&Math.max(...tops)-Math.min(...tops)<=1&&Math.max(...captions)-Math.min(...captions)<=1,`desktop/tablet remaster frames must share width, height, top, bottom, and caption baseline: ${JSON.stringify(state.remasterScreens)}`);
+        const explorationWidths=state.explorationScreens.map((screen)=>screen.image.width); const explorationTops=state.explorationScreens.map((screen)=>screen.screen.top);
+        assert(state.explorationFlow.scrollWidth===state.explorationFlow.clientWidth&&Math.max(...explorationWidths)-Math.min(...explorationWidths)<=1&&Math.max(...explorationTops)-Math.min(...explorationTops)<=1,`desktop exploration run must show five equal complete screens: ${JSON.stringify({flow:state.explorationFlow,screens:state.explorationScreens})}`);
       }
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
@@ -294,8 +311,16 @@ try {
         await cdp.screenshot('pikapp-390-light-opening.png');
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-members.png');
+        await cdp.evaluate(`document.querySelector('.identity-source').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-identity.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-390-light-prototype.png');
+        await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-explorations.png');
+        await cdp.evaluate(`document.querySelector('.exploration-montage').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-exploration-studies.png');
+        await cdp.evaluate(`document.querySelector('.exploration-flow').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-exploration-flow.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__triptych').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
@@ -306,8 +331,16 @@ try {
       if (viewport.label==='1280'&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-members.png');
+        await cdp.evaluate(`document.querySelector('.identity-source').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-identity.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-1280-dark-prototype.png');
+        await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-explorations.png');
+        await cdp.evaluate(`document.querySelector('.exploration-montage').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-exploration-studies.png');
+        await cdp.evaluate(`document.querySelector('.exploration-flow').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-exploration-flow.png');
         await cdp.evaluate(`document.getElementById('present-day-coda').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__triptych').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
@@ -338,12 +371,21 @@ try {
     await cdp.call('Runtime.enable', {}, prototypeSessionId);
     prototypeEvaluate = (expression) => cdp.evaluateInSession(prototypeSessionId, expression);
   }
-  const prototypeReady=await prototypeEvaluate(`(()=>{const tabs=[...document.querySelectorAll('[role="tab"]')];const text=document.body.textContent.toLowerCase();return {boot:Boolean(document.querySelector('.prototype-boot')),bulletin:text.includes('chapter bulletin'),milestones:text.includes('milestones'),selected:tabs.find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim()||''}})()`);
-  assert(!prototypeReady.boot&&prototypeReady.bulletin&&prototypeReady.milestones&&prototypeReady.selected==='Member',`sandboxed embedded prototype did not leave its loading state: ${JSON.stringify(prototypeReady)}`);
+  const prototypeReady=await prototypeEvaluate(`(()=>{const tabs=[...document.querySelectorAll('[role="tab"]')];const text=document.body.textContent.replace(/\\s+/g,' ').trim();return {boot:Boolean(document.querySelector('.prototype-boot')),bulletin:text.toLowerCase().includes('chapter bulletin'),milestones:text.toLowerCase().includes('milestones'),selected:tabs.find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim()||'',member:text.includes('Concept Chapter')&&text.includes('Sample'),boundary:text.includes('Illustrative progress')&&text.includes('No live standings'),sample:text.includes('Illustrative service update'),unsafe:['Victor Tran','Iota Theta','University of Iowa','Ranked #','Push America','Ability Experience'].filter((value)=>text.includes(value))}})()`);
+  assert(!prototypeReady.boot&&prototypeReady.bulletin&&prototypeReady.milestones&&prototypeReady.selected==='Member'&&prototypeReady.member&&prototypeReady.boundary&&prototypeReady.sample&&prototypeReady.unsafe.length===0,`sandboxed embedded prototype did not leave its loading state or expose sanitized member data: ${JSON.stringify(prototypeReady)}`);
   await prototypeEvaluate(`[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.textContent.trim()==='Chapter')?.click()`);
   await delay(240);
   const prototypeChapter=await prototypeEvaluate(`(()=>{const selected=[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:document.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
-  assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Brother roster, chapter-wide milestones, and weekly standings live here.'),`sandboxed embedded prototype controls did not respond: ${JSON.stringify(prototypeChapter)}`);
+  assert(prototypeChapter.selected==='Chapter'&&prototypeChapter.text.includes('Illustrative chapter concept. No live roster, standings, or member records.')&&!prototypeChapter.text.includes('weekly standings live here'),`sandboxed embedded prototype controls or privacy boundary failed: ${JSON.stringify(prototypeChapter)}`);
+  for (const [tabLabel, expected, forbidden] of [
+    ['National', 'Illustrative national view. No live announcements, campaigns, or inter-chapter rankings.', 'inter-chapter rankings will land'],
+    ['Settings', 'Illustrative settings view. No profile, notification, theme, or privacy data is connected.', 'Reserved for v2 of the prototype'],
+  ]) {
+    await prototypeEvaluate(`[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.textContent.trim()===${JSON.stringify(tabLabel)})?.click()`);
+    await delay(240);
+    const prototypePlaceholder=await prototypeEvaluate(`(()=>{const selected=[...document.querySelectorAll('[role="tab"]')].find((tab)=>tab.getAttribute('aria-selected')==='true')?.textContent.trim();return {selected,text:document.body.textContent.replace(/\\s+/g,' ').trim()}})()`);
+    assert(prototypePlaceholder.selected===tabLabel&&prototypePlaceholder.text.includes(expected)&&!prototypePlaceholder.text.includes(forbidden),`sandboxed ${tabLabel} privacy boundary failed: ${JSON.stringify(prototypePlaceholder)}`);
+  }
   if (prototypeSessionId) await cdp.call('Target.detachFromTarget', { sessionId: prototypeSessionId });
 
 
@@ -429,7 +471,7 @@ try {
   assert(semantics.index===(before.index+1)%3&&semantics.count===`${semantics.index+1} / 3`,`next control failed: before=${JSON.stringify(before)} after=${JSON.stringify(semantics)}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 archive=8 reduced-motion=pass controls=pass prototype=pass remaster=3`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=18 overflow=0 archive=8 reduced-motion=pass controls=pass prototype=pass explorations=7 remaster=3`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

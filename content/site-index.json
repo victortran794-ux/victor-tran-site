@@ -312,6 +312,7 @@
       "It still needed to look like Pi Kappa Phi.",
       "The earlier concepts showed how the member view was taking shape.",
       "A formative start, not a finished product.",
+      "A smorgasbord of directions, not one shipped system.",
       "What I would do with the app today.",
       "Expansion Portfolio"
     ],
@@ -333,8 +334,8 @@
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-case-study/app-icon.png",
-        "alt": "Original Pi Kapp App icon: a gold star over crossed swords"
+        "src": "images/pikapp-case-study/app-crest.png",
+        "alt": "Original Pi Kapp App star-and-swords crest"
       },
       {
         "src": "images/pikapp-case-study/login-screen.png",
@@ -349,20 +350,20 @@
         "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-case-study/remaster-attention.png",
-        "alt": "Dark-blue Today screen showing illustrative responsibilities ordered by what needs attention"
+        "src": "images/pikapp-case-study/exploration-placeholder.webp",
+        "alt": "AI-assisted Chapter placeholder explicitly showing that no live roster, standings, or member records are present"
       },
       {
-        "src": "images/pikapp-case-study/remaster-trust.png",
-        "alt": "Dark-blue responsibility detail showing illustrative source, visibility, status, and correction controls"
+        "src": "images/pikapp-case-study/exploration-design-system.webp",
+        "alt": "AI-assisted visual study of Pi Kapp colors, typography, marks, patterns, and interface components"
       },
       {
-        "src": "images/pikapp-case-study/remaster-chapter-context.png",
-        "alt": "Dark-blue Chapter screen showing illustrative shared work and recognition without rankings"
+        "src": "images/pikapp-case-study/exploration-today.png",
+        "alt": "Illustrative dark-blue Today screen organizing sample priorities and updates"
       },
       {
-        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
-        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
+        "src": "images/pikapp-case-study/exploration-responsibility.png",
+        "alt": "Illustrative responsibility-detail screen showing sample source and visibility states"
       }
     ],
     "projects": []
