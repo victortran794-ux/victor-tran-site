@@ -18,6 +18,10 @@ html[data-theme="dark"] .ui-gallery-page {
   --ui-accent: #baff50;
 }
 
+body.ui-gallery-page .cursor-dot{background:var(--ui-accent);box-shadow:0 0 0 1px #101820}
+body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}
+body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}
+
 .ui-gallery-page .page-content {
   overflow: clip;
 }
@@ -163,6 +167,8 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
 .ui-study-grid--magi .ui-study-view--overview {
   grid-column: span 4;
 }
+
+html[data-theme="dark"] .ui-study-grid--magi .ui-study-view{box-shadow:0 0 0 1px rgba(242,242,233,.24)}
 
 .ui-study-view--architecture > img,
 .ui-study-view--overview > img {

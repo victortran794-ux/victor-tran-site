@@ -485,6 +485,22 @@ try {
               const rect = image.getBoundingClientRect();
               return { width: Math.round(rect.width), height: Math.round(rect.height) };
             }),
+            uiCursor: (() => {
+              const dot = document.querySelector('.cursor-dot');
+              const ring = document.querySelector('.cursor-ring');
+              if (!dot || !ring) return null;
+              const dotStyle = getComputedStyle(dot);
+              const ringStyle = getComputedStyle(ring);
+              return {
+                dotBackground: dotStyle.backgroundColor,
+                dotShadow: dotStyle.boxShadow,
+                ringBorder: ringStyle.borderColor,
+                ringShadow: ringStyle.boxShadow,
+                ringOpacity: ringStyle.opacity,
+              };
+            })(),
+            uiMagiEdges: [...document.querySelectorAll('.ui-study-grid--magi .ui-study-view')]
+              .map((view) => getComputedStyle(view).boxShadow),
             uiScrollScreen: (() => {
               const screen = document.querySelector('[data-ui-scroll-screen]');
               if (!screen) return null;
@@ -591,6 +607,13 @@ try {
             `uigallery.html: declared dimensions do not match decoded media: ${JSON.stringify(state.uiImageDimensions)}`);
           assert(state.uiImageLayout.slice(1).every((image) => Math.abs((image.width / image.height) - 1.6) <= 0.03),
             `uigallery.html: Magi screen ratios drifted: ${JSON.stringify(state.uiImageLayout)}`);
+          assert(state.uiCursor && state.uiCursor.dotBackground === 'rgb(186, 255, 80)' &&
+            state.uiCursor.dotShadow !== 'none' && state.uiCursor.ringBorder === 'rgb(186, 255, 80)' &&
+            state.uiCursor.ringShadow !== 'none' && Number(state.uiCursor.ringOpacity) >= 0.8,
+            `uigallery.html: custom cursor can lose contrast over mixed artwork: ${JSON.stringify(state.uiCursor)}`);
+          const expectedMagiEdge = theme === 'dark';
+          assert(state.uiMagiEdges.length === 2 && state.uiMagiEdges.every((shadow) => expectedMagiEdge ? shadow !== 'none' : shadow === 'none'),
+            `uigallery.html: Magi edge must be subtle and dark-theme-only: ${JSON.stringify({ theme, edges: state.uiMagiEdges })}`);
           const expectedScrollRatio = viewport.mobile ? (4 / 5) : 1.6;
           assert(state.uiScrollScreen && Math.abs((state.uiScrollScreen.width / state.uiScrollScreen.height) - expectedScrollRatio) <= 0.03 &&
             state.uiScrollScreen.scrollHeight > state.uiScrollScreen.clientHeight && state.uiScrollScreen.overflowY === 'auto' && state.uiScrollScreen.tabindex === 0,

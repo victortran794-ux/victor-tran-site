@@ -11,7 +11,7 @@ EKOS_SOURCE_ENV = "EKOS_UI_GALLERY_SOURCE"
 EXPANDED_SOURCE_ENV = "UI_GALLERY_EXPANDED_SOURCE"
 
 EKOS_SOURCES = {
-    "desktop": "ekos-polished-desktop-v3-2.png",
+    "desktop": "ekos-polished-desktop-v3-3.png",
 }
 
 EXPANDED_SOURCES = {
@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
         dest="ekos_source",
         type=Path,
         default=Path(ekos_source) if ekos_source else None,
-        help=f"Approved Ekos V3.2 preview directory. Defaults to ${EKOS_SOURCE_ENV}.",
+        help=f"Approved Ekos V3.3 preview directory. Defaults to ${EKOS_SOURCE_ENV}.",
     )
     parser.add_argument(
         "--expanded-source",
