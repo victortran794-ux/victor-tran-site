@@ -72,6 +72,8 @@ on:
       - "scripts/check-home-lens-portal-browser.mjs"
       - "scripts/check-homepage-system-alignment.py"
       - "scripts/check-shared-shell.mjs"
+      - "scripts/check-theme-continuity-proof.mjs"
+      - "scripts/check-global-theme-control.mjs"
       - "scripts/generate-site-shell.mjs"
       - "scripts/test-site-shell.mjs"
       - "vercel.json"
@@ -158,6 +160,8 @@ on:
       - "scripts/check-home-lens-portal-browser.mjs"
       - "scripts/check-homepage-system-alignment.py"
       - "scripts/check-shared-shell.mjs"
+      - "scripts/check-theme-continuity-proof.mjs"
+      - "scripts/check-global-theme-control.mjs"
       - "scripts/generate-site-shell.mjs"
       - "scripts/test-site-shell.mjs"
       - "vercel.json"
@@ -197,6 +201,10 @@ jobs:
         run: npm run check:home-global-completion
       - name: Design DNA and live-component system contract
         run: npm run check:design-dna-system
+      - name: Theme continuity and global-control contracts
+        run: |
+          npm run check:theme-continuity-proof
+          npm run check:global-theme-control
       - name: Verify reproducible Pi Kapp demo build
         run: |
           npm ci --ignore-scripts

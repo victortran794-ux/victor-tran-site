@@ -104,6 +104,8 @@ fi
 
 run_required "Home/global completion contract" npm run check:home-global-completion
 run_required "Design DNA and live-component system contract" npm run check:design-dna-system
+run_required "Theme Continuity proof contract" npm run check:theme-continuity-proof
+run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "UI Gallery integration contract" npm run check:ui-gallery
 run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser

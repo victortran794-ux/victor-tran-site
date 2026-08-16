@@ -496,8 +496,10 @@ main#main-content {
 .lens-switcher {
   display: flex;
   align-items: center;
+  background: var(--surface-floating);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04);
   overflow: visible;
   position: relative;
   flex-shrink: 0;
@@ -587,14 +589,9 @@ main#main-content {
   color: var(--bg);
 }
 
-/* Three-route finish proof: make mode selection readable without changing the
-   generated shell or applying an unapproved treatment to the rest of the site. */
-html[data-finish-proof] .lens-switcher {
-  background: var(--surface-floating);
-  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04);
-}
-
-html[data-finish-proof] .lens-switcher-icon {
+/* Shared mode clarity: preserve the accessible icon-only shell while making
+   Light, Dark, and the selected semantic state explicit on every shared page. */
+.lens-switcher-icon {
   width: 18px;
   height: 18px;
   display: grid;
@@ -603,27 +600,27 @@ html[data-finish-proof] .lens-switcher-icon {
   line-height: 1;
 }
 
-html[data-finish-proof] .lens-switcher-icon::before {
+.lens-switcher-icon::before {
   font-family: 'Source Code Pro', monospace;
   font-size: 0.95rem;
 }
 
-html[data-finish-proof] [data-lens="light"] .lens-switcher-icon::before { content: '☼'; }
-html[data-finish-proof] [data-lens="dark"] .lens-switcher-icon::before { content: '☾'; }
+[data-lens="light"] .lens-switcher-icon::before { content: '☼'; }
+[data-lens="dark"] .lens-switcher-icon::before { content: '☾'; }
 
-html[data-finish-proof] .lens-switcher-btn[aria-pressed="true"] {
+.lens-switcher-btn[aria-pressed="true"] {
   background: var(--text);
   color: var(--surface-canvas);
 }
 
-html[data-finish-proof] .lens-switcher-btn[aria-pressed="false"] {
+.lens-switcher-btn[aria-pressed="false"] {
   background: transparent;
   color: var(--text-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html[data-finish-proof] .lens-switcher-btn,
-  html[data-finish-proof] .lens-switcher-icon { transition: none; }
+  .lens-switcher-btn,
+  .lens-switcher-icon { transition: none; }
 }
 
 
