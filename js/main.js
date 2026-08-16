@@ -151,6 +151,36 @@ document.addEventListener('click', (e) => {
 });
 
 
+// ── Finish-proof hash target stabilization ─────────
+// A fresh URL fragment can be resolved before the external stylesheet applies
+// scroll-margin-top. Re-anchor after load so the fixed nav never obscures the
+// bounded About jump targets. Other routes remain untouched.
+const stabilizeFinishProofHashTarget = () => {
+  if (!document.documentElement.hasAttribute('data-finish-proof') || !window.location.hash) return;
+
+  let targetId;
+  try {
+    targetId = decodeURIComponent(window.location.hash.slice(1));
+  } catch {
+    return;
+  }
+
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    target.scrollIntoView({ block: 'start' });
+    root.style.scrollBehavior = previousScrollBehavior;
+  }));
+};
+
+window.addEventListener('load', stabilizeFinishProofHashTarget, { once: true });
+window.addEventListener('hashchange', stabilizeFinishProofHashTarget);
+
+
 // ── Magnetic Cards (rAF-batched) ───────────────────
 if (!prefersReducedMotion) {
   document.querySelectorAll('.featured-item').forEach(card => {
