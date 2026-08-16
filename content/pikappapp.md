@@ -135,11 +135,9 @@ The final direction returns to the original cyan field, Star Shield, hex texture
 
 Source-faithful remaster. Illustrative concept screens.
 
-This project brought together my experience in leadership and communications with a growing interest in product design and research.
+This project connected my experience in leadership and communications with a growing interest in product design and research. It was an early attempt to make HQ feel closer to day-to-day chapter life through one member-facing app.
 
-HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization easier to reach. When I shared it with fraternity members, recruitment staff, and HQ colleagues, the feedback was positive, especially around needs the recruitment team already recognized. The concept still needed more definition.
-
-The next step would have been usability testing and a more defined integration model. Even as an experimental concept, it changed how I thought about meeting an audience halfway: start with the systems people already use, then make the member-facing experience easier to understand.
+The concept still needed usability testing and a clearer integration model. What stayed with me was the approach: start with the systems people already use, then make the member-facing experience easier to understand.
 
 Pi Kapp App archive
 
