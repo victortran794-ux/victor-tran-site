@@ -126,6 +126,11 @@ if (fs.existsSync(path.join(root, 'images/pikapp-case-study/expansion-cover.png'
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+const signatureMarkRule = css.match(/\.pikapp-page \.identity-board__signature img\{([^}]*)\}/)?.[1] || '';
+for (const required of ['background:#006f9e', 'padding:8px', 'border-radius:14px', 'box-sizing:border-box']) {
+  if (!signatureMarkRule.includes(required)) fail(`Pi Kapp signature mark is missing its accessible cyan field treatment: ${required}`);
+}
+if (!text('images/pikapp-case-study/app-star-shield.svg').includes('.st1{fill:#FFFFFF;}')) fail('source Star Shield must preserve its authentic white silhouette');
 
 const explorationDisplayAssets = [
   'exploration-today.png', 'exploration-responsibility.png', 'exploration-chapter.png',
