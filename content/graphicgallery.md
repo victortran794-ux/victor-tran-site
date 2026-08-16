@@ -102,9 +102,9 @@ Complete poster view selected.
 - Complete Mendenhall type specimen poster: images/gg-illus-4.jpg
 - Mendenhall sentence specimen reading from the heart of the frozen glacier: images/mendenhall/type-thumbnail.png
 - Complete Mendenhall lowercase alphabet and type specimen sheet: images/mendenhall/mendenhall-layout.png
-- Hand-built Mendenhall letterform sketches and physical studies: images/mendenhall/mendenhall-sketches.png
+- Hand-built Mendenhall letterform sketches and physical studies: images/mendenhall/mendenhall-sketches.webp
 - Complete Mendenhall poster thumbnail: images/gg-illus-4.jpg
 - Sentence specimen thumbnail: images/mendenhall/type-thumbnail.png
 - Alphabet specimen thumbnail: images/mendenhall/mendenhall-layout.png
-- Letterform studies thumbnail: images/mendenhall/mendenhall-sketches.png
+- Letterform studies thumbnail: images/mendenhall/mendenhall-sketches.webp
 - Wide informational graphic: images/gg-infographic.jpg

@@ -442,7 +442,7 @@ GRAPHIC_PRIMARY = r'''
               <img class="mendenhall-archive-master" data-mendenhall-master="poster" data-src="images/gg-illus-4.jpg" width="933" height="1600" alt="Complete Mendenhall type specimen poster">
               <img class="mendenhall-archive-master" data-mendenhall-master="sentence" data-src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Mendenhall sentence specimen reading from the heart of the frozen glacier" hidden>
               <img class="mendenhall-archive-master" data-mendenhall-master="alphabet" data-src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Complete Mendenhall lowercase alphabet and type specimen sheet" hidden>
-              <img class="mendenhall-archive-master" data-mendenhall-master="sketches" data-src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Hand-built Mendenhall letterform sketches and physical studies" hidden>
+              <img class="mendenhall-archive-master" data-mendenhall-master="sketches" data-src="images/mendenhall/mendenhall-sketches.webp" width="2500" height="1087" alt="Hand-built Mendenhall letterform sketches and physical studies" hidden>
             </div>
             <aside class="mendenhall-archive-details" aria-label="Mendenhall project details">
               <p class="mendenhall-archive-kicker">2015 type design exploration</p>
@@ -458,7 +458,7 @@ GRAPHIC_PRIMARY = r'''
                 <button type="button" class="mendenhall-archive-view" data-mendenhall-view="poster" aria-pressed="true" aria-label="View complete type poster"><img loading="lazy" decoding="async" data-src="images/gg-illus-4.jpg" width="933" height="1600" alt="Complete Mendenhall poster thumbnail"></button>
                 <button type="button" class="mendenhall-archive-view" data-mendenhall-view="sentence" aria-pressed="false" aria-label="View sentence specimen"><img loading="lazy" decoding="async" data-src="images/mendenhall/type-thumbnail.png" width="1500" height="1500" alt="Sentence specimen thumbnail"></button>
                 <button type="button" class="mendenhall-archive-view" data-mendenhall-view="alphabet" aria-pressed="false" aria-label="View complete alphabet specimen"><img loading="lazy" decoding="async" data-src="images/mendenhall/mendenhall-layout.png" width="7292" height="3125" alt="Alphabet specimen thumbnail"></button>
-                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="sketches" aria-pressed="false" aria-label="View sketches and physical studies"><img loading="lazy" decoding="async" data-src="images/mendenhall/mendenhall-sketches.png" width="2500" height="1087" alt="Letterform studies thumbnail"></button>
+                <button type="button" class="mendenhall-archive-view" data-mendenhall-view="sketches" aria-pressed="false" aria-label="View sketches and physical studies"><img loading="lazy" decoding="async" data-src="images/mendenhall/mendenhall-sketches.webp" width="2500" height="1087" alt="Letterform studies thumbnail"></button>
               </div>
               <p class="mendenhall-archive-status sr-only" aria-live="polite">Complete poster view selected.</p>
             </aside>

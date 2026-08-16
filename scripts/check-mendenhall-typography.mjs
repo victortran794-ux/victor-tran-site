@@ -10,13 +10,10 @@ const read=(p)=>fs.readFileSync(path.join(root,p),'utf8');
 const expected={
  'images/mendenhall/type-thumbnail.png':'8f7cdcaf8b5f8bce79e86708eb4d33519cf8692955b8c2fbf8ca1bd699db3bc6',
  'images/mendenhall/mendenhall-layout.png':'7fdbbf7e89adab301503b12c9a76e2829336306b8bf3099088989837185249f4',
- 'images/mendenhall/mendenhall-sketches.png':'f813043a6565f6e8d26ed299428fdb8f2e5d07ccf45063997518f53f4a77433a',
-
+ 'images/mendenhall/mendenhall-sketches.webp':'cafbf18d54d1581294896f18738381d44c9ca8bd67c2ef60892f26db1e479e39',
 };
 const encodedPixels={
  'images/mendenhall/type-thumbnail.png':'b036923641b29e919389cbb1c670eb82559880ecafd1c7e8b52e7c35f36b61ff',
- 'images/mendenhall/mendenhall-sketches.png':'ab991940125ba596e056ab423dd6de2f78af986b65289cd12a33c663a117c40b',
-
 };
 const pngIdatHash=(bytes)=>{let offset=8;const chunks=[];while(offset<bytes.length){const length=bytes.readUInt32BE(offset);const type=bytes.subarray(offset+4,offset+8).toString('ascii');if(type==='IDAT')chunks.push(bytes.subarray(offset+8,offset+8+length));offset+=12+length;}return crypto.createHash('sha256').update(Buffer.concat(chunks)).digest('hex');};
 const jpegScanHash=(bytes)=>{const marker=bytes.lastIndexOf(Buffer.from([0xff,0xda]));return crypto.createHash('sha256').update(bytes.subarray(marker)).digest('hex');};
@@ -32,7 +29,7 @@ expect(generator.includes('data-mendenhall-master="alphabet"'),'generator: alpha
 expect(generator.includes('data-mendenhall-master="sketches"'),'generator: sketches view missing');
 expect(generator.includes('images/mendenhall/type-thumbnail.png'),'generator: poster-phrase pick missing');
 expect(generator.includes('images/mendenhall/mendenhall-layout.png'),'generator: alphabet pick missing');
-expect(generator.includes('images/mendenhall/mendenhall-sketches.png'),'generator: studies pick missing');
+expect(generator.includes('images/mendenhall/mendenhall-sketches.webp'),'generator: studies pick missing');
 expect(!generator.includes('data-mendenhall-picker'),'generator: page-level Mendenhall buttons must be removed');
 expect(!generator.includes('mendenhall-feature'),'generator: standalone Mendenhall feature section must be removed');
 expect(!generator.includes('data-viewer-picks'),'generator: generic lightbox picks must be removed');
