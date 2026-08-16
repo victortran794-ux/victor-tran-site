@@ -22,6 +22,10 @@
   --text:   #1a1a1a;
   --text-2: #6e6e6e;
   --border: #e5e5e3;
+  --surface-canvas:   #ffffff;
+  --surface-section:  #f6f6f4;
+  --surface-media:    #ececea;
+  --surface-floating: #ffffff;
   --max-w:  1200px;
   --nav-h:  68px;
 
@@ -90,6 +94,10 @@
   --text:   #f0f0ee;
   --text-2: #888888;
   --border: #2c2c2c;
+  --surface-canvas:   #0e0e0e;
+  --surface-section:  #181818;
+  --surface-media:    #222222;
+  --surface-floating: #141414;
   --blue:      #7ab8ff;
   --blue-text: #7ab8ff;
   --pink:   #f06ab5;
@@ -577,6 +585,45 @@ main#main-content {
 .lens-switcher-btn.is-active {
   background: var(--text);
   color: var(--bg);
+}
+
+/* Three-route finish proof: make mode selection readable without changing the
+   generated shell or applying an unapproved treatment to the rest of the site. */
+html[data-finish-proof] .lens-switcher {
+  background: var(--surface-floating);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04);
+}
+
+html[data-finish-proof] .lens-switcher-icon {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+  line-height: 1;
+}
+
+html[data-finish-proof] .lens-switcher-icon::before {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.95rem;
+}
+
+html[data-finish-proof] [data-lens="light"] .lens-switcher-icon::before { content: '☼'; }
+html[data-finish-proof] [data-lens="dark"] .lens-switcher-icon::before { content: '☾'; }
+
+html[data-finish-proof] .lens-switcher-btn[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--surface-canvas);
+}
+
+html[data-finish-proof] .lens-switcher-btn[aria-pressed="false"] {
+  background: transparent;
+  color: var(--text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-finish-proof] .lens-switcher-btn,
+  html[data-finish-proof] .lens-switcher-icon { transition: none; }
 }
 
 
@@ -1236,6 +1283,56 @@ main#main-content {
 }
 
 
+/* ── Three-route finish proof: current practice ── */
+html[data-finish-proof] .home-practice-proof {
+  padding: var(--space-4) var(--route02-x);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(var(--space-4), 3vw, var(--space-10));
+  background: var(--surface-section);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: var(--text-label);
+}
+
+html[data-finish-proof] .home-practice-proof-label {
+  color: var(--blue-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html[data-finish-proof] .home-practice-proof strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  html[data-finish-proof] .home-practice-proof {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  html[data-finish-proof] .home-practice-proof > span:not(.home-practice-proof-label) {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  html[data-finish-proof] .home-practice-proof {
+    padding: var(--space-5) var(--page-x);
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  html[data-finish-proof] .home-practice-proof > span:not(.home-practice-proof-label) {
+    grid-column: 1;
+  }
+}
+
 /* ══════════════════════════════════════════════
    FEATURED PROJECTS
 ══════════════════════════════════════════════ */
@@ -1611,6 +1708,34 @@ main#main-content {
 .featured-item--surface-ability .view-link:hover { color: #1a1a1a; }
 .featured-item--surface-ability .view-link::after { color: var(--homepage-ability-blue); }
 
+
+/* ── Three-route finish proof: project context ── */
+html[data-finish-proof] .page-context {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--space-6) var(--page-x) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--surface-canvas);
+  color: var(--text-2);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+html[data-finish-proof] .page-context a {
+  color: var(--blue-text);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+html[data-finish-proof] .page-context a:hover { text-decoration-color: currentColor; }
+
+html[data-finish-proof] .page-context + .page-header { padding-top: var(--space-10); }
 
 /* ══════════════════════════════════════════════
    PAGE HEADER (gallery / case study pages)
@@ -2247,6 +2372,62 @@ main#main-content {
 /* ══════════════════════════════════════════════
    ABOUT PAGE
 ══════════════════════════════════════════════ */
+html[data-finish-proof] .about-jump-nav {
+  width: calc(100% - (2 * var(--page-x)));
+  max-width: calc(var(--max-w) - (2 * var(--page-x)));
+  margin: 0 auto var(--space-12);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  background: var(--surface-floating);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text-2);
+  font-size: var(--text-label);
+}
+
+html[data-finish-proof] .about-jump-nav > span {
+  color: var(--text-2);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html[data-finish-proof] .about-jump-nav a {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color var(--duration-fast), text-decoration-color var(--duration-fast);
+}
+
+html[data-finish-proof] .about-jump-nav a:hover {
+  color: var(--blue-text);
+  text-decoration-color: currentColor;
+}
+
+html[data-finish-proof] #about-current,
+html[data-finish-proof] #about-practice,
+html[data-finish-proof] #about-now,
+html[data-finish-proof] #about-play {
+  scroll-margin-top: calc(var(--nav-h) + var(--space-6));
+}
+
+@media (max-width: 600px) {
+  html[data-finish-proof] .about-jump-nav {
+    border-radius: var(--radius-md);
+    align-items: flex-start;
+  }
+
+  html[data-finish-proof] .about-jump-nav > span {
+    flex-basis: 100%;
+  }
+}
+
 .about-intro {
   max-width: var(--max-w);
   margin: 0 auto;

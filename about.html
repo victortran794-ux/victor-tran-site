@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-finish-proof>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,10 +102,18 @@
       </div>
     </section>
 
+    <nav class="about-jump-nav" aria-label="About sections">
+      <span>On this page</span>
+      <a href="#about-current">Now</a>
+      <a href="#about-practice">Practice</a>
+      <a href="#about-now">Right now</a>
+      <a href="#about-play">Play</a>
+    </nav>
+
     <hr class="about-divider">
 
     <!-- Current practice -->
-    <section class="about-current" aria-labelledby="about-current-title">
+    <section class="about-current" id="about-current" aria-labelledby="about-current-title">
       <div class="about-current-heading">
         <h2 id="about-current-title">What I’m doing now</h2>
         <p class="about-current-summary">Since January 2024, I’ve been a Visual Designer at IBM watsonx Orchestrate in Austin, Texas, focused on enterprise AI and automation while staying close to design systems and implementation.</p>
@@ -131,7 +139,7 @@
     </section>
 
     <!-- Skills -->
-    <section class="about-skills">
+    <section class="about-skills" id="about-practice">
       <div class="about-skills-section">
         <h3>What I design</h3>
         <div class="tag-list">
@@ -169,7 +177,7 @@
     </section>
 
     <!-- Right now -->
-    <section class="about-now">
+    <section class="about-now" id="about-now">
       <h2 class="about-now-title">Right now I am...</h2>
       <div class="about-now-grid">
         <div class="about-now-item">
@@ -200,7 +208,7 @@
     </section>
 
     <!-- Play & Listen -->
-    <section class="about-play">
+    <section class="about-play" id="about-play">
       <div class="about-play-grid">
         <!-- Neumorphic Tetris -->
         <div class="about-play-card about-play-tetris">
