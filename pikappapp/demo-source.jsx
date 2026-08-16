@@ -7,42 +7,38 @@ import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-m
 // --------------------------------------------------------------------------
 
 const MEMBER = {
-  name: "Victor Tran",
-  chapter: "Iota Theta",
-  school: "University of Iowa",
-  rank: 21,
-  rankOf: 45,
-  rankTrend: 3, // up 3 this week
+  name: "Sample",
+  chapter: "Concept",
 };
 
 const BULLETIN = [
   {
     id: "b1",
     tag: "Service",
-    title: "Push America 5K — sign-ups close Friday",
-    body: "Pick up your race kit at the chapter house Thursday between 4–7pm. Volunteers needed at gear check.",
-    when: "2d ago",
+    title: "Illustrative service update",
+    body: "Example bulletin content for layout and interaction only. No live event details are connected.",
+    when: "Example",
   },
   {
     id: "b2",
     tag: "Academics",
-    title: "Chapter GPA report posted",
-    body: "Fall midterm averages are in. Iota Theta is up two spots regionally — see your standing on the Chapter tab.",
-    when: "4d ago",
+    title: "Illustrative academic update",
+    body: "Example bulletin content with no grades, rankings, standings, or member records.",
+    when: "Example",
   },
   {
     id: "b3",
     tag: "Brotherhood",
-    title: "Brotherhood retreat — pack list",
-    body: "Tahoe departure 6am Saturday. Bring layers; the lodge runs cold at night. Carpool sheet pinned.",
-    when: "6d ago",
+    title: "Illustrative community update",
+    body: "Example bulletin content with no location, schedule, attendance, or transportation data.",
+    when: "Example",
   },
   {
     id: "b4",
     tag: "Chapter",
-    title: "Spring rush table assignments live",
-    body: "Sign up for at least two shifts by Sunday. New brothers — your first shift is paired with an exec.",
-    when: "1w ago",
+    title: "Illustrative chapter update",
+    body: "Example bulletin content with no live assignments, deadlines, or member information.",
+    when: "Example",
   },
 ];
 
@@ -52,20 +48,20 @@ const INITIAL_MILESTONES = [
     title: "Brotherhood",
     blurb: "Strengthen ties across the chapter through shared experiences and accountability.",
     tasks: [
-      { id: "t1", title: "Attend chapter retreat", done: true,  date: "08/30" },
-      { id: "t2", title: "Host an alumni call",   done: true,  date: "09/12" },
-      { id: "t3", title: "Big–Little reveal week", done: false },
-      { id: "t4", title: "Log 8 brotherhood hours", done: false },
+      { id: "t1", title: "Complete sample activity", done: true },
+      { id: "t2", title: "Review sample reflection", done: true },
+      { id: "t3", title: "Plan illustrative check-in", done: false },
+      { id: "t4", title: "Record sample participation", done: false },
     ],
   },
   {
     id: "m2",
     title: "Service",
-    blurb: "Live the founders' vision through philanthropy and community work.",
+    blurb: "Illustrative service milestones for interface demonstration only.",
     tasks: [
-      { id: "t5", title: "Push America 5K — volunteer", done: true,  date: "09/05" },
-      { id: "t6", title: "Ability Experience hours: 15", done: false },
-      { id: "t7", title: "Local food drive shift",       done: false },
+      { id: "t5", title: "Complete sample service activity", done: true },
+      { id: "t6", title: "Review illustrative service goal", done: false },
+      { id: "t7", title: "Plan sample community activity", done: false },
     ],
   },
   {
@@ -73,9 +69,9 @@ const INITIAL_MILESTONES = [
     title: "Personal Development",
     blurb: "Grow as a student, professional, and individual.",
     tasks: [
-      { id: "t8",  title: "GPA above 2.75",                done: true,  date: "08/15" },
-      { id: "t9",  title: "Career workshop attended",      done: false },
-      { id: "t10", title: "Resume review with an alumnus", done: false },
+      { id: "t8",  title: "Complete sample learning goal", done: true },
+      { id: "t9",  title: "Review illustrative workshop", done: false },
+      { id: "t10", title: "Plan sample development step", done: false },
     ],
   },
   {
@@ -83,8 +79,8 @@ const INITIAL_MILESTONES = [
     title: "Leadership",
     blurb: "Take on responsibility for the chapter's future.",
     tasks: [
-      { id: "t11", title: "Committee role accepted", done: true, date: "08/22" },
-      { id: "t12", title: "Lead one chapter event",  done: false },
+      { id: "t11", title: "Complete sample leadership step", done: true },
+      { id: "t12", title: "Plan illustrative group activity", done: false },
     ],
   },
 ];
@@ -160,7 +156,7 @@ function Splash({ onDone }) {
         transition={{ delay: 0.5, duration: 0.5 }}
         className="font-display text-3xl mt-2"
       >
-        Iota Theta
+        Illustrative member view
       </motion.p>
     </motion.div>
   );
@@ -210,7 +206,7 @@ function StatusBar({ light = false }) {
 // Avatar with progress ring
 // --------------------------------------------------------------------------
 
-function AvatarRing({ progress, size = 64, initials = "VT" }) {
+function AvatarRing({ progress, size = 64, initials = "IM" }) {
   const stroke = 4;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
@@ -249,20 +245,14 @@ function AvatarRing({ progress, size = 64, initials = "VT" }) {
 }
 
 // --------------------------------------------------------------------------
-// Rank chip with trend
+// Illustrative-data boundary
 // --------------------------------------------------------------------------
 
-function RankChip({ rank, of, trend }) {
+function ContextChip() {
   return (
     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/10 text-xs">
-      <span className="font-medium text-white/90">Ranked #{rank} of {of}</span>
-      <span className="h-3 w-px bg-white/15" />
-      <span className="inline-flex items-center gap-1 text-pikapp-gold-light">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden>
-          <path d="M5 1 L9 6 L6.5 6 L6.5 9 L3.5 9 L3.5 6 L1 6 Z"/>
-        </svg>
-        {trend} this week
-      </span>
+      <span className="font-medium text-white/90">Illustrative progress</span>
+      <span className="text-pikapp-gold-light">No live standings</span>
     </div>
   );
 }
@@ -318,7 +308,7 @@ function MemberTab({ milestones, onToggleTask, expandedId, setExpandedId, frozen
               />
             </div>
             <div className="mt-3">
-              <RankChip rank={MEMBER.rank} of={MEMBER.rankOf} trend={MEMBER.rankTrend} />
+              <ContextChip />
             </div>
           </div>
         </div>
@@ -528,7 +518,7 @@ function TaskRow({ task, onToggle, frozenBurst }) {
         {task.title}
       </span>
       <span className={`text-[11px] tabular-nums ${task.done ? "text-pikapp-gold-deep" : "text-pikapp-ink/30"}`}>
-        {task.done ? `Completed ${task.date ?? ""}` : "Pending"}
+        {task.done ? "Illustrative complete" : "Illustrative pending"}
       </span>
     </button>
   );
@@ -692,7 +682,7 @@ function App() {
     return INITIAL_MILESTONES.map((m) => ({
       ...m,
       tasks: m.tasks.map((t) =>
-        t.id === frozenBurst ? { ...t, done: true, date: formatToday() } : t
+        t.id === frozenBurst ? { ...t, done: true } : t
       ),
     }));
   }, [frozenBurst]);
@@ -720,7 +710,7 @@ function App() {
           ...m,
           tasks: m.tasks.map((t) =>
             t.id === taskId
-              ? { ...t, done: !t.done, date: !t.done ? formatToday() : t.date }
+              ? { ...t, done: !t.done }
               : t
           ),
         };
@@ -755,19 +745,19 @@ function App() {
           {activeTab === "chapter" && (
             <EmptyTab
               title="Chapter"
-              message="Brother roster, chapter-wide milestones, and weekly standings live here. Coming next."
+              message="Illustrative chapter concept. No live roster, standings, or member records."
             />
           )}
           {activeTab === "national" && (
             <EmptyTab
               title="National HQ"
-              message="National announcements, Push America campaigns, and inter-chapter rankings will land in this view."
+              message="Illustrative national view. No live announcements, campaigns, or inter-chapter rankings."
             />
           )}
           {activeTab === "settings" && (
             <EmptyTab
               title="Settings"
-              message="Profile, notifications, theme, and privacy. Reserved for v2 of the prototype."
+              message="Illustrative settings view. No profile, notification, theme, or privacy data is connected."
             />
           )}
         </motion.div>
@@ -776,11 +766,6 @@ function App() {
       <TabBar active={activeTab} onChange={setActiveTab} />
     </DeviceShell>
   );
-}
-
-function formatToday() {
-  const d = new Date();
-  return `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}`;
 }
 
 createRoot(document.getElementById("root")).render(<App />);

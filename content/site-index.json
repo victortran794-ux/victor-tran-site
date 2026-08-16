@@ -310,9 +310,10 @@
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
       "It still needed to look like Pi Kappa Phi.",
-      "The earlier concepts showed how the member view was taking shape.",
-      "A formative start, not a finished product.",
-      "What I might do with the app today.",
+      "The explorations showed what was worth carrying forward.",
+      "Other explorations.",
+      "The final remaster brings the app back to its source.",
+      "A formative project that changed how I approached product design.",
       "Expansion Portfolio"
     ],
     "images": [
@@ -333,8 +334,8 @@
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-case-study/app-icon.png",
-        "alt": "Original Pi Kapp App icon: a gold star over crossed swords"
+        "src": "images/pikapp-case-study/app-star-shield.svg",
+        "alt": "Original vector Pi Kapp App Star Shield"
       },
       {
         "src": "images/pikapp-case-study/login-screen.png",
@@ -349,20 +350,20 @@
         "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-case-study/v2-today-light-clean.png",
-        "alt": "Light-theme Today screen showing chapter context, responsibilities, and an Update us field"
+        "src": "images/pikapp-case-study/exploration-today.png",
+        "alt": "Illustrative dark-blue Today screen organizing sample priorities and updates"
       },
       {
-        "src": "images/pikapp-case-study/v2-responsibility-detail-dark-clean.png",
-        "alt": "Dark-theme responsibility detail sheet showing source context and review controls"
+        "src": "images/pikapp-case-study/exploration-responsibility.png",
+        "alt": "Illustrative responsibility-detail screen showing sample source and visibility states"
       },
       {
-        "src": "images/pikapp-case-study/v2-update-review-dark-clean.png",
-        "alt": "Dark-theme update review screen showing a proposed responsibility update before it is applied"
+        "src": "images/pikapp-case-study/exploration-chapter.png",
+        "alt": "Illustrative Chapter screen exploring shared focus and recognition"
       },
       {
-        "src": "images/pikapp-case-study/v2-correction-requested-dark-clean.png",
-        "alt": "Dark-theme correction-requested screen confirming that a review has been sent"
+        "src": "images/pikapp-case-study/exploration-support.png",
+        "alt": "Illustrative Support screen connecting sample responsibilities with resources"
       }
     ],
     "projects": []
