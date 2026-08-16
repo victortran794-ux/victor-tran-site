@@ -591,6 +591,8 @@ html[data-theme="dark"] .pikapp-page .identity-board .system-icons svg{stroke:cu
 
 .pikapp-page .close p{font-size:19px;max-width:760px;color:#d8dff1}
 
+.pikapp-page .close p+p{margin-top:16px}
+
 @media (max-width: 800px){
 .pikapp-page .index__inner,
 .pikapp-page .chapter-head,

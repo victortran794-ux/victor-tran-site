@@ -27,21 +27,21 @@ A mobile application concept for undergraduate fraternity members to track miles
 - Every year looked a little different. The same stuff still had to get done.
 - There was already a system. It was just spread everywhere.
 - It still needed to look like Pi Kappa Phi.
-- A smorgasbord of explorations showed what could carry forward.
+- The explorations showed what was worth carrying forward.
 - Other explorations.
 - The final remaster brings the app back to its source.
-- A formative start, not a finished product.
+- A formative project that changed how I approached product design.
 - Expansion Portfolio
 
 ## Body Copy
 
-A passion project that brought together my love for leadership, helping people stay organized, and design.
+A mobile concept for helping fraternity members keep track of milestones and stay connected to the organization.
 
-Students already had a lot going on: college, financial responsibilities, fraternity milestones, and all the systems around them. As Pi Kapp's lead designer and Assistant Executive Director of Communications, I wanted to see whether one mobile experience could make some of that easier to follow.
+Students already had a lot to keep up with: college, financial responsibilities, fraternity milestones, and the systems around them. As Pi Kapp's lead designer and Assistant Executive Director of Communications, I explored whether one mobile experience could make the member side easier to follow.
 
-I started with the resources we already had, including recruitment guides, and talked with new graduate recruiters, students, executive-board members, and chapter administrators. I also brought my own experience inside the organization.
+I reviewed the resources we already had, including recruitment guides, and spoke with new graduate recruiters, students, executive board members, and chapter administrators. I also drew on my own experience inside the organization.
 
-The same problems kept coming up: things were disorganized, and the system was not flexible when another tool needed to plug in. Every small improvement mattered because gathering everything was already hard enough.
+The same issues kept coming up: information was spread across tools, and the member experience became harder to follow whenever another system entered the mix.
 
 Research context: this was practical internal discovery for an experimental concept, not a funded usability study.
 
@@ -65,7 +65,7 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept. This chapter collects only the pieces that move forward into the final three screens.
+The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept. This chapter shows only the pieces used in the final three screens.
 
 Pi Kapp App
 
@@ -109,13 +109,13 @@ Milestone states
 
 Bottom navigation
 
-The original V1 screens, runnable earlier V2, and later visual studies tested different ways to organize progress, chapter information, milestones, and support. Together they show the paths considered before the final remaster.
+V1 established the member flow. V2 made part of that model runnable. Later visual studies explored tone, hierarchy, and alternate flows before the final remaster.
 
-Supporting chronology: V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.
+Supporting chronology: These materials come from different stages of the concept: original V1 screens, the earlier runnable V2, and later AI-assisted visual studies.
 
 Earlier concept sequence
 
-The sequence shows how the original identity, member dashboard, and milestone detail were explored before the present-day coda.
+The sequence shows how the original identity, member dashboard, and milestone detail were explored before the current remaster.
 
 Earlier V2 prototype
 
@@ -125,21 +125,21 @@ AI-assisted flow studies
 
 Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.
 
-AI-assisted studies. Illustrative information. Not researched or shipped.
+AI-assisted studies. Illustrative explorations, not research findings.
 
 Chapter 05
 
 Final design | Source-faithful remaster
 
-The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
+The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
 
-Source-faithful remaster. Illustrative information. Not researched or shipped.
+Source-faithful remaster. Illustrative concept screens.
 
-This was a passion project. It brought together my love for leadership, helping people stay organized, and a growing interest in product design and research. It also gave me a UX project I could develop for my portfolio.
+This project brought together my experience in leadership and communications with a growing interest in product design and research.
 
-HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization feel a little easier to reach. The fraternity members, recruitment staff, and HQ colleagues I presented it to responded positively. It felt current and met needs the recruitment team recognized, but it still needed to be fleshed out.
+HQ could feel distant from day-to-day chapter life. The app was one attempt to meet students where they already were, on their phones, and make the organization easier to reach. When I shared it with fraternity members, recruitment staff, and HQ colleagues, the feedback was positive, especially around needs the recruitment team already recognized. The concept still needed more definition.
 
-I still do not have usability testing or evidence that the concept was adopted. It remained an experimental study, but it was a neat start and it changed how I thought about meeting an audience halfway.
+The next step would have been usability testing and a more defined integration model. Even as an experimental concept, it changed how I thought about meeting an audience halfway: start with the systems people already use, then make the member-facing experience easier to understand.
 
 Pi Kapp App archive
 

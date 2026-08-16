@@ -151,7 +151,8 @@ for (const required of [
   '<!-- generated:site-shell-footer:start -->',
   '<!-- generated:site-shell-footer:end -->',
   '<p class="section-label sr-only">Design</p>',
-  'Concept · not shipped',
+  '<span class="concept-flag">Concept</span>',
+  'A mobile concept for helping fraternity members keep track of milestones and stay connected to the organization.',
   'From expansion work to one member view.',
   'Every year looked a little different. The same stuff still had to get done.',
   'There was already a system. It was just spread everywhere.',
@@ -191,24 +192,24 @@ for (const required of [
   'role="group" aria-label="Source palette color roles"',
   'role="group" aria-label="Member, Chapter, National HQ, and Settings interface icons"',
   'role="group" aria-label="Display, interface, and status type roles"',
-  'A smorgasbord of explorations showed what could carry forward.',
+  'The explorations showed what was worth carrying forward.',
   'Supporting chronology',
-  'V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.',
-  'A formative start, not a finished product.',
+  'These materials come from different stages of the concept: original V1 screens, the earlier runnable V2, and later AI-assisted visual studies.',
+  'A formative project that changed how I approached product design.',
   'AI-assisted flow studies',
   'Other explorations.',
   'Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.',
   'Chapter 05',
   'Final design | Source-faithful remaster',
   'The final remaster brings the app back to its source.',
-  'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
+  'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   '01 Welcome',
   'A cleaner login keeps the original composition, mark, and color field.',
   '02 Member view',
   'The dashboard keeps progress and milestones visible without crowding the next action.',
   '03 Milestone detail',
   'Expanded tasks preserve context while making completion state easier to scan.',
-  'Source-faithful remaster. Illustrative information. Not researched or shipped.',
+  'Source-faithful remaster. Illustrative concept screens.',
   'Earlier V2 prototype',
   'A runnable snapshot of the V2 member model.',
   'This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.',
@@ -231,7 +232,7 @@ if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the 
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
 if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
-for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'Five visual directions.', 'Five equal mobile studies', 'It is illustrative and not shipped.']) {
+for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'Five visual directions.', 'Five equal mobile studies', 'It is illustrative and not shipped.', 'Concept · not shipped', 'Not researched or shipped.', 'illustrative and unshipped']) {
   if (html.includes(repeatedNarrative)) fail(`consolidated page still contains repeated narrative: ${repeatedNarrative}`);
 }
 const publicExport = text('content/pikappapp.md');
@@ -241,7 +242,7 @@ for (const requiredExport of [
   'App cyan: Entry and member view',
   'App navy: Structure and detail',
   'White: Fields and reading',
-  'Supporting chronology: V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.',
+  'Supporting chronology: These materials come from different stages of the concept: original V1 screens, the earlier runnable V2, and later AI-assisted visual studies.',
 ]) {
   if (!publicExport.includes(requiredExport)) fail(`public Pi Kapp export missing consolidated semantic content: ${requiredExport}`);
 }
@@ -411,7 +412,7 @@ for (const [key, value] of Object.entries(expectedProject)) {
 }
 if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
 if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
-if (!html.includes('<p class="coda__boundary">Source-faithful remaster. Illustrative information. Not researched or shipped.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (!html.includes('<p class="coda__boundary">Source-faithful remaster. Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
 
 if (failures.length) {
   console.error('PI KAPP PAGE INTEGRATION CONTRACT: FAIL');
