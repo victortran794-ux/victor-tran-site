@@ -138,7 +138,7 @@ need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\
 
 # Canonical project facts and protection flags.
 expected = {
-    "wxo-canvas": ("IBM watsonX Orchestrate", "wxo-canvas.html", "An agentic workflow canvas for building, inspecting, and improving AI workflows."),
+    "wxo-canvas": ("IBM watsonx Orchestrate", "wxo-canvas.html", "An agentic workflow canvas for building, inspecting, and improving AI workflows."),
     "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
@@ -167,7 +167,7 @@ protected = by_slug.get("document-processing", {})
 need(protected.get("protected") is True, "Document Processing must remain protected")
 need(protected.get("noindex") is True, "Document Processing must remain noindex")
 need(protected.get("sitemap") is False, "Document Processing must remain excluded from the sitemap")
-need("IBM watsonX Orchestrate" in index and "A2UI" not in index, "homepage needs IBM watsonX Orchestrate without A2UI claims")
+need("IBM watsonx Orchestrate" in index and "A2UI" not in index, "homepage needs IBM watsonx Orchestrate without A2UI claims")
 for private_rationale in ("Shared anatomy", "Project color is bounded", "Current behavior remains intact"):
     need(private_rationale not in index, f"private comparison rationale leaked into public copy: {private_rationale}")
 

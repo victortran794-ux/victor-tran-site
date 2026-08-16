@@ -4,7 +4,7 @@ This file is hand-maintained professional context for the portfolio chatbot. It 
 
 ## Current Role
 
-Victor Tran is a Visual Designer at IBM in Austin, Texas. His recent work spans enterprise UX, visual design, agentic workflow design, AI and automation, IBM Cloud, watsonx Orchestrate, and visual systems.
+Victor Tran is a Visual Designer at IBM watsonx Orchestrate in Austin, Texas. He began that role in January 2024. His recent work spans enterprise UX, visual design, agentic workflow design, AI and automation, design systems, and implementation review.
 
 ## Background
 
@@ -14,8 +14,8 @@ His design career began at Pi Kappa Phi, where he served as the in-house designe
 
 ## Experience
 
-- Visual Designer, IBM - watsonx Orchestrate, AI and automation.
-- User Experience Designer, IBM Cloud - Observability.
+- Visual Designer, IBM watsonx Orchestrate | AI and Automation, January 2024 to present.
+- Visual Designer, IBM Cloud | Observability, January 2021 to December 2023.
 - Assistant Executive Director of Communication, Pi Kappa Phi.
 - In-house designer, Pi Kappa Phi.
 

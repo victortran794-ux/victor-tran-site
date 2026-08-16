@@ -100,7 +100,7 @@ The IBM Patterns prototype did not become the production page. What I remember c
 
 If I revisited the problem now, I would keep that human goal: interpret intent, make the next destination clear, confirm where a request went, and keep a real person within reach.
 
-Influence and concept boundaryThis is a bounded first-person recollection. Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation. This is not a designed, tested, or implemented AI system.
+Influence and concept boundaryThis is a bounded first-person recollection. Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation.
 
 ## Images
 

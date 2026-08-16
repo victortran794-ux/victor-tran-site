@@ -68,7 +68,7 @@ requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
   'Homepage needs exactly one compact archive heading.');
 requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
   'Compact homepage heading must preserve Victor’s approved casual phrase.');
-forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonX Orchestrate as Protected.');
+forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonx Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
 requireText(index, 'id="galleries" role="group" aria-label="Art, graphic design, and UI galleries"',
@@ -80,7 +80,7 @@ forbid(index, /class="featured-galleries-intro"/,
 forbid(css, /\.featured-galleries-intro/,
   'Removed gallery intro markup must not leave stale responsive CSS behind.');
 requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 1,
-  'Homepage needs exactly one lock on the IBM watsonX Orchestrate card.');
+  'Homepage needs exactly one lock on the IBM watsonx Orchestrate card.');
 requireText(index, 'aria-label="Password required"', 'Homepage lock needs an accessible password-required label.');
 requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
@@ -110,7 +110,7 @@ const wxoProject = bySlug.get('wxo-canvas');
 requireCondition(Boolean(wxoProject), 'wxO Canvas must exist in the project manifest.');
 if (wxoProject) {
   for (const [key, value] of Object.entries({
-    title: 'IBM watsonX Orchestrate',
+    title: 'IBM watsonx Orchestrate',
     url: 'wxo-canvas.html',
     entryUrl: 'wxo-canvas.html?lock=1',
     category: 'Product Systems',
@@ -127,7 +127,7 @@ if (wxoProject) {
   })) requireCondition(wxoProject[key] === value, `wxO Canvas manifest ${key} must equal ${String(value)}.`);
   requireCondition(wxoProject.images?.length === 1, 'wxO homepage entry must use one thumbnail asset.');
   requireCondition(wxoProject.images?.[0]?.src === 'images/wxo-canvas/wxo-home-thumbnail.png',
-    'IBM watsonX Orchestrate must use the approved Agentic workflow canvas thumbnail.');
+    'IBM watsonx Orchestrate must use the approved Agentic workflow canvas thumbnail.');
 }
 const documentProject = bySlug.get('document-processing');
 requireCondition(documentProject?.homepage === false && documentProject?.nav === false,

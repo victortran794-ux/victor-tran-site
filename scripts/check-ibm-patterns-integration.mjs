@@ -78,10 +78,14 @@ for (const required of [
   'six-week concept',
   'Visual Designer',
   'did not become the production page',
-  'This is not a designed, tested, or implemented AI system.',
+  'Influence and concept boundary',
+  'Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation.',
   '<script src="js/ibm-patterns.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`ibm-patterns.html missing required integration marker: ${required}`);
+}
+if (html.includes('This is not a designed, tested, or implemented AI system.')) {
+  fail('ibm-patterns.html must not introduce AI only to deny that the bounded contact concept was an AI system.');
 }
 if (count(html, '<main') !== 1) fail('ibm-patterns.html must contain exactly one main');
 if (count(html, '<h1') !== 1) fail('ibm-patterns.html must contain exactly one h1');

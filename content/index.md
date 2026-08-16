@@ -25,7 +25,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Featured Projects
 
-- IBM watsonX Orchestrate (Product Systems): wxo-canvas
+- IBM watsonx Orchestrate (Product Systems): wxo-canvas
 - IBM Cloud Observability (Product Design): ibmcloud
 - IBM Patterns: Contact Us (Product Design): ibm-patterns
 - Performance Contracting, Inc. (Brand & Print): pci
@@ -39,7 +39,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Section Headings
 
 - Other cool things to check out
-- IBM watsonX Orchestrate
+- IBM watsonx Orchestrate
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
 - Performance Contracting, Inc.
