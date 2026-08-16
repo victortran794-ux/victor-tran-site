@@ -138,6 +138,10 @@ for (const required of [
 for (const retired of ['the feedback was positive', 'The concept still needed more definition.', 'The next step would have been usability testing']) {
   if (closeSection.includes(retired)) fail(`Pi Kapp closing reflection still contains retired repeated copy: ${retired}`);
 }
+for (const persona of ['Associate member', 'Chapter secretary', 'Graduating senior']) {
+  if (!html.includes(`<h3>${persona}</h3>`)) fail(`Pi Kapp member journey is missing its role-based persona label: ${persona}`);
+}
+if (html.includes('Sample member')) fail('Pi Kapp member journey must not retain generic Sample member labels');
 const signatureMarkRule = css.match(/\.pikapp-page \.identity-board__signature img\{([^}]*)\}/)?.[1] || '';
 for (const required of ['background:#006f9e', 'padding:8px', 'border-radius:14px', 'box-sizing:border-box']) {
   if (!signatureMarkRule.includes(required)) fail(`Pi Kapp signature mark is missing its accessible cyan field treatment: ${required}`);
@@ -382,8 +386,23 @@ for (const required of [
 for (const forbidden of ['.reviewbar', '.boundary__inner', '.decision']) {
   if (css.includes(forbidden)) fail(`css/pikappapp.css retained private-review selector: ${forbidden}`);
 }
+const screenRadiusRules = [
+  ['V1 phone screen', css.match(/\.pikapp-page \.phone-slide\{([^}]*)\}/)?.[1] || '', 'border-radius:26px'],
+  ['V2 prototype screen', css.match(/\.pikapp-page \.prototype-embed__device\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
+  ['exploration screens', css.match(/\.pikapp-page \.exploration-screen img\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
+  ['remaster screens', css.match(/\.pikapp-page \.coda__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
+];
+for (const [label, rule, expected] of screenRadiusRules) {
+  if (!rule.includes(expected)) fail(`${label} must preserve its approved rounded-corner treatment: ${expected}`);
+}
+for (const [label, rule] of [
+  ['V2 prototype screen', screenRadiusRules[1][1]],
+  ['remaster screens', screenRadiusRules[3][1]],
+]) {
+  if (!rule.includes('overflow:hidden')) fail(`${label} must keep overflow hidden on its rounded clipping owner`);
+}
 if (!css.includes('.pikapp-page .coda__image{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain;max-width:390px;border-radius:0;box-shadow:none}')) {
-  fail('remaster screenshots must preserve their complete 390/844 frame with no artificial rounded shadow treatment');
+  fail('remaster image pixels must remain complete and shadow-free inside the rounded outer screen frame');
 }
 if (/\.pikapp-page \.coda__image\{[^}]*box-shadow:(?!none)/.test(css)) {
   fail('future-state screenshots must not restore a fuzzy box shadow');
