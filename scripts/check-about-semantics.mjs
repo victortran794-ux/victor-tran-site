@@ -38,13 +38,21 @@ expect(/<h2\b[^>]*id="about-current-title"[^>]*>\s*What I’m doing now\s*<\/h2>
   'The current-practice section must use the approved direct heading “What I’m doing now”.');
 expect(html.includes('Visual Designer, IBM watsonx Orchestrate'),
   'About must preserve Victor’s current IBM watsonx Orchestrate role.');
-expect(html.includes('User Experience Designer, IBM Cloud'),
+expect(html.includes('Visual Designer, IBM Cloud | Observability'),
   'About must preserve Victor’s IBM Cloud role history.');
+expect(html.includes('January 2024 to present'),
+  'About must identify January 2024 as the start of Victor’s IBM watsonx Orchestrate work.');
+expect(html.includes('January 2021 to December 2023'),
+  'About must identify December 2023 as the end of Victor’s IBM Cloud work.');
+expect(!html.includes('AI-assisted workflows'),
+  'About must not use generic AI-assistance as a design specialty.');
+expect(!html.includes('IBM watsonX Orchestrate'),
+  'About must use the official lowercase-x IBM watsonx Orchestrate product name.');
 const currentPractice = html.match(/<section\b[^>]*class="[^"]*\babout-current\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
 const roleHistory = html.match(/<section\b[^>]*class="[^"]*\babout-role-history\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
-expect(currentPractice.includes('Visual Designer, IBM watsonx Orchestrate') && !currentPractice.includes('User Experience Designer, IBM Cloud'),
+expect(currentPractice.includes('Visual Designer, IBM watsonx Orchestrate') && !currentPractice.includes('Visual Designer, IBM Cloud'),
   'The current-practice section must contain only Victor’s current IBM watsonx Orchestrate role.');
-expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('User Experience Designer, IBM Cloud'),
+expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual Designer, IBM Cloud | Observability'),
   'IBM Cloud must be labeled and contained as previous role history.');
 expect(/class="about-current"[\s\S]*class="about-role-history"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
   'Current work and IBM role history must precede skills and past work in the About narrative.');
@@ -68,11 +76,15 @@ expect((aboutMarkdown.match(/^# About Victor Tran$/gm) || []).length === 1,
   'content/about.md must contain one About Victor Tran Markdown h1.');
 for (const requiredRole of [
   'Visual Designer, IBM watsonx Orchestrate',
-  'User Experience Designer, IBM Cloud',
+  'Visual Designer, IBM Cloud | Observability',
+  'January 2024 to present',
+  'January 2021 to December 2023',
 ]) {
   expect(aboutMarkdown.includes(requiredRole),
     `content/about.md is missing exported role title: ${requiredRole}`);
 }
+expect(!aboutMarkdown.includes('AI-assisted workflows'),
+  'content/about.md must not export generic AI-assistance as a design specialty.');
 
 let siteIndex = [];
 try {

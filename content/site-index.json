@@ -8,7 +8,7 @@
     "contentFile": "content/index.md",
     "headings": [
       "Other cool things to check out",
-      "IBM watsonX Orchestrate",
+      "IBM watsonx Orchestrate",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
       "Performance Contracting, Inc.",
@@ -67,7 +67,7 @@
     ],
     "projects": [
       {
-        "title": "IBM watsonX Orchestrate",
+        "title": "IBM watsonx Orchestrate",
         "category": "Product Systems",
         "url": "wxo-canvas",
         "image": "images/wxo-canvas/wxo-home-thumbnail.png",
@@ -149,7 +149,7 @@
       "What I’m doing now",
       "Visual Designer, IBM watsonx Orchestrate | AI & Automation",
       "Previously at IBM",
-      "User Experience Designer, IBM Cloud | Observability",
+      "Visual Designer, IBM Cloud | Observability",
       "What I design",
       "How I work",
       "Past work",

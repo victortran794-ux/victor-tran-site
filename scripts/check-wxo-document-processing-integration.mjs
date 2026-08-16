@@ -60,7 +60,7 @@ for (const path of [
 requireText(healthWorkflow, 'npm run check:wxo-document-processing', 'Health-check workflow must run the wxO and Document Processing source contract.');
 requireText(healthWorkflow, 'npm run check:wxo-document-processing-browser', 'Health-check workflow must run the locked deep-link browser regression.');
 
-for (const [name, html] of [['IBM watsonX Orchestrate', wxo], ['Document Processing', doc]]) {
+for (const [name, html] of [['IBM watsonx Orchestrate', wxo], ['Document Processing', doc]]) {
   requireText(html, 'sessionStorage.getItem(\'vtd-unlock\')', `${name} must preserve the session-only password gate.`);
   requireText(html, 'css/password-gate.css', `${name} must preserve the shared password-gate stylesheet.`);
   requireText(html, 'js/password-gate.js', `${name} must preserve the shared password-gate script.`);
@@ -111,7 +111,7 @@ requireText(workflowCss, '.doc-current-stage {', 'Each current Document Processi
 requireText(workflowJs, "document.querySelectorAll('[data-doc-motion-toggle]')", 'The autoplay journey pause control must be wired in the scoped workflow script.');
 
 for (const text of [
-  'IBM watsonX Orchestrate · 2024–present',
+  'IBM watsonx Orchestrate · 2024–present',
   'Agentic workflow canvas.',
   'Document Processing is a focused chapter',
   'Visual Designer',

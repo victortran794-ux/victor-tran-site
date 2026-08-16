@@ -90,16 +90,20 @@ forbid(docs.dashboard, /Art & Illustration \| next active page lane/i, 'dashboar
 forbid(docs.dashboard, /Graphic Design \| queued after Art/i, 'dashboard Graphic tracker status must be refreshed');
 forbid(docs.dashboard, /Home \+ global shell \| lens portal production-verified in PRs #114 and #116; broader August 7 list remains open/i, 'dashboard Home/global tracker status must be refreshed');
 for (const phrase of [
-  'Art & Illustration production-verified in PR #125',
-  'Graphic Design production-verified in PR #126',
-  'Home/global production-verified in PR #127',
-  'Design DNA/component reconciliation production-verified in PR #128',
-  'Final whole-site reconciliation is active',
-  'asset-dependent items and separate route-opening gates remain open',
+  'production-verified through PR #150',
+  '`feat/vercel-content-alignment`',
+  'final whole-site reconciliation is closed',
+  'wxO remains password-gated, `noindex`, and omitted from the sitemap',
+  'Document Processing remains a protected chapter inside wxO',
+  'Getting In is retired from the public portfolio',
+  'Pi Kapp is public and closed',
+  'Asset-dependent enhancements and A2UI remain parked',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
 
-requireText(docs.dashboard, 'Last updated: 2026-08-09', 'dashboard must use the August 9 current-status date');
-forbid(docs.dashboard, /Last updated: 2026-08-08/i, 'dashboard must not retain the August 8 current-status date');
+requireText(docs.dashboard, 'Last updated: 2026-08-16', 'dashboard must use the August 16 current-status date');
+forbid(docs.dashboard, /Last updated: 2026-08-0[89]/i, 'dashboard must not retain the August 8 or August 9 current-status date');
+forbid(docs.dashboard, /Final whole-site reconciliation is active/i, 'dashboard must not describe the closed whole-site reconciliation as active');
+forbid(docs.dashboard, /asset-dependent items and separate route-opening gates remain open/i, 'dashboard must not describe parked asset work as an open release blocker');
 forbid(docs.dashboard, /Keep broader DNA reassessment parked/i, 'dashboard must not describe broader DNA reassessment as parked');
 forbid(docs.dashboard, /(?:remove|reopen|pending)[^\n.]*visible `Light`\s*\/\s*`Dark` words|visible `Light`\s*\/\s*`Dark` words[^\n.]*(?:remain|are) pending/i, 'dashboard must not present visible Light/Dark words as pending');
 forbid(docs.dashboard, /visible `Copy email` (?:action|wording|treatment)/i, 'dashboard must not present visible Copy email as current or pending');
