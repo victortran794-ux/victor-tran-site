@@ -126,6 +126,18 @@ if (fs.existsSync(path.join(root, 'images/pikapp-case-study/expansion-cover.png'
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+const closeSection = html.match(/<section class="close">([\s\S]*?)<\/section>/)?.[1] || '';
+if (count(closeSection, '<p>') !== 2) fail('Pi Kapp closing reflection must stay concise at exactly two paragraphs');
+for (const required of [
+  'It was an early attempt to make HQ feel closer to day-to-day chapter life through one member-facing app.',
+  'The concept still needed usability testing and a clearer integration model.',
+  'start with the systems people already use, then make the member-facing experience easier to understand.',
+]) {
+  if (!closeSection.includes(required)) fail(`Pi Kapp closing reflection is missing approved concise copy: ${required}`);
+}
+for (const retired of ['the feedback was positive', 'The concept still needed more definition.', 'The next step would have been usability testing']) {
+  if (closeSection.includes(retired)) fail(`Pi Kapp closing reflection still contains retired repeated copy: ${retired}`);
+}
 const signatureMarkRule = css.match(/\.pikapp-page \.identity-board__signature img\{([^}]*)\}/)?.[1] || '';
 for (const required of ['background:#006f9e', 'padding:8px', 'border-radius:14px', 'box-sizing:border-box']) {
   if (!signatureMarkRule.includes(required)) fail(`Pi Kapp signature mark is missing its accessible cyan field treatment: ${required}`);

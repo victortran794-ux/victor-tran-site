@@ -346,6 +346,8 @@ try {
         await cdp.screenshot('pikapp-390-light-remaster-sequence.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-boundary.png');
+        await cdp.evaluate(`document.querySelector('.close').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-looking-back.png');
       }
       if (viewport.label==='1280'&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
@@ -370,6 +372,8 @@ try {
         await cdp.screenshot('pikapp-1280-dark-remaster-sequence.png');
         await cdp.evaluate(`document.querySelector('.coda__boundary').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-boundary.png');
+        await cdp.evaluate(`document.querySelector('.close').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-looking-back.png');
       }
       checks += 1;
     }
