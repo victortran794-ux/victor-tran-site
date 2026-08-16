@@ -167,12 +167,9 @@ for (const required of [
   'Milestone states',
   'Bottom navigation',
   'Components',
-  'From system to screen',
-  'Brand field to welcome',
-  'Progress card to dashboard',
-  'Task states to detail',
   'identity-board',
   'identity-board__header',
+  'Source vocabulary',
   'identity-board__section identity-board__section--color',
   'identity-board__section identity-board__section--type',
   'identity-board__section identity-board__section--mark',
@@ -180,24 +177,32 @@ for (const required of [
   'identity-board__card',
   'The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept.',
   'Brand foundation and interface layers',
+  '>Brand blue</h4>',
+  '>Brand gold</h4>',
+  '>App cyan</h4>',
+  '>App navy</h4>',
+  '>White</h4>',
   'Brand, interface, and status roles',
   'Original vector mark on its intended field',
   'Only the pieces used by the final remaster',
-  'identity-swatches',
-  'identity-handoff',
+  'identity-palette',
+  'Original app Star Shield on the cyan hex field',
+  'Original vector mark, kept small and crisp inside its intended app layer.',
   'role="group" aria-label="Source palette color roles"',
   'role="group" aria-label="Member, Chapter, National HQ, and Settings interface icons"',
   'role="group" aria-label="Display, interface, and status type roles"',
   'A smorgasbord of explorations showed what could carry forward.',
+  'Supporting chronology',
+  'V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.',
   'A formative start, not a finished product.',
   'AI-assisted flow studies',
-  'A smorgasbord of directions, not one shipped system.',
-  'These studies helped me test visual tone, components, information hierarchy, and alternate app flows. They are exploratory and illustrative, not research findings or a shipped application.',
+  'Five visual directions.',
+  'Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.',
   'Five equal mobile studies',
   'Chapter 05',
   'Final design | Source-faithful remaster',
   'The final remaster brings the app back to its source.',
-  'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility. It is illustrative and not shipped.',
+  'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   '01 Welcome',
   'A cleaner login keeps the original composition, mark, and color field.',
   '02 Member view',
@@ -224,6 +229,23 @@ if (count(html, 'class="exploration-study"') !== 0) fail('redundant broad explor
 if (count(html, 'class="exploration-screen"') !== 5) fail('AI exploration montage must contain exactly five sanitized app-flow screens');
 if (count(html, 'class="coda__screen"') !== 3) fail('Pi Kapp coda must contain exactly three source-faithful remaster screens');
 if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the explicit 01, 02, 03 story order');
+if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
+if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
+if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
+for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'It is illustrative and not shipped.']) {
+  if (html.includes(repeatedNarrative)) fail(`consolidated page still contains repeated narrative: ${repeatedNarrative}`);
+}
+const publicExport = text('content/pikappapp.md');
+for (const requiredExport of [
+  'Brand blue: Identity and recognition',
+  'Brand gold: Actions and progress',
+  'App cyan: Entry and member view',
+  'App navy: Structure and detail',
+  'White: Fields and reading',
+  'Supporting chronology: V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.',
+]) {
+  if (!publicExport.includes(requiredExport)) fail(`public Pi Kapp export missing consolidated semantic content: ${requiredExport}`);
+}
 if (html.includes('class="future-principle"') || html.includes('class="coda__state-pair')) fail('obsolete seven-screen V2 support structures must not remain in the concise remaster coda');
 if (/src="images\/pikapp-case-study\/v2-[^"]+\.png"/.test(html)) fail('Pi Kapp coda must not display the superseded seven-screen V2 derivatives');
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');

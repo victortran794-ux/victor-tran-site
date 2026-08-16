@@ -254,9 +254,8 @@ try {
         const prototypeEmbed=document.querySelector('.prototype-embed');
         const identityHero=document.querySelector('.identity-board__header');
         const identitySpecimenGrid=document.querySelector('.identity-board__component-grid');
-        const identityHandoff=document.querySelector('.identity-handoff');
-        const identityHandoffList=document.querySelector('.identity-handoff ol');
-        const identityRects=['.identity-board','.identity-board__type-grid','.identity-handoff'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
+        const identityPalette=document.querySelector('.identity-palette');
+        const identityRects=['.identity-board','.identity-board__type-grid','.identity-palette','.identity-board__card--pattern'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
         const finaleRects=['.coda__head','.coda__triptych','.coda__boundary','.project-nav-item--prev','.project-nav-item--next'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
@@ -265,7 +264,7 @@ try {
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,explorationStudyCount:explorationStudies.length,explorationScreenCount:explorationScreens.length,
           boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,remasterScreens,explorationScreens,explorationStudies,explorationBoundary:explorationBoundary?.textContent.trim().replace(/\\s+/g,' '),explorationFlow:{display:explorationFlowStyle.display,columns:explorationFlowStyle.gridTemplateColumns,overflowX:explorationFlowStyle.overflowX,clientWidth:explorationFlow.clientWidth,scrollWidth:explorationFlow.scrollWidth,tabindex:explorationFlow.getAttribute('tabindex')},
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
-          identity:{swatches:document.querySelectorAll('.identity-swatch').length,specimens:document.querySelectorAll('.identity-board__card').length,icons:document.querySelectorAll('.system-icons>span').length,steps:document.querySelectorAll('.identity-handoff li').length,heroColumns:getComputedStyle(identityHero).gridTemplateColumns,specimenColumns:getComputedStyle(identitySpecimenGrid).gridTemplateColumns,handoffColumns:getComputedStyle(identityHandoff).gridTemplateColumns,stepColumns:getComputedStyle(identityHandoffList).gridTemplateColumns,rects:identityRects},
+          identity:{paletteItems:document.querySelectorAll('.identity-palette__item').length,specimens:document.querySelectorAll('.identity-board__card').length,icons:document.querySelectorAll('.system-icons>span').length,markLockups:document.querySelectorAll('.identity-board__card--pattern').length,handoffs:document.querySelectorAll('.identity-handoff').length,heroColumns:getComputedStyle(identityHero).gridTemplateColumns,paletteColumns:getComputedStyle(identityPalette).gridTemplateColumns,specimenColumns:getComputedStyle(identitySpecimenGrid).gridTemplateColumns,rects:identityRects},
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,embedHeight:prototypeEmbed.getBoundingClientRect().height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX},finaleRects,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
@@ -273,16 +272,15 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===18&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===17&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===0&&state.codaScreens===3&&state.phoneSlides===3&&state.explorationStudyCount===0&&state.explorationScreenCount===5,'approved evidence counts drifted');
-      assert(state.identity.swatches===5&&state.identity.specimens===9&&state.identity.icons===4&&state.identity.steps===3,`identity-board inventory drifted: ${JSON.stringify(state.identity)}`);
+      assert(state.identity.paletteItems===5&&state.identity.specimens===8&&state.identity.icons===4&&state.identity.markLockups===1&&state.identity.handoffs===0,`identity-board inventory drifted: ${JSON.stringify(state.identity)}`);
       assert(state.identity.rects.every((rect)=>rect.width>0&&rect.height>0&&rect.left>=-1&&rect.right<=viewport.width+1),`identity-board escaped the viewport: ${JSON.stringify(state.identity.rects)}`);
       const identityColumnCount=(value)=>value.split(' ').filter(Boolean).length;
       assert(identityColumnCount(state.identity.heroColumns)===(viewport.width<=800?1:2),`identity hero columns drifted at ${viewport.label}: ${state.identity.heroColumns}`);
+      assert(identityColumnCount(state.identity.paletteColumns)===(viewport.width<=600?1:viewport.width<=1050?3:5),`identity palette columns drifted at ${viewport.label}: ${state.identity.paletteColumns}`);
       assert(identityColumnCount(state.identity.specimenColumns)===(viewport.width<=800?1:12),`identity specimen columns drifted at ${viewport.label}: ${state.identity.specimenColumns}`);
-      assert(identityColumnCount(state.identity.handoffColumns)===(viewport.width<=800?1:2),`identity handoff columns drifted at ${viewport.label}: ${state.identity.handoffColumns}`);
-      assert(identityColumnCount(state.identity.stepColumns)===(viewport.width<=600?1:3),`identity handoff step columns drifted at ${viewport.label}: ${state.identity.stepColumns}`);
       assert(state.explorationBoundary==='AI-assisted studies. Illustrative information. Not researched or shipped.','exploration boundary copy drifted');
       assert(state.boundary==='Source-faithful remaster. Illustrative information. Not researched or shipped.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
@@ -325,12 +323,12 @@ try {
         await cdp.screenshot('pikapp-390-light-members.png');
         await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-identity-opening.png');
-        await cdp.evaluate(`document.querySelector('.identity-board').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-390-light-identity.png');
+        await cdp.evaluate(`document.querySelector('.identity-palette').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-identity-palette.png');
         await cdp.evaluate(`document.querySelector('.identity-board__component-grid').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-identity-components.png');
-        await cdp.evaluate(`document.querySelector('.identity-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-390-light-identity-handoff.png');
+        await cdp.evaluate(`document.querySelector('.identity-board__card--pattern').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-identity-mark-pattern.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-390-light-prototype.png');
         await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
@@ -350,12 +348,12 @@ try {
         await cdp.screenshot('pikapp-1280-dark-members.png');
         await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-identity-opening.png');
-        await cdp.evaluate(`document.querySelector('.identity-board').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-1280-dark-identity.png');
+        await cdp.evaluate(`document.querySelector('.identity-palette').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-identity-palette.png');
         await cdp.evaluate(`document.querySelector('.identity-board__component-grid').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-identity-components.png');
-        await cdp.evaluate(`document.querySelector('.identity-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-1280-dark-identity-handoff.png');
+        await cdp.evaluate(`document.querySelector('.identity-board__card--pattern').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-identity-mark-pattern.png');
         await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-1280-dark-prototype.png');
         await cdp.evaluate(`document.getElementById('ai-explorations').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);

@@ -28,7 +28,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - There was already a system. It was just spread everywhere.
 - It still needed to look like Pi Kappa Phi.
 - A smorgasbord of explorations showed what could carry forward.
-- A smorgasbord of directions, not one shipped system.
+- Five visual directions.
 - The final remaster brings the app back to its source.
 - A formative start, not a finished product.
 - Expansion Portfolio
@@ -69,19 +69,17 @@ The final remaster draws from the original app files, the archived Pi Kappa Phi 
 
 Pi Kapp App
 
-The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept.
-
 Brand foundation and interface layers
 
-Official identity and recognition
+Brand blue: Identity and recognition
 
-Primary actions and progress
+Brand gold: Actions and progress
 
-Entry field and member view
+App cyan: Entry and member view
 
-Structure and detail layers
+App navy: Structure and detail
 
-Fields, rows, and clear reading
+White: Fields and reading
 
 Brand, interface, and status roles
 
@@ -93,11 +91,9 @@ Short labels keep the next action clear. Supporting text explains only what the 
 
 Original vector mark on its intended field
 
-Original app Star Shield
+Original app Star Shield on the cyan hex field
 
-Kept small and crisp inside the app, not enlarged as a standalone illustration.
-
-Cyan hex field
+Original vector mark, kept small and crisp inside its intended app layer.
 
 Only the pieces used by the final remaster
 
@@ -113,15 +109,9 @@ Milestone states
 
 Bottom navigation
 
-From system to screen
-
-Chapter 4 shows the earlier paths I explored. Chapter 5 returns to these exact ingredients for the final remaster.
-
 The original V1 screens, runnable earlier V2, and later visual studies tested different ways to organize progress, chapter information, milestones, and support. Together they show the paths considered before the final remaster.
 
-I treat these as supporting material rather than one continuous product history. V1 established the member flow, V2 made part of that model runnable, and the later AI-assisted studies widened the visual possibilities without proving a shipped system.
-
-Supporting materialThese screens are supporting evidence from earlier concept directions, not the current app.
+Supporting chronology: V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.
 
 Earlier concept sequence
 
@@ -133,17 +123,17 @@ This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and nav
 
 AI-assisted flow studies
 
-These studies helped me test visual tone, components, information hierarchy, and alternate app flows. They are exploratory and illustrative, not research findings or a shipped application.
-
-Five equal mobile studies
+Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.
 
 AI-assisted studies. Illustrative information. Not researched or shipped.
+
+Five equal mobile studies
 
 Chapter 05
 
 Final design | Source-faithful remaster
 
-The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility. It is illustrative and not shipped.
+The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the pixels for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
 
 Source-faithful remaster. Illustrative information. Not researched or shipped.
 
@@ -160,12 +150,6 @@ A selected sequence of complete pages from the original Creighton University exp
 Views
 
 Cover view selected.
-
-## Lists And Tags
-
-- 01Brand field to welcomeThe vector mark, hex texture, fields, and gold action form the login.
-- 02Progress card to dashboardProgress, bulletin rows, and navigation organize the member view.
-- 03Task states to detailOpen and complete rows carry the member into milestone detail.
 
 ## Images
 
