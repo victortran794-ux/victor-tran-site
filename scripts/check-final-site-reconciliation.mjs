@@ -91,17 +91,19 @@ forbid(docs.dashboard, /Graphic Design \| queued after Art/i, 'dashboard Graphic
 forbid(docs.dashboard, /Home \+ global shell \| lens portal production-verified in PRs #114 and #116; broader August 7 list remains open/i, 'dashboard Home/global tracker status must be refreshed');
 for (const phrase of [
   'production-verified through PR #152',
-  '`6d868b884dd9f6d7c46fc558c5dfcdeee2ade623`',
+  'production-verified through PR #153',
+  '`00364c03e3a522274027bf538be8c0d420d26a2e`',
   'the Vercel application was subsequently submitted and closed',
-  'The Mendenhall delivery optimization is released as bounded maintenance',
-  'Victor has authorized a separate global theme-control consistency lane',
+  'The Mendenhall delivery optimization is production-verified through PR #153',
+  'The clearer Light/Dark glyph, selected-state, semantic floating-surface, and reduced-motion treatment is verified as a bounded release candidate across every live shared-shell route',
+  'route-specific Theme Continuity content remains scoped to Home, IBM Cloud, and About',
   'the optional PCI orientation treatment remains a proof, not an automatic rollout',
   'final whole-site reconciliation is closed',
   'wxO remains password-gated, `noindex`, and omitted from the sitemap',
   'Document Processing remains a protected chapter inside wxO',
   'Getting In is retired from the public portfolio',
   'Pi Kapp and Heart of the Frozen Void are public and closed',
-  'The global theme-control consistency lane is authorized next',
+  'the clearer shared Light/Dark control treatment is a verified bounded release candidate',
   'Future Canvas and future gallery overlays are parked',
   'UI Fragments is review-later',
   'server-side protection is review-only when a concrete need exists',
@@ -122,7 +124,8 @@ forbid(docs.dashboard, /visible `Copy email` (?:action|wording|treatment)/i, 'da
 forbid(docs.dashboard, /Current known mismatch: the manifest marks IBM Patterns and PCI as public\/indexable\/sitemap-eligible/i, 'dashboard must not present the resolved IBM Patterns/PCI visibility mismatch as current');
 for (const phrase of [
   'PR #127 established the accessible icon-only theme control',
-  'Generalizing only that shared control refinement is the authorized next lane',
+  'That shared control refinement is verified for bounded release across live shared-shell routes',
+  'without normalizing project-native surfaces or route-specific content furniture',
   'visible `Email` action uses a direct `mailto:` link',
   'About retains the full email sentence',
   'IBM Cloud, IBM Patterns, and the sanitized PCI story are approved as public archive projects',

@@ -41,7 +41,8 @@
     "check:visual-archives-lightbox-browser": "node scripts/check-visual-archives-browser.mjs all",
     "check:ui-gallery": "node scripts/check-ui-gallery-integration.mjs",
     "check:ui-gallery-browser": "node scripts/check-visual-archives-browser.mjs ui",
-    "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs"
+    "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs",
+    "check:global-theme-control": "node scripts/check-global-theme-control.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.1",

@@ -71,12 +71,12 @@ for (const selector of [
   }
 }
 
-if (!css.includes('html[data-finish-proof] .lens-switcher-btn[aria-pressed="true"]')) {
+if (!css.includes('.lens-switcher-btn[aria-pressed="true"]')) {
   throw new Error('Selected theme treatment is not explicitly tied to aria-pressed');
 }
-if (!css.includes('html[data-finish-proof] [data-lens="light"] .lens-switcher-icon::before') ||
-    !css.includes('html[data-finish-proof] [data-lens="dark"] .lens-switcher-icon::before')) {
-  throw new Error('The finish proof does not expose distinct sun and moon symbols');
+if (!css.includes('[data-lens="light"] .lens-switcher-icon::before') ||
+    !css.includes('[data-lens="dark"] .lens-switcher-icon::before')) {
+  throw new Error('The shared shell does not expose distinct sun and moon symbols');
 }
 if (!css.includes('html[data-finish-proof] #about-current') || !css.includes('scroll-margin-top:')) {
   throw new Error('About jump targets do not account for the persistent navigation');
@@ -89,8 +89,8 @@ if (!interactions.includes('stabilizeFinishProofHashTarget') ||
 if (!/@media\s*\(max-width:\s*600px\)[\s\S]*?html\[data-finish-proof\] \.home-practice-proof/.test(css)) {
   throw new Error('Home current-practice proof does not define a mobile treatment');
 }
-if (!/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?html\[data-finish-proof\] \.lens-switcher-btn/.test(css)) {
-  throw new Error('Finish-proof theme controls do not define reduced-motion behavior');
+if (!/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.lens-switcher-btn/.test(css)) {
+  throw new Error('Shared theme controls do not define reduced-motion behavior');
 }
 
 console.log('THEME CONTINUITY PROOF CONTRACT: PASS semantic surfaces + orientation + mode clarity');

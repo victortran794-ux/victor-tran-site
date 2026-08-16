@@ -20,7 +20,7 @@ Consult next:
 
 ### Current active plan
 
-Victor's August 7 desk review remains the content authority for the completed enhancement cycle. The bounded page, shell, gallery, accessibility, recruiter-facing alignment, and three-route Theme Continuity lanes are production-verified through PR #152 at `6d868b884dd9f6d7c46fc558c5dfcdeee2ade623`; the Vercel application was subsequently submitted and closed. The Mendenhall delivery optimization is released as bounded maintenance. Victor has authorized a separate global theme-control consistency lane; the optional PCI orientation treatment remains a proof, not an automatic rollout. wxO remains password-gated, `noindex`, and omitted from the sitemap. Document Processing remains a protected chapter inside wxO rather than a separate public route. Getting In is retired from the public portfolio and retained only as private authored source material. Pi Kapp and Heart of the Frozen Void are public and closed. Future Canvas and future gallery overlays are parked, UI Fragments is review-later, and server-side protection is review-only when a concrete need exists.
+Victor's August 7 desk review remains the content authority for the completed enhancement cycle. The bounded page, shell, gallery, accessibility, recruiter-facing alignment, and three-route Theme Continuity lanes are production-verified through PR #152; the Vercel application was subsequently submitted and closed. The Mendenhall delivery optimization is production-verified through PR #153 at `00364c03e3a522274027bf538be8c0d420d26a2e`. The clearer Light/Dark glyph, selected-state, semantic floating-surface, and reduced-motion treatment is verified as a bounded release candidate across every live shared-shell route while route-specific Theme Continuity content remains scoped to Home, IBM Cloud, and About. The optional PCI orientation treatment remains a proof, not an automatic rollout. wxO remains password-gated, `noindex`, and omitted from the sitemap. Document Processing remains a protected chapter inside wxO rather than a separate public route. Getting In is retired from the public portfolio and retained only as private authored source material. Pi Kapp and Heart of the Frozen Void are public and closed. Future Canvas and future gallery overlays are parked, UI Fragments is review-later, and server-side protection is review-only when a concrete need exists.
 
 Master review and alignment records:
 
@@ -31,11 +31,10 @@ Master review and alignment records:
 
 ### Current next actions
 
-1. Implement and verify the authorized global theme-control consistency lane from newly synchronized `main`; generalize only the shared Light/Dark control refinement.
-2. Evaluate a lightweight PCI page-context treatment as a separate proof after the shared-control lane. Do not roll it into protected, gallery, or art-directed route families without a distinct review.
-3. Preserve wxO protection. Password gate, `noindex`, sitemap omission, export policy, route behavior, and confidentiality boundaries change only through a separate explicit clearance and release lane.
-4. Keep the July 31 Art/Graphic worktree historical and frozen. Preserve the July 24 `portfolio-dashboard checkpoint before PR 95 main sync` stash as historical recovery material only; never apply it as current status.
-5. Keep Future Canvas and future gallery overlays parked, UI Fragments review-later, and server-side protection review-only on a concrete need. Retired concepts do not create a new queue.
+1. Release the verified shared Light/Dark control lane, then evaluate a lightweight PCI page-context treatment as a separate proof. Do not release the PCI proof automatically or roll it into protected, gallery, or art-directed route families without a distinct review.
+2. Preserve wxO protection. Password gate, `noindex`, sitemap omission, export policy, route behavior, and confidentiality boundaries change only through a separate explicit clearance and release lane.
+3. Keep the July 31 Art/Graphic worktree historical and frozen. Preserve the July 24 `portfolio-dashboard checkpoint before PR 95 main sync` stash as historical recovery material only; never apply it as current status.
+4. Keep Future Canvas and future gallery overlays parked, UI Fragments review-later, and server-side protection review-only on a concrete need. Retired concepts do not create a new queue.
 
 ### Supporting historical context
 
@@ -46,7 +45,7 @@ Master review and alignment records:
 
 ## Current enhancement phase
 
-Status: the bounded August 7 cycle, subsequent gallery/accessibility work, recruiter-facing alignment, and three-route Theme Continuity treatment are production-verified through PR #152. The Vercel application is submitted and closed, and the Mendenhall delivery optimization is released. The public portfolio has one intended locked story, wxO, with Document Processing contained as its protected chapter. Protected exports remain source-independent public stubs omitted from the public index. The global theme-control consistency lane is authorized next; PCI orientation remains a separate proof. New concepts require their own bounded preview, verification, and explicit release approval.
+Status: the bounded August 7 cycle, subsequent gallery/accessibility work, recruiter-facing alignment, and three-route Theme Continuity treatment are production-verified through PR #152. The Vercel application is submitted and closed, the Mendenhall delivery optimization is production-verified through PR #153, and the clearer shared Light/Dark control treatment is a verified bounded release candidate. The public portfolio has one intended locked story, wxO, with Document Processing contained as its protected chapter. Protected exports remain source-independent public stubs omitted from the public index. PCI orientation remains a separate proof. New concepts require their own bounded preview, verification, and explicit release approval.
 
 Recent shipped work:
 
@@ -81,7 +80,7 @@ Current operational rules:
 - Preserve tested public stubs for every currently gated route. Real preview URLs must be checked before any deployment approval.
 - Treat wxO as the protected umbrella and Document Processing as its focused thread. Keep Document Processing protected until its separate opening clearance passes.
 - Design DNA/component reconciliation is complete in PR #128, final whole-site reconciliation is closed, the Vercel alignment released in PR #151, and the bounded Theme Continuity treatment released in PR #152.
-- PR #127 established the accessible icon-only theme control; PR #152 proved a clearer glyph and selected-state treatment. Generalizing only that shared control refinement is the authorized next lane.
+- PR #127 established the accessible icon-only theme control; PR #152 proved a clearer glyph and selected-state treatment. That shared control refinement is verified for bounded release across live shared-shell routes without normalizing project-native surfaces or route-specific content furniture.
 - The footer's visible `Email` action uses a direct `mailto:` link, keeps the resilient contact paths, and About retains the full email sentence.
 - IBM Cloud, IBM Patterns, and the sanitized PCI story are approved as public archive projects; their password gates, protected metadata, robots exclusions, and sitemap omissions are removed.
 - PCI's public route preserves the sanitized artifact set, rejected-source exclusions, authorship boundaries, and conservative outcome claims.
