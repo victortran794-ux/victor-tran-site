@@ -161,6 +161,20 @@ async function waitForScrollSettle() {
 }
 
 async function checkLightbox(spec) {
+  const initiallyClosed = await cdp.evaluate(`(() => {
+    const dialog = document.querySelector('.lightbox');
+    const closeButton = dialog?.querySelector('.lb-close');
+    closeButton?.focus();
+    return dialog ? {
+      open: dialog.classList.contains('is-open'),
+      inert: dialog.inert,
+      ariaHidden: dialog.getAttribute('aria-hidden'),
+      activeInside: dialog.contains(document.activeElement),
+    } : null;
+  })()`);
+  assert(initiallyClosed && !initiallyClosed.open && initiallyClosed.inert && initiallyClosed.ariaHidden === 'true' && !initiallyClosed.activeInside,
+    `${spec.file}: closed lightbox remains exposed to accessibility or keyboard focus: ${JSON.stringify(initiallyClosed)}`);
+
   const trigger = await cdp.evaluate(`(() => {
     const image = document.querySelector('.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img, .ui-gallery-page .archive-frame > img:not([data-ui-scroll-image])');
     if (!image) return null;
@@ -179,9 +193,9 @@ async function checkLightbox(spec) {
     const dialog = document.querySelector('.lightbox');
     const main = document.querySelector('main#main-content');
     const focusables = [...dialog.querySelectorAll('button:not([disabled])')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
-    return { open: dialog.classList.contains('is-open'), active: document.activeElement?.className, overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), focusables: focusables.map((element) => element.className) };
+    return { open: dialog.classList.contains('is-open'), inert: dialog.inert, ariaHidden: dialog.getAttribute('aria-hidden'), active: document.activeElement?.className, overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), focusables: focusables.map((element) => element.className) };
   })()`);
-  assert(opened.open && opened.active.includes('lb-close') && opened.overflow === 'hidden' && opened.mainInert && opened.mainHidden === 'true',
+  assert(opened.open && !opened.inert && opened.ariaHidden === 'false' && opened.active.includes('lb-close') && opened.overflow === 'hidden' && opened.mainInert && opened.mainHidden === 'true',
     `${spec.file}: lightbox initial-focus/background state failed: ${JSON.stringify(opened)}`);
   assert(opened.focusables.length >= 4, `${spec.file}: lightbox controls are unexpectedly incomplete.`);
   await cdp.evaluate(`document.querySelector('.lightbox .lb-thumb:last-child').focus()`);
@@ -200,9 +214,9 @@ async function checkLightbox(spec) {
     const dialog = document.querySelector('.lightbox');
     const main = document.querySelector('main#main-content');
     const footer = document.querySelector('footer.footer');
-    return { open: dialog.classList.contains('is-open'), overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), footerInert: footer.inert, footerHidden: footer.getAttribute('aria-hidden'), exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger };
+    return { open: dialog.classList.contains('is-open'), inert: dialog.inert, ariaHidden: dialog.getAttribute('aria-hidden'), overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), footerInert: footer.inert, footerHidden: footer.getAttribute('aria-hidden'), exactTriggerFocused: document.activeElement === window.__lightboxReviewTrigger, activeInside: dialog.contains(document.activeElement) };
   })()`);
-  assert(!closed.open && closed.overflow === '' && !closed.mainInert && closed.mainHidden === 'false' && closed.footerInert && closed.footerHidden === null && closed.exactTriggerFocused,
+  assert(!closed.open && closed.inert && closed.ariaHidden === 'true' && !closed.activeInside && closed.overflow === '' && !closed.mainInert && closed.mainHidden === 'false' && closed.footerInert && closed.footerHidden === null && closed.exactTriggerFocused,
     `${spec.file}: Escape did not restore page state and the exact image trigger: ${JSON.stringify(closed)}`);
 
   // Let the site's smooth focus-restoration scroll settle before measuring Space activation.

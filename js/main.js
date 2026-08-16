@@ -402,6 +402,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   lb.setAttribute('role', 'dialog');
   lb.setAttribute('aria-modal', 'true');
   lb.setAttribute('aria-label', 'Image viewer');
+  lb.setAttribute('aria-hidden', 'true');
+  lb.inert = true;
   lb.innerHTML = `
     <header class="lb-header">
       <div>
@@ -526,6 +528,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     preservedScrollX = window.scrollX;
     preservedScrollY = window.scrollY;
     previousBodyOverflow = document.body.style.overflow;
+    lb.inert = false;
+    lb.setAttribute('aria-hidden', 'false');
     lb.classList.add('is-open');
     setBackgroundInert(true);
     document.body.style.overflow = 'hidden';
@@ -538,6 +542,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   function close() {
     if (!lb.classList.contains('is-open')) return;
     lb.classList.remove('is-open');
+    lb.inert = true;
+    lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = previousBodyOverflow;
     setBackgroundInert(false);
     if (lastTrigger instanceof HTMLElement && document.contains(lastTrigger)) {
