@@ -196,9 +196,8 @@ for (const required of [
   'V1 preserves the original concept, V2 keeps an earlier runnable model, and the later AI-assisted studies remain illustrative and unshipped.',
   'A formative start, not a finished product.',
   'AI-assisted flow studies',
-  'Five visual directions.',
+  'Other explorations.',
   'Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.',
-  'Five equal mobile studies',
   'Chapter 05',
   'Final design | Source-faithful remaster',
   'The final remaster brings the app back to its source.',
@@ -232,7 +231,7 @@ if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the 
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
 if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
-for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'It is illustrative and not shipped.']) {
+for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'Five visual directions.', 'Five equal mobile studies', 'It is illustrative and not shipped.']) {
   if (html.includes(repeatedNarrative)) fail(`consolidated page still contains repeated narrative: ${repeatedNarrative}`);
 }
 const publicExport = text('content/pikappapp.md');

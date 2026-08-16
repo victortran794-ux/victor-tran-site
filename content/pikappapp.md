@@ -28,7 +28,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - There was already a system. It was just spread everywhere.
 - It still needed to look like Pi Kappa Phi.
 - A smorgasbord of explorations showed what could carry forward.
-- Five visual directions.
+- Other explorations.
 - The final remaster brings the app back to its source.
 - A formative start, not a finished product.
 - Expansion Portfolio
@@ -126,8 +126,6 @@ AI-assisted flow studies
 Visual studies for tone, hierarchy, and alternate flows. The final remaster below returns to the source identity.
 
 AI-assisted studies. Illustrative information. Not researched or shipped.
-
-Five equal mobile studies
 
 Chapter 05
 
