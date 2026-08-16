@@ -90,15 +90,27 @@ forbid(docs.dashboard, /Art & Illustration \| next active page lane/i, 'dashboar
 forbid(docs.dashboard, /Graphic Design \| queued after Art/i, 'dashboard Graphic tracker status must be refreshed');
 forbid(docs.dashboard, /Home \+ global shell \| lens portal production-verified in PRs #114 and #116; broader August 7 list remains open/i, 'dashboard Home/global tracker status must be refreshed');
 for (const phrase of [
-  'production-verified through PR #150',
-  '`feat/vercel-content-alignment`',
+  'production-verified through PR #152',
+  '`6d868b884dd9f6d7c46fc558c5dfcdeee2ade623`',
+  'the Vercel application was subsequently submitted and closed',
+  'The Mendenhall delivery optimization is released as bounded maintenance',
+  'Victor has authorized a separate global theme-control consistency lane',
+  'the optional PCI orientation treatment remains a proof, not an automatic rollout',
   'final whole-site reconciliation is closed',
   'wxO remains password-gated, `noindex`, and omitted from the sitemap',
   'Document Processing remains a protected chapter inside wxO',
   'Getting In is retired from the public portfolio',
-  'Pi Kapp is public and closed',
-  'Asset-dependent enhancements and A2UI remain parked',
+  'Pi Kapp and Heart of the Frozen Void are public and closed',
+  'The global theme-control consistency lane is authorized next',
+  'Future Canvas and future gallery overlays are parked',
+  'UI Fragments is review-later',
+  'server-side protection is review-only when a concrete need exists',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
+
+forbid(docs.dashboard, /feat\/vercel-content-alignment/i, 'dashboard must not describe the released Vercel branch as active');
+forbid(docs.dashboard, /await(?:s|ing) (?:Victor's )?preview/i, 'dashboard must not describe the released Vercel alignment as awaiting preview');
+forbid(docs.dashboard, /Heart of the Frozen Void assets are parked/i, 'dashboard must not carry the completed Heart of the Frozen Void asset reminder');
+forbid(docs.dashboard, /theme-continuity work remains an isolated preview proof/i, 'dashboard must not describe released Theme Continuity work as a preview');
 
 requireText(docs.dashboard, 'Last updated: 2026-08-16', 'dashboard must use the August 16 current-status date');
 forbid(docs.dashboard, /Last updated: 2026-08-0[89]/i, 'dashboard must not retain the August 8 or August 9 current-status date');
@@ -109,7 +121,8 @@ forbid(docs.dashboard, /(?:remove|reopen|pending)[^\n.]*visible `Light`\s*\/\s*`
 forbid(docs.dashboard, /visible `Copy email` (?:action|wording|treatment)/i, 'dashboard must not present visible Copy email as current or pending');
 forbid(docs.dashboard, /Current known mismatch: the manifest marks IBM Patterns and PCI as public\/indexable\/sitemap-eligible/i, 'dashboard must not present the resolved IBM Patterns/PCI visibility mismatch as current');
 for (const phrase of [
-  'PR #127 approved icon-only theme control with accessible names and state',
+  'PR #127 established the accessible icon-only theme control',
+  'Generalizing only that shared control refinement is the authorized next lane',
   'visible `Email` action uses a direct `mailto:` link',
   'About retains the full email sentence',
   'IBM Cloud, IBM Patterns, and the sanitized PCI story are approved as public archive projects',
