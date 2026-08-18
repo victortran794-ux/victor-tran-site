@@ -380,7 +380,7 @@ const pageSpecs = {
     bodyClass: 'ui-gallery-page',
     archive: 'ui-gallery',
     mainImages: 3,
-    captions: 0,
+    captions: 2,
   },
 };
 
@@ -513,8 +513,8 @@ try {
                 ringOpacity: ringStyle.opacity,
               };
             })(),
-            uiMagiEdges: [...document.querySelectorAll('.ui-study-grid--magi .ui-study-view')]
-              .map((view) => getComputedStyle(view).boxShadow),
+            uiMagiEdges: [...document.querySelectorAll('.ui-study-grid--magi .ui-study-view > img')]
+              .map((image) => getComputedStyle(image).boxShadow),
             uiScrollScreen: (() => {
               const screen = document.querySelector('[data-ui-scroll-screen]');
               if (!screen) return null;
@@ -610,12 +610,12 @@ try {
           assert(state.uiViews === 3 && state.uiLayout.length === 3,
             `uigallery.html: expected exactly three static UI study views; found ${state.uiViews}`);
           assert(JSON.stringify(state.uiViewNames) === JSON.stringify([
-            'ekos-desktop', 'magi-architecture', 'magi-overview',
+            'ekos-desktop', 'magi-overview', 'magi-architecture',
           ]), `uigallery.html: minimal gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
           assert(JSON.stringify(state.uiImageSources) === JSON.stringify([
             'images/ui-gallery/ekos-desktop.webp',
-            'images/ui-gallery/magi-architecture.webp',
             'images/ui-gallery/magi-overview.webp',
+            'images/ui-gallery/magi-architecture.webp',
           ]), `uigallery.html: minimal gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
           assert(state.uiImageDimensions.every((image) => image.naturalWidth === image.declaredWidth && image.naturalHeight === image.declaredHeight),
             `uigallery.html: declared dimensions do not match decoded media: ${JSON.stringify(state.uiImageDimensions)}`);
@@ -640,15 +640,15 @@ try {
             return moved;
           })()`);
           assert(scrolledEkos > 0, `uigallery.html: Ekos screen did not scroll through the complete page.`);
-          const [ekosDesktop, magiArchitecture, magiOverview] = state.uiLayout;
+          const [ekosDesktop, magiOverview, magiArchitecture] = state.uiLayout;
           if (viewport.mobile) {
-            assert(Math.abs(magiArchitecture.left - magiOverview.left) <= 1 && magiArchitecture.top < magiOverview.top,
-              `uigallery.html: mobile Magi studies do not stack architecture first: ${JSON.stringify(state.uiLayout)}`);
+            assert(Math.abs(magiOverview.left - magiArchitecture.left) <= 1 && magiOverview.top < magiArchitecture.top,
+              `uigallery.html: mobile Magi studies do not stack the overview first: ${JSON.stringify(state.uiLayout)}`);
           } else {
-            const magiRatio = magiArchitecture.width / (magiArchitecture.width + magiOverview.width);
-            assert(Math.abs(magiArchitecture.top - magiOverview.top) <= 1 && magiArchitecture.left < magiOverview.left && magiRatio >= 0.63 && magiRatio <= 0.69,
-              `uigallery.html: desktop Magi studies must remain an architecture-led 65/35 pair: ${JSON.stringify({ magiRatio, layout: state.uiLayout })}`);
-            assert(ekosDesktop.width > magiArchitecture.width,
+            const magiRatio = magiOverview.width / (magiOverview.width + magiArchitecture.width);
+            assert(Math.abs(magiOverview.top - magiArchitecture.top) <= 1 && magiOverview.left < magiArchitecture.left && magiRatio >= 0.63 && magiRatio <= 0.69,
+              `uigallery.html: desktop Magi studies must remain an overview-led 65/35 pair: ${JSON.stringify({ magiRatio, layout: state.uiLayout })}`);
+            assert(ekosDesktop.width > magiOverview.width,
               `uigallery.html: the single Ekos screen must remain the full-width gallery lead: ${JSON.stringify(state.uiLayout)}`);
           }
         }

@@ -48,11 +48,15 @@ for (const token of [
   'data-ui-scroll-screen',
   'tabindex="0"',
   '<section class="ui-study ui-study--magi" aria-labelledby="magi-study-title">',
-  '<h2 id="magi-study-title">Magi dashboard</h2>',
+  '<h2 id="magi-study-title">Magi interface studies</h2>',
   'A private dashboard experiment built from a small set of reusable UI pieces.',
   'This public version is static and sanitized.',
-  'data-ui-study-view="magi-architecture"',
   'data-ui-study-view="magi-overview"',
+  '<strong>Dashboard overview</strong>',
+  'Illustrative work states. No live operational connection.',
+  'data-ui-study-view="magi-architecture"',
+  '<strong>System architecture</strong>',
+  "Sanitized read-only map of the system's parts and relationships.",
   '<div class="cursor-dot" aria-hidden="true"></div>',
   '<div class="cursor-ring" aria-hidden="true"></div>',
   '<script src="js/main.js"></script>',
@@ -62,14 +66,18 @@ for (const token of [
   'body.ui-gallery-page .cursor-dot{background:var(--ui-accent);box-shadow:0 0 0 1px #101820}',
   'body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}',
   'body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}',
-  'html[data-theme="dark"] .ui-study-grid--magi .ui-study-view{box-shadow:0 0 0 1px rgba(242,242,233,.24)}',
+  'html[data-theme="dark"] .ui-study-grid--magi .ui-study-view > img{box-shadow:0 0 0 1px rgba(242,242,233,.24)}',
 ]) needText(css, token, `UI Gallery dark-polish CSS is missing: ${token}`);
 
-forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
+forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view > img\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
   'Magi screen edge must remain dark-theme-only.');
 
 need(count(html, /data-ui-study-view=/g) === 3, 'UI Gallery must contain exactly three static study views.');
 need(count(html, /<img\b[^>]*data-ui-study-image/g) === 3, 'Each UI Gallery view must be a static image.');
+need(count(html, /<figcaption class="ui-study-caption">/g) === 2,
+  'The two Magi studies must have concise visible captions.');
+need(html.indexOf('data-ui-study-view="magi-overview"') < html.indexOf('data-ui-study-view="magi-architecture"'),
+  'The dashboard overview must lead the Magi study before the supporting architecture view.');
 need(count(html, /loading="lazy"/g) >= 3, 'All UI Gallery study images must use deferred loading.');
 for (const [asset, width, height] of [
   ['magi-overview.webp', 1440, 1000],
@@ -86,8 +94,8 @@ for (const asset of [
 ]) need(fs.existsSync(asset), `Missing UI Gallery asset: ${asset}`);
 forbid(html, /ekos-components|data-ui-study-view="components"|Components and provenance|component views?|original proof|source comparison/i,
   'UI Gallery must not retain the obsolete component board or an original-proof comparison.');
-forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-mobile|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary|<figcaption/i,
-  'UI Gallery must remain a minimal three-screen gallery without Pi Kapp, duplicate Ekos variants, captions, or editorial metadata blocks.');
+forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-mobile|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary/i,
+  'UI Gallery must remain a minimal three-screen gallery without Pi Kapp, duplicate Ekos variants, or editorial metadata blocks.');
 forbid(html, /A place for screen studies|historical landing-page concept|returns to that visual character|read-only operations dashboard|work continuity and architecture|generalizing protected infrastructure/i,
   'UI Gallery copy must stay plainspoken and must not regress to generated case-study language.');
 forbid(html, /revisited|refinement|returns to/i,
@@ -114,6 +122,7 @@ for (const token of [
   'aspect-ratio: 16 / 10;',
   'grid-column: span 8;',
   'grid-column: span 4;',
+  '.ui-study-caption {',
   'border: 0;',
   'html[data-theme="dark"] .ui-gallery-page',
   '@media (max-width: 760px)',
@@ -122,8 +131,8 @@ for (const token of [
 ]) needText(css, token, `UI Gallery CSS is missing: ${token}`);
 forbid(css, /html\[data-lens="dark"\]/, 'UI Gallery must use the shared data-theme attribute rather than a stale data-lens selector.');
 forbid(css, /ui-study-view--components/, 'UI Gallery CSS must not retain the obsolete component-view role.');
-forbid(css, /ui-study--teaser|ui-study-grid--teaser|ui-study-teaser-copy|ui-study-link|ui-study-notes|ui-study-boundary|ui-study-view--mobile|ui-study-view--details|ui-study-view figcaption/,
-  'UI Gallery CSS must not retain obsolete teaser, metadata, caption, or duplicate Ekos-view styling.');
+forbid(css, /ui-study--teaser|ui-study-grid--teaser|ui-study-teaser-copy|ui-study-link|ui-study-notes|ui-study-boundary|ui-study-view--mobile|ui-study-view--details/,
+  'UI Gallery CSS must not retain obsolete teaser, metadata, or duplicate Ekos-view styling.');
 
 for (const token of [
   'ekos-polished-desktop-v3-3.png',
@@ -209,4 +218,4 @@ if (failures.length) {
 }
 
 console.log('UI GALLERY CONTRACT PASSED');
-console.log('- one complete scrollable Ekos page, 65/35 sanitized Magi pair, three borderless studies, privacy boundaries, and CI wiring pass');
+console.log('- one complete scrollable Ekos page, overview-led 65/35 sanitized Magi pair, concise captions, privacy boundaries, and CI wiring pass');

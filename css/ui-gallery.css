@@ -161,14 +161,14 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
 }
 
 .ui-study-grid--magi .ui-study-view--architecture {
-  grid-column: span 8;
-}
-
-.ui-study-grid--magi .ui-study-view--overview {
   grid-column: span 4;
 }
 
-html[data-theme="dark"] .ui-study-grid--magi .ui-study-view{box-shadow:0 0 0 1px rgba(242,242,233,.24)}
+.ui-study-grid--magi .ui-study-view--overview {
+  grid-column: span 8;
+}
+
+html[data-theme="dark"] .ui-study-grid--magi .ui-study-view > img{box-shadow:0 0 0 1px rgba(242,242,233,.24)}
 
 .ui-study-view--architecture > img,
 .ui-study-view--overview > img {
@@ -183,6 +183,27 @@ html[data-theme="dark"] .ui-study-grid--magi .ui-study-view{box-shadow:0 0 0 1px
 
 .ui-study-view:hover > img {
   filter: brightness(0.94);
+}
+
+.ui-study-caption {
+  display: grid;
+  gap: 4px;
+  padding-top: 14px;
+  color: var(--ui-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.ui-study-caption strong {
+  color: var(--ui-ink);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ui-study-caption span {
+  display: block;
 }
 
 @media (max-width: 760px) {

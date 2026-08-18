@@ -703,7 +703,7 @@
     "contentFile": "content/uigallery.md",
     "headings": [
       "Ekos Con 2018",
-      "Magi dashboard"
+      "Magi interface studies"
     ],
     "images": [
       {
@@ -711,12 +711,12 @@
         "alt": "Complete Ekos Con desktop landing-page cleanup with drafting-grid construction, event details, brewery photograph, pricing, and lodging information"
       },
       {
-        "src": "images/ui-gallery/magi-architecture.webp",
-        "alt": "Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes"
-      },
-      {
         "src": "images/ui-gallery/magi-overview.webp",
         "alt": "Sanitized dark Magi dashboard study showing an illustrative work docket and disconnected operations state"
+      },
+      {
+        "src": "images/ui-gallery/magi-architecture.webp",
+        "alt": "Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes"
       }
     ],
     "projects": []

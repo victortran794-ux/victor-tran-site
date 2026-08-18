@@ -21,7 +21,7 @@ Selected interface studies by Victor Tran, including a high-fidelity Ekos Con vi
 ## Section Headings
 
 - Ekos Con 2018
-- Magi dashboard
+- Magi interface studies
 
 ## Body Copy
 
@@ -36,5 +36,5 @@ A private dashboard experiment built from a small set of reusable UI pieces. Thi
 ## Images
 
 - Complete Ekos Con desktop landing-page cleanup with drafting-grid construction, event details, brewery photograph, pricing, and lodging information: images/ui-gallery/ekos-desktop.webp
-- Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes: images/ui-gallery/magi-architecture.webp
 - Sanitized dark Magi dashboard study showing an illustrative work docket and disconnected operations state: images/ui-gallery/magi-overview.webp
+- Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes: images/ui-gallery/magi-architecture.webp
