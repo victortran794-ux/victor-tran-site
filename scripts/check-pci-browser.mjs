@@ -143,6 +143,7 @@ try {
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
           artifacts:artifacts.length,three:document.querySelectorAll('[data-pci-artifact-count="3"]').length,four:document.querySelectorAll('[data-pci-artifact-count="4"]').length,
           hero:Boolean(document.querySelector('[data-pci-artifact="red-hexagon-hero"]')),map:Boolean(document.querySelector('[data-pci-artifact="national-footprint-map"]')),
+          openingEvidenceTop:document.querySelector('[data-pci-artifact="red-hexagon-hero"]').getBoundingClientRect().top,
           rejected:[...document.querySelectorAll('img')].map((image)=>image.getAttribute('src')||'').filter((src)=>/pci-(?:handbook-3-ceo-letter|handbook-42-back|banners-5)/.test(src))};
       })()`);
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
@@ -153,6 +154,7 @@ try {
       assert(!state.framed.length, `faux artifact frame at ${viewport.label} ${theme}: ${JSON.stringify(state.framed)}`);
       assert(state.shell && !state.gate && state.artifacts === 12 && state.three === 1 && state.four === 1 && state.hero && state.map && !state.rejected.length, `approved page state drifted: ${JSON.stringify(state)}`);
       if (viewport.width === 390) {
+        assert(state.openingEvidenceTop <= 720, `PCI opening evidence begins too late at ${state.openingEvidenceTop}px`);
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
         assert(!undersized.length, `undersized mobile controls: ${JSON.stringify(undersized)}`);
       }

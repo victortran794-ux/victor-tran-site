@@ -17,6 +17,21 @@ const manifest = JSON.parse(read('data/projects.json'));
 const projects = manifest.projects ?? [];
 const bySlug = new Map(projects.map(project => [project.slug, project]));
 
+const homepageProjects = projects.filter(project => project.homepage);
+requireCondition(homepageProjects[0]?.slug === 'wxo-canvas',
+  'IBM watsonx Orchestrate must remain the first homepage project while it stays protected.');
+const approvedRecruiterCopy = new Map([
+  ['ibmcloud', 'Research, product workflows, and reusable visual methods for IBM Cloud Observability.'],
+  ['abilityexperience', 'A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities.'],
+  ['pikappapp', "A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity."],
+]);
+for (const [slug, description] of approvedRecruiterCopy) {
+  requireCondition(bySlug.get(slug)?.description === description,
+    `${slug} manifest description must use the approved recruiter-scan copy.`);
+  requireText(index, description,
+    `${slug} homepage card must render the approved recruiter-scan copy.`);
+}
+
 // Preserve the selected signature hero while applying the approved Route 02 refinements.
 for (const token of [
   'class="hero"',
