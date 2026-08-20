@@ -41,14 +41,21 @@ for (const phrase of [
   'Researched and tested a product flow',
   'Reviewed and explored the product system',
   'Built visual methods for reuse',
-  'Event Notifications was the first project where I was assigned to conduct the end-to-end research and design process, then concept-test the design.',
-  'consolidate two related concepts into one',
-  'This was a proposed and concept-tested alternative, not a claim that the original was defective or that the alternative shipped.',
+  'Event Notifications was my first assigned end-to-end research and design project.',
+  'Could a stepped flow make the relationship among subscriptions, sources, destinations, and conditions understandable?',
+  'Testing showed that people could move through the simple and complex flows, while terminology, condition discoverability, and visibility across steps still needed attention.',
+  'Keep the common path sequential, reuse destinations, and reveal condition logic only when the source needs it.',
+  'Proposed and concept-tested. The research supported the direction and exposed open questions; it did not prove shipment or measured impact.',
+  'class="ibm-ux-decision-rail reveal"',
+  'Research question',
+  'What testing surfaced',
+  'Design response',
+  'Validation boundary',
   'Monitoring heuristic evaluation',
   'IBM Cloud Logs',
   'based on Coralogix',
-  'color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes',
-  'These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.',
+  'tokens, icons, navigation, data visualization, components, type, and themes',
+  'They scoped the work, but do not prove that every explored state shipped.',
   'collaborative workgroup',
   'early trial of moving the illustration workflow from Sketch to Figma',
   'Research, exploration, and moments of delight.',
@@ -70,9 +77,9 @@ for (const phrase of [
   'Translating the visual system',
   'I mapped source visualization roles toward IBM theme values, revealing where token transfer worked and where manual decisions remained.',
   'Internal exploration · Not proof of shipment',
-  'I took this component into high fidelity, focusing on hierarchy, connection status, and actions.',
-  'The first round framed the research questions around subscription structure and flow.',
-  'The findings sharpened hierarchy, terminology, and expectations for reusable destinations and sources.',
+  'High-fidelity work clarified hierarchy, connection status, and actions.',
+  'What mental model and sequence would people expect?',
+  'Where did the model align, and where did it require learning?',
   'Events, metrics, and logs moved through a shared technical environment.',
   'Early sketches narrowed composition, service metaphors, and hierarchy before final rendering.',
   'Shared perspective and lighting rules connected distinct product stories without making them identical.',
@@ -125,6 +132,10 @@ const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
   .split(/\s+/)
   .filter(Boolean).length;
 require(narrativeWords <= 950, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
+require(narrativeWords <= 875, `IBM Cloud UX-evidence revision must reduce narrative below 876 words: ${narrativeWords} words`);
+require((html.match(/class="[^"]*\bibm-ux-decision-item\b[^"]*"/g) || []).length === 4, 'expected four source-backed UX decision items');
+require(html.indexOf('ibm-cloud-research-framing.png') < html.indexOf('class="ibm-ux-decision-rail reveal"'), 'research framing must precede the synthesized decision rail');
+require(html.indexOf('class="ibm-ux-decision-rail reveal"') < html.indexOf('id="event-flow-artifact"'), 'decision rail must connect research evidence to the authentic flow');
 require(!html.includes('Pending protected asset selection'), 'cleared supporting images must replace both pending evidence reservations');
 require(!html.includes('data-asset-status="victor-selection-required"'), 'IBM Cloud must not retain a Victor-selection placeholder after cleared assets are supplied');
 require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 9, 'expected exactly nine curated artifact cards outside the three-screen product flow and dedicated technical-context figure');

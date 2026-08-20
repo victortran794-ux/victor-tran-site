@@ -176,7 +176,7 @@
     "contentFile": "content/ibmcloud.md",
     "headings": [
       "Learn the system, then help other people see it.",
-      "Use research to find a more focused path.",
+      "Connect research evidence to a specific interaction model.",
       "Use exploration to understand the work ahead.",
       "Move from making images to defining a method.",
       "Research, exploration, and moments of delight."
@@ -195,6 +195,14 @@
         "alt": "IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services"
       },
       {
+        "src": "images/ibm-cloud-research-framing.png",
+        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
+      },
+      {
+        "src": "images/ibm-cloud-research-findings.png",
+        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
+      },
+      {
         "src": "images/ibm-cloud-event-flow-details.png",
         "alt": "Event Notifications create-subscription flow on the Details step"
       },
@@ -205,14 +213,6 @@
       {
         "src": "images/ibm-cloud-event-flow-condition-compound.png",
         "alt": "Event Notifications condition panel with a second rule added"
-      },
-      {
-        "src": "images/ibm-cloud-research-framing.png",
-        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
-      },
-      {
-        "src": "images/ibm-cloud-research-findings.png",
-        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
       },
       {
         "src": "images/ibm-cloud-card-component-design.png",

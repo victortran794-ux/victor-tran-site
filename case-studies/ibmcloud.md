@@ -1,6 +1,6 @@
 # IBM Cloud public supporting-image manifest
 
-Last reviewed: 2026-08-10
+Last reviewed: 2026-08-20
 
 ## Publication boundary
 
@@ -39,6 +39,10 @@ The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Not
   - SHA-256: `416ccce17c3ff145374f4f8b9d279ed7fdeed96e6ce840968308b0f3bed74224`
 
 ### Event Notifications research and component
+
+The Proof 01 evidence chain was re-audited against the existing sanitized research boards and private concept-test protocols retained outside the repository. The public synthesis is limited to high-level, anonymous patterns supported across those sources: people could progress through the simple and complex flows, while terminology, condition discoverability, and visibility across steps remained open design questions. The design response keeps the common path sequential, reuses destinations, and reveals condition logic when needed. No participant identities, exact quotes, counts, response distributions, private URLs, or individual session notes are published.
+
+This synthesis documents a proposed, concept-tested direction. It does not claim shipment, measured impact, unanimous comprehension, or a comparison-test result.
 
 - `images/ibm-cloud-research-framing.png`
   - Source: Figma node `6:8632`

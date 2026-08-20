@@ -202,6 +202,20 @@
   line-height: 1.55;
 }
 
+[data-project="ibm-cloud"] #product-work {
+  padding-top: clamp(72px, 9vw, 112px);
+}
+
+[data-project="ibm-cloud"] #product-work .ibm-proof-header {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+[data-project="ibm-cloud"] #product-work .ibm-proof-header h2 {
+  max-width: 760px;
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  line-height: 0.98;
+}
+
 [data-project="ibm-cloud"] .ibm-proof-product-layout,
 [data-project="ibm-cloud"] .ibm-systems-layout {
   display: grid;
@@ -240,8 +254,9 @@
 }
 
 [data-project="ibm-cloud"] .ibm-product-evidence {
-  position: sticky;
-  top: calc(var(--nav-h) + var(--space-8));
+  width: min(100%, 1100px);
+  margin: clamp(64px, 9vw, 112px) auto 0;
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
 }
 
 [data-project="ibm-cloud"] .ibm-flow-screen {
@@ -298,7 +313,7 @@
 }
 
 [data-project="ibm-cloud"] .ibm-product-research {
-  margin-top: clamp(72px, 10vw, 128px);
+  margin-top: clamp(56px, 8vw, 96px);
   padding-top: var(--space-8);
   border-top: 1px solid var(--border);
 }
@@ -333,9 +348,44 @@
   background: var(--bg-2);
 }
 
+[data-project="ibm-cloud"] .ibm-ux-decision-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(48px, 7vw, 80px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+}
+
+[data-project="ibm-cloud"] .ibm-ux-decision-item {
+  min-width: 0;
+  padding: var(--space-6);
+  border-right: 1px solid var(--border);
+}
+
+[data-project="ibm-cloud"] .ibm-ux-decision-item:last-child { border-right: 0; }
+
+[data-project="ibm-cloud"] .ibm-ux-decision-item span {
+  color: var(--blue-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  line-height: 1.4;
+}
+
+[data-project="ibm-cloud"] .ibm-ux-decision-item p {
+  margin: var(--space-6) 0 0;
+  color: var(--text-1);
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.55;
+}
+
 [data-project="ibm-cloud"] .ibm-component-artifact {
   max-width: 760px;
+  margin-top: clamp(64px, 9vw, 112px);
   margin-right: 0;
+  margin-left: auto;
 }
 
 [data-project="ibm-cloud"] .ibm-adaptation-evidence {
@@ -548,8 +598,11 @@
 @media (max-width: 900px) {
   [data-project="ibm-cloud"] .ibm-proof-product-layout,
   [data-project="ibm-cloud"] .ibm-systems-layout { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-product-evidence { position: static; margin-top: var(--space-12); }
+  [data-project="ibm-cloud"] .ibm-product-evidence { margin-top: var(--space-12); }
   [data-project="ibm-cloud"] .ibm-proof-copy--wide { margin-left: 0; }
+  [data-project="ibm-cloud"] .ibm-ux-decision-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(2) { border-right: 0; }
+  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
   [data-project="ibm-cloud"] .ibm-action-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(2) { border-right: 0; }
   [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
@@ -585,7 +638,14 @@
   [data-project="ibm-cloud"] .ibm-proof-index a:last-child { border-bottom: 0; }
   [data-project="ibm-cloud"] .ibm-flow-pair { gap: var(--space-3); }
   [data-project="ibm-cloud"] .ibm-action-steps,
-  [data-project="ibm-cloud"] .ibm-research-pair { grid-template-columns: 1fr; }
+  [data-project="ibm-cloud"] .ibm-research-pair,
+  [data-project="ibm-cloud"] .ibm-ux-decision-rail { grid-template-columns: 1fr; }
+  [data-project="ibm-cloud"] .ibm-ux-decision-item,
+  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  [data-project="ibm-cloud"] .ibm-ux-decision-item:last-child { border-bottom: 0; }
   [data-project="ibm-cloud"] .ibm-action-steps article {
     min-height: 0;
     border-right: 0;

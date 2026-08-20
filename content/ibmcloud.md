@@ -32,48 +32,46 @@ I learned the technical system, then used research, product design, and visual s
 ## Section Headings
 
 - Learn the system, then help other people see it.
-- Use research to find a more focused path.
+- Connect research evidence to a specific interaction model.
 - Use exploration to understand the work ahead.
 - Move from making images to defining a method.
 - Research, exploration, and moments of delight.
 
 ## Body Copy
 
-I ramped up on cloud infrastructure, observability, UX and UI design, and enterprise development. Documentation and hands-on product exploration helped the pieces come together.
-
-I learned to apply that technical understanding through product flows, illustrations, narratives, and presentations. The goal was not to simplify the technology away. It was to make the system easier to understand and act on.
+I learned the technical system through documentation and product exploration, then applied that understanding through concept-tested flows, visual adaptation, and reusable illustration methods.
 
 Events, metrics, and logs moved through a shared technical environment.
 
 Proof 01 · End-to-end research and design
 
-Event Notifications was the first project where I was assigned to conduct the end-to-end research and design process, then concept-test the design. I worked with the product manager and my design lead to propose an alternative way to send a notification.
+Event Notifications was my first assigned end-to-end research and design project. With the product manager and design lead, I explored and concept-tested a stepped subscription flow.
 
-The opportunity was to consolidate two related concepts into one without losing an effective way to complete the task.
+Research evidence
 
-The proposed structure also made it easier to store and reuse the different demographics or groups that notifications were sent to. I explored the sequence through co-design, a high-fidelity prototype, and concept testing.
+What mental model and sequence would people expect?
 
-For conditions, I used a familiar filter model and revealed compound logic only when needed. This was a proposed and concept-tested alternative, not a claim that the original was defective or that the alternative shipped.
+Where did the model align, and where did it require learning?
 
-Testing the flow
+Could a stepped flow make the relationship among subscriptions, sources, destinations, and conditions understandable?
 
-The first round framed the research questions around subscription structure and flow.
+Testing showed that people could move through the simple and complex flows, while terminology, condition discoverability, and visibility across steps still needed attention.
 
-The findings sharpened hierarchy, terminology, and expectations for reusable destinations and sources.
+Keep the common path sequential, reuse destinations, and reveal condition logic only when the source needs it.
 
-I took this component into high fidelity, focusing on hierarchy, connection status, and actions.
+Proposed and concept-tested. The research supported the direction and exposed open questions; it did not prove shipment or measured impact.
+
+High-fidelity work clarified hierarchy, connection status, and actions.
 
 Proof 02 · Review and adaptation
 
-A Monitoring heuristic evaluation revealed a large set of visual and UX issues. Later, IBM Cloud Logs explorations tested how an external product could align with IBM Cloud and helped expose the manual work an overhaul would require.
+A Monitoring heuristic evaluation surfaced visual and UX issues. IBM Cloud Logs explorations then tested adaptation toward IBM Cloud conventions and exposed where manual work remained.
 
 Review the product, then use the findings to scope a credible next move.
 
-My first major Monitoring review followed an established heuristic-evaluation path. I already understood the broader Observability space, but I was new to this specific product. The review logged a large number of visual and UX issues for the team to investigate.
+My Monitoring review followed an established heuristic path and recorded issues for the team to investigate. For IBM Cloud Logs, based on Coralogix, I explored IBM conventions across tokens, icons, navigation, data visualization, components, type, and themes.
 
-IBM Cloud Logs was based on Coralogix's white-label observability offering. In Figma, I explored how it could adapt to IBM branding and IBM Cloud product conventions across color variables, icons, navigation, data visualizations, spacing, components, typography, and light and dark themes.
-
-Those explorations tested visual consistency and identified where the first overhaul would need manual intervention. These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.
+The explorations identified where adaptation required manual decisions. They scoped the work, but do not prove that every explored state shipped.
 
 I mapped source visualization roles toward IBM theme values, revealing where token transfer worked and where manual decisions remained.
 
@@ -107,16 +105,23 @@ I ramped up quickly in my technical knowledge and learned to apply it through il
 
 Design can save time by reducing uncertainty, uncover valuable information, and turn what we learn into something useful and compelling. It can also make room for great, neat things that bring delight to a technical experience.
 
+## Lists And Tags
+
+- 01 · Research question Could a stepped flow make the relationship among subscriptions, sources, destinations, and conditions understandable?
+- 02 · What testing surfaced Testing showed that people could move through the simple and complex flows, while terminology, condition discoverability, and visibility across steps still needed attention.
+- 03 · Design response Keep the common path sequential, reuse destinations, and reveal condition logic only when the source needs it.
+- 04 · Validation boundary Proposed and concept-tested. The research supported the direction and exposed open questions; it did not prove shipment or measured impact.
+
 ## Images
 
 - IBM Cloud Observability abstract service illustration in light mode: images/ibm-thumb-light.png
 - IBM Cloud Observability abstract service illustration in dark mode: images/ibm-thumb-dark.png
 - IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services: images/ibm-cloud-routing-architecture.png
+- Event Notifications research roles and questions about subscription structure and creation flow: images/ibm-cloud-research-framing.png
+- Event Notifications findings about subscription structure, terminology, and creation flow: images/ibm-cloud-research-findings.png
 - Event Notifications create-subscription flow on the Details step: images/ibm-cloud-event-flow-details.png
 - Event Notifications condition panel before a rule is selected: images/ibm-cloud-event-flow-condition-empty.png
 - Event Notifications condition panel with a second rule added: images/ibm-cloud-event-flow-condition-compound.png
-- Event Notifications research roles and questions about subscription structure and creation flow: images/ibm-cloud-research-framing.png
-- Event Notifications findings about subscription structure, terminology, and creation flow: images/ibm-cloud-research-findings.png
 - IBM Cloud subscription card component explorations showing hierarchy, status, and connected services: images/ibm-cloud-card-component-design.png
 - Source token study mapping visualization roles and colors toward IBM theme values: images/ibm-cloud-proof02-token-translation.png
 - IBM Cloud concept sketches progressing through shared isometric construction studies: images/ibm-cloud-concept-to-final.png
