@@ -176,7 +176,7 @@
     "contentFile": "content/ibmcloud.md",
     "headings": [
       "Learn the system, then help other people see it.",
-      "Use research to find a more focused path.",
+      "Connect research evidence to a specific interaction model.",
       "Use exploration to understand the work ahead.",
       "Move from making images to defining a method.",
       "Research, exploration, and moments of delight."
@@ -195,6 +195,14 @@
         "alt": "IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services"
       },
       {
+        "src": "images/ibm-cloud-research-framing.png",
+        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
+      },
+      {
+        "src": "images/ibm-cloud-research-findings.png",
+        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
+      },
+      {
         "src": "images/ibm-cloud-event-flow-details.png",
         "alt": "Event Notifications create-subscription flow on the Details step"
       },
@@ -207,16 +215,12 @@
         "alt": "Event Notifications condition panel with a second rule added"
       },
       {
-        "src": "images/ibm-cloud-research-framing.png",
-        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
-      },
-      {
-        "src": "images/ibm-cloud-research-findings.png",
-        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
-      },
-      {
         "src": "images/ibm-cloud-card-component-design.png",
         "alt": "IBM Cloud subscription card component explorations showing hierarchy, status, and connected services"
+      },
+      {
+        "src": "images/ibm-cloud-proof02-token-translation.png",
+        "alt": "Source token study mapping visualization roles and colors toward IBM theme values"
       },
       {
         "src": "images/ibm-cloud-concept-to-final.png",
@@ -225,10 +229,6 @@
       {
         "src": "images/ibm-cloud-visual-system-foundations.png",
         "alt": "IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules"
-      },
-      {
-        "src": "images/ibm-cloud-code-engine-light.png",
-        "alt": "Code Engine illustration in the light theme"
       }
     ],
     "projects": []
