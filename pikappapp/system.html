@@ -69,14 +69,14 @@
 <body>
 
 <!-- Single artboard intended for a 1600×2400 export -->
-<main class="mx-auto" style="width: 1600px;">
+<main class="w-full max-w-[1600px] mx-auto">
 
   <!-- Header -->
-  <header class="px-20 pt-20 pb-14">
-    <div class="flex items-end justify-between">
+  <header class="px-5 sm:px-10 lg:px-20 pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
+    <div class="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="font-brand uppercase tracking-[0.32em] text-[12px] text-pikapp-gold-deep mb-3">Pi Kapp App</p>
-        <h1 class="font-display text-[80px] leading-none text-pikapp-ink">Design System</h1>
+        <h1 class="font-display text-[48px] sm:text-[64px] lg:text-[80px] leading-none text-pikapp-ink">Design System</h1>
         <p class="mt-5 text-pikapp-ink/60 text-[18px] max-w-[560px] leading-relaxed">
           The minimum coherent set: color, type, mark, pattern, and a handful of components — the same vocabulary
           that shows up across every screen of the prototype.
@@ -98,13 +98,13 @@
   </header>
 
   <!-- COLOR -->
-  <section class="px-20 pb-20">
-    <div class="flex items-baseline justify-between mb-8">
+  <section class="px-5 sm:px-10 lg:px-20 pb-14 sm:pb-20">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between mb-8">
       <h2 class="font-display text-[40px] text-pikapp-ink">Color</h2>
       <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-ink/40">Five tokens, one feeling</p>
     </div>
 
-    <div class="grid grid-cols-5 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       <!-- Royal blue -->
       <div class="grid-card p-5">
         <div class="h-32 rounded-xl mb-4" style="background:#15295C"></div>
@@ -161,18 +161,18 @@
   </section>
 
   <!-- TYPE -->
-  <section class="px-20 pb-20">
-    <div class="flex items-baseline justify-between mb-8">
+  <section class="px-5 sm:px-10 lg:px-20 pb-14 sm:pb-20">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between mb-8">
       <h2 class="font-display text-[40px] text-pikapp-ink">Type</h2>
       <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-ink/40">Editorial display, neutral body</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Display -->
       <div class="grid-card p-10">
         <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-gold-deep mb-4">Display · DM Serif Display</p>
-        <p class="font-display text-[88px] leading-[0.95] text-pikapp-ink">Iota Theta</p>
-        <div class="mt-8 grid grid-cols-3 gap-6 text-pikapp-ink/70">
+        <p class="font-display text-[48px] sm:text-[64px] lg:text-[88px] leading-[0.95] text-pikapp-ink">Iota Theta</p>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-pikapp-ink/70">
           <div>
             <p class="font-display text-[34px] leading-none text-pikapp-ink">Aa Gg</p>
             <p class="font-brand uppercase tracking-wider text-[10px] text-pikapp-ink/40 mt-2">Headlines</p>
@@ -195,7 +195,7 @@
           Pick up your race kit at the chapter house Thursday between 4–7pm.
           Volunteers needed at gear check. Sign-ups close Friday at midnight.
         </p>
-        <div class="mt-8 grid grid-cols-3 gap-6 text-pikapp-ink/70">
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-pikapp-ink/70">
           <div>
             <p class="text-[15px] font-medium text-pikapp-ink">Inter 500</p>
             <p class="font-brand uppercase tracking-wider text-[10px] text-pikapp-ink/40 mt-2">Body emphasis</p>
@@ -214,13 +214,13 @@
   </section>
 
   <!-- ICONOGRAPHY + PATTERN -->
-  <section class="px-20 pb-20">
-    <div class="flex items-baseline justify-between mb-8">
+  <section class="px-5 sm:px-10 lg:px-20 pb-14 sm:pb-20">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between mb-8">
       <h2 class="font-display text-[40px] text-pikapp-ink">Mark &amp; Pattern</h2>
       <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-ink/40">One asset, three roles</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Iconography -->
       <div class="grid-card p-10">
         <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-gold-deep mb-8">Gold Star — Brand Element</p>
@@ -274,13 +274,13 @@
   </section>
 
   <!-- COMPONENTS -->
-  <section class="px-20 pb-20">
-    <div class="flex items-baseline justify-between mb-8">
+  <section class="px-5 sm:px-10 lg:px-20 pb-14 sm:pb-20">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between mb-8">
       <h2 class="font-display text-[40px] text-pikapp-ink">Components</h2>
       <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-ink/40">Default · active · complete</p>
     </div>
 
-    <div class="grid grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Tab pill -->
       <div class="grid-card p-10">
         <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-gold-deep mb-6">Tab Pill</p>
@@ -397,9 +397,9 @@
   </section>
 
   <!-- Footer -->
-  <footer class="px-20 pb-20 pt-2">
+  <footer class="px-5 sm:px-10 lg:px-20 pb-14 sm:pb-20 pt-2">
     <div class="h-px bg-gradient-to-r from-transparent via-pikapp-ink/15 to-pikapp-gold/40 mb-8"></div>
-    <div class="flex items-end justify-between">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <p class="font-brand uppercase tracking-[0.24em] text-[11px] text-pikapp-ink/40">
         Pi Kapp App · Concept · Iota Theta
       </p>

@@ -140,7 +140,8 @@ try {
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),controls,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
           proofs:document.querySelectorAll('.ibm-proof').length,artifacts:document.querySelectorAll('.ibm-evidence-artifact').length,techContext:document.querySelectorAll('.ibm-tech-context').length,reservations:document.querySelectorAll('.ibm-evidence-reservation').length,atlas:Boolean(document.querySelector('.ibm-visual-atlas')),
-          client:[...document.querySelectorAll('.case-study-meta dt')].some((node)=>node.textContent.trim()==='Client'),heroBorder:getComputedStyle(hero).borderBottomWidth};
+          client:[...document.querySelectorAll('.case-study-meta dt')].some((node)=>node.textContent.trim()==='Client'),heroBorder:getComputedStyle(hero).borderBottomWidth,
+          openingEvidenceTop:document.querySelector('.ibm-hiring-hero-art').getBoundingClientRect().top};
       })()`);
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
       assert((theme === 'dark' ? state.theme === 'dark' : !state.theme || state.theme === 'light') && state.stored === theme, `theme failed ${viewport.label} ${theme}`);
@@ -149,6 +150,7 @@ try {
       assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 8 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
       assert(state.heroBorder === '0px', `crowded header divider returned at ${viewport.label} ${theme}`);
       if (viewport.width === 390) {
+        assert(state.openingEvidenceTop <= 720, `IBM Cloud opening evidence begins too late at ${state.openingEvidenceTop}px`);
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
         assert(!undersized.length, `undersized mobile controls: ${JSON.stringify(undersized)}`);
       }

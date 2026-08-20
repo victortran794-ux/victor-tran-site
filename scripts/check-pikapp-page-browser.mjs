@@ -383,6 +383,29 @@ try {
     }
   }
 
+  for (const viewport of [
+    { label:'390',width:390,height:844,mobile:true,columns:[1,1,1,1],title:'48px' },
+    { label:'1440',width:1440,height:1000,mobile:false,columns:[5,2,2,3],title:'80px' },
+  ]) {
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width:viewport.width,height:viewport.height,deviceScaleFactor:1,mobile:viewport.mobile });
+    await cdp.navigate(`${baseUrl}/pikappapp/system.html`);
+    await delay(800);
+    const systemState=await cdp.evaluate(`(()=>{
+      const root=document.documentElement;
+      const main=document.querySelector('main');
+      const grids=[...document.querySelectorAll('main > section > .grid')].map((grid)=>getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length);
+      const mainRect=main.getBoundingClientRect();
+      return {viewport:[innerWidth,innerHeight],overflow:root.scrollWidth-root.clientWidth,main:{left:mainRect.left,right:mainRect.right,width:mainRect.width},grids,title:getComputedStyle(document.querySelector('h1')).fontSize};
+    })()`);
+    assert(systemState.viewport[0]===viewport.width&&systemState.viewport[1]===viewport.height,`Pi Kapp system viewport drifted: ${JSON.stringify(systemState)}`);
+    assert(systemState.overflow===0,`Pi Kapp system has ${systemState.overflow}px overflow at ${viewport.label}`);
+    assert(systemState.main.left>=-1&&systemState.main.right<=viewport.width+1,`Pi Kapp system main escaped viewport: ${JSON.stringify(systemState.main)}`);
+    assert(JSON.stringify(systemState.grids)===JSON.stringify(viewport.columns),`Pi Kapp system grid columns drifted at ${viewport.label}: ${JSON.stringify(systemState.grids)}`);
+    assert(systemState.title===viewport.title,`Pi Kapp system title size drifted at ${viewport.label}: ${systemState.title}`);
+    await cdp.screenshot(`pikapp-system-${viewport.label}.png`);
+    checks += 1;
+  }
+
   await cdp.call('Emulation.setDeviceMetricsOverride', { width:1280,height:720,deviceScaleFactor:1,mobile:false });
   await cdp.navigate(`${baseUrl}/pikappapp.html`);
   await cdp.evaluate(`document.querySelector('.prototype-embed').scrollIntoView({block:'center',behavior:'instant'})`);

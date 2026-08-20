@@ -140,12 +140,12 @@ need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\
 expected = {
     "wxo-canvas": ("IBM watsonx Orchestrate", "wxo-canvas.html", "An agentic workflow canvas for building, inspecting, and improving AI workflows."),
     "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
-    "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods."),
+    "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "Research, product workflows, and reusable visual methods for IBM Cloud Observability."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
-    "abilityexperience": ("The Ability Experience", "abilityexperience.html", "Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities."),
+    "abilityexperience": ("The Ability Experience", "abilityexperience.html", "A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities."),
     "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."),
-    "pikappapp": ("Pi Kapp App", "pikappapp.html", "A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day."),
+    "pikappapp": ("Pi Kapp App", "pikappapp.html", "A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity."),
     "artillustration": ("Art & Illustration", "artillustration.html", "Standalone digital and traditional work, including posters, paintings, and personal series."),
     "graphicgallery": ("Graphic Design", "graphicgallery.html", "Standalone identity, print, illustration, and event graphics."),
 }

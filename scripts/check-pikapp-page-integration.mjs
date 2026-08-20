@@ -19,6 +19,29 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 const size = (relativePath) => read(relativePath).length;
 
+const standaloneSystem = text('pikappapp/system.html');
+for (const required of [
+  'class="w-full max-w-[1600px] mx-auto"',
+  'px-5 sm:px-10 lg:px-20',
+  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
+  'grid grid-cols-1 lg:grid-cols-2',
+  'grid grid-cols-1 sm:grid-cols-3',
+  'grid grid-cols-1 lg:grid-cols-3',
+  'text-[48px] sm:text-[64px] lg:text-[80px]',
+  'text-[48px] sm:text-[64px] lg:text-[88px]',
+]) {
+  if (!standaloneSystem.includes(required)) fail(`Pi Kapp standalone system page missing responsive contract: ${required}`);
+}
+for (const forbidden of [
+  'style="width: 1600px;"',
+  'class="px-20',
+  'class="grid grid-cols-5',
+  'class="grid grid-cols-3',
+  'class="grid grid-cols-2',
+]) {
+  if (standaloneSystem.includes(forbidden)) fail(`Pi Kapp standalone system page retains fixed desktop framing: ${forbidden}`);
+}
+
 const frozenFiles = {
   'pikappapp/demo.html': '6c2621e62c0e8dc4626dffff7ebfba97d2a4f1ff326240d25c9822a583c80ab4',
   'pikappapp/demo.bundle.css': 'f4988fc9711f6bb63cd3c41bc86775d4df4773cc11f2e0edd575165aacab779e',

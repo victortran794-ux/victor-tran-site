@@ -60,17 +60,17 @@ Visual designer working across brand, illustration, and product systems.
 
 An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
-IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable methods.
+Research, product workflows, and reusable visual methods for IBM Cloud Observability.
 
 A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.
 
 Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts.
 
-Brand identity and collateral for The Ability Experience, a Pi Kappa Phi initiative supporting people with disabilities.
+A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities.
 
 Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.
 
-A mobile app concept for undergraduate fraternity members to track milestones, stay connected with the chapter, and live the values day to day.
+A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity.
 
 Standalone digital and traditional work, including posters, paintings, and personal series.
 

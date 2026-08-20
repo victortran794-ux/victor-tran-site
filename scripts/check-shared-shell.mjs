@@ -95,6 +95,9 @@ if (!fs.existsSync(sharedCssPath)) {
     if (!accessibilityBlock.includes(required)) fail(`shared shell CSS contract missing ${required}`);
   }
   if (!css.includes('.footer-social ul')) fail('shared shell CSS needs semantic footer-list layout');
+  if (/\.nav-links\s*>\s*li:nth-child\(3\)\s*\{[^}]*display:\s*none;/s.test(css)) {
+    fail('mobile shared shell must keep the direct Contact navigation item visible');
+  }
 }
 
 const actualPages = fs.readdirSync(root)
@@ -171,6 +174,9 @@ for (const page of expectedPages) {
   }
   if (!nav.includes('class="nav-mobile-theme"') || count(nav, 'data-mobile-lens=') !== 2) {
     fail(`${page} Work disclosure must preserve mobile Light and Dark controls`);
+  }
+  if (!nav.includes(`href="mailto:${config.contactEmail}" class="nav-contact">Contact</a>`)) {
+    fail(`${page} primary navigation must preserve direct Contact access`);
   }
   const dropdown = extractTag(nav, /<ul id="work-menu" class="nav-dropdown-menu"[\s\S]*?<\/ul>/i);
   const actualNavUrls = [...dropdown.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);

@@ -8,6 +8,12 @@ import { spawn } from 'node:child_process';
 const root = path.resolve(process.argv[2] || process.cwd());
 const baseUrl = process.env.SITE_URL || 'http://127.0.0.1:8896';
 const evidenceDir = process.env.SHELL_EVIDENCE_DIR || path.join(root, '.hermes', 'evidence', 'shared-shell');
+const projectManifest = JSON.parse(fs.readFileSync(path.join(root, 'data', 'projects.json'), 'utf8'));
+const workLinks = projectManifest.projects
+  .filter((project) => project.nav)
+  .map((project) => project.entryUrl || project.url);
+const firstWorkLink = workLinks[0];
+const lastWorkLink = workLinks.at(-1);
 const chromeCandidates = [
   process.env.CHROME_BIN,
   '/home/victortran794/.agent-browser/browsers/chrome-149.0.7827.55/chrome',
@@ -215,16 +221,16 @@ try {
   await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').focus()`);
   await cdp.key('ArrowDown', 'ArrowDown', 40);
   const arrowDownHref = await cdp.evaluate(`document.activeElement?.getAttribute('href')`);
-  assert(arrowDownHref === 'wxo-canvas.html', `ArrowDown did not focus the first Work link; focused=${arrowDownHref}`);
+  assert(arrowDownHref === firstWorkLink, `ArrowDown did not focus the first Work link; focused=${arrowDownHref}`);
   await cdp.key('End', 'End', 35);
-  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'graphicgallery.html', 'End did not focus the last Work link');
+  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === lastWorkLink, 'End did not focus the last Work link');
   await cdp.key('Home', 'Home', 36);
-  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'wxo-canvas.html', 'Home did not focus the first Work link');
+  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === firstWorkLink, 'Home did not focus the first Work link');
   await cdp.key('Escape', 'Escape', 27);
   const escapeState = await cdp.evaluate(`({focused: document.activeElement?.classList.contains('nav-dropdown-toggle'), expanded: document.querySelector('.nav-dropdown-toggle').getAttribute('aria-expanded')})`);
   assert(escapeState.focused && escapeState.expanded === 'false', 'Escape did not close Work and restore trigger focus');
   await cdp.key('ArrowUp', 'ArrowUp', 38);
-  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === 'graphicgallery.html', 'ArrowUp did not focus the last Work link');
+  assert(await cdp.evaluate(`document.activeElement?.getAttribute('href')`) === lastWorkLink, 'ArrowUp did not focus the last Work link');
 
   await cdp.evaluate(`document.querySelector('[data-mobile-lens="dark"]').click()`);
   const dark = await cdp.evaluate(`({theme: document.documentElement.dataset.theme, stored: localStorage.getItem('lens'), pressed: [...document.querySelectorAll('[data-lens="dark"]')].every((button) => button.getAttribute('aria-pressed') === 'true')})`);
