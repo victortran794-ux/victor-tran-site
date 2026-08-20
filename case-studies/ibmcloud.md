@@ -67,6 +67,19 @@ The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Not
   - Dimensions: `1024 × 768`
   - SHA-256: `606ee4e19741eead6c0b545254b4858c4bf59880ae93f85a970bcad9859b8bd3`
 
+### Proof 02 adaptation evidence · approved review scope
+
+Victor approved proceeding with the webpage update on 2026-08-20. The token-translation study is the only new Proof 02 visual cleared for the review branch. It remains bounded as internal exploration and not proof of shipment.
+
+- `images/ibm-cloud-proof02-token-translation.png`
+  - Source: private IBM design archive screenshot dated 2023-09-14; original retained outside the repository
+  - Treatment: source RGBA pixels flattened onto white; screenshot metadata stripped; visible framing and content unchanged
+  - Public-state boundary: internal exploration, not proof of shipment
+  - Dimensions: `1322 × 440`
+  - SHA-256: `9a0e4971a673cb3b5c8b5b05e34bdfa2f18c3126d65c9b1d39671be3100ceb17`
+
+A second chart candidate was removed after independent privacy review because sanitizing labels and axes did not remove the operational meaning carried by its title and relative geometry. It is not present in the repository or public webpage. Monitoring remains text-led, and no replacement data or reconstructed chart was created.
+
 ### Visual systems
 
 - `images/ibm-cloud-concept-to-final.png`

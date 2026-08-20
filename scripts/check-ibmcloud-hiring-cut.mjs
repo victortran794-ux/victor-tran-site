@@ -66,6 +66,10 @@ for (const phrase of [
   'images/ibm-cloud-concept-to-final.png',
   'images/ibm-cloud-isometric-compositions.png',
   'images/ibm-cloud-service-icons.png',
+  'images/ibm-cloud-proof02-token-translation.png',
+  'Translating the visual system',
+  'I mapped source visualization roles toward IBM theme values, revealing where token transfer worked and where manual decisions remained.',
+  'Internal exploration · Not proof of shipment',
   'I took this component into high fidelity, focusing on hierarchy, connection status, and actions.',
   'The first round framed the research questions around subscription structure and flow.',
   'The findings sharpened hierarchy, terminology, and expectations for reusable destinations and sources.',
@@ -100,6 +104,7 @@ for (const phrase of [
   'first self-led product-design journey',
   'Design the next step.',
   'data:image/',
+  'images/ibm-cloud-proof02-data-visualization-sanitized.png',
   'ibm-en-conditions.jpg',
   'ibm-en-custom-domains.jpg',
   '<dt>Client</dt>',
@@ -122,7 +127,7 @@ const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
 require(narrativeWords <= 950, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
 require(!html.includes('Pending protected asset selection'), 'cleared supporting images must replace both pending evidence reservations');
 require(!html.includes('data-asset-status="victor-selection-required"'), 'IBM Cloud must not retain a Victor-selection placeholder after cleared assets are supplied');
-require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 8, 'expected exactly eight curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
+require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 9, 'expected exactly nine curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
 require((html.match(/class="[^"]*\bibm-tech-context\b[^"]*"/g) || []).length === 1, 'expected one dedicated technical-context figure near the opening');
 
 const selectedAssets = {
@@ -181,6 +186,11 @@ const selectedAssets = {
     width: '1024',
     height: '292',
   },
+  'images/ibm-cloud-proof02-token-translation.png': {
+    sha256: '9a0e4971a673cb3b5c8b5b05e34bdfa2f18c3126d65c9b1d39671be3100ceb17',
+    width: '1322',
+    height: '440',
+  },
   'images/ibm-cloud-code-engine-light.png': { sha256: 'ff92d0376ee9d9856d4d765e046853049efd0ea3b89f18deba0bbf5cde26a8b0', width: '960', height: '540' },
   'images/ibm-cloud-code-engine-dark.png': { sha256: 'fb1d537c314db31d8aea0e40909da3ea15ddb00f74bc8216b66622d6d781394a', width: '960', height: '540' },
   'images/ibm-cloud-observability-light.png': { sha256: 'dc0c325182ca6f77ed2e9a2168c574c024c4614505009b909cff0447d738b172', width: '960', height: '540' },
@@ -233,7 +243,7 @@ if (fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css'))) {
   require(css.includes('[data-project="ibm-cloud"]'), 'IBM hiring CSS must be scoped by data-project');
   require(css.includes('[data-project="ibm-cloud"] .ibm-hiring-hero {') && css.includes('border-bottom: 0;'), 'IBM Cloud must remove the crowded page-header divider');
   require(css.includes('[data-project="ibm-cloud"] .ibm-evidence-artifact'), 'IBM Cloud selected evidence artifacts are unstyled');
-  for (const selector of ['.ibm-tech-context', '.ibm-research-pair', '.ibm-visual-sequence']) {
+  for (const selector of ['.ibm-tech-context', '.ibm-research-pair', '.ibm-adaptation-evidence', '.ibm-visual-sequence']) {
     require(css.includes(`[data-project="ibm-cloud"] ${selector}`), `IBM Cloud revised evidence sequence is missing styles for ${selector}`);
   }
   require(css.includes('grid-template-rows: auto 1fr;'), 'IBM Cloud research cards must absorb unequal caption height without a white bar');

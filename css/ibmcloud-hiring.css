@@ -338,6 +338,28 @@
   margin-right: 0;
 }
 
+[data-project="ibm-cloud"] .ibm-adaptation-evidence {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  max-width: 1100px;
+  margin: clamp(56px, 9vw, 104px) auto 0;
+}
+
+[data-project="ibm-cloud"] .ibm-adaptation-evidence .ibm-evidence-artifact {
+  width: 100%;
+  margin-top: 0;
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+}
+
+[data-project="ibm-cloud"] .ibm-adaptation-artifact h3 {
+  margin: 0 0 var(--space-3);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
 [data-project="ibm-cloud"] .ibm-action-map {
   margin-top: clamp(52px, 8vw, 92px);
   border-top: 1px solid var(--border);

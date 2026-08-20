@@ -75,7 +75,7 @@ IBM Cloud Logs was based on Coralogix's white-label observability offering. In F
 
 Those explorations tested visual consistency and identified where the first overhaul would need manual intervention. These explorations helped scope the adaptation work, but they should not be read as proof that every explored state shipped.
 
-Working method
+I mapped source visualization roles toward IBM theme values, revealing where token transfer worked and where manual decisions remained.
 
 Proof 03 · Built visual methods for reuse
 
@@ -118,6 +118,7 @@ Design can save time by reducing uncertainty, uncover valuable information, and 
 - Event Notifications research roles and questions about subscription structure and creation flow: images/ibm-cloud-research-framing.png
 - Event Notifications findings about subscription structure, terminology, and creation flow: images/ibm-cloud-research-findings.png
 - IBM Cloud subscription card component explorations showing hierarchy, status, and connected services: images/ibm-cloud-card-component-design.png
+- Source token study mapping visualization roles and colors toward IBM theme values: images/ibm-cloud-proof02-token-translation.png
 - IBM Cloud concept sketches progressing through shared isometric construction studies: images/ibm-cloud-concept-to-final.png
 - IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules: images/ibm-cloud-visual-system-foundations.png
 - Code Engine illustration in the light theme: images/ibm-cloud-code-engine-light.png

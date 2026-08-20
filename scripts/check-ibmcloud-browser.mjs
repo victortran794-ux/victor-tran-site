@@ -136,18 +136,20 @@ try {
         const controls=[...document.querySelectorAll('.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
+        const adaptationCards=[...document.querySelectorAll('.ibm-adaptation-artifact')].map((card)=>{const r=card.getBoundingClientRect();const image=card.querySelector('img');return {width:r.width,left:r.left,right:r.right,src:image?.getAttribute('src'),natural:[image?.naturalWidth||0,image?.naturalHeight||0],alt:image?.getAttribute('alt')||''}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),controls,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
           proofs:document.querySelectorAll('.ibm-proof').length,artifacts:document.querySelectorAll('.ibm-evidence-artifact').length,techContext:document.querySelectorAll('.ibm-tech-context').length,reservations:document.querySelectorAll('.ibm-evidence-reservation').length,atlas:Boolean(document.querySelector('.ibm-visual-atlas')),
           client:[...document.querySelectorAll('.case-study-meta dt')].some((node)=>node.textContent.trim()==='Client'),heroBorder:getComputedStyle(hero).borderBottomWidth,
-          openingEvidenceTop:document.querySelector('.ibm-hiring-hero-art').getBoundingClientRect().top};
+          openingEvidenceTop:document.querySelector('.ibm-hiring-hero-art').getBoundingClientRect().top,adaptationCards};
       })()`);
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
       assert((theme === 'dark' ? state.theme === 'dark' : !state.theme || state.theme === 'light') && state.stored === theme, `theme failed ${viewport.label} ${theme}`);
       assert(state.overflow === 0, `${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images === 26 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
-      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 8 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.images === 27 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 9 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.adaptationCards.length === 1 && state.adaptationCards.every((card)=>card.width>0&&card.left>=0&&card.right<=viewport.width&&card.natural[0]>0&&card.natural[1]>0&&card.alt.length>0), `Proof 02 adaptation evidence drifted at ${viewport.label} ${theme}: ${JSON.stringify(state.adaptationCards)}`);
       assert(state.heroBorder === '0px', `crowded header divider returned at ${viewport.label} ${theme}`);
       if (viewport.width === 390) {
         assert(state.openingEvidenceTop <= 720, `IBM Cloud opening evidence begins too late at ${state.openingEvidenceTop}px`);
@@ -159,11 +161,17 @@ try {
         await cdp.evaluate(`document.querySelector('#event-flow-artifact').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-390-light-event-flow-artifact.png');
+        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'start',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('ibm-cloud-390-light-proof02-token-translation.png');
       }
       if (viewport.width === 1440 && theme === 'dark') {
         await cdp.evaluate(`document.getElementById('team-action').scrollIntoView({block:'start',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-1440-dark-team-action.png');
+        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'start',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('ibm-cloud-1440-dark-proof02-token-translation.png');
         await cdp.evaluate(`document.querySelector('.ibm-theme-family').scrollIntoView({block:'start',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-1440-dark-theme-family.png');
@@ -179,7 +187,7 @@ try {
 
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=26 proofs=3 artifacts=8 tech_context=1 reservations=0 overflow=0 public=pass controls=pass`);
+  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=27 proofs=3 artifacts=9 adaptation_artifacts=1 tech_context=1 reservations=0 overflow=0 public=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

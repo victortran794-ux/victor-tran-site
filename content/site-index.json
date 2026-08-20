@@ -219,16 +219,16 @@
         "alt": "IBM Cloud subscription card component explorations showing hierarchy, status, and connected services"
       },
       {
+        "src": "images/ibm-cloud-proof02-token-translation.png",
+        "alt": "Source token study mapping visualization roles and colors toward IBM theme values"
+      },
+      {
         "src": "images/ibm-cloud-concept-to-final.png",
         "alt": "IBM Cloud concept sketches progressing through shared isometric construction studies"
       },
       {
         "src": "images/ibm-cloud-visual-system-foundations.png",
         "alt": "IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules"
-      },
-      {
-        "src": "images/ibm-cloud-code-engine-light.png",
-        "alt": "Code Engine illustration in the light theme"
       }
     ],
     "projects": []
