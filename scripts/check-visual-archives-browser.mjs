@@ -379,8 +379,8 @@ const pageSpecs = {
     file: 'uigallery.html',
     bodyClass: 'ui-gallery-page',
     archive: 'ui-gallery',
-    mainImages: 3,
-    captions: 2,
+    mainImages: 8,
+    captions: 6,
   },
 };
 
@@ -450,7 +450,8 @@ try {
             return 0.2126 * r + 0.7152 * g + 0.0722 * b;
           };
           const outlineLum = luminance(getComputedStyle(focusTarget).outlineColor);
-          const surfaceLum = luminance(getComputedStyle(document.querySelector('.archive-primary')).backgroundColor);
+          const focusSurface = focusTarget?.closest('.ui-study') || document.querySelector('.archive-primary');
+          const surfaceLum = luminance(getComputedStyle(focusSurface).backgroundColor);
           const focusContrast = (Math.max(outlineLum, surfaceLum) + 0.05) / (Math.min(outlineLum, surfaceLum) + 0.05);
           return {
             width: innerWidth,
@@ -486,6 +487,7 @@ try {
             mendenhallFit: document.querySelector('.mendenhall-archive-trigger > img') ? getComputedStyle(document.querySelector('.mendenhall-archive-trigger > img')).objectFit : null,
             uiViews: document.querySelectorAll('[data-ui-study-view]').length,
             uiBackground: getComputedStyle(document.body).backgroundColor,
+            uiMagiBackground: document.querySelector('.ui-study--magi') ? getComputedStyle(document.querySelector('.ui-study--magi')).backgroundColor : null,
             uiViewNames: [...document.querySelectorAll('[data-ui-study-view]')].map((view) => view.dataset.uiStudyView),
             uiImageSources: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => image.getAttribute('src')),
             uiImageDimensions: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => ({
@@ -515,11 +517,10 @@ try {
             })(),
             uiMagiEdges: [...document.querySelectorAll('.ui-study-grid--magi .ui-study-view > img')]
               .map((image) => getComputedStyle(image).boxShadow),
-            uiScrollScreen: (() => {
-              const screen = document.querySelector('[data-ui-scroll-screen]');
-              if (!screen) return null;
+            uiScrollScreens: [...document.querySelectorAll('[data-ui-scroll-screen]')].map((screen) => {
               const rect = screen.getBoundingClientRect();
               return {
+                role: screen.dataset.uiScrollScreen,
                 width: Math.round(rect.width),
                 height: Math.round(rect.height),
                 clientHeight: screen.clientHeight,
@@ -527,7 +528,7 @@ try {
                 overflowY: getComputedStyle(screen).overflowY,
                 tabindex: screen.tabIndex,
               };
-            })(),
+            }),
             uiLayout: [...document.querySelectorAll('[data-ui-study-view]')].map((view) => {
               const rect = view.getBoundingClientRect();
               return { left: Math.round(rect.left), top: Math.round(rect.top), width: Math.round(rect.width) };
@@ -607,49 +608,67 @@ try {
           const expectedUiBackground = theme === 'dark' ? 'rgb(12, 17, 22)' : 'rgb(238, 241, 239)';
           assert(state.uiBackground === expectedUiBackground,
             `uigallery.html: ${theme} palette did not apply; expected ${expectedUiBackground}, found ${state.uiBackground}`);
-          assert(state.uiViews === 3 && state.uiLayout.length === 3,
-            `uigallery.html: expected exactly three static UI study views; found ${state.uiViews}`);
+          assert(state.uiViews === 8 && state.uiLayout.length === 8,
+            `uigallery.html: expected two complete Ekos frames and six curated Magi study views; found ${state.uiViews}`);
           assert(JSON.stringify(state.uiViewNames) === JSON.stringify([
-            'ekos-desktop', 'magi-overview', 'magi-architecture',
-          ]), `uigallery.html: minimal gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
+            'ekos-desktop', 'ekos-mobile', 'magi-overview', 'magi-architecture',
+            'magi-overlays', 'magi-color-type', 'magi-components', 'magi-node-states',
+          ]), `uigallery.html: gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
           assert(JSON.stringify(state.uiImageSources) === JSON.stringify([
             'images/ui-gallery/ekos-desktop.webp',
+            'images/ui-gallery/ekos-mobile.webp',
             'images/ui-gallery/magi-overview.webp',
             'images/ui-gallery/magi-architecture.webp',
-          ]), `uigallery.html: minimal gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
+            'images/ui-gallery/magi-overlays.webp',
+            'images/ui-gallery/magi-color-type.webp',
+            'images/ui-gallery/magi-components.webp',
+            'images/ui-gallery/magi-node-states.webp',
+          ]), `uigallery.html: gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
           assert(state.uiImageDimensions.every((image) => image.naturalWidth === image.declaredWidth && image.naturalHeight === image.declaredHeight),
             `uigallery.html: declared dimensions do not match decoded media: ${JSON.stringify(state.uiImageDimensions)}`);
-          assert(state.uiImageLayout.slice(1).every((image) => Math.abs((image.width / image.height) - 1.6) <= 0.03),
-            `uigallery.html: Magi screen ratios drifted: ${JSON.stringify(state.uiImageLayout)}`);
+          assert(state.uiImageLayout.slice(2).every((image, index) => {
+            const declared = state.uiImageDimensions[index + 2];
+            const expectedHeight = Math.round(image.width * declared.declaredHeight / declared.declaredWidth);
+            return Math.abs(image.height - expectedHeight) <= 1;
+          }), `uigallery.html: a Magi frame is cropped or distorted: ${JSON.stringify(state.uiImageLayout)}`);
+          assert(state.uiMagiBackground === 'rgb(7, 16, 15)',
+            `uigallery.html: Magi dark-canvas presentation drifted: ${state.uiMagiBackground}`);
           assert(state.uiCursor && state.uiCursor.dotBackground === 'rgb(186, 255, 80)' &&
             state.uiCursor.dotShadow !== 'none' && state.uiCursor.ringBorder === 'rgb(186, 255, 80)' &&
             state.uiCursor.ringShadow !== 'none' && Number(state.uiCursor.ringOpacity) >= 0.8,
             `uigallery.html: custom cursor can lose contrast over mixed artwork: ${JSON.stringify(state.uiCursor)}`);
-          const expectedMagiEdge = theme === 'dark';
-          assert(state.uiMagiEdges.length === 2 && state.uiMagiEdges.every((shadow) => expectedMagiEdge ? shadow !== 'none' : shadow === 'none'),
-            `uigallery.html: Magi edge must be subtle and dark-theme-only: ${JSON.stringify({ theme, edges: state.uiMagiEdges })}`);
-          const expectedScrollRatio = viewport.mobile ? (4 / 5) : 1.6;
-          assert(state.uiScrollScreen && Math.abs((state.uiScrollScreen.width / state.uiScrollScreen.height) - expectedScrollRatio) <= 0.03 &&
-            state.uiScrollScreen.scrollHeight > state.uiScrollScreen.clientHeight && state.uiScrollScreen.overflowY === 'auto' && state.uiScrollScreen.tabindex === 0,
-            `uigallery.html: Ekos screen is not a keyboard-focusable, scrollable responsive viewport: ${JSON.stringify(state.uiScrollScreen)}`);
+          assert(state.uiMagiEdges.length === 6 && state.uiMagiEdges.every((shadow) => shadow === 'none'),
+            `uigallery.html: Magi frames must remain borderless on the dark canvas: ${JSON.stringify(state.uiMagiEdges)}`);
+          const expectedScrollRatios = viewport.mobile ? { desktop: 4 / 5, mobile: 9 / 16 } : { desktop: 1.6, mobile: 9 / 16 };
+          assert(state.uiScrollScreens.length === 2 && state.uiScrollScreens.every((screen) =>
+            Math.abs((screen.width / screen.height) - expectedScrollRatios[screen.role]) <= 0.03 &&
+            screen.scrollHeight > screen.clientHeight && screen.overflowY === 'auto' && screen.tabindex === 0),
+            `uigallery.html: Ekos frames are not keyboard-focusable, scrollable responsive viewports: ${JSON.stringify(state.uiScrollScreens)}`);
           const scrolledEkos = await cdp.evaluate(`(() => {
-            const screen = document.querySelector('[data-ui-scroll-screen]');
-            screen.scrollTop = screen.scrollHeight;
-            const moved = screen.scrollTop;
-            screen.scrollTop = 0;
-            return moved;
+            return [...document.querySelectorAll('[data-ui-scroll-screen]')].map((screen) => {
+              screen.scrollTop = screen.scrollHeight;
+              const moved = screen.scrollTop;
+              screen.scrollTop = 0;
+              return moved;
+            });
           })()`);
-          assert(scrolledEkos > 0, `uigallery.html: Ekos screen did not scroll through the complete page.`);
-          const [ekosDesktop, magiOverview, magiArchitecture] = state.uiLayout;
+          assert(scrolledEkos.length === 2 && scrolledEkos.every((distance) => distance > 0), `uigallery.html: both Ekos frames must scroll through their complete pages.`);
+          const [ekosDesktop, ekosMobile, magiOverview, magiArchitecture, magiOverlays, magiColorType, magiComponents, magiNodeStates] = state.uiLayout;
           if (viewport.mobile) {
-            assert(Math.abs(magiOverview.left - magiArchitecture.left) <= 1 && magiOverview.top < magiArchitecture.top,
-              `uigallery.html: mobile Magi studies do not stack the overview first: ${JSON.stringify(state.uiLayout)}`);
+            assert(state.uiLayout.every((view) => Math.abs(ekosDesktop.left - view.left) <= 1) &&
+              state.uiLayout.every((view, index, views) => index === 0 || views[index - 1].top < view.top),
+              `uigallery.html: mobile studies do not stack in authored order: ${JSON.stringify(state.uiLayout)}`);
           } else {
-            const magiRatio = magiOverview.width / (magiOverview.width + magiArchitecture.width);
-            assert(Math.abs(magiOverview.top - magiArchitecture.top) <= 1 && magiOverview.left < magiArchitecture.left && magiRatio >= 0.63 && magiRatio <= 0.69,
-              `uigallery.html: desktop Magi studies must remain an overview-led 65/35 pair: ${JSON.stringify({ magiRatio, layout: state.uiLayout })}`);
-            assert(ekosDesktop.width > magiOverview.width,
-              `uigallery.html: the single Ekos screen must remain the full-width gallery lead: ${JSON.stringify(state.uiLayout)}`);
+            assert(ekosDesktop.top < ekosMobile.top && ekosDesktop.width > ekosMobile.width && ekosMobile.left > ekosDesktop.left,
+              `uigallery.html: Ekos desktop/mobile hierarchy drifted: ${JSON.stringify(state.uiLayout)}`);
+            assert(magiOverview.top < magiArchitecture.top && magiOverview.width > magiArchitecture.width &&
+              magiArchitecture.top === magiOverlays.top && magiArchitecture.width > magiOverlays.width,
+              `uigallery.html: Magi lead and structural pair hierarchy drifted: ${JSON.stringify(state.uiLayout)}`);
+            assert(magiColorType.top === magiComponents.top && magiColorType.width < magiComponents.width &&
+              magiNodeStates.top > magiComponents.top && magiNodeStates.width === magiOverview.width,
+              `uigallery.html: Magi system pair and closing state strip drifted: ${JSON.stringify(state.uiLayout)}`);
+            assert(ekosDesktop.width >= magiOverview.width,
+              `uigallery.html: Ekos must remain at least as wide as the Magi dashboard lead: ${JSON.stringify(state.uiLayout)}`);
           }
         }
 
