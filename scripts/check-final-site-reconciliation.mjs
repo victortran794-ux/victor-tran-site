@@ -115,8 +115,8 @@ forbid(docs.dashboard, /await(?:s|ing) (?:Victor's )?preview/i, 'dashboard must 
 forbid(docs.dashboard, /Heart of the Frozen Void assets are parked/i, 'dashboard must not carry the completed Heart of the Frozen Void asset reminder');
 forbid(docs.dashboard, /theme-continuity work remains an isolated preview proof/i, 'dashboard must not describe released Theme Continuity work as a preview');
 
-requireText(docs.dashboard, 'Last updated: 2026-08-16', 'dashboard must use the August 16 current-status date');
-forbid(docs.dashboard, /Last updated: 2026-08-0[89]/i, 'dashboard must not retain the August 8 or August 9 current-status date');
+requireText(docs.dashboard, 'Last updated: 2026-08-21', 'dashboard must use the August 21 PR #160 closeout date');
+forbid(docs.dashboard, /Last updated: 2026-08-(?:0[89]|16)/i, 'dashboard must not retain a superseded August 8, August 9, or August 16 current-status date');
 forbid(docs.dashboard, /Final whole-site reconciliation is active/i, 'dashboard must not describe the closed whole-site reconciliation as active');
 forbid(docs.dashboard, /asset-dependent items and separate route-opening gates remain open/i, 'dashboard must not describe parked asset work as an open release blocker');
 forbid(docs.dashboard, /Keep broader DNA reassessment parked/i, 'dashboard must not describe broader DNA reassessment as parked');

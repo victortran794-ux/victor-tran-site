@@ -1,6 +1,6 @@
 # Portfolio Dashboard
 
-Last updated: 2026-08-16
+Last updated: 2026-08-21
 
 This is the quick cockpit for portfolio work: what exists, what state it is in, and what to do next.
 
@@ -16,11 +16,13 @@ Consult next:
 - `content/design-system.md` and `content/design-system.json` for design system principles and tokens.
 - `archive/planning/README.md` for historical planning context only.
 
-## Active plan
+## Current portfolio state
 
-### Current active plan
+### Current baseline
 
-Victor's August 7 desk review remains the content authority for the completed enhancement cycle. The bounded page, shell, gallery, accessibility, recruiter-facing alignment, and three-route Theme Continuity lanes are production-verified through PR #152; the Vercel application was subsequently submitted and closed. The Mendenhall delivery optimization is production-verified through PR #153 at `00364c03e3a522274027bf538be8c0d420d26a2e`. The clearer Light/Dark glyph, selected-state, semantic floating-surface, and reduced-motion treatment is production-verified across every live shared-shell route through PR #154 at `8644d9f65f62e2ef9540b94d883d3208f038d802`, while route-specific Theme Continuity content remains scoped to Home, IBM Cloud, and About. The optional PCI orientation proof was evaluated and discarded because it duplicated the global Work navigation and immediate project title without enough reader benefit. wxO remains password-gated, `noindex`, and omitted from the sitemap. Document Processing remains a protected chapter inside wxO rather than a separate public route. Getting In is retired from the public portfolio and retained only as private authored source material. Pi Kapp and Heart of the Frozen Void are public and closed. Future Canvas and future gallery overlays are parked, UI Fragments is review-later, and server-side protection is review-only when a concrete need exists.
+Victor's August 7 desk review remains the content authority for the completed enhancement cycle. The bounded page, shell, gallery, accessibility, recruiter-facing alignment, and three-route Theme Continuity lanes are production-verified through PR #152; the Vercel application was subsequently submitted and closed. The Mendenhall delivery optimization is production-verified through PR #153 at `00364c03e3a522274027bf538be8c0d420d26a2e`. The clearer Light/Dark treatment is production-verified across every live shared-shell route through PR #154 at `8644d9f65f62e2ef9540b94d883d3208f038d802`, while route-specific Theme Continuity content remains scoped to Home, IBM Cloud, and About. The optional PCI orientation proof was evaluated and discarded. Recruiter-scan, IBM Cloud evidence, Pi Kapp authorship, and consolidated public-route authorship work are production-verified through PR #160 at `8cb9ed18a2dfb18e95721c90e614c852876bded4`. PR #160 refined IBM Patterns copy and the UI Gallery homepage framing after source-first audits found no defensible change for Star & Lamp, The Ability Experience, PCI, Art & Illustration, Graphic Design, or the UI Gallery route. wxO remains password-gated, `noindex`, and omitted from the sitemap. Document Processing remains a protected chapter inside wxO rather than a separate public route. Getting In is retired from the public portfolio. Pi Kapp and Heart of the Frozen Void are public and closed. No further enhancement lane is queued. Future Canvas and future gallery overlays are parked, UI Fragments is review-later, and server-side protection is review-only when a concrete need exists.
+
+The **authorship and website-evidence readiness** lane is complete. The review preserved project-specific authorship, rejected cosmetic churn, and shipped only source-backed corrections. No public-site implementation lane is active. Presentation preparation remains interview-triggered rather than part of the website queue.
 
 Master review and alignment records:
 
@@ -31,9 +33,11 @@ Master review and alignment records:
 
 ### Current next actions
 
-1. Preserve wxO protection. Password gate, `noindex`, sitemap omission, export policy, route behavior, and confidentiality boundaries change only through a separate explicit clearance and release lane.
-2. Keep the July 31 Art/Graphic worktree historical and frozen. Preserve the July 24 `portfolio-dashboard checkpoint before PR 95 main sync` stash as historical recovery material only; never apply it as current status.
-3. Keep Future Canvas and future gallery overlays parked, UI Fragments review-later, and server-side protection review-only on a concrete need. Retired concepts do not create a new queue.
+1. Hold the public portfolio at the PR #160 production baseline. Reopen a route only for new authored evidence, a concrete hiring target, verified live-site defect, recruiter/interview request, or explicit protection/publication decision.
+2. Preserve the 30-to-60-second recruiter opening and add deeper chapters only when new source evidence supports a real story. Do not create generic process prose or cosmetic work merely to keep the queue moving.
+3. Preserve wxO protection. Password gate, `noindex`, sitemap omission, export policy, route behavior, and confidentiality boundaries change only through a separate explicit clearance and release lane.
+4. Keep historical worktrees frozen and preserve the `portfolio-dashboard checkpoint before PR 95 main sync` stash as recovery material only; never apply it as current status.
+5. Keep Future Canvas, future gallery overlays, A2UI, UI Fragments, and server-side protection parked or review-only until a concrete need creates a new bounded lane.
 
 ### Supporting historical context
 
@@ -44,7 +48,7 @@ Master review and alignment records:
 
 ## Current enhancement phase
 
-Status: the bounded August 7 cycle, subsequent gallery/accessibility work, recruiter-facing alignment, three-route Theme Continuity treatment, Mendenhall delivery optimization, and shared Light/Dark control treatment are production-verified through PR #154. The Vercel application is submitted and closed. The optional PCI orientation proof was assessed as a no-go and discarded without a commit or production change. The public portfolio has one intended locked story, wxO, with Document Processing contained as its protected chapter. Protected exports remain source-independent public stubs omitted from the public index. No further enhancement lane is queued. New concepts require their own bounded preview, verification, and explicit release approval.
+Status: the public portfolio is production-verified through PR #160 at `8cb9ed18a2dfb18e95721c90e614c852876bded4`. The authorship and website-evidence audit is closed with every reviewed public route either source-backed and shipped or explicitly kept unchanged. The portfolio has one intended locked story, wxO, with Document Processing contained as its protected chapter. Protected exports remain source-independent public stubs omitted from the public index. No public-site enhancement lane is queued. Presentation work remains interview-triggered, and any future visual, narrative, route, protection, or publication change requires a new bounded proposal, preview, verification, and explicit release approval.
 
 Recent shipped work:
 
@@ -59,9 +63,10 @@ Recent shipped work:
 - About voiceover cleanup shipped in PRs #71 and #72: the game-show wording was replaced with `open to voice over work`, the generated About export and profile Markdown were aligned, and the repo returned to clean synced `main`.
 - About page remains otherwise unchanged after the reverted program-note experiment.
 - A2UI experiments are parked: the standalone `a2ui.html` branch remains unmerged, and the inline About-page prototype is contained under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`.
-- Pi Kapp is public, production-verified, and closed; no additional pages are queued.
+- Pi Kapp's source-first case study, cleaned identity-pattern presentation, reproducible remaster, and contained runnable V2 are production-verified through PR #159. Its unlinked `noindex` system page remains intentionally deferred; no further Pi Kapp work or route is queued.
 - Getting In is retired from public navigation and preserved only as private authored source material.
-- The IBM Cloud eleven-artifact Figma expansion production-verified in PR #135 remains the approved supporting-image baseline; no further IBM Cloud image work is queued.
+- The IBM Cloud eleven-artifact Figma expansion production-verified in PR #135 remains the approved supporting-image baseline. PR #158 made Event Notifications the primary UX evidence chain, retained the publication-safe IBM Cloud Logs token study, and removed the rejected operational chart rather than fabricating replacement evidence. The lane is production-verified and closed.
+- PR #160 refined IBM Patterns copy and the UI Gallery homepage description, preserved six audited public routes unchanged, passed independent exact-diff review and default-branch CI, and was production-verified at `8cb9ed18a2dfb18e95721c90e614c852876bded4`.
 - Homepage thumbnail replaced with the approved Final Playback cover and production-verified in PR #133; IBM Patterns remains closed with the approved concept-boundary copy.
 - UI Gallery is public with one complete scrollable Ekos artifact, sanitized static Magi studies, and verified lightbox accessibility across Art, Graphic Design, and UI Gallery.
 - PR #150 fixed the closed gallery dialog lifecycle and was production-verified for keyboard activation, focus transfer, Escape close, and exact trigger restoration.
@@ -236,6 +241,38 @@ Parked outside the controlled redesign:
 
 Status: the existing home-page Design DNA overlay is live. A bounded lens-to-DNA comparison is active in the Home lane, while broader Lens expansion remains parked. A2UI remains a contained experiment under `archive/experiments/a2ui-inline-about-methodology-2026-06-06/`; the parked standalone `a2ui.html` branch must not be merged or promoted as-is. VicO2 may eventually style a real implementation, but visual compatibility does not make the technology or claims ready.
 
+### F. Authorship and website-evidence readiness
+
+Purpose: ensure each page carries Victor's intentional, project-specific decisions and presents credible evidence without generic portfolio or framework-default treatment.
+
+Status: completed through PR #160. The page-by-page audit and bounded corrections are production-verified; no follow-on visual implementation is queued. Presentation preparation remains deferred until a concrete interview.
+
+Immediate outputs:
+
+- A page-by-page authorship audit separating clearly project-specific choices from generic portfolio, AI-generated-design, and framework-default conventions.
+- A direct recommendation for each flagged pattern: keep and explain, restyle with project evidence, replace, simplify, or remove.
+- A webpage narrative check grounded in verified role, artifacts, chronology, collaboration, and outcome boundaries.
+
+Long-form enhancement:
+
+- Keep the opening movement optimized for a 30-to-60-second recruiter scan.
+- Add optional deeper chapters only when they help Victor explain the project: context, role, constraints, design decisions, iterations, evidence, outcome or non-outcome, and reflection.
+- Let images, complete authored frames, and specific artifacts carry the story. Do not add generic design-process diagrams or prose merely to make a page feel substantial.
+- Treat each project as its own editorial composition. Shared shell and accessibility behavior stay consistent, while color, typography, pacing, image treatment, diagrams, and section transitions must come from the project's actual identity and evidence.
+
+Deferred review-only item:
+
+- `pikappapp/system.html` remains an unlinked `noindex` page and is intentionally deferred. Its Tailwind usage does not create an active rewrite or publication lane.
+
+Boundaries:
+
+- No fabricated process, outcomes, metrics, user quotes, dashboards, interactions, or design rationale.
+- No blanket ban on cards, grids, gradients, pills, rounded corners, or Tailwind. Keep them when they are the right project-specific choice and Victor can explain why.
+- No site-wide visual homogenization. Findings become small page or project-family proposals.
+- Preserve public/protected boundaries and do not expose protected content during audit or implementation.
+- Do not create decks, rehearsal notes, presentation run-of-show material, or peer-Q&A packages until an interview creates a concrete need.
+- Victor approves the direction before implementation and separately approves preview, merge, and release.
+
 ## Status legend
 
 - `idea` — rough concept only
@@ -263,9 +300,9 @@ Every item in `PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md` is classified below. Nothi
 - Ability Experience mark/iconography/illustration/application sequence.
 - Pi Kapp archive behavior, user icons, restrained evidence caption, corrected future-screen treatment, and Art next link.
 
-### No remaining enhancement lane
+### Closed cross-site enhancement lane
 
-- None. Global theme-control consistency is released, and the separate PCI orientation proof was evaluated as a no-go and discarded.
+- Authorship and website-evidence readiness is complete through PR #160. No active page-change queue remains; presentation work stays interview-triggered.
 
 ### Explicitly asset-dependent or separately release-gated
 
@@ -277,16 +314,16 @@ Every item in `PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md` is classified below. Nothi
 
 | Project | Current checkpoint | Visibility | Canonical package | Remaining action | Blockers / cautions |
 |---|---|---|---|---|---|
-| Home + global shell | production-verified through PR #154; three-route Theme Continuity remains scoped to Home, IBM Cloud, and About | public | Current `main` plus August 7 master notes | None | No redesign, route change, or protection change without a new bounded lane |
+| Home + global shell | production-verified through PR #157; three-route Theme Continuity remains scoped to Home, IBM Cloud, and About | public | Current `main` plus August 7 master notes | None | No redesign, route change, or protection change without a new bounded lane |
 | About | production-verified through PR #154 with bounded jump navigation and shared control refinement | public | Current `main`, `content/about.md`, and `content/profile.md` | None | Preserve casual Victor voice, first-generation/BFA context, restrained role hierarchy, and direct contact language |
 | wxO Canvas | production-verified protected story with official lowercase `watsonx` naming | protected, `noindex`, homepage/Work visible with lock, omitted from sitemap | Current `main` plus `Website Items\Portfolio Packages\wxO Canvas\` | No current evidence action; keep Future Canvas parked | Only intended locked story; never store the password; Future Canvas must not invent behavior or replace authored V1 |
 | Document Processing | production-verified chapter inside wxO | protected, `noindex`, hidden from public index, omitted from sitemap; `/document-processing` redirects to the wxO chapter | Current `main` plus `Website Items\Portfolio Packages\Document Processing\` | No current action | Preserve July 2026 release state, collaboration boundaries, sanitized media, and source-independent public stub |
-| IBM Cloud | production-verified public story; chronology confirmed as 2021–2023 | public, indexable, included in sitemap | Current `main`, supplied Figma Updates file, plus `Website Items\Portfolio Packages\IBM Cloud\` | No page action | Preserve employer/customer distinction, provenance, experiment framing, and claims boundaries |
-| IBM Patterns | production-verified public story with the approved concept-boundary copy | public, indexable, included in sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Patterns\` | No current action | Preserve six-week, five-person, non-shipped, influence, authorship, and collaboration boundaries |
+| IBM Cloud | production-verified through PR #158; chronology confirmed as 2021–2023 | public, indexable, included in sitemap | Current `main`, supplied Figma Updates file, plus `Website Items\Portfolio Packages\IBM Cloud\` | No page action | Preserve employer/customer distinction, provenance, experiment framing, research privacy, and proposed/not-shipped boundaries |
+| IBM Patterns | production-verified through PR #160 with approved copy polish and concept boundaries | public, indexable, included in sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Patterns\` | No current action | Preserve six-week, five-person, non-shipped, influence, authorship, and collaboration boundaries |
 | PCI | production-verified sanitized public story | public, indexable, included in sitemap | Current `main` plus `Website Items\Portfolio Packages\PCI\` | No content expansion without another source review | Never unblur source files or imply logo authorship; preserve concept/composite boundaries and conservative claims |
 | Star & Lamp / SAL Magazine | production-verified public story | public | Current `main` plus `Website Items\Portfolio Packages\Star & Lamp\` | No page action | Preserve verified chronology, role, award language, issue links, and source-backed spreads |
 | Ability Experience | production-verified public story | public | Current `main` | No page action | Preserve current sequence and claims as a live VicO2 reference |
-| Pi Kapp App | production-verified public story; closed | public | Current `main` plus `Website Items\Portfolio Packages\Pi Kapp\` | None unless Victor explicitly reopens it | Preserve historical webpage versus speculative V2 distinction, prototype-data labels, non-shipped framing, and AI provenance boundaries |
+| Pi Kapp App | production-verified through PR #159; source-first authorship refinement closed | public | Current `main` plus `Website Items\Portfolio Packages\Pi Kapp\` | No current action; keep the unlinked `noindex` system page deferred | Preserve historical source versus remaster distinction, prototype-data labels, non-shipped framing, and AI provenance boundaries |
 | Art & Illustration | production-verified public archive | public | Current `main` plus `Website Items\Portfolio Packages\Art & Illustration\` | No page action | Preserve production image set, rights, authorship boundaries, viewer behavior, and artwork-first identity |
 | Graphic Design | production-verified public archive; Mendenhall delivery optimization released; Heart of the Frozen Void live and complete | public | Current `main`, `Website Items\Portfolio Packages\Graphic Design\`, and the private Mendenhall source master | No current delivery action | Preserve production source set, rights/client boundaries, editorial identity, complete authored frames, and distinct Mendenhall / Heart of the Frozen Void provenance |
 | UI Gallery | production-verified public archive with PR #150 lightbox accessibility fix | public | Current `main` and sanitized gallery sources | No page action | Preserve complete Ekos artifact, static sanitized Magi studies, privacy boundaries, and accessible lightbox lifecycle |
