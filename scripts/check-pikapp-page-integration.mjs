@@ -137,7 +137,7 @@ const assetHashes = {
   'images/pikapp-case-study/exploration-profile.png': 'b54b3a0a950f2c9c912051ebb28a4db34042401b5f1cc0bf31f61a986de1c518',
   'images/pikapp-case-study/pattern-dark-blue-display.svg': '3050763379deb29578f865c3b8d4a4df164591654a842cce1c732656082cc509',
   'images/pikapp-case-study/remaster-login.png': '47cd04deeb73a1ba707a002102b436cb995d3a6fc2531c501de7e640c74c3bf3',
-  'images/pikapp-case-study/remaster-dashboard.png': '4878a24c55e9d7ce0497ef02dde240696c28eb156902d6a31d066b75da6cc305',
+  'images/pikapp-case-study/remaster-dashboard.png': '01cf2880f8f1fd85e2a36d0c692cb0ba1a25916edffdac56b0e8379c6ed70e2f',
   'images/pikapp-case-study/remaster-milestones.png': 'e5ff72d4ef7e1ce7d48b82f9a4b75b5cef6e5f670b773cbda92caa6f92c95a43',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
