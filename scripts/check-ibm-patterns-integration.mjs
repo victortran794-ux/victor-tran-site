@@ -108,6 +108,22 @@ for (const removed of [
   if (html.includes(removed)) fail(`ibm-patterns.html retained a removed editorial component or phrase: ${removed}`);
 }
 
+for (const required of [
+  'For someone without an established IBM relationship, the page could become a dead end.',
+  'I am still especially proud of the final playback and the way our team made the concept understandable beyond the sprint.',
+  'I later recognized parts of its direction in the page.',
+]) {
+  if (!html.includes(required)) fail(`ibm-patterns.html missing approved copy polish: ${required}`);
+}
+for (const removed of [
+  'For the “lil ole user,”',
+  'very, very well received',
+  'sharing glowing comments afterward',
+  'I remember the work being well received and later recognizing parts of its direction in the page.',
+]) {
+  if (html.includes(removed)) fail(`ibm-patterns.html retained superseded copy: ${removed}`);
+}
+
 for (const forbidden of [
   '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
   '<meta name="referrer" content="no-referrer">',
