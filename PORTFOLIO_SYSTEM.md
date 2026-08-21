@@ -64,37 +64,63 @@ Do **not** put durable planning/source notes in `content/`; most of `content/` i
 
 ## Health automation currently present
 
-GitHub Actions already runs `Site health check` from `.github/workflows/health-check.yml`.
+GitHub Actions runs one `Site health check` workflow from `.github/workflows/health-check.yml`. Four jobs currently run inside one `Site health check` workflow:
 
-It runs on:
+1. **Broken link check:** the primary blocking job. Its name is historical: it also runs source, manifest, privacy, generated-export, responsive-image, route-specific integration, browser, accessibility, media, and Lychee link contracts. The latest post-merge run contained 34 named validation steps and completed in about six minutes.
+2. **Lighthouse audit · desktop:** audits twelve public production routes after eligible pushes to `main`, on the weekly schedule, or by manual dispatch.
+3. **Lighthouse audit · mobile:** audits eight representative public production routes on the same non-PR events.
+4. **Oversized image scan:** reports deployable images over 1MB as warnings; it does not currently fail the job when oversized images exist.
 
-- manual dispatch from GitHub Actions
-- weekly schedule: Mondays at 12:00 UTC
-- pushes to `main` that touch HTML/CSS/JS/sitemap/robots files
+The workflow runs on:
 
-Checks included:
+- manual dispatch, with an optional validated base origin;
+- weekly schedule: Mondays at 12:00 UTC;
+- eligible pushes to `main` selected by a large path allowlist;
+- eligible pull requests selected by the same path allowlist.
 
-- Lychee broken-link check across root HTML files
-- Lighthouse audit for selected public URLs
-- oversized image scan for images over 1MB
+Pull requests intentionally skip both production-domain Lighthouse jobs because those jobs audit the current production hostname rather than the candidate preview. On PRs, the primary contract/browser/link job and oversized-image scan run, while Vercel separately reports the preview deployment and preview-comment checks. After merge, use the workflow run whose `headSha` equals the merge commit for default-branch evidence, then verify the exact Vercel production deployment and live custom domain.
 
-Local helper:
+### Current assessment
+
+- **Coverage:** strong and intentionally layered for this portfolio. Source contracts, generated outputs, browser behavior, deployment containment, links, responsive media, and production Lighthouse protect different failure modes; their overlap is not automatically duplication.
+- **Organization:** too monolithic. The primary job serializes most route-specific browser suites, so a narrow documentation or naming change still waits for the complete portfolio contract chain.
+- **Enforcement:** too weak. No classic branch protection or repository ruleset currently requires these checks before merge. The existing manual green-light and exact-SHA release procedure is effective but remains procedural rather than GitHub-enforced.
+- **Portability:** mixed. Keep the portfolio-specific contracts in this repository, but extract a smaller reusable web-project baseline instead of copying every Victor-specific route assertion into unrelated projects.
+
+### Privacy and provenance classification
+
+- Privacy checks must classify evidence from source and provenance, not from realistic-looking interface strings alone. Names, dates, statuses, metrics, process labels, and topology can be fictional design data and are not proof of live or private records.
+- When provenance is unknown or contradictory, fail closed and pause publication until the source is established. Do not represent uncertainty as confirmed exposure, and do not represent a realistic screen as safe merely because no obvious secret is visible.
+- A fictional-sample-data disclosure is useful framing, not a waiver. It cannot override evidence that real client, employee, customer, medical, financial, credential, or operational data is present.
+- Automated string scans may flag candidates for review, but they must not make the final privacy classification without provenance evidence and rendered-source inspection.
+
+### Recommended control model, not yet implemented
+
+1. **Required PR baseline:** syntax/build, tests, changed-route integration, accessibility smoke, internal links, generated-artifact parity, and Vercel preview status.
+2. **Portfolio contract suite:** retain privacy, provenance classification, claims, manifest, shell, route-specific browser, media, and archive contracts here. Split them into named jobs or path-aware groups only when the split preserves coverage and makes failures easier to locate.
+3. **Post-merge production gate:** keep desktop/mobile Lighthouse, production-host checks, exact merge-SHA deployment binding, and live custom-domain verification after deployment.
+4. **Scheduled maintenance:** keep weekly external-link and production Lighthouse coverage; add dependency/action-runtime review only when it produces an actionable finding.
+5. **GitHub enforcement:** propose a branch ruleset requiring the PR baseline and Vercel preview before merge, blocking direct pushes to `main`, and preserving an explicit recovery path. Do not enable it until Victor reviews repository-owner access and emergency rollback behavior.
+
+Local helpers:
 
 ```bash
+./scripts/preflight.sh
 ./scripts/health-check.sh
 ./scripts/health-check.sh http://localhost:8000
 ```
 
-Current local caveat: `lychee` is not installed locally, so local link checks are skipped unless installed with `brew install lychee`. GitHub Actions still runs Lychee remotely.
+`./scripts/preflight.sh` is broader than the older summary below: it runs source/privacy/route contracts, reproducible generators, browser suites, responsive/media checks, and final generated-content verification. It is manual by default and is not a Git hook.
 
 ## Last known health notes
 
-Checked 2026-05-13:
+Checked 2026-08-21:
 
-- GitHub workflow `Site health check` is active.
-- Recent successful runs exist for PR #22 and PR #23.
-- PR #21 failed because `document-processing.html` linked canonically to `https://www.victortrandesign.com/document-processing` before that route existed live, causing Lychee to report a 404.
-- Local oversized image scan currently flags several `images/cards/diamond-*` PNGs plus `images/illus-img4496.jpg`.
+- GitHub workflow `Site health check` is active and the post-merge run for PR #165 succeeded at merge SHA `a13d369780f599efd4b148582bec7a452fe0908c`.
+- The PR #165 run passed the primary contract/browser/link job and oversized-image scan; both production Lighthouse jobs were intentionally skipped on the PR event.
+- The post-merge run passed the primary job, desktop Lighthouse, mobile Lighthouse, and oversized-image scan.
+- Vercel preview and production status checks are separate from GitHub Actions. They must be tied to the reviewed head SHA and post-merge SHA respectively.
+- Pi Kapp's standalone demo is currently included in reproducible build verification, the Pi Kapp integration/browser contracts, Lychee exclusions, and both production Lighthouse inventories. A static-screen simplification must reconcile each dependency rather than only deleting `pikappapp/demo.html`.
 
 ## Preflight checks
 

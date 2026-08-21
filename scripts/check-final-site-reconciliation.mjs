@@ -25,6 +25,7 @@ const docs = {
   workflows: read('PORTFOLIO_AGENT_WORKFLOWS.md'),
   dashboard: read('PORTFOLIO_DASHBOARD.md'),
 };
+const directionBrief = read('PORTFOLIO_DIRECTION_BRIEF.md');
 
 const jobBlock = jobId => {
   const marker = `\n  ${jobId}:\n`;
@@ -45,8 +46,21 @@ for (const [name, jobId] of [['desktop', 'lighthouse'], ['mobile', 'lighthouse-m
   for (const route of ['wxo-canvas', 'document-processing']) {
     forbid(block, new RegExp(`\\$\\{\\{ steps\\.url\\.outputs\\.base \\}\\}/${route}(?:\\s|$)`), `${name} Lighthouse must not audit protected /${route}`);
   }
-  requireText(block, '${{ steps.url.outputs.base }}/pikappapp/demo', `${name} Lighthouse must retain public noindex Pi Kapp demo coverage`);
 }
+
+for (const phrase of [
+  'Four jobs currently run inside one `Site health check` workflow',
+  'Pull requests intentionally skip both production-domain Lighthouse jobs',
+  'No classic branch protection or repository ruleset currently requires these checks before merge',
+  'Keep the portfolio-specific contracts in this repository',
+  'extract a smaller reusable web-project baseline',
+  '### Privacy and provenance classification',
+  'Privacy checks must classify evidence from source and provenance',
+  'are not proof of live or private records',
+  'When provenance is unknown or contradictory, fail closed',
+  'A fictional-sample-data disclosure is useful framing, not a waiver',
+  'Automated string scans may flag candidates for review',
+]) requirePhrase(docs.system, phrase, `portfolio system must state: ${phrase}`);
 
 const checkJob = jobBlock('links');
 if (!checkJob) fail('primary check job was not found');
@@ -104,15 +118,28 @@ for (const phrase of [
   'Document Processing remains a protected chapter inside wxO',
   'Getting In is retired from the public portfolio',
   'Pi Kapp and Heart of the Frozen Void are public and closed',
-  'New authored V1/V2 Canvas evidence now supports one active protected wxO story lane',
-  'Document Processing remains its smaller protected chapter',
-  'Homepage hero plus Design DNA entry and UI Gallery naming plus approved-artifact review are sequenced behind wxO',
+  'production-verified through PR #165',
+  '`a13d369780f599efd4b148582bec7a452fe0908c`',
+  'PR #162 evolved the protected wxO story from V1 foundation to V2 studies',
+  'PR #163 released the name-first Victor TRAN Homepage hero',
+  'PR #164 renamed the public UI Gallery label to Interface Studies',
+  'PR #165 expanded Interface Studies with the complete Ekos desktop/mobile pair',
+  'The next bounded implementation candidate is Pi Kapp static-screen simplification',
+  'Preserve the stable `/pikappapp` case-study route',
+  'Remove the standalone runnable V2 demo only after its links, build dependencies, browser contracts, Lighthouse inventory, and generated exports are reconciled',
+  'Site checks and balances is an active governance audit',
+  'Realistic labels, metrics, names, dates, status text, or topology are not proof that a design screen contains live or private records',
+  'a fictional-sample-data label never overrides evidence that real client, employee, customer, or operational data is present',
+  'KitBitz is tracked separately as an external illustration resource',
   'Retire `UI Fragments` as a separate concept',
   'Keep generic gallery overlays and A2UI parked',
   'Use targeted source intake only; do not repeat a broad asset inventory',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
 
 forbid(docs.dashboard, /No further enhancement lane is queued/i, 'dashboard must not retain the superseded no-enhancement-lane state');
+forbid(docs.dashboard, /New authored V1\/V2 Canvas evidence now supports one active protected wxO story lane/i, 'dashboard must not describe the released wxO lane as active');
+forbid(docs.dashboard, /Homepage hero plus Design DNA entry and UI Gallery naming plus approved-artifact review are sequenced behind wxO/i, 'dashboard must not describe the released Home and Interface Studies lanes as queued');
+forbid(docs.dashboard, /no further Pi Kapp work or route is queued/i, 'dashboard must record the approved Pi Kapp simplification candidate');
 forbid(docs.dashboard, /UI Fragments is review-later/i, 'dashboard must not retain UI Fragments as a separate review-later concept');
 forbid(docs.dashboard, /bounded lens-to-DNA comparison is active/i, 'dashboard must not describe the superseded Home lens comparison as active');
 forbid(docs.dashboard, /feat\/vercel-content-alignment/i, 'dashboard must not describe the released Vercel branch as active');
@@ -128,6 +155,29 @@ forbid(docs.dashboard, /Keep broader DNA reassessment parked/i, 'dashboard must 
 forbid(docs.dashboard, /(?:remove|reopen|pending)[^\n.]*visible `Light`\s*\/\s*`Dark` words|visible `Light`\s*\/\s*`Dark` words[^\n.]*(?:remain|are) pending/i, 'dashboard must not present visible Light/Dark words as pending');
 forbid(docs.dashboard, /visible `Copy email` (?:action|wording|treatment)/i, 'dashboard must not present visible Copy email as current or pending');
 forbid(docs.dashboard, /Current known mismatch: the manifest marks IBM Patterns and PCI as public\/indexable\/sitemap-eligible/i, 'dashboard must not present the resolved IBM Patterns/PCI visibility mismatch as current');
+forbid(docs.dashboard, /Active protected V1\/V2 story audit and redesign proposal/i, 'dashboard project tracker must not describe the released wxO lane as active');
+forbid(docs.dashboard, /Pi Kapp App[^\n]*\| No current action;/i, 'dashboard project tracker must record the Pi Kapp simplification candidate');
+forbid(docs.dashboard, /\| UI Gallery \|[^\n]*Sequenced naming and approved-artifact audit after Home/i, 'dashboard project tracker must not retain the released Interface Studies lane as queued');
+for (const phrase of [
+  '| wxO Canvas | production-verified through PR #162',
+  '| Pi Kapp App | production-verified through PR #159',
+  'Static-screen simplification candidate',
+  '| Interface Studies | production-verified through PR #165',
+]) requirePhrase(docs.dashboard, phrase, `dashboard project tracker must state: ${phrase}`);
+
+forbid(directionBrief, /portfolio\/wxo-v1-v2-story-2026-08-21/i, 'direction brief must not point to the completed wxO worktree as the next action');
+forbid(directionBrief, /After wxO, open the Homepage hero plus Design DNA entry lane/i, 'direction brief must not queue the released Home and Interface Studies sequence');
+forbid(directionBrief, /After VicO2 reconciliation, should the existing home-only Design DNA overlay be refreshed/i, 'direction brief must not treat the released Design DNA entry as an unresolved pre-release question');
+forbid(directionBrief, /What final sequence should coordinate the homepage, Work menu, and previous and next links after wxO Canvas is considered/i, 'direction brief must not treat the released wxO sequence as unresolved');
+for (const phrase of [
+  '### Current bounded next actions',
+  'Pi Kapp static-screen simplification',
+  'Site checks and balances',
+  'production/reset baseline through PR #165',
+  'Classify privacy from source and provenance rather than realistic-looking interface strings alone',
+  'Does Pi Kapp static-screen simplification preserve the strongest authored evidence',
+  'Which existing checks should be required before merge',
+]) requirePhrase(directionBrief, phrase, `direction brief must state: ${phrase}`);
 for (const phrase of [
   'PR #127 established the accessible icon-only theme control',
   'PR #154 released that shared refinement across live shared-shell routes',
