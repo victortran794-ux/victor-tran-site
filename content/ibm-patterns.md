@@ -46,7 +46,7 @@ Chapter 02 | The dead end
 
 The old experience did not accomplish much for someone who was new, smaller, or simply unsure where a question belonged.
 
-If you were a primary customer with a representative, you had a shortcut. For the “lil ole user,” the page could become a dead end. The team also saw the receiving-side burden: many categories, poorly differentiated support destinations, and requests that still needed to be sorted by people.
+If you were a primary customer with a representative, you had a shortcut. For someone without an established IBM relationship, the page could become a dead end. The team also saw the receiving-side burden: many categories, poorly differentiated support destinations, and requests that still needed to be sorted by people.
 
 We combined sponsor-user interviews with competitor analysis and Google 360 and IBM internal-search data. The historical playback distilled that work into two practical tensions.
 
@@ -94,7 +94,7 @@ Source noteThis paraphrases private program feedback. It does not expose reviewe
 
 Chapter 05 | Influence and reflection
 
-We shared the future state with the team responsible for the real Contact Us experience. I remember the work being well received and later recognizing parts of its direction in the page.
+We shared the future state with the team responsible for the real Contact Us experience. I later recognized parts of its direction in the page.
 
 The IBM Patterns prototype did not become the production page. What I remember carrying forward was a warmer entry, card-based choices, more useful routes up front, and clearer guidance based on someone's relationship with IBM.
 

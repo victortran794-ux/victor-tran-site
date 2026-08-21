@@ -76,7 +76,7 @@ Standalone digital and traditional work, including posters, paintings, and perso
 
 Standalone identity, print, illustration, and event graphics.
 
-Static screen studies focused on interface craft, visual refinement, and responsive presentation.
+Static screen studies focused on interface craft and visual refinement.
 
 ## Lists And Tags
 
