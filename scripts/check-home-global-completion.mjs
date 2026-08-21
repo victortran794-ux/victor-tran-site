@@ -77,7 +77,7 @@ need(count(healthWorkflow, 'run: npm run check:home-global-completion') === 1,
   'Health workflow must execute the Home/global completion contract exactly once.');
 need(!index.includes('class="featured-galleries-intro"') &&
   index.includes('<h3 class="featured-galleries-title">And some galleries.</h3>') &&
-  index.includes('id="galleries" role="group" aria-label="Art, graphic design, and UI galleries"'),
+  index.includes('id="galleries" role="group" aria-label="Art, graphic design, and interface studies"'),
   'Homepage gallery ending must use the approved casual chapter name and preserve an explicit accessible name.');
 
 need(shell.footerSubtitle === '', 'Footer must retire the repeated subtitle invitation.');

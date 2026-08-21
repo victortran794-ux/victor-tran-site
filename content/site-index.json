@@ -17,7 +17,7 @@
       "Pi Kapp App",
       "Art & Illustration",
       "Graphic Design",
-      "UI Gallery"
+      "Interface Studies"
     ],
     "images": [
       {
@@ -130,7 +130,7 @@
         "alt": "Purple boombox graphic with two illustrated eye panels"
       },
       {
-        "title": "UI Gallery",
+        "title": "Interface Studies",
         "category": "",
         "url": "uigallery",
         "image": "images/ui-gallery/ekos-cover.webp",
