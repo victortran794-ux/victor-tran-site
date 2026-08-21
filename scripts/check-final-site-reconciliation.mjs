@@ -104,12 +104,17 @@ for (const phrase of [
   'Document Processing remains a protected chapter inside wxO',
   'Getting In is retired from the public portfolio',
   'Pi Kapp and Heart of the Frozen Void are public and closed',
-  'No further enhancement lane is queued',
-  'Future Canvas and future gallery overlays are parked',
-  'UI Fragments is review-later',
-  'server-side protection is review-only when a concrete need exists',
+  'New authored V1/V2 Canvas evidence now supports one active protected wxO story lane',
+  'Document Processing remains its smaller protected chapter',
+  'Homepage hero plus Design DNA entry and UI Gallery naming plus approved-artifact review are sequenced behind wxO',
+  'Retire `UI Fragments` as a separate concept',
+  'Keep generic gallery overlays and A2UI parked',
+  'Use targeted source intake only; do not repeat a broad asset inventory',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
 
+forbid(docs.dashboard, /No further enhancement lane is queued/i, 'dashboard must not retain the superseded no-enhancement-lane state');
+forbid(docs.dashboard, /UI Fragments is review-later/i, 'dashboard must not retain UI Fragments as a separate review-later concept');
+forbid(docs.dashboard, /bounded lens-to-DNA comparison is active/i, 'dashboard must not describe the superseded Home lens comparison as active');
 forbid(docs.dashboard, /feat\/vercel-content-alignment/i, 'dashboard must not describe the released Vercel branch as active');
 forbid(docs.dashboard, /await(?:s|ing) (?:Victor's )?preview/i, 'dashboard must not describe the released Vercel alignment as awaiting preview');
 forbid(docs.dashboard, /Heart of the Frozen Void assets are parked/i, 'dashboard must not carry the completed Heart of the Frozen Void asset reminder');

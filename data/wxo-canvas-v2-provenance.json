@@ -1,0 +1,76 @@
+{
+  "figmaFileKey": "PKr7T6508DtrWg9FhTTc75",
+  "figmaFileName": "wxo flows v1 - v2",
+  "sourcePage": "wxo flows v1 - v2",
+  "sourceUrl": "https://www.figma.com/design/PKr7T6508DtrWg9FhTTc75/wxo-flows-v1---v2?node-id=0-1",
+  "editorialRule": "V1 remains the authored foundation. V2 showcase boards are shown as a separate protected evolution. The operations-style prototype remains source-only. No shipment, adoption, performance, or outcome claim is made.",
+  "assets": [
+    {
+      "file": "01-component-system-showcase.png",
+      "role": "V2 node-library and state-system overview",
+      "sourceNode": "6:21895",
+      "sourceFrame": "component-system-showcase",
+      "sourceBounds": [1440, 1024],
+      "exportedDimensions": [1024, 729],
+      "treatment": "Full Figma showcase frame uniformly scaled by the MCP screenshot service; unsupported performance descriptor removed; metadata stripped; no crop or reconstruction.",
+      "sanitization": "Removed unsupported performance descriptor; no component evidence changed.",
+      "privacyStatus": "Generic component examples and state labels; no personal or customer identifiers visible after sanitization.",
+      "claimStatus": "Authored V2 exploration only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 36694,
+      "sha256": "17a8fbe3c61331cad95ed3ac4d9664b627e606b934b27a19e94e7c4b43602dfd"
+    },
+    {
+      "file": "02-agent-flow-showcase.png",
+      "role": "V2 agent-orchestration graph overview",
+      "sourceNode": "6:21960",
+      "sourceFrame": "agent-flow-v2-showcase",
+      "sourceBounds": [1440, 1024],
+      "exportedDimensions": [1024, 729],
+      "treatment": "Full Figma showcase frame uniformly scaled by the MCP screenshot service; initials avatar and provider/model value neutralized; metadata stripped; no crop or reconstruction.",
+      "sanitization": "Neutralized the top-right initials avatar and removed the provider/model value; no orchestration structure changed.",
+      "privacyStatus": "Generic orchestration example; no personal, customer, account, or provider-configuration identifiers visible after sanitization.",
+      "claimStatus": "Authored V2 exploration only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 63782,
+      "sha256": "671b23116eac70387a32daf7f8344bb65aad3d8bca3039b52865fafb38d8ea25"
+    },
+    {
+      "file": "03-flow-controls-showcase.png",
+      "role": "V2 flow-control and routing semantics overview",
+      "sourceNode": "6:21977",
+      "sourceFrame": "flow-controls-showcase",
+      "sourceBounds": [1440, 1024],
+      "exportedDimensions": [1024, 729],
+      "treatment": "Full Figma showcase frame uniformly scaled by the MCP screenshot service, metadata stripped, no crop or reconstruction.",
+      "privacyStatus": "Generic control and routing labels; no personal, customer, account, or operational identifiers visible.",
+      "claimStatus": "Authored V2 exploration only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 72673,
+      "sha256": "68decef0fc6707ee270dcfa7a44da13c91139923685637cd06549f6c02aaea09"
+    },
+    {
+      "file": "04-workflow-detail-showcase.png",
+      "role": "V2 workflow-detail viewport study",
+      "sourceNode": "6:22060",
+      "sourceFrame": "workflow-detail",
+      "sourceBounds": [1440, 1024],
+      "exportedDimensions": [1024, 729],
+      "completenessStatus": "Complete authored showcase frame; the embedded application viewport intentionally shows only the upper portion of the workflow.",
+      "treatment": "Full Figma showcase frame uniformly scaled by the MCP screenshot service; unsupported performance descriptor removed and initials avatar neutralized; metadata stripped; no crop or reconstruction.",
+      "sanitization": "Neutralized the top-right initials avatar and removed unsupported performance descriptor; no workflow content changed.",
+      "privacyStatus": "Generic sample workflow; no personal, customer, account, or operational identifiers visible after sanitization.",
+      "claimStatus": "Authored V2 exploration and partial workflow-detail viewport only; no end-to-end completeness, shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 46176,
+      "sha256": "0e0c9c36e04d891a5c5372a858fb9730c39386147316e90d4e38b8b7c60b6a59"
+    }
+  ],
+  "prototypeExploration": {
+    "parentNode": "1:24219",
+    "status": "source-only",
+    "relationship": "Separate multi-screen prototype exploration; not treated as V2 release evidence or a canonical continuation of the V2 showcase boards.",
+    "excludedNodes": ["1:24220", "1:24436", "1:24694", "1:24826", "1:25151", "1:25535", "1:25860", "1:26263", "1:26361"],
+    "reason": "Operations-style screens contain synthetic identities, metrics, status language, workflow records, endpoint or debug residue, and other cues that could blur exploratory and shipped states. No raw export or crop enters deployable assets."
+  }
+}
