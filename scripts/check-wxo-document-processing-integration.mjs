@@ -145,16 +145,16 @@ if (count(wxo, /class="wxo-v2-image-link"/g) !== 4) fail('Every V2 board must pr
 if (count(wxo, />Open full-size board ↗<\/span>/g) !== 4) fail('Every V2 board must label its full-size inspection action.');
 requireText(wxo, 'Complete V2 workflow-detail specification', 'Workflow-detail alt text must identify the complete authored specification.');
 requireText(wxo, 'A complete authored specification checks the path from entry through forms, branching logic, and End.', 'Workflow-detail caption must identify the complete authored specification without implying implementation.');
-requireText(wxo, '>Builder interface study</h3>', 'wxO must distinguish the builder-interface walkthrough from the V2 specification boards.');
-requireText(wxo, 'not a recording of a live or shipped product', 'Prototype copy must identify the editorial walkthrough boundary.');
+requireText(wxo, '>Visual system in motion</h3>', 'wxO must present the original prototype as a visual-system sequence.');
+requireText(wxo, 'Names and values are fictional sample data.', 'Prototype copy must identify the fictional sample-data boundary.');
 forbid(wxo, /shipped V2|released V2|production V2|V2 shipped|V2 release evidence/i, 'wxO V2 copy must not imply shipment or production status.');
 forbid(wxo, /Future state explorations|Coming soon|data-future-motion-toggle|wxo-future-canvas-motion/i, 'wxO must retire the obsolete Future Canvas teaser and motion control.');
 
 const v2Assets = [
-  ['01-component-system-showcase.png', 2944, 2112],
-  ['02-agent-flow-showcase.png', 2952, 2688],
-  ['03-flow-controls-showcase.png', 2992, 2160],
-  ['04-workflow-detail-showcase.png', 2952, 2840],
+  ['01-component-system-showcase.png', 2880, 2048],
+  ['02-agent-flow-showcase.png', 2880, 2616],
+  ['03-flow-controls-showcase.png', 2880, 2048],
+  ['04-workflow-detail-showcase.png', 2880, 2768],
 ];
 if (!fs.existsSync(v2ManifestPath)) fail('Repository-only wxO V2 provenance manifest must exist outside the public artifact tree.');
 else {
@@ -162,10 +162,10 @@ else {
   if (v2Manifest.figmaFileKey !== 'PKr7T6508DtrWg9FhTTc75' || v2Manifest.sourcePage !== 'wxo flows v1 - v2') fail('wxO V2 manifest must identify the approved updated Figma source.');
   if (JSON.stringify((v2Manifest.assets ?? []).map((entry) => entry.file)) !== JSON.stringify(v2Assets.map(([file]) => file))) fail('wxO V2 manifest must record the four curated complete-frame assets in narrative order.');
   const expectedV2Sanitization = {
-    '01-component-system-showcase.png': 'Replaced Connection timed out and runtime execution error copy with neutral review guidance; metadata stripped; no component structure changed.',
-    '02-agent-flow-showcase.png': 'Removed the provider/model value and replaced it with neutral Model configuration copy; no orchestration structure changed.',
-    '03-flow-controls-showcase.png': 'Metadata stripped; no visible flow-control evidence changed.',
-    '04-workflow-detail-showcase.png': 'Removed unsupported high-performance language and replaced it with neutral routing-study copy; no workflow structure changed.',
+    '01-component-system-showcase.png': 'Replaced Connection timed out and runtime execution error copy with neutral review guidance; removed the external export-shadow matte; metadata stripped; no component structure changed.',
+    '02-agent-flow-showcase.png': 'Removed the provider/model value, replaced it with neutral Model configuration copy, and removed the external export-shadow matte; no orchestration structure changed.',
+    '03-flow-controls-showcase.png': 'Removed the external export-shadow matte and stripped metadata; no internal flow-control evidence changed.',
+    '04-workflow-detail-showcase.png': 'Removed unsupported high-performance language, replaced it with neutral routing-study copy, and removed the external export-shadow matte; no workflow structure changed.',
   };
   for (const entry of v2Manifest.assets ?? []) {
     const expected = v2Assets.find(([file]) => file === entry.file);
@@ -179,23 +179,23 @@ else {
     requireText(wxo, `width="${expected[1]}" height="${expected[2]}"`, `wxO V2 HTML dimensions must match ${entry.file}.`);
   }
   const prototype = v2Manifest.prototypeExploration;
-  if (!prototype || prototype.status !== 'published-editorial-walkthrough' || prototype.publishedSourceNode !== '1:26269' || !/editorial camera move/i.test(prototype.treatment) || !/not a recording/i.test(prototype.claimStatus)) fail('V2 prototype provenance must preserve the bounded editorial-walkthrough status and source node.');
+  if (!prototype || prototype.status !== 'published-authored-sequence' || prototype.sourceArtifact !== 'wxo-figma-interaction-demo.gif' || !/original matching MP4 and WebM exports/i.test(prototype.treatment) || !/visual-system prototype only/i.test(prototype.claimStatus) || !/fictional prototype sample content/i.test(prototype.privacyStatus)) fail('V2 prototype provenance must preserve the original authored sequence and fictional sample-data boundary.');
   const expectedMedia = {
-    'v2-builder-walkthrough-poster.png': '96ffe60f13d6e5c97ca9eb7df73fb78d957ffa0e820f092d00f1c14afc2a910a',
-    'v2-builder-walkthrough.webm': 'd17bee7d2f16bae126444deccd5640815d0a2ff7cc72a78ebdf97f0d8cf13fc7',
-    'v2-builder-walkthrough.mp4': '03d42dac16fa8ce64fcdc929123538a4d30e55caeaf792d1c6baa8047e9ef093',
+    'v2-figma-interaction-demo-poster.png': '47494440f56fee47c753fccf511e625dda2dadfd77fe449653713f04e6d98a16',
+    'v2-figma-interaction-demo.webm': '0e9df3c0e44fcf9fdfda6a034dbe9d62b1b37824525a242323026b27fdda6a0f',
+    'v2-figma-interaction-demo.mp4': 'ae2392130a9723e1b3c52226cd99160fdd2c11d80bc91a1c05ea0ba42d0ec713',
   };
   for (const media of prototype?.media ?? []) {
     const mediaPath = `assets/wxo-canvas-v2/media/${media.file}`;
     if (expectedMedia[media.file] !== media.sha256 || !fs.existsSync(mediaPath) || sha256(mediaPath) !== media.sha256) fail(`V2 prototype media hash or inventory changed: ${media.file}.`);
   }
-  if (Object.keys(expectedMedia).length !== (prototype?.media ?? []).length) fail('V2 prototype provenance must record exactly one poster and two video encodings.');
+  if (Object.keys(expectedMedia).length !== (prototype?.media ?? []).length) fail('V2 prototype provenance must record exactly one poster and the two original video encodings.');
 }
-requireText(wxo, 'data-prototype-evidence="published-editorial-walkthrough"', 'The builder study must remain explicitly bounded as a published editorial walkthrough.');
-requireText(wxo, 'poster="assets/wxo-canvas-v2/media/v2-builder-walkthrough-poster.png"', 'The builder walkthrough must provide a static poster.');
-requireText(wxo, 'assets/wxo-canvas-v2/media/v2-builder-walkthrough.webm', 'The builder walkthrough must provide a WebM source.');
-requireText(wxo, 'assets/wxo-canvas-v2/media/v2-builder-walkthrough.mp4', 'The builder walkthrough must provide an MP4 source.');
-requireText(wxo, '<video controls playsinline preload="metadata"', 'The builder walkthrough must remain optional and user-controlled.');
+requireText(wxo, 'data-prototype-evidence="published-authored-sequence"', 'The prototype must remain explicitly bounded as an authored visual-system sequence.');
+requireText(wxo, 'poster="assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png"', 'The original prototype sequence must provide a static poster.');
+requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.webm', 'The original prototype sequence must provide its matching WebM source.');
+requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.mp4', 'The original prototype sequence must provide its matching MP4 source.');
+requireText(wxo, '<video controls playsinline preload="metadata"', 'The original prototype sequence must remain optional and user-controlled.');
 forbid(wxo, /Main prototype 1|big builder yea|Alerts exploration|Floating right side|VT exploration/i, 'Internal prototype frame names must not enter viewer-facing copy.');
 requireText(wxo, 'data-wxo-tab-status>Current view</small>', 'wxO chapter selector must identify the current view.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
@@ -231,7 +231,7 @@ const expectedCurrentCanvasHashes = {
   '12-palette-user-inputs.png': '8074bafc2f525d8d1ba35bdc32a069653d3cc4c41373ac987bea18a82d199487',
   '13-user-activity-created.png': '6d2ac52a2c14fd166d6064c117e2e2a3cc01189e93993b92294b4b410f32aab6',
   '14-user-activity-configure.png': '75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa',
-  '15-user-activity-form-filled.png': '8039484c6274a0e59be05cd692e8631300a5eb00275b8cd862ea424e692ca403',
+  '15-user-activity-form-filled.png': '56c6a9dc2352cc42088ef6e5f60bea52403daed7a659a7197ffcb45e56a24c06',
   '16-user-activity-complete.png': '9064113da7bfd832382c1b2d4e048aa3aea9c8b5dcba5faab0633e3b9334319f',
 };
 for (const asset of [
