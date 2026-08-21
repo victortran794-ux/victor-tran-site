@@ -174,6 +174,7 @@ if (uiProject) {
     sitemap: true,
     chapter: '03',
     chapterTitle: 'And some galleries.',
+    description: 'Static screen studies focused on interface craft and visual refinement.',
   })) need(uiProject[key] === value, `uigallery manifest ${key} must equal ${String(value)}.`);
   need(uiProject.images?.[0]?.src === 'images/ui-gallery/ekos-cover.webp', 'UI Gallery homepage card must use the Ekos cover asset.');
   need(uiProject.images?.[0]?.width === 1366 && uiProject.images?.[0]?.height === 939,
