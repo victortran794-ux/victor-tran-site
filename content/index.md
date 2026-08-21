@@ -34,7 +34,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Pi Kapp App (Product Design): pikappapp
 - Art & Illustration: artillustration
 - Graphic Design: graphicgallery
-- UI Gallery: uigallery
+- Interface Studies: uigallery
 
 ## Section Headings
 
@@ -48,15 +48,15 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 - Pi Kapp App
 - Art & Illustration
 - Graphic Design
-- UI Gallery
+- Interface Studies
 
 ## Body Copy
 
 Project-native systems stay distinct.
 
-Victor Tran ®
+Victor Tran ® · Visual Designer
 
-Visual designer working across brand, illustration, and product systems.
+Visual designer building clear, expressive systems across enterprise products, brands, and stories.
 
 An agentic workflow canvas for building, inspecting, and improving AI workflows.
 

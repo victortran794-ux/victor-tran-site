@@ -29,14 +29,16 @@ need(Boolean(html), 'uigallery.html must exist.');
 need(Boolean(css), 'css/ui-gallery.css must exist.');
 
 for (const token of [
-  '<title>UI Gallery | Victor Tran</title>',
+  '<title>Interface Studies | Victor Tran</title>',
   '<link rel="canonical" href="https://www.victortrandesign.com/uigallery">',
   '<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">',
   '<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">',
   '<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">',
   '<body class="visual-archive-page ui-gallery-page">',
   '<main class="page-content" id="main-content" tabindex="-1" data-archive="ui-gallery">',
-  '<p class="ui-gallery-kicker">UI Gallery</p>',
+  '<meta property="og:title" content="Interface Studies | Victor Tran">',
+  '<meta name="twitter:title" content="Interface Studies | Victor Tran">',
+  '<p class="ui-gallery-kicker">Interface Studies</p>',
   '<h1>Interfaces, in view.</h1>',
   'A few interface studies and small experiments I liked enough to keep around.',
   '<section class="ui-study ui-study--ekos archive-primary" aria-labelledby="ekos-study-title">',
@@ -164,7 +166,7 @@ const uiProject = manifest.projects.find(project => project.slug === 'uigallery'
 need(Boolean(uiProject), 'data/projects.json must include uigallery.');
 if (uiProject) {
   for (const [key, value] of Object.entries({
-    title: 'UI Gallery',
+    title: 'Interface Studies',
     url: 'uigallery.html',
     type: 'gallery',
     nav: true,
@@ -186,15 +188,18 @@ for (const slug of ['artillustration', 'graphicgallery']) {
 }
 need(shell.pages.includes('uigallery.html'), 'Shared shell must register uigallery.html.');
 needText(index, '<h3 class="featured-galleries-title">And some galleries.</h3>', 'Homepage must show the renamed gallery chapter.');
-needText(index, 'aria-label="Art, graphic design, and UI galleries"', 'Homepage gallery group needs a clear accessible label.');
+needText(index, 'aria-label="Art, graphic design, and interface studies"', 'Homepage gallery group needs a clear accessible label.');
 need(count(index, /featured-item--gallery/g) === 3, 'Homepage must contain exactly three gallery cards.');
 needText(index, 'href="uigallery.html"', 'Homepage and generated navigation must link to UI Gallery.');
+needText(index, '<h2 class="featured-item-title">Interface Studies</h2>', 'Homepage must use the approved Interface Studies public title.');
 needText(index, 'src="images/ui-gallery/ekos-cover.webp" width="1366" height="939"',
   'Generated homepage must declare the truthful 1366x939 Ekos cover dimensions.');
 needText(sitemap, '<loc>https://www.victortrandesign.com/uigallery</loc>', 'Sitemap must include /uigallery.');
 needText(exporter, "'uigallery.html'", 'Public Markdown exporter must include uigallery.html.');
 needText(read('content/uigallery.md'), 'source: "uigallery.html"', 'Generated public Markdown must include the UI Gallery source.');
+needText(read('content/uigallery.md'), 'Interface Studies', 'Generated public Markdown must use the Interface Studies public name.');
 needText(read('content/site-index.json'), '"source": "uigallery.html"', 'Generated site index must include UI Gallery.');
+needText(read('content/site-index.json'), '"title": "Interface Studies"', 'Generated site index must use the Interface Studies public name.');
 need(packageJson.scripts?.['check:ui-gallery'] === 'node scripts/check-ui-gallery-integration.mjs', 'package.json must register check:ui-gallery.');
 need(Boolean(browserContract), 'The enforced visual-archive browser harness must exist.');
 needText(browserContract, "ui: {", 'The enforced visual-archive browser harness must define the UI Gallery route.');

@@ -25,7 +25,7 @@ Selected interface studies by Victor Tran, including a high-fidelity Ekos Con vi
 
 ## Body Copy
 
-UI Gallery
+Interface Studies
 
 A few interface studies and small experiments I liked enough to keep around.
 

@@ -88,7 +88,7 @@ requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
 forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonx Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
-requireText(index, 'id="galleries" role="group" aria-label="Art, graphic design, and UI galleries"',
+requireText(index, 'id="galleries" role="group" aria-label="Art, graphic design, and interface studies"',
   'Final gallery chapter needs an explicit accessible group name.');
 requireText(index, '<h3 class="featured-galleries-title">And some galleries.</h3>',
   'Final gallery chapter needs Victor’s approved casual heading.');
