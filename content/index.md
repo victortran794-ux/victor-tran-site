@@ -54,9 +54,9 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 Project-native systems stay distinct.
 
-Victor Tran ®
+Victor Tran ® · Visual Designer
 
-Visual designer working across brand, illustration, and product systems.
+Visual designer building clear, expressive systems across enterprise products, brands, and stories.
 
 An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
