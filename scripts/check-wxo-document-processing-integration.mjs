@@ -28,9 +28,10 @@ const passwordGate = read('js/password-gate.js');
 const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
 const deployIgnore = read('.vercelignore');
-const futureManifest = JSON.parse(read('data/wxo-canvas-future-provenance.json'));
-if (fs.existsSync('assets/wxo-canvas-future/manifest.json')) fail('Future Canvas internal provenance must not live in the publicly deployed assets tree.');
-requireText(deployIgnore, 'data/', 'Repository-only Future Canvas provenance must remain excluded from deployment.');
+const v2ManifestPath = 'data/wxo-canvas-v2-provenance.json';
+if (fs.existsSync('assets/wxo-canvas-future')) fail('Retired Future Canvas media must not remain in the deployable asset tree.');
+if (fs.existsSync('data/wxo-canvas-future-provenance.json')) fail('Retired separate-source Future Canvas provenance must not remain active beside the canonical V1/V2 ledger.');
+requireText(deployIgnore, 'data/', 'Repository-only wxO provenance must remain excluded from deployment.');
 
 const documentProcessingRedirect = vercel.redirects?.find((rule) => rule.source === '/document-processing');
 if (!documentProcessingRedirect || documentProcessingRedirect.destination !== '/wxo-canvas#document-processing' || documentProcessingRedirect.permanent !== true) {
@@ -135,36 +136,73 @@ forbid(wxo, /Context travels with the task|Judgment has a return path|04 \/ Desi
 requireText(workflowCss, 'grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);', 'wxO chapter selector must preserve the smaller Document Processing tab.');
 requireText(workflowCss, 'top: 58px;', 'The sticky wxO selector must meet the scrolled 58px site navigation without exposing the page background.');
 forbid(wxo, /data-wxo-chapter="future-canvas"/i, 'Future Canvas must not appear as a peer chapter tab.');
-requireText(wxo, 'class="wxo-future-preview reveal"', 'Future Canvas must appear at the end of the Agentic Workflow Canvas chapter.');
-requireText(wxo, '>Future state explorations</h2>', 'Future Canvas must use the concise approved heading.');
-requireText(wxo, '<span>Coming soon</span>', 'Future Canvas must remain clearly labeled as upcoming exploratory work.');
-forbid(wxo, /A ten-second look at where the canvas was heading|This short prototype walkthrough|Future-direction prototype · exploration only/i, 'Future Canvas must not restore the rejected long ending copy.');
-for (const asset of ['future-canvas-loop.webm', 'future-canvas-loop.mp4', 'future-canvas-poster.webp']) {
-  requireText(wxo, `assets/wxo-canvas-future/${asset}`, `Future Canvas missing motion derivative ${asset}.`);
-  if (!fs.existsSync(`assets/wxo-canvas-future/${asset}`)) fail(`Future Canvas motion derivative does not exist: ${asset}`);
+requireText(wxo, 'A protected visual-system story spanning a V1 workflow foundation, later V2 canvas studies, and a smaller Document Processing pressure test.', 'wxO opening must separate the V1 foundation, later V2 studies, and subordinate Document Processing chapter.');
+requireText(wxo, '>01 / V1 foundation</span>', 'wxO must identify the current Canvas evidence as the V1 foundation.');
+requireText(wxo, 'class="wxo-v2-story reveal"', 'wxO must add the bounded V2 evolution story at the end of Canvas.');
+requireText(wxo, '>V2 system evolution</h2>', 'wxO must name the new V2 system evolution chapter.');
+requireText(wxo, 'V2 authored exploration', 'wxO must label V2 as authored exploration rather than shipped product evidence.');
+if (count(wxo, /class="wxo-v2-image-link"/g) !== 4) fail('Every V2 board must provide an accessible full-size inspection link.');
+if (count(wxo, />Open full-size board ↗<\/span>/g) !== 4) fail('Every V2 board must label its full-size inspection action.');
+requireText(wxo, 'Complete V2 workflow-detail specification', 'Workflow-detail alt text must identify the complete authored specification.');
+requireText(wxo, 'A complete authored specification checks the path from entry through forms, branching logic, and End.', 'Workflow-detail caption must identify the complete authored specification without implying implementation.');
+requireText(wxo, '>Visual system in motion</h3>', 'wxO must present the original prototype as a visual-system sequence.');
+requireText(wxo, 'Names and values are fictional sample data.', 'Prototype copy must identify the fictional sample-data boundary.');
+forbid(wxo, /shipped V2|released V2|production V2|V2 shipped|V2 release evidence/i, 'wxO V2 copy must not imply shipment or production status.');
+forbid(wxo, /Future state explorations|Coming soon|data-future-motion-toggle|wxo-future-canvas-motion/i, 'wxO must retire the obsolete Future Canvas teaser and motion control.');
+
+const v2Assets = [
+  ['01-component-system-showcase.png', 2880, 2048],
+  ['02-agent-flow-showcase.png', 2880, 2616],
+  ['03-flow-controls-showcase.png', 2880, 2048],
+  ['04-workflow-detail-showcase.png', 2880, 2768],
+];
+if (!fs.existsSync(v2ManifestPath)) fail('Repository-only wxO V2 provenance manifest must exist outside the public artifact tree.');
+else {
+  const v2Manifest = JSON.parse(read(v2ManifestPath));
+  if (v2Manifest.figmaFileKey !== 'PKr7T6508DtrWg9FhTTc75' || v2Manifest.sourcePage !== 'wxo flows v1 - v2') fail('wxO V2 manifest must identify the approved updated Figma source.');
+  if (JSON.stringify((v2Manifest.assets ?? []).map((entry) => entry.file)) !== JSON.stringify(v2Assets.map(([file]) => file))) fail('wxO V2 manifest must record the four curated complete-frame assets in narrative order.');
+  const expectedV2Sanitization = {
+    '01-component-system-showcase.png': 'Replaced Connection timed out and runtime execution error copy with neutral review guidance; removed the external export-shadow matte; metadata stripped; no component structure changed.',
+    '02-agent-flow-showcase.png': 'Removed the provider/model value, replaced it with neutral Model configuration copy, and removed the external export-shadow matte; no orchestration structure changed.',
+    '03-flow-controls-showcase.png': 'Removed the external export-shadow matte and stripped metadata; no internal flow-control evidence changed.',
+    '04-workflow-detail-showcase.png': 'Removed unsupported high-performance language, replaced it with neutral routing-study copy, and removed the external export-shadow matte; no workflow structure changed.',
+  };
+  for (const entry of v2Manifest.assets ?? []) {
+    const expected = v2Assets.find(([file]) => file === entry.file);
+    const assetPath = `images/wxo-canvas/v2/${entry.file}`;
+    if (!entry.sourceNode || !Array.isArray(entry.sourceBounds) || !Array.isArray(entry.rawExportDimensions) || !entry.rawExportSha256 || !Array.isArray(entry.exportedDimensions) || !entry.treatment || !entry.privacyStatus || !entry.claimStatus) fail(`wxO V2 manifest entry ${entry.file ?? 'unknown'} is incomplete.`);
+    if (!expected || JSON.stringify(entry.exportedDimensions) !== JSON.stringify(expected.slice(1))) fail(`V2 provenance must record exact native dimensions for ${entry.file}.`);
+    if (entry.sanitization !== expectedV2Sanitization[entry.file]) fail(`V2 provenance must record the approved sanitization for ${entry.file}.`);
+    if (!fs.existsSync(assetPath)) fail(`Missing wxO V2 derivative ${assetPath}.`);
+    else if (sha256(assetPath) !== entry.sha256) fail(`wxO V2 derivative hash changed from its manifest: ${assetPath}.`);
+    requireText(wxo, `images/wxo-canvas/v2/${entry.file}`, `wxO V2 story missing curated derivative ${entry.file}.`);
+    requireText(wxo, `width="${expected[1]}" height="${expected[2]}"`, `wxO V2 HTML dimensions must match ${entry.file}.`);
+  }
+  const prototype = v2Manifest.prototypeExploration;
+  if (!prototype || prototype.status !== 'published-authored-sequence' || prototype.sourceArtifact !== 'wxo-figma-interaction-demo.gif' || !/original matching MP4 and WebM exports/i.test(prototype.treatment) || !/visual-system prototype only/i.test(prototype.claimStatus) || !/fictional prototype sample content/i.test(prototype.privacyStatus)) fail('V2 prototype provenance must preserve the original authored sequence and fictional sample-data boundary.');
+  const expectedMedia = {
+    'v2-figma-interaction-demo-poster.png': '47494440f56fee47c753fccf511e625dda2dadfd77fe449653713f04e6d98a16',
+    'v2-figma-interaction-demo.webm': '0e9df3c0e44fcf9fdfda6a034dbe9d62b1b37824525a242323026b27fdda6a0f',
+    'v2-figma-interaction-demo.mp4': 'ae2392130a9723e1b3c52226cd99160fdd2c11d80bc91a1c05ea0ba42d0ec713',
+  };
+  for (const media of prototype?.media ?? []) {
+    const mediaPath = `assets/wxo-canvas-v2/media/${media.file}`;
+    if (expectedMedia[media.file] !== media.sha256 || !fs.existsSync(mediaPath) || sha256(mediaPath) !== media.sha256) fail(`V2 prototype media hash or inventory changed: ${media.file}.`);
+  }
+  if (Object.keys(expectedMedia).length !== (prototype?.media ?? []).length) fail('V2 prototype provenance must record exactly one poster and the two original video encodings.');
 }
-if (futureManifest.source?.figmaFileKey !== 'xCDC70RQXCft14QJmDTmrW' || futureManifest.source?.nodes?.inventory !== '26:267748') {
-  fail('Future Canvas motion must trace to the original wxO file and linked inventory node.');
-}
-if (futureManifest.cameraMotion !== 'none' || futureManifest.durationSeconds !== 10) {
-  fail('Future Canvas motion must remain a ten-second full-frame sequence without camera zoom.');
-}
-for (const [asset, expectedHash] of Object.entries({
-  'future-inventory-sanitized.png': '9757ff27d0fb0da91e0f8f6c9b06e1b0d9ca1bb19141a6dedd6b01aa41886436',
-  'future-builder-sanitized.png': '54c0a66623538627dfa7d13c5459881e2d1db211adcb07d040672043374145fc',
-  'future-debug-sanitized.png': '766dcb6f5a1ca927def033a0c7807ec7a90def722d1e284c3258744e5606bc25',
-})) {
-  const assetPath = `assets/wxo-canvas-future/${asset}`;
-  if (!fs.existsSync(assetPath)) fail(`Future Canvas approved full-frame derivative is missing: ${asset}`);
-  else if (sha256(assetPath) !== expectedHash) fail(`Future Canvas approved derivative changed unexpectedly: ${asset}`);
-}
-requireText(wxo, 'data-future-motion-toggle', 'Future Canvas motion must provide a visible pause control.');
+requireText(wxo, 'data-prototype-evidence="published-authored-sequence"', 'The prototype must remain explicitly bounded as an authored visual-system sequence.');
+requireText(wxo, 'poster="assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png"', 'The original prototype sequence must provide a static poster.');
+requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.webm', 'The original prototype sequence must provide its matching WebM source.');
+requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.mp4', 'The original prototype sequence must provide its matching MP4 source.');
+requireText(wxo, '<video controls playsinline preload="metadata"', 'The original prototype sequence must remain optional and user-controlled.');
+forbid(wxo, /Main prototype 1|big builder yea|Alerts exploration|Floating right side|VT exploration/i, 'Internal prototype frame names must not enter viewer-facing copy.');
 requireText(wxo, 'data-wxo-tab-status>Current view</small>', 'wxO chapter selector must identify the current view.');
 requireText(workflowCss, 'position: sticky;', 'wxO chapter selector must remain available while reading either chapter.');
 requireText(wxo, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
 requireText(wxo, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
 requireText(wxo, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'wxO must load the scoped workflow behavior.');
-forbid(wxo, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
+forbid(wxo, /<video autoplay muted loop playsinline[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 
 const currentCanvasAssets = [
   '01-skill-studio-main.png',
@@ -193,7 +231,7 @@ const expectedCurrentCanvasHashes = {
   '12-palette-user-inputs.png': '8074bafc2f525d8d1ba35bdc32a069653d3cc4c41373ac987bea18a82d199487',
   '13-user-activity-created.png': '6d2ac52a2c14fd166d6064c117e2e2a3cc01189e93993b92294b4b410f32aab6',
   '14-user-activity-configure.png': '75d84dc2fbbd9d358f5677d9a734145a4e4349c2967556073037b58d0c0ddbaa',
-  '15-user-activity-form-filled.png': '8039484c6274a0e59be05cd692e8631300a5eb00275b8cd862ea424e692ca403',
+  '15-user-activity-form-filled.png': '56c6a9dc2352cc42088ef6e5f60bea52403daed7a659a7197ffcb45e56a24c06',
   '16-user-activity-complete.png': '9064113da7bfd832382c1b2d4e048aa3aea9c8b5dcba5faab0633e3b9334319f',
 };
 for (const asset of [
@@ -289,8 +327,8 @@ for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
 
 if (count(wxo, /class="doc-current-stage"/gi) !== 4) fail('The wxO Document Processing chapter must show four current evidence stages.');
 if (count(wxo, /class="doc-current-frame"/gi) !== 9) fail('The wxO Document Processing chapter must show nine curated current Figma frames.');
-if (count(wxo, /<img\b/gi) !== 23) fail('wxO Canvas must use exactly twenty-three images: shared nav image, thirteen V1 Canvas exports, and nine current Document Processing frames.');
-if (count(wxo, /<video\b/gi) !== 2) fail('wxO Canvas must use exactly two bounded motion loops: Document Processing and Future Canvas.');
+if (count(wxo, /<img\b/gi) !== 27) fail('wxO Canvas must use exactly twenty-seven images: shared nav image, thirteen V1 Canvas exports, four V2 showcase boards, and nine current Document Processing frames.');
+if (count(wxo, /<video\b/gi) !== 2) fail('wxO Canvas must use exactly two bounded videos: the optional V2 builder walkthrough and the Document Processing motion loop.');
 if (count(wxo, /<\/span><h3\b/gi) !== 4) fail('Current stage headers must stay compact and text-light.');
 requireText(wxo, 'class="doc-current-evaluator-grid"', 'The Evaluate finale must use a distinct four-screen grid.');
 forbid(wxo, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant classifier data-mapping screen must be removed.');

@@ -243,14 +243,14 @@
         900,
         592
       ],
-      "treatment": "complete uncropped authored frame extracted from frame 3 of the audited four-frame review GIF; existing review export uniformly scaled the 1024x674 source to 900x592; external developer-note overlay removed only from blank #f4f4f4 canvas pixels; top-right initials avatar replaced with a neutral marker; form and side-panel geometry untouched; metadata-free PNG resave",
+      "treatment": "complete uncropped authored frame extracted from frame 3 of the audited four-frame review GIF; existing review export uniformly scaled the 1024x674 source to 900x592; external developer-note overlay removed only from blank #f4f4f4 canvas pixels; top-right initials avatar replaced with a neutral marker; unintended one-pixel white strip at the far-right export edge replaced from the adjacent authored backdrop; form and side-panel geometry untouched; metadata-free PNG resave",
       "privacyStatus": "top-right initials avatar neutralized; external developer annotation removed; fictional interface content retained",
       "claimStatus": "design evidence only; no shipment, runtime, adoption, performance, or measured-outcome claim",
       "approvalState": "user-approved replacement",
       "sourceArtifact": "Portfolio Handoffs/wxO Canvas/2026-08-03-flow1-source-screen-review/assets/07-form-build.gif",
       "sourceArtifactSha256": "cd33e7d462fc759c4b659da48fe8d05aed83660d6b505a59cbbe17ca6dca590f",
-      "bytes": 44257,
-      "sha256": "8039484c6274a0e59be05cd692e8631300a5eb00275b8cd862ea424e692ca403"
+      "bytes": 40025,
+      "sha256": "56c6a9dc2352cc42088ef6e5f60bea52403daed7a659a7197ffcb45e56a24c06"
     },
     {
       "file": "16-user-activity-complete.png",

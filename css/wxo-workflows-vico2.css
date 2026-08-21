@@ -176,57 +176,164 @@ html[data-theme='dark'] .workflow-pages {
   display: none;
 }
 
-.wxo-future-preview {
-  padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 7rem);
+.wxo-v2-story {
+  padding: clamp(4rem, 9vw, 8rem) 0 clamp(5rem, 10vw, 9rem);
   border-top: 1px solid var(--border);
 }
 
-.wxo-future-preview h2 {
-  max-width: 64rem;
-  margin: 0 auto clamp(1.75rem, 4vw, 3rem);
-  font-size: clamp(2.35rem, 4.8vw, 4.75rem);
-  line-height: 1;
+.wxo-v2-story-head,
+.wxo-v2-evidence,
+.wxo-v2-evidence-grid,
+.wxo-v2-prototype-boundary {
+  width: min(100%, 72rem);
+  margin-inline: auto;
 }
 
-.wxo-future-preview figure {
-  width: min(100%, 64rem);
-  margin: 0 auto;
+.wxo-v2-story h2 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.wxo-v2-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  margin: 1.5rem 0 0;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--blue-text);
+  color: var(--blue-text);
+  font-family: var(--editorial-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wxo-v2-evidence {
+  margin-top: clamp(2rem, 5vw, 4rem);
   border: 1px solid var(--border);
   background: var(--bg-2);
 }
 
-.wxo-future-preview video {
+.wxo-v2-image-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wxo-v2-image-link:focus-visible {
+  outline: 3px solid var(--blue-text);
+  outline-offset: 3px;
+}
+
+.wxo-v2-evidence img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1024 / 676;
-  background: #161616;
+  object-fit: contain;
+  background: #f4f4f4;
 }
 
-.wxo-future-preview figcaption {
+.wxo-v2-open-label {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.9rem 1rem;
-  color: var(--text-2);
+  justify-content: flex-end;
+  min-height: 2.5rem;
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--blue-text);
   font-family: var(--editorial-mono);
   font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.wxo-future-motion-toggle {
-  min-height: 44px;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
+.wxo-v2-image-link:hover .wxo-v2-open-label {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.wxo-v2-evidence figcaption {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.32fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: var(--text-caption);
+  line-height: 1.45;
+}
+
+.wxo-v2-evidence figcaption strong {
   color: var(--text);
-  font: inherit;
-  cursor: pointer;
+  font-family: var(--editorial-mono);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.wxo-future-motion-toggle:hover,
-.wxo-future-motion-toggle:focus-visible {
-  border-color: var(--text);
+.wxo-v2-evidence-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.wxo-v2-evidence-grid .wxo-v2-evidence {
+  width: 100%;
+}
+
+.wxo-v2-evidence-grid .wxo-v2-evidence figcaption {
+  min-height: 0;
+}
+
+.wxo-v2-prototype-boundary {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.38fr) minmax(0, 0.62fr);
+  align-items: start;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
+  border-block: 1px solid var(--border);
+}
+
+.wxo-v2-prototype-copy .workflow-label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.wxo-v2-prototype-boundary h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.wxo-v2-prototype-boundary p {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+.wxo-v2-prototype-media {
+  min-width: 0;
+  margin: 0;
+}
+
+.wxo-v2-prototype-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  background: #111;
+}
+
+.wxo-v2-prototype-media figcaption {
+  padding-top: 0.75rem;
+  color: var(--text-2);
+  font: 500 0.72rem/1.5 var(--editorial-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .workflow-chapter {
@@ -730,8 +837,22 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   .wxo-hero-grid,
   .workflow-chapter-head,
   .wxo-feature-grid,
-  .workflow-close-grid {
+  .workflow-close-grid,
+  .wxo-v2-evidence-grid,
+  .wxo-v2-prototype-boundary {
     grid-template-columns: 1fr;
+  }
+
+  .wxo-v2-prototype-boundary .workflow-label {
+    grid-row: auto;
+  }
+
+  .wxo-v2-evidence figcaption {
+    grid-template-columns: 1fr;
+  }
+
+  .wxo-v2-evidence-grid .wxo-v2-evidence figcaption {
+    min-height: 0;
   }
 
   .doc-current-pair,
@@ -771,7 +892,8 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     line-height: 1.25;
   }
 
-  .wxo-chapter-nav a[data-wxo-chapter='document-processing'] span {
+  .wxo-chapter-nav a[data-wxo-chapter='document-processing'] span,
+  .wxo-chapter-nav a[data-wxo-chapter='document-processing'] small {
     display: none;
   }
 

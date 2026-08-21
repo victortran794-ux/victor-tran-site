@@ -1,0 +1,119 @@
+{
+  "figmaFileKey": "PKr7T6508DtrWg9FhTTc75",
+  "figmaFileName": "wxo flows v1 - v2",
+  "sourcePage": "wxo flows v1 - v2",
+  "sourceUrl": "https://www.figma.com/design/PKr7T6508DtrWg9FhTTc75/wxo-flows-v1---v2?node-id=0-1",
+  "editorialRule": "V1 remains the authored foundation. V2 boards and the original Figma prototype sequence are shown as authored visual-system exploration. Prototype names, values, records, metrics, statuses, timestamps, costs, and errors are fictional sample content. No shipment, adoption, runtime, performance, or outcome claim is made.",
+  "assets": [
+    {
+      "file": "01-component-system-showcase.png",
+      "role": "V2 node-library and state-system overview",
+      "sourceNode": "6:22187",
+      "sourceFrame": "component-system-showcase dark",
+      "sourceBounds": [1440, 1024],
+      "rawExportDimensions": [2944, 2112],
+      "rawExportSha256": "d31ca4db5401bab0cc59378e12f43f69b1020901a62c8d602b2046379d448ff7",
+      "exportedDimensions": [2880, 2048],
+      "treatment": "Complete Figma 2x frame cropped only to the authored 1440 by 1024 frame bounds, removing the baked external shadow matte; operational error/runtime strings replaced with neutral component-state guidance; metadata stripped; no component reconstruction.",
+      "sanitization": "Replaced Connection timed out and runtime execution error copy with neutral review guidance; removed the external export-shadow matte; metadata stripped; no component structure changed.",
+      "privacyStatus": "Generic component examples and interaction-state labels; no personal, customer, account, provider, runtime, or operational error details visible.",
+      "claimStatus": "Authored V2 component specification only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 252029,
+      "sha256": "07b7b8448b3c44e23814d8ea2067e86ba097be71d2bc08861de486d5d813e7fe"
+    },
+    {
+      "file": "02-agent-flow-showcase.png",
+      "role": "V2 agent-orchestration graph overview",
+      "sourceNode": "6:22398",
+      "sourceFrame": "agent-flow-v2-showcase dark",
+      "sourceBounds": [1440, 1308],
+      "rawExportDimensions": [2952, 2688],
+      "rawExportSha256": "8f74281bb4224c24282180cb97c33e17012acd66247786a7f690da9d9f8207f9",
+      "exportedDimensions": [2880, 2616],
+      "treatment": "Complete Figma 2x frame cropped only to the authored 1440 by 1308 frame bounds, removing the baked external shadow matte; provider/model value replaced with neutral model-configuration copy; metadata stripped; no graph reconstruction.",
+      "sanitization": "Removed the provider/model value, replaced it with neutral Model configuration copy, and removed the external export-shadow matte; no orchestration structure changed.",
+      "privacyStatus": "Generic orchestration example; no personal, customer, account, provider, or model identifiers visible after sanitization.",
+      "claimStatus": "Authored V2 orchestration specification only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 373792,
+      "sha256": "0fed7239f3d4201296278cf9ed98d00be5b9358e54f188757387dd18027d8187"
+    },
+    {
+      "file": "03-flow-controls-showcase.png",
+      "role": "V2 flow-control and routing semantics overview",
+      "sourceNode": "6:21977",
+      "sourceFrame": "flow-controls-showcase light",
+      "sourceBounds": [1440, 1024],
+      "rawExportDimensions": [2992, 2160],
+      "rawExportSha256": "235a6b91eaa1471c882347e2f746666bb22ad39486d3abed0f80863fc66878cd",
+      "exportedDimensions": [2880, 2048],
+      "treatment": "Complete Figma 2x frame cropped only to the authored 1440 by 1024 frame bounds, removing the baked external shadow matte; resaved as RGB PNG to strip embedded metadata; no reconstruction or internal content edit.",
+      "sanitization": "Removed the external export-shadow matte and stripped metadata; no internal flow-control evidence changed.",
+      "privacyStatus": "Generic control and routing labels; no personal, customer, account, provider, or operational identifiers visible.",
+      "claimStatus": "Authored V2 flow-control specification only; no shipment, runtime, adoption, performance, or measured-outcome claim.",
+      "approvalState": "protected preview candidate",
+      "bytes": 195202,
+      "sha256": "046719f0dc900d8653d1b95aba753578120196b9c087e687c3657f87b947862c"
+    },
+    {
+      "file": "04-workflow-detail-showcase.png",
+      "role": "Complete V2 workflow-detail specification",
+      "sourceNode": "6:22060",
+      "sourceFrame": "workflow-detail light",
+      "sourceBounds": [1440, 1384],
+      "rawExportDimensions": [2952, 2840],
+      "rawExportSha256": "68d6e0aaecc52751e6835587f045a44423c018b54168a9cb182d37a79bb734c5",
+      "exportedDimensions": [2880, 2768],
+      "completenessStatus": "Complete authored workflow specification visible from entry through branching logic to End and output termination.",
+      "treatment": "Complete Figma 2x frame cropped only to the authored 1440 by 1384 frame bounds, removing the baked external shadow matte; unsupported performance descriptor replaced with neutral routing-study copy; metadata stripped; no workflow reconstruction.",
+      "sanitization": "Removed unsupported high-performance language, replaced it with neutral routing-study copy, and removed the external export-shadow matte; no workflow structure changed.",
+      "privacyStatus": "Generic sample workflow; no personal, customer, account, provider, model, runtime, cost, endpoint, error, or debug identifiers visible.",
+      "claimStatus": "Complete authored V2 workflow specification, not evidence of implementation, shipment, runtime, adoption, performance, or measured outcomes.",
+      "approvalState": "protected preview candidate",
+      "bytes": 183109,
+      "sha256": "4052a5c00593ea9b961493017127cfcba5fce991ad561445c1445f412e21ceb2"
+    }
+  ],
+  "prototypeExploration": {
+    "parentNode": "1:24219",
+    "sourceArtifact": "wxo-figma-interaction-demo.gif",
+    "status": "published-authored-sequence",
+    "relationship": "Original authored Figma prototype showing how the V2 visual system carries from workflow overview through execution views and into the builder. It is not treated as implementation or performance evidence.",
+    "sourceGifDimensions": [960, 630],
+    "sourceGifFrames": 118,
+    "sourceGifDurationSeconds": 9.83,
+    "sourceGifBytes": 2311575,
+    "sourceGifSha256": "f95b0bf8c9b9e48d0ffce0ae073f82efa6d19471c63fe727c0188154c0edd43e",
+    "treatment": "Original matching MP4 and WebM exports published byte-for-byte with no reconstructed motion, camera move, crop, blur, redaction, or content edit. RGB poster generated from the original GIF first frame.",
+    "privacyStatus": "Names, initials, values, workflow records, metrics, statuses, timestamps, execution identifiers, costs, and error/debug states are fictional prototype sample content, confirmed by the author.",
+    "claimStatus": "Authored visual-system prototype only. The sequence does not claim implementation, shipment, live operation, adoption, performance, or measured outcomes.",
+    "media": [
+      {
+        "file": "v2-figma-interaction-demo-poster.png",
+        "format": "PNG",
+        "dimensions": [960, 630],
+        "bytes": 162925,
+        "sha256": "47494440f56fee47c753fccf511e625dda2dadfd77fe449653713f04e6d98a16"
+      },
+      {
+        "file": "v2-figma-interaction-demo.webm",
+        "format": "WebM",
+        "dimensions": [960, 630],
+        "durationSeconds": 9.83,
+        "audio": false,
+        "bytes": 2442616,
+        "sha256": "0e9df3c0e44fcf9fdfda6a034dbe9d62b1b37824525a242323026b27fdda6a0f"
+      },
+      {
+        "file": "v2-figma-interaction-demo.mp4",
+        "format": "MP4",
+        "dimensions": [960, 630],
+        "durationSeconds": 9.83,
+        "audio": false,
+        "bytes": 1158770,
+        "sha256": "ae2392130a9723e1b3c52226cd99160fdd2c11d80bc91a1c05ea0ba42d0ec713"
+      }
+    ]
+  }
+}

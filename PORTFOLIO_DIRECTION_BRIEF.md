@@ -42,7 +42,7 @@ Short version:
 
 ### Current posture
 
-Victor's August 7 desk review remains the master content source for the completed VicO2 release cycle. Production now includes recruiter-scan/mobile-access work through PR #157, IBM Cloud UX evidence through PR #158, Pi Kapp source-first authorship through PR #159, and the consolidated public-route authorship closeout through PR #160 at `8cb9ed18a2dfb18e95721c90e614c852876bded4`. Current production source, approved package provenance, shared-shell contracts, privacy and generated-export rules, accessibility coverage, and rollback evidence remain the operational safety layer. The authorship and website-evidence audit is complete, no public-site implementation lane is active, and presentation preparation remains parked until a concrete interview.
+Victor's August 7 desk review remains the master content source for the completed VicO2 release cycle. Production now includes recruiter-scan/mobile-access work through PR #157, IBM Cloud UX evidence through PR #158, Pi Kapp source-first authorship through PR #159, and the consolidated public-route authorship closeout through PR #160 at `8cb9ed18a2dfb18e95721c90e614c852876bded4`. Current production source, approved package provenance, shared-shell contracts, privacy and generated-export rules, accessibility coverage, and rollback evidence remain the operational safety layer. The authorship and website-evidence audit is complete. New authored wxO V1/V2 source opened one bounded protected-story lane on 2026-08-21; Homepage hero plus Design DNA entry and UI Gallery naming plus approved-artifact review are sequenced behind it. Presentation preparation remains parked until a concrete interview.
 
 Current working posture:
 
@@ -51,15 +51,15 @@ Current working posture:
 3. Use current `main` as the implementation baseline. Reuse current production behavior and approved media before consulting older candidates or worktrees.
 4. Treat prior Keep verdicts plus August 7 notes as bounded revision passes, not blank-slate redesigns.
 5. Preserve current protection during content and visual work. wxO remains the only intended locked story, with Document Processing contained as its protected chapter.
-6. Compare only the bounded Home portrait-lens connection to the existing DNA experience now. Keep broad DNA expansion conditional and defer full reassessment until the VicO2 rollout is stable.
+6. Keep the current Home Design DNA experience stable until the sequenced hero plus Design DNA entry lane. That lane should define a more visually compelling opening and useful post-entry payload; broad project-wide Lens expansion remains conditional.
 7. Preserve PCI's released sanitized evidence and conservative claims boundaries; do not reopen it without a new source review.
 8. Keep A2UI, framework migration, generative chat UI, floating chat widgets, and uncontrolled rollout outside the active lane.
 
 ### Top standing decisions
 
-1. Preserve current `main` through PR #160 as the production baseline.
+1. Preserve current `main` through PR #161 as the production/reset baseline while the approved wxO V1/V2 lane runs in isolation.
 2. Keep wxO protected as the intended locked umbrella and keep Document Processing inside that protected story.
-3. Treat the route-by-route authorship and website-evidence audit as complete. Reopen work only for new source evidence, a concrete hiring target, a verified live defect, or an explicit publication/protection decision.
+3. Treat the route-by-route authorship and website-evidence audit as complete. The updated `wxo-flows-v1---v2` Figma file is the new authored evidence that justifies the active protected wxO lane.
 4. Judge the rendered result rather than frameworks by name. Retain Tailwind or shared components when the visible result carries project-specific decisions.
 5. Convert any future finding into a small route-specific proposal and let Victor select the direction before implementation.
 6. Preserve verified role, chronology, collaboration, historical-source, concept, privacy, and outcome boundaries.
@@ -503,15 +503,14 @@ Guardrails:
 
 ### Recommended next action
 
-1. Preserve the August 7 master notes and enhancement-authority reconciliation as the active review sources.
-2. Create one clean Home/global worktree from current `origin/main`.
-3. Audit the shared-shell generator, current Home contracts, and current production behavior already in `main` before writing changes.
-4. Build the two-option lens-to-DNA comparison and Home/global contracts first, then stop for one batched Victor review.
-5. Continue through the dashboard's bounded page sequence using current production pages as the baseline and earlier candidates only as provenance/reference sources.
-6. Preserve all current protection until each page's separate privacy, claims, route, access, indexing, preview, and release gates pass.
-7. Complete PCI sanitized evidence intake before beginning its implementation lane.
-8. Run complete-site visual, tone, responsive, accessibility, metadata, privacy, and exposure review through an approved preview strategy; merge only after explicit approval.
-9. Keep A2UI, broad Lens expansion, framework migration, floating chat, and uncontrolled rollout parked until explicitly resumed.
+1. Use the isolated `portfolio/wxo-v1-v2-story-2026-08-21` worktree from synchronized `main`.
+2. Audit the approved `wxo-flows-v1---v2` Figma file before export. Separate V1 foundation, V2 evolution, developed prototype, and shipped/exploration status; prefer complete authored frames over reconstructed crops.
+3. Keep wxO password-locked, `noindex`, and omitted from the sitemap. Export only sanitized portfolio derivatives; the current client-side gate is not true confidentiality control.
+4. Keep Document Processing inside wxO as a smaller protected secondary chapter. Compare its current side tab with a more subdued secondary-tab treatment; do not create a standalone public route.
+5. Build the protected V1/V2 story proposal and its source/provenance contracts, then stop for one batched Victor preview review before publication or merge.
+6. After wxO, open the Homepage hero plus Design DNA entry lane, then the UI Gallery naming plus approved-artifact audit. Treat motion as supporting behavior only where it communicates authored temporal evidence.
+7. Use report-style chapter anatomy as an editorial checklist, not a universal visible template. Keep generic gallery overlays and A2UI parked; retire `UI Fragments` as a separate concept and the Pi Kapp system page as an active lane.
+8. Run complete visual, responsive, accessibility, metadata, privacy, generated-export, and exposure review through an approved preview strategy; merge only after explicit approval.
 
 ---
 
