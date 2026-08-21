@@ -57,7 +57,7 @@
   --text-subheading: 1.5rem;                                /* 24px — H3-equivalent                          */
   --text-title:      clamp(1.5rem, 2.5vw, 2.25rem);         /* 24-36px fluid — H2 / card titles              */
   --text-display:    clamp(2.75rem, 7vw, 5.5rem);           /* 44-88px fluid — hero H1, big section heads    */
-  --text-hero:       clamp(7rem, 24vw, 26rem);              /* 112-416px fluid — the "Visual / Designer" giant */
+  --text-hero:       clamp(7rem, 24vw, 26rem);              /* 112-416px fluid — name-first hero display       */
 
   /* Leading scale */
   --leading-tight: 1;
@@ -741,11 +741,10 @@ main#main-content {
 
 
 /* ══════════════════════════════════════════════
-   HERO  (Adrianus-style billboard — giant role title
-   stacked top + bottom, portrait cutout sandwiched
-   between, lens-fill overlay as a brand signature.
-   Tap/click anywhere on the hero to cycle portraits.)
-══════════════════════════════════════════════ */
+   HERO  (Name-first billboard with the joined Victor TRAN
+   lockup leading a secondary portrait and lens-fill signature.
+   Tap/click anywhere on the hero to cycle colors.)
+   ══════════════════════════════════════════════ */
 .home-page {
   --route02-x: clamp(48px, 5vw, 76.8px);
 }
@@ -769,7 +768,7 @@ main#main-content {
   --bg-tint: transparent;
   --lens-color: var(--text);
   --accent-2: var(--text);
-  background-color: color-mix(in oklab, var(--bg-tint) 26%, var(--bg));
+  background-color: color-mix(in oklab, var(--bg-tint) 16%, var(--bg));
   color: var(--text);
   cursor: default;
   transition: background-color 1800ms ease;
@@ -810,17 +809,17 @@ main#main-content {
   .hero[data-pointer-wash="active"] .hero-pointer-wash { opacity: 1; }
 }
 
-/* Giant headline — two words stacked tight, left-aligned, the whole block
-   centered in the hero. Figure sits in front; the type wings peek out
-   left/right of the silhouette. */
+/* Giant joined name foregrounds the person before the role. TRAN shares the
+   baseline at a reduced scale so its capital T meets Victor's lowercase rhythm. */
 .hero-typeblock {
+  --hero-name-size: clamp(7rem, 14.5vw, 13.5rem);
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: var(--route02-x);
   transform: translateY(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: baseline;
   z-index: 1;
   pointer-events: none;
   user-select: none;
@@ -829,22 +828,30 @@ main#main-content {
   display: block;
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
-  font-size: clamp(6.8rem, 14.2vw, 13.25rem);
+  font-size: var(--hero-name-size);
   line-height: 0.86;
   letter-spacing: -0.025em;
-  /* Track the active portrait's accent token so the words sit in the same
-     hue as the lens fill — full saturation up top, knocked-back italic below. */
-  color: var(--lens-color, var(--text));
+  /* Track the active portrait's accent token while blending toward the theme
+     text color enough to preserve large-display contrast in every palette. */
+  color: color-mix(in oklab, var(--lens-color, var(--text)) 80%, var(--text) 20%);
   white-space: nowrap;
   transition: color 1800ms ease;
 }
+.hero-bigtype--victor {
+  font-size: var(--hero-name-size);
+  transform: none;
+}
+.hero-bigtype--tran {
+  font-size: calc(var(--hero-name-size) * 0.76);
+  margin-left: -0.16em;
+  transform: none;
+}
 .hero-bigtype + .hero-bigtype {
   font-style: italic;
-  /* Second word picks a different palette token (set on the hero by JS) so
-     the headline plays a small two-color game. Italic + ~half opacity keeps
-     it knocked back behind "Visual". */
-  color: var(--accent-2, var(--lens-color));
-  opacity: 0.55;
+  /* TRAN uses the secondary palette token. Theme-text blending preserves the
+     pink/blue relationship while maintaining large-text contrast. */
+  color: color-mix(in oklab, var(--accent-2, var(--lens-color)) 80%, var(--text) 20%);
+  opacity: 1;
 }
 
 /* Portrait frame — a single laughing portrait stays fixed while the color
@@ -854,7 +861,7 @@ main#main-content {
   /* Container spans the full hero so each portrait's --anchor (center / left
      bottom / right bottom) actually has room to shift the figure within. */
   position: absolute;
-  inset: 0;
+  inset: 34% 0 0;
   z-index: 2;
 }
 
@@ -933,7 +940,7 @@ main#main-content {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 100%;
+  height: 66%;
   aspect-ratio: 1250 / 1800;
   container-type: size;
   z-index: 4;
@@ -970,14 +977,16 @@ main#main-content {
   content: '';
   position: absolute;
   inset: -2px;
-  border: 1px solid transparent;
+  border: 1px solid color-mix(in oklab, var(--text) 58%, var(--lens-color) 42%);
   border-radius: 47% 53% 49% 51% / 45% 48% 52% 55%;
-  transition: border-color 180ms ease;
+  opacity: 0.78;
+  transition: border-color 180ms ease, opacity 180ms ease;
 }
 
 .hero-lens-portal:hover::before,
 .hero-lens-portal:focus-visible::before {
-  border-color: color-mix(in srgb, var(--text) 76%, transparent);
+  border-color: color-mix(in oklab, var(--text) 82%, var(--lens-color) 18%);
+  opacity: 1;
 }
 
 .hero-lens-portal:focus-visible {
@@ -1011,7 +1020,7 @@ main#main-content {
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.45;
-  color: var(--text-2);
+  color: color-mix(in oklab, var(--text-2) 78%, var(--text) 22%);
   letter-spacing: 0.005em;
   margin: 0;
 }
@@ -1021,7 +1030,7 @@ main#main-content {
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--text-2);
+  color: color-mix(in oklab, var(--text-2) 78%, var(--text) 22%);
   margin: 0;
 }
 
@@ -1125,27 +1134,31 @@ main#main-content {
 @media (max-width: 900px) {
   .hero-meta { max-width: 240px; top: calc(var(--nav-h) + var(--space-8)); }
   .hero-services { font-size: var(--text-caption); gap: var(--space-3); }
-  .hero-bigtype { font-size: clamp(5.8rem, 18vw, 10rem); }
+  .hero-typeblock { --hero-name-size: clamp(5.6rem, 15.5vw, 9rem); }
 }
 
 /* Phone: stack meta above the type block; shrink portrait; 2x2 services. */
 @media (max-width: 600px) {
   .hero { min-height: 580px; }
   .hero-typeblock {
+    --hero-name-size: clamp(4.35rem, 18.8vw, 5.35rem);
     top: 58%;
     left: var(--route02-x);
     transform: translateY(-50%);
+    flex-direction: row;
+    align-items: baseline;
     z-index: 1;
   }
-  .hero-bigtype { font-size: clamp(4.5rem, 18.5vw, 5.4rem); line-height: 0.9; }
+  .hero-bigtype { line-height: 0.9; }
+  .hero-bigtype--tran { margin-left: -0.16em; transform: none; }
   .hero-bigtype + .hero-bigtype {
-    color: var(--lens-color, var(--text));
-    opacity: 0.72;
-    font-style: normal;
+    color: color-mix(in oklab, var(--accent-2, var(--lens-color)) 80%, var(--text) 20%);
+    opacity: 1;
+    font-style: italic;
   }
   .hero-portraits {
     inset: auto 0 0 0;
-    height: min(60vh, 470px);
+    height: min(39vh, 310px);
     z-index: 2;
   }
   .hero-portrait-cutout,
@@ -1156,7 +1169,7 @@ main#main-content {
             mask-position: 100% bottom;
   }
   .hero-lens-hitarea {
-    height: min(60vh, 470px);
+    height: min(39vh, 310px);
   }
   .hero-pointer-wash { display: none; }
   /* The 44px touch targets are intentionally larger than the rendered lenses
