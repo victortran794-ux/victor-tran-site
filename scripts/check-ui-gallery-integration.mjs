@@ -59,6 +59,9 @@ for (const token of [
   'data-ui-study-view="magi-architecture"',
   '<strong>System architecture</strong>',
   "Sanitized read-only map of the system's parts and relationships.",
+  'data-ui-study-view="magi-color-type"',
+  '<strong>Color and type</strong>',
+  'Surface, signal, status, and type specimens for the visual system.',
   '<div class="cursor-dot" aria-hidden="true"></div>',
   '<div class="cursor-ring" aria-hidden="true"></div>',
   '<script src="js/main.js"></script>',
@@ -68,22 +71,32 @@ for (const token of [
   'body.ui-gallery-page .cursor-dot{background:var(--ui-accent);box-shadow:0 0 0 1px #101820}',
   'body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}',
   'body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}',
-  'html[data-theme="dark"] .ui-study-grid--magi .ui-study-view > img{box-shadow:0 0 0 1px rgba(242,242,233,.24)}',
+  'background: #07100f;',
+  'grid-column: 3 / span 8;',
+  'grid-column: 4 / span 6;',
 ]) needText(css, token, `UI Gallery dark-polish CSS is missing: ${token}`);
 
 forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view > img\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
   'Magi screen edge must remain dark-theme-only.');
 
-need(count(html, /data-ui-study-view=/g) === 3, 'UI Gallery must contain exactly three static study views.');
-need(count(html, /<img\b[^>]*data-ui-study-image/g) === 3, 'Each UI Gallery view must be a static image.');
-need(count(html, /<figcaption class="ui-study-caption">/g) === 2,
-  'The two Magi studies must have concise visible captions.');
-need(html.indexOf('data-ui-study-view="magi-overview"') < html.indexOf('data-ui-study-view="magi-architecture"'),
-  'The dashboard overview must lead the Magi study before the supporting architecture view.');
-need(count(html, /loading="lazy"/g) >= 3, 'All UI Gallery study images must use deferred loading.');
+need(count(html, /data-ui-study-view=/g) === 4, 'UI Gallery must contain one Ekos lead and three privacy-reviewed Magi study views.');
+need(count(html, /<img\b[^>]*data-ui-study-image/g) === 4, 'Each UI Gallery view must be a static image.');
+need(count(html, /<figcaption class="ui-study-caption">/g) === 3,
+  'All three privacy-reviewed Magi studies must have concise visible captions.');
+const magiOrder = [
+  'magi-overview',
+  'magi-architecture',
+  'magi-color-type',
+];
+for (let index = 1; index < magiOrder.length; index += 1) {
+  need(html.indexOf(`data-ui-study-view="${magiOrder[index - 1]}"`) < html.indexOf(`data-ui-study-view="${magiOrder[index]}"`),
+    `Magi brief order must keep ${magiOrder[index - 1]} before ${magiOrder[index]}.`);
+}
+need(count(html, /loading="lazy"/g) >= 4, 'All UI Gallery study images must use deferred loading.');
 for (const [asset, width, height] of [
   ['magi-overview.webp', 1440, 1000],
   ['magi-architecture.webp', 1440, 1000],
+  ['magi-color-type.webp', 800, 600],
   ['ekos-desktop.webp', 1320, 2715],
 
 ]) need(new RegExp(`src="images/ui-gallery/${asset}"\\s+width="${width}"\\s+height="${height}"`).test(html),
@@ -91,19 +104,22 @@ for (const [asset, width, height] of [
 for (const asset of [
   'images/ui-gallery/magi-overview.webp',
   'images/ui-gallery/magi-architecture.webp',
+  'images/ui-gallery/magi-color-type.webp',
   'images/ui-gallery/ekos-desktop.webp',
   'images/ui-gallery/ekos-cover.webp',
 ]) need(fs.existsSync(asset), `Missing UI Gallery asset: ${asset}`);
-forbid(html, /ekos-components|data-ui-study-view="components"|Components and provenance|component views?|original proof|source comparison/i,
-  'UI Gallery must not retain the obsolete component board or an original-proof comparison.');
+forbid(html, /ekos-components|Components and provenance|original proof|source comparison/i,
+  'UI Gallery must not retain the obsolete Ekos component board or an original-proof comparison.');
 forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-mobile|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary/i,
-  'UI Gallery must remain a minimal three-screen gallery without Pi Kapp, duplicate Ekos variants, or editorial metadata blocks.');
+  'UI Gallery must remain a focused static gallery without Pi Kapp, duplicate Ekos variants, or editorial metadata blocks.');
 forbid(html, /A place for screen studies|historical landing-page concept|returns to that visual character|read-only operations dashboard|work continuity and architecture|generalizing protected infrastructure/i,
   'UI Gallery copy must stay plainspoken and must not regress to generated case-study language.');
 forbid(html, /revisited|refinement|returns to/i,
   'UI Gallery copy must not narrate revision history when the screens can carry it.');
 forbid(html, /<iframe|<form|<input|<video|data-dashboard|sessionStorage|password-gate/i,
   'UI Gallery must remain a public static-study route without embedded applications, forms, media players, or private-route logic.');
+forbid(html, /Inspector and metrics|Component studies|Overlay patterns|Node state specimens|sample dates|recent tasks|last checkpoint|in progress now|14,220|99\.94%|running processes|cluster system settings/i,
+  'UI Gallery must exclude rejected record-like activity, metrics, commands, and topology studies.');
 forbid(html, /Windows \+ WSL|Hermes Gateway|Sol \/ Orchestrator|Gemini fallback|Life OS|GreekLifeEDU|Good afternoon, Brad|>BT<|>AM<|>JR<|>TK</i,
   'UI Gallery contains a private topology or illustrative personal marker.');
 forbid(html, /\b(?:was|were|is) (?:shipped|launched|implemented|published)|conversion|outcome|responsive deliverable/i,
@@ -122,8 +138,7 @@ for (const token of [
   '.ui-scroll-screen',
   'overflow-y: auto;',
   'aspect-ratio: 16 / 10;',
-  'grid-column: span 8;',
-  'grid-column: span 4;',
+  'height: auto;',
   '.ui-study-caption {',
   'border: 0;',
   'html[data-theme="dark"] .ui-gallery-page',
@@ -132,26 +147,32 @@ for (const token of [
   'prefers-reduced-motion: reduce',
 ]) needText(css, token, `UI Gallery CSS is missing: ${token}`);
 forbid(css, /html\[data-lens="dark"\]/, 'UI Gallery must use the shared data-theme attribute rather than a stale data-lens selector.');
-forbid(css, /ui-study-view--components/, 'UI Gallery CSS must not retain the obsolete component-view role.');
 forbid(css, /ui-study--teaser|ui-study-grid--teaser|ui-study-teaser-copy|ui-study-link|ui-study-notes|ui-study-boundary|ui-study-view--mobile|ui-study-view--details/,
   'UI Gallery CSS must not retain obsolete teaser, metadata, or duplicate Ekos-view styling.');
 
 for (const token of [
   'ekos-polished-desktop-v3-3.png',
-
-  '01-magi-dashboard-overview-public.png',
-  '02-magi-architecture-public.png',
-  '"magi-overview.webp"',
+  'Magi — Color & Type System.png',
+  '"magi-color-type.webp"',
 ]) needText(assetBuilder, token, `UI Gallery asset builder is missing approved source/output: ${token}`);
 forbid(assetBuilder, /Ekos V2|ekos-hifi-|ekos-components/, 'UI Gallery asset builder must not retain V2 or component-board sources.');
 forbid(assetBuilder, /ekos-polished-mobile|ekos-cleanup-details|ekos-mobile\.webp|ekos-details\.webp/,
   'UI Gallery asset builder must not retain duplicate Ekos mobile/detail outputs.');
+forbid(assetBuilder, /Dashboard Overview|Architecture Canvas|Inspector & Metrics|Component Studies|Overlay Patterns|Node State Specimens|magi-inspector-metrics|magi-components|"magi-overview\.webp"|"magi-architecture\.webp"|"magi-overlays\.webp"|"magi-node-states\.webp"/,
+  'UI Gallery asset builder must exclude current-looking, operational, metric, command, and topology Magi exports.');
+for (const rejectedAsset of [
+  'images/ui-gallery/magi-inspector-metrics.webp',
+  'images/ui-gallery/magi-components.webp',
+  'images/ui-gallery/magi-overlays.webp',
+  'images/ui-gallery/magi-node-states.webp',
+]) need(!fs.existsSync(rejectedAsset), `Rejected private/live-state asset must not exist: ${rejectedAsset}`);
 
 // These hashes lock the exact independently pixel-reviewed public derivatives.
 // Update only after rerunning the derivative safety scan and visual privacy review.
 const reviewedPublicAssetHashes = {
   'images/ui-gallery/magi-overview.webp': 'b044e656461e24ff9cc821774ecf3e63b182cb09e6ee600292be64a4ef6c775e',
   'images/ui-gallery/magi-architecture.webp': '4aa214da61b5901d1a35f9761f7658c628affd62bd54a62dd0ea86731f78e2c7',
+  'images/ui-gallery/magi-color-type.webp': '7f23603b9e5627ca2d318fc313707481d361103e2387656b36f7c20f2a315cec',
 };
 for (const [asset, expectedHash] of Object.entries(reviewedPublicAssetHashes)) {
   if (!fs.existsSync(asset)) {
@@ -224,4 +245,4 @@ if (failures.length) {
 }
 
 console.log('UI GALLERY CONTRACT PASSED');
-console.log('- one complete scrollable Ekos page, overview-led 65/35 sanitized Magi pair, concise captions, privacy boundaries, and CI wiring pass');
+console.log('- one complete scrollable Ekos page, two approved Magi studies plus one privacy-reviewed visual-system specimen, and CI wiring pass');

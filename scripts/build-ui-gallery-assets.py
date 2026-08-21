@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 from pathlib import Path
+from typing import Any
 
 EKOS_SOURCE_ENV = "EKOS_UI_GALLERY_SOURCE"
 EXPANDED_SOURCE_ENV = "UI_GALLERY_EXPANDED_SOURCE"
@@ -15,8 +17,11 @@ EKOS_SOURCES = {
 }
 
 EXPANDED_SOURCES = {
-    "magi_overview": "candidates/01-magi-dashboard-overview-public.png",
-    "magi_architecture": "candidates/02-magi-architecture-public.png",
+    "magi_color_type": "Magi — Color & Type System.png",
+}
+
+EXPANDED_SOURCE_SPECS = {
+    "magi_color_type": ((1600, 1200), "12ed1011380ca151296a1140351a986b99439e8f020bb3abe288c4567a923bb9"),
 }
 
 
@@ -69,6 +74,20 @@ def load_images(root: Path, sources: dict[str, str], image_module):
     return images
 
 
+def verify_expanded_sources(root: Path, images: dict[str, Any]) -> None:
+    for name, (expected_size, expected_hash) in EXPANDED_SOURCE_SPECS.items():
+        source = root / EXPANDED_SOURCES[name]
+        actual_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+        if images[name].size != expected_size:
+            raise ValueError(
+                f"Unexpected dimensions for {source}: {images[name].size}, expected {expected_size}"
+            )
+        if actual_hash != expected_hash:
+            raise ValueError(
+                f"Unexpected source hash for {source}: {actual_hash}, expected {expected_hash}"
+            )
+
+
 def save_webp(image, destination: Path, quality: int) -> None:
     image.convert("RGB").save(destination, "WEBP", quality=quality, method=6)
 
@@ -88,12 +107,17 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=True)
     ekos = load_images(args.ekos_source, EKOS_SOURCES, Image)
     expanded = load_images(args.expanded_source, EXPANDED_SOURCES, Image)
+    verify_expanded_sources(args.expanded_source, expanded)
 
     outputs = {
-        "magi-overview.webp": resize_to_width(expanded["magi_overview"], 1440, Image),
-        "magi-architecture.webp": resize_to_width(expanded["magi_architecture"], 1440, Image),
+        "magi-color-type.webp": resize_to_width(expanded["magi_color_type"], 800, Image),
         "ekos-desktop.webp": resize_to_width(ekos["desktop"], 1320, Image),
     }
+
+    # The previously approved dashboard and architecture derivatives remain
+    # hash-locked in the repository. New dashboard, architecture, inspector,
+    # component, overlay, and node-state exports are excluded because their
+    # pixels contain current-looking, operational, metric, or topology content.
 
     cover_source = ekos["desktop"]
     cover_height = min(cover_source.height, round(cover_source.width * 11 / 16))

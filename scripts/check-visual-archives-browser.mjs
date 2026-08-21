@@ -379,8 +379,8 @@ const pageSpecs = {
     file: 'uigallery.html',
     bodyClass: 'ui-gallery-page',
     archive: 'ui-gallery',
-    mainImages: 3,
-    captions: 2,
+    mainImages: 4,
+    captions: 3,
   },
 };
 
@@ -450,7 +450,8 @@ try {
             return 0.2126 * r + 0.7152 * g + 0.0722 * b;
           };
           const outlineLum = luminance(getComputedStyle(focusTarget).outlineColor);
-          const surfaceLum = luminance(getComputedStyle(document.querySelector('.archive-primary')).backgroundColor);
+          const focusSurface = focusTarget?.closest('.ui-study') || document.querySelector('.archive-primary');
+          const surfaceLum = luminance(getComputedStyle(focusSurface).backgroundColor);
           const focusContrast = (Math.max(outlineLum, surfaceLum) + 0.05) / (Math.min(outlineLum, surfaceLum) + 0.05);
           return {
             width: innerWidth,
@@ -486,6 +487,7 @@ try {
             mendenhallFit: document.querySelector('.mendenhall-archive-trigger > img') ? getComputedStyle(document.querySelector('.mendenhall-archive-trigger > img')).objectFit : null,
             uiViews: document.querySelectorAll('[data-ui-study-view]').length,
             uiBackground: getComputedStyle(document.body).backgroundColor,
+            uiMagiBackground: document.querySelector('.ui-study--magi') ? getComputedStyle(document.querySelector('.ui-study--magi')).backgroundColor : null,
             uiViewNames: [...document.querySelectorAll('[data-ui-study-view]')].map((view) => view.dataset.uiStudyView),
             uiImageSources: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => image.getAttribute('src')),
             uiImageDimensions: [...document.querySelectorAll('[data-ui-study-image]')].map((image) => ({
@@ -607,27 +609,33 @@ try {
           const expectedUiBackground = theme === 'dark' ? 'rgb(12, 17, 22)' : 'rgb(238, 241, 239)';
           assert(state.uiBackground === expectedUiBackground,
             `uigallery.html: ${theme} palette did not apply; expected ${expectedUiBackground}, found ${state.uiBackground}`);
-          assert(state.uiViews === 3 && state.uiLayout.length === 3,
-            `uigallery.html: expected exactly three static UI study views; found ${state.uiViews}`);
+          assert(state.uiViews === 4 && state.uiLayout.length === 4,
+            `uigallery.html: expected one Ekos lead and three privacy-reviewed Magi study views; found ${state.uiViews}`);
           assert(JSON.stringify(state.uiViewNames) === JSON.stringify([
             'ekos-desktop', 'magi-overview', 'magi-architecture',
-          ]), `uigallery.html: minimal gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
+            'magi-color-type',
+          ]), `uigallery.html: gallery study roles drifted: ${JSON.stringify(state.uiViewNames)}`);
           assert(JSON.stringify(state.uiImageSources) === JSON.stringify([
             'images/ui-gallery/ekos-desktop.webp',
             'images/ui-gallery/magi-overview.webp',
             'images/ui-gallery/magi-architecture.webp',
-          ]), `uigallery.html: minimal gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
+            'images/ui-gallery/magi-color-type.webp',
+          ]), `uigallery.html: gallery sequence drifted: ${JSON.stringify(state.uiImageSources)}`);
           assert(state.uiImageDimensions.every((image) => image.naturalWidth === image.declaredWidth && image.naturalHeight === image.declaredHeight),
             `uigallery.html: declared dimensions do not match decoded media: ${JSON.stringify(state.uiImageDimensions)}`);
-          assert(state.uiImageLayout.slice(1).every((image) => Math.abs((image.width / image.height) - 1.6) <= 0.03),
-            `uigallery.html: Magi screen ratios drifted: ${JSON.stringify(state.uiImageLayout)}`);
+          assert(state.uiImageLayout.slice(1).every((image, index) => {
+            const declared = state.uiImageDimensions[index + 1];
+            const expectedHeight = Math.round(image.width * declared.declaredHeight / declared.declaredWidth);
+            return Math.abs(image.height - expectedHeight) <= 1;
+          }), `uigallery.html: a Magi frame is cropped or distorted: ${JSON.stringify(state.uiImageLayout)}`);
+          assert(state.uiMagiBackground === 'rgb(7, 16, 15)',
+            `uigallery.html: Magi dark-canvas presentation drifted: ${state.uiMagiBackground}`);
           assert(state.uiCursor && state.uiCursor.dotBackground === 'rgb(186, 255, 80)' &&
             state.uiCursor.dotShadow !== 'none' && state.uiCursor.ringBorder === 'rgb(186, 255, 80)' &&
             state.uiCursor.ringShadow !== 'none' && Number(state.uiCursor.ringOpacity) >= 0.8,
             `uigallery.html: custom cursor can lose contrast over mixed artwork: ${JSON.stringify(state.uiCursor)}`);
-          const expectedMagiEdge = theme === 'dark';
-          assert(state.uiMagiEdges.length === 2 && state.uiMagiEdges.every((shadow) => expectedMagiEdge ? shadow !== 'none' : shadow === 'none'),
-            `uigallery.html: Magi edge must be subtle and dark-theme-only: ${JSON.stringify({ theme, edges: state.uiMagiEdges })}`);
+          assert(state.uiMagiEdges.length === 3 && state.uiMagiEdges.every((shadow) => shadow === 'none'),
+            `uigallery.html: Magi frames must remain borderless on the dark canvas: ${JSON.stringify(state.uiMagiEdges)}`);
           const expectedScrollRatio = viewport.mobile ? (4 / 5) : 1.6;
           assert(state.uiScrollScreen && Math.abs((state.uiScrollScreen.width / state.uiScrollScreen.height) - expectedScrollRatio) <= 0.03 &&
             state.uiScrollScreen.scrollHeight > state.uiScrollScreen.clientHeight && state.uiScrollScreen.overflowY === 'auto' && state.uiScrollScreen.tabindex === 0,
@@ -640,16 +648,18 @@ try {
             return moved;
           })()`);
           assert(scrolledEkos > 0, `uigallery.html: Ekos screen did not scroll through the complete page.`);
-          const [ekosDesktop, magiOverview, magiArchitecture] = state.uiLayout;
+          const [ekosDesktop, magiOverview, magiArchitecture, magiColorType] = state.uiLayout;
           if (viewport.mobile) {
-            assert(Math.abs(magiOverview.left - magiArchitecture.left) <= 1 && magiOverview.top < magiArchitecture.top,
-              `uigallery.html: mobile Magi studies do not stack the overview first: ${JSON.stringify(state.uiLayout)}`);
+            assert(state.uiLayout.slice(2).every((view) => Math.abs(magiOverview.left - view.left) <= 1) &&
+              state.uiLayout.slice(1).every((view, index, views) => index === 0 || views[index - 1].top < view.top),
+              `uigallery.html: mobile Magi studies do not stack in brief order: ${JSON.stringify(state.uiLayout)}`);
           } else {
-            const magiRatio = magiOverview.width / (magiOverview.width + magiArchitecture.width);
-            assert(Math.abs(magiOverview.top - magiArchitecture.top) <= 1 && magiOverview.left < magiArchitecture.left && magiRatio >= 0.63 && magiRatio <= 0.69,
-              `uigallery.html: desktop Magi studies must remain an overview-led 65/35 pair: ${JSON.stringify({ magiRatio, layout: state.uiLayout })}`);
-            assert(ekosDesktop.width > magiOverview.width,
-              `uigallery.html: the single Ekos screen must remain the full-width gallery lead: ${JSON.stringify(state.uiLayout)}`);
+            assert(magiOverview.top < magiArchitecture.top && magiArchitecture.width < magiOverview.width && magiArchitecture.left > magiOverview.left,
+              `uigallery.html: approved architecture must remain supporting below the dashboard: ${JSON.stringify(state.uiLayout)}`);
+            assert(magiColorType.top > magiArchitecture.top && magiColorType.width < magiArchitecture.width && magiColorType.left > magiArchitecture.left,
+              `uigallery.html: color/type specimen must remain a centered, subordinate closing study: ${JSON.stringify(state.uiLayout)}`);
+            assert(ekosDesktop.width >= magiOverview.width,
+              `uigallery.html: Ekos must remain at least as wide as the Magi dashboard lead: ${JSON.stringify(state.uiLayout)}`);
           }
         }
 

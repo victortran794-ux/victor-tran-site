@@ -717,6 +717,10 @@
       {
         "src": "images/ui-gallery/magi-architecture.webp",
         "alt": "Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes"
+      },
+      {
+        "src": "images/ui-gallery/magi-color-type.webp",
+        "alt": "Magi visual-system study showing dark surface colors, emerald signals, status colors, and a Space Grotesk type scale"
       }
     ],
     "projects": []
