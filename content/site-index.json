@@ -310,10 +310,10 @@
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
       "It still needed to look like Pi Kappa Phi.",
-      "The explorations showed what was worth carrying forward.",
-      "Other explorations.",
+      "V1 established the structure. V2 made it runnable.",
       "The final remaster brings the app back to its source.",
       "A formative project that changed how I approached product design.",
+      "Pi Kapp member model",
       "Expansion Portfolio"
     ],
     "images": [
@@ -350,20 +350,20 @@
         "alt": "Original Pi Kapp App expanded milestone screen"
       },
       {
-        "src": "images/pikapp-case-study/exploration-today.png",
-        "alt": "Illustrative dark-blue Today screen organizing sample priorities and updates"
+        "src": "images/pikapp-case-study/remaster-login.png",
+        "alt": "Source-faithful Pi Kapp login remaster with cyan hex field and original star-and-swords mark"
       },
       {
-        "src": "images/pikapp-case-study/exploration-responsibility.png",
-        "alt": "Illustrative responsibility-detail screen showing sample source and visibility states"
+        "src": "images/pikapp-case-study/remaster-dashboard.png",
+        "alt": "Source-faithful Pi Kapp member dashboard remaster with progress, bulletin, and milestone sections"
       },
       {
-        "src": "images/pikapp-case-study/exploration-chapter.png",
-        "alt": "Illustrative Chapter screen exploring shared focus and recognition"
+        "src": "images/pikapp-case-study/remaster-milestones.png",
+        "alt": "Source-faithful Pi Kapp milestone-detail remaster with expanded task states"
       },
       {
-        "src": "images/pikapp-case-study/exploration-support.png",
-        "alt": "Illustrative Support screen connecting sample responsibilities with resources"
+        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
+        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       }
     ],
     "projects": []
