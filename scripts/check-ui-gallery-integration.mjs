@@ -43,25 +43,35 @@ for (const token of [
   'A few interface studies and small experiments I liked enough to keep around.',
   '<section class="ui-study ui-study--ekos archive-primary" aria-labelledby="ekos-study-title">',
   '<h2 id="ekos-study-title">Ekos Con 2018</h2>',
-  'An event-site concept with a cleaner interface treatment.',
-  'Scroll through the screen to see the full page.',
-  'Registration is illustrative.',
+  'A conference landing page for craft beverage makers, shown in complete desktop and mobile frames.',
+  'Event and registration details are illustrative.',
   'data-ui-study-view="ekos-desktop"',
-  'data-ui-scroll-screen',
+  'data-ui-study-view="ekos-mobile"',
+  'data-ui-scroll-screen="desktop"',
+  'data-ui-scroll-screen="mobile"',
   'tabindex="0"',
   '<section class="ui-study ui-study--magi" aria-labelledby="magi-study-title">',
   '<h2 id="magi-study-title">Magi interface studies</h2>',
-  'A private dashboard experiment built from a small set of reusable UI pieces.',
-  'This public version is static and sanitized.',
+  'A dark interface system explored through dashboards, architecture, components, and interaction patterns.',
+  'Interface details use fictional sample data and are shown as design examples rather than production data.',
   'data-ui-study-view="magi-overview"',
   '<strong>Dashboard overview</strong>',
-  'Illustrative work states. No live operational connection.',
+  'A work-continuity dashboard organized around status, attention, and history.',
   'data-ui-study-view="magi-architecture"',
   '<strong>System architecture</strong>',
-  "Sanitized read-only map of the system's parts and relationships.",
+  'A topology study connecting coordinators, workers, domains, and shared state.',
+  'data-ui-study-view="magi-overlays"',
+  '<strong>Overlay patterns</strong>',
+  'Command-palette and confirmation-dialog studies for consequential controls.',
   'data-ui-study-view="magi-color-type"',
   '<strong>Color and type</strong>',
   'Surface, signal, status, and type specimens for the visual system.',
+  'data-ui-study-view="magi-components"',
+  '<strong>Component studies</strong>',
+  'Buttons, fields, status badges, task states, and activity treatments.',
+  'data-ui-study-view="magi-node-states"',
+  '<strong>Node states</strong>',
+  'Default, selected, focus, and muted treatments across the architecture.',
   '<div class="cursor-dot" aria-hidden="true"></div>',
   '<div class="cursor-ring" aria-hidden="true"></div>',
   '<script src="js/main.js"></script>',
@@ -72,54 +82,67 @@ for (const token of [
   'body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}',
   'body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}',
   'background: #07100f;',
-  'grid-column: 3 / span 8;',
-  'grid-column: 4 / span 6;',
+  'grid-column: span 7;',
+  'grid-column: span 5;',
+  'grid-column: 1 / -1;',
 ]) needText(css, token, `UI Gallery dark-polish CSS is missing: ${token}`);
 
 forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view > img\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
   'Magi screen edge must remain dark-theme-only.');
 
-need(count(html, /data-ui-study-view=/g) === 4, 'UI Gallery must contain one Ekos lead and three privacy-reviewed Magi study views.');
-need(count(html, /<img\b[^>]*data-ui-study-image/g) === 4, 'Each UI Gallery view must be a static image.');
-need(count(html, /<figcaption class="ui-study-caption">/g) === 3,
-  'All three privacy-reviewed Magi studies must have concise visible captions.');
+need(count(html, /data-ui-study-view=/g) === 8, 'UI Gallery must contain two complete Ekos frames and six curated Magi study views.');
+need(count(html, /<img\b[^>]*data-ui-study-image/g) === 8, 'Each UI Gallery view must use an authored static image.');
+need(count(html, /<figcaption class="ui-study-caption">/g) === 6,
+  'All six Magi studies must have concise visible captions.');
 const magiOrder = [
   'magi-overview',
   'magi-architecture',
+  'magi-overlays',
   'magi-color-type',
+  'magi-components',
+  'magi-node-states',
 ];
 for (let index = 1; index < magiOrder.length; index += 1) {
   need(html.indexOf(`data-ui-study-view="${magiOrder[index - 1]}"`) < html.indexOf(`data-ui-study-view="${magiOrder[index]}"`),
     `Magi brief order must keep ${magiOrder[index - 1]} before ${magiOrder[index]}.`);
 }
-need(count(html, /loading="lazy"/g) >= 4, 'All UI Gallery study images must use deferred loading.');
+need(count(html, /loading="lazy"/g) >= 8, 'All UI Gallery study images must use deferred loading.');
 for (const [asset, width, height] of [
-  ['magi-overview.webp', 1440, 1000],
-  ['magi-architecture.webp', 1440, 1000],
+  ['magi-overview.webp', 1440, 1024],
+  ['magi-architecture.webp', 1440, 960],
+  ['magi-overlays.webp', 900, 640],
   ['magi-color-type.webp', 800, 600],
-  ['ekos-desktop.webp', 1320, 2715],
-
+  ['magi-components.webp', 1200, 900],
+  ['magi-node-states.webp', 1400, 200],
+  ['ekos-desktop.webp', 1440, 3069],
+  ['ekos-mobile.webp', 780, 7022],
 ]) need(new RegExp(`src="images/ui-gallery/${asset}"\\s+width="${width}"\\s+height="${height}"`).test(html),
   `UI Gallery must declare truthful intrinsic dimensions for ${asset}.`);
 for (const asset of [
   'images/ui-gallery/magi-overview.webp',
   'images/ui-gallery/magi-architecture.webp',
+  'images/ui-gallery/magi-overlays.webp',
   'images/ui-gallery/magi-color-type.webp',
+  'images/ui-gallery/magi-components.webp',
+  'images/ui-gallery/magi-node-states.webp',
   'images/ui-gallery/ekos-desktop.webp',
+  'images/ui-gallery/ekos-mobile.webp',
   'images/ui-gallery/ekos-cover.webp',
 ]) need(fs.existsSync(asset), `Missing UI Gallery asset: ${asset}`);
 forbid(html, /ekos-components|Components and provenance|original proof|source comparison/i,
   'UI Gallery must not retain the obsolete Ekos component board or an original-proof comparison.');
-forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-mobile|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary/i,
-  'UI Gallery must remain a focused static gallery without Pi Kapp, duplicate Ekos variants, or editorial metadata blocks.');
+forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary/i,
+  'UI Gallery must remain a focused static gallery without Pi Kapp, duplicate detail variants, or editorial metadata blocks.');
 forbid(html, /A place for screen studies|historical landing-page concept|returns to that visual character|read-only operations dashboard|work continuity and architecture|generalizing protected infrastructure/i,
   'UI Gallery copy must stay plainspoken and must not regress to generated case-study language.');
 forbid(html, /revisited|refinement|returns to/i,
   'UI Gallery copy must not narrate revision history when the screens can carry it.');
 forbid(html, /<iframe|<form|<input|<video|data-dashboard|sessionStorage|password-gate/i,
   'UI Gallery must remain a public static-study route without embedded applications, forms, media players, or private-route logic.');
-forbid(html, /Inspector and metrics|Component studies|Overlay patterns|Node state specimens|sample dates|recent tasks|last checkpoint|in progress now|14,220|99\.94%|running processes|cluster system settings/i,
-  'UI Gallery must exclude rejected record-like activity, metrics, commands, and topology studies.');
+forbid(html, /Inspector and metrics|sample dates|last checkpoint/i,
+  'UI Gallery must omit the visually redundant Inspector board and stale internal review language.');
+forbid(html, /static and sanitized|sanitized dark|sanitized read-only|private dashboard experiment/i,
+  'Viewer-facing copy must not misclassify fictional sample content as private or sanitized.');
 forbid(html, /Windows \+ WSL|Hermes Gateway|Sol \/ Orchestrator|Gemini fallback|Life OS|GreekLifeEDU|Good afternoon, Brad|>BT<|>AM<|>JR<|>TK</i,
   'UI Gallery contains a private topology or illustrative personal marker.');
 forbid(html, /\b(?:was|were|is) (?:shipped|launched|implemented|published)|conversion|outcome|responsive deliverable/i,
@@ -134,7 +157,8 @@ for (const token of [
   '.ui-study-grid',
   '.ui-study--magi',
   '.ui-study-grid--magi',
-  '.ui-study-view--desktop',
+  '.ui-study-view--ekos-desktop',
+  '.ui-study-view--ekos-mobile',
   '.ui-scroll-screen',
   'overflow-y: auto;',
   'aspect-ratio: 16 / 10;',
@@ -151,28 +175,40 @@ forbid(css, /ui-study--teaser|ui-study-grid--teaser|ui-study-teaser-copy|ui-stud
   'UI Gallery CSS must not retain obsolete teaser, metadata, or duplicate Ekos-view styling.');
 
 for (const token of [
-  'ekos-polished-desktop-v3-3.png',
+  'ekos-con-landing-page.png',
+  'ekos-con-mobile.png',
+  'Magi — Dashboard Overview.png',
+  'Magi — Architecture Canvas.png',
+  'Magi — Overlay Patterns.png',
   'Magi — Color & Type System.png',
+  'Magi — Component Studies.png',
+  'Magi — Node State Specimens.png',
+  '"ekos-mobile.webp"',
+  '"magi-overview.webp"',
+  '"magi-architecture.webp"',
+  '"magi-overlays.webp"',
   '"magi-color-type.webp"',
+  '"magi-components.webp"',
+  '"magi-node-states.webp"',
 ]) needText(assetBuilder, token, `UI Gallery asset builder is missing approved source/output: ${token}`);
 forbid(assetBuilder, /Ekos V2|ekos-hifi-|ekos-components/, 'UI Gallery asset builder must not retain V2 or component-board sources.');
-forbid(assetBuilder, /ekos-polished-mobile|ekos-cleanup-details|ekos-mobile\.webp|ekos-details\.webp/,
-  'UI Gallery asset builder must not retain duplicate Ekos mobile/detail outputs.');
-forbid(assetBuilder, /Dashboard Overview|Architecture Canvas|Inspector & Metrics|Component Studies|Overlay Patterns|Node State Specimens|magi-inspector-metrics|magi-components|"magi-overview\.webp"|"magi-architecture\.webp"|"magi-overlays\.webp"|"magi-node-states\.webp"/,
-  'UI Gallery asset builder must exclude current-looking, operational, metric, command, and topology Magi exports.');
-for (const rejectedAsset of [
+forbid(assetBuilder, /ekos-cleanup-details|ekos-details\.webp|Magi — Inspector & Metrics\.png|magi-inspector-metrics\.webp/,
+  'UI Gallery asset builder must omit obsolete Ekos details and the redundant Magi Inspector board.');
+for (const omittedAsset of [
   'images/ui-gallery/magi-inspector-metrics.webp',
-  'images/ui-gallery/magi-components.webp',
-  'images/ui-gallery/magi-overlays.webp',
-  'images/ui-gallery/magi-node-states.webp',
-]) need(!fs.existsSync(rejectedAsset), `Rejected private/live-state asset must not exist: ${rejectedAsset}`);
+]) need(!fs.existsSync(omittedAsset), `Omitted UI Gallery asset must not exist: ${omittedAsset}`);
 
-// These hashes lock the exact independently pixel-reviewed public derivatives.
-// Update only after rerunning the derivative safety scan and visual privacy review.
+// These hashes lock the exact approved fictional design-study derivatives.
 const reviewedPublicAssetHashes = {
-  'images/ui-gallery/magi-overview.webp': 'b044e656461e24ff9cc821774ecf3e63b182cb09e6ee600292be64a4ef6c775e',
-  'images/ui-gallery/magi-architecture.webp': '4aa214da61b5901d1a35f9761f7658c628affd62bd54a62dd0ea86731f78e2c7',
+  'images/ui-gallery/ekos-desktop.webp': '7672651d1db04d5a21e111df36b92585a1305452021de13aa09c97d736316c80',
+  'images/ui-gallery/ekos-mobile.webp': '21a3df3f9e08c509accaa390d847904044f15aa9f125cccbf458fc1baa574c0d',
+  'images/ui-gallery/ekos-cover.webp': 'ca3025330424f1e21d35f7d5538673a2b86cb6ee60193d0535ee64ce8daff816',
+  'images/ui-gallery/magi-overview.webp': '9c7bcc9de0a443fc144f1e8e37940a40abf9727009f9ebaabf549702133e0007',
+  'images/ui-gallery/magi-architecture.webp': 'c56bff57c5a39b77082f260b22fd2c9c82a42dd9a34de54de1bfac031008fc3d',
+  'images/ui-gallery/magi-overlays.webp': 'ebadaaf0561c8b5158dbe870876157eb916123b907da529a2d0a0463d30c5bd9',
   'images/ui-gallery/magi-color-type.webp': '7f23603b9e5627ca2d318fc313707481d361103e2387656b36f7c20f2a315cec',
+  'images/ui-gallery/magi-components.webp': '5d5137c55a18cd9338f04d5852dab7dc6d6356de534fa137532c2c2feb5a3b0f',
+  'images/ui-gallery/magi-node-states.webp': '492f6b0482904520eeaa20fa0c7f37d04607e6720b56fd00794310036ce59cf4',
 };
 for (const [asset, expectedHash] of Object.entries(reviewedPublicAssetHashes)) {
   if (!fs.existsSync(asset)) {
@@ -245,4 +281,4 @@ if (failures.length) {
 }
 
 console.log('UI GALLERY CONTRACT PASSED');
-console.log('- one complete scrollable Ekos page, two approved Magi studies plus one privacy-reviewed visual-system specimen, and CI wiring pass');
+console.log('- complete desktop/mobile Ekos frames, six curated Magi studies, refreshed thumbnail ownership, and CI wiring pass');

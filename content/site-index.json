@@ -708,19 +708,35 @@
     "images": [
       {
         "src": "images/ui-gallery/ekos-desktop.webp",
-        "alt": "Complete Ekos Con desktop landing-page cleanup with drafting-grid construction, event details, brewery photograph, pricing, and lodging information"
+        "alt": "Complete Ekos Con desktop landing page with Draft Your Craft identity, conference details, brewery photography, pricing, lodging, and product illustrations"
+      },
+      {
+        "src": "images/ui-gallery/ekos-mobile.webp",
+        "alt": "Complete responsive Ekos Con mobile landing page preserving the Draft Your Craft identity, color-blocked sections, pricing, illustrations, and lodging information"
       },
       {
         "src": "images/ui-gallery/magi-overview.webp",
-        "alt": "Sanitized dark Magi dashboard study showing an illustrative work docket and disconnected operations state"
+        "alt": "Dark Magi dashboard interface study with fictional status summaries, a work docket, and an operations panel"
       },
       {
         "src": "images/ui-gallery/magi-architecture.webp",
-        "alt": "Sanitized dark system architecture study with generalized coordinator, worker, runtime, and protected-domain nodes"
+        "alt": "Dark Magi ecosystem-map study connecting fictional coordinator, worker, runtime, domain, and shared-state nodes"
+      },
+      {
+        "src": "images/ui-gallery/magi-overlays.webp",
+        "alt": "Magi overlay study with a fictional command palette and pause-agents confirmation dialog"
       },
       {
         "src": "images/ui-gallery/magi-color-type.webp",
         "alt": "Magi visual-system study showing dark surface colors, emerald signals, status colors, and a Space Grotesk type scale"
+      },
+      {
+        "src": "images/ui-gallery/magi-components.webp",
+        "alt": "Magi component board showing buttons, fields, status badges, fictional agent states, task activity, and a sample success-rate card"
+      },
+      {
+        "src": "images/ui-gallery/magi-node-states.webp",
+        "alt": "Magi architecture-node specimens showing default, selected, focus, and muted visual states"
       }
     ],
     "projects": []
