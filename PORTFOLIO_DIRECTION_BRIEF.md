@@ -1,8 +1,8 @@
 # Portfolio Direction Brief — Concept Album + Studio System
 
 Created: 2026-05-19
-Last updated: 2026-08-07
-Status: Active direction brief aligned to Victor's August 7 master desk review and the VicO2 living-archive execution plan
+Last updated: 2026-08-21
+Status: Stable direction brief aligned to the production-verified VicO2 and authorship cycle through PR #160
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -42,30 +42,29 @@ Short version:
 
 ### Current posture
 
-Victor's August 7 desk review is the master source for the current enhancement cycle. It reopens Home and selected pages because Victor supplied new visual, voice, hierarchy, asset, and completeness evidence after the earlier Keep checkpoints. Earlier enhancement work remains valuable as an operational safety layer: current production source, approved package provenance, shared-shell contracts, privacy and generated-export rules, accessibility coverage, and rollback evidence all carry forward. Work begins with Home plus global components, proceeds through bounded page lanes, reassesses Design DNA after the VicO2 rollout is stable, and ends with whole-site privacy, route, consistency, preview, and release review. A2UI remains parked.
+Victor's August 7 desk review remains the master content source for the completed VicO2 release cycle. Production now includes recruiter-scan/mobile-access work through PR #157, IBM Cloud UX evidence through PR #158, Pi Kapp source-first authorship through PR #159, and the consolidated public-route authorship closeout through PR #160 at `8cb9ed18a2dfb18e95721c90e614c852876bded4`. Current production source, approved package provenance, shared-shell contracts, privacy and generated-export rules, accessibility coverage, and rollback evidence remain the operational safety layer. The authorship and website-evidence audit is complete, no public-site implementation lane is active, and presentation preparation remains parked until a concrete interview.
 
 Current working posture:
 
-1. Treat **VicO2** (Victor + Carbon) as the production system for a controlled broad redesign, advanced through bounded revisions rather than a one-shot rewrite.
-2. Use Victor's August 7 raw notes for content and presentation decisions. Use the dashboard and prior contracts to supply sequence, evidence, accessibility, privacy, and release safeguards.
+1. Treat **VicO2** (Victor + Carbon) as the production system, advanced through bounded route-specific revisions rather than a one-shot rewrite.
+2. Use Victor's August 7 raw notes for content and page decisions. Use the dashboard and prior contracts to supply sequence, evidence, accessibility, privacy, and release safeguards.
 3. Use current `main` as the implementation baseline. Reuse current production behavior and approved media before consulting older candidates or worktrees.
 4. Treat prior Keep verdicts plus August 7 notes as bounded revision passes, not blank-slate redesigns.
-5. Preserve current protection during content and visual work. The desired final state of only wxO remaining locked requires separate page-by-page privacy, route, access, indexing, preview, and release decisions.
+5. Preserve current protection during content and visual work. wxO remains the only intended locked story, with Document Processing contained as its protected chapter.
 6. Compare only the bounded Home portrait-lens connection to the existing DNA experience now. Keep broad DNA expansion conditional and defer full reassessment until the VicO2 rollout is stable.
-7. Keep PCI blocked until separately sanitized evidence intake is complete for every selected artifact.
+7. Preserve PCI's released sanitized evidence and conservative claims boundaries; do not reopen it without a new source review.
 8. Keep A2UI, framework migration, generative chat UI, floating chat widgets, and uncontrolled rollout outside the active lane.
 
-### Top active decisions
+### Top standing decisions
 
-1. Reopen Home through a bounded Home/global lane because the August 7 review supplies new evidence. Preserve its theatrical Route 02 hero, shared shell, and current accessible behavior.
-2. Preserve The Ability Experience as the strongest live VicO2 reference except for the named mark/iconography/illustration/application sequence edit.
-3. Revise the current production Art and Graphic pages rather than replaying frozen worktrees.
-4. Preserve the reconciled VicO2 patterns, evidence states, behavior contracts, source fences, and intentional project-native variants.
-5. Preserve the public-stub export policy for every currently gated route and verify real preview URLs before approving any protection or deployment change.
-6. Keep wxO protected as the intended final locked umbrella. Keep Document Processing and the other currently gated pages protected until separate opening clearance passes.
-7. Audit IBM Cloud hiring-cut commit `fdac040` as a read-only source when that lane begins; do not merge it wholesale over current `main`.
-8. Complete PCI sanitized evidence intake before implementation.
-9. Review the complete portfolio through an approved preview strategy and obtain explicit approval before merge, protection changes, route changes, or launch.
+1. Preserve current `main` through PR #160 as the production baseline.
+2. Keep wxO protected as the intended locked umbrella and keep Document Processing inside that protected story.
+3. Treat the route-by-route authorship and website-evidence audit as complete. Reopen work only for new source evidence, a concrete hiring target, a verified live defect, or an explicit publication/protection decision.
+4. Judge the rendered result rather than frameworks by name. Retain Tailwind or shared components when the visible result carries project-specific decisions.
+5. Convert any future finding into a small route-specific proposal and let Victor select the direction before implementation.
+6. Preserve verified role, chronology, collaboration, historical-source, concept, privacy, and outcome boundaries.
+7. Review any future approved change through an isolated branch and preview strategy; obtain explicit approval before merge, protection changes, route changes, or launch.
+8. Keep presentation decks, speaking notes, rehearsal, and peer-Q&A work inactive until a concrete interview requires them.
 
 ---
 
@@ -271,6 +270,29 @@ Potential structure:
 
 Status: idea only. Validate first with one private, bounded prototype before considering a reusable template or broader rollout.
 
+### Authorship and website narrative
+
+The portfolio must support a recruiter scanning quickly while offering deeper evidence where the source material justifies it. Layer the website story instead of choosing between a shallow scan and indiscriminate long copy.
+
+Opening movement:
+
+- Identify the project, Victor's role, the problem, and the strongest evidence within 30 to 60 seconds.
+- Use plain, specific language. Avoid canned design-process claims, competency clusters, and polished narration that Victor would not say out loud.
+- Give each artifact a clear job in the story instead of surrounding every image with equal card treatment.
+
+Deeper walkthrough:
+
+- Organize optional chapters around real decisions and evidence: context, constraints, direct choices, iterations, collaboration, outcome or honest non-outcome, and reflection.
+- Make Victor's decisions visible. Explain why a composition, type treatment, interaction, diagram, or artifact sequence exists when that reasoning is supported by source material.
+- Keep the webpage sequence coherent on its own. Presentation decks, speaking notes, rehearsal, and peer-Q&A preparation remain outside the active queue until a concrete interview.
+
+Visual-authorship test:
+
+- Flag interchangeable equal cards, pill clusters, uniform three-column grids, generic gradients, excessive rounding or shadows, anonymous dashboards, and default framework spacing only when they weaken the project's identity.
+- Frameworks are implementation tools, not a verdict. Tailwind, shared tokens, or reusable components can remain when the rendered design reflects deliberate project-specific choices.
+- Prefer complete authored frames, actual project assets, source-backed diagrams, distinctive pacing, and meaningful asymmetry over decorative novelty.
+- Do not replace one generic system with another. Each change needs an explanation tied to the project's evidence, audience, or narrative.
+
 ### Project families and design-system lineage
 
 Use family resemblance where the projects have a real organizational, historical, or system relationship. This is not permission to apply one page template across the portfolio.
@@ -279,7 +301,7 @@ Use family resemblance where the projects have a real organizational, historical
 - **IBM / Carbon lineage:** use Carbon as the common system foundation while distinguishing the work by era and role. IBM Patterns is the 2021 incubator project; IBM Cloud is the later true product-work chapter; wxO Canvas and Document Processing are the current product-work chapter. Shared system language must not flatten those differences or imply identical ownership, shipment, or publication status.
 - **Visual archives:** Art & Illustration and Graphic Design form a useful paired review lane, but remain distinct archives with different curation, rights, and composition.
 
-The current bounded process trial uses the already-refined Pi Kapp and IBM Patterns private candidates. It tests the review method with a strong Keep bias; it does not establish that those two pages should share styling.
+The completed bounded process used Pi Kapp, IBM Patterns, and the remaining public routes to validate a strong Keep bias. It did not establish that unrelated pages should share styling, and it does not create an evergreen redesign queue.
 
 ### Portfolio color punctuation
 
