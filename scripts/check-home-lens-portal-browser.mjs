@@ -184,6 +184,7 @@ try {
           label: portal.getAttribute('aria-label'),
           controls: portal.getAttribute('aria-controls'),
           hasPopup: portal.getAttribute('aria-haspopup'),
+          borderColor: pseudo.borderTopColor,
           pseudoInset: [pseudo.top, pseudo.left],
           pseudoSize: [
             parseFloat(pseudo.width) + parseFloat(pseudo.borderLeftWidth) + parseFloat(pseudo.borderRightWidth),
@@ -197,10 +198,28 @@ try {
       const wash = document.querySelector('.hero-pointer-wash');
       const washStyle = getComputedStyle(wash);
       const heroRect = document.querySelector('.hero').getBoundingClientRect();
+      const systemFrame = document.querySelector('.hero-system-frame')?.getBoundingClientRect();
+      const metaOrnament = document.querySelector('.hero-meta-ornament')?.getBoundingClientRect();
+      const eyebrowName = document.querySelector('.hero-eyebrow-name');
+      const nameWords = [...document.querySelectorAll('.hero-bigtype')].map((word) => {
+        const rect = word.getBoundingClientRect();
+        const style = getComputedStyle(word);
+        const transform = new DOMMatrix(style.transform === 'none' ? undefined : style.transform);
+        return {
+          text: word.textContent.trim(),
+          rect: [rect.left, rect.top, rect.width, rect.height],
+          fontSize: parseFloat(style.fontSize),
+          translate: [transform.e, transform.f],
+        };
+      });
       return {
         viewport: [innerWidth, innerHeight],
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         hitareaHeight: hitarea.getBoundingClientRect().height,
+        portraitStageHeight: document.querySelector('.hero-portraits').getBoundingClientRect().height,
+        typeWords: nameWords.map((word) => word.text),
+        nameWords,
+        identityLine: document.querySelector('.hero-eyebrow')?.textContent.trim(),
         targets,
         portrait: [portrait.complete, portrait.naturalWidth, portrait.naturalHeight],
         switcherButtons: switcher.querySelectorAll('.lens-switcher-btn').length,
@@ -209,11 +228,38 @@ try {
         tooltipCount: document.querySelectorAll('.hero-lens-tooltip, [role="tooltip"]').length,
         wash: { display: washStyle.display, opacity: parseFloat(washStyle.opacity) },
         heroRect: [heroRect.left, heroRect.top, heroRect.width, heroRect.height],
+        systemFrame: systemFrame ? [systemFrame.left, systemFrame.top, systemFrame.width, systemFrame.height] : null,
+        metaOrnament: metaOrnament ? [metaOrnament.left, metaOrnament.top, metaOrnament.width, metaOrnament.height] : null,
+        eyebrowName: eyebrowName ? eyebrowName.textContent.trim() : null,
         overlayHidden: document.getElementById('dnaOverlay').getAttribute('aria-hidden'),
       };
     })()`);
     assert(base.viewport[0] === viewport.width && base.viewport[1] === viewport.height, `${viewport.label}: viewport mismatch ${base.viewport}`);
     assert(base.overflow === 0, `${viewport.label}: horizontal overflow ${base.overflow}`);
+    assert(base.typeWords.join('|') === 'Victor|TRAN',
+      `${viewport.label}: hero must foreground Victor's name ${JSON.stringify(base.typeWords)}`);
+    const [victorWord, tranWord] = base.nameWords;
+    const victorScale = victorWord.fontSize / tranWord.fontSize;
+    assert(victorScale >= 1.28 && victorScale <= 1.36,
+      `${viewport.label}: Tran must reduce enough for its capital T to meet Victor near the lowercase t crossbar ${JSON.stringify({ victorWord, tranWord, victorScale })}`);
+    const victorRight = victorWord.rect[0] + victorWord.rect[2];
+    const wordOverlap = victorRight - tranWord.rect[0];
+    const minimumTopOffset = viewport.mobile ? 10 : 24;
+    assert(tranWord.rect[0] > victorWord.rect[0] && wordOverlap >= 7 && wordOverlap <= 30 &&
+      tranWord.rect[1] - victorWord.rect[1] >= minimumTopOffset &&
+      Math.abs((victorWord.rect[1] + victorWord.rect[3]) - (tranWord.rect[1] + tranWord.rect[3])) <= 12,
+      `${viewport.label}: the smaller blue T must overlap the pink r while sharing its baseline ${JSON.stringify({ victorWord, tranWord, wordOverlap, minimumTopOffset })}`);
+    assert(base.identityLine === 'Victor Tran ® · Visual Designer',
+      `${viewport.label}: accessible identity line must preserve name and role ${JSON.stringify(base.identityLine)}`);
+    const maximumPortraitRatio = viewport.mobile ? 0.48 : 0.7;
+    assert(base.portraitStageHeight / base.heroRect[3] <= maximumPortraitRatio,
+      `${viewport.label}: portrait remains too prevalent ${JSON.stringify({ portraitStageHeight: base.portraitStageHeight, heroHeight: base.heroRect[3], maximumPortraitRatio })}`);
+    assert(base.systemFrame === null,
+      `${viewport.label}: enclosing selection-style frame must not appear in the authored hero ${JSON.stringify(base.systemFrame)}`);
+    assert(base.metaOrnament === null,
+      `${viewport.label}: detached line-and-dot ornament must be removed ${JSON.stringify(base.metaOrnament)}`);
+    assert(base.eyebrowName === null,
+      `${viewport.label}: small identity line must not retain the rejected color underline ${JSON.stringify(base.eyebrowName)}`);
     assert(base.targets.length === 2 && base.targets.every(target => target.rect[2] >= 44 && target.rect[3] >= 44 && target.visible),
       `${viewport.label}: invalid lens targets ${JSON.stringify(base.targets)}`);
     assert(base.targets.map(target => target.label).join('|') ===
@@ -222,6 +268,8 @@ try {
     assert(base.targets.every(target => target.controls === 'dnaOverlay' && target.hasPopup === 'dialog' &&
       target.pseudoInset.every(value => value === '-2px')),
       `${viewport.label}: accessible relationship or two-pixel outline geometry failed ${JSON.stringify(base.targets)}`);
+    assert(base.targets.every(target => target.borderColor !== 'rgba(0, 0, 0, 0)' && target.borderColor !== 'transparent'),
+      `${viewport.label}: glasses must retain a tasteful visible outline before hover or focus ${JSON.stringify(base.targets)}`);
     if (viewport.mobile) {
       const expectedOutlineSizes = [
         [base.hitareaHeight * 0.0756 + 4, base.hitareaHeight * 0.0756 + 4],
@@ -238,6 +286,75 @@ try {
     assert(viewport.mobile ? base.wash.display === 'none' : base.wash.display !== 'none' && base.wash.opacity === 0,
       `${viewport.label}: pointer wash baseline failed ${JSON.stringify(base.wash)}`);
     assert(base.overlayHidden === 'true', `${viewport.label}: DNA overlay must begin closed`);
+
+    const contrastStates = await cdp.evaluate(`(() => {
+      const hero = document.querySelector('.hero');
+      const root = document.documentElement;
+      const originalTheme = root.getAttribute('data-theme');
+      const originalTint = hero.style.getPropertyValue('--bg-tint');
+      const originalLens = hero.style.getPropertyValue('--lens-color');
+      const originalAccent = hero.style.getPropertyValue('--accent-2');
+      const transitionNodes = [hero, document.querySelector('.hero-bigtype--victor'), document.querySelector('.hero-bigtype--tran')];
+      const originalTransitions = transitionNodes.map(node => node.style.transition);
+      transitionNodes.forEach(node => { node.style.transition = 'none'; });
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 1;
+      const context = canvas.getContext('2d', { willReadFrequently: true });
+      const rgb = (color) => {
+        context.clearRect(0, 0, 1, 1);
+        context.fillStyle = color;
+        context.fillRect(0, 0, 1, 1);
+        return [...context.getImageData(0, 0, 1, 1).data.slice(0, 3)].map(value => value / 255);
+      };
+      const linear = value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+      const luminance = color => {
+        const [r, g, b] = color.map(linear);
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      const contrast = (foreground, background, opacity = 1) => {
+        const fg = rgb(foreground);
+        const bg = rgb(background);
+        const composite = fg.map((value, index) => value * opacity + bg[index] * (1 - opacity));
+        const [lighter, darker] = [luminance(composite), luminance(bg)].sort((a, b) => b - a);
+        return (lighter + 0.05) / (darker + 0.05);
+      };
+      const states = [
+        ['--pink', '--blue'], ['--blue', '--pink'],
+        ['--orange', '--blue'], ['--purple', '--pink'],
+      ];
+      const results = [];
+      for (const theme of ['light', 'dark']) {
+        root.setAttribute('data-theme', theme);
+        for (const [session, accent] of states) {
+          hero.style.setProperty('--bg-tint', 'var(' + session + ')');
+          hero.style.setProperty('--lens-color', 'var(' + session + ')');
+          hero.style.setProperty('--accent-2', 'var(' + accent + ')');
+          const background = getComputedStyle(hero).backgroundColor;
+          const victor = getComputedStyle(document.querySelector('.hero-bigtype--victor'));
+          const tran = getComputedStyle(document.querySelector('.hero-bigtype--tran'));
+          const title = getComputedStyle(document.querySelector('.hero-title'));
+          const subtitle = getComputedStyle(document.querySelector('.hero-subtitle'));
+          results.push({
+            theme, session, accent,
+            victor: contrast(victor.color, background, parseFloat(victor.opacity)),
+            tran: contrast(tran.color, background, parseFloat(tran.opacity)),
+            title: contrast(title.color, background, parseFloat(title.opacity)),
+            subtitle: contrast(subtitle.color, background, parseFloat(subtitle.opacity)),
+          });
+        }
+      }
+      if (originalTheme === null) root.removeAttribute('data-theme');
+      else root.setAttribute('data-theme', originalTheme);
+      for (const [name, value] of [['--bg-tint', originalTint], ['--lens-color', originalLens], ['--accent-2', originalAccent]]) {
+        if (value) hero.style.setProperty(name, value);
+        else hero.style.removeProperty(name);
+      }
+      void hero.offsetWidth;
+      transitionNodes.forEach((node, index) => { node.style.transition = originalTransitions[index]; });
+      return results;
+    })()`);
+    assert(contrastStates.every(state => state.victor >= 3 && state.tran >= 3 && state.title >= 4.5 && state.subtitle >= 4.5),
+      `${viewport.label}: hero palette contrast failed ${JSON.stringify(contrastStates)}`);
 
     if (!viewport.mobile) {
       const washPoint = { x: viewport.width * 0.24, y: viewport.height * 0.58 };

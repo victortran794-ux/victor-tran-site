@@ -40,8 +40,8 @@ for (const token of [
   'class="hero-meta"',
   'class="hero-services"',
   'class="hero-cycle"',
-  '>Visual</span>',
-  '>Designer</span>',
+  '>Victor</span>',
+  '>TRAN</span>',
   'I design cool things with sincerity.',
 ]) requireText(index, token, `Route 02 must preserve the signature hero token: ${token}`);
 
@@ -61,12 +61,14 @@ if (fs.existsSync(socialCardPath)) {
 }
 
 requireText(css, '.hero-typeblock {', 'Route 02 hero type block CSS is missing.');
-requireCondition(/\.hero-typeblock\s*\{[\s\S]*?left:\s*var\(--page-x\);[\s\S]*?transform:\s*translateY\(-50%\)/.test(css),
-  'Visual Designer must use the same left grid token as the hero copy.');
-requireText(css, 'font-size: clamp(6.8rem, 14.2vw, 13.25rem);',
-  'Desktop Visual Designer needs the approved slightly smaller scale.');
-requireCondition(/@media\s*\(max-width:\s*600px\)[\s\S]*?\.hero-typeblock\s*\{[\s\S]*?left:\s*var\(--page-x\)/.test(css),
-  'Mobile Visual Designer must remain on the shared grid token.');
+requireCondition(/\.hero-typeblock\s*\{[^}]*left:\s*var\(--route02-x\);[^}]*transform:\s*translateY\(-50%\)/.test(css),
+  'Victor TRAN must use the same left grid token as the hero copy.');
+requireText(css, '--hero-name-size: clamp(7rem, 14.5vw, 13.5rem);',
+  'Desktop Victor needs the approved name-first scale.');
+requireText(css, 'font-size: calc(var(--hero-name-size) * 0.76);',
+  'Desktop TRAN needs the approved reduced scale.');
+requireCondition(/@media\s*\(max-width:\s*600px\)[\s\S]*?\.hero-typeblock\s*\{[^}]*left:\s*var\(--route02-x\)/.test(css),
+  'Mobile Victor TRAN must remain on the shared grid token.');
 requireText(css, 'max-width: 280px;', 'Top-left hero content needs the approved compact width.');
 requireText(css, '.hero-cycle .control-tooltip {', 'Hero color control tooltip must remain available.');
 requireText(index, '<span class="control-tooltip" aria-hidden="true">Change color</span>',

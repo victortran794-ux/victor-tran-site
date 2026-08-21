@@ -62,7 +62,7 @@ for token in (
     need(index.count(token) == 1, f"signature hero token must remain exactly once: {token}")
 for authored_copy in (
     'I design cool things with sincerity.',
-    'Visual designer working across brand, illustration, and product systems.',
+    'Visual designer building clear, expressive systems across enterprise products, brands, and stories.',
 ):
     need(authored_copy in index, f"signature hero copy must remain: {authored_copy}")
 
@@ -127,7 +127,8 @@ need(re.search(r"\.hero-lens-portal\s*\{[^}]*min-width:\s*44px[^}]*min-height:\s
      "the lens portal must keep a 44 by 44 minimum target")
 need(".hero-lens-portal:focus-visible" in css and
      ".hero-lens-portal:hover::before" in css and
-     re.search(r"\.hero-lens-portal::before\s*\{[^}]*inset:\s*-2px[^}]*border:\s*1px\s+solid\s+transparent", css, re.S),
+     ".hero-lens-portal:focus-visible::before" in css and
+     re.search(r"\.hero-lens-portal::before\s*\{[^}]*inset:\s*-2px[^}]*border:\s*1px\s+solid\s+color-mix\([^}]*opacity:\s*0\.78", css, re.S),
      "each lens portal needs a restrained two-pixel-offset hover and keyboard-focus outline")
 need('.hero-lens-tooltip' not in css,
      "the retired lens tooltip must not leave styling behind")
