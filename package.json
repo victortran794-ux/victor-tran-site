@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build:pikapp-demo": "tailwindcss -c pikappapp/tailwind.config.cjs -i pikappapp/demo-source.css -o pikappapp/demo.bundle.css --minify && esbuild pikappapp/demo-source.jsx --bundle --minify --format=esm --target=es2022 --outfile=pikappapp/demo.bundle.js",
+    "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
     "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
     "check:pikapp-page-browser": "node scripts/check-pikapp-page-browser.mjs",

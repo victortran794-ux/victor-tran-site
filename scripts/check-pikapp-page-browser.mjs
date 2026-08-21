@@ -252,6 +252,9 @@ try {
         const prototypeRect=prototypeFrame?.getBoundingClientRect();
         const prototypeDevice=document.querySelector('.prototype-embed__device');
         const prototypeEmbed=document.querySelector('.prototype-embed');
+        const prototypeTrigger=document.querySelector('[data-prototype-open]');
+        const prototypeDialog=document.querySelector('[data-prototype-dialog]');
+        const prototypeDialogFrame=document.querySelector('[data-prototype-dialog-frame]');
         const identityHero=document.querySelector('.identity-board__header');
         const identitySignatureMark=document.querySelector('.identity-board__signature img');
         const identitySignatureMarkStyle=getComputedStyle(identitySignatureMark);
@@ -269,7 +272,7 @@ try {
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
           identity:{paletteItems:document.querySelectorAll('.identity-palette__item').length,specimens:document.querySelectorAll('.identity-board__card').length,icons:document.querySelectorAll('.system-icons>span').length,markLockups:document.querySelectorAll('.identity-board__card--pattern').length,handoffs:document.querySelectorAll('.identity-handoff').length,heroColumns:getComputedStyle(identityHero).gridTemplateColumns,paletteColumns:getComputedStyle(identityPalette).gridTemplateColumns,specimenColumns:getComputedStyle(identitySpecimenGrid).gridTemplateColumns,signatureMark:{backgroundColor:identitySignatureMarkStyle.backgroundColor,padding:identitySignatureMarkStyle.padding,borderRadius:identitySignatureMarkStyle.borderRadius,boxSizing:identitySignatureMarkStyle.boxSizing,width:identitySignatureMarkRect.width,height:identitySignatureMarkRect.height},rects:identityRects},
           next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
-          prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,borderRadius:getComputedStyle(prototypeDevice).borderRadius,overflow:getComputedStyle(prototypeDevice).overflow,embedHeight:prototypeEmbed.getBoundingClientRect().height,link:document.querySelector('.prototype-embed__link')?.getAttribute('href')},triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX},finaleRects,
+          prototype:{src:prototypeFrame?.getAttribute('src'),title:prototypeFrame?.getAttribute('title'),loading:prototypeFrame?.getAttribute('loading'),sandbox:prototypeFrame?.getAttribute('sandbox'),width:prototypeRect?.width,height:prototypeRect?.height,deviceDisplay:getComputedStyle(prototypeDevice).display,borderRadius:getComputedStyle(prototypeDevice).borderRadius,overflow:getComputedStyle(prototypeDevice).overflow,embedHeight:prototypeEmbed.getBoundingClientRect().height,actionTag:prototypeTrigger?.tagName,actionTarget:prototypeTrigger?.getAttribute('target'),actionControls:prototypeTrigger?.getAttribute('aria-controls'),dialogOpen:prototypeDialog?.open,dialogFrameSrc:prototypeDialogFrame?.getAttribute('src'),dialogFrameDataSrc:prototypeDialogFrame?.dataset.src,dialogSandbox:prototypeDialogFrame?.getAttribute('sandbox')},triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX},finaleRects,
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
       })()`);
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
@@ -293,7 +296,7 @@ try {
       assert(state.remasterScreens.every((screen)=>screen.frameBorderRadius==='24px'&&screen.frameOverflow==='hidden'&&screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete rounded 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.explorationScreens.length===0,'AI-assisted exploration screens returned to the public case-study sequence');
       assert(state.explorationStudies.length===0,`redundant broad exploration studies returned: ${JSON.stringify(state.explorationStudies)}`);
-      assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier V2 Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts'&&state.prototype.link==='pikappapp/demo.html'&&state.prototype.borderRadius==='24px'&&state.prototype.overflow==='hidden',`prototype boundary or rounded screen treatment drifted: ${JSON.stringify(state.prototype)}`);
+      assert(state.prototype.src==='pikappapp/demo.html'&&state.prototype.title==='Earlier V2 Pi Kapp member-dashboard prototype'&&state.prototype.loading==='lazy'&&state.prototype.sandbox==='allow-scripts'&&state.prototype.actionTag==='BUTTON'&&!state.prototype.actionTarget&&state.prototype.actionControls==='v2-prototype-dialog'&&!state.prototype.dialogOpen&&!state.prototype.dialogFrameSrc&&state.prototype.dialogFrameDataSrc==='pikappapp/demo.html'&&state.prototype.dialogSandbox==='allow-scripts'&&state.prototype.borderRadius==='24px'&&state.prototype.overflow==='hidden',`prototype boundary or window treatment drifted: ${JSON.stringify(state.prototype)}`);
       if (viewport.mobile||viewport.compact) {
         assert(state.prototype.deviceDisplay==='none'&&state.prototype.width===0&&state.prototype.height===0&&state.prototype.embedHeight<420,`mobile prototype must collapse to its standalone action: ${JSON.stringify(state.prototype)}`);
         assert(state.finaleRects.every((rect)=>rect.left>=24-1&&rect.right<=viewport.width-24+1),`compact finale gutter escaped 24px boundary: ${JSON.stringify(state.finaleRects)}`);
@@ -309,7 +312,7 @@ try {
       assert(state.cue.text===''&&state.cue.opacity===((viewport.mobile||state.hoverNone)?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
       assert(state.archiveViewLabels.length===8&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View Creighton opener|View expansion timeline|View post-expansion support|View national statistics|View regional map|View event application|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
       assert(state.next.href==='artillustration.html'&&state.next.label==='Next project: Art & Illustration',`Pi Kapp next-project route drifted: ${JSON.stringify(state.next)}`);
-      assert(state.pattern.includes('pattern-dark-blue.svg'),'approved pattern hero failed to resolve');
+      assert(state.pattern.includes('pattern-dark-blue-display.svg'),'edge-clean pattern hero failed to resolve');
       assert(!state.reviewUi&&!state.privateText,'private review UI or copy escaped production');
       if (viewport.mobile) {
         const undersized=state.controls.filter((control)=>control.width<44||control.height<44);
@@ -424,6 +427,26 @@ try {
   if (prototypeSessionId) await cdp.call('Target.detachFromTarget', { sessionId: prototypeSessionId });
 
 
+  const verifyPrototypeDialog = async ({ label, width, height, mobile }) => {
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
+    await cdp.navigate(`${baseUrl}/pikappapp.html`);
+    const pageTargetsBefore = (await cdp.call('Target.getTargets')).targetInfos.filter((target) => target.type === 'page').length;
+    await cdp.evaluate(`(()=>{const trigger=document.querySelector('[data-prototype-open]');trigger.scrollIntoView({block:'center',behavior:'instant'});trigger.click()})()`);
+    await delay(2200);
+    const pageTargetsAfter = (await cdp.call('Target.getTargets')).targetInfos.filter((target) => target.type === 'page').length;
+    const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-prototype-dialog]');const frame=dialog.querySelector('[data-prototype-dialog-frame]');const device=dialog.querySelector('.prototype-dialog__device');const dr=dialog.getBoundingClientRect();const vr=device.getBoundingClientRect();return {open:dialog.open,bodyLocked:document.body.classList.contains('prototype-open'),focus:document.activeElement?.className,frameSrc:frame.getAttribute('src'),frameSandbox:frame.getAttribute('sandbox'),dialogRect:{left:dr.left,top:dr.top,width:dr.width,height:dr.height},deviceRect:{left:vr.left,top:vr.top,width:vr.width,height:vr.height},rootOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}})()`);
+    assert(pageTargetsAfter===pageTargetsBefore,`${label}: V2 action created a new browsing context`);
+    assert(opened.open&&opened.bodyLocked&&opened.focus.includes('prototype-dialog__close')&&opened.frameSrc==='pikappapp/demo.html'&&opened.frameSandbox==='allow-scripts',`${label}: V2 window did not open, focus, lock, or load correctly: ${JSON.stringify(opened)}`);
+    assert(opened.rootOverflow===0&&opened.dialogRect.left>=-1&&opened.dialogRect.top>=-1&&opened.dialogRect.width<=width+1&&opened.dialogRect.height<=height+1&&opened.deviceRect.width>0&&opened.deviceRect.height>0&&Math.abs((opened.deviceRect.width/opened.deviceRect.height)-(390/844))<0.02,`${label}: V2 window escaped the viewport or lost phone geometry: ${JSON.stringify(opened)}`);
+    if (mobile) assert(Math.abs(opened.dialogRect.width-width)<=1&&Math.abs(opened.dialogRect.height-height)<=1,`${label}: mobile V2 window must fill the viewport: ${JSON.stringify(opened.dialogRect)}`);
+    else assert(opened.dialogRect.width<=720&&opened.dialogRect.height<=height-40,`${label}: desktop V2 window must remain bounded: ${JSON.stringify(opened.dialogRect)}`);
+    await cdp.screenshot(`pikapp-prototype-window-${label}.png`);
+    await cdp.key('Escape','Escape',27);
+    await delay(120);
+    const closed = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-prototype-dialog]');return {open:dialog.open,bodyLocked:document.body.classList.contains('prototype-open'),focus:document.activeElement?.className||'',bodyPadding:document.body.style.getPropertyValue('--prototype-scrollbar')}})()`);
+    assert(!closed.open&&!closed.bodyLocked&&closed.focus.includes('prototype-embed__link')&&!closed.bodyPadding,`${label}: V2 Escape close did not unlock and restore focus: ${JSON.stringify(closed)}`);
+  };
+
   const verifyArchive = async ({ label, width, height, mobile }) => {
     await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
     await cdp.navigate(`${baseUrl}/pikappapp.html`);
@@ -492,6 +515,8 @@ try {
     await delay(80);
   };
 
+  await verifyPrototypeDialog({ label: '1280x720', width: 1280, height: 720, mobile: false });
+  await verifyPrototypeDialog({ label: '390x844', width: 390, height: 844, mobile: true });
   await verifyArchive({ label: '1280x720', width: 1280, height: 720, mobile: false });
   await verifyArchive({ label: '390x844', width: 390, height: 844, mobile: true });
 

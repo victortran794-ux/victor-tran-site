@@ -135,9 +135,10 @@ const assetHashes = {
   'images/pikapp-case-study/exploration-chapter.png': '98120ec9787d223ede0d64cc2dbb650f0ff20fe483d765d398c5ffc8153b782b',
   'images/pikapp-case-study/exploration-support.png': 'c5830030087b853e168c83f60999e85bfd4bafa45cdb65bd8b5e6bb711cd67a2',
   'images/pikapp-case-study/exploration-profile.png': 'b54b3a0a950f2c9c912051ebb28a4db34042401b5f1cc0bf31f61a986de1c518',
-  'images/pikapp-case-study/remaster-login.png': '8476e54964fc05c0e57291e4ef3eb0ba2e475872cc14fb8ff37011d5ffb9b34f',
-  'images/pikapp-case-study/remaster-dashboard.png': 'c5d7255308539234257dabb4fab296d859ddadf18f4108dc1842e68b9156badb',
-  'images/pikapp-case-study/remaster-milestones.png': '2b04a8bc38a1fc3f169be6c1a9eee364b87fc89a8b6080553b00c3b6e2b46caf',
+  'images/pikapp-case-study/pattern-dark-blue-display.svg': '3050763379deb29578f865c3b8d4a4df164591654a842cce1c732656082cc509',
+  'images/pikapp-case-study/remaster-login.png': '47cd04deeb73a1ba707a002102b436cb995d3a6fc2531c501de7e640c74c3bf3',
+  'images/pikapp-case-study/remaster-dashboard.png': '4878a24c55e9d7ce0497ef02dde240696c28eb156902d6a31d066b75da6cc305',
+  'images/pikapp-case-study/remaster-milestones.png': 'e5ff72d4ef7e1ce7d48b82f9a4b75b5cef6e5f670b773cbda92caa6f92c95a43',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
   const actual = sha256(relativePath);
@@ -149,6 +150,13 @@ if (fs.existsSync(path.join(root, 'images/pikapp-case-study/expansion-cover.png'
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+const remasterRenderer = text('scripts/render-pikapp-remaster.mjs');
+if (!remasterRenderer.includes('process.env.CHROME_BIN')) {
+  fail('remaster renderer must support an explicit portable CHROME_BIN');
+}
+if (/\/(?:home|Users)\/[A-Za-z0-9._-]+\//.test(remasterRenderer)) {
+  fail('remaster renderer must not track a user-specific home or cache path');
+}
 const closeSection = html.match(/<section class="close">([\s\S]*?)<\/section>/)?.[1] || '';
 if (count(closeSection, '<p>') !== 2) fail('Pi Kapp closing reflection must stay concise at exactly two paragraphs');
 for (const required of [
@@ -265,6 +273,13 @@ for (const required of [
   'loading="lazy"',
   'sandbox="allow-scripts"',
   'Open V2 prototype',
+  'class="prototype-dialog"',
+  'data-prototype-dialog',
+  'data-prototype-open',
+  'aria-controls="v2-prototype-dialog"',
+  'data-prototype-dialog-frame',
+  'data-src="pikappapp/demo.html"',
+  'aria-label="Close V2 prototype"',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
@@ -278,6 +293,7 @@ for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted s
   if (html.includes(removedExplorationCopy)) fail(`public Pi Kapp page retained removed exploration copy: ${removedExplorationCopy}`);
 }
 if (count(html, 'class="coda__screen"') !== 3) fail('Pi Kapp coda must contain exactly three source-faithful remaster screens');
+if (/prototype-embed__link[^>]*(?:target="_blank"|href="pikappapp\/demo\.html")/.test(html)) fail('V2 action must open the in-page window instead of a new browsing context');
 if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the explicit 01, 02, 03 story order');
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
@@ -380,6 +396,17 @@ for (const obsolete of ['remaster-attention.png', 'remaster-trust.png', 'remaste
 }
 if (/src="assets\//.test(html) || /url\(["']?assets\//.test(css)) fail('Pi Kapp integration must use repository-owned public asset paths');
 
+const patternCardRule = css.match(/\.pikapp-page \.identity-board__card--pattern\{([^}]*)\}/)?.[1] || '';
+if (!patternCardRule.includes("url('../images/pikapp-case-study/pattern-dark-blue-display.svg')")) {
+  fail('Mark & pattern card must use the edge-clean display derivative');
+}
+if (patternCardRule.includes("url('../images/pikapp-case-study/pattern-dark-blue.svg')")) {
+  fail('Mark & pattern card must not repeat the raw SVG with malformed edge slivers');
+}
+if (css.includes('pattern-dark-blue.svg')) {
+  fail('Public Pi Kapp CSS must use the edge-clean pattern derivative consistently');
+}
+
 for (const required of [
   '.pikapp-page',
   'html[data-theme="dark"] .pikapp-page',
@@ -387,7 +414,7 @@ for (const required of [
   '@media (max-width: 800px)',
   '@media (max-width: 430px)',
   'min-height: 44px',
-  'images/pikapp-case-study/pattern-dark-blue.svg',
+  'images/pikapp-case-study/pattern-dark-blue-display.svg',
   'scroll-margin-top:',
   '.archive-dialog',
   '.archive-trigger',

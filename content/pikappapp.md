@@ -30,6 +30,7 @@ A mobile application concept for undergraduate fraternity members to track miles
 - V1 established the structure. V2 made it runnable.
 - The final remaster brings the app back to its source.
 - A formative project that changed how I approached product design.
+- Pi Kapp member model
 - Expansion Portfolio
 
 ## Body Copy
@@ -131,6 +132,8 @@ Source-faithful remaster. Illustrative concept screens.
 This project connected my experience in leadership and communications with a growing interest in product design and research. It was an early attempt to make HQ feel closer to day-to-day chapter life through one member-facing app.
 
 The concept still needed usability testing and a clearer integration model. What stayed with me was the approach: start with the systems people already use, then make the member-facing experience easier to understand.
+
+Runnable V2 snapshot. Illustrative concept data only.
 
 Pi Kapp App archive
 
