@@ -1,12 +1,10 @@
 # Design system
 
-Hand-edited prose layer that sits next to [design-system.json](design-system.json). The JSON holds tokens; this file holds the *why* — principles, voice, imagery direction, and anything that doesn't fit neatly in a token.
+Detailed companion to the root [`DESIGN.md`](../DESIGN.md), which is the normative design intent and formal agent contract. `css/style.css` remains executable runtime, [design-system.json](design-system.json) is the contract-checked structured mirror, and governance docs own active gates and state. This detailed companion is not a second broad authority; it preserves Phase 1 compatibility prose while consumers are audited.
 
-## Authority note
+## Compatibility note
 
-This file is authoritative for design system principles, voice, imagery direction, usage guidance, and prose explanations. It is not authoritative for current portfolio status, next actions, or the structured token values themselves. Use `design-system.json` for token data, `../PORTFOLIO_DASHBOARD.md` for current status, and `../PORTFOLIO_DIRECTION_BRIEF.md` for broader creative/product direction.
-
-> Status: reconciled foundations and component direction harvested from approved local candidates. Sections marked **TBD** remain deliberate gaps. This document does not authorize shared-shell implementation or production rollout.
+This hand-edited detailed companion retains rationale, voice, imagery direction, and implementation context temporarily. Where it differs from root `DESIGN.md`, the root contract governs shared semantics and safety boundaries.
 
 ---
 
@@ -44,7 +42,7 @@ First-person. Conversational. A dose of humor where it lands.
 
 ## Color
 
-Tokens live in [design-system.json → colors](design-system.json). The palette is intentionally small: two accents (`blue`, `pink`) plus a five-step neutral ramp.
+Tokens live in [design-system.json → colors](design-system.json). The palette has four live accents (`blue`, `pink`, `purple`, and `orange`) plus semantic surface aliases and a five-step neutral ramp.
 
 ### Paired-token rule
 

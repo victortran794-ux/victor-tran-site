@@ -32,6 +32,7 @@ jobs:
       images: ${{ steps.scope.outputs.images }}
       links: ${{ steps.scope.outputs.links }}
       deployable: ${{ steps.scope.outputs.deployable }}
+      design: ${{ steps.scope.outputs.design }}
       docs: ${{ steps.scope.outputs.docs }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -78,6 +79,15 @@ jobs:
           node-version: "22.22.0"
       - name: Health-check scope classifier fixture
         run: node scripts/test-classify-health-check-scope.mjs
+      - name: Install Design.md dependencies
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.design == 'true'
+        run: npm ci --ignore-scripts
+      - name: Design.md contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.design == 'true'
+        run: |
+          npm run test:design-md-wiring
+          npm run test:design-md
+          npm run check:design-md
 
       - name: Home/global completion contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
@@ -263,6 +273,14 @@ jobs:
           needs.changes.outputs.gallery == 'true'
         with:
           python-version: "3.14"
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        if: >-
+          needs.changes.outputs.all == 'true' ||
+          needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.images == 'true' ||
+          needs.changes.outputs.gallery == 'true'
+        with:
+          version: "0.11.14"
       - name: wxO and Document Processing protected deep-link regression
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.wxo == 'true'
         run: |
@@ -286,6 +304,11 @@ jobs:
       - name: Responsive image regression check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-responsive-images.mjs
+      - name: Graphic responsive image ownership contracts
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.images == 'true'
+        run: |
+          npm run check:graphic-responsive-images
+          npm run test:responsive-output-bounds
       - name: Gallery media regression check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-gallery-media.mjs
@@ -306,6 +329,10 @@ jobs:
           kill -0 "$SERVER_PID"
           curl --fail --silent http://127.0.0.1:8896/artillustration.html >/dev/null
           SITE_URL=http://127.0.0.1:8896 npm run check:visual-archives-lightbox-browser
+          npm run test:graphic-responsive-network
+          npm run test:graphic-responsive-no-io
+          npm run test:art-responsive-network
+          npm run test:art-responsive-no-io
       - name: Lychee link check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.links == 'true'
         uses: lycheeverse/lychee-action@v2

@@ -42,6 +42,11 @@ fi
 run_required "Whitespace/conflict marker check" git diff --check
 run_required "Path-aware health-check scope fixture" npm run test:health-check-scope
 
+section "Documentation contracts"
+run_required "Design.md wiring contract" npm run test:design-md-wiring
+run_required "Design.md contract fixture" npm run test:design-md
+run_required "Design.md contract" npm run check:design-md
+
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "About semantic-heading contract" node scripts/check-about-semantics.mjs
 run_required "Approved full-site copy sweep self-test" node scripts/test-approved-copy-sweep.mjs
@@ -54,6 +59,12 @@ run_required "PCI claims and publication contract" npm run check:pci-claims-prot
 run_required "Star & Lamp bounded revision contract" npm run check:sal-vico2
 run_required "Ability Experience bounded sequence contract" npm run check:ability-vico2
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
+run_required "Graphic responsive-image ownership contract" npm run check:graphic-responsive-images
+run_required "Responsive output ownership mutation" npm run test:responsive-output-bounds
+run_required "Graphic future-request mutation" npm run test:graphic-responsive-network
+run_required "Graphic no-observer fallback" npm run test:graphic-responsive-no-io
+run_required "Art future-request mutation" npm run test:art-responsive-network
+run_required "Art no-observer fallback" npm run test:art-responsive-no-io
 run_required "Gallery media regression check" node scripts/check-gallery-media.mjs
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs
 run_required "Pi Kapp static simplification contract" node scripts/check-pikapp-static-simplification.mjs

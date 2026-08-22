@@ -22,6 +22,7 @@ assert.deepEqual(docsOnly, {
   images: false,
   links: false,
   deployable: false,
+  design: false,
   docs: true,
 });
 
@@ -45,6 +46,7 @@ assert.deepEqual(galleryVisual, {
   images: true,
   links: true,
   deployable: true,
+  design: false,
   docs: false,
 });
 
@@ -69,6 +71,7 @@ assert.deepEqual(sharedSystem, {
   images: false,
   links: true,
   deployable: true,
+  design: false,
   docs: false,
 });
 
@@ -137,6 +140,46 @@ for (const changedPath of [
 const rootDocumentation = classifyPaths(['README.md']);
 assert.equal(rootDocumentation.docs, true, 'root Markdown documentation must select the fast documentation baseline');
 assert.equal(rootDocumentation.all, false, 'root Markdown documentation must not force full coverage');
+
+const designDocumentation = classifyPaths(['DESIGN.md']);
+assert.deepEqual(designDocumentation, {
+  all: false,
+  shared: false,
+  home: false,
+  ibm: false,
+  pikapp: false,
+  gallery: false,
+  about: false,
+  pci: false,
+  sal: false,
+  ability: false,
+  wxo: false,
+  images: false,
+  links: false,
+  deployable: false,
+  design: true,
+  docs: true,
+});
+
+for (const changedPath of [
+  'content/design-system.md',
+  'content/design-system.json',
+  'scripts/check-design-md-contract.mjs',
+  'scripts/test-design-md-contract.mjs',
+  'scripts/test-design-md-wiring.mjs',
+]) {
+  const scope = classifyPaths([changedPath]);
+  assert.equal(scope.design, true, `${changedPath} must select Design.md validation`);
+  assert.equal(scope.all, false, `${changedPath} must not force the full suite`);
+}
+
+for (const changedPath of [
+  'scripts/check-design-md-contract.mjs',
+  'scripts/test-design-md-contract.mjs',
+  'scripts/test-design-md-wiring.mjs',
+]) {
+  assert.equal(classifyPaths([changedPath]).docs, true, `${changedPath} must retain documentation coverage`);
+}
 
 const forced = forceAllScopes();
 assert.ok(Object.values(forced).every(Boolean), 'manual and scheduled runs must force every scope');

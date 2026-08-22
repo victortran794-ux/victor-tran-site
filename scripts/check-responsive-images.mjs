@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const root = path.resolve(import.meta.dirname, '..');
+const root = path.resolve(process.env.RESPONSIVE_IMAGES_ROOT || path.resolve(import.meta.dirname, '..'));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -39,7 +39,7 @@ function readWebpDimensions(bytes) {
   throw new Error('WebP dimensions not found');
 }
 
-const expectedImages = [
+const existingImages = [
   'images/responsive/about-vic-japan-480.webp',
   'images/responsive/about-vic-japan-800.webp',
   'images/responsive/about-vic-japan-1200.webp',
@@ -51,9 +51,39 @@ const expectedImages = [
   'images/responsive/dna-preview-1200.webp',
   'images/responsive/thumb-sal-540.webp',
 ];
+const artResponsiveImages = [
+  'images/responsive/illus-ibm-selectric-web-480.webp',
+  'images/responsive/illus-ibm-selectric-web-960.webp',
+  'images/responsive/illus-ibm-selectric-web-1440.webp',
+  'images/responsive/old-one-240.webp',
+  'images/responsive/old-one-480.webp',
+  ...Array.from({ length: 7 }, (_, index) => index + 5).flatMap((version) =>
+    [320, 640, 800].map((width) => `images/responsive/illus-untitled-${version}-${width}.webp`)),
+];
+const graphicResponsiveImages = Object.entries({
+  'logos-2':[480,768,1200],'gg-edc-1':[320,480],'gg-edc-0':[480,768,1280],'gg-edc-2':[480,768,1280],'gg-edc-3':[480,768,1280],'thumb-sgla':[320,480,768],'sgla-2024-identity-development':[480,768,1200],'sgla-2023-brand-guidelines':[480,768,1280],'sgla-2024-ballroom-system':[480,768,1280],'sgla-2024-signage-system':[768,1280,2048],
+  ...Object.fromEntries(Array.from({length:16},(_,i)=>[`gg-slides-${i+1}`,[320,480,640]])), 'gg-day-of-giving':[480,768,1024],'dog':[480,768,1024],'gg-ibm-fan':[480,1024,1600],'logos-1':[768,1280,2048],'chantico':[480,768,1024],'logos-3':[480,768,1024],'logos-4':[480,768,1024],'abex':[480,768,1200],'sc56-instagram-panel-series':[480,768,1280],'ibm-paltron-illustration-system':[480,768,1200],'wxo-illustration-system':[480,768,1280],'gg-illus-1':[320,480,768],'gg-illus-2':[320,480,768],'gg-illus-3':[320,480,768],'gg-infographic':[768,1280,2048],
+}).flatMap(([stem,widths]) => widths.map(width => `images/responsive/graphic/${stem}-w${width}.webp`));
+const expectedImages = [...existingImages, ...artResponsiveImages, ...graphicResponsiveImages];
+const expectedImageSet = new Set(expectedImages);
+const artSources = {
+  'images/illus-ibm-selectric-web.jpg': [480, 960, 1440],
+  'images/art-archive-v2/old-one.webp': [240, 480],
+  ...Object.fromEntries(Array.from({ length: 7 }, (_, index) => [
+    `images/illus-untitled-${index + 5}.jpg`, [320, 640, 800],
+  ])),
+};
 for (const file of expectedImages) {
   expect(fs.existsSync(path.join(root, file)), `${file} must exist.`);
 }
+const responsiveDirectory = path.join(root, 'images', 'responsive');
+const onDiskWebps = fs.existsSync(responsiveDirectory)
+  ? fs.readdirSync(responsiveDirectory, { withFileTypes: true, recursive: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.webp'))
+    .map((entry) => { const relativeParent = path.relative(responsiveDirectory, entry.parentPath); return `images/responsive/${relativeParent ? `${relativeParent}/` : ''}${entry.name}`.replaceAll('\\', '/'); })
+  : [];
+expect(JSON.stringify(onDiskWebps.sort()) === JSON.stringify([...expectedImageSet].sort()),
+  'Responsive output directory WebP set must exactly match the expected derivative set.');
 
 const integrityPath = path.join(root, 'images/responsive/manifest.json');
 expect(fs.existsSync(integrityPath), 'Responsive derivative integrity manifest must exist.');
@@ -66,9 +96,19 @@ if (fs.existsSync(integrityPath)) {
     'Responsive derivatives must record the approved encoder configuration.');
   expect(JSON.stringify(Object.keys(integrity.outputs ?? {}).sort()) === JSON.stringify([...expectedImages].sort()),
     'Integrity manifest output keys must exactly match the expected derivative set.');
+  expect(expectedImages.length === 158, 'Responsive image program must define exactly 158 derivatives.');
+  expect(graphicResponsiveImages.length === 122, 'Graphic slice must define exactly 122 responsive derivatives.');
+  for (const [source, widths] of Object.entries(artSources)) {
+    const stem = path.basename(source, path.extname(source));
+    for (const width of widths) {
+      expect(artResponsiveImages.includes(`images/responsive/${stem}-${width}.webp`),
+        `${source} must declare its ${width}w Art responsive derivative.`);
+    }
+  }
   for (const source of [
     'images/about-vic-japan.jpg', 'images/patterns-hero.webp',
     'images/pci-handbook-1-cover.webp', 'images/dna-preview.jpg', 'images/thumb-sal.webp',
+    ...Object.keys(artSources),
   ]) {
     const bytes = fs.readFileSync(path.join(root, source));
     const entry = integrity.sources?.[source];
@@ -91,7 +131,7 @@ if (fs.existsSync(integrityPath)) {
     } catch (error) {
       failures.push(`${file} must be a decodable WebP: ${error.message}`);
     }
-    const width = Number(file.match(/-(\d+)\.webp$/)?.[1]);
+    const width = Number(file.match(/-(?:w)?(\d+)\.webp$/)?.[1]);
     expect(entry.width === width, `${file} recorded width must match its filename descriptor.`);
     expect(Number.isInteger(entry.height) && entry.height > 0, `${file} must record a positive pixel height.`);
   }

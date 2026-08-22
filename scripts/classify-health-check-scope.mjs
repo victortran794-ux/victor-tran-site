@@ -16,12 +16,18 @@ const emptyScope = () => ({
   images: false,
   links: false,
   deployable: false,
+  design: false,
   docs: false,
 });
 
 export function classifyPaths(paths) {
   const scope = emptyScope();
   const isDocumentationPath = path => /^[^/]+\.md$/.test(path);
+  const isDesignPath = path =>
+    path === 'DESIGN.md' ||
+    path === 'content/design-system.md' ||
+    path === 'content/design-system.json' ||
+    /^scripts\/(?:check-design-md-contract|test-design-md-contract|test-design-md-wiring)\.mjs$/.test(path);
   const isFullSuitePath = path =>
     path === '.github/workflows/health-check.yml' ||
     path === '.github/lighthouse-budget.json' ||
@@ -56,7 +62,8 @@ export function classifyPaths(paths) {
     path === 'sitemap.xml' ||
     path === 'robots.txt';
 
-  scope.docs = paths.some(isDocumentationPath);
+  scope.design = paths.some(isDesignPath);
+  scope.docs = paths.some(isDocumentationPath) || scope.design;
   scope.all = paths.some(isFullSuitePath);
   scope.shared = paths.some(isSharedPath);
 
@@ -147,6 +154,7 @@ export function classifyPaths(paths) {
 
   const hasUnknownPath = paths.some(path =>
     !isDocumentationPath(path) &&
+    !isDesignPath(path) &&
     !isFullSuitePath(path) &&
     !isSharedPath(path) &&
     !isDeployablePath(path) &&

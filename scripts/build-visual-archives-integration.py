@@ -337,6 +337,56 @@ ART_PRIMARY = r'''
 # object labels; descriptive alt text remains on every image.
 ART_PRIMARY = re.sub(r'<figcaption>[\s\S]*?</figcaption>', '', ART_PRIMARY)
 
+# The Art responsive-media pilot is deliberately bounded to the opening trio.
+# Full source paths remain available to the shared lightbox, while the page uses
+# derivatives appropriate to the rendered slot.
+RESPONSIVE_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+IBM_SIZES = '(max-width: 720px) calc(100vw - 40px), calc(50vw - clamp(24px, 3.333vw, 48px) - clamp(0.4rem, 1vw, 0.875rem))'
+OLD_ONE_SIZES = '(max-width: 720px) calc(33.333vw - 13.333px - clamp(0.533rem, 1.333vw, 1.167rem)), calc(16.667vw - clamp(8px, 1.111vw, 16px) - clamp(0.667rem, 1.667vw, 1.458rem))'
+HORNED_SIZES = '(max-width: 720px) calc(66.667vw - 26.667px - clamp(0.267rem, 0.667vw, 0.583rem)), calc(33.333vw - clamp(16px, 2.222vw, 32px) - clamp(0.533rem, 1.333vw, 1.167rem))'
+
+
+def responsive_art_image(full: str, src: str, srcset: str, sizes: str, width: int, height: int,
+                         alt: str, thumb: str, *, eager: bool = False, deferred: bool = False) -> str:
+    priority = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
+    if deferred:
+        return (f'<img class="series-slideshow-img" {priority} decoding="async" src="{RESPONSIVE_PLACEHOLDER}" '
+                f'data-deferred-src="{src}" data-deferred-srcset="{srcset}" data-deferred-sizes="{sizes}" '
+                f'data-full-src="{full}" data-thumb-src="{thumb}" width="{width}" height="{height}" alt="{alt}">')
+    return (f'<img {priority} decoding="async" src="{src}" srcset="{srcset}" sizes="{sizes}" '
+            f'data-full-src="{full}" data-thumb-src="{thumb}" width="{width}" height="{height}" alt="{alt}">')
+
+
+ART_PRIMARY = ART_PRIMARY.replace(
+    '<img loading="eager" fetchpriority="high" decoding="async" src="images/illus-ibm-selectric-web.jpg" width="1806" height="2396" alt="IBM Selectric 1961 blueprint illustration">',
+    responsive_art_image('images/illus-ibm-selectric-web.jpg', 'images/responsive/illus-ibm-selectric-web-960.webp',
+                         'images/responsive/illus-ibm-selectric-web-480.webp 480w, images/responsive/illus-ibm-selectric-web-960.webp 960w, images/responsive/illus-ibm-selectric-web-1440.webp 1440w',
+                         IBM_SIZES, 1806, 2396, 'IBM Selectric 1961 blueprint illustration',
+                         'images/responsive/illus-ibm-selectric-web-480.webp', eager=True),
+)
+ART_PRIMARY = ART_PRIMARY.replace(
+    '<img loading="eager" fetchpriority="high" decoding="async" src="images/art-archive-v2/old-one.webp" width="1600" height="2071" alt="Black-and-white and turquoise character illustration">',
+    responsive_art_image('images/art-archive-v2/old-one.webp', 'images/responsive/old-one-240.webp',
+                         'images/responsive/old-one-240.webp 240w, images/responsive/old-one-480.webp 480w',
+                         OLD_ONE_SIZES, 1600, 2071, 'Black-and-white and turquoise character illustration',
+                         'images/responsive/old-one-240.webp'),
+)
+for version, alt in [
+    (5, 'Horned Woman pencil sketch'), (6, 'Horned Woman painted study'),
+    (7, 'Horned Woman stylized black-and-white study'), (8, 'Horned Woman glitch study'),
+    (9, 'Horned Woman pink overlay study'), (10, 'Horned Woman watercolor study'),
+    (11, 'Horned Woman blue ink study'),
+]:
+    full = f'images/illus-untitled-{version}.jpg'
+    src = f'images/responsive/illus-untitled-{version}-640.webp'
+    srcset = f'images/responsive/illus-untitled-{version}-320.webp 320w, images/responsive/illus-untitled-{version}-640.webp 640w, images/responsive/illus-untitled-{version}-800.webp 800w'
+    original = f'<img class="series-slideshow-img{" is-active" if version == 5 else ""}" loading="lazy" decoding="async" src="{full}" width="800" height="1600" alt="{alt}">'
+    replacement = responsive_art_image(full, src, srcset, HORNED_SIZES, 800, 1600, alt,
+                                       f'images/responsive/illus-untitled-{version}-320.webp', deferred=version != 5)
+    if version == 5:
+        replacement = replacement.replace('<img ', '<img class="series-slideshow-img is-active" ', 1)
+    ART_PRIMARY = ART_PRIMARY.replace(original, replacement)
+
 GRAPHIC_PRIMARY = r'''
     <section class="archive-primary" aria-labelledby="graphic-archive-title">
       <div class="graphic-shell">
@@ -476,6 +526,36 @@ GRAPHIC_PRIMARY = r'''
 # carries object identity without repeating small labels under every image.
 GRAPHIC_PRIMARY = re.sub(r'<figcaption>[\s\S]*?</figcaption>', '', GRAPHIC_PRIMARY)
 GRAPHIC_PRIMARY = re.sub(r'[ \t]+\n', '\n', GRAPHIC_PRIMARY)
+
+GRAPHIC_RESPONSIVE = {
+    'images/logos-2.jpg': ('opening', [480, 768, 1200]), 'images/gg-edc-1.jpg': ('half', [320, 480]),
+    'images/gg-edc-0.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-2.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-3.jpg': ('half', [480, 768, 1280]),
+    'images/thumb-sgla.webp': ('third', [320, 480, 768]), 'images/graphic-archive-v2/sgla-2024-identity-development.webp': ('feature', [480, 768, 1200]), 'images/graphic-archive-v2/sgla-2023-brand-guidelines.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-ballroom-system.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-signage-system.webp': ('full', [768, 1280, 2048]),
+    **{f'images/gg-slides-{number}.jpg': ('slides', [320, 480, 640]) for number in range(1, 17)},
+    'images/gg-day-of-giving.png': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/dog.webp': ('third', [480, 768, 1024]), 'images/gg-ibm-fan.jpg': ('feature', [480, 1024, 1600]), 'images/logos-1.jpg': ('full', [768, 1280, 2048]), 'images/graphic-archive-v2/chantico.webp': ('third', [480, 768, 1024]), 'images/logos-3.jpg': ('third', [480, 768, 1024]), 'images/logos-4.jpg': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/abex.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/sc56-instagram-panel-series.webp': ('wide', [480, 768, 1280]), 'images/graphic-archive-v2/ibm-paltron-illustration-system.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/wxo-illustration-system.webp': ('wide', [480, 768, 1280]), 'images/gg-illus-1.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-2.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-3.jpg': ('illustration', [320, 480, 768]), 'images/gg-infographic.jpg': ('full', [768, 1280, 2048]),
+}
+GRAPHIC_SIZES = {
+    'opening': '(max-width: 720px) calc(100vw - 40px), (max-width: 1600px) calc(61.75vw - 62px), 926px', 'half': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(50vw - 60px), 740px', 'third': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(33.333vw - 48px), 485px', 'feature': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(66.667vw - 104px), 995px', 'full': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(100vw - 96px), 1504px', 'slides': '(max-width: 720px) calc((100vw - 48px) / 2), (max-width: 900px) calc((100vw - 72px) / 4), (max-width: 1199px) calc((100vw - 120px) / 4), (max-width: 1600px) calc((100vw - 128px) / 5), 294px', 'tall': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(41.667vw - 78px), 589px', 'wide': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(58.333vw - 114px), 851px', 'illustration': '(max-width: 720px) calc((100vw - 56px) / 2), (max-width: 1600px) calc(25vw - 42px), 358px',
+}
+def responsive_graphic_image(match: re.Match) -> str:
+    tag = match.group(0)
+    source_match = re.search(r'\bsrc="([^"]+)"', tag)
+    source = source_match.group(1) if source_match else ''
+    if source not in GRAPHIC_RESPONSIVE:
+        return tag
+    profile, widths = GRAPHIC_RESPONSIVE[source]
+    stem = Path(source).stem
+    original_width = re.search(r'\bwidth="(\d+)"', tag).group(1)
+    srcset = ', '.join([*(f'images/responsive/graphic/{stem}-w{width}.webp {width}w' for width in widths), f'{source} {original_width}w'])
+    thumb = f'images/responsive/graphic/{stem}-w{widths[0]}.webp'
+    if 'loading="eager"' in tag:
+        return tag[:-1] + f' srcset="{srcset}" sizes="{GRAPHIC_SIZES[profile]}" data-full-src="{source}" data-thumb-src="{thumb}">'
+    deferred_tag = tag.replace(f'src="{source}"', f'src="{RESPONSIVE_PLACEHOLDER}"', 1)
+    return deferred_tag[:-1] + (
+        f' data-deferred-src="{source}" data-deferred-srcset="{srcset}" '
+        f'data-deferred-sizes="{GRAPHIC_SIZES[profile]}" data-full-src="{source}" data-thumb-src="{thumb}">'
+    )
+GRAPHIC_PRIMARY = re.sub(r'<img\b[^>]*>', responsive_graphic_image, GRAPHIC_PRIMARY)
 
 
 def validate_assets(mapping: dict[str, str], target_name: str) -> None:

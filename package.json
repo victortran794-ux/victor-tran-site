@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "test:health-check-scope": "node scripts/test-classify-health-check-scope.mjs",
+    "test:design-md": "node scripts/test-design-md-contract.mjs",
+    "check:design-md": "node scripts/check-design-md-contract.mjs",
+    "test:design-md-wiring": "node scripts/test-design-md-wiring.mjs",
     "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
     "check:pikapp-static": "node scripts/check-pikapp-static-simplification.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
@@ -11,6 +14,13 @@
     "check:ibm-patterns": "node scripts/check-ibm-patterns-integration.mjs",
     "check:ibm-patterns-browser": "node scripts/check-ibm-patterns-browser.mjs",
     "check:gallery-motion-system": "node scripts/check-gallery-motion-system.mjs",
+    "check:responsive-images": "node scripts/check-responsive-images.mjs",
+    "check:graphic-responsive-images": "node scripts/check-graphic-responsive-images.mjs",
+    "test:responsive-output-bounds": "node scripts/test-responsive-output-bounds.mjs",
+    "test:graphic-responsive-network": "node scripts/test-graphic-responsive-network-mutation.mjs",
+    "test:graphic-responsive-no-io": "node scripts/test-graphic-responsive-no-intersection-observer.mjs",
+    "test:art-responsive-network": "node scripts/test-visual-archives-network-mutation.mjs",
+    "test:art-responsive-no-io": "node scripts/test-visual-archives-no-intersection-observer.mjs",
     "check:protected-delivery": "node scripts/test-protected-delivery.mjs",
     "check:wxo-document-processing": "node scripts/check-wxo-document-processing-integration.mjs",
     "check:wxo-document-processing-browser": "node scripts/check-wxo-document-processing-browser.mjs",
@@ -47,5 +57,9 @@
   },
   "dependencies": {
     "@vercel/functions": "^3.9.5"
+  },
+  "devDependencies": {
+    "@google/design.md": "0.4.0",
+    "yaml": "2.9.0"
   }
 }

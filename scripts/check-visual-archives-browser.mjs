@@ -66,6 +66,8 @@ class Cdp {
     this.pending = new Map();
     this.waiters = new Map();
     this.exceptions = [];
+    this.requests = [];
+    this.networkErrors = [];
   }
 
   async open() {
@@ -81,6 +83,9 @@ class Cdp {
         return;
       }
       if (message.method === 'Runtime.exceptionThrown') this.exceptions.push(message.params.exceptionDetails);
+      if (message.method === 'Network.requestWillBeSent') this.requests.push(message.params.request.url);
+      if (message.method === 'Network.loadingFailed') this.networkErrors.push(`${message.params.errorText} ${message.params.blockedReason || ''}`.trim());
+      if (message.method === 'Network.responseReceived' && message.params.response.status >= 400) this.networkErrors.push(`${message.params.response.status} ${message.params.response.url}`);
       const waiters = this.waiters.get(message.method) || [];
       this.waiters.delete(message.method);
       waiters.forEach((resolve) => resolve(message.params));
@@ -145,6 +150,32 @@ class Cdp {
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function hornedRequestsSince(mark) {
+  return cdp.requests.slice(mark).map((url) => {
+    const match = new URL(url).pathname.match(/\/images\/(?:responsive\/)?illus-untitled-(\d+)(?:-(320|640|800)\.webp|(\.jpg))$/);
+    return match && Number(match[1]) >= 5 && { url, version: Number(match[1]), width: match[2] ? Number(match[2]) : null, original: Boolean(match[3]) };
+  }).filter(Boolean);
+}
+
+function assertHornedRequests(mark, allowedVersions, label, { requireOriginal = false, thumbsOnly = false } = {}) {
+  const requests = hornedRequestsSince(mark);
+  const unexpected = requests.filter((request) => !allowedVersions.includes(request.version));
+  assert(unexpected.length === 0,
+    `artillustration.html: network ${label} requested a farther Horned Woman family: ${JSON.stringify(unexpected)}`);
+  if (requireOriginal) {
+    assert(requests.some((request) => request.original),
+      `artillustration.html: network ${label} did not request the active Horned Woman full original: ${JSON.stringify(requests)}`);
+  } else {
+    assert(requests.every((request) => !request.original),
+      `artillustration.html: network ${label} requested a Horned Woman original before lightbox: ${JSON.stringify(requests)}`);
+  }
+  if (thumbsOnly) {
+    assert(requests.filter((request) => !request.original).every((request) => request.width === 320),
+      `artillustration.html: network ${label} used a non-320 Horned Woman thumbnail derivative: ${JSON.stringify(requests)}`);
+  }
+  return requests;
 }
 
 async function waitForScrollSettle() {
@@ -285,6 +316,72 @@ async function checkLiveSlideshowFocusRestoration() {
   });
 }
 
+async function checkArtResponsiveMedia() {
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1280, height: 720, deviceScaleFactor: 1, mobile: false });
+  const noIntersectionObserver = process.env.VISUAL_ARCHIVES_DISABLE_IO === '1';
+  const navigationMark = cdp.requests.length;
+  await cdp.navigate(`${baseUrl}/artillustration.html`);
+  const initial = await cdp.evaluate(`(() => {
+    const slides = [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')];
+    return {
+      slides: slides.map((slide) => ({ src: slide.getAttribute('src'), deferred: slide.hasAttribute('data-deferred-src'), full: slide.dataset.fullSrc, thumb: slide.dataset.thumbSrc })),
+      fullSourceRequests: performance.getEntriesByType('resource').map((entry) => entry.name).filter((name) => [5, 6, 7, 8, 9, 10, 11].some((version) => name.includes('/images/illus-untitled-' + version + '.jpg'))),
+    };
+  })()`);
+  assert(initial.slides.length === 7 && initial.slides.every((slide) => slide.full && slide.thumb),
+    `artillustration.html: responsive Horned Woman source metadata is incomplete: ${JSON.stringify(initial)}`);
+  const expectedInitialLive = noIntersectionObserver ? 2 : 1;
+  const expectedInitialPlaceholders = noIntersectionObserver ? 5 : 6;
+  assert(initial.slides.filter((slide) => !slide.deferred).length === expectedInitialLive &&
+    initial.slides.slice(0, expectedInitialLive).every((slide) => !slide.src.startsWith('data:image/')) &&
+    initial.slides.slice(expectedInitialLive).every((slide) => slide.deferred && slide.src.startsWith('data:image/')) &&
+    initial.slides.filter((slide) => slide.src.startsWith('data:image/')).length === expectedInitialPlaceholders,
+    `artillustration.html: initial Horned Woman ${noIntersectionObserver ? 'no-observer fallback' : 'parse'} state is invalid: ${JSON.stringify(initial.slides)}`);
+  assert(initial.fullSourceRequests.length === 0,
+    `artillustration.html: full Horned Woman sources loaded before lightbox: ${JSON.stringify(initial.fullSourceRequests)}`);
+  if (process.env.VISUAL_ARCHIVES_NETWORK_MUTATION === 'future-horned-responsive-request') {
+    await cdp.evaluate(`(async () => { const url = new URL('images/responsive/illus-untitled-11-640.webp', location.href); url.searchParams.set('network-mutation', String(Date.now())); await fetch(url.href, { cache: 'no-store' }); })()`);
+  }
+  assertHornedRequests(navigationMark, noIntersectionObserver ? [5, 6] : [5], 'before deferred-stage intersection');
+
+  const intersectionMark = cdp.requests.length;
+  await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-stage').scrollIntoView({ block: 'center' })`);
+  await delay(260);
+  const hydrated = await cdp.evaluate(`(() => {
+    const slides = [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')];
+    return slides.map((slide) => ({ src: slide.getAttribute('src'), deferred: slide.hasAttribute('data-deferred-src') }));
+  })()`);
+  assert(hydrated.filter((slide) => !slide.src.startsWith('data:image/')).length === 2 && hydrated.slice(0, 2).every((slide) => !slide.deferred) && hydrated.slice(2).every((slide) => slide.deferred),
+    `artillustration.html: intersection hydration must load active and next Horned Woman derivatives only: ${JSON.stringify(hydrated)}`);
+  assertHornedRequests(intersectionMark, [5, 6], 'after deferred-stage intersection');
+
+  const lightboxMark = cdp.requests.length;
+  await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active').focus()`);
+  await cdp.key('Enter', 'Enter', 13);
+  await delay(240);
+  const lightbox = await cdp.evaluate(`(() => ({
+    full: document.querySelector('.lightbox .lb-img')?.getAttribute('src'),
+    thumbs: [...document.querySelectorAll('.lightbox .lb-thumb img')].map((image) => image.getAttribute('src')),
+  }))()`);
+  assert(lightbox.full === 'images/illus-untitled-5.jpg' && lightbox.thumbs.slice(1, 8).every((src, index) => src === `images/responsive/illus-untitled-${index + 5}-320.webp`),
+    `artillustration.html: lightbox must use full source and compact thumbnail derivatives: ${JSON.stringify(lightbox)}`);
+  const lightboxRequests = assertHornedRequests(lightboxMark, [5, 6, 7, 8, 9, 10, 11], 'on lightbox open', { requireOriginal: true });
+  assert(lightboxRequests.filter((request) => request.original).every((request) => request.version === 5),
+    `artillustration.html: lightbox requested a non-active Horned Woman full original: ${JSON.stringify(lightboxRequests)}`);
+  assertHornedRequests(lightboxMark, [5, 6, 7, 8, 9, 10, 11], 'on lightbox thumbnail load', { requireOriginal: true, thumbsOnly: true });
+  await cdp.key('Escape', 'Escape', 27);
+  await delay(2050);
+  const laterActivationRequests = hornedRequestsSince(intersectionMark);
+  const laterSlideshowRequests = laterActivationRequests.filter((request) => request.original || request.width !== 320);
+  assert(laterSlideshowRequests.every((request) => request.version <= 7),
+    `artillustration.html: network before later slideshow activation requested a farther non-thumbnail Horned Woman family: ${JSON.stringify(laterSlideshowRequests)}`);
+  assert(laterSlideshowRequests.filter((request) => request.original).every((request) => request.version === 5),
+    `artillustration.html: network before later slideshow activation requested a non-active full original: ${JSON.stringify(laterSlideshowRequests)}`);
+  await cdp.evaluate(`document.querySelector('.slideshow-pause-btn').click()`);
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+}
+
 async function checkHornedWomanCadenceAndPause() {
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }],
@@ -362,6 +459,78 @@ async function checkHomepageGalleryChapter() {
     `index.html: desktop gallery hierarchy drifted: ${JSON.stringify(desktop)}`);
 }
 
+function graphicRequestsSince(mark) {
+  return cdp.requests.slice(mark).filter((url) => new URL(url).pathname.includes('/images/'));
+}
+
+async function checkGraphicResponsiveMedia() {
+  const noIntersectionObserver = process.env.VISUAL_ARCHIVES_DISABLE_IO === '1';
+  const representatives = [
+    'images/logos-2.jpg', 'images/gg-edc-1.jpg', 'images/thumb-sgla.webp',
+    'images/graphic-archive-v2/sgla-2024-identity-development.webp', 'images/logos-1.jpg',
+    'images/gg-slides-1.jpg', 'images/graphic-archive-v2/abex.webp',
+    'images/graphic-archive-v2/sc56-instagram-panel-series.webp', 'images/gg-illus-1.jpg',
+  ];
+  for (const viewport of [
+    { label: '390', width: 390, height: 844, mobile: true },
+    { label: '1600', width: 1600, height: 900, mobile: false },
+  ]) {
+    await cdp.navigate('data:text/html,<meta charset="utf-8"><title>Graphic responsive reset</title>');
+    await cdp.call('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1 });
+    const navigationMark = cdp.requests.length;
+    await cdp.navigate(`${baseUrl}/graphicgallery.html?responsive-network=${viewport.label}-${Date.now()}`);
+    await delay(300);
+    if (process.env.VISUAL_ARCHIVES_NETWORK_MUTATION === 'future-graphic-responsive-request') {
+      await cdp.evaluate(`(async () => { const url = new URL('images/responsive/graphic/gg-slides-16-w640.webp', location.href); url.searchParams.set('network-mutation', String(Date.now())); await fetch(url.href, { cache: 'no-store' }); })()`);
+    }
+    const eager = graphicRequestsSince(navigationMark).filter((url) => /\/images\/(?:responsive\/graphic\/(?:logos-2|gg-edc-1)-w\d+\.webp|(?:logos-2|gg-edc-1)\.jpg)$/.test(new URL(url).pathname));
+    const graphic = graphicRequestsSince(navigationMark).filter((url) => new URL(url).pathname.includes('/images/responsive/graphic/') || /\/images\/(?:logos-2|gg-edc-1)\.jpg$/.test(new URL(url).pathname));
+    if (noIntersectionObserver) {
+      const fallback = await cdp.evaluate(`(() => ({
+        pending: document.querySelectorAll('main img[data-deferred-src]').length,
+        responsive: document.querySelectorAll('main img[data-full-src]').length,
+      }))()`);
+      assert(fallback.pending === 0 && fallback.responsive === 41,
+        `graphicgallery.html: no-observer fallback did not synchronously hydrate all eligible media: ${JSON.stringify(fallback)}`);
+    } else {
+      assert(graphic.length === eager.length && eager.length === 2,
+        `graphicgallery.html: fresh ${viewport.label}px navigation requested lazy or original Graphic media instead of only the two eager responsive candidates: ${JSON.stringify(graphic)}`);
+    }
+
+    for (const source of representatives) {
+      const result = await cdp.evaluate(`(async () => {
+        const source = ${JSON.stringify(source)};
+        const image = [...document.querySelectorAll('main img[data-full-src]')].find((element) => element.dataset.fullSrc === source);
+        if (!image) return null;
+        image.scrollIntoView({ block: 'center' });
+        try { await image.decode(); } catch {}
+        await new Promise((resolve) => setTimeout(resolve, 120));
+        const rect = image.getBoundingClientRect();
+        return { source, currentSrc: image.currentSrc, srcset: image.getAttribute('srcset'), width: rect.width, full: image.dataset.fullSrc, thumb: image.dataset.thumbSrc, role: image.getAttribute('role'), popup: image.getAttribute('aria-haspopup'), tabindex: image.tabIndex };
+      })()`);
+      assert(result, `graphicgallery.html: missing responsive representative ${source}`);
+      if (!result) continue;
+      const candidates = result.srcset.split(',').map((entry) => entry.trim().split(/\s+/)).map(([url, descriptor]) => ({ url: new URL(url, baseUrl).href, width: Number(descriptor.replace('w', '')) }));
+      const selected = candidates.find((candidate) => candidate.url === result.currentSrc);
+      const maxCandidateWidth = Math.max(...candidates.map((candidate) => candidate.width));
+      const requiredWidth = Math.min(Math.ceil(result.width), maxCandidateWidth);
+      const approvedSource = selected && (selected.url.includes('/images/responsive/graphic/') || selected.url === new URL(source, baseUrl).href);
+      assert(approvedSource && selected.width >= requiredWidth,
+        `graphicgallery.html: ${viewport.label}px ${source} currentSrc is not an adequate approved candidate within source bounds: ${JSON.stringify({ result, selected, requiredWidth, maxCandidateWidth })}`);
+      assert(result.full === source && result.thumb && result.thumb.includes('images/responsive/graphic/') && result.role === 'button' && result.popup === 'dialog' && result.tabindex === 0,
+        `graphicgallery.html: ${source} lightbox source/thumbnail/keyboard contract drifted: ${JSON.stringify(result)}`);
+      const paths = graphicRequestsSince(navigationMark).map((url) => new URL(url).pathname);
+      const stem = path.basename(source, path.extname(source));
+      const original = paths.some((pathname) => pathname.endsWith(`/${stem}${path.extname(source)}`));
+      const derivative = paths.some((pathname) => pathname.includes(`/images/responsive/graphic/${stem}-w`));
+      assert(!(original && derivative), `graphicgallery.html: ${source} loaded original and derivative simultaneously: ${JSON.stringify(paths.filter((pathname) => pathname.includes(stem)))}`);
+    }
+    const mendenhall = await cdp.evaluate(`(() => { const image = document.querySelector('.mendenhall-archive-trigger > img'); return image && { src: image.getAttribute('src'), srcset: image.getAttribute('srcset'), sizes: image.getAttribute('sizes'), full: image.dataset.fullSrc, thumb: image.dataset.thumbSrc }; })()`);
+    assert(mendenhall && mendenhall.src === 'images/gg-illus-4.jpg' && !mendenhall.srcset && !mendenhall.sizes && !mendenhall.full && !mendenhall.thumb,
+      `graphicgallery.html: Mendenhall must remain outside the responsive-image/lightbox route: ${JSON.stringify(mendenhall)}`);
+  }
+}
+
 const pageSpecs = {
   art: {
     file: 'artillustration.html',
@@ -392,8 +561,12 @@ try {
   cdp = new Cdp(target.webSocketDebuggerUrl);
   await cdp.open();
   await cdp.call('Page.enable');
+  if (process.env.VISUAL_ARCHIVES_DISABLE_IO === '1') {
+    await cdp.call('Page.addScriptToEvaluateOnNewDocument', { source: 'delete window.IntersectionObserver;' });
+  }
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
+  await cdp.call('Network.setCacheDisabled', { cacheDisabled: true });
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
@@ -689,14 +862,20 @@ try {
   }
 
   if (scope === 'all' || scope === 'art') {
+    await checkArtResponsiveMedia();
     await checkHornedWomanCadenceAndPause();
     await checkLiveSlideshowFocusRestoration();
+  }
+  if (scope === 'all' || scope === 'graphic') {
+    await checkGraphicResponsiveMedia();
   }
   if (scope === 'all' || scope === 'ui') {
     await checkHomepageGalleryChapter();
   }
 
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);
+  const actionableNetworkErrors = cdp.networkErrors.filter((error) => !/vercel.*analytics|_vercel\/(?:speed-)?insights|^net::ERR_ABORTED$/i.test(error));
+  assert(actionableNetworkErrors.length === 0, `browser network errors: ${actionableNetworkErrors.join(' | ')}`);
   console.log(`VISUAL ARCHIVES BROWSER CHECK: PASS scope=${scope} states=${checks} evidence=${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

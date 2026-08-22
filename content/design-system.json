@@ -1,7 +1,15 @@
 {
-  "$comment": "Single source of truth for design tokens. Mirrors css/style.css :root for now — see content/design-system.md for the prose layer and the migration plan in scripts/build-tokens.mjs (TODO).",
-  "version": "0.2.0",
-  "updated": "2026-08-01",
+  "$comment": "Structured mirror of the runtime token data. DESIGN.md owns normative design intent and formal agent context; css/style.css owns executable runtime; this JSON is a contract-checked structured mirror; content/design-system.md is the detailed companion; governance docs own active gates and state.",
+  "version": "0.3.0",
+  "updated": "2026-08-22",
+  "authority": {
+    "designIntent": "DESIGN.md",
+    "formalAgentContext": "DESIGN.md",
+    "runtime": "css/style.css",
+    "structuredMirror": true,
+    "detailedCompanion": "content/design-system.md",
+    "governance": "governance docs own active gates and state"
+  },
   "colors": {
     "$comment": "Hex values are the live source. `role` is what the token is for in practice. `inDarkMode` is the dark variant or null if it doesn't rebind. `usage` notes where it actually appears.",
     "accents": {
@@ -28,6 +36,25 @@
         "inDarkMode": "stable",
         "role": "Surface accent (paired with blue glyphs only)",
         "usage": "Card backplates (.featured-item--surface-orange). Body text on this surface is white; blue is reserved for graphic punctuation (dot, arrow) — never readable text. Theme-stable: does not rebind in dark mode by design."
+      }
+    },
+    "sharedAliases": {
+      "$comment": "Shared CSS aliases required by the DESIGN.md contract; these are semantic roles, not additional palette colors.",
+      "blue-text": { "value": "#2468a9", "inDarkMode": "#7ab8ff", "css": "--blue-text", "role": "Accessible shared blue text" },
+      "surface-canvas": { "value": "#ffffff", "inDarkMode": "#0e0e0e", "css": "--surface-canvas", "role": "Shared canvas surface" },
+      "surface-section": { "value": "#f6f6f4", "inDarkMode": "#181818", "css": "--surface-section", "role": "Shared section surface" },
+      "surface-media": { "value": "#ececea", "inDarkMode": "#222222", "css": "--surface-media", "role": "Shared media surface" },
+      "surface-floating": { "value": "#ffffff", "inDarkMode": "#141414", "css": "--surface-floating", "role": "Shared floating surface" }
+    },
+    "projectScopedOverlays": {
+      "homepage-ability": {
+        "scope": "project-native-overlay",
+        "universalSharedToken": false,
+        "aliases": {
+          "homepage-ability-orange": { "value": "#efaa18", "css": "--homepage-ability-orange" },
+          "homepage-ability-blue": { "value": "#03436e", "css": "--homepage-ability-blue" }
+        },
+        "usage": "Bounded to the homepage Ability featured card and excluded from universal shared tokens."
       }
     },
     "pairings": {

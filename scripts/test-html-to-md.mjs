@@ -49,7 +49,7 @@ try {
     ],
   };
   write('data/content-export-policy.json', `${JSON.stringify(policy, null, 2)}\n`);
-  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration"><a href="wxo-canvas.html?lock=1" class="featured-item"><h2 class="featured-item-title">Protected project</h2><p class="section-label">Product Systems</p><img src="protected-thumb.jpg" alt="Protected project thumbnail"></a>');
+  write('index.html', '<title>Public Home</title><h1>Public Home</h1><p>PUBLIC-HOME-SENTINEL</p><img src="chantico.jpg" alt="Chantico\'s Flame illustration"><img src="data:image/gif;base64,placeholder" data-deferred-src="responsive-study.webp" data-full-src="original-study.jpg" alt="Deferred study original"><img src="data:image/gif;base64,placeholder" data-deferred-src="deferred-only.webp" alt="Deferred study fallback"><a href="wxo-canvas.html?lock=1" class="featured-item"><h2 class="featured-item-title">Protected project</h2><p class="section-label">Product Systems</p><img src="protected-thumb.jpg" alt="Protected project thumbnail"></a>');
   write('about.html', '<title>Public About</title><h1>Public About</h1><p>PUBLIC-ABOUT-SENTINEL</p>');
   write('ibmcloud.html', '<title>Public IBM Cloud</title><h1>Public IBM Cloud</h1><p>PUBLIC-IBM-CLOUD-SENTINEL</p>');
   write('ibm-patterns.html', '<title>Public IBM Patterns</title><h1>Public IBM Patterns</h1><p>PUBLIC-IBM-PATTERNS-SENTINEL</p>');
@@ -81,9 +81,11 @@ try {
     publicIndex.find(page => page.source === 'index.html')?.images,
     [
       { src: 'chantico.jpg', alt: "Chantico's Flame illustration" },
+      { src: 'original-study.jpg', alt: 'Deferred study original' },
+      { src: 'deferred-only.webp', alt: 'Deferred study fallback' },
       { src: 'protected-thumb.jpg', alt: 'Protected project thumbnail' },
     ],
-    'double-quoted attributes must preserve apostrophes inside values'
+    'image exports must prefer semantic full and deferred sources before placeholder src values'
   );
   assert.match(read('content/ibmcloud.md'), /PUBLIC-IBM-CLOUD-SENTINEL/);
   assert.match(read('content/ibm-patterns.md'), /PUBLIC-IBM-PATTERNS-SENTINEL/);
