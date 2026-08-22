@@ -178,12 +178,10 @@ for (const required of [
   'role="group" aria-label="Member, Chapter, National HQ, and Settings interface icons"',
   'role="group" aria-label="Display, interface, and status type roles"',
   'V1 established the structure. V2 clarified the loop.',
-  'Supporting chronology',
-  'These materials show two stages of the concept: original V1 screens and selected static states from the earlier V2 direction.',
+
   '<span>04</span>V1 + static V2',
   'A formative project that changed how I approached product design.',
   'Chapter 05',
-  'Final design | Source-faithful remaster',
   'The final remaster brings the app back to its source.',
   'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   '01 Welcome',
@@ -192,10 +190,10 @@ for (const required of [
   'The dashboard keeps progress and milestones visible without crowding the next action.',
   '03 Milestone detail',
   'Expanded tasks preserve context while making completion state easier to scan.',
-  'Source-faithful remaster. Illustrative concept screens.',
+  'Illustrative concept screens.',
   'Earlier static V2 states',
   'The prototype clarified the attention-to-completion loop.',
-  'Earlier V2 direction. Illustrative concept screens.',
+
   'images/pikapp-case-study/v2-today-light-clean.png',
   'images/pikapp-case-study/v2-responsibility-detail-dark-clean.png',
   'images/pikapp-case-study/v2-all-caught-up-light-clean.png',
@@ -227,7 +225,7 @@ for (const requiredExport of [
   'App cyan: Entry and member view',
   'App navy: Structure and detail',
   'White: Fields and reading',
-  'Supporting chronology: These materials show two stages of the concept: original V1 screens and selected static states from the earlier V2 direction.',
+
 ]) {
   if (!publicExport.includes(requiredExport)) fail(`public Pi Kapp export missing consolidated semantic content: ${requiredExport}`);
 }
@@ -422,7 +420,8 @@ for (const [key, value] of Object.entries(expectedProject)) {
 }
 if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
 if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
-if (!html.includes('<p class="coda__boundary">Source-faithful remaster. Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (!html.includes('<p class="coda__boundary">Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (html.includes('concept-history') || html.includes('coda__meta')) fail('Pi Kapp page must not restore redundant chronology or final-remaster kicker chrome');
 
 if (failures.length) {
   console.error('PI KAPP PAGE INTEGRATION CONTRACT: FAIL');

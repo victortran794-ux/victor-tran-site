@@ -108,9 +108,7 @@ Milestone states
 
 Bottom navigation
 
-V1 established the member flow. The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
-
-Supporting chronology: These materials show two stages of the concept: original V1 screens and selected static states from the earlier V2 direction.
+The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
 
 Earlier concept sequence
 
@@ -118,17 +116,13 @@ The sequence shows how the original identity, member dashboard, and milestone de
 
 Earlier static V2 states
 
-Three states preserve what the interactive build added: orientation, responsibility detail, and a clear ending state. They remain supporting chronology before the final remaster below.
+Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.
 
-Earlier V2 direction. Illustrative concept screens.
+Illustrative concept screens.
 
 Chapter 05
 
-Final design | Source-faithful remaster
-
 The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
-
-Source-faithful remaster. Illustrative concept screens.
 
 This project connected my experience in leadership and communications with a growing interest in product design and research. It was an early attempt to make HQ feel closer to day-to-day chapter life through one member-facing app.
 

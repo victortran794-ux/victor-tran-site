@@ -32,7 +32,14 @@ const staticStates = [
 
 expect(html.includes('<span>04</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
 expect(html.includes('Earlier static V2 states'), 'Chapter 04 must identify the V2 evidence as static historical states.');
-expect(html.includes('Earlier V2 direction. Illustrative concept screens.'), 'V2 history must carry one natural viewer-facing boundary.');
+expect(count(html, '<p class="v2-history__boundary">Illustrative concept screens.</p>') === 1, 'V2 history must carry one concise viewer-facing boundary.');
+expect(count(html, '<p class="coda__boundary">Illustrative concept screens.</p>') === 1, 'Final remaster must carry one concise viewer-facing boundary.');
+expect(!html.includes('concept-history'), 'Redundant supporting-chronology callout must remain removed.');
+expect(!html.includes('coda__meta'), 'Redundant final-remaster metadata kicker must remain removed.');
+expect(html.includes('The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.'), 'Chapter 04 must keep the concise V2 transition.');
+expect(html.includes('Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.'), 'V2 history must keep its concise evidence summary.');
+expect(!html.includes('V1 established the member flow.'), 'Chapter 04 must not repeat the V1-established claim from its heading.');
+expect(!html.toLowerCase().includes('supporting chronology'), 'Viewer-facing copy must not restore internal chronology language.');
 expect(count(html, 'class="v2-history__screen"') === 3, 'Chapter 04 must contain exactly three static V2 history screens.');
 expect(html.includes('aria-label="Earlier V2 orientation, responsibility-detail, and completion states" tabindex="0"'), 'Static V2 history must expose a keyboard-scrollable labeled sequence.');
 for (const [filename, step, visibleText] of staticStates) {

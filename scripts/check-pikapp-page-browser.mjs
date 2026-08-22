@@ -283,7 +283,7 @@ try {
       assert(identityColumnCount(state.identity.heroColumns)===(viewport.width<=800?1:2),`identity hero columns drifted at ${viewport.label}: ${state.identity.heroColumns}`);
       assert(identityColumnCount(state.identity.paletteColumns)===(viewport.width<=600?1:viewport.width<=1050?3:5),`identity palette columns drifted at ${viewport.label}: ${state.identity.paletteColumns}`);
       assert(identityColumnCount(state.identity.specimenColumns)===(viewport.width<=800?1:12),`identity specimen columns drifted at ${viewport.label}: ${state.identity.specimenColumns}`);
-      assert(state.boundary==='Source-faithful remaster. Illustrative concept screens.','boundary copy drifted');
+      assert(state.boundary==='Illustrative concept screens.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
       assert(state.remasterScreens.length===3&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 Welcome|02 Member view|03 Milestone detail',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.personaLabels.join('|')==='Associate member|Chapter secretary|Graduating senior',`member journey lost its role-based persona labels: ${JSON.stringify(state.personaLabels)}`);
