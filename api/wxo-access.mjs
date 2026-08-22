@@ -11,10 +11,27 @@ const TRUSTED_ORIGIN_REDIRECTS = new Map([
   ['https://www.victortrandesigns.com', 'https://victortrandesigns.com'],
 ]);
 
+function isAcceptedOrigin(origin, requestOrigin) {
+  return origin === requestOrigin || TRUSTED_ORIGIN_REDIRECTS.get(requestOrigin) === origin;
+}
+
 function hasAcceptedOrigin(request) {
   const suppliedOrigin = request.headers.get('origin');
   const requestOrigin = new URL(request.url).origin;
-  return suppliedOrigin === requestOrigin || TRUSTED_ORIGIN_REDIRECTS.get(requestOrigin) === suppliedOrigin;
+  if (suppliedOrigin && suppliedOrigin !== 'null') {
+    return isAcceptedOrigin(suppliedOrigin, requestOrigin);
+  }
+
+  const fetchSite = request.headers.get('sec-fetch-site');
+  if (fetchSite !== 'same-origin' && fetchSite !== 'same-site') return false;
+
+  const referrer = request.headers.get('referer');
+  if (!referrer) return false;
+  try {
+    return isAcceptedOrigin(new URL(referrer).origin, requestOrigin);
+  } catch {
+    return false;
+  }
 }
 
 function safeNext(value) {

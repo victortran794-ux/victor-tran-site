@@ -119,6 +119,45 @@ const crossOriginResponse = await handleAccessRequest(
 assert.equal(crossOriginResponse.status, 403, 'cross-origin login POST must be rejected');
 assert.equal(crossOriginResponse.headers.has('set-cookie'), false, 'cross-origin POST must not set a cookie');
 
+function safariNavigationRequest(overrides = {}) {
+  return new Request('https://www.victortrandesign.com/api/wxo-access', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      referer: 'https://www.victortrandesign.com/wxo-access?next=%2Fwxo-canvas',
+      'sec-fetch-site': 'same-origin',
+      ...overrides,
+    },
+    body: new URLSearchParams({ password: 'wrong-password', next: '/wxo-canvas' }),
+  });
+}
+
+const missingOriginSafariResponse = await handleAccessRequest(
+  safariNavigationRequest(),
+  { passwordVerifier, sessionSecret: secret, now },
+);
+assert.equal(missingOriginSafariResponse.status, 303, 'same-origin Safari navigation without Origin must reach password verification');
+assert.equal(missingOriginSafariResponse.headers.has('set-cookie'), false, 'invalid Safari password must not set a cookie');
+
+const opaqueOriginSafariResponse = await handleAccessRequest(
+  safariNavigationRequest({ origin: 'null' }),
+  { passwordVerifier, sessionSecret: secret, now },
+);
+assert.equal(opaqueOriginSafariResponse.status, 303, 'same-origin Safari navigation with opaque Origin must reach password verification');
+
+for (const [label, overrides] of [
+  ['cross-site fetch metadata', { 'sec-fetch-site': 'cross-site' }],
+  ['untrusted referrer', { referer: 'https://attacker.invalid/wxo-access' }],
+  ['untrusted explicit origin', { origin: 'https://attacker.invalid' }],
+]) {
+  const response = await handleAccessRequest(
+    safariNavigationRequest(overrides),
+    { passwordVerifier, sessionSecret: secret, now },
+  );
+  assert.equal(response.status, 403, `${label} must not use Safari fallback`);
+  assert.equal(response.headers.has('set-cookie'), false, `${label} must not set a cookie`);
+}
+
 const trustedAliasResponse = await handleAccessRequest(
   new Request('https://www.victortrandesign.com/api/wxo-access', {
     method: 'POST',
