@@ -158,6 +158,24 @@ for (const [label, overrides] of [
   assert.equal(response.headers.has('set-cookie'), false, `${label} must not set a cookie`);
 }
 
+let rejectionDiagnostic = '';
+const originalWarn = console.warn;
+console.warn = (...parts) => { rejectionDiagnostic = parts.join(' '); };
+try {
+  await handleAccessRequest(
+    safariNavigationRequest({ origin: 'https://attacker.invalid' }),
+    { passwordVerifier, sessionSecret: secret, now },
+  );
+} finally {
+  console.warn = originalWarn;
+}
+assert.equal(
+  rejectionDiagnostic,
+  '[wxo-origin-reject] origin=mismatch referer=accepted fetchSite=same-origin',
+  'origin rejection must log only bounded diagnostic categories',
+);
+assert.doesNotMatch(rejectionDiagnostic, /password|attacker\.invalid|wxo-access/iu, 'origin diagnostics must not log request values');
+
 const trustedAliasResponse = await handleAccessRequest(
   new Request('https://www.victortrandesign.com/api/wxo-access', {
     method: 'POST',
