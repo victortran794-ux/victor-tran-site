@@ -161,7 +161,7 @@ for (const required of [
   'identity-board__section identity-board__section--mark',
   'identity-board__section identity-board__section--components',
   'identity-board__card',
-  'The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept.',
+  'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used in three remastered concept screens.',
   'Brand foundation and interface layers',
   '>Brand blue</h4>',
   '>Brand gold</h4>',

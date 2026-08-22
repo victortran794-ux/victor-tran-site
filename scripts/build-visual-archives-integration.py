@@ -242,7 +242,7 @@ ART_PRIMARY = r'''
           <div>
             <p class="section-label archive-kicker label-artwork">Art &amp; Illustration</p>
             <h1 class="archive-title" id="art-archive-title">An open studio wall.</h1>
-            <p class="archive-lede">Come check out a variety of my digital and traditional artwork.</p>
+            <p class="archive-lede">Digital and traditional work spanning character illustration, paintings, and personal series.</p>
           </div>
         </header>
 
@@ -344,7 +344,7 @@ GRAPHIC_PRIMARY = r'''
           <div>
             <p class="section-label archive-kicker label-design">Graphic Design</p>
             <h1 class="archive-title" id="graphic-archive-title">Graphics. Design. Print.</h1>
-            <p class="archive-lede">A fun plethora of side projects, explorations, and collaborations with neat people and ideas.</p>
+            <p class="archive-lede">Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.</p>
           </div>
           <figure class="archive-frame">
             <img loading="eager" fetchpriority="high" decoding="async" src="images/logos-2.jpg" width="1600" height="960" alt="Chantico's Flame illustration">

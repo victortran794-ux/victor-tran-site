@@ -64,7 +64,7 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-The final remaster draws from the original app files, the archived Pi Kappa Phi identity, and the strongest interface decisions across the concept. This chapter shows only the pieces used in the final three screens.
+The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used in three remastered concept screens.
 
 Pi Kapp App
 

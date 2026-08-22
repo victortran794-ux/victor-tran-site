@@ -39,7 +39,7 @@ I learned the technical system, then used research, product design, and visual s
 
 ## Body Copy
 
-I learned the technical system through documentation and product exploration, then applied that understanding through concept-tested flows, visual adaptation, and reusable illustration methods.
+I applied that understanding through concept-tested flows, visual adaptation, and reusable illustration methods.
 
 Events, metrics, and logs moved through a shared technical environment.
 
@@ -103,7 +103,7 @@ What changed
 
 I ramped up quickly in my technical knowledge and learned to apply it through illustrations, narratives, and presentations that made technical ideas easier to understand.
 
-Design can save time by reducing uncertainty, uncover valuable information, and turn what we learn into something useful and compelling. It can also make room for great, neat things that bring delight to a technical experience.
+Design can reduce uncertainty, surface useful information, and make technical work easier to act on. It can also bring moments of delight to the experience.
 
 ## Lists And Tags
 

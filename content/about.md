@@ -9,14 +9,14 @@ title: "About Victor Tran"
 source: "about.html"
 url: "/about"
 category: ""
-description: "About Victor Tran. Visual Designer at IBM, Austin TX."
+description: "Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Austin, Texas."
 ---
 
 # About Victor Tran
 
 ## Description
 
-About Victor Tran. Visual Designer at IBM, Austin TX.
+Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Austin, Texas.
 
 ## Section Headings
 
@@ -35,7 +35,7 @@ About Victor Tran. Visual Designer at IBM, Austin TX.
 
 ## Body Copy
 
-Hi! I’m Victor, or Vic. I’m a visual designer at IBM working on IBM watsonx Orchestrate. I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows, and I work closely with UX, product, and development partners through implementation.
+Hi! I’m Victor, or Vic. I’m a visual designer at IBM working on IBM watsonx Orchestrate. I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows. I work closely with UX, product, and development partners through implementation.
 
 Before IBM watsonx Orchestrate, I designed and evaluated IBM Cloud Observability workflows from 2021 through 2023. My broader background spans design systems, brand systems, responsive web, editorial design, and illustration. Earlier, I grew from graphic designer into communications leadership at Pi Kappa Phi and The Ability Experience.
 

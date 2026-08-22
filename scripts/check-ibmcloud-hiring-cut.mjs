@@ -59,7 +59,7 @@ for (const phrase of [
   'collaborative workgroup',
   'early trial of moving the illustration workflow from Sketch to Figma',
   'Research, exploration, and moments of delight.',
-  'Design can save time by reducing uncertainty, uncover valuable information, and turn what we learn into something useful and compelling.',
+  'Design can reduce uncertainty, surface useful information, and make technical work easier to act on. It can also bring moments of delight to the experience.',
   'images/ibm-thumb-light.png',
   'images/ibm-thumb-dark.png',
   'images/ibm-cloud-routing-architecture.png',
