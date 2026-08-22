@@ -172,6 +172,10 @@ html[data-theme='dark'] .workflow-pages {
   outline-offset: 3px;
 }
 
+.wxo-chapter-panel {
+  scroll-margin-top: 72px;
+}
+
 .wxo-chapter-panel[hidden] {
   display: none;
 }

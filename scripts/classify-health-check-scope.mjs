@@ -111,10 +111,12 @@ export function classifyPaths(paths) {
       /^images\/(?:ability|abex|thumb-abex)/,
     ],
     wxo: [
-      /^(?:wxo-canvas|document-processing)\.html$/,
-      /^(?:css|js)\/(?:wxo-|password-gate)/,
-      /^scripts\/check-wxo/,
+      /^(?:wxo-canvas|wxo-access|document-processing)\.html$/,
+      /^(?:css\/password-gate\.css|js\/wxo-)/,
+      /^(?:middleware\.ts|api\/wxo-access\.mjs|lib\/(?:protected-(?:access|middleware)|password-verifier)\.mjs)$/,
+      /^scripts\/(?:check-wxo|test-protected-delivery)/,
       /^images\/wxo-canvas/,
+      /^protected\/wxo\//,
       /^case-studies\/document-processing\.md$/,
     ],
   };
@@ -127,7 +129,8 @@ export function classifyPaths(paths) {
 
   const isDeployablePath = path =>
     /^[^/]+\.html$/.test(path) ||
-    /^(?:css|js|images|pikappapp)\//.test(path) ||
+    /^(?:css|js|images|pikappapp|protected\/wxo)\//.test(path) ||
+    /^(?:middleware\.ts|api\/wxo-access\.mjs|lib\/(?:protected-(?:access|middleware)|password-verifier)\.mjs)$/.test(path) ||
     /^data\/(?:projects|site-shell|content-export-policy)\.json$/.test(path) ||
     path === 'vercel.json' ||
     path === 'sitemap.xml' ||

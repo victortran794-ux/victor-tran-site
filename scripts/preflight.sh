@@ -58,6 +58,7 @@ run_required "Pi Kapp static simplification contract" node scripts/check-pikapp-
 run_required "Pi Kapp approved page integration contract" npm run check:pikapp-page
 run_required "IBM Patterns approved page integration contract" npm run check:ibm-patterns
 run_required "Gallery motion system contract" npm run check:gallery-motion-system
+run_required "Server-side protected delivery contract" npm run check:protected-delivery
 run_required "wxO Canvas and Document Processing integration contract" npm run check:wxo-document-processing
 run_required "Route 02 homepage integration contract" npm run check:route02-homepage
 run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs

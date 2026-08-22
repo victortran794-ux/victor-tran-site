@@ -147,13 +147,20 @@ class Cdp {
     return result.result.value;
   }
   async navigate(url) {
-    const loaded = this.event('Page.loadEventFired');
+    const loaded = this.event('Page.loadEventFired', 45000);
     await this.call('Page.navigate', { url });
-    await loaded;
+    try {
+      await loaded;
+    } catch (error) {
+      const state = await this.evaluate(`({ href: location.href, readyState: document.readyState })`);
+      if (state.href !== url || state.readyState !== 'complete') {
+        throw new Error(`${url}: ${error.message}; state=${JSON.stringify(state)}`);
+      }
+    }
     await delay(180);
   }
   async reload() {
-    const loaded = this.event('Page.loadEventFired');
+    const loaded = this.event('Page.loadEventFired', 45000);
     await this.call('Page.reload', { ignoreCache: true });
     await loaded;
     await delay(180);
@@ -197,193 +204,71 @@ try {
     await cdp.call('Emulation.setDeviceMetricsOverride', {
       width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile,
     });
-    for (const spec of protectedPages) {
-    await cdp.navigate(`${baseUrl}/${spec.file}`);
-    await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
-    await cdp.reload();
+    await cdp.navigate(`${baseUrl}/wxo-access.html?next=%2Fwxo-canvas`);
     const gate = await cdp.evaluate(`({
-      locked:document.documentElement.classList.contains('locked'),
-      gate:Boolean(document.getElementById('vtd-gate')),
       dialog:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-modal'),
       labelledBy:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-labelledby'),
       titleId:document.querySelector('.vtd-gate-title')?.id,
       describedBy:document.querySelector('#vtd-gate [role="dialog"]')?.getAttribute('aria-describedby'),
       descriptionId:document.querySelector('.vtd-gate-body')?.id,
       errorLive:document.querySelector('.vtd-gate-error')?.getAttribute('aria-live'),
-      backgroundInert:[...document.body.children].filter((element)=>element.id!=='vtd-gate').every((element)=>element.inert),
+      errorHidden:document.querySelector('.vtd-gate-error')?.hidden,
       focused:document.activeElement?.id,
-      contentHidden:getComputedStyle(document.querySelector('main')).visibility==='hidden',
-      viewport:[innerWidth,innerHeight],
+      method:document.querySelector('.vtd-gate-form')?.method,
+      action:new URL(document.querySelector('.vtd-gate-form')?.action).pathname,
+      next:document.querySelector('input[name="next"]')?.value,
       overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
-      cardRect:(()=>{const rect=document.querySelector('.vtd-gate-card').getBoundingClientRect();return {left:rect.left,right:rect.right,top:rect.top,width:rect.width}})()
+      card:(()=>{const r=document.querySelector('.vtd-gate-card').getBoundingClientRect();return {left:r.left,right:r.right}})()
     })`);
-    assert(gate.locked && gate.gate && gate.dialog === 'true' && gate.labelledBy === gate.titleId &&
-      gate.describedBy === gate.descriptionId &&
-      gate.errorLive === 'assertive' && gate.backgroundInert && gate.focused === 'vtd-gate-input' && gate.contentHidden,
-      `${spec.file}: password gate failed at ${viewport.label} ${JSON.stringify(gate)}`);
-    assert(gate.viewport[0] === viewport.width && gate.viewport[1] === viewport.height && gate.overflow === 0 &&
-      gate.cardRect.left >= 0 && gate.cardRect.right <= viewport.width,
-      `${spec.file}: gate geometry failed at ${viewport.label} ${JSON.stringify(gate)}`);
-
-    await cdp.key('Tab', 'Tab', 9);
-    assert(await cdp.evaluate(`document.activeElement?.classList.contains('vtd-gate-submit')`),
-      `${spec.file}: Tab from password input must focus Unlock`);
-    const submitFocus = await cdp.evaluate(`(()=>{const style=getComputedStyle(document.activeElement);const surface=getComputedStyle(document.querySelector('.vtd-gate'));return {outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth,outlineColor:style.outlineColor,surface:surface.backgroundColor}})()`);
-    assert(submitFocus.outlineStyle !== 'none' && parseFloat(submitFocus.outlineWidth) >= 2 &&
-      contrastRatio(submitFocus.outlineColor, submitFocus.surface) >= 3,
-      `${spec.file}: Unlock focus indicator must have 3:1 contrast at ${viewport.label} ${JSON.stringify(submitFocus)}`);
-    await cdp.key('Tab', 'Tab', 9);
-    const afterUnlockTab = await cdp.evaluate(`({tag:document.activeElement?.tagName,id:document.activeElement?.id,className:document.activeElement?.className,text:document.activeElement?.textContent?.trim()})`);
-    assert(afterUnlockTab.tag === 'A' && afterUnlockTab.text?.includes('Back to portfolio'),
-      `${spec.file}: Tab from Unlock must focus Back to portfolio ${JSON.stringify(afterUnlockTab)}`);
-    await cdp.key('Tab', 'Tab', 9);
-    assert(await cdp.evaluate(`document.activeElement?.tagName==='A'&&Boolean(document.activeElement.closest('.vtd-gate-body'))`),
-      `${spec.file}: forward Tab must wrap from Back to portfolio to Email me`);
-    await cdp.key('Tab', 'Tab', 9);
-    assert(await cdp.evaluate(`document.activeElement?.id==='vtd-gate-input'`),
-      `${spec.file}: Tab from Email me must focus the password input`);
-    await cdp.key('Tab', 'Tab', 9, 8);
-    assert(await cdp.evaluate(`document.activeElement?.tagName==='A'&&Boolean(document.activeElement.closest('.vtd-gate-body'))`),
-      `${spec.file}: Shift+Tab from the password input must focus Email me without leaving the dialog`);
-    const focusVisible = await cdp.evaluate(`(()=>{const style=getComputedStyle(document.activeElement);return {outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth}})()`);
-    assert(focusVisible.outlineStyle !== 'none' && parseFloat(focusVisible.outlineWidth) >= 2,
-      `${spec.file}: keyboard focus must remain visibly outlined at ${viewport.label} ${JSON.stringify(focusVisible)}`);
-
-    await cdp.key('Tab', 'Tab', 9);
-    await cdp.key('Escape', 'Escape', 27);
-    const afterEscape = await cdp.evaluate(`({gate:Boolean(document.getElementById('vtd-gate')),focused:document.activeElement?.id})`);
-    assert(afterEscape.gate && afterEscape.focused === 'vtd-gate-input',
-      `${spec.file}: Escape must not bypass the protected gate ${JSON.stringify(afterEscape)}`);
-
-    await cdp.call('Input.insertText', { text: 'definitely-wrong' });
-    await cdp.key('Enter', 'Enter', 13);
-    await delay(100);
-    const invalid = await cdp.evaluate(`({
-      hidden:document.querySelector('.vtd-gate-error').hidden,
-      text:document.querySelector('.vtd-gate-error').textContent.trim(),
-      focused:document.activeElement?.id,
-      value:document.querySelector('#vtd-gate-input').value
-    })`);
-    assert(!invalid.hidden && invalid.text === 'Incorrect password. Try again.' &&
-      invalid.focused === 'vtd-gate-input' && invalid.value === '',
-      `${spec.file}: invalid password feedback failed ${JSON.stringify(invalid)}`);
-
-    const expectedDigest = Array.from(Buffer.from('577ceca1249a0d345bbc81098c47abe8825294b2cb4724735403188a01a1ade1', 'hex'));
-    await cdp.evaluate(`Object.defineProperty(crypto.subtle,'digest',{configurable:true,value:async()=>new Uint8Array(${JSON.stringify(expectedDigest)}).buffer})`);
-    await cdp.call('Input.insertText', { text: 'accepted-by-test-digest' });
-    await cdp.key('Enter', 'Enter', 13);
-    await delay(380);
-    const unlocked = await cdp.evaluate(`({
-      locked:document.documentElement.classList.contains('locked'),
-      gate:Boolean(document.getElementById('vtd-gate')),
-      mainInert:document.querySelector('main').inert,
-      focused:document.activeElement?.id
-    })`);
-    assert(!unlocked.locked && !unlocked.gate && !unlocked.mainInert && unlocked.focused === 'main-content',
-      `${spec.file}: unlock must restore the underlay and focus main content ${JSON.stringify(unlocked)}`);
-    gateChecks += 1;
+    assert(gate.dialog === 'true' && gate.labelledBy === gate.titleId && gate.describedBy === gate.descriptionId &&
+      gate.errorLive === 'assertive' && gate.errorHidden && gate.focused === 'vtd-gate-input' && gate.method === 'post' &&
+      gate.action === '/api/wxo-access' && gate.next === '/wxo-canvas' && gate.overflow === 0 &&
+      gate.card.left >= 0 && gate.card.right <= viewport.width,
+      `wxo-access.html: gate semantics or geometry failed at ${viewport.label} ${JSON.stringify(gate)}`);
+    for (const expected of ['Unlock', 'Back to portfolio', 'Email me', 'vtd-gate-input']) {
+      await cdp.key('Tab', 'Tab', 9);
+      const focus = await cdp.evaluate(`({id:document.activeElement?.id,text:document.activeElement?.textContent?.trim()})`);
+      assert(focus.id === expected || focus.text?.includes(expected),
+        `wxo-access.html: focus order failed; expected ${expected}, got ${JSON.stringify(focus)}`);
     }
+    await cdp.key('Escape', 'Escape', 27);
+    assert(await cdp.evaluate(`document.activeElement?.id==='vtd-gate-input'`),
+      'Escape must keep focus inside the public gate');
+    await cdp.navigate(`${baseUrl}/wxo-access.html?next=%2Fwxo-canvas&error=1`);
+    const invalid = await cdp.evaluate(`({hidden:document.querySelector('.vtd-gate-error').hidden,text:document.querySelector('.vtd-gate-error').textContent.trim(),focused:document.activeElement?.id})`);
+    assert(!invalid.hidden && invalid.text === 'Incorrect password. Try again.' && invalid.focused === 'vtd-gate-input',
+      `wxo-access.html: server-returned invalid state failed ${JSON.stringify(invalid)}`);
+    gateChecks += 1;
   }
 
-  await cdp.navigate(`${baseUrl}/document-processing.html`);
-  await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
-  await cdp.call('Emulation.setDeviceMetricsOverride', {
-    width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
-  });
-  await cdp.navigate(`${baseUrl}/wxo-canvas.html#document-processing`);
-  const lockedDeepLink = await cdp.evaluate(`({
-    locked:document.documentElement.classList.contains('locked'),
-    gate:Boolean(document.getElementById('vtd-gate')),
-    focused:document.activeElement?.id,
-    scrollY,
-    hash:location.hash,
-    pendingHash:history.state?.vtdProtectedHash || null,
-    historyLength:history.length
-  })`);
-  assert(lockedDeepLink.locked && lockedDeepLink.gate && lockedDeepLink.focused === 'vtd-gate-input' &&
-    lockedDeepLink.scrollY === 0 && lockedDeepLink.hash === '' && lockedDeepLink.pendingHash === '#document-processing',
-    `wxo-canvas.html: locked Document Processing deep link must preserve gate focus without fragment scrolling ${JSON.stringify(lockedDeepLink)}`);
-  await cdp.screenshot('wxo-document-processing-390-locked-deep-link.png');
-
-  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
-  await cdp.reload();
-  const restoredDeepLink = await cdp.evaluate(`({
-    locked:document.documentElement.classList.contains('locked'),
-    gate:Boolean(document.getElementById('vtd-gate')),
-    hash:location.hash,
-    pendingHash:history.state?.vtdProtectedHash || null,
-    current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
-    canvas:!document.querySelector('#canvas').hidden,
-    document:!document.querySelector('#document-processing').hidden,
-    focused:document.activeElement?.id,
-    scrollY,
-    historyLength:history.length,
-    viewportHeight:innerHeight,
-    panelTop:document.querySelector('#document-processing').getBoundingClientRect().top,
-    fixedBottom:Math.max(
-      document.querySelector('.nav').getBoundingClientRect().bottom,
-      document.querySelector('.site-route-status').getBoundingClientRect().bottom
-    )
-  })`);
-  assert(!restoredDeepLink.locked && !restoredDeepLink.gate && restoredDeepLink.hash === '#document-processing' &&
-    restoredDeepLink.pendingHash === null && restoredDeepLink.current === '#document-processing' &&
-    !restoredDeepLink.canvas && restoredDeepLink.document && restoredDeepLink.focused === 'document-processing' &&
-    restoredDeepLink.historyLength === lockedDeepLink.historyLength &&
-    restoredDeepLink.scrollY > 0 && restoredDeepLink.panelTop >= restoredDeepLink.fixedBottom + 8 &&
-    restoredDeepLink.panelTop <= restoredDeepLink.viewportHeight * 0.35,
-    `wxo-canvas.html: unlocked Document Processing deep link must restore its chapter ${JSON.stringify(restoredDeepLink)}`);
-  await cdp.screenshot('wxo-document-processing-390-restored-chapter.png');
-
-  await cdp.navigate(`${baseUrl}/document-processing.html`);
-  await cdp.evaluate(`sessionStorage.removeItem('vtd-unlock')`);
-  await cdp.call('Emulation.setDeviceMetricsOverride', {
-    width: 1280, height: 577, deviceScaleFactor: 1, mobile: false,
-  });
-  await cdp.navigate(`${baseUrl}/wxo-canvas.html#document-processing`);
-  const lockedDesktopDeepLink = await cdp.evaluate(`({
-    locked:document.documentElement.classList.contains('locked'),
-    gate:Boolean(document.getElementById('vtd-gate')),
-    focused:document.activeElement?.id,
-    scrollY,
-    hash:location.hash,
-    pendingHash:history.state?.vtdProtectedHash || null,
-    historyLength:history.length
-  })`);
-  assert(lockedDesktopDeepLink.locked && lockedDesktopDeepLink.gate &&
-    lockedDesktopDeepLink.focused === 'vtd-gate-input' && lockedDesktopDeepLink.scrollY === 0 &&
-    lockedDesktopDeepLink.hash === '' && lockedDesktopDeepLink.pendingHash === '#document-processing',
-    `wxo-canvas.html: desktop locked Document Processing deep link failed ${JSON.stringify(lockedDesktopDeepLink)}`);
-  await cdp.screenshot('wxo-document-processing-1280-locked-deep-link.png');
-
-  await cdp.evaluate(`sessionStorage.setItem('vtd-unlock','ok')`);
-  await cdp.reload();
-  const restoredDesktopDeepLink = await cdp.evaluate(`({
-    locked:document.documentElement.classList.contains('locked'),
-    gate:Boolean(document.getElementById('vtd-gate')),
-    hash:location.hash,
-    pendingHash:history.state?.vtdProtectedHash || null,
-    current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
-    canvas:!document.querySelector('#canvas').hidden,
-    document:!document.querySelector('#document-processing').hidden,
-    focused:document.activeElement?.id,
-    scrollY,
-    historyLength:history.length,
-    viewportHeight:innerHeight,
-    panelTop:document.querySelector('#document-processing').getBoundingClientRect().top,
-    fixedBottom:Math.max(
-      document.querySelector('.nav').getBoundingClientRect().bottom,
-      document.querySelector('.site-route-status').getBoundingClientRect().bottom
-    )
-  })`);
-  assert(!restoredDesktopDeepLink.locked && !restoredDesktopDeepLink.gate &&
-    restoredDesktopDeepLink.hash === '#document-processing' && restoredDesktopDeepLink.pendingHash === null &&
-    restoredDesktopDeepLink.current === '#document-processing' && !restoredDesktopDeepLink.canvas &&
-    restoredDesktopDeepLink.document && restoredDesktopDeepLink.focused === 'document-processing' &&
-    restoredDesktopDeepLink.historyLength === lockedDesktopDeepLink.historyLength &&
-    restoredDesktopDeepLink.scrollY > 0 && restoredDesktopDeepLink.panelTop >= restoredDesktopDeepLink.fixedBottom + 8 &&
-    restoredDesktopDeepLink.panelTop <= restoredDesktopDeepLink.viewportHeight * 0.35,
-    `wxo-canvas.html: desktop unlocked Document Processing deep link failed ${JSON.stringify(restoredDesktopDeepLink)}`);
-  await cdp.screenshot('wxo-document-processing-1280-restored-chapter.png');
+  for (const viewport of [
+    { label: '390', width: 390, height: 844, mobile: true },
+    { label: '1280', width: 1280, height: 577, mobile: false },
+  ]) {
+    await cdp.call('Emulation.setDeviceMetricsOverride', {
+      width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile,
+    });
+    await cdp.navigate(`${baseUrl}/wxo-canvas.html#document-processing`);
+    const deepLink = await cdp.evaluate(`({
+      hash:location.hash,
+      current:document.querySelector('.wxo-chapter-nav [aria-current="true"]')?.getAttribute('href'),
+      canvas:!document.querySelector('#canvas').hidden,
+      document:!document.querySelector('#document-processing').hidden,
+      focused:document.activeElement?.id,
+      scrollY,
+      scrollHeight:document.documentElement.scrollHeight,
+      maxScroll:document.documentElement.scrollHeight-innerHeight,
+      panelAbsoluteTop:document.querySelector('#document-processing').getBoundingClientRect().top+scrollY,
+      viewportHeight:innerHeight,
+      panelTop:document.querySelector('#document-processing').getBoundingClientRect().top,
+      fixedBottom:Math.max(document.querySelector('.nav').getBoundingClientRect().bottom,document.querySelector('.site-route-status').getBoundingClientRect().bottom)
+    })`);
+    assert(deepLink.hash === '#document-processing' && deepLink.current === '#document-processing' && !deepLink.canvas &&
+      deepLink.document && deepLink.focused === 'document-processing' && deepLink.scrollY > 0 &&
+      deepLink.panelTop >= deepLink.fixedBottom + 8 && deepLink.panelTop <= deepLink.viewportHeight * 0.35,
+      `wxo-canvas.html: authenticated deep link failed at ${viewport.label} ${JSON.stringify(deepLink)}`);
+    await cdp.screenshot(`wxo-document-processing-${viewport.label}-authenticated-deep-link.png`);
+  }
 
   let checks = 0;
   let chapterChecks = 0;
@@ -495,7 +380,7 @@ try {
           state.v2BoardGeometry.length===4&&state.v2BoardGeometry.every(({left,right,width,height,renderedRatio,naturalRatio})=>left>=0&&right<=viewport.width&&width>=Math.min(330,viewport.width-40)&&height>0&&Math.abs(renderedRatio-naturalRatio)<0.015)&&
           state.v2Captions.length===4&&state.v2Captions.every(({width,height,visible,textLength})=>visible&&width>=Math.min(330,viewport.width-40)&&height>=44&&textLength>=24)&&
           state.v2InspectionLinks.length===4&&state.v2InspectionLinks.every(({href,target,rel,width,height,imageSrc,labelVisible})=>href===imageSrc&&target==='_blank'&&rel.split(/\s+/).includes('noopener')&&width>=Math.min(330,viewport.width-40)&&height>44&&labelVisible)&&
-          state.v2GridColumns===1&&state.v2PrototypeSequence.published&&state.v2PrototypeSequence.count===1&&state.v2PrototypeSequence.controls&&!state.v2PrototypeSequence.autoplay&&!state.v2PrototypeSequence.loop&&state.v2PrototypeSequence.playsInline&&state.v2PrototypeSequence.preload==='metadata'&&state.v2PrototypeSequence.poster==='assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png'&&state.v2PrototypeSequence.sources===2&&state.v2PrototypeSequence.ready>=1&&state.v2PrototypeSequence.width>=Math.min(300,viewport.width-40)&&state.v2PrototypeSequence.height>0&&state.v2PrototypeSequence.left>=0&&state.v2PrototypeSequence.right<=viewport.width&&state.v2AtCanvasEnd&&
+          state.v2GridColumns===1&&state.v2PrototypeSequence.published&&state.v2PrototypeSequence.count===1&&state.v2PrototypeSequence.controls&&!state.v2PrototypeSequence.autoplay&&!state.v2PrototypeSequence.loop&&state.v2PrototypeSequence.playsInline&&state.v2PrototypeSequence.preload==='metadata'&&state.v2PrototypeSequence.poster==='protected/wxo/assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png'&&state.v2PrototypeSequence.sources===2&&state.v2PrototypeSequence.ready>=1&&state.v2PrototypeSequence.width>=Math.min(300,viewport.width-40)&&state.v2PrototypeSequence.height>0&&state.v2PrototypeSequence.left>=0&&state.v2PrototypeSequence.right<=viewport.width&&state.v2AtCanvasEnd&&
           state.canvasArrangements===7&&state.canvasArrangementsLoaded&&state.canvasIllustrations===4&&state.canvasIllustrationsLoaded&&
           state.canvasPalettePieces===2&&state.canvasPaletteLoaded&&state.canvasWideActivityWidths.length===2&&
           state.canvasFormFrame&&state.canvasFormFrame.natural[0]===900&&state.canvasFormFrame.natural[1]===592&&
@@ -632,8 +517,8 @@ try {
       }
     }
   }
-  assert(gateChecks === protectedPages.length * 2,
-    `expected ${protectedPages.length * 2} protected-gate checks; found ${gateChecks}`);
+  assert(gateChecks === 2,
+    `expected two public-gate viewport checks; found ${gateChecks}`);
   assert(chapterChecks===1, `expected one wxO interactive chapter check; found ${chapterChecks}`);
   assert(cdp.exceptions.length===0, `browser exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(cdp.consoleErrors.length===0, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);

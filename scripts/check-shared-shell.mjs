@@ -21,6 +21,7 @@ const expectedPages = [
   'uigallery.html',
   'wxo-canvas.html',
 ];
+const expectedRootPages = [...expectedPages, 'wxo-access.html'].sort();
 const projectNavigationSnapshot = {
   'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
@@ -103,8 +104,8 @@ if (!fs.existsSync(sharedCssPath)) {
 const actualPages = fs.readdirSync(root)
   .filter((name) => name.endsWith('.html'))
   .sort();
-if (JSON.stringify(actualPages) !== JSON.stringify(expectedPages)) {
-  fail(`root route set changed: expected ${expectedPages.join(', ')}, received ${actualPages.join(', ')}`);
+if (JSON.stringify(actualPages) !== JSON.stringify(expectedRootPages)) {
+  fail(`root route set changed: expected ${expectedRootPages.join(', ')}, received ${actualPages.join(', ')}`);
 }
 
 const navProjects = (manifest.projects || []).filter((project) => project.nav);
@@ -206,7 +207,9 @@ for (const page of expectedPages) {
   const protectedStatus = '<p class="site-route-status"><span>Private case study</span><small>Access required</small></p>';
   if (activeProtected.has(page)) {
     if (!headerBlock.includes(protectedStatus)) fail(`${page} missing fixed protected route status`);
-    if (!html.includes('src="js/password-gate.js"')) fail(`${page} lost its client-side password gate marker`);
+    if (html.includes('src="js/password-gate.js"') || html.includes("sessionStorage.getItem('vtd-unlock')")) {
+      fail(`${page} retained retired client-side authorization logic`);
+    }
     if (!/<meta\s+name="robots"\s+content="noindex,nofollow(?:,[^"]*)?">/i.test(html)) {
       fail(`${page} lost noindex,nofollow`);
     }

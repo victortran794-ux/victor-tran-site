@@ -21,13 +21,17 @@ const expectedSharedPages = [
   'wxo-canvas.html',
 ].sort();
 
+const expectedStandalonePages = [
+  'wxo-access.html',
+].sort();
+
 const rootPages = fs.readdirSync('.')
   .filter(path => path.endsWith('.html'))
   .sort();
 
 assert.deepEqual(
   rootPages,
-  expectedSharedPages,
+  [...expectedSharedPages, ...expectedStandalonePages].sort(),
   'The global theme-control contract must enumerate every root HTML route',
 );
 
@@ -38,6 +42,12 @@ for (const page of expectedSharedPages) {
   assert.match(html, /data-lens="light"[^>]*aria-pressed="(?:true|false)"[^>]*aria-label="Light mode"/, `${page} must retain an accessible Light control`);
   assert.match(html, /data-lens="dark"[^>]*aria-pressed="(?:true|false)"[^>]*aria-label="Dark mode"/, `${page} must retain an accessible Dark control`);
 }
+
+const accessGate = read('wxo-access.html');
+const accessGateScript = read('js/wxo-access.js');
+assert.match(accessGate, /<script\b[^>]*src="js\/wxo-access\.js"/, 'The standalone access gate must load its bounded controller');
+assert.match(accessGateScript, /localStorage\.getItem\('lens'\)\s*===\s*'dark'/, 'The standalone access gate must restore the saved dark theme');
+assert.match(accessGateScript, /setAttribute\('data-theme',\s*'dark'\)/, 'The standalone access gate must apply the saved dark theme');
 
 
 const ruleBody = selector => {
@@ -80,4 +90,4 @@ for (const scopedContentSelector of [
   assert.ok(css.includes(scopedContentSelector), `Route-specific content must remain proof-scoped: ${scopedContentSelector}`);
 }
 
-console.log(`GLOBAL THEME CONTROL CONTRACT: PASS shared_pages=${expectedSharedPages.length} standalone_holdouts=2 proof_content_scoped=3`);
+console.log(`GLOBAL THEME CONTROL CONTRACT: PASS shared_pages=${expectedSharedPages.length} standalone_routes=${expectedStandalonePages.length} proof_content_scoped=3`);

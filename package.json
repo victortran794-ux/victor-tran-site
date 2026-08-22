@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "test:health-check-scope": "node scripts/test-classify-health-check-scope.mjs",
-
     "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
     "check:pikapp-static": "node scripts/check-pikapp-static-simplification.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
@@ -12,6 +11,7 @@
     "check:ibm-patterns": "node scripts/check-ibm-patterns-integration.mjs",
     "check:ibm-patterns-browser": "node scripts/check-ibm-patterns-browser.mjs",
     "check:gallery-motion-system": "node scripts/check-gallery-motion-system.mjs",
+    "check:protected-delivery": "node scripts/test-protected-delivery.mjs",
     "check:wxo-document-processing": "node scripts/check-wxo-document-processing-integration.mjs",
     "check:wxo-document-processing-browser": "node scripts/check-wxo-document-processing-browser.mjs",
     "check:route02-homepage": "node scripts/check-route02-homepage-integration.mjs",
@@ -26,7 +26,6 @@
     "check:sal-browser": "node scripts/check-sal-browser.mjs",
     "check:ability-vico2": "python3 scripts/check-ability-victor-carbon.py",
     "check:ability-browser": "node scripts/check-ability-browser.mjs",
-
     "test:content-export-policy": "node scripts/test-html-to-md.mjs",
     "check:content-export-policy": "node scripts/check-protected-content-exports.mjs",
     "check:final-site-reconciliation": "node scripts/check-final-site-reconciliation.mjs",
@@ -45,5 +44,8 @@
     "check:ui-gallery-browser": "node scripts/check-visual-archives-browser.mjs ui",
     "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs",
     "check:global-theme-control": "node scripts/check-global-theme-control.mjs"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.9.5"
   }
 }

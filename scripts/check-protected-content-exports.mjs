@@ -23,8 +23,8 @@ function hasProtectedGateContract(html) {
     .find(tag => /name\s*=\s*["']robots["']/i.test(tag));
   const content = robotsTag?.match(/content\s*=\s*["']([^"']*)["']/i)?.[1] ?? '';
   const directives = new Set(content.toLowerCase().split(/[\s,]+/).filter(Boolean));
-  const hasClientGate = /password gate|password-overlay|class=["'][^"']*locked/i.test(html);
-  return directives.has('noindex') && directives.has('nofollow') && hasClientGate;
+  const hasProtectedStatus = /class=["'][^"']*site-route-status/i.test(html);
+  return directives.has('noindex') && directives.has('nofollow') && hasProtectedStatus;
 }
 
 let policy;
@@ -67,6 +67,11 @@ const existingPolicySources = protectedPages
   .filter(item => fs.existsSync(path.join(ROOT, item.source)))
   .map(item => item.source)
   .sort();
+const middleware = read('middleware.ts');
+
+if (!middleware.includes("matcher: ['/:path*']")) {
+  fail('middleware matcher must inspect every request so protected page, alias, and media paths cannot bypass authorization');
+}
 
 if (!sameMembers(discoveredGates, existingPolicySources)) {
   fail(`gated HTML and export policy differ: gates=${discoveredGates.join(',')} policy=${existingPolicySources.join(',')}`);
