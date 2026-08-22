@@ -94,13 +94,12 @@ for (const dependency of ['esbuild', 'framer-motion', 'react', 'react-dom', 'tai
   expect(!packageJson.devDependencies?.[dependency], `package.json must remove V2-only dependency ${dependency}.`);
   expect(!packageLock.packages?.[`node_modules/${dependency}`], `package-lock must not restore V2-only dependency ${dependency}.`);
 }
-expect(!packageLock.packages?.['']?.devDependencies, 'package-lock root must not retain V2-only devDependencies.');
 expect(
   JSON.stringify(Object.keys(packageLock.packages?.['']?.dependencies || {}).sort()) === JSON.stringify(['@vercel/functions']),
   'package-lock root dependencies must remain limited to the server-side Vercel boundary.',
 );
 
-for (const forbidden of ['npm ci --ignore-scripts', 'verify:pikapp-demo', 'Install pinned website build tools']) {
+for (const forbidden of ['verify:pikapp-demo', 'Install pinned website build tools']) {
   expect(!preflight.includes(forbidden), `Preflight must remove V2-only step: ${forbidden}`);
   expect(!workflow.includes(forbidden), `Workflow must remove V2-only step: ${forbidden}`);
 }

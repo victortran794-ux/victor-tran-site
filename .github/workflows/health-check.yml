@@ -32,6 +32,7 @@ jobs:
       images: ${{ steps.scope.outputs.images }}
       links: ${{ steps.scope.outputs.links }}
       deployable: ${{ steps.scope.outputs.deployable }}
+      design: ${{ steps.scope.outputs.design }}
       docs: ${{ steps.scope.outputs.docs }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -78,6 +79,15 @@ jobs:
           node-version: "22.22.0"
       - name: Health-check scope classifier fixture
         run: node scripts/test-classify-health-check-scope.mjs
+      - name: Install Design.md dependencies
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.design == 'true'
+        run: npm ci --ignore-scripts
+      - name: Design.md contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.design == 'true'
+        run: |
+          npm run test:design-md-wiring
+          npm run test:design-md
+          npm run check:design-md
 
       - name: Home/global completion contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'

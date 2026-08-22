@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "test:health-check-scope": "node scripts/test-classify-health-check-scope.mjs",
+    "test:design-md": "node scripts/test-design-md-contract.mjs",
+    "check:design-md": "node scripts/check-design-md-contract.mjs",
+    "test:design-md-wiring": "node scripts/test-design-md-wiring.mjs",
     "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
     "check:pikapp-static": "node scripts/check-pikapp-static-simplification.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
@@ -54,5 +57,9 @@
   },
   "dependencies": {
     "@vercel/functions": "^3.9.5"
+  },
+  "devDependencies": {
+    "@google/design.md": "0.4.0",
+    "yaml": "2.9.0"
   }
 }
