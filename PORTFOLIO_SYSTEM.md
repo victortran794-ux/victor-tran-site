@@ -117,8 +117,8 @@ Local helpers:
 
 Checked 2026-08-21:
 
-- GitHub workflow `Site health check` is active and the post-merge run for documentation PR #166 succeeded at merge SHA `25e6e2f23d19457b6ecd76f33962663676e6b23b` under the legacy full-fan-out workflow.
-- This protected Site checks lane replaces that monolithic dispatch with the tested path-aware model above; GitHub PR evidence must confirm both scope selection and full fallback before release.
+- GitHub workflow `Site health check` is active. The post-merge run for Site checks PR #167 succeeded at merge SHA `974ae9d6c2b05710052750a6d6d7bb280d8ef282`, releasing the tested path-aware model above.
+- The post-merge run for Pi Kapp PR #168 succeeded at merge SHA `a922a27fd4c7dcd4bc4cf73ba411dcc4faf882cd`, including Portfolio checks, oversized-image scan, and desktop/mobile Lighthouse jobs.
 - Vercel preview and production status checks remain separate from GitHub Actions. Exact deployment and live custom-domain verification are required for meaningful deployable releases, not documentation-only or workflow-only changes.
 - Branch protection and repository rules remain unchanged.
 - Pi Kapp preserves its original V1 sequence, three selected static V2 states, authored expansion archive, identity evidence, and final remaster without a standalone runtime. The retired demo and system URLs redirect to the relevant case-study chapters; integration/browser contracts, Lychee, Lighthouse, preflight, and deployment containment are reconciled around the stable `/pikappapp` route.

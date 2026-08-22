@@ -161,16 +161,17 @@ for (const phrase of [
   'Document Processing remains a protected chapter inside wxO',
   'Getting In is retired from the public portfolio',
   'Pi Kapp and Heart of the Frozen Void are public and closed',
-  'production-verified through PR #165',
-  '`a13d369780f599efd4b148582bec7a452fe0908c`',
+  'production-verified through PR #168',
+  '`a922a27fd4c7dcd4bc4cf73ba411dcc4faf882cd`',
   'PR #162 evolved the protected wxO story from V1 foundation to V2 studies',
   'PR #163 released the name-first Victor TRAN Homepage hero',
   'PR #164 renamed the public UI Gallery label to Interface Studies',
   'PR #165 expanded Interface Studies with the complete Ekos desktop/mobile pair',
-  'The next bounded implementation candidate is Pi Kapp static-screen simplification',
-  'Preserve the stable `/pikappapp` case-study route',
-  'Remove the standalone runnable V2 demo only after its links, build dependencies, browser contracts, Lighthouse inventory, and generated exports are reconciled',
-  'Site checks and balances is an active governance audit',
+  'PR #167 at `974ae9d6c2b05710052750a6d6d7bb280d8ef282` released the path-aware Site health workflow',
+  'PR #168 retired the standalone Pi Kapp V2 runtime',
+  'No implementation lane is automatically active',
+  'Select the next bounded lane only from fresh source, live-site, interview, or user-priority evidence',
+  'Branch protection and repository rules remain unchanged',
   'Realistic labels, metrics, names, dates, status text, or topology are not proof that a design screen contains live or private records',
   'a fictional-sample-data label never overrides evidence that real client, employee, customer, or operational data is present',
   'KitBitz is tracked separately as an external illustration resource',
@@ -179,10 +180,10 @@ for (const phrase of [
   'Use targeted source intake only; do not repeat a broad asset inventory',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard must state: ${phrase}`);
 
-forbid(docs.dashboard, /No further enhancement lane is queued/i, 'dashboard must not retain the superseded no-enhancement-lane state');
+forbid(docs.dashboard, /next bounded implementation candidate is Pi Kapp|Pi Kapp static-screen simplification is the next|Site checks and balances is (?:an|the) active/i, 'dashboard must not retain completed Pi Kapp or Site checks lanes as active');
 forbid(docs.dashboard, /New authored V1\/V2 Canvas evidence now supports one active protected wxO story lane/i, 'dashboard must not describe the released wxO lane as active');
 forbid(docs.dashboard, /Homepage hero plus Design DNA entry and UI Gallery naming plus approved-artifact review are sequenced behind wxO/i, 'dashboard must not describe the released Home and Interface Studies lanes as queued');
-forbid(docs.dashboard, /no further Pi Kapp work or route is queued/i, 'dashboard must record the approved Pi Kapp simplification candidate');
+forbid(docs.dashboard, /production-verified through PR #159[^\n]*Pi Kapp App|Static-screen simplification candidate/i, 'dashboard project tracker must not retain the completed Pi Kapp candidate');
 forbid(docs.dashboard, /UI Fragments is review-later/i, 'dashboard must not retain UI Fragments as a separate review-later concept');
 forbid(docs.dashboard, /bounded lens-to-DNA comparison is active/i, 'dashboard must not describe the superseded Home lens comparison as active');
 forbid(docs.dashboard, /feat\/vercel-content-alignment/i, 'dashboard must not describe the released Vercel branch as active');
@@ -199,12 +200,12 @@ forbid(docs.dashboard, /(?:remove|reopen|pending)[^\n.]*visible `Light`\s*\/\s*`
 forbid(docs.dashboard, /visible `Copy email` (?:action|wording|treatment)/i, 'dashboard must not present visible Copy email as current or pending');
 forbid(docs.dashboard, /Current known mismatch: the manifest marks IBM Patterns and PCI as public\/indexable\/sitemap-eligible/i, 'dashboard must not present the resolved IBM Patterns/PCI visibility mismatch as current');
 forbid(docs.dashboard, /Active protected V1\/V2 story audit and redesign proposal/i, 'dashboard project tracker must not describe the released wxO lane as active');
-forbid(docs.dashboard, /Pi Kapp App[^\n]*\| No current action;/i, 'dashboard project tracker must record the Pi Kapp simplification candidate');
+forbid(docs.dashboard, /Pi Kapp App[^\n]*\| No current action;/i, 'dashboard project tracker must use the current PR #168 Pi Kapp status and action wording');
 forbid(docs.dashboard, /\| UI Gallery \|[^\n]*Sequenced naming and approved-artifact audit after Home/i, 'dashboard project tracker must not retain the released Interface Studies lane as queued');
 for (const phrase of [
   '| wxO Canvas | production-verified through PR #162',
-  '| Pi Kapp App | production-verified through PR #159',
-  'Static-screen simplification candidate',
+  '| Pi Kapp App | production-verified through PR #168',
+  'No current page action',
   '| Interface Studies | production-verified through PR #165',
 ]) requirePhrase(docs.dashboard, phrase, `dashboard project tracker must state: ${phrase}`);
 
@@ -214,13 +215,23 @@ forbid(directionBrief, /After VicO2 reconciliation, should the existing home-onl
 forbid(directionBrief, /What final sequence should coordinate the homepage, Work menu, and previous and next links after wxO Canvas is considered/i, 'direction brief must not treat the released wxO sequence as unresolved');
 for (const phrase of [
   '### Current bounded next actions',
-  'Pi Kapp static-screen simplification',
-  'Site checks and balances',
-  'production/reset baseline through PR #165',
+  'No implementation lane is automatically active',
+  'production/reset baseline through PR #168',
+  'path-aware Site health through PR #167 at `974ae9d6c2b05710052750a6d6d7bb280d8ef282`',
+  'Select the next bounded lane only after a fresh source, live-site, interview, or user-priority review',
   'Classify privacy from source and provenance rather than realistic-looking interface strings alone',
-  'Does Pi Kapp static-screen simplification preserve the strongest authored evidence',
-  'Which existing checks should be required before merge',
+  'Which bounded route, if any, now has enough new evidence to justify reopening',
+  'Branch protection and repository rules remain unchanged',
 ]) requirePhrase(directionBrief, phrase, `direction brief must state: ${phrase}`);
+forbid(directionBrief, /Pi Kapp static-screen simplification|production\/reset baseline through PR #165|Which existing checks should be required before merge/i, 'direction brief must not retain completed lanes as current questions or actions');
+
+for (const phrase of [
+  'post-merge run for Site checks PR #167 succeeded',
+  '`974ae9d6c2b05710052750a6d6d7bb280d8ef282`',
+  'post-merge run for Pi Kapp PR #168 succeeded',
+  '`a922a27fd4c7dcd4bc4cf73ba411dcc4faf882cd`',
+  'Branch protection and repository rules remain unchanged',
+]) requirePhrase(docs.system, phrase, `portfolio system health notes must state: ${phrase}`);
 for (const phrase of [
   'PR #127 established the accessible icon-only theme control',
   'PR #154 released that shared refinement across live shared-shell routes',
