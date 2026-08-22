@@ -133,12 +133,18 @@ function removeSiteChrome(html) {
     .replace(/<div class="dna-overlay"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/gi, '');
 }
 
+function getExportImageSource(tag) {
+  return getAttribute(tag, 'data-full-src')
+    || getAttribute(tag, 'data-deferred-src')
+    || getAttribute(tag, 'src');
+}
+
 function extractImages(html) {
   const images = [];
 
   for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
     const tag = match[0];
-    const src = getAttribute(tag, 'src');
+    const src = getExportImageSource(tag);
     const alt = getAttribute(tag, 'alt');
 
     if (!src || !alt) continue;
@@ -196,7 +202,7 @@ function extractHomeProjects(html) {
     const title = firstMatch(block, /<(?:h2|h3)[^>]*class="(?:project-card-title|featured-item-title)[^"]*"[^>]*>([\s\S]*?)<\/(?:h2|h3)>/i);
     const category = firstMatch(block, /<p[^>]*class="section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
     const imgTag = block.match(/<img\b[^>]*>/i)?.[0] ?? '';
-    const image = getAttribute(imgTag, 'src');
+    const image = getExportImageSource(imgTag);
     const alt = getAttribute(imgTag, 'alt');
 
     if (title) {

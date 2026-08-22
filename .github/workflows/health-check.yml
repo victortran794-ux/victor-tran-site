@@ -286,6 +286,11 @@ jobs:
       - name: Responsive image regression check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-responsive-images.mjs
+      - name: Graphic responsive image ownership contracts
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.images == 'true'
+        run: |
+          npm run check:graphic-responsive-images
+          npm run test:responsive-output-bounds
       - name: Gallery media regression check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-gallery-media.mjs
@@ -306,6 +311,10 @@ jobs:
           kill -0 "$SERVER_PID"
           curl --fail --silent http://127.0.0.1:8896/artillustration.html >/dev/null
           SITE_URL=http://127.0.0.1:8896 npm run check:visual-archives-lightbox-browser
+          npm run test:graphic-responsive-network
+          npm run test:graphic-responsive-no-io
+          npm run test:art-responsive-network
+          npm run test:art-responsive-no-io
       - name: Lychee link check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.links == 'true'
         uses: lycheeverse/lychee-action@v2

@@ -423,6 +423,35 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   });
 })();
 
+// ── Deferred responsive gallery images ─────────────
+(function initDeferredResponsiveImages() {
+  const images = Array.from(document.querySelectorAll('.graphic-archive-v2 img[data-deferred-src]'));
+  if (!images.length) return;
+
+  function hydrate(image) {
+    if (!image?.dataset.deferredSrc) return;
+    image.sizes = image.dataset.deferredSizes;
+    image.srcset = image.dataset.deferredSrcset;
+    image.src = image.dataset.deferredSrc;
+    delete image.dataset.deferredSrc;
+    delete image.dataset.deferredSrcset;
+    delete image.dataset.deferredSizes;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        hydrate(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px' });
+    images.forEach((image) => observer.observe(image));
+  } else {
+    images.forEach(hydrate);
+  }
+})();
+
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(

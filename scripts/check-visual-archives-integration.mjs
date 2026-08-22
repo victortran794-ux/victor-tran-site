@@ -366,12 +366,12 @@ const opening = graphicPrimary.match(/<header class="graphic-opening">([\s\S]*?)
 expect(/src="images\/logos-2\.jpg" width="1600" height="960" alt="Chantico's Flame illustration"/.test(opening),
   'graphicgallery.html: open with the standalone Chantico\'s Flame illustration and truthful metadata.');
 const marksStack = graphicPrimary.match(/<div class="graphic-brand-grid">([\s\S]*?)<\/div>/i)?.[1] ?? '';
-expect(/src="images\/graphic-archive-v2\/chantico\.webp" width="2400" height="2000" alt="Three illustrated Chantico bottle applications"/.test(marksStack) &&
-  !marksStack.includes('src="images/logos-2.jpg"') && (graphicPrimary.match(/src="images\/logos-2\.jpg"/g) ?? []).length === 1 &&
-  (graphicPrimary.match(/src="images\/graphic-archive-v2\/chantico\.webp"/g) ?? []).length === 1,
+expect(/(?:\s)data-deferred-src="images\/graphic-archive-v2\/chantico\.webp"/.test(marksStack) && marksStack.includes('alt="Three illustrated Chantico bottle applications"') &&
+  (marksStack.match(/(?:\s)src="images\/logos-2\.jpg"/g) ?? []).length === 0 && (graphicPrimary.match(/(?:\s)src="images\/logos-2\.jpg"/g) ?? []).length === 1 &&
+  (graphicPrimary.match(/(?:\s)data-deferred-src="images\/graphic-archive-v2\/chantico\.webp"/g) ?? []).length === 1,
   'graphicgallery.html: literally swap Chantico assets so each approved asset appears once in its new position.');
-expect(marksStack.indexOf('src="images/gg-day-of-giving.png"') >= 0 && marksStack.indexOf('src="images/graphic-archive-v2/dog.webp"') >= 0 &&
-  Math.abs(marksStack.indexOf('src="images/gg-day-of-giving.png"') - marksStack.indexOf('src="images/graphic-archive-v2/dog.webp"')) < 700,
+expect(marksStack.indexOf('data-deferred-src="images/gg-day-of-giving.png"') >= 0 && marksStack.indexOf('data-deferred-src="images/graphic-archive-v2/dog.webp"') >= 0 &&
+  Math.abs(marksStack.indexOf('data-deferred-src="images/gg-day-of-giving.png"') - marksStack.indexOf('data-deferred-src="images/graphic-archive-v2/dog.webp"')) < 1300,
   'graphicgallery.html: keep the Day of Giving event graphic adjacent to its logo study in the visible marks group.');
 const eventsStack = graphicPrimary.match(/<div class="graphic-events">([\s\S]*?)<\/div>/i)?.[1] ?? '';
 expect(!eventsStack.includes('dog.webp') && eventsStack.includes('abex.webp'),
@@ -429,7 +429,7 @@ for (const sglaAsset of [
   'images/graphic-archive-v2/sgla-2024-signage-system.webp',
   'images/graphic-archive-v2/sgla-2024-ballroom-system.webp',
 ]) {
-  expect((sglaStack.match(new RegExp(sglaAsset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) ?? []).length === 1,
+  expect((sglaStack.match(new RegExp(`(?:\\s)data-deferred-src="${sglaAsset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'g')) ?? []).length === 1,
     `graphicgallery.html: SGLA identity section must contain ${sglaAsset} exactly once.`);
 }
 expect(graphic.includes('<p class="graphic-section-kicker">Identity system</p><h2 id="graphic-sgla-title">'),

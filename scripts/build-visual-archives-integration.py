@@ -527,6 +527,36 @@ GRAPHIC_PRIMARY = r'''
 GRAPHIC_PRIMARY = re.sub(r'<figcaption>[\s\S]*?</figcaption>', '', GRAPHIC_PRIMARY)
 GRAPHIC_PRIMARY = re.sub(r'[ \t]+\n', '\n', GRAPHIC_PRIMARY)
 
+GRAPHIC_RESPONSIVE = {
+    'images/logos-2.jpg': ('opening', [480, 768, 1200]), 'images/gg-edc-1.jpg': ('half', [320, 480]),
+    'images/gg-edc-0.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-2.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-3.jpg': ('half', [480, 768, 1280]),
+    'images/thumb-sgla.webp': ('third', [320, 480, 768]), 'images/graphic-archive-v2/sgla-2024-identity-development.webp': ('feature', [480, 768, 1200]), 'images/graphic-archive-v2/sgla-2023-brand-guidelines.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-ballroom-system.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-signage-system.webp': ('full', [768, 1280, 2048]),
+    **{f'images/gg-slides-{number}.jpg': ('slides', [320, 480, 640]) for number in range(1, 17)},
+    'images/gg-day-of-giving.png': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/dog.webp': ('third', [480, 768, 1024]), 'images/gg-ibm-fan.jpg': ('feature', [480, 1024, 1600]), 'images/logos-1.jpg': ('full', [768, 1280, 2048]), 'images/graphic-archive-v2/chantico.webp': ('third', [480, 768, 1024]), 'images/logos-3.jpg': ('third', [480, 768, 1024]), 'images/logos-4.jpg': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/abex.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/sc56-instagram-panel-series.webp': ('wide', [480, 768, 1280]), 'images/graphic-archive-v2/ibm-paltron-illustration-system.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/wxo-illustration-system.webp': ('wide', [480, 768, 1280]), 'images/gg-illus-1.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-2.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-3.jpg': ('illustration', [320, 480, 768]), 'images/gg-infographic.jpg': ('full', [768, 1280, 2048]),
+}
+GRAPHIC_SIZES = {
+    'opening': '(max-width: 720px) calc(100vw - 40px), (max-width: 1600px) calc(61.75vw - 62px), 926px', 'half': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(50vw - 60px), 740px', 'third': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(33.333vw - 48px), 485px', 'feature': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(66.667vw - 104px), 995px', 'full': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(100vw - 96px), 1504px', 'slides': '(max-width: 720px) calc((100vw - 48px) / 2), (max-width: 900px) calc((100vw - 72px) / 4), (max-width: 1199px) calc((100vw - 120px) / 4), (max-width: 1600px) calc((100vw - 128px) / 5), 294px', 'tall': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(41.667vw - 78px), 589px', 'wide': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(58.333vw - 114px), 851px', 'illustration': '(max-width: 720px) calc((100vw - 56px) / 2), (max-width: 1600px) calc(25vw - 42px), 358px',
+}
+def responsive_graphic_image(match: re.Match) -> str:
+    tag = match.group(0)
+    source_match = re.search(r'\bsrc="([^"]+)"', tag)
+    source = source_match.group(1) if source_match else ''
+    if source not in GRAPHIC_RESPONSIVE:
+        return tag
+    profile, widths = GRAPHIC_RESPONSIVE[source]
+    stem = Path(source).stem
+    original_width = re.search(r'\bwidth="(\d+)"', tag).group(1)
+    srcset = ', '.join([*(f'images/responsive/graphic/{stem}-w{width}.webp {width}w' for width in widths), f'{source} {original_width}w'])
+    thumb = f'images/responsive/graphic/{stem}-w{widths[0]}.webp'
+    if 'loading="eager"' in tag:
+        return tag[:-1] + f' srcset="{srcset}" sizes="{GRAPHIC_SIZES[profile]}" data-full-src="{source}" data-thumb-src="{thumb}">'
+    deferred_tag = tag.replace(f'src="{source}"', f'src="{RESPONSIVE_PLACEHOLDER}"', 1)
+    return deferred_tag[:-1] + (
+        f' data-deferred-src="{source}" data-deferred-srcset="{srcset}" '
+        f'data-deferred-sizes="{GRAPHIC_SIZES[profile]}" data-full-src="{source}" data-thumb-src="{thumb}">'
+    )
+GRAPHIC_PRIMARY = re.sub(r'<img\b[^>]*>', responsive_graphic_image, GRAPHIC_PRIMARY)
+
 
 def validate_assets(mapping: dict[str, str], target_name: str) -> None:
     target = ROOT / 'images' / target_name

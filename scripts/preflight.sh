@@ -54,6 +54,12 @@ run_required "PCI claims and publication contract" npm run check:pci-claims-prot
 run_required "Star & Lamp bounded revision contract" npm run check:sal-vico2
 run_required "Ability Experience bounded sequence contract" npm run check:ability-vico2
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
+run_required "Graphic responsive-image ownership contract" npm run check:graphic-responsive-images
+run_required "Responsive output ownership mutation" npm run test:responsive-output-bounds
+run_required "Graphic future-request mutation" npm run test:graphic-responsive-network
+run_required "Graphic no-observer fallback" npm run test:graphic-responsive-no-io
+run_required "Art future-request mutation" npm run test:art-responsive-network
+run_required "Art no-observer fallback" npm run test:art-responsive-no-io
 run_required "Gallery media regression check" node scripts/check-gallery-media.mjs
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs
 run_required "Pi Kapp static simplification contract" node scripts/check-pikapp-static-simplification.mjs
