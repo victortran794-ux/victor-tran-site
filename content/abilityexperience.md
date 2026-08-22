@@ -9,14 +9,14 @@ title: "The Ability Experience"
 source: "abilityexperience.html"
 url: "/abilityexperience"
 category: "Brand Identity & Collateral"
-description: "Empowering social change through accessible design. Brand identity and collateral for The Ability Experience."
+description: "Brand identity and collateral for The Ability Experience’s 40th anniversary."
 ---
 
 # The Ability Experience
 
 ## Description
 
-Empowering social change through accessible design. Brand identity and collateral for The Ability Experience.
+Brand identity and collateral for The Ability Experience’s 40th anniversary.
 
 ## Metadata
 
@@ -43,7 +43,7 @@ Source thesis
 
 The Ability Experience is the philanthropy of Pi Kappa Phi Fraternity, connecting student members with people with disabilities through cycling events and community programs. For the organization's 40th anniversary, I built an iconography system, an illustrated commemorative print, and cycling kits worn by nearly 100 student riders traveling coast to coast.
 
-The illustrated print shows the origins of the philanthropy and tells the story of multiple volunteer projects from across the country. Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode from the West Coast to Washington D.C.
+The illustrated print shows the philanthropy’s origins and volunteer projects from across the country. The same iconography carried into cycling kits worn by riders on the journey from the West Coast to Washington, D.C.
 
 02 / Identity system
 
@@ -63,11 +63,11 @@ The identity moved into a two-sided recruitment piece that paired program storie
 
 03 / Cycling kits
 
-Each summer kit sets the branding standard for The Ability Experience's team events.
+The identity carried into cycling kits for The Ability Experience’s summer events.
 
 Applied identity
 
-For each new year of team summer events, The Ability Experience designs a cycling kit that sets a branding standard for the summer of team events. Incorporating safety feature standards, these cycling kits are used during The Ability Experience summer team events Gear Up Florida and the Journey of Hope.
+The cycling kits carried the anniversary iconography into Gear Up Florida and Journey of Hope and incorporated safety-feature standards.
 
 ## Images
 

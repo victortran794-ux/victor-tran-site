@@ -86,11 +86,11 @@ def main() -> int:
 
     # Existing public narrative must not silently disappear.
     required_copy = [
-        "Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.",
-        "A century-old fraternity magazine, redrawn into an award-winning publication. Five years of issues, art direction, and editorial design.",
+        "I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.",
+        "Five years of issues, art direction, and editorial design.",
         '"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity\'s First Lady, in my last issue as creative director.',
-        "From rinse-and-repeat brochure to industry award winner.",
-        "First published in the fall of 1909, the Star &amp; Lamp is the magazine of Pi Kappa Phi Fraternity and is produced in-house.",
+        "My role grew from primary designer to creative director while I continued designing.",
+        "First published in fall 1909, Star &amp; Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.",
         "Five years of issues, archived in full on Issuu. Click any cover to read the issue.",
         "View the complete issue archive",
         "Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.",

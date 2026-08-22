@@ -44,6 +44,8 @@ run_required "Path-aware health-check scope fixture" npm run test:health-check-s
 
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "About semantic-heading contract" node scripts/check-about-semantics.mjs
+run_required "Approved full-site copy sweep self-test" node scripts/test-approved-copy-sweep.mjs
+run_required "Approved full-site copy sweep contract" node scripts/check-approved-copy-sweep.mjs
 run_required "Public IBM Cloud hiring-cut contract" node scripts/check-ibmcloud-hiring-cut.mjs
 run_required "Public archive-route contract" npm run check:public-archive-routes
 run_required "Production-host regression check" node scripts/check-production-host.mjs

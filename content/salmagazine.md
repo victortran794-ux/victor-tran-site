@@ -9,18 +9,18 @@ title: "Star & Lamp"
 source: "salmagazine.html"
 url: "/salmagazine"
 category: "Art Direction & Layout Design"
-description: "Modernizing a century-old publication. Layout and art direction for the official Pi Kappa Phi magazine."
+description: "Five years of layout and art direction for Pi Kappa Phi’s official magazine."
 ---
 
 # Star & Lamp
 
 ## Description
 
-Modernizing a century-old publication. Layout and art direction for the official Pi Kappa Phi magazine.
+Five years of layout and art direction for Pi Kappa Phi’s official magazine.
 
 ## Page Intro
 
-Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.
+I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.
 
 ## Metadata
 
@@ -39,15 +39,15 @@ Modernizing a century-old publication. I led the layout and art direction for th
 
 ## Body Copy
 
-A century-old fraternity magazine, redrawn into an award-winning publication. Five years of issues, art direction, and editorial design.
+Five years of issues, art direction, and editorial design.
 
 01 / Redrawing a legacy
 
-From rinse-and-repeat brochure to industry award winner.
+My role grew from primary designer to creative director while I continued designing.
 
 Publication context
 
-First published in the fall of 1909, the Star & Lamp is the magazine of Pi Kappa Phi Fraternity and is produced in-house. As the official publication of the organization, it serves as a forum of communication to educate, inspire, and move members to action on fraternity, Greek, and men's issues. From primary designer to creative director (while still designing), this magazine evolved into an industry award-winning publication.
+First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.
 
 "To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, in my last issue as creative director.
 

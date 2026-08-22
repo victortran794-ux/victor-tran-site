@@ -143,7 +143,7 @@
     "source": "about.html",
     "url": "/about",
     "category": "",
-    "description": "About Victor Tran. Visual Designer at IBM, Austin TX.",
+    "description": "Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Austin, Texas.",
     "contentFile": "content/about.md",
     "headings": [
       "What I’m doing now",
@@ -451,7 +451,7 @@
     "source": "abilityexperience.html",
     "url": "/abilityexperience",
     "category": "Brand Identity & Collateral",
-    "description": "Empowering social change through accessible design. Brand identity and collateral for The Ability Experience.",
+    "description": "Brand identity and collateral for The Ability Experience’s 40th anniversary.",
     "contentFile": "content/abilityexperience.md",
     "headings": [
       "One moment, one connected story.",
@@ -511,7 +511,7 @@
     "source": "salmagazine.html",
     "url": "/salmagazine",
     "category": "Art Direction & Layout Design",
-    "description": "Modernizing a century-old publication. Layout and art direction for the official Pi Kappa Phi magazine.",
+    "description": "Five years of layout and art direction for Pi Kappa Phi’s official magazine.",
     "contentFile": "content/salmagazine.md",
     "headings": [
       "From brochure to publication.",

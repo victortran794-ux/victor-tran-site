@@ -31,7 +31,7 @@ An evolving studio wall of character illustration, personal series, paintings, a
 
 ## Body Copy
 
-Come check out a variety of my digital and traditional artwork.
+Digital and traditional work spanning character illustration, paintings, and personal series.
 
 Selected illustrations
 

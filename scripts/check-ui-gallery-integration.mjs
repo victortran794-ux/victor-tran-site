@@ -29,15 +29,15 @@ need(Boolean(html), 'uigallery.html must exist.');
 need(Boolean(css), 'css/ui-gallery.css must exist.');
 
 for (const token of [
-  '<title>Interface Studies | Victor Tran</title>',
+  '<title>Interface Studies · Victor Tran Design</title>',
   '<link rel="canonical" href="https://www.victortrandesign.com/uigallery">',
   '<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">',
   '<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">',
   '<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">',
   '<body class="visual-archive-page ui-gallery-page">',
   '<main class="page-content" id="main-content" tabindex="-1" data-archive="ui-gallery">',
-  '<meta property="og:title" content="Interface Studies | Victor Tran">',
-  '<meta name="twitter:title" content="Interface Studies | Victor Tran">',
+  '<meta property="og:title" content="Interface Studies · Victor Tran Design">',
+  '<meta name="twitter:title" content="Interface Studies · Victor Tran Design">',
   '<p class="ui-gallery-kicker">Interface Studies</p>',
   '<h1>Interfaces, in view.</h1>',
   'A few interface studies and small experiments I liked enough to keep around.',

@@ -51,8 +51,8 @@ def main():
     need('<strong>Cycling kits</strong>' not in html,'cycling kits must sit under the broader Application stage')
     need('A full brand package built around a single anniversary moment.' in html,'public thesis must remain')
     need('nearly 100 student riders' in html,'existing public rider wording must remain')
-    legacy_print_copy="The illustrated print shows the origins of the philanthropy and tells the story of multiple volunteer projects from across the country. Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode from the West Coast to Washington D.C."
-    need(legacy_print_copy in html,'existing public print-and-rider narrative must remain verbatim')
+    approved_print_copy="The illustrated print shows the philanthropy’s origins and volunteer projects from across the country. The same iconography carried into cycling kits worn by riders on the journey from the West Coast to Washington, D.C."
+    need(approved_print_copy in html,'approved public print-and-rider narrative must remain verbatim')
     need('Brand Designer' in html and 'Identity &amp; Collateral' in html,'public metadata must remain')
 
     required_images=['thumb-abex.webp','abex-print.jpg','abex-40logo.jpg','abex-icons-1.jpg','abex-icons-2.jpg','abex-kits-1.jpg','abex-kits-2.jpg','abex-kits-3.jpg','abex-map.jpg','abex-2019-handout-1.webp','abex-2019-handout-2.webp']

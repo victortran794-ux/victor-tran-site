@@ -202,7 +202,7 @@ if (artDarkPalette) {
     `artillustration.html: Dark kicker orange must meet WCAG AA 4.5:1 contrast (found ${contrastRatio(artDarkPalette[2], artDarkPalette[1]).toFixed(2)}:1).`);
 }
 expect(!primaryHtml(art).includes('—'), 'artillustration.html: primary copy must not use em dashes.');
-expect(primaryHtml(art).includes('Come check out a variety of my digital and traditional artwork.'),
+expect(primaryHtml(art).includes('Digital and traditional work spanning character illustration, paintings, and personal series.'),
   'artillustration.html: use Victor’s approved Art opener verbatim.');
 expect(!primaryHtml(art).includes('I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.'),
   'artillustration.html: remove the superseded Art opener.');
@@ -306,7 +306,7 @@ expect(graphicIndexEntry?.images?.find((image) => image.src === 'images/logos-2.
   'content/site-index.json: preserve the full Chantico opener alt text, including its apostrophe.');
 expect(graphicPrimary.includes('<h1 class="archive-title" id="graphic-archive-title">Graphics. Design. Print.</h1>'),
   'graphicgallery.html: use the approved Graphic title verbatim.');
-expect(graphicPrimary.includes('<p class="archive-lede">A fun plethora of side projects, explorations, and collaborations with neat people and ideas.</p>'),
+expect(graphicPrimary.includes('<p class="archive-lede">Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.</p>'),
   'graphicgallery.html: use the approved Graphic supporting copy verbatim.');
 expect(!graphicPrimary.includes('Graphic Design in motion.') && !graphicPrimary.includes('Identity, print, presentations, and applications. Edited by format, scale, and visual energy.'),
   'graphicgallery.html: remove superseded Graphic opening copy.');

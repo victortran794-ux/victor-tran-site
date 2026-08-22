@@ -35,7 +35,7 @@ An energetic visual archive spanning identity, print, applications, presentation
 
 ## Body Copy
 
-A fun plethora of side projects, explorations, and collaborations with neat people and ideas.
+Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.
 
 Project graphics
 
