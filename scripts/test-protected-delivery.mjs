@@ -145,6 +145,39 @@ const opaqueOriginSafariResponse = await handleAccessRequest(
 );
 assert.equal(opaqueOriginSafariResponse.status, 303, 'same-origin Safari navigation with opaque Origin must reach password verification');
 
+const capturedSafariResponse = await handleAccessRequest(
+  new Request('https://www.victortrandesign.com/api/wxo-access', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      origin: 'null',
+      'sec-fetch-site': 'same-origin',
+    },
+    body: new URLSearchParams({ password: 'wrong-password', next: '/wxo-canvas' }),
+  }),
+  { passwordVerifier, sessionSecret: secret, now },
+);
+assert.equal(capturedSafariResponse.status, 303, 'captured Safari opaque-origin request without Referer must reach password verification');
+assert.equal(capturedSafariResponse.headers.has('set-cookie'), false, 'invalid captured Safari password must not set a cookie');
+
+for (const fetchSite of ['same-site', 'cross-site', 'none', null]) {
+  const headers = {
+    'content-type': 'application/x-www-form-urlencoded',
+    origin: 'null',
+  };
+  if (fetchSite) headers['sec-fetch-site'] = fetchSite;
+  const response = await handleAccessRequest(
+    new Request('https://www.victortrandesign.com/api/wxo-access', {
+      method: 'POST',
+      headers,
+      body: new URLSearchParams({ password: 'wrong-password', next: '/wxo-canvas' }),
+    }),
+    { passwordVerifier, sessionSecret: secret, now },
+  );
+  assert.equal(response.status, 403, `opaque Origin with ${fetchSite || 'missing'} fetch metadata must fail closed`);
+  assert.equal(response.headers.has('set-cookie'), false, 'rejected opaque request must not set a cookie');
+}
+
 for (const [label, overrides] of [
   ['cross-site fetch metadata', { 'sec-fetch-site': 'cross-site' }],
   ['untrusted referrer', { referer: 'https://attacker.invalid/wxo-access' }],
