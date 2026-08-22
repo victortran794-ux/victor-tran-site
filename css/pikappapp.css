@@ -786,7 +786,7 @@ body.archive-open{overflow:hidden;padding-right:var(--archive-scrollbar,0px)}
 
 .pikapp-page .archive-view[aria-pressed="true"]{border:3px solid var(--blue-2)}
 
-.pikapp-page .member-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.5vw,30px);margin:0 0 clamp(44px,6vw,64px)}
+.pikapp-page .member-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.5vw,30px);max-width:1100px;margin:0 auto clamp(44px,6vw,64px)}
 
 .pikapp-page .member-card{--member-accent:var(--blue-2);position:relative;min-height:320px;padding:28px 26px 26px;border:1px solid var(--line);border-top:8px solid var(--member-accent);background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
 
@@ -840,9 +840,9 @@ html[data-theme="dark"] .pikapp-page .member-card__stage{color:#adc5fa}
 
 .pikapp-page .v2-history__head>p:not(.eyebrow){margin:0;color:var(--muted);font-size:17px;line-height:1.65}
 
-.pikapp-page .v2-history__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,34px);align-items:start;max-width:900px;margin-inline:auto}
+.pikapp-page .v2-history__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.5vw,30px);align-items:start;max-width:1100px;margin-inline:auto}
 
-.pikapp-page .v2-history__screen{margin:0;min-width:0}
+.pikapp-page .v2-history__screen{width:min(100%,280px);margin:0;min-width:0;justify-self:center}
 
 .pikapp-page .v2-history__step{display:block;margin-bottom:12px;color:var(--blue-2);font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 
@@ -955,7 +955,7 @@ html[data-theme="dark"] .pikapp-page .coda__meta{color:#adc5fa}
 
 .pikapp-page .coda__boundary{max-width:830px;margin:24px 0 0;padding:0;border:0;background:transparent;color:var(--muted);font-size:13px;line-height:1.55;font-style:italic}
 
-.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.2vw,30px);align-items:start;scroll-margin-top:88px}
+.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.5vw,30px);align-items:start;max-width:1100px;margin-inline:auto;scroll-margin-top:88px}
 
 .pikapp-page .coda__screen{display:grid;margin:0;min-width:0}
 
