@@ -34,6 +34,34 @@ function hasAcceptedOrigin(request) {
   }
 }
 
+function originRejectionDiagnostic(request) {
+  const requestOrigin = new URL(request.url).origin;
+  const suppliedOrigin = request.headers.get('origin');
+  const origin = suppliedOrigin === null
+    ? 'missing'
+    : suppliedOrigin === 'null'
+      ? 'opaque'
+      : isAcceptedOrigin(suppliedOrigin, requestOrigin) ? 'accepted' : 'mismatch';
+
+  const referrerValue = request.headers.get('referer');
+  let referrer = 'missing';
+  if (referrerValue) {
+    try {
+      referrer = isAcceptedOrigin(new URL(referrerValue).origin, requestOrigin) ? 'accepted' : 'mismatch';
+    } catch {
+      referrer = 'malformed';
+    }
+  }
+
+  const suppliedFetchSite = request.headers.get('sec-fetch-site');
+  const knownFetchSites = new Set(['same-origin', 'same-site', 'cross-site', 'none']);
+  const fetchSite = suppliedFetchSite === null
+    ? 'missing'
+    : knownFetchSites.has(suppliedFetchSite) ? suppliedFetchSite : 'other';
+
+  return `origin=${origin} referer=${referrer} fetchSite=${fetchSite}`;
+}
+
 function safeNext(value) {
   const candidate = String(value || '');
   if (/^\/wxo-canvas(?:\.html)?(?:[?#][^\r\n]*)?$/u.test(candidate)) return candidate;
@@ -63,6 +91,7 @@ export async function handleAccessRequest(request, options = {}) {
   }
 
   if (!hasAcceptedOrigin(request)) {
+    console.warn('[wxo-origin-reject]', originRejectionDiagnostic(request));
     return new Response('Access request rejected.', {
       status: 403,
       headers: { 'cache-control': 'no-store' },
