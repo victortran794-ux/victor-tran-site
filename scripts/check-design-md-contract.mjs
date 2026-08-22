@@ -27,6 +27,9 @@ const REQUIRED_PROSE = [
   ['truthful claims/status boundary', 'truthful project status'],
   ['fictional sample-data disclosure', 'fictional sample-data disclosure'],
   ['publication-lane boundary', 'separate channels'],
+  ['project experience modes boundary', 'Project experience modes define three supported levels: Standard, Project-native, and Immersive.'],
+  ['immersive shared-shell boundary', 'Immersive experiences enter and return through the shared portfolio shell.'],
+  ['immersive reduced-motion boundary', 'A reduced-motion alternative must preserve the same essential content and navigation.'],
 ];
 
 const REQUIRED_AUTHORITY_PROSE = [

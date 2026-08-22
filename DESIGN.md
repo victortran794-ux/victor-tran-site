@@ -258,6 +258,18 @@ Project overlays extend the shared shell without replacing it.
 
 A separate project repository should define its own `DESIGN.md`. It may reuse this file's schema and maintenance discipline, but not automatically inherit the portfolio palette or publication model.
 
+## Project Experience Modes
+
+Project experience modes define three supported levels: Standard, Project-native, and Immersive.
+
+- **Standard:** Uses the shared shell and a conventional case-study flow for concise context, evidence, and project navigation.
+- **Project-native:** Extends the shared shell with a distinct project composition, local visual language, and bounded interaction without replacing portfolio orientation.
+- **Immersive:** Begins with clear portfolio context, then may transition into motion-led storytelling, scroll choreography, spatial canvas, video, or a project-specific interactive system. Immersive experiences enter and return through the shared portfolio shell.
+
+Every mode preserves truthful project status, privacy boundaries, semantic navigation, keyboard access, focus behavior, responsive intent, and a clear return path. An immersive implementation must declare its owner, loading strategy, supported viewports, exit behavior, and fallback before it becomes production work. A reduced-motion alternative must preserve the same essential content and navigation.
+
+Do not build a universal immersive framework in advance. Begin with the needs and evidence of a real project. Promote a motion or interaction pattern into the shared system only after a confirmed second use or a demonstrated shared need.
+
 ## Media Delivery
 
 - Substantial raster media should provide viewport-appropriate variants where source quality permits.
