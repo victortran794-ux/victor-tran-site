@@ -32,7 +32,12 @@ function images(html) {
   return [...mainHtml(html).matchAll(/<img\b[^>]*>/gi)].map((match) => {
     const tag = match[0];
     const attr = (name) => tag.match(new RegExp(`${name}="([^"]*)"`, 'i'))?.[1] ?? '';
-    return { tag, src: attr('src'), alt: attr('alt'), width: attr('width'), height: attr('height') };
+    return {
+      tag, src: attr('src'), alt: attr('alt'), width: attr('width'), height: attr('height'),
+      srcset: attr('srcset'), sizes: attr('sizes'), fullSrc: attr('data-full-src'),
+      thumbSrc: attr('data-thumb-src'), deferredSrc: attr('data-deferred-src'),
+      deferredSrcset: attr('data-deferred-srcset'), deferredSizes: attr('data-deferred-sizes'),
+    };
   });
 }
 
@@ -129,9 +134,9 @@ for (const [name, page] of Object.entries(pages).filter(([name]) => scope === 'a
   const baselineHtml = read(page.baseline);
   const currentImages = images(html);
   const baselineImages = images(baselineHtml);
-  const currentSrcs = new Set(currentImages.map((image) => image.src));
+  const currentSrcs = new Set(currentImages.flatMap((image) => [image.src, image.fullSrc]));
   const primary = primaryHtml(html);
-  const primarySrcs = new Set(images(`<main>${primary}</main>`).map((image) => image.src));
+  const primarySrcs = new Set(images(`<main>${primary}</main>`).flatMap((image) => [image.src, image.fullSrc]));
 
   expect(html.includes(`<body class="${page.bodyClass}">`), `${page.file}: add the bounded visual-archive body classes.`);
   expect(html.includes(page.marker), `${page.file}: add the project-native archive marker.`);
@@ -245,6 +250,49 @@ expect((hornedSlideshow.match(/series-slideshow-img/g) ?? []).length === 7 && ho
   'artillustration.html: restore all seven Horned Woman versions as the original auto-crossfade slideshow.');
 expect(hornedSlideshow.includes('data-slideshow-interval="2000"'),
   'artillustration.html: the Horned Woman panel must advance every two seconds.');
+const artImages = images(art);
+const responsiveSpecs = [
+  {
+    full: 'images/illus-ibm-selectric-web.jpg', thumb: 'images/responsive/illus-ibm-selectric-web-480.webp',
+    srcset: 'images/responsive/illus-ibm-selectric-web-480.webp 480w, images/responsive/illus-ibm-selectric-web-960.webp 960w, images/responsive/illus-ibm-selectric-web-1440.webp 1440w',
+    sizes: '(max-width: 720px) calc(100vw - 40px), calc(50vw - clamp(24px, 3.333vw, 48px) - clamp(0.4rem, 1vw, 0.875rem))', eager: true,
+  },
+  {
+    full: 'images/art-archive-v2/old-one.webp', thumb: 'images/responsive/old-one-240.webp',
+    srcset: 'images/responsive/old-one-240.webp 240w, images/responsive/old-one-480.webp 480w',
+    sizes: '(max-width: 720px) calc(33.333vw - 13.333px - clamp(0.533rem, 1.333vw, 1.167rem)), calc(16.667vw - clamp(8px, 1.111vw, 16px) - clamp(0.667rem, 1.667vw, 1.458rem))', eager: false,
+  },
+];
+for (let version = 5; version <= 11; version += 1) {
+  responsiveSpecs.push({
+    full: `images/illus-untitled-${version}.jpg`, thumb: `images/responsive/illus-untitled-${version}-320.webp`,
+    srcset: `images/responsive/illus-untitled-${version}-320.webp 320w, images/responsive/illus-untitled-${version}-640.webp 640w, images/responsive/illus-untitled-${version}-800.webp 800w`,
+    sizes: '(max-width: 720px) calc(66.667vw - 26.667px - clamp(0.267rem, 0.667vw, 0.583rem)), calc(33.333vw - clamp(16px, 2.222vw, 32px) - clamp(0.533rem, 1.333vw, 1.167rem))',
+    deferred: version !== 5,
+  });
+}
+for (const spec of responsiveSpecs) {
+  const image = artImages.find((candidate) => candidate.fullSrc === spec.full);
+  expect(Boolean(image), `artillustration.html: ${spec.full} must remain an Art lightbox item via data-full-src.`);
+  if (!image) continue;
+  expect(image.thumbSrc === spec.thumb, `artillustration.html: ${spec.full} must declare its compact data-thumb-src.`);
+  expect((spec.deferred ? image.deferredSrcset : image.srcset) === spec.srcset,
+    `artillustration.html: ${spec.full} must declare its approved responsive srcset.`);
+  expect((spec.deferred ? image.deferredSizes : image.sizes) === spec.sizes,
+    `artillustration.html: ${spec.full} must declare its approved responsive sizes.`);
+  if (spec.deferred) {
+    expect(image.src.startsWith('data:image/'), `artillustration.html: deferred ${spec.full} must use a valid nonnetwork placeholder.`);
+    expect(Boolean(image.deferredSrc), `artillustration.html: deferred ${spec.full} must retain data-deferred-src.`);
+  } else {
+    expect(!image.src.startsWith('data:image/') && Boolean(image.srcset), `artillustration.html: initial ${spec.full} must be live at parse.`);
+  }
+  if (spec.eager) expect(image.tag.includes('loading="eager"') && image.tag.includes('fetchpriority="high"'),
+    `artillustration.html: IBM Selectric must remain eager and high priority.`);
+  if (spec.full.includes('old-one')) expect(image.tag.includes('loading="lazy"') && !image.tag.includes('fetchpriority="high"'),
+    `artillustration.html: Old One must remain lazy without high priority.`);
+}
+expect(artImages.filter((image) => image.fullSrc.startsWith('images/illus-untitled-')).filter((image) => !image.src.startsWith('data:image/')).length === 1,
+  'artillustration.html: only the initial Horned Woman slide may use a network source at parse.');
 expect(read('scripts/build-visual-archives-integration.py').includes('data-slideshow-interval="2000"'),
   'visual archive generator: own the Horned Woman two-second interval in the canonical source.');
 for (const heading of ['Characters and worlds', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work']) {

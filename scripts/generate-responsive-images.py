@@ -6,11 +6,12 @@ Run with:
 """
 import hashlib
 import json
+import os
 import platform
 from pathlib import Path
 from PIL import Image, ImageOps, __version__ as pillow_version, features
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(os.environ.get("RESPONSIVE_IMAGES_ROOT", Path(__file__).resolve().parent.parent)).resolve()
 OUTPUT = ROOT / "images" / "responsive"
 JOBS = {
     "images/about-vic-japan.jpg": [480, 800, 1200],
@@ -18,9 +19,26 @@ JOBS = {
     "images/pci-handbook-1-cover.webp": [640, 1200],
     "images/dna-preview.jpg": [640, 1200],
     "images/thumb-sal.webp": [540],
+    "images/illus-ibm-selectric-web.jpg": [480, 960, 1440],
+    "images/art-archive-v2/old-one.webp": [240, 480],
+    **{f"images/illus-untitled-{version}.jpg": [320, 640, 800] for version in range(5, 12)},
 }
 
+def expected_outputs():
+    return {
+        f"images/responsive/{Path(source_name).stem}-{width}.webp"
+        for source_name, widths in JOBS.items()
+        for width in widths
+    }
+
+
+EXPECTED_OUTPUTS = expected_outputs()
 OUTPUT.mkdir(parents=True, exist_ok=True)
+# `images/responsive` is the generator's canonical WebP output directory. Reconcile
+# only its WebPs; unrelated files (for example notes) remain untouched.
+for candidate in OUTPUT.glob("*.webp"):
+    if candidate.relative_to(ROOT).as_posix() not in EXPECTED_OUTPUTS:
+        candidate.unlink()
 integrity = {
     "pillowVersion": pillow_version,
     "runtime": {

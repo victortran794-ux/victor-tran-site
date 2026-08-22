@@ -66,6 +66,7 @@ class Cdp {
     this.pending = new Map();
     this.waiters = new Map();
     this.exceptions = [];
+    this.requests = [];
   }
 
   async open() {
@@ -81,6 +82,7 @@ class Cdp {
         return;
       }
       if (message.method === 'Runtime.exceptionThrown') this.exceptions.push(message.params.exceptionDetails);
+      if (message.method === 'Network.requestWillBeSent') this.requests.push(message.params.request.url);
       const waiters = this.waiters.get(message.method) || [];
       this.waiters.delete(message.method);
       waiters.forEach((resolve) => resolve(message.params));
@@ -145,6 +147,32 @@ class Cdp {
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function hornedRequestsSince(mark) {
+  return cdp.requests.slice(mark).map((url) => {
+    const match = new URL(url).pathname.match(/\/images\/(?:responsive\/)?illus-untitled-(\d+)(?:-(320|640|800)\.webp|(\.jpg))$/);
+    return match && Number(match[1]) >= 5 && { url, version: Number(match[1]), width: match[2] ? Number(match[2]) : null, original: Boolean(match[3]) };
+  }).filter(Boolean);
+}
+
+function assertHornedRequests(mark, allowedVersions, label, { requireOriginal = false, thumbsOnly = false } = {}) {
+  const requests = hornedRequestsSince(mark);
+  const unexpected = requests.filter((request) => !allowedVersions.includes(request.version));
+  assert(unexpected.length === 0,
+    `artillustration.html: network ${label} requested a farther Horned Woman family: ${JSON.stringify(unexpected)}`);
+  if (requireOriginal) {
+    assert(requests.some((request) => request.original),
+      `artillustration.html: network ${label} did not request the active Horned Woman full original: ${JSON.stringify(requests)}`);
+  } else {
+    assert(requests.every((request) => !request.original),
+      `artillustration.html: network ${label} requested a Horned Woman original before lightbox: ${JSON.stringify(requests)}`);
+  }
+  if (thumbsOnly) {
+    assert(requests.filter((request) => !request.original).every((request) => request.width === 320),
+      `artillustration.html: network ${label} used a non-320 Horned Woman thumbnail derivative: ${JSON.stringify(requests)}`);
+  }
+  return requests;
 }
 
 async function waitForScrollSettle() {
@@ -285,6 +313,72 @@ async function checkLiveSlideshowFocusRestoration() {
   });
 }
 
+async function checkArtResponsiveMedia() {
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1280, height: 720, deviceScaleFactor: 1, mobile: false });
+  const noIntersectionObserver = process.env.VISUAL_ARCHIVES_DISABLE_IO === '1';
+  const navigationMark = cdp.requests.length;
+  await cdp.navigate(`${baseUrl}/artillustration.html`);
+  const initial = await cdp.evaluate(`(() => {
+    const slides = [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')];
+    return {
+      slides: slides.map((slide) => ({ src: slide.getAttribute('src'), deferred: slide.hasAttribute('data-deferred-src'), full: slide.dataset.fullSrc, thumb: slide.dataset.thumbSrc })),
+      fullSourceRequests: performance.getEntriesByType('resource').map((entry) => entry.name).filter((name) => [5, 6, 7, 8, 9, 10, 11].some((version) => name.includes('/images/illus-untitled-' + version + '.jpg'))),
+    };
+  })()`);
+  assert(initial.slides.length === 7 && initial.slides.every((slide) => slide.full && slide.thumb),
+    `artillustration.html: responsive Horned Woman source metadata is incomplete: ${JSON.stringify(initial)}`);
+  const expectedInitialLive = noIntersectionObserver ? 2 : 1;
+  const expectedInitialPlaceholders = noIntersectionObserver ? 5 : 6;
+  assert(initial.slides.filter((slide) => !slide.deferred).length === expectedInitialLive &&
+    initial.slides.slice(0, expectedInitialLive).every((slide) => !slide.src.startsWith('data:image/')) &&
+    initial.slides.slice(expectedInitialLive).every((slide) => slide.deferred && slide.src.startsWith('data:image/')) &&
+    initial.slides.filter((slide) => slide.src.startsWith('data:image/')).length === expectedInitialPlaceholders,
+    `artillustration.html: initial Horned Woman ${noIntersectionObserver ? 'no-observer fallback' : 'parse'} state is invalid: ${JSON.stringify(initial.slides)}`);
+  assert(initial.fullSourceRequests.length === 0,
+    `artillustration.html: full Horned Woman sources loaded before lightbox: ${JSON.stringify(initial.fullSourceRequests)}`);
+  if (process.env.VISUAL_ARCHIVES_NETWORK_MUTATION === 'future-horned-responsive-request') {
+    await cdp.evaluate(`(async () => { const url = new URL('images/responsive/illus-untitled-11-640.webp', location.href); url.searchParams.set('network-mutation', String(Date.now())); await fetch(url.href, { cache: 'no-store' }); })()`);
+  }
+  assertHornedRequests(navigationMark, noIntersectionObserver ? [5, 6] : [5], 'before deferred-stage intersection');
+
+  const intersectionMark = cdp.requests.length;
+  await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-stage').scrollIntoView({ block: 'center' })`);
+  await delay(260);
+  const hydrated = await cdp.evaluate(`(() => {
+    const slides = [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')];
+    return slides.map((slide) => ({ src: slide.getAttribute('src'), deferred: slide.hasAttribute('data-deferred-src') }));
+  })()`);
+  assert(hydrated.filter((slide) => !slide.src.startsWith('data:image/')).length === 2 && hydrated.slice(0, 2).every((slide) => !slide.deferred) && hydrated.slice(2).every((slide) => slide.deferred),
+    `artillustration.html: intersection hydration must load active and next Horned Woman derivatives only: ${JSON.stringify(hydrated)}`);
+  assertHornedRequests(intersectionMark, [5, 6], 'after deferred-stage intersection');
+
+  const lightboxMark = cdp.requests.length;
+  await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active').focus()`);
+  await cdp.key('Enter', 'Enter', 13);
+  await delay(240);
+  const lightbox = await cdp.evaluate(`(() => ({
+    full: document.querySelector('.lightbox .lb-img')?.getAttribute('src'),
+    thumbs: [...document.querySelectorAll('.lightbox .lb-thumb img')].map((image) => image.getAttribute('src')),
+  }))()`);
+  assert(lightbox.full === 'images/illus-untitled-5.jpg' && lightbox.thumbs.slice(1, 8).every((src, index) => src === `images/responsive/illus-untitled-${index + 5}-320.webp`),
+    `artillustration.html: lightbox must use full source and compact thumbnail derivatives: ${JSON.stringify(lightbox)}`);
+  const lightboxRequests = assertHornedRequests(lightboxMark, [5, 6, 7, 8, 9, 10, 11], 'on lightbox open', { requireOriginal: true });
+  assert(lightboxRequests.filter((request) => request.original).every((request) => request.version === 5),
+    `artillustration.html: lightbox requested a non-active Horned Woman full original: ${JSON.stringify(lightboxRequests)}`);
+  assertHornedRequests(lightboxMark, [5, 6, 7, 8, 9, 10, 11], 'on lightbox thumbnail load', { requireOriginal: true, thumbsOnly: true });
+  await cdp.key('Escape', 'Escape', 27);
+  await delay(2050);
+  const laterActivationRequests = hornedRequestsSince(intersectionMark);
+  const laterSlideshowRequests = laterActivationRequests.filter((request) => request.original || request.width !== 320);
+  assert(laterSlideshowRequests.every((request) => request.version <= 7),
+    `artillustration.html: network before later slideshow activation requested a farther non-thumbnail Horned Woman family: ${JSON.stringify(laterSlideshowRequests)}`);
+  assert(laterSlideshowRequests.filter((request) => request.original).every((request) => request.version === 5),
+    `artillustration.html: network before later slideshow activation requested a non-active full original: ${JSON.stringify(laterSlideshowRequests)}`);
+  await cdp.evaluate(`document.querySelector('.slideshow-pause-btn').click()`);
+  await cdp.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+}
+
 async function checkHornedWomanCadenceAndPause() {
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }],
@@ -392,8 +486,12 @@ try {
   cdp = new Cdp(target.webSocketDebuggerUrl);
   await cdp.open();
   await cdp.call('Page.enable');
+  if (process.env.VISUAL_ARCHIVES_DISABLE_IO === '1') {
+    await cdp.call('Page.addScriptToEvaluateOnNewDocument', { source: 'delete window.IntersectionObserver;' });
+  }
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
+  await cdp.call('Network.setCacheDisabled', { cacheDisabled: true });
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
@@ -689,6 +787,7 @@ try {
   }
 
   if (scope === 'all' || scope === 'art') {
+    await checkArtResponsiveMedia();
     await checkHornedWomanCadenceAndPause();
     await checkLiveSlideshowFocusRestoration();
   }

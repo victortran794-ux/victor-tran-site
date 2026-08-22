@@ -35,6 +35,162 @@
       "sha256": "bb707add17ce7735856ec7be3e61d5fb14faf1f9e2352d97e408ebb47f054d19",
       "width": 640
     },
+    "images/responsive/illus-ibm-selectric-web-1440.webp": {
+      "bytes": 73792,
+      "height": 1910,
+      "sha256": "8cb4f490a918bdc6b54ec296e0fbf4c39dbff433f497b87d4af5ea84b0b29e8a",
+      "width": 1440
+    },
+    "images/responsive/illus-ibm-selectric-web-480.webp": {
+      "bytes": 18346,
+      "height": 637,
+      "sha256": "bfa4ce9eed6c6808b5bb793728611a476c8b8e3b5e6df03045cd64c6eeb52961",
+      "width": 480
+    },
+    "images/responsive/illus-ibm-selectric-web-960.webp": {
+      "bytes": 47752,
+      "height": 1274,
+      "sha256": "4081cc7d08e7724f6a2ff9a4c04c710747624c65b3830234bdbf921b2da5c1ba",
+      "width": 960
+    },
+    "images/responsive/illus-untitled-10-320.webp": {
+      "bytes": 47746,
+      "height": 640,
+      "sha256": "ca3d7dac8e7da6109f9ff48e5e31cebeed3c175d6fd8eca003ccd37f60715fb7",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-10-640.webp": {
+      "bytes": 152288,
+      "height": 1280,
+      "sha256": "a2f8134889a51e8a3ecdba1177784133f08c22b2b3d36d9f80ebfe3e9a15014d",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-10-800.webp": {
+      "bytes": 220282,
+      "height": 1600,
+      "sha256": "9bbe4b7dd420ae8f280e0e5b5a653a4023444c2dc7b4997f4807aa633eadd0e6",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-11-320.webp": {
+      "bytes": 57998,
+      "height": 640,
+      "sha256": "5e371d46664058c1977373c431d422f1ed644702a11cd8f2ad792b32b510e08d",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-11-640.webp": {
+      "bytes": 190252,
+      "height": 1280,
+      "sha256": "d0bee8de14dbf921173a5ff1a2885828b1c7944f767ed4fe58b1bf135d5632a7",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-11-800.webp": {
+      "bytes": 277722,
+      "height": 1600,
+      "sha256": "803203773407f609722b7f3760b2151ffe1750a74514881d1fb20eb45a3a1461",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-5-320.webp": {
+      "bytes": 36470,
+      "height": 640,
+      "sha256": "10a4e8d5ece95fea20c5f654cb3f4febe1e0682747fb6795963d4ff0b857ed9a",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-5-640.webp": {
+      "bytes": 127390,
+      "height": 1280,
+      "sha256": "cb9c9531af867f9a1216094fd82b10d909bb27451c7c3c957d1af1a9a3268e58",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-5-800.webp": {
+      "bytes": 188150,
+      "height": 1600,
+      "sha256": "781ecfd926baa080f75d892399fe787b032757bd22322fac8aa7b4fd3da3aa23",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-6-320.webp": {
+      "bytes": 31274,
+      "height": 640,
+      "sha256": "db5055613a0e6db616bdca2fb9948bc69b04cb464e1d5714b74bb63c0d091553",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-6-640.webp": {
+      "bytes": 94420,
+      "height": 1280,
+      "sha256": "3801e8bd9ef0a809a8a4f7e1952ef540e3c784bc680f52d5d74b2436743d2fe0",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-6-800.webp": {
+      "bytes": 136598,
+      "height": 1600,
+      "sha256": "a05611ea4dc66c5394da7d7d253ec211d7bc3e2a2e82dd1c8660fe4e1be98f25",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-7-320.webp": {
+      "bytes": 49772,
+      "height": 640,
+      "sha256": "e96f9f6ae20f39f47e82abe90f824f83c6fea0d1be194b5c57e7f3e589daa3dd",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-7-640.webp": {
+      "bytes": 175314,
+      "height": 1280,
+      "sha256": "b48ecb79a93e9401d57951a51ec96b44c81e1ff51bf4f732e4652675b9a5452d",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-7-800.webp": {
+      "bytes": 261282,
+      "height": 1600,
+      "sha256": "91b9e418749f628d50239a62beff7dbfc5fdebb2cf7287368dc7fcdd33512818",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-8-320.webp": {
+      "bytes": 51122,
+      "height": 640,
+      "sha256": "6a8e2917648888d4b6a298a2652c603b4a1e5fb5d2f19dd84e7f32a5de74eece",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-8-640.webp": {
+      "bytes": 172944,
+      "height": 1280,
+      "sha256": "cba7480d102c2dc625543af3e716f429248fb77cf87b75a53d262ecd633ccdb2",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-8-800.webp": {
+      "bytes": 253328,
+      "height": 1600,
+      "sha256": "7feb8ba15d9e923fd22ad9e699d39dc112e5f033d1bc0c10c8cd7d6ab5fffa00",
+      "width": 800
+    },
+    "images/responsive/illus-untitled-9-320.webp": {
+      "bytes": 43978,
+      "height": 640,
+      "sha256": "81c0ebc37daacd23ba8123c80977af0a20f67dd506aacb5c44f35e77061dff13",
+      "width": 320
+    },
+    "images/responsive/illus-untitled-9-640.webp": {
+      "bytes": 144594,
+      "height": 1280,
+      "sha256": "d09a90b97ea0d1532c3937063c7095772f35f3a606e14c7cb31c0d024e133005",
+      "width": 640
+    },
+    "images/responsive/illus-untitled-9-800.webp": {
+      "bytes": 210648,
+      "height": 1600,
+      "sha256": "990014161969b2151c0fe70711a89a2bde9aa0923d1f490c007bc8c5e9459eb0",
+      "width": 800
+    },
+    "images/responsive/old-one-240.webp": {
+      "bytes": 29340,
+      "height": 311,
+      "sha256": "921a2d20a2fc805d0888aa34683eeea451d87b5da14b7badc2a7c7ce51fa7867",
+      "width": 240
+    },
+    "images/responsive/old-one-480.webp": {
+      "bytes": 95286,
+      "height": 621,
+      "sha256": "ae0123eb92790b043ef59c9d3642df150996b31cab8d84de454d5f75e4779351",
+      "width": 480
+    },
     "images/responsive/patterns-hero-1200.webp": {
       "bytes": 17880,
       "height": 675,
@@ -76,9 +232,45 @@
       "bytes": 598512,
       "sha256": "5a6169c44e67b6ca6cfd8d606d455942811187fb33fd3b513d87f89a17c9b4a7"
     },
+    "images/art-archive-v2/old-one.webp": {
+      "bytes": 703434,
+      "sha256": "0e11d5217b6063961bfae3a9c769ece3ebd0165d99a188b0c86c7dc22e5aa4b6"
+    },
     "images/dna-preview.jpg": {
       "bytes": 197309,
       "sha256": "ec856141094bfb63d03132131c504bb8b5c69a5f5c096ab689f48ab742b326db"
+    },
+    "images/illus-ibm-selectric-web.jpg": {
+      "bytes": 292779,
+      "sha256": "65d810aa8b1ac4844b32c3040d8ec6319b41c0d82f1819047ae468f38b70e76a"
+    },
+    "images/illus-untitled-10.jpg": {
+      "bytes": 460079,
+      "sha256": "f9d684d0a97e97014d6ebb12d642beb99334c0e1593126c7951e950f21b8d941"
+    },
+    "images/illus-untitled-11.jpg": {
+      "bytes": 549176,
+      "sha256": "b162b8fe80773a99c0ddac0427ae20476c9f4c2b1949d2013639d925fd91572e"
+    },
+    "images/illus-untitled-5.jpg": {
+      "bytes": 386180,
+      "sha256": "ca95c251499a1401c2e374481fc0c4291bcea755e88959d5c4394209ef534332"
+    },
+    "images/illus-untitled-6.jpg": {
+      "bytes": 354050,
+      "sha256": "76fd07287479e2f14fb10929659083382c2cd9c40fffacee8f765a2364e2e147"
+    },
+    "images/illus-untitled-7.jpg": {
+      "bytes": 524130,
+      "sha256": "e2d3a0ed3792f1c2782232800dc189433f0b32d0081b5ff18a023a93042a5264"
+    },
+    "images/illus-untitled-8.jpg": {
+      "bytes": 508497,
+      "sha256": "0941312fbf8de2d48ce93b5311f05c0bdc13d1c6000c3cc2d4dfc66da18b7d5a"
+    },
+    "images/illus-untitled-9.jpg": {
+      "bytes": 432994,
+      "sha256": "b0fc1aa29b7f33ce8454cd7ae0c6a262f5d59d2e9867c6260d747e0695245dbc"
     },
     "images/patterns-hero.webp": {
       "bytes": 85718,

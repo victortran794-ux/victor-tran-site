@@ -52,16 +52,20 @@ if (canUseCustomCursor) {
 // ── Scroll Reveal ──────────────────────────────────
 const revealEls = document.querySelectorAll('.reveal');
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
 
-revealEls.forEach(el => revealObserver.observe(el));
+  revealEls.forEach(el => revealObserver.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add('revealed'));
+}
 
 
 // ── Nav: compact on scroll (rAF-throttled) ─────────
@@ -288,6 +292,11 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     });
   }
 
+  if (!('IntersectionObserver' in window)) {
+    setActiveChapter(cards[0].dataset.chapter, cards[0].dataset.chapterTitle);
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     const visible = entries
       .filter(entry => entry.isIntersecting)
@@ -423,7 +432,9 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
   let current = 0;
   const pageTitle = (document.querySelector('.page-header-title')?.textContent || 'Gallery').trim();
-  const defaultItems = pageImgs.map((img) => ({ src: img.src, alt: img.alt }));
+  const fullSource = (img) => img.dataset.fullSrc || img.currentSrc || img.src;
+  const thumbSource = (img) => img.dataset.thumbSrc || img.currentSrc || img.src;
+  const defaultItems = pageImgs.map((img) => ({ src: fullSource(img), thumb: thumbSource(img), alt: img.alt }));
   let activeItems = defaultItems;
 
   // Build DOM
@@ -503,7 +514,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       btn.className = 'lb-thumb';
       btn.setAttribute('aria-label', `Go to image ${i + 1}`);
       const ti = document.createElement('img');
-      ti.src = item.src;
+      ti.src = item.thumb || item.src;
       ti.alt = item.alt;
       ti.loading = 'lazy';
       btn.appendChild(ti);
@@ -544,7 +555,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     const supplemental = viewer?.querySelector('template[data-viewer-picks]');
     if (supplemental) {
       const picks = Array.from(supplemental.content.querySelectorAll('[data-viewer-pick]'));
-      activeItems = [{ src: trigger.src, alt: trigger.alt }, ...picks.map((pick) => ({ src: pick.src, alt: pick.alt }))];
+      activeItems = [{ src: fullSource(trigger), thumb: thumbSource(trigger), alt: trigger.alt }, ...picks.map((pick) => ({ src: pick.src, alt: pick.alt }))];
       idx = 0;
       lb.querySelector('.lb-title').textContent = viewer.dataset.viewerTitle || pageTitle;
     } else {
@@ -660,6 +671,20 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
     let i = slides.findIndex(slide => slide.classList.contains('is-active'));
     if (i < 0) i = 0;
+    const hasDeferredSlides = slides.some((slide) => slide.dataset.deferredSrc);
+    let activated = !hasDeferredSlides;
+    function hydrate(slide) {
+      if (!slide?.dataset.deferredSrc) return;
+      slide.src = slide.dataset.deferredSrc;
+      slide.srcset = slide.dataset.deferredSrcset;
+      slide.sizes = slide.dataset.deferredSizes;
+      delete slide.dataset.deferredSrc;
+      delete slide.dataset.deferredSrcset;
+      delete slide.dataset.deferredSizes;
+    }
+    function hydrateNext() {
+      hydrate(slides[(i + 1) % slides.length]);
+    }
     function syncSlideTriggers() {
       slides.forEach((slide, idx) => {
         const isActive = idx === i;
@@ -684,12 +709,21 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     let wasRunningBeforeLightbox = false;
 
     function advance() {
-      i = (i + 1) % slides.length;
+      const next = (i + 1) % slides.length;
+      hydrate(slides[next]);
+      i = next;
+      hydrateNext();
       syncSlideTriggers();
     }
     function start() {
-      if (userPaused || lightboxOpen || timer) return;
+      if (!activated || userPaused || lightboxOpen || timer) return;
       timer = setInterval(advance, intervalMs);
+    }
+    function activate() {
+      if (activated) return;
+      activated = true;
+      hydrateNext();
+      start();
     }
     function stop() {
       if (!timer) return;
@@ -715,7 +749,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       wasRunningBeforeLightbox = false;
     });
 
-    return { stage, start, stop, setUserPaused, get userPaused() { return userPaused; } };
+    return { stage, start, stop, activate, hasDeferredSlides, setUserPaused, get userPaused() { return userPaused; } };
   }).filter(Boolean);
 
   // Wire pause/play button per slideshow
@@ -735,7 +769,25 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     });
   });
 
-  slideshows.forEach(slideshow => slideshow.start());
+  if ('IntersectionObserver' in window) {
+    const deferredStageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const slideshow = slideshows.find((candidate) => candidate.stage === entry.target);
+        slideshow?.activate();
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px' });
+    slideshows.forEach((slideshow) => {
+      if (slideshow.hasDeferredSlides) deferredStageObserver.observe(slideshow.stage);
+      else slideshow.start();
+    });
+  } else {
+    slideshows.forEach((slideshow) => {
+      if (slideshow.hasDeferredSlides) slideshow.activate();
+      else slideshow.start();
+    });
+  }
 
   // Pause when tab is hidden so it doesn't drift while away
   document.addEventListener('visibilitychange', () => {

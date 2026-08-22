@@ -337,6 +337,56 @@ ART_PRIMARY = r'''
 # object labels; descriptive alt text remains on every image.
 ART_PRIMARY = re.sub(r'<figcaption>[\s\S]*?</figcaption>', '', ART_PRIMARY)
 
+# The Art responsive-media pilot is deliberately bounded to the opening trio.
+# Full source paths remain available to the shared lightbox, while the page uses
+# derivatives appropriate to the rendered slot.
+RESPONSIVE_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+IBM_SIZES = '(max-width: 720px) calc(100vw - 40px), calc(50vw - clamp(24px, 3.333vw, 48px) - clamp(0.4rem, 1vw, 0.875rem))'
+OLD_ONE_SIZES = '(max-width: 720px) calc(33.333vw - 13.333px - clamp(0.533rem, 1.333vw, 1.167rem)), calc(16.667vw - clamp(8px, 1.111vw, 16px) - clamp(0.667rem, 1.667vw, 1.458rem))'
+HORNED_SIZES = '(max-width: 720px) calc(66.667vw - 26.667px - clamp(0.267rem, 0.667vw, 0.583rem)), calc(33.333vw - clamp(16px, 2.222vw, 32px) - clamp(0.533rem, 1.333vw, 1.167rem))'
+
+
+def responsive_art_image(full: str, src: str, srcset: str, sizes: str, width: int, height: int,
+                         alt: str, thumb: str, *, eager: bool = False, deferred: bool = False) -> str:
+    priority = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
+    if deferred:
+        return (f'<img class="series-slideshow-img" {priority} decoding="async" src="{RESPONSIVE_PLACEHOLDER}" '
+                f'data-deferred-src="{src}" data-deferred-srcset="{srcset}" data-deferred-sizes="{sizes}" '
+                f'data-full-src="{full}" data-thumb-src="{thumb}" width="{width}" height="{height}" alt="{alt}">')
+    return (f'<img {priority} decoding="async" src="{src}" srcset="{srcset}" sizes="{sizes}" '
+            f'data-full-src="{full}" data-thumb-src="{thumb}" width="{width}" height="{height}" alt="{alt}">')
+
+
+ART_PRIMARY = ART_PRIMARY.replace(
+    '<img loading="eager" fetchpriority="high" decoding="async" src="images/illus-ibm-selectric-web.jpg" width="1806" height="2396" alt="IBM Selectric 1961 blueprint illustration">',
+    responsive_art_image('images/illus-ibm-selectric-web.jpg', 'images/responsive/illus-ibm-selectric-web-960.webp',
+                         'images/responsive/illus-ibm-selectric-web-480.webp 480w, images/responsive/illus-ibm-selectric-web-960.webp 960w, images/responsive/illus-ibm-selectric-web-1440.webp 1440w',
+                         IBM_SIZES, 1806, 2396, 'IBM Selectric 1961 blueprint illustration',
+                         'images/responsive/illus-ibm-selectric-web-480.webp', eager=True),
+)
+ART_PRIMARY = ART_PRIMARY.replace(
+    '<img loading="eager" fetchpriority="high" decoding="async" src="images/art-archive-v2/old-one.webp" width="1600" height="2071" alt="Black-and-white and turquoise character illustration">',
+    responsive_art_image('images/art-archive-v2/old-one.webp', 'images/responsive/old-one-240.webp',
+                         'images/responsive/old-one-240.webp 240w, images/responsive/old-one-480.webp 480w',
+                         OLD_ONE_SIZES, 1600, 2071, 'Black-and-white and turquoise character illustration',
+                         'images/responsive/old-one-240.webp'),
+)
+for version, alt in [
+    (5, 'Horned Woman pencil sketch'), (6, 'Horned Woman painted study'),
+    (7, 'Horned Woman stylized black-and-white study'), (8, 'Horned Woman glitch study'),
+    (9, 'Horned Woman pink overlay study'), (10, 'Horned Woman watercolor study'),
+    (11, 'Horned Woman blue ink study'),
+]:
+    full = f'images/illus-untitled-{version}.jpg'
+    src = f'images/responsive/illus-untitled-{version}-640.webp'
+    srcset = f'images/responsive/illus-untitled-{version}-320.webp 320w, images/responsive/illus-untitled-{version}-640.webp 640w, images/responsive/illus-untitled-{version}-800.webp 800w'
+    original = f'<img class="series-slideshow-img{" is-active" if version == 5 else ""}" loading="lazy" decoding="async" src="{full}" width="800" height="1600" alt="{alt}">'
+    replacement = responsive_art_image(full, src, srcset, HORNED_SIZES, 800, 1600, alt,
+                                       f'images/responsive/illus-untitled-{version}-320.webp', deferred=version != 5)
+    if version == 5:
+        replacement = replacement.replace('<img ', '<img class="series-slideshow-img is-active" ', 1)
+    ART_PRIMARY = ART_PRIMARY.replace(original, replacement)
+
 GRAPHIC_PRIMARY = r'''
     <section class="archive-primary" aria-labelledby="graphic-archive-title">
       <div class="graphic-shell">
