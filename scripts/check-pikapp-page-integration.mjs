@@ -482,9 +482,7 @@ for (const required of [
 if (js.includes('innerHTML') || js.includes('eval(') || js.includes('fetch(')) fail('Pi Kapp viewer script must not inject HTML or call external services');
 if (!workflow.includes('npm run check:pikapp-page')) fail('health-check workflow must run the Pi Kapp page contract');
 if (!workflow.includes('npm run check:pikapp-page-browser')) fail('health-check workflow must run the Pi Kapp browser contract');
-for (const contractPath of ['scripts/check-pikapp-page-integration.mjs', 'scripts/check-pikapp-page-browser.mjs']) {
-  if (count(workflow, `- "${contractPath}"`) !== 2) fail(`health-check push and pull_request paths must include ${contractPath}`);
-}
+if (!workflow.includes("needs.changes.outputs.pikapp == 'true'")) fail('health-check workflow must scope Pi Kapp contracts through classifier ownership');
 
 const manifest = JSON.parse(text('data/projects.json'));
 const project = manifest.projects.find((entry) => entry.slug === 'pikappapp');

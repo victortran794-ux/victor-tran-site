@@ -80,15 +80,10 @@ expect(packageJson.scripts?.['check:design-dna-system'] === 'node scripts/check-
   'package.json must expose check:design-dna-system.');
 expect(preflight.includes('npm run check:design-dna-system'),
   'Preflight must run the Design DNA system contract.');
-for (const dependency of [
-  'content/design-system.md',
-  'content/design-system.json',
-  'content/vico2-page-system.md',
-  'scripts/check-design-dna-system.mjs',
-]) {
-  const occurrences = workflow.split(dependency).length - 1;
-  expect(occurrences >= 2, `Health-check push and pull_request filters must include ${dependency}.`);
-}
+expect(workflow.includes("needs.changes.outputs.home == 'true'"),
+  'Health check must scope Design DNA through Homepage classifier ownership.');
+expect(workflow.includes("needs.changes.outputs.shared == 'true'"),
+  'Health check must include shared-system changes in Design DNA validation.');
 expect(workflow.includes('npm run check:design-dna-system'),
   'Health check must execute the Design DNA system contract.');
 

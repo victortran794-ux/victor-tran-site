@@ -11,203 +11,102 @@ on:
     - cron: "0 12 * * 1"  # Mondays at 12:00 UTC
   push:
     branches: [main]
-    paths:
-      - "*.html"
-      - "css/**"
-      - "js/**"
-      - "images/**"
-      - "data/projects.json"
-      - "data/site-shell.json"
-      - "data/content-export-policy.json"
-      - "content/about.md"
-      - "content/design-system.md"
-      - "content/design-system.json"
-      - "content/vico2-page-system.md"
-      - "content/index.md"
-      - "content/salmagazine.md"
-      - "content/site-index.json"
-      - "scripts/generate-project-sections.mjs"
-      - "scripts/check-responsive-images.mjs"
-      - "scripts/check-gallery-media.mjs"
-      - "scripts/check-gallery-motion-system.mjs"
-      - "scripts/generate-responsive-images.py"
-      - "scripts/build-visual-archives-integration.py"
-      - "scripts/check-visual-archives-integration.mjs"
-      - "scripts/check-visual-archives-browser.mjs"
-      - "scripts/check-ui-gallery-integration.mjs"
-      - "scripts/build-ui-gallery-assets.py"
-      - "uigallery.html"
-      - "css/ui-gallery.css"
-      - "images/ui-gallery/**"
-      - "scripts/preflight.sh"
-      - "scripts/check-home-global-completion.mjs"
-      - "scripts/check-design-dna-system.mjs"
-      - "scripts/check-route02-homepage-integration.mjs"
-      - "scripts/validate-project-manifest.mjs"
-      - "scripts/check-about-semantics.mjs"
-      - "scripts/check-about-browser.mjs"
-      - "scripts/about-browser-process.mjs"
-      - "scripts/test-about-browser-process.mjs"
-      - "scripts/html-to-md.mjs"
-      - "scripts/test-html-to-md.mjs"
-      - "scripts/check-final-site-reconciliation.mjs"
-      - "scripts/check-public-archive-routes.mjs"
-      - ".vercelignore"
-      - "scripts/check-production-artifact-containment.mjs"
-      - "pci.html"
-      - "css/pci-vico2.css"
-      - "scripts/check-pci-claims-protection.mjs"
-      - "scripts/check-pci-browser.mjs"
-      - "scripts/check-sal-vico2.py"
-      - "scripts/check-sal-browser.mjs"
-      - "scripts/check-ability-victor-carbon.py"
-      - "scripts/check-ability-browser.mjs"
-      - "scripts/check-ibm-patterns-integration.mjs"
-      - "scripts/check-ibm-patterns-browser.mjs"
-      - "scripts/check-ibmcloud-hiring-cut.mjs"
-      - "scripts/check-ibmcloud-browser.mjs"
-      - "scripts/check-wxo-document-processing-integration.mjs"
-      - "scripts/check-wxo-document-processing-browser.mjs"
-      - "js/wxo-workflows-vico2.js"
-      - "scripts/check-home-lens-portal-browser.mjs"
-      - "scripts/check-homepage-system-alignment.py"
-      - "scripts/check-shared-shell.mjs"
-      - "scripts/check-theme-continuity-proof.mjs"
-      - "scripts/check-global-theme-control.mjs"
-      - "scripts/generate-site-shell.mjs"
-      - "scripts/test-site-shell.mjs"
-      - "vercel.json"
-      - "sitemap.xml"
-      - "robots.txt"
-      - ".github/workflows/health-check.yml"
-      - ".github/lighthouse-budget.json"
-      - ".github/lighthouse-mobile.json"
-      - "scripts/check-lighthouse-coverage.mjs"
-      - "scripts/health-check.sh"
-      - "scripts/check-production-host.mjs"
-      - "scripts/install-lychee.ps1"
-      - "scripts/check-pikapp-demo-build.mjs"
-      - "scripts/check-pikapp-page-integration.mjs"
-      - "scripts/check-pikapp-page-browser.mjs"
-      - "package.json"
-      - "package-lock.json"
-      - "pikappapp/**"
-      - "case-studies/document-processing.md"
-      - "CLAUDE.md"
-      - "PORTFOLIO_SYSTEM.md"
-      - "PORTFOLIO_AGENT_WORKFLOWS.md"
-      - "PORTFOLIO_DASHBOARD.md"
-      - "victor-tran-site.md"
   pull_request:
-    paths:
-      - "*.html"
-      - "css/**"
-      - "js/**"
-      - "images/**"
-      - "data/projects.json"
-      - "data/site-shell.json"
-      - "data/content-export-policy.json"
-      - "content/about.md"
-      - "content/design-system.md"
-      - "content/design-system.json"
-      - "content/vico2-page-system.md"
-      - "content/index.md"
-      - "content/salmagazine.md"
-      - "content/site-index.json"
-      - "scripts/generate-project-sections.mjs"
-      - "scripts/check-responsive-images.mjs"
-      - "scripts/check-gallery-media.mjs"
-      - "scripts/check-gallery-motion-system.mjs"
-      - "scripts/generate-responsive-images.py"
-      - "scripts/build-visual-archives-integration.py"
-      - "scripts/check-visual-archives-integration.mjs"
-      - "scripts/check-visual-archives-browser.mjs"
-      - "scripts/check-ui-gallery-integration.mjs"
-      - "scripts/build-ui-gallery-assets.py"
-      - "uigallery.html"
-      - "css/ui-gallery.css"
-      - "images/ui-gallery/**"
-      - "scripts/preflight.sh"
-      - "scripts/check-home-global-completion.mjs"
-      - "scripts/check-design-dna-system.mjs"
-      - "scripts/check-route02-homepage-integration.mjs"
-      - "scripts/validate-project-manifest.mjs"
-      - "scripts/check-about-semantics.mjs"
-      - "scripts/check-about-browser.mjs"
-      - "scripts/about-browser-process.mjs"
-      - "scripts/test-about-browser-process.mjs"
-      - "scripts/html-to-md.mjs"
-      - "scripts/test-html-to-md.mjs"
-      - "scripts/check-final-site-reconciliation.mjs"
-      - "scripts/check-public-archive-routes.mjs"
-      - ".vercelignore"
-      - "scripts/check-production-artifact-containment.mjs"
-      - "pci.html"
-      - "css/pci-vico2.css"
-      - "scripts/check-pci-claims-protection.mjs"
-      - "scripts/check-pci-browser.mjs"
-      - "scripts/check-sal-vico2.py"
-      - "scripts/check-sal-browser.mjs"
-      - "scripts/check-ability-victor-carbon.py"
-      - "scripts/check-ability-browser.mjs"
-      - "scripts/check-ibm-patterns-integration.mjs"
-      - "scripts/check-ibm-patterns-browser.mjs"
-      - "scripts/check-ibmcloud-hiring-cut.mjs"
-      - "scripts/check-ibmcloud-browser.mjs"
-      - "scripts/check-wxo-document-processing-integration.mjs"
-      - "scripts/check-wxo-document-processing-browser.mjs"
-      - "js/wxo-workflows-vico2.js"
-      - "scripts/check-home-lens-portal-browser.mjs"
-      - "scripts/check-homepage-system-alignment.py"
-      - "scripts/check-shared-shell.mjs"
-      - "scripts/check-theme-continuity-proof.mjs"
-      - "scripts/check-global-theme-control.mjs"
-      - "scripts/generate-site-shell.mjs"
-      - "scripts/test-site-shell.mjs"
-      - "vercel.json"
-      - "sitemap.xml"
-      - "robots.txt"
-      - ".github/workflows/health-check.yml"
-      - ".github/lighthouse-budget.json"
-      - ".github/lighthouse-mobile.json"
-      - "scripts/check-lighthouse-coverage.mjs"
-      - "scripts/health-check.sh"
-      - "scripts/check-production-host.mjs"
-      - "scripts/install-lychee.ps1"
-      - "scripts/check-pikapp-demo-build.mjs"
-      - "scripts/check-pikapp-page-integration.mjs"
-      - "scripts/check-pikapp-page-browser.mjs"
-      - "package.json"
-      - "package-lock.json"
-      - "pikappapp/**"
-      - "case-studies/document-processing.md"
-      - "CLAUDE.md"
-      - "PORTFOLIO_SYSTEM.md"
-      - "PORTFOLIO_AGENT_WORKFLOWS.md"
-      - "PORTFOLIO_DASHBOARD.md"
-      - "victor-tran-site.md"
 
 jobs:
+  changes:
+    name: Select validation scope
+    runs-on: ubuntu-latest
+    outputs:
+      all: ${{ steps.scope.outputs.all }}
+      shared: ${{ steps.scope.outputs.shared }}
+      home: ${{ steps.scope.outputs.home }}
+      ibm: ${{ steps.scope.outputs.ibm }}
+      pikapp: ${{ steps.scope.outputs.pikapp }}
+      gallery: ${{ steps.scope.outputs.gallery }}
+      about: ${{ steps.scope.outputs.about }}
+      pci: ${{ steps.scope.outputs.pci }}
+      sal: ${{ steps.scope.outputs.sal }}
+      ability: ${{ steps.scope.outputs.ability }}
+      wxo: ${{ steps.scope.outputs.wxo }}
+      images: ${{ steps.scope.outputs.images }}
+      links: ${{ steps.scope.outputs.links }}
+      deployable: ${{ steps.scope.outputs.deployable }}
+      docs: ${{ steps.scope.outputs.docs }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          fetch-depth: 0
+      - name: Classify changed paths
+        id: scope
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$EVENT_NAME" != "pull_request" ]]; then
+            node scripts/classify-health-check-scope.mjs --all >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BASE_SHA="$PR_BASE_SHA"
+          HEAD_SHA="$PR_HEAD_SHA"
+
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" =~ ^0+$ || -z "$HEAD_SHA" ]]; then
+            node scripts/classify-health-check-scope.mjs --all >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" | node scripts/classify-health-check-scope.mjs >> "$GITHUB_OUTPUT"
+
   links:
-    name: Broken link check
+    name: Portfolio checks
+    needs: changes
+    if: always()
     runs-on: ubuntu-latest
     steps:
+      - name: Require successful scope selection
+        if: needs.changes.result != 'success'
+        run: |
+          echo "::error::Validation scope selection failed; refusing to skip Portfolio checks."
+          exit 1
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: "22.22.0"
           cache: npm
+      - name: Health-check scope classifier fixture
+        run: node scripts/test-classify-health-check-scope.mjs
+      - name: Install pinned website build tools
+        if: >-
+          needs.changes.outputs.all == 'true' ||
+          needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.home == 'true' ||
+          needs.changes.outputs.ibm == 'true' ||
+          needs.changes.outputs.pikapp == 'true' ||
+          needs.changes.outputs.gallery == 'true' ||
+          needs.changes.outputs.about == 'true' ||
+          needs.changes.outputs.pci == 'true' ||
+          needs.changes.outputs.sal == 'true' ||
+          needs.changes.outputs.ability == 'true' ||
+          needs.changes.outputs.wxo == 'true'
+        run: npm ci --ignore-scripts
       - name: Home/global completion contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: npm run check:home-global-completion
       - name: Design DNA and live-component system contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: npm run check:design-dna-system
       - name: Theme continuity and global-control contracts
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: |
           npm run check:theme-continuity-proof
           npm run check:global-theme-control
       - name: Verify reproducible Pi Kapp demo build
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.pikapp == 'true'
         run: |
-          npm ci --ignore-scripts
           npm run verify:pikapp-demo
       - name: Content export generator policy fixture
         run: npm run test:content-export-policy
@@ -218,14 +117,19 @@ jobs:
       - name: Final site reconciliation contract
         run: npm run check:final-site-reconciliation
       - name: Public archive-route contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true'
         run: npm run check:public-archive-routes
       - name: Pi Kapp page integration contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.pikapp == 'true'
         run: npm run check:pikapp-page
       - name: IBM Patterns integration contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.ibm == 'true'
         run: npm run check:ibm-patterns
       - name: Gallery motion system contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true'
         run: npm run check:gallery-motion-system
       - name: IBM Cloud and IBM Patterns browser contracts
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.ibm == 'true'
         run: |
           node scripts/check-ibmcloud-hiring-cut.mjs
           python3 -m http.server 8876 --bind 127.0.0.1 >/tmp/ibm-two-page-server.log 2>&1 &
@@ -239,6 +143,7 @@ jobs:
           SITE_URL=http://127.0.0.1:8876 npm run check:ibmcloud-browser
           SITE_URL=http://127.0.0.1:8876 npm run check:ibm-patterns-browser
       - name: Pi Kapp page browser contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.pikapp == 'true'
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pikapp-page-server.log 2>&1 &
           SERVER_PID=$!
@@ -250,22 +155,29 @@ jobs:
           curl --fail --silent http://127.0.0.1:8765/pikappapp.html >/dev/null
           npm run check:pikapp-page-browser
       - name: Home lens portal contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: |
           npm run test:site-shell
           npm run check:site-shell
           python3 scripts/check-homepage-system-alignment.py
           npm run check:home-lens-portal-browser
       - name: Production host regression check
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.deployable == 'true'
         run: node scripts/check-production-host.mjs
       - name: About semantic-heading contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.about == 'true'
         run: node scripts/check-about-semantics.mjs
       - name: About voice-calibration browser contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.about == 'true'
         run: npm run check:about-browser
       - name: Production artifact containment contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.deployable == 'true'
         run: npm run check:artifact-containment
       - name: PCI claims and publication contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.pci == 'true'
         run: npm run check:pci-claims-protection
       - name: PCI responsive browser contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.pci == 'true'
         run: |
           PCI_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
           PCI_URL="http://127.0.0.1:${PCI_PORT}/pci.html"
@@ -293,8 +205,10 @@ jobs:
           curl --fail --silent "$PCI_URL" >/dev/null
           SITE_URL="http://127.0.0.1:${PCI_PORT}" npm run check:pci-browser
       - name: Star & Lamp bounded revision contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.sal == 'true'
         run: npm run check:sal-vico2
       - name: Star & Lamp responsive browser contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.sal == 'true'
         run: |
           SAL_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
           SAL_URL="http://127.0.0.1:${SAL_PORT}/salmagazine.html"
@@ -322,8 +236,10 @@ jobs:
           curl --fail --silent "$SAL_URL" >/dev/null
           SITE_URL="http://127.0.0.1:${SAL_PORT}" npm run check:sal-browser
       - name: Ability Experience bounded sequence contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.ability == 'true'
         run: npm run check:ability-vico2
       - name: Ability Experience responsive browser contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.ability == 'true'
         run: |
           ABILITY_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
           ABILITY_URL="http://127.0.0.1:${ABILITY_PORT}/abilityexperience.html"
@@ -351,11 +267,19 @@ jobs:
           curl --fail --silent "$ABILITY_URL" >/dev/null
           SITE_URL="http://127.0.0.1:${ABILITY_PORT}" npm run check:ability-browser
       - name: Lighthouse coverage regression check
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.pikapp == 'true'
         run: node scripts/check-lighthouse-coverage.mjs
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        if: >-
+          needs.changes.outputs.all == 'true' ||
+          needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.wxo == 'true' ||
+          needs.changes.outputs.images == 'true' ||
+          needs.changes.outputs.gallery == 'true'
         with:
           python-version: "3.14"
       - name: wxO and Document Processing protected deep-link regression
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.wxo == 'true'
         run: |
           npm run check:wxo-document-processing
           python3 -m http.server 8898 --bind 127.0.0.1 >/tmp/wxo-document-server.log 2>&1 &
@@ -368,17 +292,22 @@ jobs:
           curl --fail --silent http://127.0.0.1:8898/wxo-canvas.html >/dev/null
           SITE_URL=http://127.0.0.1:8898 npm run check:wxo-document-processing-browser
       - name: Regenerate responsive images reproducibly
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.images == 'true'
         run: |
           python -m pip install pillow==12.3.0
           python scripts/generate-responsive-images.py
           git diff --exit-code -- images/responsive
       - name: Responsive image regression check
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-responsive-images.mjs
       - name: Gallery media regression check
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.images == 'true'
         run: node scripts/check-gallery-media.mjs
       - name: UI Gallery integration contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true'
         run: npm run check:ui-gallery
       - name: Visual archives integration and browser contracts
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.gallery == 'true'
         run: |
           node scripts/check-visual-archives-integration.mjs all
           python3 -m http.server 8896 --bind 127.0.0.1 >/tmp/visual-archives-server.log 2>&1 &
@@ -392,6 +321,7 @@ jobs:
           curl --fail --silent http://127.0.0.1:8896/artillustration.html >/dev/null
           SITE_URL=http://127.0.0.1:8896 npm run check:visual-archives-lightbox-browser
       - name: Lychee link check
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.links == 'true'
         uses: lycheeverse/lychee-action@v2
         with:
           # Protected pages, including Document Processing, stay visitor-gated, noindex,
@@ -413,7 +343,10 @@ jobs:
 
   lighthouse:
     name: Lighthouse audit · desktop
-    if: github.event_name != 'pull_request'
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' &&
+      (needs.changes.outputs.all == 'true' || needs.changes.outputs.deployable == 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -455,7 +388,10 @@ jobs:
 
   lighthouse-mobile:
     name: Lighthouse audit · mobile
-    if: github.event_name != 'pull_request'
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' &&
+      (needs.changes.outputs.all == 'true' || needs.changes.outputs.deployable == 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -493,6 +429,8 @@ jobs:
 
   images:
     name: Oversized image scan
+    needs: changes
+    if: needs.changes.outputs.all == 'true' || needs.changes.outputs.images == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3

@@ -107,27 +107,11 @@ expect(preflight.includes('run_required "About voice-calibration browser contrac
   'Preflight must invoke the About browser contract unconditionally.');
 
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/health-check.yml'), 'utf8');
-const triggerCount = workflow.match(/- "scripts\/check-about-semantics\.mjs"/g)?.length ?? 0;
-expect(triggerCount === 2,
-  `Health-check path filters must include the About contract for push and pull requests; found ${triggerCount}.`);
-const browserTriggerCount = workflow.match(/- "scripts\/check-about-browser\.mjs"/g)?.length ?? 0;
-expect(browserTriggerCount === 2,
-  `Health-check path filters must include the About browser contract for push and pull requests; found ${browserTriggerCount}.`);
-for (const dependency of [
-  'content/about.md',
-  'content/site-index.json',
-  'scripts/about-browser-process.mjs',
-  'scripts/test-about-browser-process.mjs',
-  'scripts/html-to-md.mjs',
-]) {
-  const escapedDependency = dependency.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const dependencyTriggerCount = workflow.match(new RegExp(`- "${escapedDependency}"`, 'g'))?.length ?? 0;
-  expect(dependencyTriggerCount === 2,
-    `Health-check path filters must include ${dependency} for push and pull requests; found ${dependencyTriggerCount}.`);
-}
-expect(workflow.includes('- name: About semantic-heading contract\n        run: node scripts/check-about-semantics.mjs'),
+expect(workflow.includes("needs.changes.outputs.about == 'true'"),
+  'Health-check must scope About contracts through classifier ownership.');
+expect(workflow.includes('run: node scripts/check-about-semantics.mjs'),
   'Health-check must run the About semantic-heading contract.');
-expect(workflow.includes('- name: About voice-calibration browser contract\n        run: npm run check:about-browser'),
+expect(workflow.includes('run: npm run check:about-browser'),
   'Health-check must run the About browser contract.');
 
 if (failures.length) {

@@ -24,16 +24,8 @@ const workflow = fs.readFileSync(path.join(root, '.github/workflows/health-check
 if (!workflow.includes('run: node scripts/check-production-host.mjs')) {
   failures.push('.github/workflows/health-check.yml: CI must execute the production-host regression check.');
 }
-for (const watchedFile of [
-  'scripts/check-production-host.mjs',
-  'case-studies/document-processing.md',
-  'CLAUDE.md',
-  'PORTFOLIO_SYSTEM.md',
-  'victor-tran-site.md',
-]) {
-  if (!workflow.includes(`"${watchedFile}"`)) {
-    failures.push(`.github/workflows/health-check.yml: ${watchedFile} changes must trigger CI.`);
-  }
+if (!workflow.includes("needs.changes.outputs.deployable == 'true'")) {
+  failures.push('.github/workflows/health-check.yml: production-host validation must use deployable scope.');
 }
 
 const htmlFiles = files.filter((file) => file.endsWith('.html'));

@@ -40,6 +40,7 @@ else
 fi
 
 run_required "Whitespace/conflict marker check" git diff --check
+run_required "Path-aware health-check scope fixture" npm run test:health-check-scope
 
 run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs
 run_required "About semantic-heading contract" node scripts/check-about-semantics.mjs

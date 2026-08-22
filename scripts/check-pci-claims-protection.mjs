@@ -219,10 +219,7 @@ for (const ownedServerGuard of [
 ]) {
   requireText(workflow, ownedServerGuard, 'PCI browser workflow owned-server guard');
 }
-for (const requiredPath of ['pci.html', 'css/pci-vico2.css', 'scripts/check-pci-browser.mjs']) {
-  const pattern = new RegExp(`- ["']?${requiredPath.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}["']?`, 'g');
-  if ((workflow.match(pattern) || []).length < 2) fail(`health-check workflow must trigger for ${requiredPath} on push and pull requests`);
-}
+if (!workflow.includes("needs.changes.outputs.pci == 'true'")) fail('health-check workflow must scope PCI contracts through classifier ownership');
 
 if (!/"check:pci-claims-protection"\s*:\s*"node scripts\/check-pci-claims-protection\.mjs"/.test(packageJson)) {
   fail('package.json must expose check:pci-claims-protection');
@@ -233,10 +230,7 @@ if (!/npm run check:pci-claims-protection/.test(preflight)) {
 if (!/npm run check:pci-claims-protection/.test(workflow)) {
   fail('health-check workflow must run check:pci-claims-protection');
 }
-const exportPolicyTriggers = workflow.match(/- "data\/content-export-policy\.json"/g) || [];
-if (exportPolicyTriggers.length !== 2) {
-  fail('health-check workflow must trigger on content export policy changes for push and pull requests');
-}
+
 
 if (errors.length) {
   console.error('PCI CLAIMS AND PUBLICATION CONTRACT: FAIL');

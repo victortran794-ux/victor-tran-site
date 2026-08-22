@@ -157,16 +157,8 @@ const workflow = read('.github/workflows/health-check.yml');
 expect(workflow.includes('pull_request:'), 'Health workflow must run as a pull-request gate.');
 expect(workflow.includes('run: node scripts/check-responsive-images.mjs'),
   'CI must execute the responsive-image regression check.');
-for (const watchedPath of [
-  'images/**',
-  'data/projects.json',
-  'scripts/check-responsive-images.mjs',
-  'scripts/generate-project-sections.mjs',
-  'scripts/generate-responsive-images.py',
-  'scripts/preflight.sh',
-]) {
-  expect(workflow.includes(`"${watchedPath}"`), `${watchedPath} changes must trigger CI.`);
-}
+expect(workflow.includes("needs.changes.outputs.images == 'true'"), 'Responsive-image checks must use image scope.');
+expect(workflow.includes("needs.changes.outputs.shared == 'true'"), 'Responsive-image checks must include shared generator scope.');
 expect(workflow.includes('pillow==12.3.0'), 'CI must pin Pillow 12.3.0 for derivative generation.');
 expect(workflow.includes('python scripts/generate-responsive-images.py'), 'CI must regenerate responsive derivatives.');
 expect(workflow.includes('git diff --exit-code -- images/responsive'), 'CI must compare regenerated derivatives with committed outputs.');

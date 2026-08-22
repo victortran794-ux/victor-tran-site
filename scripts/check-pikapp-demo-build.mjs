@@ -83,16 +83,10 @@ expect(packageJson.devDependencies?.esbuild && packageJson.devDependencies?.tail
 expect(preflight.includes('npm run verify:pikapp-demo'),
   'Preflight must run the reproducible Pi Kapp demo build verification.');
 
-for (const watchedPath of [
-  'package.json',
-  'package-lock.json',
-  'pikappapp/**',
-  'scripts/check-pikapp-demo-build.mjs',
-]) {
-  const occurrences = workflow.split(`- "${watchedPath}"`).length - 1;
-  expect(occurrences >= 2,
-    `Site health workflow must watch ${watchedPath} for push and pull_request events.`);
-}
+expect(workflow.includes("needs.changes.outputs.pikapp == 'true'"),
+  'Site health workflow must scope the reproducible Pi Kapp build through classifier ownership.');
+expect(workflow.includes("needs.changes.outputs.all == 'true'"),
+  'Site health workflow must run the Pi Kapp build for tooling and full-suite changes.');
 expect(workflow.includes('npm run verify:pikapp-demo'),
   'Site health workflow must verify regenerated Pi Kapp demo artifacts.');
 

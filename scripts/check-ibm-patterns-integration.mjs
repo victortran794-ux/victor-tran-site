@@ -53,7 +53,7 @@ if (packageJson.scripts?.['check:ibm-patterns'] !== 'node scripts/check-ibm-patt
 if (packageJson.scripts?.['check:ibm-patterns-browser'] !== 'node scripts/check-ibm-patterns-browser.mjs') fail('package.json missing IBM Patterns browser command');
 if (!text('scripts/preflight.sh').includes('npm run check:ibm-patterns')) fail('preflight must run the IBM Patterns integration contract');
 const healthWorkflow = text('.github/workflows/health-check.yml');
-if (count(healthWorkflow, '- "scripts/check-ibm-patterns-integration.mjs"') !== 2) fail('health workflow must watch the IBM Patterns integration contract for push and pull requests');
+if (!healthWorkflow.includes("needs.changes.outputs.ibm == 'true'")) fail('health workflow must scope IBM Patterns through classifier ownership');
 if (!healthWorkflow.includes('run: npm run check:ibm-patterns')) fail('health workflow must execute the IBM Patterns integration contract');
 for (const required of [
   '<link rel="canonical" href="https://www.victortrandesign.com/ibm-patterns">',

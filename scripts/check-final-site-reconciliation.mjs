@@ -20,6 +20,8 @@ const forbid = (text, pattern, message) => {
 const workflow = read('.github/workflows/health-check.yml');
 const packageJson = JSON.parse(read('package.json'));
 const preflight = read('scripts/preflight.sh');
+const scopeClassifier = read('scripts/classify-health-check-scope.mjs');
+const scopeFixture = read('scripts/test-classify-health-check-scope.mjs');
 const docs = {
   system: read('PORTFOLIO_SYSTEM.md'),
   workflows: read('PORTFOLIO_AGENT_WORKFLOWS.md'),
@@ -49,11 +51,13 @@ for (const [name, jobId] of [['desktop', 'lighthouse'], ['mobile', 'lighthouse-m
 }
 
 for (const phrase of [
-  'Four jobs currently run inside one `Site health check` workflow',
+  'Five logical statuses now run inside that workflow',
+  'Documentation-only changes stop after the fast baseline',
+  'Shared and workflow/tooling changes fail safely to full coverage',
+  'every `main` push performs the full maintenance suite',
   'Pull requests intentionally skip both production-domain Lighthouse jobs',
   'No classic branch protection or repository ruleset currently requires these checks before merge',
-  'Keep the portfolio-specific contracts in this repository',
-  'extract a smaller reusable web-project baseline',
+  'Victor-specific claims, privacy/provenance, archive, shell, and browser contracts remain portfolio-only',
   '### Privacy and provenance classification',
   'Privacy checks must classify evidence from source and provenance',
   'are not proof of live or private records',
@@ -62,14 +66,51 @@ for (const phrase of [
   'Automated string scans may flag candidates for review',
 ]) requirePhrase(docs.system, phrase, `portfolio system must state: ${phrase}`);
 
+const changesJob = jobBlock('changes');
+const triggerBlock = workflow.slice(0, workflow.indexOf('\njobs:'));
+forbid(triggerBlock, /^\s+paths:/m, 'health workflow must emit scope and baseline statuses for every PR and main push');
+if (!changesJob) fail('scope-selection job was not found');
+else {
+  requireText(changesJob, 'fetch-depth: 0', 'scope selection must fetch both diff endpoints');
+  requireText(changesJob, 'set -euo pipefail', 'scope selection must fail closed when git diff or the classifier fails');
+  requireText(changesJob, 'if [[ "$EVENT_NAME" != "pull_request" ]]', 'main, scheduled, and manual runs must force full coverage');
+  requireText(changesJob, 'BASE_SHA="$PR_BASE_SHA"', 'pull requests must use the immutable base SHA');
+  requireText(changesJob, 'HEAD_SHA="$PR_HEAD_SHA"', 'pull requests must use the immutable head SHA');
+  requireText(changesJob, 'scripts/classify-health-check-scope.mjs --all', 'scope selection must preserve safe full-run fallback');
+  requireText(changesJob, 'git diff --name-only "$BASE_SHA" "$HEAD_SHA"', 'scope selection must classify the exact event diff');
+}
+
 const checkJob = jobBlock('links');
 if (!checkJob) fail('primary check job was not found');
 else {
+  requireText(checkJob, 'needs: changes', 'portfolio checks must depend on scope selection');
+  requireText(checkJob, 'if: always()', 'portfolio checks must emit a failing stable status when scope selection fails');
+  requireText(checkJob, "if: needs.changes.result != 'success'", 'portfolio checks must explicitly reject failed scope selection');
+  requireText(checkJob, 'node scripts/test-classify-health-check-scope.mjs', 'portfolio checks must run the scope fixture');
+  requireText(checkJob, "needs.changes.outputs.pikapp == 'true'", 'Pi Kapp contracts must be path scoped');
+  requireText(checkJob, "needs.changes.outputs.gallery == 'true'", 'gallery contracts must be path scoped');
+  requireText(checkJob, "needs.changes.outputs.wxo == 'true'", 'wxO contracts must be path scoped');
   requireText(checkJob, 'npm run test:content-export-policy', 'primary check job must preserve the content export policy fixture');
   requireText(checkJob, 'npm run check:content-export-policy', 'primary check job must run current-artifact content export policy validation');
   requireText(checkJob, 'node scripts/validate-project-manifest.mjs', 'primary check job must validate the current project manifest');
   requireText(checkJob, 'npm run check:final-site-reconciliation', 'primary check job must run the final reconciliation contract');
 }
+
+for (const [name, jobId] of [['desktop', 'lighthouse'], ['mobile', 'lighthouse-mobile']]) {
+  const block = jobBlock(jobId);
+  requireText(block, 'needs: changes', `${name} Lighthouse must depend on scope selection`);
+  requireText(block, "needs.changes.outputs.deployable == 'true'", `${name} Lighthouse must be limited to deployable changes outside forced full runs`);
+}
+
+const imagesJob = jobBlock('images');
+requireText(imagesJob, 'needs: changes', 'image scan must depend on scope selection');
+requireText(imagesJob, "needs.changes.outputs.images == 'true'", 'image scan must be limited to image changes outside forced full runs');
+
+requireText(scopeClassifier, 'unknownDeployable', 'scope classifier must fail unknown deployable paths toward shared coverage');
+requireText(scopeClassifier, 'hasUnknownPath', 'scope classifier must fail every unrecognized non-documentation path toward full coverage');
+requireText(scopeFixture, 'docsOnly', 'scope fixture must protect documentation-only behavior');
+requireText(scopeFixture, 'unknown public HTML must fail safely to shared coverage', 'scope fixture must protect unknown deployable fallback');
+requireText(scopeFixture, 'must fail safely to full coverage', 'scope fixture must protect unknown tooling and configuration fallback');
 
 const protectedPages = ['wxo-canvas.html', 'document-processing.html'];
 for (const page of protectedPages) {
@@ -79,7 +120,9 @@ for (const page of protectedPages) {
 }
 
 requireText(packageJson.scripts?.['check:final-site-reconciliation'] ?? '', 'scripts/check-final-site-reconciliation.mjs', 'package.json must register the reconciliation contract');
+requireText(packageJson.scripts?.['test:health-check-scope'] ?? '', 'scripts/test-classify-health-check-scope.mjs', 'package.json must register the scope fixture');
 requireText(preflight, 'check:final-site-reconciliation', 'preflight must run the reconciliation contract');
+requireText(preflight, 'test:health-check-scope', 'preflight must run the scope fixture');
 
 for (const [name, text] of Object.entries(docs)) {
   requirePhrase(text, 'static client-side password gate is visitor deterrence and discovery reduction, not server-side access control', `${name} must state the client-side gate limitation`);
