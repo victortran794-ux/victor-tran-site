@@ -6,6 +6,16 @@ import { verifyPassword } from '../lib/password-verifier.mjs';
 
 const MAX_AGE_SECONDS = 60 * 60 * 8;
 const DEFAULT_NEXT = '/wxo-canvas';
+const TRUSTED_ORIGIN_REDIRECTS = new Map([
+  ['https://www.victortrandesign.com', 'https://victortrandesign.com'],
+  ['https://www.victortrandesigns.com', 'https://victortrandesigns.com'],
+]);
+
+function hasAcceptedOrigin(request) {
+  const suppliedOrigin = request.headers.get('origin');
+  const requestOrigin = new URL(request.url).origin;
+  return suppliedOrigin === requestOrigin || TRUSTED_ORIGIN_REDIRECTS.get(requestOrigin) === suppliedOrigin;
+}
 
 function safeNext(value) {
   const candidate = String(value || '');
@@ -35,7 +45,7 @@ export async function handleAccessRequest(request, options = {}) {
     });
   }
 
-  if (request.headers.get('origin') !== new URL(request.url).origin) {
+  if (!hasAcceptedOrigin(request)) {
     return new Response('Access request rejected.', {
       status: 403,
       headers: { 'cache-control': 'no-store' },

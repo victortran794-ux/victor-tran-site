@@ -119,6 +119,35 @@ const crossOriginResponse = await handleAccessRequest(
 assert.equal(crossOriginResponse.status, 403, 'cross-origin login POST must be rejected');
 assert.equal(crossOriginResponse.headers.has('set-cookie'), false, 'cross-origin POST must not set a cookie');
 
+const trustedAliasResponse = await handleAccessRequest(
+  new Request('https://www.victortrandesign.com/api/wxo-access', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      origin: 'https://victortrandesign.com',
+    },
+    body: new URLSearchParams({ password: 'wrong-password', next: '/wxo-canvas' }),
+  }),
+  { passwordVerifier, sessionSecret: secret, now },
+);
+assert.equal(trustedAliasResponse.status, 303, 'trusted apex-to-www login redirect must reach password verification');
+assert.match(trustedAliasResponse.headers.get('location') || '', /error=1/u, 'invalid alias-origin password must return the normal gate error');
+assert.equal(trustedAliasResponse.headers.has('set-cookie'), false, 'invalid alias-origin password must not set a cookie');
+
+const trustedPluralAliasResponse = await handleAccessRequest(
+  new Request('https://www.victortrandesigns.com/api/wxo-access', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      origin: 'https://victortrandesigns.com',
+    },
+    body: new URLSearchParams({ password: 'wrong-password', next: '/wxo-canvas' }),
+  }),
+  { passwordVerifier, sessionSecret: secret, now },
+);
+assert.equal(trustedPluralAliasResponse.status, 303, 'trusted plural apex-to-www redirect must reach password verification');
+assert.equal(trustedPluralAliasResponse.headers.has('set-cookie'), false, 'invalid plural alias-origin password must not set a cookie');
+
 const unsafeNextResponse = await handleAccessRequest(
   accessRequest('test-only-password', 'https://attacker.invalid/'),
   { passwordVerifier, sessionSecret: secret, now },
