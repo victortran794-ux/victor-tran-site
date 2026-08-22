@@ -18,11 +18,12 @@ function isAcceptedOrigin(origin, requestOrigin) {
 function hasAcceptedOrigin(request) {
   const suppliedOrigin = request.headers.get('origin');
   const requestOrigin = new URL(request.url).origin;
+  const fetchSite = request.headers.get('sec-fetch-site');
+  if (suppliedOrigin === 'null' && fetchSite === 'same-origin') return true;
   if (suppliedOrigin && suppliedOrigin !== 'null') {
     return isAcceptedOrigin(suppliedOrigin, requestOrigin);
   }
 
-  const fetchSite = request.headers.get('sec-fetch-site');
   if (fetchSite !== 'same-origin' && fetchSite !== 'same-site') return false;
 
   const referrer = request.headers.get('referer');
