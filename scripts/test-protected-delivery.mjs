@@ -17,7 +17,15 @@ for (const path of [
   '/wxo-canvas.html',
   '/document-processing',
   '/document-processing.html',
+  '/wxo-canvas/',
+  '/wxo-canvas%2ehtml',
+  '/wxo-canvas%252ehtml',
   '/protected/wxo/current/example.png',
+  '/protected/wxo%2fcurrent/example.png',
+  '/protected/wxo%252fcurrent/example.png',
+  '/protected%2fwxo/current/example.png',
+  '/protected%255cwxo%255ccurrent%255cexample.png',
+  '/PROTECTED/WXO/current/example.png',
   '/protected/wxo/v2/example.webm',
 ]) {
   assert.equal(isProtectedPath(path), true, `${path} must require authorization`);
@@ -157,6 +165,20 @@ assert.equal(anonymousMediaResponse.headers.get('cache-control'), 'no-store');
 assert.equal(anonymousMediaResponse.headers.get('cdn-cache-control'), 'no-store', 'anonymous media denial must disable downstream CDN caching');
 assert.equal(anonymousMediaResponse.headers.get('vercel-cdn-cache-control'), 'no-store', 'anonymous media denial must disable Vercel CDN caching');
 
+for (const encodedMediaPath of [
+  '/protected/wxo%2fcurrent/example.png',
+  '/protected/wxo%252fcurrent/example.png',
+  '/protected%2fwxo/current/example.png',
+  '/protected%255cwxo%255ccurrent%255cexample.png',
+  '/PROTECTED/WXO/current/example.png',
+]) {
+  const encodedAnonymousMediaResponse = await handleProtectedRequest(
+    new Request(`https://portfolio.test${encodedMediaPath}`),
+    { sessionSecret: secret, now, ...helpers },
+  );
+  assert.equal(encodedAnonymousMediaResponse.status, 404, `${encodedMediaPath} anonymous protected media must fail closed`);
+}
+
 const authorizedPageResponse = await handleProtectedRequest(authorized, {
   sessionSecret: secret,
   now: now + 30_000,
@@ -208,6 +230,8 @@ for (const forbidden of ['wxo-workflows-vico2', 'protected/wxo/', 'images/wxo-ca
 }
 
 const wxoHtml = fs.readFileSync('wxo-canvas.html', 'utf8');
+const middlewareSource = fs.readFileSync('middleware.ts', 'utf8');
+assert.match(middlewareSource, /matcher:\s*\['\/:path\*'\]/u, 'routing middleware must inspect every request so encoded protected paths cannot skip authorization');
 assert.equal(wxoHtml.includes('js/password-gate.js'), false, 'protected page must not load the retired client gate');
 assert.equal(wxoHtml.includes('sessionStorage.getItem(\'vtd-unlock\')'), false, 'protected page must not authorize in the browser');
 assert.equal(fs.existsSync('js/password-gate.js'), false, 'client-side hash gate must be retired');

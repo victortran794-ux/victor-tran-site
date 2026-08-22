@@ -40,9 +40,7 @@ requireText(deployIgnore, 'data/', 'Repository-only wxO provenance must remain e
 if (vercel.redirects?.some((rule) => rule.source === '/document-processing')) {
   fail('Document Processing redirect must remain behind middleware authorization.');
 }
-for (const route of ['/wxo-canvas', '/wxo-canvas.html', '/document-processing', '/document-processing.html', '/protected/wxo/:path*']) {
-  requireText(middleware, `'${route}'`, `Routing Middleware must match ${route}.`);
-}
+requireText(middleware, "matcher: ['/:path*']", 'Routing Middleware must inspect every request so encoded protected paths cannot bypass authorization.');
 for (const value of ['WXO_SESSION_SECRET', 'handleProtectedRequest', 'next', 'rewrite']) {
   requireText(middleware, value, `Routing Middleware missing server boundary marker: ${value}`);
 }
