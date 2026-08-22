@@ -23,8 +23,3 @@ case-studies/
 content/
 scripts/
 data/
-
-# Pi Kapp build sources; keep compiled demo/runtime artifacts
-pikappapp/demo-source.css
-pikappapp/demo-source.jsx
-pikappapp/tailwind.config.cjs

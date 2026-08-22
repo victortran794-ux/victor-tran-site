@@ -121,7 +121,7 @@ Checked 2026-08-21:
 - This protected Site checks lane replaces that monolithic dispatch with the tested path-aware model above; GitHub PR evidence must confirm both scope selection and full fallback before release.
 - Vercel preview and production status checks remain separate from GitHub Actions. Exact deployment and live custom-domain verification are required for meaningful deployable releases, not documentation-only or workflow-only changes.
 - Branch protection and repository rules remain unchanged.
-- Pi Kapp's standalone demo is currently included in reproducible build verification, the Pi Kapp integration/browser contracts, Lychee exclusions, and both production Lighthouse inventories. A static-screen simplification must reconcile each dependency rather than only deleting `pikappapp/demo.html`.
+- Pi Kapp preserves its original V1 sequence, three selected static V2 states, authored expansion archive, identity evidence, and final remaster without a standalone runtime. The retired demo and system URLs redirect to the relevant case-study chapters; integration/browser contracts, Lychee, Lighthouse, preflight, and deployment containment are reconciled around the stable `/pikappapp` route.
 
 ## Preflight checks
 

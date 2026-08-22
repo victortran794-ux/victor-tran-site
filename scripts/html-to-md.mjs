@@ -257,6 +257,7 @@ function pageToMarkdown(file, html) {
     .filter(item => !['Home', 'About', 'Contact', 'Work', 'Galleries'].includes(item));
   const tags = dedupeBy(allMatches(cleanHtml, /<span[^>]*class="tag[^"]*"[^>]*>([\s\S]*?)<\/span>/gi), item => item);
   const images = extractImages(cleanHtml);
+  const summaryImageLimit = file === 'pikappapp.html' ? 15 : 12;
   const homeProjects = file === 'index.html' ? extractHomeProjects(cleanHtml) : [];
 
   const frontmatter = [
@@ -350,7 +351,7 @@ function pageToMarkdown(file, html) {
       description,
       contentFile: `content/${contentFileFromHtml(file)}`,
       headings,
-      images: images.slice(0, 12),
+      images: images.slice(0, summaryImageLimit),
       projects: homeProjects,
     },
   };

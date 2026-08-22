@@ -21,9 +21,6 @@ const requiredIgnoreEntries = [
   'content/',
   'scripts/',
   'data/',
-  'pikappapp/demo-source.css',
-  'pikappapp/demo-source.jsx',
-  'pikappapp/tailwind.config.cjs',
 ];
 
 for (const entry of requiredIgnoreEntries) {
@@ -60,9 +57,6 @@ const denylist = [
   '/content/site-index.json',
   '/.gitattributes',
   '/.hermes/evidence/shared-shell/index-390-dark-menu.png',
-  '/pikappapp/demo-source.css',
-  '/pikappapp/demo-source.jsx',
-  '/pikappapp/tailwind.config.cjs',
 ];
 
 const runtimeFiles = fs.readdirSync(root)

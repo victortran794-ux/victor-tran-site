@@ -7,6 +7,16 @@
       "source": "/document-processing",
       "destination": "/wxo-canvas#document-processing",
       "permanent": true
+    },
+    {
+      "source": "/pikappapp/demo",
+      "destination": "/pikappapp#chapter-4",
+      "permanent": true
+    },
+    {
+      "source": "/pikappapp/system",
+      "destination": "/pikappapp#chapter-3",
+      "permanent": true
     }
   ]
 }

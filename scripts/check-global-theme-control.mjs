@@ -39,9 +39,6 @@ for (const page of expectedSharedPages) {
   assert.match(html, /data-lens="dark"[^>]*aria-pressed="(?:true|false)"[^>]*aria-label="Dark mode"/, `${page} must retain an accessible Dark control`);
 }
 
-for (const standalone of ['pikappapp/demo.html', 'pikappapp/system.html']) {
-  assert.ok(!read(standalone).includes('src="../js/main.js"') && !read(standalone).includes('src="js/main.js"'), `${standalone} must remain outside the shared shell contract`);
-}
 
 const ruleBody = selector => {
   const start = css.indexOf(`${selector} {`);

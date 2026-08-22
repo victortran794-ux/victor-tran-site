@@ -19,78 +19,6 @@ const sha256 = (relativePath) => crypto.createHash('sha256').update(read(relativ
 const count = (value, needle) => value.split(needle).length - 1;
 const size = (relativePath) => read(relativePath).length;
 
-const standaloneSystem = text('pikappapp/system.html');
-for (const required of [
-  'class="w-full max-w-[1600px] mx-auto"',
-  'px-5 sm:px-10 lg:px-20',
-  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
-  'grid grid-cols-1 lg:grid-cols-2',
-  'grid grid-cols-1 sm:grid-cols-3',
-  'grid grid-cols-1 lg:grid-cols-3',
-  'text-[48px] sm:text-[64px] lg:text-[80px]',
-  'text-[48px] sm:text-[64px] lg:text-[88px]',
-]) {
-  if (!standaloneSystem.includes(required)) fail(`Pi Kapp standalone system page missing responsive contract: ${required}`);
-}
-for (const forbidden of [
-  'style="width: 1600px;"',
-  'class="px-20',
-  'class="grid grid-cols-5',
-  'class="grid grid-cols-3',
-  'class="grid grid-cols-2',
-]) {
-  if (standaloneSystem.includes(forbidden)) fail(`Pi Kapp standalone system page retains fixed desktop framing: ${forbidden}`);
-}
-
-const frozenFiles = {
-  'pikappapp/demo.html': '6c2621e62c0e8dc4626dffff7ebfba97d2a4f1ff326240d25c9822a583c80ab4',
-  'pikappapp/demo.bundle.css': 'f4988fc9711f6bb63cd3c41bc86775d4df4773cc11f2e0edd575165aacab779e',
-  'pikappapp/demo.bundle.js': '61c76d50667c222490c01b87a76fd7cc254307867832aa5c8b69795b113843d9',
-};
-for (const [relativePath, expected] of Object.entries(frozenFiles)) {
-  const actual = sha256(relativePath);
-  if (actual !== expected) fail(`${relativePath} changed outside the approved Pi Kapp page scope`);
-}
-
-const demoSource = text('pikappapp/demo-source.jsx');
-const demoBundle = text('pikappapp/demo.bundle.js');
-for (const required of [
-  'Sample',
-  'Concept',
-  'Illustrative progress',
-  'No live standings',
-  'Example bulletin content with no grades, rankings, standings, or member records.',
-  'Illustrative complete',
-  'Illustrative pending',
-  'Illustrative chapter concept. No live roster, standings, or member records.',
-  'Illustrative national view. No live announcements, campaigns, or inter-chapter rankings.',
-  'Illustrative settings view. No profile, notification, theme, or privacy data is connected.',
-]) {
-  if (!demoSource.includes(required) || !demoBundle.includes(required)) fail(`sanitized V2 prototype boundary missing from source or bundle: ${required}`);
-}
-for (const forbidden of [
-  'Victor Tran',
-  'Iota Theta',
-  'University of Iowa',
-  'Ranked #',
-  'this week',
-  'Push America',
-  'Ability Experience',
-  'Tahoe',
-  'Spring rush table assignments live',
-  'Chapter GPA report posted',
-  '08/30',
-  '09/12',
-  '09/05',
-  '08/15',
-  '08/22',
-  'weekly standings live here',
-  'inter-chapter rankings will land',
-  'Reserved for v2 of the prototype',
-]) {
-  if (demoSource.includes(forbidden) || demoBundle.includes(forbidden)) fail(`future-live V2 prototype claim remains: ${forbidden}`);
-}
-
 const assetHashes = {
   'images/pikapp-case-study/belltower-expansion.jpg': 'b977af8df532d2562ceeb0d9db85e7e985ceaa9e583b4940f37b71dac4f5c77f',
   'images/pikapp-case-study/expansion-cover-detail.jpg': '9c6ac629bfc4df01f25ebd75985f32b515f08469bbaeeb27c94b4bdf22650b01',
@@ -249,13 +177,11 @@ for (const required of [
   'role="group" aria-label="Source palette color roles"',
   'role="group" aria-label="Member, Chapter, National HQ, and Settings interface icons"',
   'role="group" aria-label="Display, interface, and status type roles"',
-  'V1 established the structure. V2 made it runnable.',
-  'Supporting chronology',
-  'These materials show two stages of the concept: original V1 screens and the earlier runnable V2.',
-  '<span>04</span>V1 + runnable V2',
+  'V1 established the structure. V2 clarified the loop.',
+
+  '<span>04</span>V1 + static V2',
   'A formative project that changed how I approached product design.',
   'Chapter 05',
-  'Final design | Source-faithful remaster',
   'The final remaster brings the app back to its source.',
   'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   '01 Welcome',
@@ -264,22 +190,13 @@ for (const required of [
   'The dashboard keeps progress and milestones visible without crowding the next action.',
   '03 Milestone detail',
   'Expanded tasks preserve context while making completion state easier to scan.',
-  'Source-faithful remaster. Illustrative concept screens.',
-  'Earlier V2 prototype',
-  'A runnable snapshot of the V2 member model.',
-  'This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.',
-  '<iframe class="prototype-embed__frame" src="pikappapp/demo.html"',
-  'title="Earlier V2 Pi Kapp member-dashboard prototype"',
-  'loading="lazy"',
-  'sandbox="allow-scripts"',
-  'Open V2 prototype',
-  'class="prototype-dialog"',
-  'data-prototype-dialog',
-  'data-prototype-open',
-  'aria-controls="v2-prototype-dialog"',
-  'data-prototype-dialog-frame',
-  'data-src="pikappapp/demo.html"',
-  'aria-label="Close V2 prototype"',
+  'Illustrative concept screens.',
+  'Earlier static V2 states',
+  'The prototype clarified the attention-to-completion loop.',
+
+  'images/pikapp-case-study/v2-today-light-clean.png',
+  'images/pikapp-case-study/v2-responsibility-detail-dark-clean.png',
+  'images/pikapp-case-study/v2-all-caught-up-light-clean.png',
   '<script src="js/pikappapp.js"></script>',
 ]) {
   if (!html.includes(required)) fail(`pikappapp.html missing required integration marker: ${required}`);
@@ -293,7 +210,7 @@ for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted s
   if (html.includes(removedExplorationCopy)) fail(`public Pi Kapp page retained removed exploration copy: ${removedExplorationCopy}`);
 }
 if (count(html, 'class="coda__screen"') !== 3) fail('Pi Kapp coda must contain exactly three source-faithful remaster screens');
-if (/prototype-embed__link[^>]*(?:target="_blank"|href="pikappapp\/demo\.html")/.test(html)) fail('V2 action must open the in-page window instead of a new browsing context');
+if (count(html, 'class="v2-history__screen"') !== 3) fail('Earlier V2 history must contain exactly three static screens');
 if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the explicit 01, 02, 03 story order');
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
@@ -308,7 +225,7 @@ for (const requiredExport of [
   'App cyan: Entry and member view',
   'App navy: Structure and detail',
   'White: Fields and reading',
-  'Supporting chronology: These materials show two stages of the concept: original V1 screens and the earlier runnable V2.',
+
 ]) {
   if (!publicExport.includes(requiredExport)) fail(`public Pi Kapp export missing consolidated semantic content: ${requiredExport}`);
 }
@@ -316,7 +233,8 @@ for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted s
   if (publicExport.includes(removedExplorationCopy)) fail(`public Pi Kapp export retained removed exploration copy: ${removedExplorationCopy}`);
 }
 if (html.includes('class="future-principle"') || html.includes('class="coda__state-pair')) fail('obsolete seven-screen V2 support structures must not remain in the concise remaster coda');
-if (/src="images\/pikapp-case-study\/v2-[^"]+\.png"/.test(html)) fail('Pi Kapp coda must not display the superseded seven-screen V2 derivatives');
+const renderedV2Assets = [...html.matchAll(/src="images\/pikapp-case-study\/(v2-[^"]+\.png)"/g)].map((match) => match[1]);
+if (JSON.stringify(renderedV2Assets) !== JSON.stringify(['v2-today-light-clean.png','v2-responsibility-detail-dark-clean.png','v2-all-caught-up-light-clean.png'])) fail(`Pi Kapp must render only the approved static V2 sequence: ${JSON.stringify(renderedV2Assets)}`);
 if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
 for (const obsoleteAsset of ['exploration-placeholder.webp', 'exploration-design-system.webp', 'app-crest.png', 'app-icon.png']) {
   if (html.includes(obsoleteAsset)) fail(`Pi Kapp page still references superseded public asset: ${obsoleteAsset}`);
@@ -422,8 +340,9 @@ for (const required of [
   'object-fit:contain',
   '.pikapp-page .expansion-artifact__sheet{transition:none}',
   '.member-card__avatar',
-  '.prototype-embed',
-  '.prototype-embed__frame',
+  '.v2-history',
+  '.v2-history__grid',
+  '.v2-history__frame',
   '.coda__triptych',
   'grid-template-columns:repeat(3,minmax(0,1fr))',
   'aspect-ratio:390/844',
@@ -444,14 +363,14 @@ for (const forbidden of ['.reviewbar', '.boundary__inner', '.decision', '.explor
 }
 const screenRadiusRules = [
   ['V1 phone screen', css.match(/\.pikapp-page \.phone-slide\{([^}]*)\}/)?.[1] || '', 'border-radius:26px'],
-  ['V2 prototype screen', css.match(/\.pikapp-page \.prototype-embed__device\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
+  ['V2 history screens', css.match(/\.pikapp-page \.v2-history__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
   ['remaster screens', css.match(/\.pikapp-page \.coda__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
 ];
 for (const [label, rule, expected] of screenRadiusRules) {
   if (!rule.includes(expected)) fail(`${label} must preserve its approved rounded-corner treatment: ${expected}`);
 }
 for (const [label, rule] of [
-  ['V2 prototype screen', screenRadiusRules[1][1]],
+  ['V2 history screens', screenRadiusRules[1][1]],
   ['remaster screens', screenRadiusRules[2][1]],
 ]) {
   if (!rule.includes('overflow:hidden')) fail(`${label} must keep overflow hidden on its rounded clipping owner`);
@@ -501,11 +420,12 @@ for (const [key, value] of Object.entries(expectedProject)) {
 }
 if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
 if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
-if (!html.includes('<p class="coda__boundary">Source-faithful remaster. Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (!html.includes('<p class="coda__boundary">Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (html.includes('concept-history') || html.includes('coda__meta')) fail('Pi Kapp page must not restore redundant chronology or final-remaster kicker chrome');
 
 if (failures.length) {
   console.error('PI KAPP PAGE INTEGRATION CONTRACT: FAIL');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=43 remaster=3 prototype=embedded-earlier');
+console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=43 remaster=3 v2=static-history');
