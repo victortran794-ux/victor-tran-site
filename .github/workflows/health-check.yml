@@ -321,6 +321,7 @@ jobs:
             --exclude "localhost"
             --exclude "victor-tran-site-2vxf.vercel.app"
             --exclude "linkedin.com"
+            --exclude "api/wxo-access"
 
             --exclude "${{ github.event_name == 'pull_request' && 'www.victortrandesign.com/wxo-canvas' || 'a^' }}"
             --exclude "${{ github.event_name == 'pull_request' && 'www.victortrandesign.com/uigallery' || 'a^' }}"

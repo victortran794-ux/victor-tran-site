@@ -231,7 +231,9 @@ for (const forbidden of ['wxo-workflows-vico2', 'protected/wxo/', 'images/wxo-ca
 
 const wxoHtml = fs.readFileSync('wxo-canvas.html', 'utf8');
 const middlewareSource = fs.readFileSync('middleware.ts', 'utf8');
+const healthWorkflow = fs.readFileSync('.github/workflows/health-check.yml', 'utf8');
 assert.match(middlewareSource, /matcher:\s*\['\/:path\*'\]/u, 'routing middleware must inspect every request so encoded protected paths cannot skip authorization');
+assert.equal(healthWorkflow.includes('--exclude "api/wxo-access"'), true, 'link checker must exclude the server-only wxO access endpoint');
 assert.equal(wxoHtml.includes('js/password-gate.js'), false, 'protected page must not load the retired client gate');
 assert.equal(wxoHtml.includes('sessionStorage.getItem(\'vtd-unlock\')'), false, 'protected page must not authorize in the browser');
 assert.equal(fs.existsSync('js/password-gate.js'), false, 'client-side hash gate must be retired');
