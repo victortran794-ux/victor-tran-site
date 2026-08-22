@@ -14,6 +14,7 @@ const css = text('css/pikappapp.css');
 const js = text('js/pikappapp.js');
 const packageJson = JSON.parse(text('package.json'));
 const packageLock = JSON.parse(text('package-lock.json'));
+const siteIndex = JSON.parse(text('content/site-index.json'));
 const workflow = text('.github/workflows/health-check.yml');
 const preflight = text('scripts/preflight.sh');
 const localHealthCheck = text('scripts/health-check.sh');
@@ -122,6 +123,16 @@ for (const preserved of [
   'data-archive-master="cover"',
   'data-archive-master="context"',
 ]) expect(html.includes(preserved), `Stable Pi Kapp evidence must remain: ${preserved}`);
+
+const piKappIndex = siteIndex.find((entry) => entry.source === 'pikappapp.html');
+const indexedImages = new Set((piKappIndex?.images || []).map((image) => image.src));
+for (const preserved of [
+  ...staticStates.map(([filename]) => `images/pikapp-case-study/${filename}`),
+  'images/pikapp-case-study/remaster-login.png',
+  'images/pikapp-case-study/remaster-dashboard.png',
+  'images/pikapp-case-study/remaster-milestones.png',
+  'images/pikapp-case-study/expansion-cover-detail.jpg',
+]) expect(indexedImages.has(preserved), `Pi Kapp site-index metadata must preserve evidence: ${preserved}`);
 
 if (failures.length) {
   console.error(`PI KAPP STATIC SIMPLIFICATION: FAIL (${failures.length})`);

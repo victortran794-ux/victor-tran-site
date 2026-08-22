@@ -363,6 +363,18 @@
       {
         "src": "images/pikapp-case-study/remaster-login.png",
         "alt": "Source-faithful Pi Kapp login remaster with cyan hex field and original star-and-swords mark"
+      },
+      {
+        "src": "images/pikapp-case-study/remaster-dashboard.png",
+        "alt": "Source-faithful Pi Kapp member dashboard remaster with progress, bulletin, and milestone sections"
+      },
+      {
+        "src": "images/pikapp-case-study/remaster-milestones.png",
+        "alt": "Source-faithful Pi Kapp milestone-detail remaster with expanded task states"
+      },
+      {
+        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
+        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
       }
     ],
     "projects": []
