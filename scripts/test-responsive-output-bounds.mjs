@@ -23,6 +23,20 @@ const copy = (relative) => fs.cpSync(path.join(root, relative), path.join(fixtur
 const run = () => execFileSync('uv', ['run', '--python', '3.14', '--with', 'pillow==12.3.0', 'python3', 'scripts/generate-responsive-images.py'], {
   cwd: root, env: { ...process.env, RESPONSIVE_IMAGES_ROOT: fixture }, encoding: 'utf8', stdio: 'pipe',
 });
+const workflow = fs.readFileSync(path.join(root, '.github/workflows/health-check.yml'), 'utf8');
+const uvSetup = `      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        if: >-
+          needs.changes.outputs.all == 'true' ||
+          needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.images == 'true' ||
+          needs.changes.outputs.gallery == 'true'
+        with:
+          version: "0.11.14"`;
+const uvSetupIndex = workflow.indexOf(uvSetup);
+const ownershipIndex = workflow.indexOf('      - name: Graphic responsive image ownership contracts');
+if (uvSetupIndex === -1 || ownershipIndex === -1 || uvSetupIndex > ownershipIndex) {
+  throw new Error('health-check workflow must install pinned uv before responsive image ownership tests');
+}
 
 try {
   fs.mkdirSync(path.join(fixture, 'images'), { recursive: true });
