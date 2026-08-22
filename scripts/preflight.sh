@@ -54,8 +54,7 @@ run_required "Ability Experience bounded sequence contract" npm run check:abilit
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
 run_required "Gallery media regression check" node scripts/check-gallery-media.mjs
 run_required "Lighthouse coverage regression check" node scripts/check-lighthouse-coverage.mjs
-run_required "Install pinned website build tools" npm ci --ignore-scripts
-run_required "Pi Kapp demo reproducible build check" npm run verify:pikapp-demo
+run_required "Pi Kapp static simplification contract" node scripts/check-pikapp-static-simplification.mjs
 run_required "Pi Kapp approved page integration contract" npm run check:pikapp-page
 run_required "IBM Patterns approved page integration contract" npm run check:ibm-patterns
 run_required "Gallery motion system contract" npm run check:gallery-motion-system

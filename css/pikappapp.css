@@ -832,36 +832,29 @@ html[data-theme="dark"] .pikapp-page .member-card__stage{color:#adc5fa}
 
 .pikapp-page .app-experience--final .phone-device{width:min(340px,72vw)}
 
-.pikapp-page .prototype-embed{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:clamp(34px,6vw,82px);align-items:center;max-width:980px;margin:clamp(48px,7vw,84px) auto 0;padding:clamp(28px,5vw,56px);border:1px solid var(--line);background:var(--paper)}
+.pikapp-page .v2-history{max-width:1100px;margin:clamp(52px,8vw,96px) auto 0;padding-top:clamp(34px,5vw,54px);border-top:1px solid var(--line)}
 
-.pikapp-page .prototype-embed__copy h3{max-width:540px;margin:10px 0 18px;font:clamp(36px,4.2vw,58px)/1 var(--serif);letter-spacing:-.035em}
+.pikapp-page .v2-history__head{max-width:720px;margin-bottom:clamp(30px,5vw,52px)}
 
-.pikapp-page .prototype-embed__copy>p:not(.eyebrow){max-width:560px;margin:0;color:var(--muted);font-size:17px;line-height:1.65}
+.pikapp-page .v2-history__head h3{margin:10px 0 18px;font:clamp(36px,4.2vw,58px)/1 var(--serif);letter-spacing:-.035em}
 
-.pikapp-page .prototype-embed__link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:24px;padding:0;border:0;background:transparent;color:var(--blue-2);font:700 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.pikapp-page .v2-history__head>p:not(.eyebrow){margin:0;color:var(--muted);font-size:17px;line-height:1.65}
 
-.pikapp-page .prototype-embed__link:hover,
-.pikapp-page .prototype-embed__link:focus-visible{text-decoration:underline;text-underline-offset:5px}
+.pikapp-page .v2-history__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,34px);align-items:start;max-width:900px;margin-inline:auto}
 
-.pikapp-page .prototype-embed__device{width:min(320px,100%);aspect-ratio:390/844;justify-self:center;border:1px solid rgba(18,38,91,.22);border-radius:24px;background:#071020;overflow:hidden;box-shadow:0 18px 44px rgba(18,38,91,.13)}
+.pikapp-page .v2-history__screen{margin:0;min-width:0}
 
-.pikapp-page .prototype-embed__frame{display:block;width:100%;height:100%;border:0;background:#fff}
+.pikapp-page .v2-history__step{display:block;margin-bottom:12px;color:var(--blue-2);font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 
-body.prototype-open{overflow:hidden;padding-right:var(--prototype-scrollbar,0px)}
+html[data-theme="dark"] .pikapp-page .v2-history__step{color:#adc5fa}
 
-.pikapp-page .prototype-dialog{width:min(720px,calc(100vw - 42px));height:min(920px,calc(100dvh - 42px));max-width:none;max-height:none;margin:auto;padding:0;border:0;background:#071020;color:#fff;box-shadow:0 30px 100px rgba(0,0,0,.58);overflow:hidden}
+.pikapp-page .v2-history__frame{border:1px solid rgba(18,38,91,.18);border-radius:24px;background:#071020;overflow:hidden}
 
-.pikapp-page .prototype-dialog::backdrop{background:rgba(4,14,28,.82);backdrop-filter:blur(7px)}
+.pikapp-page .v2-history__frame img{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain}
 
-.pikapp-page .prototype-dialog__topbar{height:72px;padding:0 22px 0 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.14);background:#0d1a2d}
+.pikapp-page .v2-history__screen figcaption{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.5}
 
-.pikapp-page .prototype-dialog__topbar p,.pikapp-page .prototype-dialog__topbar h2{margin:0}.pikapp-page .prototype-dialog__topbar p{font:700 9px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#8fb3c8}.pikapp-page .prototype-dialog__topbar h2{margin-top:5px;font:700 17px/1.1 var(--sans);letter-spacing:-.02em}
-
-.pikapp-page .prototype-dialog__close{display:grid;place-items:center;width:48px;height:48px;border:1px solid rgba(255,255,255,.7);border-radius:50%;background:transparent;color:#fff;font-size:24px;cursor:pointer}.pikapp-page .prototype-dialog__close:hover{background:#fff;color:#071020}.pikapp-page .prototype-dialog__close:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-
-.pikapp-page .prototype-dialog__stage{height:calc(100% - 72px);display:grid;grid-template-rows:minmax(0,1fr) auto;place-items:center;gap:14px;padding:22px;background:radial-gradient(circle at 50% 35%,rgba(0,151,201,.22),transparent 48%),#071020}.pikapp-page .prototype-dialog__stage>p{margin:0;color:#9fb5c3;font:700 9px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;text-align:center}
-
-.pikapp-page .prototype-dialog__device{height:min(744px,100%);aspect-ratio:390/844;border:1px solid rgba(255,255,255,.2);border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.4)}.pikapp-page .prototype-dialog__frame{display:block;width:100%;height:100%;border:0;background:#fff}
+.pikapp-page .v2-history__boundary{max-width:900px;margin:26px auto 0;color:var(--muted);font-size:13px;font-style:italic}
 
 @media (max-width: 800px){
 .pikapp-page .expansion-evidence{grid-template-columns:1fr;gap:28px}
@@ -904,21 +897,19 @@ body.prototype-open{overflow:hidden;padding-right:var(--prototype-scrollbar,0px)
 
 .pikapp-page .app-experience--final .phone-device{width:min(250px,100%)}
 
-.pikapp-page .prototype-embed{grid-template-columns:1fr;margin:32px 4px 0;padding:24px}
+.pikapp-page .v2-history{margin-top:42px}
 
-.pikapp-page .prototype-embed__copy h3{margin-bottom:14px;font-size:clamp(32px,10vw,42px)}
+.pikapp-page .v2-history__head h3{font-size:clamp(32px,10vw,42px)}
 
-.pikapp-page .prototype-embed__copy>p:not(.eyebrow){font-size:16px;line-height:1.5}
+.pikapp-page .v2-history__head>p:not(.eyebrow){font-size:16px;line-height:1.5}
 
-.pikapp-page .prototype-embed__link{margin-top:14px}
+.pikapp-page .v2-history__grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(78vw,310px);gap:18px;max-width:none;margin-inline:0;padding:0 2px 14px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:inline mandatory;scrollbar-width:thin}
 
-.pikapp-page .prototype-embed__device{display:none}
+.pikapp-page .v2-history__screen{width:auto;margin:0;scroll-snap-align:start}
 
-.pikapp-page .prototype-dialog{width:100vw;height:100dvh;margin:0}
+.pikapp-page .v2-history__grid:focus-visible{outline:3px solid var(--blue-2);outline-offset:6px}
 
-.pikapp-page .prototype-dialog__topbar{height:64px;padding:0 16px 0 20px}.pikapp-page .prototype-dialog__topbar h2{font-size:15px}.pikapp-page .prototype-dialog__close{width:44px;height:44px}
-
-.pikapp-page .prototype-dialog__stage{height:calc(100% - 64px);padding:14px 12px 18px}.pikapp-page .prototype-dialog__device{width:auto;height:calc(100% - 34px);max-width:100%}
+html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-color:#adc5fa}
 }
 
 @media (prefers-reduced-motion: reduce){

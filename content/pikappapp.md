@@ -27,10 +27,9 @@ A mobile application concept for undergraduate fraternity members to track miles
 - Every year looked a little different. The same stuff still had to get done.
 - There was already a system. It was just spread everywhere.
 - It still needed to look like Pi Kappa Phi.
-- V1 established the structure. V2 made it runnable.
+- V1 established the structure. V2 clarified the loop.
 - The final remaster brings the app back to its source.
 - A formative project that changed how I approached product design.
-- Pi Kapp member model
 - Expansion Portfolio
 
 ## Body Copy
@@ -109,17 +108,19 @@ Milestone states
 
 Bottom navigation
 
-V1 established the member flow. V2 turned the dashboard, bulletin, milestones, and navigation into a working prototype before the final remaster.
+V1 established the member flow. The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
 
-Supporting chronology: These materials show two stages of the concept: original V1 screens and the earlier runnable V2.
+Supporting chronology: These materials show two stages of the concept: original V1 screens and selected static states from the earlier V2 direction.
 
 Earlier concept sequence
 
 The sequence shows how the original identity, member dashboard, and milestone detail were explored before the current remaster.
 
-Earlier V2 prototype
+Earlier static V2 states
 
-This runnable V2 snapshot preserves the dashboard, bulletin, milestones, and navigation. It predates the 2026 remaster below.
+Three states preserve what the interactive build added: orientation, responsibility detail, and a clear ending state. They remain supporting chronology before the final remaster below.
+
+Earlier V2 direction. Illustrative concept screens.
 
 Chapter 05
 
@@ -132,8 +133,6 @@ Source-faithful remaster. Illustrative concept screens.
 This project connected my experience in leadership and communications with a growing interest in product design and research. It was an early attempt to make HQ feel closer to day-to-day chapter life through one member-facing app.
 
 The concept still needed usability testing and a clearer integration model. What stayed with me was the approach: start with the systems people already use, then make the member-facing experience easier to understand.
-
-Runnable V2 snapshot. Illustrative concept data only.
 
 Pi Kapp App archive
 
@@ -153,6 +152,9 @@ Cover view selected.
 - Original Pi Kapp App login screen, cropped to remove the captured phone hardware: images/pikapp-case-study/login-screen.png
 - Original Pi Kapp App member dashboard screen: images/pikapp-case-study/member.png
 - Original Pi Kapp App expanded milestone screen: images/pikapp-case-study/task-expand.png
+- Earlier V2 Today screen showing what needs attention: images/pikapp-case-study/v2-today-light-clean.png
+- Earlier V2 responsibility detail screen showing what to do next: images/pikapp-case-study/v2-responsibility-detail-dark-clean.png
+- Earlier V2 completion screen stating that nothing needs attention: images/pikapp-case-study/v2-all-caught-up-light-clean.png
 - Source-faithful Pi Kapp login remaster with cyan hex field and original star-and-swords mark: images/pikapp-case-study/remaster-login.png
 - Source-faithful Pi Kapp member dashboard remaster with progress, bulletin, and milestone sections: images/pikapp-case-study/remaster-dashboard.png
 - Source-faithful Pi Kapp milestone-detail remaster with expanded task states: images/pikapp-case-study/remaster-milestones.png

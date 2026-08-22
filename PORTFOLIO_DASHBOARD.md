@@ -149,7 +149,7 @@ Excludes new design-system rollout, new homepage structure, and Document Process
 These items were verified and closed through narrow, reviewed changes:
 
 - **Contact resilience and presentation resolved:** PR #127 replaced the former Copy email treatment with a visible `Email` direct-`mailto:` action while retaining resilient footer contact paths and the full email sentence on About.
-- **Pi Kapp demo cold start resolved:** `pikappapp/demo.html` includes a branded static pre-render loading state that React replaces after initialization.
+- **Pi Kapp runtime retired:** the former demo cold-start fix was superseded by three selected static V2 states on the main case study; legacy demo and system URLs redirect to the relevant chapters.
 - **Release wording resolved:** Victor confirmed that Accuracy Evaluation released in July 2026. Current protected production source preserves that release state, gate, `noindex`, sitemap omission, sanitized media, and claims boundaries.
 - **Name consistency resolved:** public labels align to the official Performance Contracting, Inc. name.
 
@@ -265,9 +265,7 @@ Long-form enhancement:
 - Let images, complete authored frames, and specific artifacts carry the story. Do not add generic design-process diagrams or prose merely to make a page feel substantial.
 - Treat each project as its own editorial composition. Shared shell and accessibility behavior stay consistent, while color, typography, pacing, image treatment, diagrams, and section transitions must come from the project's actual identity and evidence.
 
-Deferred review-only item:
-
-- `pikappapp/system.html` remains an unlinked `noindex` page and is intentionally deferred. Its Tailwind usage does not create an active rewrite or publication lane.
+Pi Kapp's former unlinked system page is no longer a deferred runtime. Its authored identity evidence remains integrated into Chapter 03, and the legacy URL redirects there.
 
 Boundaries:
 

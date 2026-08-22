@@ -10,9 +10,8 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const desktopRoutes = [
   '/', '/about', '/salmagazine', '/pikappapp', '/abilityexperience',
   '/artillustration', '/graphicgallery', '/uigallery', '/ibmcloud', '/ibm-patterns', '/pci',
-  '/pikappapp/demo',
 ];
-const mobileRoutes = ['/', '/about', '/artillustration', '/uigallery', '/ibmcloud', '/ibm-patterns', '/pci', '/pikappapp/demo'];
+const mobileRoutes = ['/', '/about', '/artillustration', '/uigallery', '/ibmcloud', '/ibm-patterns', '/pci'];
 
 function jobBlock(jobId) {
   const marker = `\n  ${jobId}:\n`;

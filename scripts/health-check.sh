@@ -43,7 +43,6 @@ if [ -n "$LYCHEE_BIN" ]; then
     --exclude "localhost" \
     --exclude "victor-tran-site-2vxf.vercel.app" \
     --exclude "linkedin.com" \
-    --exclude "pikappapp/demo" \
     "${LYCHEE_INPUTS[@]}"
 else
   echo "  lychee not installed - skipping."

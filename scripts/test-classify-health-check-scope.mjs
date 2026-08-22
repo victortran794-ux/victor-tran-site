@@ -85,7 +85,7 @@ assert.equal(workflowTooling.deployable, true);
 const routeCases = [
   ['home', 'index.html'],
   ['ibm', 'ibmcloud.html'],
-  ['pikapp', 'pikappapp/demo-source.jsx'],
+  ['pikapp', 'images/pikapp-case-study/v2-today-light-clean.png'],
   ['gallery', 'graphicgallery.html'],
   ['about', 'about.html'],
   ['pci', 'pci.html'],

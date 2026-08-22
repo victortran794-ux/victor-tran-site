@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "test:health-check-scope": "node scripts/test-classify-health-check-scope.mjs",
-    "build:pikapp-demo": "tailwindcss -c pikappapp/tailwind.config.cjs -i pikappapp/demo-source.css -o pikappapp/demo.bundle.css --minify && esbuild pikappapp/demo-source.jsx --bundle --minify --format=esm --target=es2022 --outfile=pikappapp/demo.bundle.js",
+
     "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
-    "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",
+    "check:pikapp-static": "node scripts/check-pikapp-static-simplification.mjs",
     "check:pikapp-page": "node scripts/check-pikapp-page-integration.mjs",
     "check:pikapp-page-browser": "node scripts/check-pikapp-page-browser.mjs",
     "check:ibmcloud-browser": "node scripts/check-ibmcloud-browser.mjs",
@@ -26,7 +26,7 @@
     "check:sal-browser": "node scripts/check-sal-browser.mjs",
     "check:ability-vico2": "python3 scripts/check-ability-victor-carbon.py",
     "check:ability-browser": "node scripts/check-ability-browser.mjs",
-    "verify:pikapp-demo": "npm run build:pikapp-demo && git diff --exit-code -- pikappapp/demo.bundle.css pikappapp/demo.bundle.js && npm run check:pikapp-demo",
+
     "test:content-export-policy": "node scripts/test-html-to-md.mjs",
     "check:content-export-policy": "node scripts/check-protected-content-exports.mjs",
     "check:final-site-reconciliation": "node scripts/check-final-site-reconciliation.mjs",
@@ -45,12 +45,5 @@
     "check:ui-gallery-browser": "node scripts/check-visual-archives-browser.mjs ui",
     "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs",
     "check:global-theme-control": "node scripts/check-global-theme-control.mjs"
-  },
-  "devDependencies": {
-    "esbuild": "0.28.1",
-    "framer-motion": "11.11.17",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "tailwindcss": "3.4.17"
   }
 }

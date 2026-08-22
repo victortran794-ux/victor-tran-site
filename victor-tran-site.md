@@ -116,26 +116,11 @@ Required files:
 
 Do not render raw HTML from response JSON. Generated/curated responses should only use component types supported by `js/generative-renderers.js`.
 
-## Pi Kapp prototype build
+## Pi Kapp static evidence
 
-The main portfolio remains plain HTML/CSS/JS with no site-wide build. The interactive Pi Kapp prototype is the one bounded exception: its React source and Tailwind utilities are compiled into committed static assets so production does not run browser-side Babel or Tailwind's Play CDN.
+The portfolio remains plain HTML/CSS/JS with no site-wide application build. Pi Kapp preserves the original V1 sequence, three selected static V2 states, authored expansion artifacts, identity evidence, and the final source-faithful remaster directly on `/pikappapp`.
 
-Source and generated files:
-
-- `pikappapp/demo-source.jsx` — React prototype source.
-- `pikappapp/demo-source.css` — Tailwind input.
-- `pikappapp/tailwind.config.cjs` — prototype-only design tokens and content paths.
-- `pikappapp/demo.bundle.js` and `pikappapp/demo.bundle.css` — committed generated assets.
-
-After changing the prototype source or configuration:
-
-```bash
-npm ci --ignore-scripts
-npm run build:pikapp-demo
-npm run check:pikapp-demo
-```
-
-`npm run verify:pikapp-demo` regenerates the assets and fails if the committed outputs differ. Local preflight and the GitHub health workflow both enforce this reproducibility check.
+The former React/Tailwind demo and standalone system page are retired from the deployable repository. Their clean URLs permanently redirect to the relevant case-study chapters. `npm run check:pikapp-static`, `npm run check:pikapp-page`, and `npm run check:pikapp-page-browser` protect the static evidence, responsive treatment, and stable route without reinstalling prototype-only dependencies.
 
 ## Local preflight
 
