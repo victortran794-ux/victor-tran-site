@@ -60,8 +60,8 @@ expect(packageJson.scripts?.['check:gallery-motion-system'] === 'node scripts/ch
   'package.json: register the gallery motion system contract.');
 expect(preflight.includes('npm run check:gallery-motion-system'),
   'scripts/preflight.sh: run the gallery motion system contract.');
-expect((workflow.match(/scripts\/check-gallery-motion-system\.mjs/g) ?? []).length === 2,
-  'health workflow: watch the gallery motion system contract for push and pull requests.');
+expect(workflow.includes("needs.changes.outputs.gallery == 'true'"),
+  'health workflow: scope the gallery motion system through classifier ownership.');
 expect(workflow.includes('run: npm run check:gallery-motion-system'),
   'health workflow: execute the gallery motion system contract.');
 

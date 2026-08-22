@@ -64,15 +64,10 @@ need(manifestValidator.includes("expected.homepageLabel === false ? ''"),
   'Manifest parity validator must accept intentional homepage label suppression.');
 need(!patternsContract.includes("'pikappapp.html':") && !patternsContract.includes("'js/main.js':"),
   'IBM Patterns route contract must not freeze independently owned peer or shared-global files.');
-for (const dependency of [
-  'data/site-shell.json',
-  'scripts/check-home-global-completion.mjs',
-  'scripts/check-route02-homepage-integration.mjs',
-  'scripts/validate-project-manifest.mjs',
-]) {
-  need(count(healthWorkflow, `- \"${dependency}\"`) === 2,
-    `Health workflow must watch ${dependency} for push and pull requests.`);
-}
+need(healthWorkflow.includes("needs.changes.outputs.home == 'true'"),
+  'Health workflow must scope Homepage contracts through classifier ownership.');
+need(healthWorkflow.includes("needs.changes.outputs.shared == 'true'"),
+  'Health workflow must preserve full shared-shell blast-radius coverage.');
 need(count(healthWorkflow, 'run: npm run check:home-global-completion') === 1,
   'Health workflow must execute the Home/global completion contract exactly once.');
 need(!index.includes('class="featured-galleries-intro"') &&

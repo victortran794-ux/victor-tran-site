@@ -2,6 +2,7 @@
   "name": "victor-tran-site-build-tools",
   "private": true,
   "scripts": {
+    "test:health-check-scope": "node scripts/test-classify-health-check-scope.mjs",
     "build:pikapp-demo": "tailwindcss -c pikappapp/tailwind.config.cjs -i pikappapp/demo-source.css -o pikappapp/demo.bundle.css --minify && esbuild pikappapp/demo-source.jsx --bundle --minify --format=esm --target=es2022 --outfile=pikappapp/demo.bundle.js",
     "render:pikapp-remaster": "node scripts/render-pikapp-remaster.mjs",
     "check:pikapp-demo": "node scripts/check-pikapp-demo-build.mjs",

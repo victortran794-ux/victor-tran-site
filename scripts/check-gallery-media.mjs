@@ -54,8 +54,10 @@ const checkCommand = 'node scripts/check-gallery-media.mjs';
 const preflight = read('scripts/preflight.sh');
 const workflow = read('.github/workflows/health-check.yml');
 expect(preflight.includes(checkCommand), 'Local preflight must run the gallery media regression check.');
-expect(workflow.includes('"scripts/check-gallery-media.mjs"'),
-  'Gallery media regression script changes must trigger CI.');
+expect(workflow.includes("needs.changes.outputs.gallery == 'true'"),
+  'Gallery media validation must use gallery scope.');
+expect(workflow.includes("needs.changes.outputs.images == 'true'"),
+  'Gallery media validation must use image scope.');
 expect(workflow.includes(`run: ${checkCommand}`), 'CI must run the gallery media regression check.');
 
 if (failures.length) {

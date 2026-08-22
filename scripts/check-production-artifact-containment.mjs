@@ -41,10 +41,7 @@ require(
 );
 const workflow = read('.github/workflows/health-check.yml');
 require(workflow.includes('run: npm run check:artifact-containment'), 'health-check workflow must run check:artifact-containment');
-for (const watchedPath of ['.vercelignore', 'scripts/check-production-artifact-containment.mjs']) {
-  const occurrences = workflow.split(`- \"${watchedPath}\"`).length - 1;
-  require(occurrences === 2, `health-check workflow must watch ${watchedPath} for push and pull_request`);
-}
+require(workflow.includes("needs.changes.outputs.deployable == 'true'"), 'artifact containment must use deployable scope');
 
 const denylist = [
   '/MAGI_ACCESS_POLICY.md',

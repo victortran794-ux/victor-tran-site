@@ -43,8 +43,10 @@ expect(mobileJob.includes('name: Lighthouse audit · mobile'), 'Workflow must in
 expect(mobileJob.includes('configPath: ./.github/lighthouse-mobile.json'), 'Mobile Lighthouse job must use its mobile configuration.');
 expect(desktopJob.includes('artifactName: lighthouse-results-desktop'), 'Desktop Lighthouse artifacts must use a unique name.');
 expect(mobileJob.includes('artifactName: lighthouse-results-mobile'), 'Mobile Lighthouse artifacts must use a unique name.');
-expect(desktopJob.includes("if: github.event_name != 'pull_request'") && mobileJob.includes("if: github.event_name != 'pull_request'"),
+expect(desktopJob.includes("github.event_name != 'pull_request'") && mobileJob.includes("github.event_name != 'pull_request'"),
   'Production Lighthouse jobs must skip pull requests.');
+expect(desktopJob.includes("needs.changes.outputs.deployable == 'true'") && mobileJob.includes("needs.changes.outputs.deployable == 'true'"),
+  'Production Lighthouse jobs must use deployable scope.');
 for (const block of [desktopJob, mobileJob]) {
   expect(block.includes('temporaryPublicStorage: false'), 'Lighthouse results must not use temporary public storage.');
   expect(block.includes('BASE_INPUT: ${{ github.event.inputs.url }}'), 'Dispatch URL must enter the shell through an environment variable.');
@@ -72,8 +74,6 @@ if (fs.existsSync(mobileConfigPath)) {
 }
 
 expect(workflow.includes('run: node scripts/check-lighthouse-coverage.mjs'), 'CI must execute the Lighthouse coverage regression check.');
-expect(workflow.includes('"scripts/check-lighthouse-coverage.mjs"'), 'Coverage-check changes must trigger CI.');
-expect(workflow.includes('".github/lighthouse-mobile.json"'), 'Mobile-config changes must trigger CI.');
 
 if (failures.length) {
   console.error(`Lighthouse coverage regression check failed (${failures.length}):`);

@@ -48,16 +48,8 @@ for (const value of [
   "url.searchParams.delete('lock')",
 ]) requireText(passwordGate, value, `Shared password gate missing protected deep-link behavior: ${value}`);
 
-for (const path of [
-  'vercel.json',
-  'scripts/check-wxo-document-processing-integration.mjs',
-  'scripts/check-wxo-document-processing-browser.mjs',
-  'js/wxo-workflows-vico2.js',
-]) {
-  if (count(healthWorkflow, new RegExp(path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) < 2) {
-    fail(`Health-check workflow must watch ${path} for push and pull requests.`);
-  }
-}
+requireText(healthWorkflow, "needs.changes.outputs.wxo == 'true'", 'Health-check workflow must scope wxO and Document Processing through classifier ownership.');
+requireText(healthWorkflow, "needs.changes.outputs.shared == 'true'", 'Health-check workflow must include shared-shell changes in protected-route validation.');
 requireText(healthWorkflow, 'npm run check:wxo-document-processing', 'Health-check workflow must run the wxO and Document Processing source contract.');
 requireText(healthWorkflow, 'npm run check:wxo-document-processing-browser', 'Health-check workflow must run the locked deep-link browser regression.');
 
