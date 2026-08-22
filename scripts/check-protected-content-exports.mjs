@@ -23,8 +23,8 @@ function hasProtectedGateContract(html) {
     .find(tag => /name\s*=\s*["']robots["']/i.test(tag));
   const content = robotsTag?.match(/content\s*=\s*["']([^"']*)["']/i)?.[1] ?? '';
   const directives = new Set(content.toLowerCase().split(/[\s,]+/).filter(Boolean));
-  const hasClientGate = /password gate|password-overlay|class=["'][^"']*locked/i.test(html);
-  return directives.has('noindex') && directives.has('nofollow') && hasClientGate;
+  const hasProtectedStatus = /class=["'][^"']*site-route-status/i.test(html);
+  return directives.has('noindex') && directives.has('nofollow') && hasProtectedStatus;
 }
 
 let policy;
@@ -67,6 +67,15 @@ const existingPolicySources = protectedPages
   .filter(item => fs.existsSync(path.join(ROOT, item.source)))
   .map(item => item.source)
   .sort();
+const middleware = read('middleware.ts');
+
+for (const source of existingPolicySources) {
+  const cleanRoute = `/${source.replace(/\.html$/u, '')}`;
+  if (!middleware.includes(`'${cleanRoute}'`) || !middleware.includes(`'/${source}'`)) {
+    fail(`middleware matcher must protect clean and raw aliases for ${source}`);
+  }
+}
+if (!middleware.includes("'/protected/wxo/:path*'")) fail('middleware must protect the dedicated wxO media prefix');
 
 if (!sameMembers(discoveredGates, existingPolicySources)) {
   fail(`gated HTML and export policy differ: gates=${discoveredGates.join(',')} policy=${existingPolicySources.join(',')}`);

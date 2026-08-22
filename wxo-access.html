@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Password access for a protected portfolio case study.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <title>Protected case study · Victor Tran Design</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/password-gate.css">
+  <script src="js/wxo-access.js" defer></script>
+</head>
+<body>
+  <main id="vtd-gate" class="vtd-gate">
+    <div class="vtd-gate-card" role="dialog" aria-modal="true" aria-labelledby="vtd-gate-title" aria-describedby="vtd-gate-description">
+      <p class="vtd-gate-eyebrow">Protected case study</p>
+      <h1 id="vtd-gate-title" class="vtd-gate-title">This work is password-protected.</h1>
+      <p id="vtd-gate-description" class="vtd-gate-body">
+        Enter the password to view this project. Don’t have one?
+        <a href="mailto:victortran794@gmail.com">Email me</a> and I’ll send it over.
+      </p>
+      <form class="vtd-gate-form" action="/api/wxo-access" method="post" autocomplete="off">
+        <input type="hidden" name="next" value="/wxo-canvas">
+        <label for="vtd-gate-input" class="vtd-gate-label">Password</label>
+        <input
+          id="vtd-gate-input"
+          class="vtd-gate-input"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          spellcheck="false"
+          autocapitalize="off"
+          autofocus
+          required>
+        <button type="submit" class="vtd-gate-submit">Unlock</button>
+        <p class="vtd-gate-error" role="status" aria-live="assertive" aria-atomic="true" hidden>Incorrect password. Try again.</p>
+      </form>
+      <p class="vtd-gate-back">
+        <a href="/">← Back to portfolio</a>
+      </p>
+    </div>
+  </main>
+</body>
+</html>

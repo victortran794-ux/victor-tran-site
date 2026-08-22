@@ -24,7 +24,11 @@ const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
 const workflowJs = read('js/wxo-workflows-vico2.js');
-const passwordGate = read('js/password-gate.js');
+const accessGate = read('wxo-access.html');
+const accessFunction = read('api/wxo-access.mjs');
+const protectedAccess = read('lib/protected-access.mjs');
+const protectedMiddleware = read('lib/protected-middleware.mjs');
+const middleware = read('middleware.ts');
 const healthWorkflow = read('.github/workflows/health-check.yml');
 const vercel = JSON.parse(read('vercel.json'));
 const deployIgnore = read('.vercelignore');
@@ -33,20 +37,23 @@ if (fs.existsSync('assets/wxo-canvas-future')) fail('Retired Future Canvas media
 if (fs.existsSync('data/wxo-canvas-future-provenance.json')) fail('Retired separate-source Future Canvas provenance must not remain active beside the canonical V1/V2 ledger.');
 requireText(deployIgnore, 'data/', 'Repository-only wxO provenance must remain excluded from deployment.');
 
-const documentProcessingRedirect = vercel.redirects?.find((rule) => rule.source === '/document-processing');
-if (!documentProcessingRedirect || documentProcessingRedirect.destination !== '/wxo-canvas#document-processing' || documentProcessingRedirect.permanent !== true) {
-  fail('Vercel must permanently retire /document-processing into the wxO Document Processing chapter.');
+if (vercel.redirects?.some((rule) => rule.source === '/document-processing')) {
+  fail('Document Processing redirect must remain behind middleware authorization.');
 }
-
-for (const value of [
-  "const PROTECTED_HASH_STATE = 'vtdProtectedHash'",
-  'history.replaceState(stateWithoutProtectedHash()',
-  "window.dispatchEvent(new HashChangeEvent('hashchange'",
-  "input.focus({ preventScroll: true })",
-  "const FORCE_LOCK = new URLSearchParams(location.search).get('lock') === '1'",
-  'if (FORCE_LOCK) sessionStorage.removeItem(KEY)',
-  "url.searchParams.delete('lock')",
-]) requireText(passwordGate, value, `Shared password gate missing protected deep-link behavior: ${value}`);
+for (const route of ['/wxo-canvas', '/wxo-canvas.html', '/document-processing', '/document-processing.html', '/protected/wxo/:path*']) {
+  requireText(middleware, `'${route}'`, `Routing Middleware must match ${route}.`);
+}
+for (const value of ['WXO_SESSION_SECRET', 'handleProtectedRequest', 'next', 'rewrite']) {
+  requireText(middleware, value, `Routing Middleware missing server boundary marker: ${value}`);
+}
+for (const value of ['WXO_PASSWORD_VERIFIER', 'WXO_SESSION_SECRET', "SameSite=Lax", "HttpOnly", "Secure", "request.headers.get('origin')"]) {
+  requireText(accessFunction, value, `Server login function missing security marker: ${value}`);
+}
+requireText(protectedAccess, "export const COOKIE_NAME = '__Host-wxo'", 'Protected session must use a host-only cookie name.');
+requireText(protectedMiddleware, "location: '/wxo-canvas#document-processing'", 'Authorized Document Processing aliases must redirect inside middleware.');
+requireText(accessGate, 'action="/api/wxo-access"', 'Public access gate must post to the server login function.');
+forbid(accessGate, /wxo-workflows-vico2|protected\/wxo\/|images\/wxo-canvas\/current|assets\/document-processing/i, 'Public access gate must not reference protected content or route-specific assets.');
+if (fs.existsSync('js/password-gate.js')) fail('Retired client-side password verifier must not remain deployable.');
 
 requireText(healthWorkflow, "needs.changes.outputs.wxo == 'true'", 'Health-check workflow must scope wxO and Document Processing through classifier ownership.');
 requireText(healthWorkflow, "needs.changes.outputs.shared == 'true'", 'Health-check workflow must include shared-shell changes in protected-route validation.');
@@ -54,9 +61,7 @@ requireText(healthWorkflow, 'npm run check:wxo-document-processing', 'Health-che
 requireText(healthWorkflow, 'npm run check:wxo-document-processing-browser', 'Health-check workflow must run the locked deep-link browser regression.');
 
 for (const [name, html] of [['IBM watsonx Orchestrate', wxo], ['Document Processing', doc]]) {
-  requireText(html, 'sessionStorage.getItem(\'vtd-unlock\')', `${name} must preserve the session-only password gate.`);
-  requireText(html, 'css/password-gate.css', `${name} must preserve the shared password-gate stylesheet.`);
-  requireText(html, 'js/password-gate.js', `${name} must preserve the shared password-gate script.`);
+  forbid(html, /sessionStorage\.getItem\(['"]vtd-unlock|js\/password-gate\.js/i, `${name} must not contain browser-side authorization logic.`);
   requireText(html, 'noindex,nofollow,noarchive,nosnippet,noimageindex', `${name} must preserve the full protected robots policy.`);
   requireText(html, '<!-- generated:site-shell-header:start -->', `${name} must use the generated shared header.`);
   requireText(html, '<!-- generated:site-shell-footer:start -->', `${name} must use the generated shared footer.`);
@@ -161,13 +166,13 @@ else {
   };
   for (const entry of v2Manifest.assets ?? []) {
     const expected = v2Assets.find(([file]) => file === entry.file);
-    const assetPath = `images/wxo-canvas/v2/${entry.file}`;
+    const assetPath = `protected/wxo/images/v2/${entry.file}`;
     if (!entry.sourceNode || !Array.isArray(entry.sourceBounds) || !Array.isArray(entry.rawExportDimensions) || !entry.rawExportSha256 || !Array.isArray(entry.exportedDimensions) || !entry.treatment || !entry.privacyStatus || !entry.claimStatus) fail(`wxO V2 manifest entry ${entry.file ?? 'unknown'} is incomplete.`);
     if (!expected || JSON.stringify(entry.exportedDimensions) !== JSON.stringify(expected.slice(1))) fail(`V2 provenance must record exact native dimensions for ${entry.file}.`);
     if (entry.sanitization !== expectedV2Sanitization[entry.file]) fail(`V2 provenance must record the approved sanitization for ${entry.file}.`);
     if (!fs.existsSync(assetPath)) fail(`Missing wxO V2 derivative ${assetPath}.`);
     else if (sha256(assetPath) !== entry.sha256) fail(`wxO V2 derivative hash changed from its manifest: ${assetPath}.`);
-    requireText(wxo, `images/wxo-canvas/v2/${entry.file}`, `wxO V2 story missing curated derivative ${entry.file}.`);
+    requireText(wxo, `protected/wxo/images/v2/${entry.file}`, `wxO V2 story missing curated derivative ${entry.file}.`);
     requireText(wxo, `width="${expected[1]}" height="${expected[2]}"`, `wxO V2 HTML dimensions must match ${entry.file}.`);
   }
   const prototype = v2Manifest.prototypeExploration;
@@ -178,15 +183,15 @@ else {
     'v2-figma-interaction-demo.mp4': 'ae2392130a9723e1b3c52226cd99160fdd2c11d80bc91a1c05ea0ba42d0ec713',
   };
   for (const media of prototype?.media ?? []) {
-    const mediaPath = `assets/wxo-canvas-v2/media/${media.file}`;
+    const mediaPath = `protected/wxo/assets/wxo-canvas-v2/media/${media.file}`;
     if (expectedMedia[media.file] !== media.sha256 || !fs.existsSync(mediaPath) || sha256(mediaPath) !== media.sha256) fail(`V2 prototype media hash or inventory changed: ${media.file}.`);
   }
   if (Object.keys(expectedMedia).length !== (prototype?.media ?? []).length) fail('V2 prototype provenance must record exactly one poster and the two original video encodings.');
 }
 requireText(wxo, 'data-prototype-evidence="published-authored-sequence"', 'The prototype must remain explicitly bounded as an authored visual-system sequence.');
-requireText(wxo, 'poster="assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png"', 'The original prototype sequence must provide a static poster.');
-requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.webm', 'The original prototype sequence must provide its matching WebM source.');
-requireText(wxo, 'assets/wxo-canvas-v2/media/v2-figma-interaction-demo.mp4', 'The original prototype sequence must provide its matching MP4 source.');
+requireText(wxo, 'poster="protected/wxo/assets/wxo-canvas-v2/media/v2-figma-interaction-demo-poster.png"', 'The original prototype sequence must provide a static poster.');
+requireText(wxo, 'protected/wxo/assets/wxo-canvas-v2/media/v2-figma-interaction-demo.webm', 'The original prototype sequence must provide its matching WebM source.');
+requireText(wxo, 'protected/wxo/assets/wxo-canvas-v2/media/v2-figma-interaction-demo.mp4', 'The original prototype sequence must provide its matching MP4 source.');
 requireText(wxo, '<video controls playsinline preload="metadata"', 'The original prototype sequence must remain optional and user-controlled.');
 forbid(wxo, /Main prototype 1|big builder yea|Alerts exploration|Floating right side|VT exploration/i, 'Internal prototype frame names must not enter viewer-facing copy.');
 requireText(wxo, 'data-wxo-tab-status>Current view</small>', 'wxO chapter selector must identify the current view.');
@@ -252,7 +257,7 @@ for (const text of [
   '15-user-activity-form-filled.png',
 ]) requireText(wxo, text, `wxO Canvas missing V1 viewer phrase: ${text}`);
 if (count(wxo, /class="[^"]*\bwxo-v1-illustration\b[^"]*"/gi) !== 4) fail('wxO Canvas must place exactly four authored V1 illustration accents.');
-requireText(wxo, 'src="images/wxo-canvas/current/03-main-illustration.png" width="870" height="546"', 'Direction stays visible must feature the predominantly blue branching-path illustration at native aspect ratio.');
+requireText(wxo, 'src="protected/wxo/images/current/03-main-illustration.png" width="870" height="546"', 'Direction stays visible must feature the predominantly blue branching-path illustration at native aspect ratio.');
 if (count(wxo, /class="[^"]*\bwxo-v1-arrangement\b[^"]*"/gi) !== 7) fail('wxO Canvas must show seven complete V1 arrangement figures after removing the flawed connector sheet.');
 if (count(wxo, /class="[^"]*\bwxo-v1-palette-piece\b[^"]*"/gi) !== 2) fail('wxO Canvas must compose only the two approved Palette child frames.');
 forbid(wxo, /01-book-a-flight-context\.png|02-component-system-board\.png|03-user-activity-form\.png|04-straight-connector-states\.png|canvas1-flow-controls-sanitized\.png|canvas1-connectors-sanitized\.png/i, 'Superseded crops, reconstructed boards, zooms, and sparse plates must not remain referenced.');
@@ -276,10 +281,27 @@ for (const asset of [
   if (fs.existsSync(asset)) fail(`Withheld future-state asset must not remain in the public repository: ${asset}.`);
 }
 
-const wxoPublicManifestPath = 'images/wxo-canvas/current/manifest.json';
+const wxoPublicManifestPath = 'protected/wxo/images/current/manifest.json';
 if (fs.existsSync(wxoPublicManifestPath)) fail('Detailed wxO provenance must not exist in the publicly deployable image directory.');
+const documentProcessingPublicManifestPath = 'protected/wxo/assets/document-processing/current/manifest.json';
+if (fs.existsSync(documentProcessingPublicManifestPath)) fail('Detailed Document Processing provenance must not exist in the deployable protected-media directory.');
 const vercelIgnore = read('.vercelignore');
 if (!/^data\/$/m.test(vercelIgnore)) fail('Vercel deployment must exclude the repository-only data provenance directory.');
+const documentProcessingManifestPath = 'data/document-processing-current-provenance.json';
+if (!fs.existsSync(documentProcessingManifestPath)) fail('Repository-only Document Processing provenance manifest must exist outside the deployable artifact tree.');
+else {
+  const documentProcessingManifest = JSON.parse(read(documentProcessingManifestPath));
+  if (!Array.isArray(documentProcessingManifest.assets) || documentProcessingManifest.assets.length !== 9) {
+    fail('Document Processing provenance manifest must record the nine approved current-system assets.');
+  }
+  for (const entry of documentProcessingManifest.assets ?? []) {
+    if (!entry.file?.startsWith('protected/wxo/assets/document-processing/current/')) {
+      fail(`Document Processing provenance entry must reference the guarded namespace: ${entry.file || '[missing]'}.`);
+    } else if (!fs.existsSync(entry.file)) {
+      fail(`Document Processing provenance entry references a missing guarded asset: ${entry.file}.`);
+    }
+  }
+}
 const wxoManifestPath = 'data/wxo-canvas-current-provenance.json';
 if (!fs.existsSync(wxoManifestPath)) fail('Repository-only wxO V1 provenance manifest must exist outside the public artifact tree.');
 else {
@@ -297,7 +319,7 @@ else {
     fail('The approved Form filled frame must retain its original wxO source, full-frame dimensions, audited artifact hash, and bounded annotation cleanup provenance.');
   }
   for (const entry of wxoManifest.assets ?? []) {
-    const assetPath = `images/wxo-canvas/current/${entry.file}`;
+    const assetPath = `protected/wxo/images/current/${entry.file}`;
     if (!entry.sourceNode || !entry.sourceFrame || !Array.isArray(entry.sourceBounds) || !Array.isArray(entry.exportedDimensions) || !entry.treatment || !entry.privacyStatus || !entry.claimStatus || !entry.approvalState) fail(`wxO manifest entry ${entry.file ?? 'unknown'} is missing Figma provenance, dimensions, treatment, privacy, claims, or approval metadata.`);
     if (!fs.existsSync(assetPath)) fail(`Missing wxO current-system derivative ${assetPath}.`);
     else {
@@ -309,7 +331,7 @@ else {
 }
 
 const expectedWxoAssets = {
-  'images/wxo-canvas/document-processing-storyboard.png': '758d72c025a02073d5aa427a3ed7d855412284a3e9389c6c0f78b9415c5aac08',
+  'protected/wxo/images/document-processing-storyboard.png': '758d72c025a02073d5aa427a3ed7d855412284a3e9389c6c0f78b9415c5aac08',
   'images/wxo-canvas/wxo-home-thumbnail.png': '690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee',
 };
 for (const [asset, expected] of Object.entries(expectedWxoAssets)) {
@@ -372,21 +394,21 @@ forbid(doc, /classify-mapping-sanitized\.png|>Data mapping</i, 'The redundant cl
 forbid(doc, /03-evaluation-details-sanitized\.png|class="doc-evaluation-specimen"/i, 'Document Processing must replace the superseded one-off evaluation specimen.');
 
 const expectedDocumentAssets = {
-  'assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm': '472376539f7fe8c8b10d1f8fe480b1052f95f6b5a8fadbeb16954396ceb4626e',
-  'assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4': '1c41a0dffbfc0fb40c65c86cba37d9f9a7d19235ec3f14a395669fdbac749867',
-  'assets/document-processing/media/doc-pro-poster-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
-  'assets/document-processing/storyboard/01-select-training-documents-sanitized.png': '74078eb8e24ee8fd26de7a75d00b464c358a7d57fa18241c417fa6aa5e71dd8c',
-  'assets/document-processing/storyboard/02-review-and-correct-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
-  'assets/document-processing/storyboard/03-evaluation-details-sanitized.png': 'e60feb0d7b7de1105e2b40d640598d2a81250d48effd60747fd05e105589f1b9',
-  'assets/document-processing/current/classify-suggested-sanitized.png': '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933',
-  'assets/document-processing/current/extract-field-sanitized.png': 'c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab',
-  'assets/document-processing/current/extract-error-sanitized.png': 'a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e',
-  'assets/document-processing/current/review-table-sanitized.png': '3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240',
-  'assets/document-processing/current/review-verified-sanitized.png': 'e79069cd3e41a6ad3d14ae12c8e774d85756b34e378bf91cbf3c16265980ff95',
-  'assets/document-processing/current/evaluate-test-set-sanitized.png': 'c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0',
-  'assets/document-processing/current/evaluate-rerun-sanitized.png': 'bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283',
-  'assets/document-processing/current/evaluate-results-sanitized.png': '7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403',
-  'assets/document-processing/current/evaluate-indicators-sanitized.png': 'bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5',
+  'protected/wxo/assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm': '472376539f7fe8c8b10d1f8fe480b1052f95f6b5a8fadbeb16954396ceb4626e',
+  'protected/wxo/assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4': '1c41a0dffbfc0fb40c65c86cba37d9f9a7d19235ec3f14a395669fdbac749867',
+  'protected/wxo/assets/document-processing/media/doc-pro-poster-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
+  'protected/wxo/assets/document-processing/storyboard/01-select-training-documents-sanitized.png': '74078eb8e24ee8fd26de7a75d00b464c358a7d57fa18241c417fa6aa5e71dd8c',
+  'protected/wxo/assets/document-processing/storyboard/02-review-and-correct-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
+  'protected/wxo/assets/document-processing/storyboard/03-evaluation-details-sanitized.png': 'e60feb0d7b7de1105e2b40d640598d2a81250d48effd60747fd05e105589f1b9',
+  'protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png': '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933',
+  'protected/wxo/assets/document-processing/current/extract-field-sanitized.png': 'c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab',
+  'protected/wxo/assets/document-processing/current/extract-error-sanitized.png': 'a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e',
+  'protected/wxo/assets/document-processing/current/review-table-sanitized.png': '3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240',
+  'protected/wxo/assets/document-processing/current/review-verified-sanitized.png': 'e79069cd3e41a6ad3d14ae12c8e774d85756b34e378bf91cbf3c16265980ff95',
+  'protected/wxo/assets/document-processing/current/evaluate-test-set-sanitized.png': 'c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0',
+  'protected/wxo/assets/document-processing/current/evaluate-rerun-sanitized.png': 'bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283',
+  'protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png': '7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403',
+  'protected/wxo/assets/document-processing/current/evaluate-indicators-sanitized.png': 'bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5',
 };
 for (const [asset, expected] of Object.entries(expectedDocumentAssets)) {
   if (!fs.existsSync(asset)) fail(`Missing approved Document Processing evidence ${asset}.`);

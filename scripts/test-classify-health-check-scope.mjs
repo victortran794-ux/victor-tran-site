@@ -102,6 +102,23 @@ for (const [route, changedPath] of routeCases) {
   assert.equal(scope.all, false, `${changedPath} must not force the full suite`);
 }
 
+for (const changedPath of [
+  'wxo-access.html',
+  'middleware.ts',
+  'api/wxo-access.mjs',
+  'lib/protected-access.mjs',
+  'lib/protected-middleware.mjs',
+  'lib/password-verifier.mjs',
+  'js/wxo-access.js',
+  'protected/wxo/images/current/01-skill-studio-main.png',
+]) {
+  const scope = classifyPaths([changedPath]);
+  assert.equal(scope.wxo, true, `${changedPath} must select wxo`);
+  assert.equal(scope.deployable, true, `${changedPath} must select deployable checks`);
+  assert.equal(scope.links, true, `${changedPath} must select link checks`);
+  assert.equal(scope.all, false, `${changedPath} must not force the full suite`);
+}
+
 const unknownPage = classifyPaths(['new-case-study.html']);
 assert.equal(unknownPage.shared, true, 'unknown public HTML must fail safely to shared coverage');
 assert.equal(unknownPage.deployable, true);

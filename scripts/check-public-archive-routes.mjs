@@ -20,6 +20,7 @@ const robots = read('robots.txt');
 const sitemap = read('sitemap.xml');
 const siteIndex = JSON.parse(read('content/site-index.json'));
 const workflow = read('.github/workflows/health-check.yml');
+const middleware = read('middleware.ts');
 const preflight = read('scripts/preflight.sh');
 const packageJson = JSON.parse(read('package.json'));
 
@@ -64,8 +65,10 @@ for (const expected of publicProjects) {
 
 for (const protectedPage of ['wxo-canvas.html', 'document-processing.html']) {
   const html = read(protectedPage);
-  requireText(html, "sessionStorage.getItem('vtd-unlock')", `${protectedPage} must retain the current password gate`);
+  forbidText(html, "sessionStorage.getItem('vtd-unlock')", `${protectedPage} must not authorize through browser storage`);
+  forbidText(html, 'js/password-gate.js', `${protectedPage} must not load the retired browser password gate`);
   requireText(html, '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">', `${protectedPage} must remain noindex`);
+  requireText(middleware, `'/${protectedPage}'`, `${protectedPage} must remain covered by Vercel Routing Middleware`);
   if (!exportPolicy.protectedPages.some(item => item.source === protectedPage)) {
     fail(`${protectedPage} must remain in the protected content-export policy`);
   }

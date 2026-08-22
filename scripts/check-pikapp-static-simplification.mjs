@@ -90,10 +90,15 @@ for (const scriptName of ['build:pikapp-demo', 'check:pikapp-demo', 'verify:pika
   expect(!packageJson.scripts?.[scriptName], `package.json must remove ${scriptName}.`);
 }
 for (const dependency of ['esbuild', 'framer-motion', 'react', 'react-dom', 'tailwindcss']) {
+  expect(!packageJson.dependencies?.[dependency], `package.json must not restore V2-only dependency ${dependency}.`);
   expect(!packageJson.devDependencies?.[dependency], `package.json must remove V2-only dependency ${dependency}.`);
+  expect(!packageLock.packages?.[`node_modules/${dependency}`], `package-lock must not restore V2-only dependency ${dependency}.`);
 }
 expect(!packageLock.packages?.['']?.devDependencies, 'package-lock root must not retain V2-only devDependencies.');
-expect(Object.keys(packageLock.packages || {}).length === 1, 'package-lock must contain only the dependency-free root package.');
+expect(
+  JSON.stringify(Object.keys(packageLock.packages?.['']?.dependencies || {}).sort()) === JSON.stringify(['@vercel/functions']),
+  'package-lock root dependencies must remain limited to the server-side Vercel boundary.',
+);
 
 for (const forbidden of ['npm ci --ignore-scripts', 'verify:pikapp-demo', 'Install pinned website build tools']) {
   expect(!preflight.includes(forbidden), `Preflight must remove V2-only step: ${forbidden}`);

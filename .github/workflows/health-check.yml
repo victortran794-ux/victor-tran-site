@@ -266,6 +266,7 @@ jobs:
       - name: wxO and Document Processing protected deep-link regression
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.wxo == 'true'
         run: |
+          npm run check:protected-delivery
           npm run check:wxo-document-processing
           python3 -m http.server 8898 --bind 127.0.0.1 >/tmp/wxo-document-server.log 2>&1 &
           SERVER_PID=$!

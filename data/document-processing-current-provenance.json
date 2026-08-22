@@ -5,7 +5,7 @@
   "sanitation": "Actual top-right prototype identity markers are neutralized on every frame, and one internal design annotation is obscured; fictional interface data remains visible to preserve the design evidence.",
   "assets": [
     {
-      "file": "assets/document-processing/current/classify-suggested-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png",
       "figmaNode": "7:104016",
       "sourceSha256": "4ea9fd2a19f14cdadba15c1f8d6b7de9565ebe8d6c97fcf79a164b19b5cdf309",
       "outputSha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/extract-field-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/extract-field-sanitized.png",
       "figmaNode": "7:104417",
       "sourceSha256": "31d74f16c2b7f0426aadd35c6a1d3970b667c1d0eeebc846d02d743507397ea1",
       "outputSha256": "c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab",
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/extract-error-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/extract-error-sanitized.png",
       "figmaNode": "7:104509",
       "sourceSha256": "c0e6bf035aa3e632b031c20a2f91420ac2d36d51a3b731bf621bb23da82d9fbf",
       "outputSha256": "a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/review-table-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/review-table-sanitized.png",
       "figmaNode": "7:104773",
       "sourceSha256": "284dfeda5565460047f30574da1458e38beb2c08f55903e1c9ab34cb506c492b",
       "outputSha256": "3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240",
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/review-verified-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/review-verified-sanitized.png",
       "figmaNode": "7:104997",
       "sourceSha256": "9e7d744b71c64b33dfc6efeaaf6ef13e8884ac2d641d02249651c2c80dd937c3",
       "outputSha256": "e79069cd3e41a6ad3d14ae12c8e774d85756b34e378bf91cbf3c16265980ff95",
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/evaluate-results-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png",
       "figmaNode": "7:105294",
       "sourceSha256": "fae92ca965a522c5d078fa8cbd149db706404d7e8f5aa847d137260c0d375376",
       "outputSha256": "7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403",
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/evaluate-indicators-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/evaluate-indicators-sanitized.png",
       "figmaNode": "7:105547",
       "sourceSha256": "cf1eb0d7b0dc2502926eef3d26f7983f1205be209d618eb8ccab38e50b52e309",
       "outputSha256": "bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5",
@@ -194,7 +194,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/evaluate-rerun-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/evaluate-rerun-sanitized.png",
       "figmaNode": "7:105171",
       "sourceSha256": "8c7247fbfd2ef3a6b8c796f9bbab162ea0e1250b2688fa6a157472ea81b3d80f",
       "outputSha256": "bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283",
@@ -215,7 +215,7 @@
       ]
     },
     {
-      "file": "assets/document-processing/current/evaluate-test-set-sanitized.png",
+      "file": "protected/wxo/assets/document-processing/current/evaluate-test-set-sanitized.png",
       "figmaNode": "7:105417",
       "sourceSha256": "51343d7433ea60a1e9b80af9ca0ca60d82c6801a5ef2019beeb583b84d2bb0e6",
       "outputSha256": "c30c6532fc7b905ccf6dfd53f26c08453a8c4e37aeb077037f114085cf0ad2b0",
