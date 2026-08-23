@@ -43,9 +43,11 @@ async function fetchJson(url, options) {
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
 }
+const targetReadyTimeoutMs = 30_000;
 async function waitForTarget() {
+  const startedAt = Date.now();
   let lastError;
-  for (let attempt = 0; attempt < 80; attempt += 1) {
+  while (Date.now() - startedAt < targetReadyTimeoutMs) {
     try {
       const targets = await fetchJson(`http://127.0.0.1:${port}/json/list`);
       const page = targets.find((target) => target.type === 'page');
