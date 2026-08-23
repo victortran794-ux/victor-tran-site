@@ -359,11 +359,19 @@ async function checkArtResponsiveMedia() {
   const lightboxMark = cdp.requests.length;
   await cdp.evaluate(`document.querySelector('[data-horned-slideshow] .series-slideshow-img.is-active').focus()`);
   await cdp.key('Enter', 'Enter', 13);
-  await delay(240);
-  const lightbox = await cdp.evaluate(`(() => ({
-    full: document.querySelector('.lightbox .lb-img')?.getAttribute('src'),
-    thumbs: [...document.querySelectorAll('.lightbox .lb-thumb img')].map((image) => image.getAttribute('src')),
-  }))()`);
+  const lightbox = await cdp.evaluate(`(async () => {
+    const deadline = performance.now() + 5000;
+    let full = '';
+    do {
+      full = document.querySelector('.lightbox .lb-img')?.getAttribute('src') || '';
+      if (full === 'images/illus-untitled-5.jpg') break;
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    } while (performance.now() < deadline);
+    return {
+      full,
+      thumbs: [...document.querySelectorAll('.lightbox .lb-thumb img')].map((image) => image.getAttribute('src')),
+    };
+  })()`);
   assert(lightbox.full === 'images/illus-untitled-5.jpg' && lightbox.thumbs.slice(1, 8).every((src, index) => src === `images/responsive/illus-untitled-${index + 5}-320.webp`),
     `artillustration.html: lightbox must use full source and compact thumbnail derivatives: ${JSON.stringify(lightbox)}`);
   const lightboxRequests = assertHornedRequests(lightboxMark, [5, 6, 7, 8, 9, 10, 11], 'on lightbox open', { requireOriginal: true });
@@ -503,8 +511,18 @@ async function checkGraphicResponsiveMedia() {
         const image = [...document.querySelectorAll('main img[data-full-src]')].find((element) => element.dataset.fullSrc === source);
         if (!image) return null;
         image.scrollIntoView({ block: 'center' });
+        const deadline = performance.now() + 5000;
+        while (performance.now() < deadline && (
+          image.hasAttribute('data-deferred-src') ||
+          !image.getAttribute('srcset') ||
+          !image.currentSrc ||
+          image.currentSrc.startsWith('data:') ||
+          !image.complete ||
+          image.naturalWidth <= 1
+        )) {
+          await new Promise((resolve) => setTimeout(resolve, 50));
+        }
         try { await image.decode(); } catch {}
-        await new Promise((resolve) => setTimeout(resolve, 120));
         const rect = image.getBoundingClientRect();
         return { source, currentSrc: image.currentSrc, srcset: image.getAttribute('srcset'), width: rect.width, full: image.dataset.fullSrc, thumb: image.dataset.thumbSrc, role: image.getAttribute('role'), popup: image.getAttribute('aria-haspopup'), tabindex: image.tabIndex };
       })()`);
