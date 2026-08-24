@@ -13,8 +13,16 @@ This hand-edited detailed companion retains rationale, voice, imagery direction,
 1. **Order in disorder, and always a little disorder in the madness.** The system has structure; the work it carries doesn't pretend to be sterile. Imperfection on purpose.
 2. **Every part of the journey is a source.** Music, conversation, magazines, fraternity work, illustration practice — they all feed the design. The site shouldn't read like a UX person's portfolio. It should read like a designer who's lived a lot of lives.
 3. **Tools yes, AI art no.** Use AI to speed work, unblock thinking, automate the boring. Don't use it to fake the act of making.
-4. **Design on the everyperson's side.** The folk-hero version. The work should make ordinary tools more interesting and less hostile to the person using them — not more profitable for the people deploying them.
+4. **Design on the side of everyday people.** Make tools more useful, understandable, and enjoyable for the people using them. Never use design to trick, pressure, or work against them.
 5. **No dark patterns. Ever.** If a UI tricks someone into a click they didn't want, it doesn't belong here.
+6. **Things have relationships for a reason.** Composition should clarify the relationships between ideas, images, and evidence. Group, separate, repeat, align, or contrast elements because the story calls for it, not because a template expects another component.
+
+## Stable identity and current skin
+
+- **Stable identity:** Authored, truthful, project-aware, accessible, image-led, non-templated, conversational, and recognizably Victor's. The work can be editorial, asymmetric, and deliberately imperfect when the composition earns it.
+- **Current skin:** The current palette, type families, spacing, radii, Light/Dark values, components, and shell describe the production implementation today. They may evolve through a separately reviewed up-skin without erasing the stable identity.
+
+Victor's current positioning spans product systems, enterprise AI experiences, brand, editorial, and illustration. The portfolio should show the relationships across those disciplines without flattening them into one style or treating each discipline as equally central to every opportunity.
 
 ## Anti-principles
 
@@ -24,7 +32,8 @@ What this site refuses to be:
 - **No dark patterns.** No timer panic, no opt-out gotchas, no fake urgency, no manufactured friction.
 - **No "boring because it's email or PowerPoint."** Even the mundane formats deserve craft. Boo to the general-ole email.
 - **No insider jargon for its own sake.** Write for the general-ole person — the smart non-specialist.
-- **No utility-template sameness.** Repeated equal cards, default pill clusters, uniform dashboard grids, gratuitous rounded panels, and framework-demo spacing should not become the portfolio's visual voice. Utility tooling may support an isolated prototype, but the authored result must remain editorial, asymmetric, project-aware, and recognizably Victor's.
+- **No out-of-the-box template as the finished design.** Templates and frameworks may provide scaffolding, but their default structure, spacing, components, and visual conventions must be reconsidered around the actual content. Cards, pills, grids, containers, and asymmetry are useful only when they clarify real relationships in the work.
+- **No distorted source material.** Preserve complete artwork and interface evidence when appropriate. Use intentional crops that respect the source proportions; never stretch, pinch, or deform an image to satisfy a predetermined container.
 
 ---
 

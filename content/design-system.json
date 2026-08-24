@@ -1,7 +1,7 @@
 {
   "$comment": "Structured mirror of the runtime token data. DESIGN.md owns normative design intent and formal agent context; css/style.css owns executable runtime; this JSON is a contract-checked structured mirror; content/design-system.md is the detailed companion; governance docs own active gates and state.",
   "version": "0.3.0",
-  "updated": "2026-08-22",
+  "updated": "2026-08-24",
   "authority": {
     "designIntent": "DESIGN.md",
     "formalAgentContext": "DESIGN.md",
