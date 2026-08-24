@@ -68,6 +68,25 @@ test('validates the checked-in design contract', () => {
   assert.deepEqual(validateDesignContract(ROOT, { formalLint: true }).errors, []);
 });
 
+test('records Victor-confirmed identity principles in the normative contract', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'DESIGN.md'), 'utf8');
+  for (const phrase of [
+    'Order in disorder, and always a little disorder in the madness.',
+    'Every part of the journey is a source.',
+    'Tools yes, AI art no.',
+    'Design on the side of everyday people.',
+    'Things have relationships for a reason.',
+    'Never treat an out-of-the-box template as the finished design.',
+    'Current skin',
+  ]) assert.ok(source.includes(phrase), `missing confirmed identity phrase: ${phrase}`);
+});
+
+test('keeps the concept-album language secondary rather than mandatory', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'PORTFOLIO_DIRECTION_BRIEF.md'), 'utf8');
+  assert.match(source, /concept album[\s\S]{0,500}secondary creative metaphor/i);
+  assert.match(source, /not a mandatory interface model/i);
+});
+
 test('does not claim old-style foreign fixtures', () => {
   const foreign = fs.mkdtempSync(path.join(os.tmpdir(), LEGACY_FIXTURE_PREFIX));
   try {
@@ -77,12 +96,12 @@ test('does not claim old-style foreign fixtures', () => {
   }
 });
 
-rejects('rejects a malformed DESIGN.md updated date', 'DESIGN.md', (source) => source.replace('updated: "2026-08-22"', 'updated: not-a-date'), 'DESIGN.md updated must be ISO YYYY-MM-DD');
-rejects('rejects DESIGN.md updated date drift from JSON', 'DESIGN.md', (source) => source.replace('updated: "2026-08-22"', 'updated: "2000-01-01"'), 'DESIGN.md updated must match design-system.json updated');
-rejects('rejects JSON updated date drift from DESIGN.md', 'content/design-system.json', (source) => source.replace('"updated": "2026-08-22"', '"updated": "2000-01-01"'), 'DESIGN.md updated must match design-system.json updated');
+rejects('rejects a malformed DESIGN.md updated date', 'DESIGN.md', (source) => source.replace('updated: "2026-08-24"', 'updated: not-a-date'), 'DESIGN.md updated must be ISO YYYY-MM-DD');
+rejects('rejects DESIGN.md updated date drift from JSON', 'DESIGN.md', (source) => source.replace('updated: "2026-08-24"', 'updated: "2000-01-01"'), 'DESIGN.md updated must match design-system.json updated');
+rejects('rejects JSON updated date drift from DESIGN.md', 'content/design-system.json', (source) => source.replace('"updated": "2026-08-24"', '"updated": "2000-01-01"'), 'DESIGN.md updated must match design-system.json updated');
 rejectsFiles('rejects a coordinated impossible updated calendar date', {
-  'DESIGN.md': (source) => source.replace('updated: "2026-08-22"', 'updated: "2026-02-30"'),
-  'content/design-system.json': (source) => source.replace('"updated": "2026-08-22"', '"updated": "2026-02-30"'),
+  'DESIGN.md': (source) => source.replace('updated: "2026-08-24"', 'updated: "2026-02-30"'),
+  'content/design-system.json': (source) => source.replace('"updated": "2026-08-24"', '"updated": "2026-02-30"'),
 }, 'DESIGN.md updated must be a real calendar date');
 
 rejects('rejects DESIGN.md mapped color drift', 'DESIGN.md', (source) => source.replace('primary: "#55A2F7"', 'primary: "#000000"'), 'CSS mapping drift: colors.primary');

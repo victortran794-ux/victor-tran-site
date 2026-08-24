@@ -1,8 +1,8 @@
-# Portfolio Direction Brief — Concept Album + Studio System
+# Portfolio Direction Brief - Authored Portfolio System
 
 Created: 2026-05-19
-Last updated: 2026-08-21
-Status: Stable direction brief aligned to the production-verified VicO2 and maintenance cycle through PR #168
+Last updated: 2026-08-24
+Status: Stable direction brief with Victor-authored identity principles confirmed on August 24, 2026
 Location: Website repo root (`PORTFOLIO_DIRECTION_BRIEF.md`)
 
 This brief is the single active direction reference for Victor's portfolio. It consolidates the scattered portfolio enhancement notes into one working direction. It does not change the live website, repo files, images, navigation, or deployment by itself.
@@ -28,9 +28,13 @@ Use this file for direction-setting. Use dated files under `archive/planning/` f
 
 ### North star
 
-Build a portfolio that feels like a designer's concept album: structured enough to navigate, theatrical enough to remember, and personal enough that it could only belong to Victor.
+Build a portfolio that is structured enough to navigate, memorable enough to feel authored, and personal enough that it could only belong to Victor. Preserve truthful evidence, project individuality, accessibility, and clear relationships between ideas, images, and evidence.
 
-Short version:
+### Concept album as a secondary creative metaphor
+
+The designer's concept album remains a secondary creative metaphor, not a mandatory interface model. It may inspire sequence, rhythm, transitions, or editorial framing when those ideas strengthen a real project. It does not require the homepage to be a tracklist, projects to behave like tracks, transitions to become crossfades, About to resemble liner notes, or navigation to become theatrical.
+
+Optional metaphor vocabulary:
 
 - The portfolio is the album.
 - The homepage is the cover and tracklist.
@@ -38,7 +42,7 @@ Short version:
 - Project transitions are crossfades.
 - Navigation is the quiet stagehand.
 - The About page is the Playbill / liner notes.
-- The design system is the production rig that keeps the show coherent.
+- The design system can act like a production rig that keeps the show coherent.
 
 ### Current posture
 
@@ -491,7 +495,7 @@ Guardrails:
 
 ### Open review questions
 
-1. Does “concept album + quiet stagehand” still feel right, or should it be softened into “curated sequence + subtle navigation”?
+1. **Decided August 24, 2026:** Keep “concept album” as a secondary creative metaphor, not a mandatory interface model. Use only the parts that strengthen a real composition.
 2. Should the homepage actually look like a tracklist, or only borrow tracklist behaviors?
 3. Are the shipped homepage labels and supporting copy grounded enough, or too theatrical?
 4. Do the Work/Galleries nav changes make the site clearer on mobile and desktop?

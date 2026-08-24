@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Victor Tran Portfolio
-updated: "2026-08-22"
+updated: "2026-08-24"
 description: An authored, evidence-led portfolio system that pairs a restrained shared shell with project-native visual storytelling.
 colors:
   primary: "#55A2F7"
@@ -173,6 +173,30 @@ The system has two layers:
 
 The website, LinkedIn, and the future master presentation are separate channels. Website rules do not authorize publication to the other channels.
 
+## Design Identity
+
+Victor is a visual designer working across product systems, enterprise AI experiences, brand, editorial, and illustration. The portfolio should show the connections across those disciplines without flattening them into a single style or presenting every discipline as equally central to every opportunity.
+
+These identity principles were confirmed by Victor during the August 24, 2026 authorship review:
+
+- **Order in disorder, and always a little disorder in the madness.** The system has structure; the work it carries does not pretend to be sterile. Imperfection may be intentional.
+- **Every part of the journey is a source.** Music, conversation, magazines, fraternity work, illustration practice, brand, editorial, and product work all feed the design. The portfolio should read like a designer who has lived a lot of lives.
+- **Tools yes, AI art no.** Use AI to speed work, unblock thinking, organize evidence, test, and automate the boring. Do not use it to fake the act of making or fabricate Victor's authorship.
+- **Design on the side of everyday people.** Make tools more useful, understandable, and enjoyable for the people using them. Never use design to trick, pressure, or work against them.
+- **Things have relationships for a reason.** Composition should clarify the relationships between ideas, images, and evidence. Group, separate, repeat, align, or contrast elements because the story calls for it, not because a template expects another component.
+- **No dark patterns. Ever.** If an interface tricks someone into an action they did not want, it does not belong here.
+- **Mundane formats still deserve craft.** Email, presentations, enterprise workflows, and operational material should not become boring merely because the format is ordinary. Boo to the general-ole email.
+- **Write for the smart non-specialist.** Use plain, conversational language and necessary domain terms without insider jargon for its own sake.
+
+The visual direction is authored rather than assembled, editorial rather than corporate-template generic, and image-led rather than card-led. Asymmetry is welcome when the composition earns it. Preserve complete artwork and interface evidence when appropriate. Use only intentional crops, respect original proportions, and never stretch, pinch, or distort source imagery.
+
+## Stable Identity and Current Skin
+
+- **Stable identity:** Authored, truthful, project-aware, accessible, image-led, non-templated, conversational, and recognizably Victor's. These qualities should survive a visual refresh.
+- **Current skin:** The blue, pink, purple, and orange palette; DM Serif Display, Barlow, and Source Code Pro; current spacing and radius scales; Light/Dark values; component inventory; and shell treatment describe the production implementation today. They are not permanent identity traits.
+
+A future visual refresh may change the current skin after a representative isolated exploration and explicit review. It must preserve the stable identity, project individuality, recruiter readability, accessibility, privacy, and truthful evidence boundaries.
+
 ## Colors
 
 - **Primary:** Shared interaction blue. Light `--blue` is `#55A2F7`; dark `--blue` and dark `--blue-text` are both `#7AB8FF`.
@@ -234,6 +258,8 @@ Dormant ideas and Design DNA samples must not be described as live components.
 - Use generators for generator-owned routes and artifacts.
 - Validate generated outputs against their sources and manifests.
 - Keep protected information out of public documentation and assets.
+- Let composition explain the relationships between ideas, images, and evidence.
+- Preserve complete source material when appropriate and use intentional, proportion-respecting crops only.
 
 ### Don't
 
@@ -244,6 +270,8 @@ Dormant ideas and Design DNA samples must not be described as live components.
 - Hide theme choice, keyboard affordances, or focus state.
 - Hand-edit generated surfaces behind their owning generator.
 - Add unowned image derivatives or duplicate token sources without validation.
+- Never treat an out-of-the-box template as the finished design. Templates and frameworks may provide scaffolding, but their default structure, spacing, components, and visual conventions must be reconsidered around the actual content.
+- Stretch, pinch, distort, or casually crop source imagery to fit a predetermined container.
 
 ## Project Overlays
 
