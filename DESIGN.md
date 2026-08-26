@@ -300,14 +300,12 @@ Do not build a universal immersive framework in advance. Begin with the needs an
 
 ## Media Delivery
 
-- Substantial raster media should provide viewport-appropriate variants where source quality permits.
-- `srcset` and `sizes` must reflect the actual component geometry.
-- The LCP image remains immediately discoverable, eager, and high priority, but receives a right-sized source.
-- Inactive slideshow media should be truly deferred.
-- Lightbox inspection should retain an intentional high-resolution source separate from the responsive page source.
-- Width, height, alt text, crop, keyboard behavior, focus restoration, and reduced-motion behavior must survive optimization.
-- Every derivative has a named generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.
-- Detailed artwork and image-embedded typography require visual compression review.
+Deliver media responsively without compromising evidence fidelity, accessibility, or intentional inspection quality.
+
+- Preserve intended geometry, crop, alt text, keyboard behavior, focus restoration, and reduced-motion behavior.
+- Prioritize primary evidence, defer inactive media, and retain a deliberate high-resolution inspection path where the work requires it.
+- Review detailed artwork and image-embedded typography visually after optimization.
+- Portfolio-specific generation, provenance, and performance procedures live in `PORTFOLIO_SYSTEM.md`.
 
 ## Accessibility, Motion, Privacy, and Truth
 
@@ -323,9 +321,4 @@ Do not build a universal immersive framework in advance. Begin with the needs an
 
 Root `DESIGN.md` is the normative design intent and formal agent context for shared semantics, live components, project overlays, and use rules.
 
-1. `css/style.css` is the executable runtime implementation of shared tokens.
-2. `content/design-system.json` is the contract-checked structured mirror.
-3. `content/design-system.md` is the detailed Phase 1 compatibility companion, not a second broad authority.
-4. Governance documents own active publication gates and project state.
-5. The repository validator must fail when token values, component status, ownership, or required safety rules drift.
-6. Any token or component change updates the contract, implementation, structured mirror, tests, and modified date in the same reviewed change.
+Governance documents own active publication gates and project state. Implementation and validation procedures live in `PORTFOLIO_SYSTEM.md`.

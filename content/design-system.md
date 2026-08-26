@@ -1,10 +1,10 @@
 # Design system
 
-Detailed companion to the root [`DESIGN.md`](../DESIGN.md), which is the normative design intent and formal agent contract. `css/style.css` remains executable runtime, [design-system.json](design-system.json) is the contract-checked structured mirror, and governance docs own active gates and state. This detailed companion is not a second broad authority; it preserves Phase 1 compatibility prose while consumers are audited.
+Root `DESIGN.md` is adopted as the normative design intent and formal agent contract. `css/style.css` remains executable runtime, [design-system.json](design-system.json) is the contract-checked structured mirror, and governance docs own active gates and state.
 
-## Compatibility note
+## Current role
 
-This hand-edited detailed companion retains rationale, voice, imagery direction, and implementation context temporarily. Where it differs from root `DESIGN.md`, the root contract governs shared semantics and safety boundaries.
+This file remains a detailed compatibility companion, not a second broad authority. It retains rationale, voice, imagery direction, and implementation context for human readers. Where it differs from root `DESIGN.md`, the root contract governs shared semantics and safety boundaries.
 
 ---
 
@@ -259,14 +259,11 @@ Known implementation gaps:
 
 ## How this doc connects to the site
 
-Today: hand-maintained, read by humans.
+This file is hand-maintained and read by humans.
 
-**Migration path** (reconciled, not yet authorized):
+- Use root `DESIGN.md` for normative identity, shared semantics, formal tokens, and safety boundaries.
+- Use `css/style.css` for the executable runtime.
+- Use `content/design-system.json` for the contract-checked structured mirror.
+- Use `PORTFOLIO_SYSTEM.md` for maintenance procedure and `PORTFOLIO_DASHBOARD.md` for current state.
 
-1. **Phase 1**: keep the existing home-page Design DNA overlay stable while the approved candidate set defines the system.
-2. **Phase 2**: reconcile prose, token roles, shared anatomy, behavior contracts, and project-native variants without changing live CSS values.
-3. **Phase 3**: approve the Launch Integration Contract and implement shared shell and case-study chrome once in a coordinated local worktree.
-4. **Phase 4**: refresh the existing Design DNA overlay from the reconciled system after complete-site preview review.
-5. **Optional later phase**: add `scripts/build-tokens.mjs` or data-driven overlay rendering only when the JSON schema and reader value are stable.
-
-The order matters. Do not rewire the overlay, introduce broad Lens behavior, or generate CSS from JSON before the coordinated integration preview proves that the schema and shared-shell decisions are stable.
+Historical migration plans belong under `archive/planning/`. New implementation work begins only from current authority and explicit approval.

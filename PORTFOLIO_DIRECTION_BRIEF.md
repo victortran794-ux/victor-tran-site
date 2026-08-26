@@ -16,8 +16,8 @@ Consult next:
 - `PORTFOLIO_DASHBOARD.md` for current active plan, current status, and next actions.
 - `PORTFOLIO_SYSTEM.md` for repo structure, publishing, health checks, and maintenance rules.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, guardrails, and handoffs.
-- `content/design-system.md` for design system principles, voice, imagery, and usage.
-- `content/design-system.json` for structured token values.
+- `DESIGN.md` for normative design intent, Victor-confirmed identity principles, and formal tokens.
+- `css/style.css` for executable runtime values, `content/design-system.json` for the contract-checked structured mirror, and `content/design-system.md` for the subordinate compatibility companion.
 - `archive/planning/README.md` for historical checkpoints and source notes.
 
 Use this file for direction-setting. Use dated files under `archive/planning/` for historical checkpoints, implementation notes, and source context. Archived plans are historical unless this brief or `PORTFOLIO_DASHBOARD.md` explicitly references them as active work.

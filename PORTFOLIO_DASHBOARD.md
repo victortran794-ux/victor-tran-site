@@ -13,7 +13,7 @@ Consult next:
 - `PORTFOLIO_SYSTEM.md` for repo structure, publishing, health checks, and maintenance rules.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, permissions, guardrails, handoffs, and closeout.
 - `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
-- `content/design-system.md` and `content/design-system.json` for design system principles and tokens.
+- `DESIGN.md` for normative design intent and formal tokens; `css/style.css` for executable runtime values; `content/design-system.json` for the contract-checked structured mirror; and `content/design-system.md` for the subordinate compatibility companion.
 - `archive/planning/README.md` for historical planning context only.
 
 ## Current portfolio state

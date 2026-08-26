@@ -11,7 +11,7 @@ Consult next:
 - `PORTFOLIO_DASHBOARD.md` for current status, active plan, and next actions.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, permissions, guardrails, handoffs, and closeout.
 - `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
-- `content/design-system.md` and `content/design-system.json` for design system authority.
+- `DESIGN.md` for normative design intent and formal tokens; `css/style.css` for executable runtime values; `content/design-system.json` for the contract-checked structured mirror; and `content/design-system.md` for the subordinate compatibility companion.
 - `archive/planning/README.md` and `archive/website-health-reports/` for historical reference only.
 
 ## Source-of-truth map
@@ -25,7 +25,7 @@ Consult next:
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
 - Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
-- Design system prose and structured tokens: `content/design-system.md` and `content/design-system.json`
+- Design contract and implementation: root `DESIGN.md` is normative, `css/style.css` is runtime, `content/design-system.json` is the checked mirror, and `content/design-system.md` is the companion.
 - Hand-maintained profile/context exception: `content/profile.md`
 - Project-package manifests and case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
 - Historical planning reference only: `archive/planning/` — see `archive/planning/README.md`
@@ -36,6 +36,24 @@ Consult next:
 Important archive rule: truly archived files should move to the designated archive area instead of remaining mixed into active docs. Use `archive/planning/` for historical planning notes, `archive/website-health-reports/` for historical health/audit reports, `archive/pages/` for retired page snapshots, and PC-side `C:\Users\Victor\Documents\Website Items` for private handoffs/backups/recovery material that should not live in the public repo. Check with Victor before moving ambiguous archive candidates.
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
+
+## Design contract maintenance
+
+- `DESIGN.md` is the normative design intent and formal token contract.
+- `css/style.css` is the executable runtime implementation of shared tokens.
+- `content/design-system.json` is the contract-checked structured mirror.
+- `content/design-system.md` is the subordinate compatibility companion.
+- The repository validator must fail when token values, component status, ownership, or required safety rules drift.
+- Any token or component change updates the contract, implementation, structured mirror, tests, and modified date in the same reviewed change.
+
+### Media production and delivery
+
+- Match responsive source selection to the component's real rendered geometry.
+- Keep the primary page image discoverable and right-sized; defer inactive slideshow media.
+- Retain a deliberate high-resolution inspection source when the work requires it.
+- Preserve dimensions, alt text, crop, keyboard behavior, focus restoration, and reduced-motion behavior through optimization.
+- Every generated derivative records its generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.
+- Visually review detailed artwork and image-embedded typography after compression.
 
 ## Project package / case study workflow
 

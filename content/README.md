@@ -6,7 +6,7 @@ This folder contains generated/exported site content used for indexing, search, 
 
 `content/*.md` and `content/site-index.json` are authoritative as the generated portfolio content export layer for indexing/search/future generative UI. They are not active planning docs, case-study handoffs, or current-status trackers. Most files here should be regenerated from HTML rather than hand-edited.
 
-Design-system files live beside the generated content but have a separate role: `content/design-system.md` explains principles, voice, imagery, and usage; `content/design-system.json` contains structured token values.
+Design-system files live beside the generated content but have a separate role. Root `DESIGN.md` is the normative design intent and formal token contract; `css/style.css` is the executable runtime; `content/design-system.json` is the contract-checked structured mirror; and `content/design-system.md` is the subordinate compatibility companion.
 
 Most files here are created from the static HTML pages by:
 

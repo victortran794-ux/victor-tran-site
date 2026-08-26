@@ -34,10 +34,20 @@ const REQUIRED_PROSE = [
 
 const REQUIRED_AUTHORITY_PROSE = [
   'Root `DESIGN.md` is the normative design intent and formal agent context',
-  '`css/style.css` is the executable runtime implementation',
-  '`content/design-system.json` is the contract-checked structured mirror',
-  '`content/design-system.md` is the detailed Phase 1 compatibility companion, not a second broad authority',
   'Governance documents own active publication gates and project state',
+  'Implementation and validation procedures live in `PORTFOLIO_SYSTEM.md`',
+];
+
+const REQUIRED_GOVERNANCE_PROSE = [
+  '`DESIGN.md` is the normative design intent and formal token contract.',
+  '`css/style.css` is the executable runtime implementation of shared tokens.',
+  '`content/design-system.json` is the contract-checked structured mirror.',
+  '`content/design-system.md` is the subordinate compatibility companion.',
+  'Any token or component change updates the contract, implementation, structured mirror, tests, and modified date in the same reviewed change.',
+];
+
+const REQUIRED_MEDIA_GOVERNANCE_PROSE = [
+  'Every generated derivative records its generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.',
 ];
 
 const REQUIRED_TOKEN_NAMES = Object.freeze({
@@ -123,11 +133,12 @@ export function runFormalLint(root = DEFAULT_ROOT) {
 
 export function validateDesignContract(root = DEFAULT_ROOT, { formalLint = false } = {}) {
   const errors = [];
-  let design; let json; let css; let prose;
+  let design; let json; let css; let prose; let governance;
   try { design = parseDesignMd(read(root, 'DESIGN.md')); } catch (caught) { return { errors: [caught.message] }; }
   try { json = JSON.parse(read(root, 'content/design-system.json')); } catch (caught) { error(errors, `design-system.json must parse: ${caught.message}`); }
   css = cssBlocks(read(root, 'css/style.css'));
   prose = read(root, 'content/design-system.md');
+  try { governance = read(root, 'PORTFOLIO_SYSTEM.md'); } catch (caught) { return { errors: [`PORTFOLIO_SYSTEM.md must be readable: ${caught.message}`] }; }
   const { frontmatter, body } = design;
 
   if (frontmatter.version !== 'alpha') error(errors, 'DESIGN.md version must be alpha');
@@ -136,6 +147,8 @@ export function validateDesignContract(root = DEFAULT_ROOT, { formalLint = false
   else if (frontmatter.updated !== json?.updated) error(errors, 'DESIGN.md updated must match design-system.json updated');
   if (/candidate is a planning artifact|not yet the repository authority|\bif adopted\b/i.test(body)) error(errors, 'adopted authority contradiction');
   if (REQUIRED_AUTHORITY_PROSE.some((phrase) => !body.includes(phrase))) error(errors, 'missing adopted authority model');
+  if (REQUIRED_GOVERNANCE_PROSE.some((phrase) => !governance.includes(phrase))) error(errors, 'portfolio governance authority boundary');
+  if (REQUIRED_MEDIA_GOVERNANCE_PROSE.some((phrase) => !governance.includes(phrase))) error(errors, 'portfolio media provenance boundary');
   if (body.includes('—')) error(errors, 'DESIGN.md must not contain em dashes');
   const headings = [...body.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => match[1]);
   for (const section of CANONICAL_SECTIONS) if (!headings.includes(section)) error(errors, `missing canonical section: ${section}`);
@@ -220,7 +233,8 @@ export function validateDesignContract(root = DEFAULT_ROOT, { formalLint = false
     for (const dormant of json.components?.dormantCandidates ?? []) if ((json.components?.existing ?? []).includes(dormant)) error(errors, `dormant component marked live: ${dormant}`);
   }
   if (!/DESIGN\.md[\s\S]{0,120}normative design intent and formal agent contract/i.test(prose)) error(errors, 'prose companion must point to root DESIGN.md as normative contract');
-  if (!/detailed companion[\s\S]{0,80}not a second broad authority/i.test(prose)) error(errors, 'prose companion authority boundary is missing');
+  if (!/detailed compatibility companion[\s\S]{0,80}not a second broad authority/i.test(prose)) error(errors, 'prose companion authority boundary is missing');
+  if (/not yet authorized|\bPhase [1-4]\b/i.test(prose)) error(errors, 'stale compatibility migration language');
   if (!/four accents/i.test(prose)) error(errors, 'prose palette must acknowledge all four accents');
 
   if (formalLint) errors.push(...runFormalLint(root).errors);
