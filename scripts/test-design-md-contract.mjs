@@ -16,7 +16,7 @@ function fixtureNames() {
 
 function fixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), FIXTURE_PREFIX));
-  for (const relative of ['DESIGN.md', 'css/style.css', 'content/design-system.json', 'content/design-system.md']) {
+  for (const relative of ['DESIGN.md', 'css/style.css', 'content/design-system.json', 'content/design-system.md', 'PORTFOLIO_SYSTEM.md']) {
     const target = path.join(root, relative);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.copyFileSync(path.join(ROOT, relative), target);
@@ -86,6 +86,51 @@ test('keeps the concept-album language secondary rather than mandatory', () => {
   assert.match(source, /concept album[\s\S]{0,500}secondary creative metaphor/i);
   assert.match(source, /not a mandatory interface model/i);
 });
+
+test('keeps repository maintenance procedure out of DESIGN.md and in portfolio governance', () => {
+  const design = fs.readFileSync(path.join(ROOT, 'DESIGN.md'), 'utf8');
+  const governance = fs.readFileSync(path.join(ROOT, 'PORTFOLIO_SYSTEM.md'), 'utf8');
+  assert.match(design, /Implementation and validation procedures live in `PORTFOLIO_SYSTEM\.md`\./);
+  assert.doesNotMatch(design, /`css\/style\.css` is the executable runtime implementation/);
+  for (const phrase of [
+    '`DESIGN.md` is the normative design intent and formal token contract.',
+    '`css/style.css` is the executable runtime implementation of shared tokens.',
+    '`content/design-system.json` is the contract-checked structured mirror.',
+    '`content/design-system.md` is the subordinate compatibility companion.',
+    'Any token or component change updates the contract, implementation, structured mirror, tests, and modified date in the same reviewed change.',
+  ]) assert.ok(governance.includes(phrase), `missing portfolio governance phrase: ${phrase}`);
+});
+
+test('keeps media quality intent in DESIGN.md and production procedure in portfolio governance', () => {
+  const design = fs.readFileSync(path.join(ROOT, 'DESIGN.md'), 'utf8');
+  const governance = fs.readFileSync(path.join(ROOT, 'PORTFOLIO_SYSTEM.md'), 'utf8');
+  assert.match(design, /Deliver media responsively without compromising evidence fidelity, accessibility, or intentional inspection quality\./);
+  assert.doesNotMatch(design, /pinned encoder settings|source hash|output hash/);
+  assert.ok(governance.includes('Every generated derivative records its generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.'), 'missing portfolio media provenance procedure');
+});
+
+rejects('rejects a removed portfolio governance authority boundary', 'PORTFOLIO_SYSTEM.md', (source) => source.replace('`DESIGN.md` is the normative design intent and formal token contract.', '`DESIGN.md` contains optional notes.'), 'portfolio governance authority boundary');
+rejects('rejects a removed portfolio media provenance boundary', 'PORTFOLIO_SYSTEM.md', (source) => source.replace('Every generated derivative records its generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.', 'Generated files may be added manually.'), 'portfolio media provenance boundary');
+
+test('reports a missing portfolio governance document as a structured contract error', () => {
+  const root = fixture();
+  try {
+    fs.rmSync(path.join(root, 'PORTFOLIO_SYSTEM.md'));
+    const result = validateDesignContract(root);
+    assert.ok(result.errors.some((message) => message.includes('PORTFOLIO_SYSTEM.md must be readable')));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('keeps the compatibility companion current and subordinate', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'content/design-system.md'), 'utf8');
+  assert.match(source, /Root `DESIGN\.md` is adopted as the normative design intent and formal agent contract\./);
+  assert.match(source, /This file remains a detailed compatibility companion, not a second broad authority\./);
+  assert.doesNotMatch(source, /not yet authorized|Phase 1|Phase 2|Phase 3|Phase 4/);
+});
+
+rejects('rejects stale compatibility migration language', 'content/design-system.md', (source) => `${source}\nMigration path (reconciled, not yet authorized).\n`, 'stale compatibility migration language');
 
 test('does not claim old-style foreign fixtures', () => {
   const foreign = fs.mkdtempSync(path.join(os.tmpdir(), LEGACY_FIXTURE_PREFIX));

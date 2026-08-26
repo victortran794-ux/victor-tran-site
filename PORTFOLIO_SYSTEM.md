@@ -37,6 +37,24 @@ Important archive rule: truly archived files should move to the designated archi
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
 
+## Design contract maintenance
+
+- `DESIGN.md` is the normative design intent and formal token contract.
+- `css/style.css` is the executable runtime implementation of shared tokens.
+- `content/design-system.json` is the contract-checked structured mirror.
+- `content/design-system.md` is the subordinate compatibility companion.
+- The repository validator must fail when token values, component status, ownership, or required safety rules drift.
+- Any token or component change updates the contract, implementation, structured mirror, tests, and modified date in the same reviewed change.
+
+### Media production and delivery
+
+- Match responsive source selection to the component's real rendered geometry.
+- Keep the primary page image discoverable and right-sized; defer inactive slideshow media.
+- Retain a deliberate high-resolution inspection source when the work requires it.
+- Preserve dimensions, alt text, crop, keyboard behavior, focus restoration, and reduced-motion behavior through optimization.
+- Every generated derivative records its generator, pinned encoder settings, source hash, output dimensions, byte size, and output hash.
+- Visually review detailed artwork and image-embedded typography after compression.
+
 ## Project package / case study workflow
 
 Use small durable files instead of stuffing an entire case study into one chat.
