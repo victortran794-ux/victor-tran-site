@@ -15,7 +15,7 @@ Consult next:
 - `PORTFOLIO_DASHBOARD.md` for current status, active plan, and next actions.
 - `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
 - `PORTFOLIO_DESIGN_CRITIQUE_RUBRIC.md` for independent direction and rendered-design review.
-- `content/design-system.md` and `content/design-system.json` for design system rules.
+- `DESIGN.md` for normative design intent and formal tokens; `css/style.css` for executable runtime values; `content/design-system.json` for the contract-checked structured mirror; and `content/design-system.md` for the subordinate compatibility companion.
 
 ## Source-of-truth file model
 

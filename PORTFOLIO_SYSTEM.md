@@ -11,7 +11,7 @@ Consult next:
 - `PORTFOLIO_DASHBOARD.md` for current status, active plan, and next actions.
 - `PORTFOLIO_AGENT_WORKFLOWS.md` for agent roles, permissions, guardrails, handoffs, and closeout.
 - `PORTFOLIO_DIRECTION_BRIEF.md` for creative/product direction and enhancement intent.
-- `content/design-system.md` and `content/design-system.json` for design system authority.
+- `DESIGN.md` for normative design intent and formal tokens; `css/style.css` for executable runtime values; `content/design-system.json` for the contract-checked structured mirror; and `content/design-system.md` for the subordinate compatibility companion.
 - `archive/planning/README.md` and `archive/website-health-reports/` for historical reference only.
 
 ## Source-of-truth map
@@ -25,7 +25,7 @@ Consult next:
 - Site conventions and gotchas: `victor-tran-site.md`
 - Claude Code entrypoint: `CLAUDE.md`
 - Generated/exported site content: `content/*.md` and `content/site-index.json` — see `content/README.md`
-- Design system prose and structured tokens: `content/design-system.md` and `content/design-system.json`
+- Design contract and implementation: root `DESIGN.md` is normative, `css/style.css` is runtime, `content/design-system.json` is the checked mirror, and `content/design-system.md` is the companion.
 - Hand-maintained profile/context exception: `content/profile.md`
 - Project-package manifests and case-study planning/source docs: `case-studies/*.md` — see `case-studies/README.md`
 - Historical planning reference only: `archive/planning/` — see `archive/planning/README.md`
