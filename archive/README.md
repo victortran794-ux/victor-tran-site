@@ -4,7 +4,7 @@ This folder holds dormant experiments, old handoffs, and retired source files th
 
 ## Archive routing rule
 
-Move truly archived files to the designated archive area instead of leaving them mixed into active docs. Use `planning/` for historical planning notes, `website-health-reports/` for historical website health/audit reports, and `pages/` for retired page snapshots. Private handoffs, backups, and recovery material usually belong outside the public repo in PC-side `C:\Users\Victor\Documents\Website Items` unless Victor approves adding them here. Check with Victor before moving ambiguous archive candidates.
+Move truly archived files to the designated archive area instead of leaving them mixed into active docs. Use `planning/` for historical planning notes, `website-health-reports/` for historical website health/audit reports, and `pages/` for retired page snapshots. Private handoffs, backups, and recovery material usually belong outside the public repo in PC-side `C:\Users\Victor\Documents\Portfolio` unless Victor approves adding them here. Check with Victor before moving ambiguous archive candidates.
 
 ## What belongs here
 

@@ -14,7 +14,7 @@ Current source-of-truth docs:
 - `../../PORTFOLIO_AGENT_WORKFLOWS.md` — agent roles, permissions, guardrails, handoffs, and closeout process.
 - `../../content/design-system.md` and `../../content/design-system.json` — design system authority.
 
-Archive rule: Archived plans are historical unless referenced by `../../PORTFOLIO_DASHBOARD.md` or `../../PORTFOLIO_DIRECTION_BRIEF.md` as active work. Truly archived files should live in the designated archive location: planning notes here, website health/audit reports in `../website-health-reports/`, retired page snapshots in `../pages/`, and private handoffs/backups/recovery material outside the public repo in PC-side Website Items unless Victor approves otherwise. Check with Victor before moving ambiguous archive candidates.
+Archive rule: Archived plans are historical unless referenced by `../../PORTFOLIO_DASHBOARD.md` or `../../PORTFOLIO_DIRECTION_BRIEF.md` as active work. Truly archived files should live in the designated archive location: planning notes here, website health/audit reports in `../website-health-reports/`, retired page snapshots in `../pages/`, and private handoffs/backups/recovery material outside the public repo in PC-side `Documents\Portfolio` unless Victor approves otherwise. Check with Victor before moving ambiguous archive candidates.
 
 Archived notes:
 

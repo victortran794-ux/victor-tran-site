@@ -33,7 +33,7 @@ Consult next:
 - Dormant/superseded files: `archive/` — see `archive/README.md`
 - Retired page snapshots: `archive/pages/` — see `archive/pages/README.md`
 
-Important archive rule: truly archived files should move to the designated archive area instead of remaining mixed into active docs. Use `archive/planning/` for historical planning notes, `archive/website-health-reports/` for historical health/audit reports, `archive/pages/` for retired page snapshots, and PC-side `C:\Users\Victor\Documents\Website Items` for private handoffs/backups/recovery material that should not live in the public repo. Check with Victor before moving ambiguous archive candidates.
+Important archive rule: truly archived files should move to the designated archive area instead of remaining mixed into active docs. Use `archive/planning/` for historical planning notes, `archive/website-health-reports/` for historical health/audit reports, `archive/pages/` for retired page snapshots, and PC-side `C:\Users\Victor\Documents\Portfolio` for private handoffs/backups/recovery material that should not live in the public repo. Check with Victor before moving ambiguous archive candidates.
 
 Important rule: once a page is implemented and approved, the matching `.html` file becomes the source of truth. Planning docs become historical context unless explicitly refreshed. Before deleting or significantly replacing a page, archive it with `node scripts/archive-page.mjs <page.html> "reason"` so its HTML, readable content, and referenced local assets stay recoverable.
 
@@ -67,7 +67,7 @@ case-studies/<project-slug>.md
 
 Treat each project as a contained package even while the static site keeps flat root HTML files. A package usually has a source HTML page, generated content export, package manifest, assets, and archived source notes. Keep status, visibility, confirmed facts, constraints, narrative direction, media guidance, redesign notes, and implementation boundaries in the package manifest. Split into more files only when a project truly becomes too large or sensitive. Default to fewer files.
 
-When two packages enter a redesign sprint, keep the sprint contract and private annotated references outside the public repo under `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\`. Promote only durable, reusable decisions back into this repo's existing authority files. Do not create duplicate strategy, visual-direction, component, or content-hierarchy authorities when the information already belongs in the direction brief, design system, agent workflow, critique rubric, or package manifests.
+When two packages enter a redesign sprint, keep the sprint contract and private annotated references outside the public repo under `C:\Users\Victor\Documents\Portfolio\Archive\Sprints\`. Promote only durable, reusable decisions back into this repo's existing authority files. Do not create duplicate strategy, visual-direction, component, or content-hierarchy authorities when the information already belongs in the direction brief, design system, agent workflow, critique rubric, or package manifests.
 
 Do **not** put durable planning/source notes in `content/`; most of `content/` is generated from HTML and should stay machine-readable/export-focused. `content/` can support future search/generative UI experiments, but it is not the notes folder.
 

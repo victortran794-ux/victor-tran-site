@@ -11,7 +11,7 @@ Use the local Git clone for website work. Use iCloud Drive as a design/source/ar
 Active Git working copy:
 
 ```text
-C:\Users\Victor\Documents\Websites\victor-tran-site
+C:\Users\Victor\Documents\Portfolio\Site\victor-tran-site
 ```
 
 Reference/archive iCloud copy:

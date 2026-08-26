@@ -45,4 +45,4 @@ Root HTML files are the source of truth for public portfolio content. Do not han
 
 For new or revised case studies, keep durable planning in `case-studies/<slug>.md`. Track confirmed facts, risky claims, open questions, media needs, narrative direction, visibility, and implementation tasks there before editing the public page.
 
-For a redesign batch, use exactly two selected pages and copy the private sprint template at `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\TEMPLATE\SPRINT_BRIEF.md`. Close the direction gate before Hi-Fi implementation, keep unrelated findings deferred, and stop after the two pages are corrected, verified, documented, and closed.
+For a redesign batch, use exactly two selected pages and copy the private sprint template at `C:\Users\Victor\Documents\Portfolio\Archive\Sprints\TEMPLATE\SPRINT_BRIEF.md`. Close the direction gate before Hi-Fi implementation, keep unrelated findings deferred, and stop after the two pages are corrected, verified, documented, and closed.
