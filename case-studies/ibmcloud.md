@@ -10,7 +10,7 @@ The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Not
 
 ## Narrative source
 
-- Raw-note capture: `C:\Users\Victor\Documents\Website Items\Portfolio Reviews\2026-08-11\IBM_CLOUD_RAW_NOTE_CAPTURE_2026-08-11.md`
+- Raw-note capture: `C:\Users\Victor\Documents\Portfolio\Reviews\2026-08-11\IBM_CLOUD_RAW_NOTE_CAPTURE_2026-08-11.md`
 - Monitoring framing: first major heuristic review of the specific Monitoring product, using an established evaluation path while already familiar with Observability more broadly.
 - IBM Cloud Logs framing: IBM Cloud Logs was based on Coralogix's white-label product. Victor's Figma work explored IBM product conventions and scoped manual overhaul work. Explored states are not automatically shipped states.
 - Illustration framing: collaborative workgroup, early Sketch-to-Figma trial, co-design and contribution across concepts, reusable components, guidance, documentation, review, light-mode adaptation, and mentoring.

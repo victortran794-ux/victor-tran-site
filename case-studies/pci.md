@@ -42,7 +42,7 @@ Primary framing: turning dense, sensitive material into clear, repeatable commun
 - Ethics Oversight and Recruiting Outlook are recurring report systems with source files and proof histories.
 - Cash Management Principles and leadership white papers are additional communication families.
 - InDesign/IDML sources, linked assets, marked-up edits, proof rounds, and final PDFs demonstrate iterative production work.
-- Full review: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Codex Asset Intake\PCI\SOURCE_STORY_REVIEW.md`.
+- Full review: `C:\Users\Victor\Documents\Portfolio\Handoffs\Codex Asset Intake\PCI\SOURCE_STORY_REVIEW.md`.
 
 ## Claims requiring confirmation before stronger emphasis
 
@@ -72,6 +72,6 @@ PCI's private lo-fi migration is complete in the isolated `PCI-vico2-migration` 
 
 After grouped approval, use:
 
-`C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Codex Asset Intake\PCI\SLOT_MAP.md`
+`C:\Users\Victor\Documents\Portfolio\Handoffs\Codex Asset Intake\PCI\SLOT_MAP.md`
 
 No commit, push, deployment, publication, visibility change, or Codex asset integration is authorized before that grouped review closes.

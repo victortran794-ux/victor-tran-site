@@ -131,7 +131,7 @@ The following patterns are live or explicitly decided. Mechanical review checks 
 ### Current checkpoint
 
 - Victor's August 7 manual review supplied the concrete current-site issues needed to reopen bounded enhancement work.
-- The durable master notes and reconciliation record live under `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\`.
+- The durable master notes and reconciliation record live under `C:\Users\Victor\Documents\Portfolio\Handoffs\Portfolio\2026-08-07-enhancement-alignment\`.
 - Earlier dated checkpoints remain source and verification context only.
 - Implementation remains opt-in, isolated, reviewable, and branch-sized, beginning with Home plus global components.
 
@@ -172,7 +172,7 @@ Avoid:
 - Preserve password gates and noindex protections.
 - Do not promote Document Processing to homepage/sitemap or add screenshots/metrics without approval.
 - Use iCloud as reference/source archive, not the active Git repo.
-- Active website repo remains `C:\Users\Victor\Documents\Websites\victor-tran-site`.
+- Active website repo remains `C:\Users\Victor\Documents\Portfolio\Site\victor-tran-site`.
 - Prefer branches and PRs for review.
 
 ---

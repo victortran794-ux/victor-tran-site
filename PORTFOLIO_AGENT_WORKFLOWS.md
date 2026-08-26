@@ -19,9 +19,9 @@ Consult next:
 
 ## Source-of-truth file model
 
-- Active website source of truth: `C:\Users\Victor\Documents\Websites\victor-tran-site`
+- Active website source of truth: `C:\Users\Victor\Documents\Portfolio\Site\victor-tran-site`
 - Temporary transfer/drop folder only: `C:\Users\Victor\iCloudDrive\Downloads`
-- PC-side private reference area for portfolio handoffs: `C:\Users\Victor\Documents\Website Items`
+- PC-side private reference area for portfolio handoffs: `C:\Users\Victor\Documents\Portfolio`
 - iCloud-side archive/reference/recovery area: `C:\Users\Victor\iCloudDrive\Documents\Website Items`
 
 Important portfolio prompts, workflow rules, case-study planning, and reusable implementation notes belong in this repo or the PC-side private reference area. iCloud Downloads can be used to pass files between devices or tools, but it should not become the durable home for current portfolio direction. Treat iCloud Drive as useful for reference and cross-device transfer, not as a guaranteed up-to-date PC source of truth.
@@ -125,7 +125,7 @@ The static client-side password gate is visitor deterrence and discovery reducti
 Use this workflow when Victor selects portfolio pages for redesign or substantial private revision. It governs the next batch without authorizing production transfer, publication, or a broader rollout.
 
 1. **Open one sprint contract for exactly two named pages.**
-   - Copy `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\TEMPLATE\SPRINT_BRIEF.md` into a dated private sprint folder.
+   - Copy `C:\Users\Victor\Documents\Portfolio\Archive\Sprints\TEMPLATE\SPRINT_BRIEF.md` into a dated private sprint folder.
    - Record exact pages, canonical packages, approved source locations, claims/privacy boundaries, allowed files, allowed backward-compatible shared changes, required evidence, non-goals, and the hard stop.
    - Completion does not authorize selecting, exploring, redesigning, migrating, or implementing another page.
 
@@ -213,10 +213,10 @@ Use this when the next task is unclear or when Victor wants options first.
 You are working in Victor's active portfolio repo.
 
 Windows path:
-C:\Users\Victor\Documents\Websites\victor-tran-site
+C:\Users\Victor\Documents\Portfolio\Site\victor-tran-site
 
 WSL path:
-/mnt/c/Users/Victor/Documents/Websites/victor-tran-site
+/mnt/c/Users/Victor/Documents/Portfolio/Site/victor-tran-site
 
 Task: read-only portfolio enhancement audit. Do not edit files, commit, push, install packages, export assets, or change generated content.
 
@@ -269,7 +269,7 @@ Implement only this selected slice:
 [PASTE SELECTED SLICE]
 
 Repo:
-/mnt/c/Users/Victor/Documents/Websites/victor-tran-site
+/mnt/c/Users/Victor/Documents/Portfolio/Site/victor-tran-site
 
 Rules:
 - Create a fresh branch from current main.
@@ -301,7 +301,7 @@ Current planning status:
 - Document Processing remains live as a protected portfolio project page, password-gated, noindex, omitted from Work and homepage, and omitted from sitemap. The protected wxO umbrella/chapter is its intended route.
 - Temporary placeholder media has shipped; keep it stable unless Victor explicitly asks for a new refinement pass.
 - The current private Figma/media handoff is:
-  `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
+  `C:\Users\Victor\Documents\Portfolio\Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
 - That handoff may be used as source material, but important outcomes should be consolidated back into the repo.
 
 Audit-only prompt shape:
@@ -314,7 +314,7 @@ Read:
 - PORTFOLIO_DIRECTION_BRIEF.md
 - PORTFOLIO_AGENT_WORKFLOWS.md
 - case-studies/document-processing.md
-- the consolidated private handoff at C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md, if available
+- the consolidated private handoff at C:\Users\Victor\Documents\Portfolio\Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md, if available
 
 Use only Victor-approved Figma screens, exported frames, links, or MCP-accessible files.
 

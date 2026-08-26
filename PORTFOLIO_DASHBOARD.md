@@ -26,9 +26,9 @@ The **authorship and website-evidence readiness** lane and its approved wxO, Hom
 
 Master review and alignment records:
 
-- `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md`
-- `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_AUTHORITY_RECONCILIATION.md`
-- `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_COVERAGE.json`
+- `C:\Users\Victor\Documents\Portfolio\Handoffs\Portfolio\2026-08-07-enhancement-alignment\PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md`
+- `C:\Users\Victor\Documents\Portfolio\Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_AUTHORITY_RECONCILIATION.md`
+- `C:\Users\Victor\Documents\Portfolio\Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_COVERAGE.json`
 - Detailed execution plan: `.hermes/plans/2026-08-07_142458-portfolio-vico2-living-archive-master-plan.md`
 
 ### Current next actions
@@ -44,7 +44,7 @@ Master review and alignment records:
 
 ### Supporting historical context
 
-- Current reconciliation record: `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_AUTHORITY_RECONCILIATION.md`.
+- Current reconciliation record: `C:\Users\Victor\Documents\Portfolio\Handoffs\Portfolio\2026-08-07-enhancement-alignment\ENHANCEMENT_AUTHORITY_RECONCILIATION.md`.
 - Earlier reconciled checkpoint: `archive/planning/portfolio-enhancement-state-2026-07-12.md`; use it only for historical context.
 - Historical planning files under `archive/planning/` are context only unless this dashboard or `PORTFOLIO_DIRECTION_BRIEF.md` explicitly carries a safeguard or source forward.
 - Legacy status snapshot: `archive/planning/portfolio-status-legacy-2026-05-18.md`; do not use it as the current status tracker.
@@ -83,8 +83,8 @@ Recent shipped work:
 Current operational rules:
 
 - Use this dashboard as the current status cockpit and the August 7 master notes as the content authority.
-- Use the VicO2 checkpoint at `C:\Users\Victor\Documents\Website Items\Design Kits\2026-07-23-carbon-victor-system\README.md` for system scope and guardrails.
-- Treat `C:\Users\Victor\Documents\Website Items\Portfolio Sprints\2026-07-31-portfolio-integration-readiness\` as a dated provenance and verification checkpoint, not the active sequence or production implementation source.
+- Use the VicO2 checkpoint at `C:\Users\Victor\Documents\Portfolio\Explorations\Design Studies\2026-07-23-carbon-victor-system\README.md` for system scope and guardrails.
+- Treat `C:\Users\Victor\Documents\Portfolio\Archive\Sprints\2026-07-31-portfolio-integration-readiness\` as a dated provenance and verification checkpoint, not the active sequence or production implementation source.
 - Treat current `main` as the source for every shipped page and shell behavior. The PR #152 Theme Continuity release baseline was `6d868b884dd9f6d7c46fc558c5dfcdeee2ade623`. The submitted Vercel package is immutable application evidence, not an active website branch.
 - Do not resume the historical July 31 Art/Graphic worktree or any prior enhancement worktree. Create each remaining lane from newly synchronized `main`.
 - Historical candidate worktrees are Git-locked with explicit reason strings so they remain recoverable without looking active. The unique IBM Cloud `fdac040` worktree is locked as a read-only provenance reference.
@@ -215,7 +215,7 @@ Current state:
 - The static client-side password gate is visitor deterrence and discovery reduction, not server-side access control. Served HTML can contain the page source. No material requiring true confidentiality may be added until a separately approved server-side protection or private-hosting architecture exists.
 - Sanitized evaluation media and story material are present in current production source. Victor's August 7 review explicitly reopens the page for a bounded media/content pass.
 - The `case-studies/` note remains an internal project-package workflow artifact for consistent facts/media/claims gathering across all future portfolio pages, not a visitor-facing category or priority label.
-- The canonical private Hi-Fi package is the current review and future migration source: `C:\Users\Victor\Documents\Website Items\Portfolio Packages\Document Processing\`. It uses sanitized source-faithful derivatives, preserves the theatrical hero, tells a cross-checked platform story across classification, extraction, table data, human review, and evaluation, and records the July 2026 Accuracy Evaluation release. The raw bundle remains private and is not referenced by the package.
+- The canonical private Hi-Fi package is the current review and future migration source: `C:\Users\Victor\Documents\Portfolio\Packages\Document Processing\`. It uses sanitized source-faithful derivatives, preserves the theatrical hero, tells a cross-checked platform story across classification, extraction, table data, human review, and evaluation, and records the July 2026 Accuracy Evaluation release. The raw bundle remains private and is not referenced by the package.
 
 Current `main` is the implementation baseline. The earlier certified candidate and package remain provenance sources. The August 7 revision must preserve source-independent public exports and public-index omission. The desired future opening remains separate from the content/media pass and requires its own privacy, route, access, indexing, preview, and production approval.
 
@@ -320,16 +320,16 @@ Every item in `PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md` is classified below. Nothi
 |---|---|---|---|---|---|
 | Home + global shell | production-verified through PR #163; name-first Victor TRAN hero and Design DNA entry released; three-route Theme Continuity remains scoped to Home, IBM Cloud, and About | public | Current `main` plus August 7 master notes | None | No redesign, route change, or protection change without a new bounded lane |
 | About | production-verified through PR #154 with bounded jump navigation and shared control refinement | public | Current `main`, `content/about.md`, and `content/profile.md` | None | Preserve casual Victor voice, first-generation/BFA context, restrained role hierarchy, and direct contact language |
-| wxO Canvas | production-verified through PR #162 with official lowercase `watsonx` naming and approved protected V1/V2 evolution | protected, `noindex`, homepage/Work visible with lock, omitted from sitemap | Current `main`, `Website Items\Portfolio Packages\wxO Canvas\`, and the approved `wxo-flows-v1---v2` Figma file | No current story action | Only intended locked story; never store the password; preserve V1, V2, prototype, and shipped-status distinctions plus sanitized complete frames |
-| Document Processing | production-verified chapter inside wxO | protected, `noindex`, hidden from public index, omitted from sitemap; `/document-processing` redirects to the wxO chapter | Current `main` plus `Website Items\Portfolio Packages\Document Processing\` | No current action | Preserve July 2026 release state, collaboration boundaries, sanitized media, and source-independent public stub |
-| IBM Cloud | production-verified through PR #158; chronology confirmed as 2021–2023 | public, indexable, included in sitemap | Current `main`, supplied Figma Updates file, plus `Website Items\Portfolio Packages\IBM Cloud\` | No page action | Preserve employer/customer distinction, provenance, experiment framing, research privacy, and proposed/not-shipped boundaries |
-| IBM Patterns | production-verified through PR #160 with approved copy polish and concept boundaries | public, indexable, included in sitemap | Current `main` plus `Website Items\Portfolio Packages\IBM Patterns\` | No current action | Preserve six-week, five-person, non-shipped, influence, authorship, and collaboration boundaries |
-| PCI | production-verified sanitized public story | public, indexable, included in sitemap | Current `main` plus `Website Items\Portfolio Packages\PCI\` | No content expansion without another source review | Never unblur source files or imply logo authorship; preserve concept/composite boundaries and conservative claims |
-| Star & Lamp / SAL Magazine | production-verified public story | public | Current `main` plus `Website Items\Portfolio Packages\Star & Lamp\` | No page action | Preserve verified chronology, role, award language, issue links, and source-backed spreads |
+| wxO Canvas | production-verified through PR #162 with official lowercase `watsonx` naming and approved protected V1/V2 evolution | protected, `noindex`, homepage/Work visible with lock, omitted from sitemap | Current `main`, `Portfolio\Packages\wxO Canvas\`, and the approved `wxo-flows-v1---v2` Figma file | No current story action | Only intended locked story; never store the password; preserve V1, V2, prototype, and shipped-status distinctions plus sanitized complete frames |
+| Document Processing | production-verified chapter inside wxO | protected, `noindex`, hidden from public index, omitted from sitemap; `/document-processing` redirects to the wxO chapter | Current `main` plus `Portfolio\Packages\Document Processing\` | No current action | Preserve July 2026 release state, collaboration boundaries, sanitized media, and source-independent public stub |
+| IBM Cloud | production-verified through PR #158; chronology confirmed as 2021–2023 | public, indexable, included in sitemap | Current `main`, supplied Figma Updates file, plus `Portfolio\Packages\IBM Cloud\` | No page action | Preserve employer/customer distinction, provenance, experiment framing, research privacy, and proposed/not-shipped boundaries |
+| IBM Patterns | production-verified through PR #160 with approved copy polish and concept boundaries | public, indexable, included in sitemap | Current `main` plus `Portfolio\Packages\IBM Patterns\` | No current action | Preserve six-week, five-person, non-shipped, influence, authorship, and collaboration boundaries |
+| PCI | production-verified sanitized public story | public, indexable, included in sitemap | Current `main` plus `Portfolio\Packages\PCI\` | No content expansion without another source review | Never unblur source files or imply logo authorship; preserve concept/composite boundaries and conservative claims |
+| Star & Lamp / SAL Magazine | production-verified public story | public | Current `main` plus `Portfolio\Packages\Star & Lamp\` | No page action | Preserve verified chronology, role, award language, issue links, and source-backed spreads |
 | Ability Experience | production-verified public story | public | Current `main` | No page action | Preserve current sequence and claims as a live VicO2 reference |
-| Pi Kapp App | production-verified through PR #168; standalone runtime retired and static evidence released | public | Current `main` plus `Website Items\Portfolio Packages\Pi Kapp\` | No current page action | Preserve the stable `/pikappapp` route, historical source versus remaster distinction, prototype-data labels, non-shipped framing, authored V1/V2/remaster evidence, expansion archive, permanent compatibility redirects, and AI provenance boundaries |
-| Art & Illustration | production-verified public archive | public | Current `main` plus `Website Items\Portfolio Packages\Art & Illustration\` | No page action | Preserve production image set, rights, authorship boundaries, viewer behavior, and artwork-first identity |
-| Graphic Design | production-verified public archive; Mendenhall delivery optimization released; Heart of the Frozen Void live and complete | public | Current `main`, `Website Items\Portfolio Packages\Graphic Design\`, and the private Mendenhall source master | No current delivery action | Preserve production source set, rights/client boundaries, editorial identity, complete authored frames, and distinct Mendenhall / Heart of the Frozen Void provenance |
+| Pi Kapp App | production-verified through PR #168; standalone runtime retired and static evidence released | public | Current `main` plus `Portfolio\Packages\Pi Kapp\` | No current page action | Preserve the stable `/pikappapp` route, historical source versus remaster distinction, prototype-data labels, non-shipped framing, authored V1/V2/remaster evidence, expansion archive, permanent compatibility redirects, and AI provenance boundaries |
+| Art & Illustration | production-verified public archive | public | Current `main` plus `Portfolio\Packages\Art & Illustration\` | No page action | Preserve production image set, rights, authorship boundaries, viewer behavior, and artwork-first identity |
+| Graphic Design | production-verified public archive; Mendenhall delivery optimization released; Heart of the Frozen Void live and complete | public | Current `main`, `Portfolio\Packages\Graphic Design\`, and the private Mendenhall source master | No current delivery action | Preserve production source set, rights/client boundaries, editorial identity, complete authored frames, and distinct Mendenhall / Heart of the Frozen Void provenance |
 | Interface Studies | production-verified through PR #165 at the stable `/uigallery` route with the PR #150 lightbox accessibility fix preserved | public | Current `main` plus approved authored Ekos and Magi sources | No current action | `UI Fragments` was the working name, not a second route; preserve complete Ekos desktop/mobile frames, the six-study Magi hierarchy, fictional-sample-data framing, source/provenance classification, and the accessible lightbox lifecycle |
 | Getting In | retired from public portfolio | private source material only; absent from public navigation and index | Private authored kits and archived source files | No action; do not reopen without explicit direction | Never describe as a public case study or current portfolio project |
 
@@ -338,7 +338,7 @@ Every item in `PORTFOLIO_DESK_REVIEW_MASTER_NOTES.md` is classified below. Nothi
 Active local repo:
 
 ```text
-C:\Users\Victor\Documents\Websites\victor-tran-site
+C:\Users\Victor\Documents\Portfolio\Site\victor-tran-site
 ```
 
 iCloud design/source archive:
@@ -385,7 +385,7 @@ Current state from latest local audit:
 - Local link health reported 600 OK, 0 errors, 60 intentionally excluded, and 1 redirect.
 - GitHub health workflow is active; local Lighthouse remains remote/GitHub-only.
 - The released maintenance patch replaces the 2,620,396-byte Mendenhall PNG with a visually verified 418,604-byte quality-90 WebP at the same `2500 × 1087` dimensions. The byte-identical PNG source master is preserved outside the deployable repository with its verified SHA-256.
-- The 3.3 MB `images/pikapp-case-study/expansion-cover.png` source master was removed from the deployable repository after checksum-preserved archival under `Website Items\Portfolio Packages\Pi Kapp\Source Masters\`. The live archive continues to use the verified 500 KB same-dimension detail derivative and 163 KB preview derivative.
+- The 3.3 MB `images/pikapp-case-study/expansion-cover.png` source master was removed from the deployable repository after checksum-preserved archival under `Portfolio\Packages\Pi Kapp\Source Masters\`. The live archive continues to use the verified 500 KB same-dimension detail derivative and 163 KB preview derivative.
 - Historical Pi Kapp post-merge Site Health passed in run `31291108193`; it is provenance, not the current production checkpoint.
 - Historical note: PR #21 failed because `/document-processing` canonical/live link 404ed before the page existed live. Current state is intentional: `/document-processing` permanently redirects to the protected wxO Document Processing chapter and remains omitted from the sitemap.
 
@@ -403,7 +403,7 @@ Current state from latest local audit:
 ## Next system improvements
 
 - Keep the About page `Training for: (WIP)` line as an intentional joke.
-- Treat Document Processing as live within the protected wxO chapter. Its static client-side gate is visitor deterrence and discovery reduction, not confidentiality. If Vic selects that package later, use the consolidated Claude Code + Figma media audit handoff in `C:\Users\Victor\Documents\Website Items\Portfolio Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` as source material before changing visuals or claims.
+- Treat Document Processing as live within the protected wxO chapter. Its static client-side gate is visitor deterrence and discovery reduction, not confidentiality. If Vic selects that package later, use the consolidated Claude Code + Figma media audit handoff in `C:\Users\Victor\Documents\Portfolio\Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md` as source material before changing visuals or claims.
 - Windows Git and Windows GitHub CLI are available as WSL credential bridges for push/PR/merge work when plain WSL Git/GH auth is unavailable.
 - Consider local Lychee or a Windows-native health script only if local link checks become routine outside preflight.
 - Optional later: add a weekly GitHub health digest only if failures occur.
