@@ -48,7 +48,9 @@ for (const value of ['WXO_PASSWORD_VERIFIER', 'WXO_SESSION_SECRET', "SameSite=La
   requireText(accessFunction, value, `Server login function missing security marker: ${value}`);
 }
 requireText(protectedAccess, "export const COOKIE_NAME = '__Host-wxo'", 'Protected session must use a host-only cookie name.');
-requireText(protectedMiddleware, "location: '/wxo-canvas#document-processing'", 'Authorized Document Processing aliases must redirect inside middleware.');
+forbid(protectedMiddleware, /location:\s*['"]\/wxo-canvas#document-processing['"]/u, 'Authorized Document Processing must not redirect back to the retired Canvas hash.');
+requireText(protectedMiddleware, "? '/document-processing'", 'Anonymous Document Processing access must preserve the standalone route through the gate.');
+requireText(accessFunction, "return candidate;", 'Server login must preserve a safe standalone Document Processing destination.');
 requireText(accessGate, 'action="/api/wxo-access"', 'Public access gate must post to the server login function.');
 forbid(accessGate, /wxo-workflows-vico2|protected\/wxo\/|images\/wxo-canvas\/current|assets\/document-processing/i, 'Public access gate must not reference protected content or route-specific assets.');
 if (fs.existsSync('js/password-gate.js')) fail('Retired client-side password verifier must not remain deployable.');

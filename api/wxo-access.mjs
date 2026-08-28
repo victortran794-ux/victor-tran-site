@@ -67,7 +67,7 @@ function safeNext(value) {
   const candidate = String(value || '');
   if (/^\/wxo-canvas(?:\.html)?(?:[?#][^\r\n]*)?$/u.test(candidate)) return candidate;
   if (/^\/document-processing(?:\.html)?(?:[?#][^\r\n]*)?$/u.test(candidate)) {
-    return '/wxo-canvas#document-processing';
+    return candidate;
   }
   return DEFAULT_NEXT;
 }

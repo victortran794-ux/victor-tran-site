@@ -82,7 +82,7 @@ assert.equal(await verifyPassword('test-only-password', passwordVerifier), true,
 assert.equal(await verifyPassword('wrong-password', passwordVerifier), false, 'wrong password must fail');
 assert.equal(await verifyPassword('test-only-password', ''), false, 'missing configured verifier must fail closed');
 
-function accessRequest(password, next = '/wxo-canvas#document-processing', origin = 'https://portfolio.test') {
+function accessRequest(password, next = '/document-processing', origin = 'https://portfolio.test') {
   return new Request('https://portfolio.test/api/wxo-access', {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded', origin },
@@ -105,7 +105,7 @@ const validResponse = await handleAccessRequest(accessRequest('test-only-passwor
   now,
 });
 assert.equal(validResponse.status, 303, 'valid password must redirect to the protected route');
-assert.equal(validResponse.headers.get('location'), '/wxo-canvas#document-processing');
+assert.equal(validResponse.headers.get('location'), '/document-processing');
 assert.match(validResponse.headers.get('set-cookie') || '', new RegExp(`^${COOKIE_NAME}=`));
 for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/', 'Max-Age=28800']) {
   assert.match(validResponse.headers.get('set-cookie') || '', new RegExp(attribute, 'i'), `cookie missing ${attribute}`);
@@ -275,6 +275,13 @@ assert.equal(helperCalls.rewrite.at(-1)?.init?.headers?.['cdn-cache-control'], '
 assert.equal(helperCalls.rewrite.at(-1)?.init?.headers?.['vercel-cdn-cache-control'], 'no-store', 'gate rewrite must disable Vercel CDN caching');
 assert.equal(await anonymousPageResponse.text(), 'public gate only');
 
+const anonymousDocumentResponse = await handleProtectedRequest(
+  new Request('https://portfolio.test/document-processing.html'),
+  { sessionSecret: secret, now, ...helpers },
+);
+assert.equal(anonymousDocumentResponse.headers.get('x-test-decision'), 'rewrite');
+assert.equal(anonymousDocumentResponse.headers.get('x-test-destination'), '/wxo-access?next=%2Fdocument-processing');
+
 const anonymousMediaResponse = await handleProtectedRequest(
   new Request('https://portfolio.test/protected/wxo/current/example.png'),
   { sessionSecret: secret, now, ...helpers },
@@ -315,8 +322,8 @@ const authorizedDocumentResponse = await handleProtectedRequest(
   }),
   { sessionSecret: secret, now: now + 30_000, ...helpers },
 );
-assert.equal(authorizedDocumentResponse.status, 308, 'authorized legacy document route must redirect');
-assert.equal(authorizedDocumentResponse.headers.get('location'), '/wxo-canvas#document-processing');
+assert.equal(authorizedDocumentResponse.headers.get('x-test-decision'), 'next', 'authorized Document Processing route must reach the standalone file');
+assert.equal(authorizedDocumentResponse.headers.get('cache-control'), 'private, no-store', 'authorized Document Processing responses must not be cached');
 
 const forcedGateResponse = await handleProtectedRequest(
   new Request(`https://portfolio.test/wxo-canvas?lock=1`, {
