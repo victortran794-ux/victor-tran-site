@@ -122,6 +122,12 @@ for (const changedPath of [
   assert.equal(scope.all, false, `${changedPath} must not force the full suite`);
 }
 
+const wxoProvenance = classifyPaths(['data/wxo-canvas-public-provenance.json']);
+assert.equal(wxoProvenance.wxo, true, 'repository-only wxO provenance must select wxo validation');
+assert.equal(wxoProvenance.deployable, false, 'repository-only wxO provenance must not select deployable checks');
+assert.equal(wxoProvenance.links, false, 'repository-only wxO provenance must not select link checks');
+assert.equal(wxoProvenance.all, false, 'repository-only wxO provenance must not force the full suite');
+
 const unknownPage = classifyPaths(['new-case-study.html']);
 assert.equal(unknownPage.shared, true, 'unknown public HTML must fail safely to shared coverage');
 assert.equal(unknownPage.deployable, true);

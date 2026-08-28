@@ -1,0 +1,272 @@
+{
+  "status": "production-release-approved",
+  "publicationApproved": true,
+  "commitApproved": true,
+  "sourceFigmaFile": "PKr7T6508DtrWg9FhTTc75",
+  "sourcePage": "0:1",
+  "approvedByVictor": "2026-08-28",
+  "approvalScope": "Production release approved by Victor on 2026-08-28 after the final spine-alignment, clarity, responsive, interaction, protected-delivery, and release-readiness checks pass.",
+  "assets": [
+    {
+      "file": "01-released-canvas.png",
+      "role": "Released canvas orientation",
+      "source": "Design/Exports/v1 agentic workflow@2x.png",
+      "figmaNode": "6:22131",
+      "dimensions": [
+        3168,
+        2084
+      ],
+      "sourceSha256": "92df560d930ee161c18c13d4e8a127c73ab417e6a8091aea0cfb58ed15d7ba73",
+      "sha256": "633a52e653ebae41a2ef7bdcc8add08d3ee18ab4700062fd37a956adf6baa8a2",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "02-component-showcase.png",
+      "role": "Complete component-system board",
+      "source": "Design/Exports/component-showcase-light@2x.png",
+      "figmaNode": "6:21895",
+      "dimensions": [
+        2944,
+        1984
+      ],
+      "sourceSha256": "4aa31206756bc4dc455269444a48369223fa6b2bdb03cd84cca75243d5ecb2d2",
+      "sha256": "e96271c1b8aa176e35530bfca279b37aad6d9b7ae0105df69af579fd69a99fb2",
+      "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "03-user-activity-workflow.png",
+      "role": "User Activity step 1",
+      "source": "Design/Exports/1 — Workflow Canvas@2x.png",
+      "figmaNode": "68:64813",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "281693694bb7507f31f9b88af6df48772d4c2355698790113a0746d39c878cb2",
+      "sha256": "95ba96f35745c9a6e9e89cb359bb4c60b75e7a3d75e2aaa824bd211b301307ef",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "04-user-activity-configuration.png",
+      "role": "User Activity step 2",
+      "source": "Design/Exports/2 — Form Configuration@2x.png",
+      "figmaNode": "94:51137",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "8642bba02163d4e356fa7f8efef5bb9d10eaa999f9f8121d9ca1a6165975a442",
+      "sha256": "d7caa32d72593f94d965e0ef955abdf1c2effa3c659424a21d72884f5e83c2ac",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "05-user-activity-summary.png",
+      "role": "User Activity step 3",
+      "source": "Design/Exports/3 — Form Summary@2x.png",
+      "figmaNode": "68:70005",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "b7acc4d0cb719dbec5af7720f3b0f8f0801a39bae6ce09c508c8c3732cec227a",
+      "sha256": "9463024deefa77963f85a9fef6ab1cc80705876aeef550a23d4f9f1278964703",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "06-illustration-vignettes.png",
+      "role": "Secondary illustration-variety strip",
+      "source": "Design/Exports/Illustration Vignettes — Canvas Interactions@2x.png",
+      "figmaNode": "104:30417",
+      "dimensions": [
+        3780,
+        884
+      ],
+      "sourceSha256": "f9728739096aef6f2a4a59bc81332e0fb8907342ff8de17e900096bd720ad2ee",
+      "sha256": "3e63b436201982327bc246ecc8f386b53ecd6410e545ab55a0a20141b34820b9",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "09-document-classify.png",
+      "role": "Document Processing: Classify",
+      "source": "protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png",
+      "figmaNode": "7:104016",
+      "dimensions": [
+        1024,
+        664
+      ],
+      "sourceSha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
+      "sha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "document-processing.html"
+    },
+    {
+      "file": "10-document-extract.png",
+      "role": "Document Processing: Extract",
+      "source": "protected/wxo/assets/document-processing/current/extract-field-sanitized.png",
+      "figmaNode": "7:104417",
+      "dimensions": [
+        1024,
+        780
+      ],
+      "sourceSha256": "c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab",
+      "sha256": "c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "document-processing.html"
+    },
+    {
+      "file": "11-document-review.png",
+      "role": "Document Processing: Review",
+      "source": "protected/wxo/assets/document-processing/current/review-table-sanitized.png",
+      "figmaNode": "7:104773",
+      "dimensions": [
+        1024,
+        674
+      ],
+      "sourceSha256": "3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240",
+      "sha256": "3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "document-processing.html"
+    },
+    {
+      "file": "12-document-evaluate.png",
+      "role": "Document Processing: Evaluate",
+      "source": "protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png",
+      "figmaNode": "7:105294",
+      "dimensions": [
+        1024,
+        674
+      ],
+      "sourceSha256": "7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403",
+      "sha256": "7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403",
+      "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "document-processing.html"
+    },
+    {
+      "file": "07-agent-orchestration-light.png",
+      "role": "Further expansions: orchestration",
+      "source": "Design/Exports/Further Expansions — Agent Orchestration Graph (Light)@2x.png",
+      "figmaNode": "6:21960",
+      "dimensions": [
+        2952,
+        1992
+      ],
+      "sourceSha256": "bc615904f05535b2434a62a08cea20ae63c67eb17f1c91ecd4a42356762b2b69",
+      "sha256": "61f9674a6dc52834aec4fb263d613f0a3f9112710afa9fa279ab34529976dc2f",
+      "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "14-workflow-detail.png",
+      "role": "Further expansions: detailed workflow",
+      "source": "Design/Exports/Further Expansions — Workflow Detail (Light)@2x.png",
+      "figmaNode": "6:22060",
+      "dimensions": [
+        2952,
+        2712
+      ],
+      "sourceSha256": "d435eeac3aba52639bee383575a73d0b0d31f7beb53b15d9574261d82708de77",
+      "sha256": "2a1206f7d20288c109dafd78432ae81df828535f57efc96e26fe42127b55ce9a",
+      "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "13a-node-states.png",
+      "role": "Floating node state studies",
+      "source": "Design/Exports/🔲 Floating Exports — Transparent Background@2x.png",
+      "figmaNode": "source-export-frame-unrecorded",
+      "sourceSha256": "a3aa003d46744622297f2c70c937b58b1942cb0355777513f31d20e844bce5a3",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html",
+      "dimensions": [
+        2600,
+        276
+      ],
+      "sha256": "127ab74307da578cf29f1f55b7a03ed2837d987a20e4bbcafda90a2b43f00046",
+      "treatment": "Literal alpha-preserving crop of source pixels x=80–2680, y=80–356; includes the complete node-state family with transparent padding, excludes the mini-map, and strips PNG metadata."
+    },
+    {
+      "file": "08-flow-control-elements-light.png",
+      "role": "Further expansions: flow controls",
+      "source": "Design/Exports/Further Expansions — Flow Control Elements (Light)@2x.png",
+      "figmaNode": "6:21977",
+      "dimensions": [
+        2992,
+        2012
+      ],
+      "sourceSha256": "80f773f7d759071a291d1318b28d88bdc6ec8843794a5ae7819b411d8b48e1f2",
+      "sha256": "117c0fe91ee13fde268e6baa999965fc0cf9f2d934b19fa27d99201fd91bd899",
+      "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 148px); all remaining authored pixels are preserved and PNG metadata is stripped.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "13b-flow-types.png",
+      "role": "Floating flow type studies",
+      "source": "Design/Exports/🔲 Floating Exports — Transparent Background@2x.png",
+      "figmaNode": "source-export-frame-unrecorded",
+      "sourceSha256": "a3aa003d46744622297f2c70c937b58b1942cb0355777513f31d20e844bce5a3",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "source-only",
+      "dimensions": [
+        1198,
+        199
+      ],
+      "sha256": "641246bbd68e39cd76f168c3f1a30be8e0f10e60bd8d8bddb4c97423002709b1",
+      "treatment": "Literal alpha-preserving crop of source pixels x=88–1286, y=445–644; includes Branch, Loop, For each, Parallel, and User Activity with transparent padding, excludes the mini-map, and strips PNG metadata."
+    },
+    {
+      "file": "13c-connector-mechanics.png",
+      "role": "Floating connector mechanics studies",
+      "source": "Design/Exports/🔲 Floating Exports — Transparent Background@2x.png",
+      "figmaNode": "source-export-frame-unrecorded",
+      "sourceSha256": "a3aa003d46744622297f2c70c937b58b1942cb0355777513f31d20e844bce5a3",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "source-only",
+      "dimensions": [
+        1746,
+        244
+      ],
+      "sha256": "4a4de2e860409068ccb57c4f3489ad3b335fce7d09e3bf8cae3257fae49529ef",
+      "treatment": "Literal alpha-preserving crop of source pixels x=1414–3160, y=436–680; includes complete input, output, variable, path, and node-attachment studies with transparent padding, excludes the mini-map, and strips PNG metadata."
+    },
+    {
+      "file": "13-floating-studies.png",
+      "role": "Floating component and connector studies",
+      "source": "Design/Exports/🔲 Floating Exports — Transparent Background@2x.png",
+      "figmaNode": "source-export-frame-unrecorded",
+      "dimensions": [
+        3600,
+        1272
+      ],
+      "sourceSha256": "a3aa003d46744622297f2c70c937b58b1942cb0355777513f31d20e844bce5a3",
+      "sha256": "0d17cdefcd0f0629f9c8b7a05d286f5e2981c35419bcef039f8bea352386641c",
+      "treatment": "Pixel content and transparency preserved exactly; PNG metadata stripped in the local derivative.",
+      "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
+      "route": "source-only"
+    }
+  ],
+  "canonicalMigrationApproved": true,
+  "canonicalMigrationApprovedOn": "2026-08-28",
+  "deliveryStatus": "protected-until-publication-approval",
+  "guardedNamespace": "protected/wxo/assets/public-candidate/",
+  "futurePublicNamespace": "images/wxo-canvas/public/",
+  "productionApproved": true
+}

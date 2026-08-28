@@ -286,6 +286,8 @@ jobs:
         run: |
           npm run check:protected-delivery
           npm run check:wxo-document-processing
+          node scripts/check-wxo-public-candidate.mjs
+          node scripts/check-wxo-route-split.mjs
           python3 -m http.server 8898 --bind 127.0.0.1 >/tmp/wxo-document-server.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT

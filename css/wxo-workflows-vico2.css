@@ -571,6 +571,7 @@ html[data-theme='dark'] .workflow-pages {
   isolation: isolate;
   overflow: hidden;
   padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 5rem);
+  padding-inline: var(--page-x);
   background: linear-gradient(115deg, #e7f1fa 0%, #f7eef3 56%, #f4e9f0 100%);
   color: #161616;
 }
@@ -617,8 +618,10 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 }
 
 .doc-motion-frame {
+  overflow: hidden;
   margin: 0;
   border: 1px solid var(--border);
+  border-radius: 0.875rem;
   background: #111;
 }
 
@@ -717,6 +720,7 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   width: 100%;
   height: auto;
   border: 1px solid var(--border);
+  border-radius: 0.875rem;
   background: #393939;
 }
 
@@ -741,56 +745,6 @@ html[data-theme='dark'] .doc-processing-page .page-header {
 }
 
 
-.doc-ending {
-  padding-bottom: clamp(3rem, 7vw, 6rem);
-}
-
-.doc-ending .workflow-chapter-head h2 {
-  max-width: 14ch;
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
-}
-
-.doc-ending-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 6vw, 6rem);
-  align-items: start;
-  background: var(--bg);
-}
-
-.case-study .doc-ending-label {
-  margin: 0 0 1rem;
-  color: var(--doc-blue-strong);
-}
-
-.doc-compact-list {
-  border-top: 1px solid var(--border);
-}
-
-.doc-decision-row,
-.doc-contribution-row {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.doc-compact-list h3,
-.doc-compact-list p {
-  margin: 0;
-}
-
-.doc-compact-list h3 {
-  font-size: 0.98rem;
-  line-height: 1.35;
-}
-
-.doc-compact-list p {
-  color: var(--text-2);
-  font-size: 0.88rem;
-  line-height: 1.5;
-}
 
 .doc-release-note {
   max-width: 34rem;
@@ -831,6 +785,33 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   color: currentColor;
   font-weight: 700;
   text-underline-offset: 0.22em;
+  transition: transform 180ms ease, color 180ms ease, text-decoration-thickness 180ms ease;
+}
+
+.workflow-companion-link a:hover,
+.workflow-companion-link a:focus-visible {
+  transform: translateX(0.3rem);
+  color: var(--doc-blue-strong);
+  text-decoration-thickness: 0.14em;
+}
+
+.workflow-return-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  margin-top: 1.5rem;
+  color: var(--doc-blue-strong);
+  font-weight: 700;
+  text-underline-offset: 0.22em;
+  transition: transform 180ms ease, color 180ms ease, text-decoration-thickness 180ms ease;
+}
+
+.workflow-return-link:hover,
+.workflow-return-link:focus-visible {
+  transform: translateX(0.3rem);
+  color: var(--doc-blue);
+  text-decoration-thickness: 0.14em;
 }
 
 @media (max-width: 860px) {
@@ -860,8 +841,7 @@ html[data-theme='dark'] .doc-processing-page .page-header {
   }
 
   .doc-current-pair,
-  .doc-current-evaluator-grid,
-  .doc-ending-grid {
+  .doc-current-evaluator-grid {
     grid-template-columns: 1fr;
   }
 
@@ -901,12 +881,6 @@ html[data-theme='dark'] .doc-processing-page .page-header {
     display: none;
   }
 
-
-  .doc-decision-row,
-  .doc-contribution-row {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-  }
 }
 
 @media (max-width: 520px) {

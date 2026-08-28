@@ -122,6 +122,7 @@ export function classifyPaths(paths) {
       /^(?:css\/password-gate\.css|js\/wxo-)/,
       /^(?:middleware\.ts|api\/wxo-access\.mjs|lib\/(?:protected-(?:access|middleware)|password-verifier)\.mjs)$/,
       /^scripts\/(?:check-wxo|test-protected-delivery)/,
+      /^data\/wxo-canvas-public-provenance\.json$/,
       /^images\/wxo-canvas/,
       /^protected\/wxo\//,
       /^case-studies\/document-processing\.md$/,

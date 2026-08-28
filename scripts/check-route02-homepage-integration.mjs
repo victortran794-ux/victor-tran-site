@@ -182,11 +182,14 @@ for (const card of index.matchAll(/<a\s+[^>]*class="[^"]*featured-item[^"]*"[\s\
 forbid(index, /document-processing-(storyboard|review|evaluation)|future-(inventory|builder|debug)/i,
   'Homepage must not expose Document Processing or future-state wxO media.');
 
-// Chapter switching belongs only on the protected wxO route.
-requireText(wxo, 'href="#canvas"', 'Protected wxO page needs a Canvas chapter control.');
-requireText(wxo, 'href="#document-processing"', 'Protected wxO page needs a Document Processing chapter control.');
-requireText(wxo, 'id="canvas"', 'Canvas must be the default protected chapter.');
-requireText(wxo, 'id="document-processing"', 'Document Processing must be the second protected chapter.');
+// The protected wxO umbrella keeps the primary canvas story and links to the standalone deep dive.
+requireText(wxo, 'class="pilot-chapter-index"', 'Protected wxO page needs a visible story index.');
+requireText(wxo, 'href="#canvas-system"', 'Protected wxO page needs a Canvas-system chapter link.');
+requireText(wxo, 'href="document-processing.html"', 'Protected wxO page needs a visible standalone Document Processing link.');
+requireText(wxo, 'id="canvas-system"', 'Canvas system must remain the primary protected story.');
+requireText(wxo, 'class="pilot-side-quest-bridge"', 'Document Processing must remain discoverable as a feature deep-dive bridge.');
+forbid(wxo, /class="pilot-section pilot-side-quest"|id="document-processing"|data-wxo-chapter-panel/i,
+  'The wxO umbrella must not embed or hide the retired inline Document Processing chapter.');
 forbid(wxo, /Canvas Future|future-(inventory|builder|debug)-sanitized/i,
   'Future-state wxO material must remain withheld from the ordinary protected path.');
 

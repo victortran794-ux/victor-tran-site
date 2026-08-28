@@ -349,6 +349,7 @@ for (const forbidden of ['wxo-workflows-vico2', 'protected/wxo/', 'images/wxo-ca
 }
 
 const wxoHtml = fs.readFileSync('wxo-canvas.html', 'utf8');
+const documentProcessingHtml = fs.readFileSync('document-processing.html', 'utf8');
 const middlewareSource = fs.readFileSync('middleware.ts', 'utf8');
 const healthWorkflow = fs.readFileSync('.github/workflows/health-check.yml', 'utf8');
 assert.match(middlewareSource, /matcher:\s*\['\/:path\*'\]/u, 'routing middleware must inspect every request so encoded protected paths cannot skip authorization');
@@ -358,10 +359,18 @@ assert.equal(wxoHtml.includes('sessionStorage.getItem(\'vtd-unlock\')'), false, 
 assert.equal(fs.existsSync('js/password-gate.js'), false, 'client-side hash gate must be retired');
 assert.equal(fs.existsSync('assets/wxo-canvas-v2'), false, 'protected V2 media must leave its public path');
 
-const legacyProtectedRefs = [...wxoHtml.matchAll(/(?:src|href|poster)="(?:images\/wxo-canvas\/(?:current|v2)|assets\/(?:wxo-canvas-v2|document-processing))\//gu)];
+const protectedRouteHtml = `${wxoHtml}\n${documentProcessingHtml}`;
+const legacyProtectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(?:images\/wxo-canvas\/(?:current|v2)|assets\/(?:wxo-canvas-v2|document-processing))\//gu)];
 assert.equal(legacyProtectedRefs.length, 0, 'case-study media must not remain on public asset paths');
-const protectedRefs = [...wxoHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
-assert.ok(protectedRefs.length >= 26, 'protected page must use the guarded media prefix for its evidence');
+const candidatePattern = /(?:src|href|poster)="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu;
+const wxoCandidateRefs = [...wxoHtml.matchAll(candidatePattern)].map((match) => match[1]);
+const documentCandidateRefs = [...documentProcessingHtml.matchAll(candidatePattern)].map((match) => match[1]);
+const candidateRefs = [...wxoCandidateRefs, ...documentCandidateRefs];
+assert.equal(wxoCandidateRefs.length, 11, 'protected wxO umbrella must use ten guarded carousel sources plus one guarded Document Processing handoff thumbnail');
+assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 1, 'protected wxO umbrella must use exactly one guarded opening illustration');
+assert.equal(documentCandidateRefs.length, 4, 'protected Document Processing route must use exactly four guarded feature-arc sources');
+assert.equal(new Set(candidateRefs).size, 14, 'the route-aware candidate package must expose fourteen unique guarded sources');
+const protectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
 for (const asset of new Set(protectedRefs)) {
   assert.equal(fs.existsSync(asset), true, `guarded media is missing: ${asset}`);
 }

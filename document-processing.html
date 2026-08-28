@@ -16,9 +16,11 @@
   <title>Document Processing · Victor Tran Design</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/wxo-workflows-vico2.css">
+  <link rel="stylesheet" href="css/wxo-public-candidate.css">
   <script src="js/wxo-workflows-vico2.js" defer></script>
+  <script src="js/wxo-public-candidate.js" defer></script>
 </head>
-<body class="workflow-pages doc-processing-page">
+<body class="workflow-pages doc-processing-page wxo-public-pilot">
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
@@ -79,7 +81,7 @@
       <p class="workflow-label">Document Processing / Watson Orchestrate</p>
       <h1 class="page-header-title">Make the trust loop visible.</h1>
       <p class="page-header-desc">Document automation does not stop at extracting a value. Builders need to know what the system recognized, where it is uncertain, how a person can correct it, and whether a change improved the result. I worked across Watson Orchestrate's Document Processing experience to help connect those moments into one platform workflow.</p>
-      <p class="workflow-companion-link"><a href="wxo-canvas.html">View Document Processing inside the broader IBM watsonx Orchestrate story <span aria-hidden="true">→</span></a></p>
+      <p class="workflow-companion-link"><a href="wxo-canvas.html">Return to the broader IBM watsonx Orchestrate canvas story <span aria-hidden="true">→</span></a></p>
       <dl class="case-study-meta">
         <div class="case-study-meta-item"><dt>Role</dt><dd>Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation</dd></div>
         <div class="case-study-meta-item"><dt>Period</dt><dd>Product design · 2025–2026</dd></div>
@@ -100,6 +102,32 @@
         </div>
         <p>I joined the work in 2025 and ramped up alongside the existing designer, Cate. Together, we made up the design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
         <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
+        <div class="doc-feature-arc-intro">
+          <p class="workflow-label">Parallel feature arc</p>
+          <h3>Classify, extract, review, then evaluate.</h3>
+          <p>Developed in parallel with the broader canvas work, the feature moved from document setup into human review. Accuracy Evaluation came later, extending that trust loop into field-level quality inspection.</p>
+        </div>
+        <div class="pilot-epic-container pilot-doc-epic">
+          <p class="pilot-epic-label">Document Processing feature arc</p>
+          <ol class="pilot-flow-sequence pilot-flow-sequence--four">
+            <li class="pilot-flow-step">
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Classify" data-caption="Set the document type and inspect suggested classes."><img src="protected/wxo/assets/public-candidate/09-document-classify.png" width="1024" height="664" alt="Document classifier screen with suggested classes" loading="lazy" decoding="async"></button></figure>
+              <div class="pilot-flow-note"><span>01 · Classify</span><h3>Establish the document type</h3><p>Suggested classes make the system recommendation visible before the workflow moves forward.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
+            </li>
+            <li class="pilot-flow-step">
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Extract" data-caption="Shape fields and source context for extraction."><img src="protected/wxo/assets/public-candidate/10-document-extract.png" width="1024" height="780" alt="Document extractor screen with field setup" loading="lazy" decoding="async"></button></figure>
+              <div class="pilot-flow-note"><span>02 · Extract</span><h3>Shape the information model</h3><p>Field setup connects the source document to the structure the workflow needs.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
+            </li>
+            <li class="pilot-flow-step">
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Review" data-caption="Correct uncertain output with the source visible."><img src="protected/wxo/assets/public-candidate/11-document-review.png" width="1024" height="674" alt="Document review screen with uncertain output" loading="lazy" decoding="async"></button></figure>
+              <div class="pilot-flow-note"><span>03 · Review</span><h3>Put uncertainty in context</h3><p>Review keeps uncertain output and its source close enough for a person to resolve the difference.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
+            </li>
+            <li class="pilot-flow-step pilot-flow-step--late">
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Accuracy Evaluation" data-caption="Inspect field-level quality in the later evaluation direction."><img src="protected/wxo/assets/public-candidate/12-document-evaluate.png" width="1024" height="674" alt="Document evaluation screen with field-level quality detail" loading="lazy" decoding="async"></button></figure>
+              <div class="pilot-flow-note"><span>Later phase · Evaluate</span><h3>Make quality inspectable</h3><p>The Accuracy Evaluator direction brought field-level quality into view near the end of the feature arc.</p></div>
+            </li>
+          </ol>
+        </div>
         <figure class="doc-motion-frame">
           <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><button type="button" class="doc-motion-toggle" data-doc-motion-toggle aria-controls="document-processing-motion" aria-pressed="false">Pause animation</button></figcaption>
           <video autoplay muted loop playsinline id="document-processing-motion" preload="metadata" poster="protected/wxo/assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Document Processing evaluation journey">
@@ -141,44 +169,31 @@
         </div>
       </section>
 
-      <section class="workflow-chapter doc-ending reveal" aria-labelledby="doc-ending-title">
-        <div class="workflow-chapter-head">
-          <span class="workflow-label">02 / Decisions + contribution</span>
-          <div>
-            <h2 id="doc-ending-title">The screens carry the story.</h2>
-          </div>
-        </div>
-        <div class="doc-ending-grid">
-          <section class="doc-ending-block" aria-labelledby="doc-decisions-title">
-            <p class="workflow-label doc-ending-label" id="doc-decisions-title">Product decisions</p>
-            <div class="doc-compact-list">
-              <article class="doc-decision-row"><h3>Keep source and output together</h3><p>Compare extracted values with the document in one view.</p></article>
-              <article class="doc-decision-row"><h3>Make uncertainty actionable</h3><p>Point to the field, document, or setup that needs attention.</p></article>
-              <article class="doc-decision-row"><h3>Reuse the workflow language</h3><p>Keep specialized document work connected to Carbon-aligned canvas states.</p></article>
-            </div>
-          </section>
-          <section class="doc-ending-block" aria-labelledby="doc-role-title">
-            <p class="workflow-label doc-ending-label" id="doc-role-title">Contribution</p>
-            <div class="doc-compact-list">
-              <article class="doc-contribution-row"><h3>Classifier + Extractor</h3><p>I joined the work in 2025, translating earlier concepts into agent-model specifications and reusable patterns.</p></article>
-              <article class="doc-contribution-row"><h3>Human review</h3><p>Connected low-confidence output, source context, and correction.</p></article>
-              <article class="doc-contribution-row"><h3>Led Accuracy Evaluation</h3><p>Shaped the workflow from test-set setup through quality inspection.</p></article>
-            </div>
-          </section>
-        </div>
-      </section>
-
       <section class="workflow-close reveal" aria-labelledby="doc-close-title">
         <div class="workflow-close-grid">
           <h2 id="doc-close-title">Trust comes from a workflow people can inspect.</h2>
           <div>
             <p>Document Extractor and Evaluation released in July 2026, connecting extraction with a quality-review workflow people could inspect.</p>
-
+            <a class="workflow-return-link" href="wxo-canvas.html">Return to the Canvas work <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
     </article>
   </main>
+
+  <dialog class="pilot-gallery-dialog" data-wxo-gallery aria-labelledby="pilot-gallery-title">
+    <div class="pilot-gallery-topbar"><p>Document Processing study</p><button type="button" class="pilot-gallery-close" aria-label="Close image viewer"><span aria-hidden="true">×</span></button></div>
+    <div class="pilot-gallery-layout">
+      <div class="pilot-gallery-stage"><img data-wxo-gallery-image src="" alt=""></div>
+      <div class="pilot-gallery-details">
+        <p class="pilot-gallery-count" data-wxo-gallery-count></p>
+        <h2 id="pilot-gallery-title" data-wxo-gallery-title></h2>
+        <p data-wxo-gallery-caption></p>
+        <div class="pilot-gallery-controls"><button type="button" data-wxo-gallery-prev aria-label="Previous image">← <span>Previous</span></button><button type="button" data-wxo-gallery-next aria-label="Next image"><span>Next</span> →</button></div>
+      </div>
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-wxo-gallery-status></p>
+  </dialog>
 
   <!-- generated:site-shell-footer:start -->
   <footer class="footer">
