@@ -311,7 +311,7 @@ try {
           const contrastTarget=document.querySelector(${name === 'wxo' ? "'.pilot-section-heading > div > p'" : "'.doc-feature-arc-intro > p:last-child'"});
           const contrastSurface=document.querySelector('body');
           return {
-            viewport:[innerWidth,innerHeight],theme:document.documentElement.dataset.theme,stored:localStorage.getItem('lens'),
+            viewport:[innerWidth,innerHeight],layoutWidth:document.documentElement.clientWidth,theme:document.documentElement.dataset.theme,stored:localStorage.getItem('lens'),
             overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
             bodyClass:document.body.className,title:document.title,mainId:document.querySelector('main')?.id,
             cssPageX:getComputedStyle(document.documentElement).getPropertyValue('--page-x').trim(),headerPadding:getComputedStyle(document.querySelector('.page-header')).paddingLeft,
@@ -386,7 +386,7 @@ try {
         assert(state.imageContainment.every(({ratio,natural,inside})=>inside&&Math.abs(ratio-natural)<0.015),`${spec.file}: evidence containment or aspect ratio failed ${JSON.stringify(state.imageContainment)}`);
         if(name==='wxo'){
           const systemNarrow=viewport.width<=860;
-          const expectedOuter=(viewport.width-Math.min(viewport.width,1200))/2;
+          const expectedOuter=(state.layoutWidth-Math.min(state.layoutWidth,1200))/2;
           const expectedText=expectedOuter+(viewport.width<=600?20:viewport.width<=900?24:48);
           const visualOverhang=viewport.width>=1440?Math.min(viewport.width*.08,(viewport.width-1200)/3):0;
           const near=(value,target)=>value!==null&&Math.abs(value-target)<=2;
@@ -416,7 +416,7 @@ try {
           assert(state.bridgeThumbnail?.loaded&&state.bridgeThumbnail.radius>=13&&state.bridgeThumbnail.overflow==='hidden'&&state.bridgeThumbnail.left>=0&&state.bridgeThumbnail.right<=viewport.width,`${spec.file}: Document Processing handoff thumbnail failed ${JSON.stringify(state.bridgeThumbnail)}`);
         }
         if(name==='doc'){
-          const expectedOuter=(viewport.width-Math.min(viewport.width,1200))/2;
+          const expectedOuter=(state.layoutWidth-Math.min(state.layoutWidth,1200))/2;
           const expectedText=expectedOuter+(viewport.width<=600?20:viewport.width<=900?24:48);
           const visualOverhang=viewport.width>=1440?Math.min(viewport.width*.08,(viewport.width-1200)/3):0;
           const safeSpines=[state.spineGeometry.heroLabel,state.spineGeometry.heroTitle,...state.spineGeometry.chapterLabels,...state.spineGeometry.chapterBody,state.spineGeometry.featureIntro].filter((left)=>left!==null);
