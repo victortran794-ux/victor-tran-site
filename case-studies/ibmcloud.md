@@ -4,9 +4,9 @@ Last reviewed: 2026-08-20
 
 ## Publication boundary
 
-The case study uses the eleven previously reviewed artifacts plus twelve complete light/dark product-illustration exports from Victor's synced IBM illustration archive. The earlier artifacts come from the supplied Figma Updates file or documented derivatives. The product illustrations come from `C:\Users\Victor\iCloudDrive\Documents\Design Work\IBM\_Illustration\Final Product Illustrations`. Customer names, participant identities, account or resource IDs, credentials, private URLs, internal metrics, and sole-authorship claims remain excluded.
+The public page renders thirteen editorial display units: one themed Observability hero, three Event Notifications flow screens, one IBM Cloud Logs token-translation study, two illustration-method studies, five light/dark product pairs, and one reduced service-icon study. The broader reviewed archive remains documented below for presentation use and provenance, but is no longer rendered on the public page. Customer names, participant identities, account or resource IDs, credentials, private URLs, internal metrics, and unsupported sole-authorship claims remain excluded.
 
-The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Notifications is framed as his first assigned end-to-end research and design process, followed by concept testing. The flow is proposed and tested work, not a claim of shipment. Monitoring and IBM Cloud Logs are described as review and adaptation explorations, while the published evidence remains generalized or sanitized. The illustration method remains explicitly collaborative.
+The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Notifications is framed as his first start-to-finish product-design project, followed by concept testing. The flow is proposed and tested work, not a claim of shipment. IBM Cloud Logs remains an internal visual-adaptation exploration. The illustration chapter states Victor's substantial original contribution while preserving the team's role in documenting and scaling the method.
 
 ## Narrative source
 
@@ -16,7 +16,9 @@ The current story is grounded in Victor's 2026-08-11 raw-note capture. Event Not
 - Illustration framing: collaborative workgroup, early Sketch-to-Figma trial, co-design and contribution across concepts, reusable components, guidance, documentation, review, light-mode adaptation, and mentoring.
 - Closing reflection: research and exploration can save time by reducing uncertainty and uncovering valuable information, while visual craft can create clarity and moments of delight.
 
-## Reviewed artifacts
+## Reviewed artifact archive
+
+Only artifacts explicitly named in the public composition above render on `ibmcloud.html`. Research boards, the card study, routing diagram, Observability family duplicate, and isometric-composition collage remain retained evidence for the master presentation and provenance record.
 
 ### Event Notifications flow
 

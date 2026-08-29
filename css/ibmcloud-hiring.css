@@ -1,4 +1,4 @@
-/* IBM Cloud protected hiring cut — page-specific, scoped styles. */
+/* IBM Cloud lean public case study, scoped to this route. */
 
 [data-project="ibm-cloud"] .ibm-hiring-hero {
   padding-bottom: var(--space-12);
@@ -16,161 +16,38 @@
 [data-project="ibm-cloud"] .ibm-hiring-hero-art {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 var(--page-x) var(--section-y);
+  padding: 0 var(--page-x) clamp(72px, 10vw, 128px);
 }
 
 [data-project="ibm-cloud"] .ibm-hiring-hero-art img {
-  width: 100%;
-  border: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro,
-[data-project="ibm-cloud"] .ibm-proof-index,
-[data-project="ibm-cloud"] .ibm-hiring-story,
-[data-project="ibm-cloud"] .ibm-hiring-close {
-  max-width: var(--max-w);
-  margin-inline: auto;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: clamp(32px, 6vw, 88px);
-  padding: clamp(72px, 10vw, 136px) var(--page-x);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro > .section-label {
-  grid-column: 1;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro h2 {
-  grid-column: 2;
-  margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.6rem, 6vw, 5rem);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro h2 em {
-  color: var(--blue-text);
-  font-style: normal;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro-copy {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-8);
-  margin-top: var(--space-8);
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-intro-copy p {
-  margin: 0;
-  color: var(--text-2);
-  font-size: var(--text-lead);
-  line-height: var(--leading-body);
-}
-
-[data-project="ibm-cloud"] .ibm-tech-context {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(32px, 6vw, 88px);
-  align-items: center;
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: clamp(48px, 7vw, 80px) var(--page-x);
-}
-
-[data-project="ibm-cloud"] .ibm-tech-context figcaption {
-  max-width: 430px;
-}
-
-[data-project="ibm-cloud"] .ibm-tech-context figcaption span {
-  color: var(--blue-text);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-[data-project="ibm-cloud"] .ibm-tech-context figcaption p {
-  margin: var(--space-4) 0 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.35rem, 2.5vw, 2rem);
-  line-height: 1.15;
-}
-
-[data-project="ibm-cloud"] .ibm-tech-context img {
   display: block;
-  width: min(100%, 460px);
+  width: 100%;
   height: auto;
-  justify-self: end;
   border: 1px solid var(--border);
 }
 
-[data-project="ibm-cloud"] .ibm-proof-index {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-inline: var(--page-x);
+[data-project="ibm-cloud"] .ibm-hiring-hero-art .theme-img-dark {
+  display: none;
 }
 
-[data-project="ibm-cloud"] .ibm-proof-index a {
-  display: grid;
-  min-height: 148px;
-  padding: var(--space-6);
-  border-left: 1px solid var(--border);
-  color: var(--text);
-  text-decoration: none;
-  transition: background var(--duration-fast), color var(--duration-fast);
+[data-theme="dark"] [data-project="ibm-cloud"] .ibm-hiring-hero-art .theme-img-light {
+  display: none;
 }
 
-[data-project="ibm-cloud"] .ibm-proof-index a:last-child {
-  border-right: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-proof-index a:hover,
-[data-project="ibm-cloud"] .ibm-proof-index a:focus-visible {
-  background: var(--text);
-  color: var(--bg);
-}
-
-[data-project="ibm-cloud"] .ibm-proof-index span,
-[data-project="ibm-cloud"] .ibm-proof-label,
-[data-project="ibm-cloud"] .ibm-flow-screen-label span,
-[data-project="ibm-cloud"] .ibm-action-steps span {
-  color: var(--blue-text);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-[data-project="ibm-cloud"] .ibm-proof-index strong {
-  align-self: end;
-  max-width: 260px;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.35rem, 2.2vw, 2rem);
-  font-weight: 400;
-  line-height: 1.05;
+[data-theme="dark"] [data-project="ibm-cloud"] .ibm-hiring-hero-art .theme-img-dark {
+  display: block;
 }
 
 [data-project="ibm-cloud"] .ibm-hiring-story {
+  max-width: var(--max-w);
+  margin-inline: auto;
   padding: 0 var(--page-x);
 }
 
 [data-project="ibm-cloud"] .ibm-proof {
-  padding: clamp(92px, 12vw, 160px) 0;
+  padding: clamp(88px, 11vw, 152px) 0;
   border-top: 1px solid var(--border);
   scroll-margin-top: calc(var(--nav-h) + var(--space-6));
-}
-
-[data-project="ibm-cloud"] .ibm-proof:first-child {
-  border-top: 0;
 }
 
 [data-project="ibm-cloud"] .ibm-proof-header {
@@ -180,88 +57,61 @@
   margin-bottom: clamp(52px, 8vw, 96px);
 }
 
+[data-project="ibm-cloud"] .ibm-proof-label,
+[data-project="ibm-cloud"] .ibm-flow-screen-label span {
+  color: var(--blue-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 [data-project="ibm-cloud"] .ibm-proof-label {
   margin: 0;
 }
 
 [data-project="ibm-cloud"] .ibm-proof-header h2 {
   grid-column: 2;
-  margin: -8px 0 0;
   max-width: 900px;
+  margin: -8px 0 0;
   font-size: clamp(3rem, 6.2vw, 5.4rem);
   line-height: 0.96;
   letter-spacing: -0.04em;
 }
 
-[data-project="ibm-cloud"] .ibm-proof-lede {
+[data-project="ibm-cloud"] .ibm-proof-lede,
+[data-project="ibm-cloud"] .ibm-proof-status {
   grid-column: 2;
   max-width: 760px;
+}
+
+[data-project="ibm-cloud"] .ibm-proof-lede {
   margin: var(--space-6) 0 0;
   color: var(--text-2);
   font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   line-height: 1.55;
 }
 
-[data-project="ibm-cloud"] #product-work {
-  padding-top: clamp(72px, 9vw, 112px);
-}
-
-[data-project="ibm-cloud"] #product-work .ibm-proof-header {
-  margin-bottom: clamp(40px, 5vw, 64px);
-}
-
-[data-project="ibm-cloud"] #product-work .ibm-proof-header h2 {
-  max-width: 760px;
-  font-size: clamp(2.8rem, 5vw, 4.6rem);
-  line-height: 0.98;
-}
-
-[data-project="ibm-cloud"] .ibm-proof-product-layout,
-[data-project="ibm-cloud"] .ibm-systems-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: clamp(40px, 7vw, 88px);
-  align-items: start;
-}
-
-[data-project="ibm-cloud"] .ibm-proof-copy {
-  padding-top: var(--space-6);
+[data-project="ibm-cloud"] .ibm-proof-status {
+  margin: var(--space-4) 0 0;
+  padding-top: var(--space-4);
   border-top: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-proof-copy--wide {
-  max-width: 790px;
-  margin-left: calc(33.333% + 28px);
-}
-
-[data-project="ibm-cloud"] .ibm-proof-copy p {
-  max-width: 750px;
-  margin: 0;
-  font-size: clamp(1rem, 1.45vw, 1.2rem);
-  line-height: 1.7;
-}
-
-[data-project="ibm-cloud"] .ibm-proof-copy p + p {
-  margin-top: var(--space-6);
-}
-
-[data-project="ibm-cloud"] .ibm-proof-copy .case-study-thesis {
-  margin-bottom: var(--space-8);
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 3.3vw, 2.8rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  color: var(--text-2);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  line-height: 1.5;
 }
 
 [data-project="ibm-cloud"] .ibm-product-evidence {
   width: min(100%, 1100px);
-  margin: clamp(64px, 9vw, 112px) auto 0;
+  margin: 0 auto;
   scroll-margin-top: calc(var(--nav-h) + var(--space-4));
 }
 
 [data-project="ibm-cloud"] .ibm-flow-screen {
-  margin: 0;
   min-width: 0;
+  margin: 0;
 }
 
 [data-project="ibm-cloud"] .ibm-flow-screen-label {
@@ -286,15 +136,6 @@
   background: #f4f4f4;
 }
 
-[data-project="ibm-cloud"] .ibm-flow-screen figcaption,
-[data-project="ibm-cloud"] .ibm-atlas-feature figcaption {
-  margin-top: var(--space-3);
-  color: var(--text-2);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  line-height: 1.5;
-}
-
 [data-project="ibm-cloud"] .ibm-flow-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -312,170 +153,15 @@
   margin-top: var(--space-1);
 }
 
-[data-project="ibm-cloud"] .ibm-product-research {
-  margin-top: clamp(56px, 8vw, 96px);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-product-research > header {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: clamp(28px, 6vw, 84px);
-  align-items: start;
-}
-
-[data-project="ibm-cloud"] .ibm-product-research h3 {
-  grid-column: 2;
-  margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1;
-}
-
-[data-project="ibm-cloud"] .ibm-research-pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-8);
-  margin-top: var(--space-10);
-}
-
-[data-project="ibm-cloud"] .ibm-research-pair .ibm-evidence-artifact {
-  margin-top: 0;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  background: var(--bg-2);
-}
-
-[data-project="ibm-cloud"] .ibm-ux-decision-rail {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: clamp(48px, 7vw, 80px) 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
-}
-
-[data-project="ibm-cloud"] .ibm-ux-decision-item {
-  min-width: 0;
-  padding: var(--space-6);
-  border-right: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-ux-decision-item:last-child { border-right: 0; }
-
-[data-project="ibm-cloud"] .ibm-ux-decision-item span {
-  color: var(--blue-text);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  line-height: 1.4;
-}
-
-[data-project="ibm-cloud"] .ibm-ux-decision-item p {
-  margin: var(--space-6) 0 0;
-  color: var(--text-1);
-  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
-  line-height: 1.55;
-}
-
-[data-project="ibm-cloud"] .ibm-component-artifact {
-  max-width: 760px;
-  margin-top: clamp(64px, 9vw, 112px);
-  margin-right: 0;
-  margin-left: auto;
-}
-
 [data-project="ibm-cloud"] .ibm-adaptation-evidence {
   display: grid;
-  gap: clamp(40px, 6vw, 72px);
   max-width: 1100px;
-  margin: clamp(56px, 9vw, 104px) auto 0;
-}
-
-[data-project="ibm-cloud"] .ibm-adaptation-evidence .ibm-evidence-artifact {
-  width: 100%;
-  margin-top: 0;
-  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
-}
-
-[data-project="ibm-cloud"] .ibm-adaptation-artifact h3 {
-  margin: 0 0 var(--space-3);
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.45rem, 2.5vw, 2.2rem);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-}
-
-[data-project="ibm-cloud"] .ibm-action-map {
-  margin-top: clamp(52px, 8vw, 92px);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-action-map > header {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: clamp(28px, 5vw, 70px);
-  padding: var(--space-6) 0 var(--space-8);
-}
-
-[data-project="ibm-cloud"] .ibm-action-map h3,
-[data-project="ibm-cloud"] .ibm-visual-atlas h3,
-[data-project="ibm-cloud"] .ibm-system-result h3 {
-  margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.9rem, 4vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-
-[data-project="ibm-cloud"] .ibm-action-steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-action-steps article {
-  min-height: 180px;
-  padding: var(--space-6);
-  border-right: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-action-steps article:last-child { border-right: 0; }
-
-[data-project="ibm-cloud"] .ibm-action-steps h4 {
-  margin: var(--space-10) 0 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.35rem, 2.2vw, 2rem);
-  font-weight: 400;
-  line-height: 1.05;
-}
-
-[data-project="ibm-cloud"] .ibm-system-result {
-  padding: var(--space-8);
-  border: 1px solid var(--border);
-  background: var(--bg-2);
-}
-
-[data-project="ibm-cloud"] .ibm-system-result h3 {
-  margin: var(--space-6) 0 var(--space-4);
-}
-
-[data-project="ibm-cloud"] .ibm-system-result > p:last-child {
-  margin: 0;
-  color: var(--text-2);
-  font-size: 1rem;
-  line-height: 1.6;
+  margin: 0 auto;
 }
 
 [data-project="ibm-cloud"] .ibm-evidence-artifact {
   max-width: 1024px;
-  margin: clamp(48px, 7vw, 80px) auto 0;
+  margin: 0 auto;
   border: 1px solid var(--border);
   background: #fff;
 }
@@ -514,11 +200,6 @@
   display: flex;
   flex-direction: column;
   gap: clamp(48px, 8vw, 96px);
-  margin-top: clamp(64px, 10vw, 128px);
-}
-
-[data-project="ibm-cloud"] .ibm-visual-sequence .ibm-evidence-artifact {
-  margin-top: 0;
 }
 
 [data-project="ibm-cloud"] .ibm-visual-piece--left {
@@ -563,103 +244,38 @@
   transform: scale(1.04);
 }
 
-[data-project="ibm-cloud"] .ibm-hiring-close {
-  padding: clamp(92px, 12vw, 160px) var(--page-x);
-  border-top: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-close > div {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(36px, 7vw, 92px);
-  margin-top: var(--space-6);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--border);
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-close h2 {
-  margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-close p {
-  max-width: 700px;
-  margin: 0;
-  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-  line-height: 1.6;
-}
-
-[data-project="ibm-cloud"] .ibm-hiring-close p + p { margin-top: var(--space-6); }
-
-@media (max-width: 900px) {
-  [data-project="ibm-cloud"] .ibm-proof-product-layout,
-  [data-project="ibm-cloud"] .ibm-systems-layout { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-product-evidence { margin-top: var(--space-12); }
-  [data-project="ibm-cloud"] .ibm-proof-copy--wide { margin-left: 0; }
-  [data-project="ibm-cloud"] .ibm-ux-decision-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(2) { border-right: 0; }
-  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-  [data-project="ibm-cloud"] .ibm-action-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(2) { border-right: 0; }
-  [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-}
-
 @media (max-width: 720px) {
-  [data-project="ibm-cloud"] .ibm-hiring-intro,
-  [data-project="ibm-cloud"] .ibm-tech-context,
   [data-project="ibm-cloud"] .ibm-proof-header,
-  [data-project="ibm-cloud"] .ibm-action-map > header,
-  [data-project="ibm-cloud"] .ibm-product-research > header,
   [data-project="ibm-cloud"] .ibm-evidence-artifact figcaption,
-  [data-project="ibm-cloud"] .ibm-hiring-close > div { grid-template-columns: 1fr; }
+  [data-project="ibm-cloud"] .ibm-theme-family > figcaption {
+    grid-template-columns: 1fr;
+  }
 
-  [data-project="ibm-cloud"] .ibm-hiring-intro h2,
-  [data-project="ibm-cloud"] .ibm-hiring-intro-copy,
   [data-project="ibm-cloud"] .ibm-proof-header h2,
   [data-project="ibm-cloud"] .ibm-proof-lede,
-  [data-project="ibm-cloud"] .ibm-product-research h3 { grid-column: 1; }
-
-  [data-project="ibm-cloud"] .ibm-tech-context img {
-    width: min(100%, 430px);
-    justify-self: start;
+  [data-project="ibm-cloud"] .ibm-proof-status {
+    grid-column: 1;
   }
-
-  [data-project="ibm-cloud"] .ibm-hiring-intro-copy { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-proof-index { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-proof-index a {
-    min-height: 104px;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  [data-project="ibm-cloud"] .ibm-proof-index a:last-child { border-bottom: 0; }
-  [data-project="ibm-cloud"] .ibm-flow-pair { gap: var(--space-3); }
-  [data-project="ibm-cloud"] .ibm-action-steps,
-  [data-project="ibm-cloud"] .ibm-research-pair,
-  [data-project="ibm-cloud"] .ibm-ux-decision-rail { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-ux-decision-item,
-  [data-project="ibm-cloud"] .ibm-ux-decision-item:nth-child(2) {
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  [data-project="ibm-cloud"] .ibm-ux-decision-item:last-child { border-bottom: 0; }
-  [data-project="ibm-cloud"] .ibm-action-steps article {
-    min-height: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  [data-project="ibm-cloud"] .ibm-action-steps article:nth-child(2) { border-bottom: 1px solid var(--border); }
-  [data-project="ibm-cloud"] .ibm-action-steps article:last-child { border-bottom: 0; }
-  [data-project="ibm-cloud"] .ibm-action-steps h4 { margin-top: var(--space-8); }
 }
 
 @media (max-width: 480px) {
-  [data-project="ibm-cloud"] .ibm-flow-pair { grid-template-columns: 1fr; }
-  [data-project="ibm-cloud"] .ibm-theme-pair { gap: 2px; }
-  [data-project="ibm-cloud"] .ibm-theme-pair img { transform: scale(1.08); }
-  [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen-label { min-height: 0; }
-  [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen + .ibm-flow-screen { margin-top: var(--space-8); }
+  [data-project="ibm-cloud"] .ibm-flow-pair {
+    grid-template-columns: 1fr;
+  }
+
+  [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen-label {
+    min-height: 0;
+  }
+
+  [data-project="ibm-cloud"] .ibm-flow-pair .ibm-flow-screen + .ibm-flow-screen {
+    margin-top: var(--space-8);
+  }
+
+  [data-project="ibm-cloud"] .ibm-theme-pair {
+    gap: 2px;
+  }
+
+  [data-project="ibm-cloud"] .ibm-theme-pair img {
+    transform: scale(1.08);
+  }
 }

@@ -172,14 +172,12 @@
     "source": "ibmcloud.html",
     "url": "/ibmcloud",
     "category": "Product Design · Visual Systems",
-    "description": "IBM Cloud product and visual-systems work across complex workflows, implementation quality, portfolio reviews, and reusable illustration methods.",
+    "description": "IBM Cloud product-design and visual-systems work across a concept-tested workflow, visual adaptation, and reusable illustration methods.",
     "contentFile": "content/ibmcloud.md",
     "headings": [
-      "Learn the system, then help other people see it.",
-      "Connect research evidence to a specific interaction model.",
-      "Use exploration to understand the work ahead.",
-      "Move from making images to defining a method.",
-      "Research, exploration, and moments of delight."
+      "Design a subscription flow people can understand.",
+      "Adapt an existing product toward IBM Cloud conventions.",
+      "Build a visual method the team could extend."
     ],
     "images": [
       {
@@ -189,18 +187,6 @@
       {
         "src": "images/ibm-thumb-dark.png",
         "alt": "IBM Cloud Observability abstract service illustration in dark mode"
-      },
-      {
-        "src": "images/ibm-cloud-routing-architecture.png",
-        "alt": "IBM Cloud routing diagram connecting audit events, metrics, logs, and observability services"
-      },
-      {
-        "src": "images/ibm-cloud-research-framing.png",
-        "alt": "Event Notifications research roles and questions about subscription structure and creation flow"
-      },
-      {
-        "src": "images/ibm-cloud-research-findings.png",
-        "alt": "Event Notifications findings about subscription structure, terminology, and creation flow"
       },
       {
         "src": "images/ibm-cloud-event-flow-details.png",
@@ -215,10 +201,6 @@
         "alt": "Event Notifications condition panel with a second rule added"
       },
       {
-        "src": "images/ibm-cloud-card-component-design.png",
-        "alt": "IBM Cloud subscription card component explorations showing hierarchy, status, and connected services"
-      },
-      {
         "src": "images/ibm-cloud-proof02-token-translation.png",
         "alt": "Source token study mapping visualization roles and colors toward IBM theme values"
       },
@@ -229,6 +211,22 @@
       {
         "src": "images/ibm-cloud-visual-system-foundations.png",
         "alt": "IBM Cloud illustration foundations showing base, shadow, color, gradient, and lighting rules"
+      },
+      {
+        "src": "images/ibm-cloud-code-engine-light.png",
+        "alt": "Code Engine illustration in the light theme"
+      },
+      {
+        "src": "images/ibm-cloud-code-engine-dark.png",
+        "alt": "Code Engine illustration in the dark theme"
+      },
+      {
+        "src": "images/ibm-cloud-registry-light.png",
+        "alt": "Container Registry illustration in the light theme"
+      },
+      {
+        "src": "images/ibm-cloud-registry-dark.png",
+        "alt": "Container Registry illustration in the dark theme"
       }
     ],
     "projects": []

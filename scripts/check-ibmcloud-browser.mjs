@@ -128,7 +128,7 @@ try {
       await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
       await cdp.navigate(`${baseUrl}/ibmcloud.html`);
       const state = await cdp.evaluate(`(async()=>{
-        const images=[...document.querySelectorAll('[data-project="ibm-cloud"] img')];
+        const images=[...document.querySelectorAll('.ibm-hiring-hero-art img,.ibm-hiring-story img')];
         images.forEach((image)=>{image.loading='eager'});
         await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));
         const root=document.documentElement;
@@ -137,31 +137,26 @@ try {
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
         const adaptationCards=[...document.querySelectorAll('.ibm-adaptation-artifact')].map((card)=>{const r=card.getBoundingClientRect();const image=card.querySelector('img');return {width:r.width,left:r.left,right:r.right,src:image?.getAttribute('src'),natural:[image?.naturalWidth||0,image?.naturalHeight||0],alt:image?.getAttribute('alt')||''}});
-        const decisionRail=document.querySelector('.ibm-ux-decision-rail');
-        const decisionItems=[...document.querySelectorAll('.ibm-ux-decision-item')].map((item)=>{const r=item.getBoundingClientRect();return {width:r.width,left:r.left,right:r.right,text:item.textContent.trim().replace(/\s+/g,' ')}});
-        const research=document.querySelector('.ibm-product-research');
-        const flow=document.getElementById('event-flow-artifact');
-        const productWork=document.getElementById('product-work');
+        const evidence=[...document.querySelectorAll('.ibm-product-evidence,.ibm-evidence-artifact')].map((item)=>{const r=item.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width,height:r.height}});
+        const proofTops=[...document.querySelectorAll('.ibm-proof')].map((item)=>item.getBoundingClientRect().top+scrollY);
+        const heroImages=[...document.querySelectorAll('.ibm-hiring-hero-art img')].map((image)=>{const r=image.getBoundingClientRect();return {display:getComputedStyle(image).display,width:r.width,height:r.height}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),controls,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
-          proofs:document.querySelectorAll('.ibm-proof').length,artifacts:document.querySelectorAll('.ibm-evidence-artifact').length,techContext:document.querySelectorAll('.ibm-tech-context').length,reservations:document.querySelectorAll('.ibm-evidence-reservation').length,atlas:Boolean(document.querySelector('.ibm-visual-atlas')),
+          proofs:document.querySelectorAll('.ibm-proof').length,artifacts:document.querySelectorAll('.ibm-evidence-artifact').length,flowScreens:document.querySelectorAll('.ibm-flow-screen').length,familyPairs:document.querySelectorAll('.ibm-theme-pair').length,
           client:[...document.querySelectorAll('.case-study-meta dt')].some((node)=>node.textContent.trim()==='Client'),heroBorder:getComputedStyle(hero).borderBottomWidth,
           openingEvidenceTop:document.querySelector('.ibm-hiring-hero-art').getBoundingClientRect().top,adaptationCards,
-          decisionItems,decisionColumns:getComputedStyle(decisionRail).gridTemplateColumns.split(' ').length,
-          uxOrder:[research.getBoundingClientRect().top,decisionRail.getBoundingClientRect().top,flow.getBoundingClientRect().top],
-          researchOffset:research.getBoundingClientRect().top-productWork.getBoundingClientRect().top};
+          evidence,proofTops,heroImages};
       })()`);
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
       assert((theme === 'dark' ? state.theme === 'dark' : !state.theme || state.theme === 'light') && state.stored === theme, `theme failed ${viewport.label} ${theme}`);
       assert(state.overflow === 0, `${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images === 27 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
-      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 9 && state.techContext === 1 && state.reservations === 0 && !state.atlas && !state.client, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.images === 19 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.shell && !state.gate && state.proofs === 3 && state.artifacts === 5 && state.flowScreens === 3 && state.familyPairs === 5 && !state.client, `approved lean page state drifted: ${JSON.stringify(state)}`);
       assert(state.adaptationCards.length === 1 && state.adaptationCards.every((card)=>card.width>0&&card.left>=0&&card.right<=viewport.width&&card.natural[0]>0&&card.natural[1]>0&&card.alt.length>0), `Proof 02 adaptation evidence drifted at ${viewport.label} ${theme}: ${JSON.stringify(state.adaptationCards)}`);
-      const expectedDecisionColumns=viewport.width>900?4:viewport.width>720?2:1;
-      assert(state.decisionItems.length===4&&state.decisionColumns===expectedDecisionColumns&&state.decisionItems.every((item)=>item.width>0&&item.left>=0&&item.right<=viewport.width&&item.text.length>0), `Proof 01 decision rail drifted at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
-      assert(state.uxOrder[0]<state.uxOrder[1]&&state.uxOrder[1]<state.uxOrder[2], `Proof 01 research-to-decision-to-flow order drifted at ${viewport.label} ${theme}: ${JSON.stringify(state.uxOrder)}`);
-      assert(state.researchOffset<=650, `Proof 01 research evidence begins too late after its section heading at ${viewport.label} ${theme}: ${state.researchOffset}px`);
+      assert(state.evidence.every((item)=>item.width>0&&item.height>0&&item.left>=0&&item.right<=viewport.width), `curated evidence escaped the viewport at ${viewport.label} ${theme}: ${JSON.stringify(state.evidence)}`);
+      assert(state.proofTops.length===3&&state.proofTops[0]<state.proofTops[1]&&state.proofTops[1]<state.proofTops[2], `proof order drifted at ${viewport.label} ${theme}: ${JSON.stringify(state.proofTops)}`);
+      assert(state.heroImages.filter((image)=>image.display!=='none'&&image.width>0&&image.height>0).length===1, `exactly one themed hero image must render at ${viewport.label} ${theme}: ${JSON.stringify(state.heroImages)}`);
       assert(state.heroBorder === '0px', `crowded header divider returned at ${viewport.label} ${theme}`);
       if (viewport.width === 390) {
         assert(state.openingEvidenceTop <= 720, `IBM Cloud opening evidence begins too late at ${state.openingEvidenceTop}px`);
@@ -170,24 +165,18 @@ try {
       }
       if (viewport.width === 390 && theme === 'light') {
         await cdp.screenshot('ibm-cloud-390-light-opening.png');
-        await cdp.evaluate(`document.querySelector('.ibm-ux-decision-rail').scrollIntoView({block:'start',behavior:'instant'})`);
-        await delay(800);
-        await cdp.screenshot('ibm-cloud-390-light-ux-decision-rail.png');
         await cdp.evaluate(`document.querySelector('#event-flow-artifact').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-390-light-event-flow-artifact.png');
-        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'start',behavior:'instant'})`);
+        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-390-light-proof02-token-translation.png');
       }
       if (viewport.width === 1440 && theme === 'dark') {
-        await cdp.evaluate(`document.querySelector('.ibm-product-research').scrollIntoView({block:'start',behavior:'instant'})`);
+        await cdp.evaluate(`document.getElementById('event-flow-artifact').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
-        await cdp.screenshot('ibm-cloud-1440-dark-ux-evidence.png');
-        await cdp.evaluate(`document.getElementById('team-action').scrollIntoView({block:'start',behavior:'instant'})`);
-        await delay(800);
-        await cdp.screenshot('ibm-cloud-1440-dark-team-action.png');
-        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'start',behavior:'instant'})`);
+        await cdp.screenshot('ibm-cloud-1440-dark-event-flow.png');
+        await cdp.evaluate(`document.querySelector('.ibm-adaptation-artifact').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('ibm-cloud-1440-dark-proof02-token-translation.png');
         await cdp.evaluate(`document.querySelector('.ibm-theme-family').scrollIntoView({block:'start',behavior:'instant'})`);
@@ -205,7 +194,7 @@ try {
 
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=27 proofs=3 artifacts=9 ux_decisions=4 adaptation_artifacts=1 tech_context=1 reservations=0 overflow=0 public=pass controls=pass`);
+  console.log(`IBM CLOUD BROWSER CONTRACT: PASS states=${checks} images=19 display_units=13 proofs=3 artifacts=5 flow_screens=3 family_pairs=5 overflow=0 public=pass controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

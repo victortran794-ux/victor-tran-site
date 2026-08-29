@@ -140,8 +140,10 @@ function forbidRendered(relativePath, retired) {
 const copy = {
   aboutDescription: 'Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Austin, Texas.',
   aboutBody: 'I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows. I work closely with UX, product, and development partners through implementation.',
-  ibmValue: 'I applied that understanding through concept-tested flows, visual adaptation, and reusable illustration methods.',
-  ibmClose: 'Design can reduce uncertainty, surface useful information, and make technical work easier to act on. It can also bring moments of delight to the experience.',
+  ibmPosition: 'I used product design and reusable visual systems to make complex cloud work easier to understand and extend.',
+  ibmEvent: 'My first start-to-finish product-design project consolidated sources, destinations, subscriptions, and conditions into a simpler stepped flow. Concept testing supported the direction.',
+  ibmLogs: 'I explored how IBM Cloud Logs could adopt IBM Cloud visual conventions.',
+  ibmIllustration: 'I created most of the original product illustrations and reusable components, then partnered with the team to document and scale the method.',
   gateIdentity: 'IBM watsonx Orchestrate · Protected case study',
   gateDescription: 'Password access for the protected IBM watsonx Orchestrate case study.',
   abilityDescription: 'Brand identity and collateral for The Ability Experience’s 40th anniversary.',
@@ -168,8 +170,10 @@ requireExact('about.html meta[name=description]', metaValues('about.html', 'name
 requireExact('about.html meta[property=og:description]', metaValues('about.html', 'property', 'og:description'), copy.aboutDescription);
 requireIncludes('about.html .about-bio', classText('about.html', 'about-bio'), copy.aboutBody);
 
-requireIncludes('ibmcloud.html .ibm-hiring-intro-copy', classText('ibmcloud.html', 'ibm-hiring-intro-copy'), copy.ibmValue);
-requireIncludes('ibmcloud.html .ibm-hiring-close', classText('ibmcloud.html', 'ibm-hiring-close'), copy.ibmClose);
+requireIncludes('ibmcloud.html .ibm-hiring-position', classText('ibmcloud.html', 'ibm-hiring-position'), copy.ibmPosition);
+requireIncludes('ibmcloud.html #product-work', idText('ibmcloud.html', 'product-work'), copy.ibmEvent);
+requireIncludes('ibmcloud.html #team-action', idText('ibmcloud.html', 'team-action'), copy.ibmLogs);
+requireIncludes('ibmcloud.html #visual-systems', idText('ibmcloud.html', 'visual-systems'), copy.ibmIllustration);
 
 requireExact('wxo-access.html title', tagText('wxo-access.html', 'title'), copy.gateIdentity);
 requireExact('wxo-access.html meta[name=description]', metaValues('wxo-access.html', 'name', 'description'), copy.gateDescription);
@@ -209,7 +213,7 @@ requireIncludes('uigallery.html .ui-study--magi', classText('uigallery.html', 'u
 
 const retired = {
   'about.html': ['About Victor Tran. Visual Designer at IBM, Austin TX.', 'automation workflows, and I work closely with UX, product, and development partners through implementation.'],
-  'ibmcloud.html': ['I learned the technical system through documentation and product exploration, then applied that understanding', 'great, neat things that bring delight to a technical experience.'],
+  'ibmcloud.html': ['I learned the technical system through documentation and product exploration, then applied that understanding', 'great, neat things that bring delight to a technical experience.', 'I applied that understanding through concept-tested flows, visual adaptation, and reusable illustration methods.', 'Design can reduce uncertainty, surface useful information, and make technical work easier to act on. It can also bring moments of delight to the experience.'],
   'wxo-access.html': ['Password access for a protected portfolio case study.', 'Protected case study · Victor Tran Design'],
   'abilityexperience.html': ['Empowering social change through accessible design. Brand identity and collateral for The Ability Experience.', 'Also using the iconography, the cycling kits are used by nearly 100 student cyclists as they rode', 'sets the branding standard for The Ability Experience', 'Setting the visual standard for the ride.', 'For each new year of team summer events'],
   'salmagazine.html': ['Modernizing a century-old publication. Layout and art direction for the official Pi Kappa Phi magazine.', 'Modernizing a century-old publication. I led the layout and art direction for the official Pi Kappa Phi magazine.', 'A century-old fraternity magazine, redrawn into an award-winning publication.', 'From rinse-and-repeat brochure to industry award winner.', 'this magazine evolved into an industry award-winning publication.'],

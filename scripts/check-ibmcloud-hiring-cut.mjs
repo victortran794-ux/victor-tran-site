@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const html = read('ibmcloud.html');
+const css = read('css/ibmcloud-hiring.css');
 const manifest = JSON.parse(read('data/projects.json'));
+const sourceManifest = read('case-studies/ibmcloud.md');
 const dashboard = read('PORTFOLIO_DASHBOARD.md');
 const preflight = read('scripts/preflight.sh');
 const failures = [];
@@ -15,13 +17,12 @@ const require = (condition, message) => { if (!condition) failures.push(message)
 const project = manifest.projects.find(item => item.slug === 'ibmcloud');
 require(Boolean(project), 'IBM Cloud project manifest entry is missing');
 if (project) {
-  require(project.protected === false, 'IBM Cloud manifest must be public');
-  require(project.noindex === false, 'IBM Cloud manifest must be indexable');
-  require(project.sitemap === true, 'IBM Cloud manifest must be included in the sitemap');
+  require(project.protected === false, 'IBM Cloud manifest must remain public');
+  require(project.noindex === false, 'IBM Cloud manifest must remain indexable');
+  require(project.sitemap === true, 'IBM Cloud must remain in the sitemap');
   require(project.url === 'ibmcloud.html', 'IBM Cloud route must remain ibmcloud.html');
-  require(project.surface === 'ibm-inverse', 'IBM Cloud homepage card must use the bounded inverse surface');
-  require(project.images?.length === 1, 'IBM Cloud homepage card must use one dominant thumbnail');
-  require(project.images?.[0]?.src === 'images/ibm-thumb-dark.png', 'IBM Cloud homepage thumbnail must use the existing dark-theme image');
+  require(project.surface === 'ibm-inverse', 'IBM Cloud homepage card must retain its inverse surface');
+  require(project.images?.length === 1 && project.images[0]?.src === 'images/ibm-thumb-dark.png', 'IBM Cloud homepage card must retain one dark-theme thumbnail');
 }
 
 for (const phrase of [
@@ -33,245 +34,141 @@ for (const phrase of [
   'class="project-nav"',
   'href="wxo-canvas.html?lock=1"',
   'href="ibm-patterns.html"',
-  'I learned the technical system, then used research, product design, and visual storytelling to help other people understand it.',
+  'I used product design and reusable visual systems to make complex cloud work easier to understand and extend.',
   '2021–2023',
   'id="product-work"',
   'id="team-action"',
   'id="visual-systems"',
-  'Researched and tested a product flow',
-  'Reviewed and explored the product system',
-  'Built visual methods for reuse',
-  'Event Notifications was my first assigned end-to-end research and design project.',
-  'Could a stepped flow make the relationship among subscriptions, sources, destinations, and conditions understandable?',
-  'Testing showed that people could move through the simple and complex flows, while terminology, condition discoverability, and visibility across steps still needed attention.',
-  'Keep the common path sequential, reuse destinations, and reveal condition logic only when the source needs it.',
-  'Proposed and concept-tested. The research supported the direction and exposed open questions; it did not prove shipment or measured impact.',
-  'class="ibm-ux-decision-rail reveal"',
-  'Research question',
-  'What testing surfaced',
-  'Design response',
-  'Validation boundary',
-  'Monitoring heuristic evaluation',
-  'IBM Cloud Logs',
-  'based on Coralogix',
-  'tokens, icons, navigation, data visualization, components, type, and themes',
-  'They scoped the work, but do not prove that every explored state shipped.',
-  'collaborative workgroup',
-  'early trial of moving the illustration workflow from Sketch to Figma',
-  'Research, exploration, and moments of delight.',
-  'Design can reduce uncertainty, surface useful information, and make technical work easier to act on. It can also bring moments of delight to the experience.',
+  'Design a subscription flow people can understand.',
+  'My first start-to-finish product-design project consolidated sources, destinations, subscriptions, and conditions into a simpler stepped flow. Concept testing supported the direction.',
+  'Proposed and concept-tested, not evidence of shipment or measured impact.',
+  'Adapt an existing product toward IBM Cloud conventions.',
+  'I explored how IBM Cloud Logs could adopt IBM Cloud visual conventions.',
+  'Token translation mapped source visualization roles toward IBM theme values.',
+  'Token translation · Internal exploration',
+  'Build a visual method the team could extend.',
+  'I created most of the original product illustrations and reusable components, then partnered with the team to document and scale the method.',
+  'Concept to final',
+  'Reusable foundations',
+  'Light and dark product family',
+  'Reduced service metaphors',
   'images/ibm-thumb-light.png',
   'images/ibm-thumb-dark.png',
-  'images/ibm-cloud-routing-architecture.png',
-  'images/ibm-cloud-visual-system-foundations.png',
-  'images/ibm-cloud-card-component-design.png',
   'images/ibm-cloud-event-flow-details.png',
   'images/ibm-cloud-event-flow-condition-empty.png',
   'images/ibm-cloud-event-flow-condition-compound.png',
-  'images/ibm-cloud-research-framing.png',
-  'images/ibm-cloud-research-findings.png',
-  'images/ibm-cloud-concept-to-final.png',
-  'images/ibm-cloud-isometric-compositions.png',
-  'images/ibm-cloud-service-icons.png',
   'images/ibm-cloud-proof02-token-translation.png',
-  'Translating the visual system',
-  'I mapped source visualization roles toward IBM theme values, revealing where token transfer worked and where manual decisions remained.',
-  'Internal exploration · Not proof of shipment',
-  'High-fidelity work clarified hierarchy, connection status, and actions.',
-  'What mental model and sequence would people expect?',
-  'Where did the model align, and where did it require learning?',
-  'Events, metrics, and logs moved through a shared technical environment.',
-  'Early sketches narrowed composition, service metaphors, and hierarchy before final rendering.',
-  'Shared perspective and lighting rules connected distinct product stories without making them identical.',
-  'A reduced service-icon set carried the same geometry and color discipline into smaller surfaces.',
-  'Shared base, shadow, color, gradient, and lighting rules made the illustration language inspectable and reusable.',
-]) {
-  require(html.includes(phrase), `missing required protected hiring-page contract: ${phrase}`);
-}
+  'images/ibm-cloud-concept-to-final.png',
+  'images/ibm-cloud-visual-system-foundations.png',
+  'images/ibm-cloud-service-icons.png',
+]) require(html.includes(phrase), `missing lean IBM Cloud requirement: ${phrase}`);
 
 for (const phrase of [
-  '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
-  '<meta name="referrer" content="no-referrer">',
-  "sessionStorage.getItem('vtd-unlock')",
+  'ibm-hiring-intro',
+  'ibm-tech-context',
+  'ibm-proof-index',
+  'ibm-product-research',
+  'ibm-research-pair',
+  'ibm-ux-decision-rail',
+  'ibm-ux-decision-item',
+  'ibm-component-artifact',
+  'ibm-proof-copy',
+  'ibm-systems-layout',
+  'ibm-system-result',
+  'ibm-hiring-close',
+  'images/ibm-cloud-routing-architecture.png',
+  'images/ibm-cloud-research-framing.png',
+  'images/ibm-cloud-research-findings.png',
+  'images/ibm-cloud-card-component-design.png',
+  'images/ibm-cloud-isometric-compositions.png',
+  'images/ibm-cloud-observability-light.png',
+  'images/ibm-cloud-observability-dark.png',
+  'Research, exploration, and moments of delight.',
+  'Not proof of shipment',
+  'Sanitized source',
+  'based on Coralogix',
+  'Monitoring heuristic evaluation',
+  'Mentoring',
+  'onboarding',
+  '<dt>Client</dt>',
+  'data:image/',
   'css/password-gate.css',
   'js/password-gate.js',
-  'site-route-status',
-  '2021–2024',
-  'first project I owned end-to-end',
-  'second-largest revenue-generating',
-  'nine user interviews',
-  'Roughly half',
-  'I led UI design across',
-  'helped designers build complex assets faster',
-  'reusable connected-experiences pattern',
-  'Shipped complex product work',
-  'Some releases shipped',
-  'PRIVATE REVIEW · NOT FOR PUBLICATION',
-  'Improvement Jam',
-  'first self-led product-design journey',
-  'Design the next step.',
-  'data:image/',
-  'images/ibm-cloud-proof02-data-visualization-sanitized.png',
-  'ibm-en-conditions.jpg',
-  'ibm-en-custom-domains.jpg',
-  '<dt>Client</dt>',
-  'class="ibm-visual-atlas',
-  'clearest example',
-  'Sysdig Secure and IBM Cloud Logs provide the release context around it.',
-  'class="product-facsimile"',
-]) {
-  require(!html.includes(phrase), `forbidden legacy/private phrase or asset remains: ${phrase}`);
-}
+]) require(!html.includes(phrase), `presentation-only or retired material remains in the public composition: ${phrase}`);
 
 const proofIds = [...html.matchAll(/<section\b[^>]*\bclass="[^"]*\bibm-proof\b[^"]*"[^>]*\bid="([^"]+)"/gi)].map(match => match[1]);
-require(JSON.stringify(proofIds) === JSON.stringify(['product-work', 'team-action', 'visual-systems']), `expected exactly three ordered proof sections, found: ${proofIds.join(', ')}`);
+require(JSON.stringify(proofIds) === JSON.stringify(['product-work', 'team-action', 'visual-systems']), `expected three ordered proof sections, found: ${proofIds.join(', ')}`);
+const classTokens = [...html.matchAll(/\bclass="([^"]*)"/gi)].flatMap(match => match[1].trim().split(/\s+/));
+require(classTokens.filter(token => token === 'ibm-flow-screen').length === 3, 'expected exactly three Event Notifications screens');
+require(classTokens.filter(token => token === 'ibm-theme-pair').length === 5, 'expected exactly five product-family pairs after the Observability hero');
+require(classTokens.filter(token => token === 'ibm-evidence-artifact').length === 5, 'expected exactly five curated evidence figures outside the three-screen flow and hero');
+
 const narrativeWords = (html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '')
   .replace(/<(?:script|style|svg)\b[\s\S]*?<\/(?:script|style|svg)>/gi, ' ')
   .replace(/<[^>]+>/g, ' ')
   .trim()
   .split(/\s+/)
   .filter(Boolean).length;
-require(narrativeWords <= 950, `IBM Cloud narrative exceeded the reduced-copy ceiling: ${narrativeWords} words`);
-require(narrativeWords <= 875, `IBM Cloud UX-evidence revision must reduce narrative below 876 words: ${narrativeWords} words`);
-require((html.match(/class="[^"]*\bibm-ux-decision-item\b[^"]*"/g) || []).length === 4, 'expected four source-backed UX decision items');
-require(html.indexOf('ibm-cloud-research-framing.png') < html.indexOf('class="ibm-ux-decision-rail reveal"'), 'research framing must precede the synthesized decision rail');
-require(html.indexOf('class="ibm-ux-decision-rail reveal"') < html.indexOf('id="event-flow-artifact"'), 'decision rail must connect research evidence to the authentic flow');
-require(!html.includes('Pending protected asset selection'), 'cleared supporting images must replace both pending evidence reservations');
-require(!html.includes('data-asset-status="victor-selection-required"'), 'IBM Cloud must not retain a Victor-selection placeholder after cleared assets are supplied');
-require((html.match(/class="[^"]*\bibm-evidence-artifact\b[^"]*"/g) || []).length === 9, 'expected exactly nine curated artifact cards outside the three-screen product flow and dedicated technical-context figure');
-require((html.match(/class="[^"]*\bibm-tech-context\b[^"]*"/g) || []).length === 1, 'expected one dedicated technical-context figure near the opening');
+require(narrativeWords <= 520, `IBM Cloud lean narrative exceeded 520 words: ${narrativeWords}`);
 
 const selectedAssets = {
-  'images/ibm-cloud-event-flow-details.png': {
-    sha256: '48f8afd7a128bb8cb50dd7837475a3fc97b4daf33a47f7c940a7e3dcb731e8af',
-    width: '1024',
-    height: '656',
-  },
-  'images/ibm-cloud-event-flow-condition-empty.png': {
-    sha256: 'd3c6552adda082a1a6bd3f8c0330207b21383168f12198045c66af7784fc20f3',
-    width: '1024',
-    height: '656',
-  },
-  'images/ibm-cloud-event-flow-condition-compound.png': {
-    sha256: '416ccce17c3ff145374f4f8b9d279ed7fdeed96e6ce840968308b0f3bed74224',
-    width: '1024',
-    height: '656',
-  },
-  'images/ibm-cloud-routing-architecture.png': {
-    sha256: '606ee4e19741eead6c0b545254b4858c4bf59880ae93f85a970bcad9859b8bd3',
-    width: '1024',
-    height: '768',
-  },
-  'images/ibm-cloud-visual-system-foundations.png': {
-    sha256: '60b5f263629b627268815f79d7e758f0287605bdc556a2b7e8a64727c5884420',
-    width: '1024',
-    height: '350',
-  },
-  'images/ibm-cloud-card-component-design.png': {
-    sha256: '50ba0a8dcf0c784584ec44b345b21256a2d5195491dd276bd859f47ea39c72c9',
-    width: '1024',
-    height: '640',
-  },
-  'images/ibm-cloud-research-framing.png': {
-    sha256: '71c0dc8da093d0b2c3360614b0aa41f527c0d79f52f4779315f167990ae1ba6a',
-    width: '1024',
-    height: '324',
-  },
-  'images/ibm-cloud-research-findings.png': {
-    sha256: '4b789a00f8e4f298e6e40f8635bb02ea1b5533312becd5b32338cc9e689d08cf',
-    width: '1024',
-    height: '304',
-  },
-  'images/ibm-cloud-concept-to-final.png': {
-    sha256: 'a04c3acdcac03f6acbe79a097f013e6efb17506e58d356ef0e659afb3181d3dd',
-    width: '820',
-    height: '360',
-  },
-  'images/ibm-cloud-isometric-compositions.png': {
-    sha256: '00811e67c5336b8874507aff2261ae546c2b1bc16da06bfdb7fcfdd09aec4cb5',
-    width: '1024',
-    height: '320',
-  },
-  'images/ibm-cloud-service-icons.png': {
-    sha256: '123801a037b685a053d9bfe0fd3ac706b0815fb00923d93b35a9286e04c20095',
-    width: '1024',
-    height: '292',
-  },
-  'images/ibm-cloud-proof02-token-translation.png': {
-    sha256: '9a0e4971a673cb3b5c8b5b05e34bdfa2f18c3126d65c9b1d39671be3100ceb17',
-    width: '1322',
-    height: '440',
-  },
-  'images/ibm-cloud-code-engine-light.png': { sha256: 'ff92d0376ee9d9856d4d765e046853049efd0ea3b89f18deba0bbf5cde26a8b0', width: '960', height: '540' },
-  'images/ibm-cloud-code-engine-dark.png': { sha256: 'fb1d537c314db31d8aea0e40909da3ea15ddb00f74bc8216b66622d6d781394a', width: '960', height: '540' },
-  'images/ibm-cloud-observability-light.png': { sha256: 'dc0c325182ca6f77ed2e9a2168c574c024c4614505009b909cff0447d738b172', width: '960', height: '540' },
-  'images/ibm-cloud-observability-dark.png': { sha256: '8f224ea49af57f69315019132c28375ee50205f90cf1476ace823ce26bb57b09', width: '960', height: '540' },
-  'images/ibm-cloud-registry-light.png': { sha256: 'dacafe983711e93a5964650639c74f7038cb838b36dbeb17da5511680a8d5fc2', width: '960', height: '540' },
-  'images/ibm-cloud-registry-dark.png': { sha256: 'b5b1ebb8d190ee17a5ab0dc540e6bcd12b6a15a3be9a2d020548d5fdb71a1bed', width: '960', height: '540' },
-  'images/ibm-cloud-satellite-light.png': { sha256: '309bf21f3e8e765ffefa737147bbc9f53bd086349c7e680907d953eb852df8a1', width: '960', height: '540' },
-  'images/ibm-cloud-satellite-dark.png': { sha256: '71a62b275551e535c859a712c45074b93465f5218950fb9616a0eb72c4ad5e69', width: '960', height: '540' },
-  'images/ibm-cloud-iks-light.png': { sha256: 'cd77b871571bd01ae95ede4d6103c1a93cecdb91a3108d600b82f7d942a9a13f', width: '960', height: '540' },
-  'images/ibm-cloud-iks-dark.png': { sha256: 'd5ab895329122e3f39ee69109fd7b8c5d1b7068cb2e0931ab2141d4e8118275f', width: '960', height: '540' },
-  'images/ibm-cloud-roks-light.png': { sha256: '548670e0c1d856fb7a25dc2ac4c42432d477ad10effb5999a688f6c5f2f30861', width: '960', height: '540' },
-  'images/ibm-cloud-roks-dark.png': { sha256: 'b31f03f791314f14cc34b124f9a50909f859a9eedaed486862245d3160ff2565', width: '960', height: '540' },
+  'images/ibm-thumb-light.png': ['3cfbde727064eda8947f0707c32d1477a08768e57051671e2ebae6743770de35', '960', '540'],
+  'images/ibm-thumb-dark.png': ['50615fbf95ae0c7c282c1f30f31447de6501aad434596868352dfa05a21e4c27', '960', '540'],
+  'images/ibm-cloud-event-flow-details.png': ['48f8afd7a128bb8cb50dd7837475a3fc97b4daf33a47f7c940a7e3dcb731e8af', '1024', '656'],
+  'images/ibm-cloud-event-flow-condition-empty.png': ['d3c6552adda082a1a6bd3f8c0330207b21383168f12198045c66af7784fc20f3', '1024', '656'],
+  'images/ibm-cloud-event-flow-condition-compound.png': ['416ccce17c3ff145374f4f8b9d279ed7fdeed96e6ce840968308b0f3bed74224', '1024', '656'],
+  'images/ibm-cloud-proof02-token-translation.png': ['9a0e4971a673cb3b5c8b5b05e34bdfa2f18c3126d65c9b1d39671be3100ceb17', '1322', '440'],
+  'images/ibm-cloud-concept-to-final.png': ['a04c3acdcac03f6acbe79a097f013e6efb17506e58d356ef0e659afb3181d3dd', '820', '360'],
+  'images/ibm-cloud-visual-system-foundations.png': ['60b5f263629b627268815f79d7e758f0287605bdc556a2b7e8a64727c5884420', '1024', '350'],
+  'images/ibm-cloud-code-engine-light.png': ['ff92d0376ee9d9856d4d765e046853049efd0ea3b89f18deba0bbf5cde26a8b0', '960', '540'],
+  'images/ibm-cloud-code-engine-dark.png': ['fb1d537c314db31d8aea0e40909da3ea15ddb00f74bc8216b66622d6d781394a', '960', '540'],
+  'images/ibm-cloud-registry-light.png': ['dacafe983711e93a5964650639c74f7038cb838b36dbeb17da5511680a8d5fc2', '960', '540'],
+  'images/ibm-cloud-registry-dark.png': ['b5b1ebb8d190ee17a5ab0dc540e6bcd12b6a15a3be9a2d020548d5fdb71a1bed', '960', '540'],
+  'images/ibm-cloud-satellite-light.png': ['309bf21f3e8e765ffefa737147bbc9f53bd086349c7e680907d953eb852df8a1', '960', '540'],
+  'images/ibm-cloud-satellite-dark.png': ['71a62b275551e535c859a712c45074b93465f5218950fb9616a0eb72c4ad5e69', '960', '540'],
+  'images/ibm-cloud-iks-light.png': ['cd77b871571bd01ae95ede4d6103c1a93cecdb91a3108d600b82f7d942a9a13f', '960', '540'],
+  'images/ibm-cloud-iks-dark.png': ['d5ab895329122e3f39ee69109fd7b8c5d1b7068cb2e0931ab2141d4e8118275f', '960', '540'],
+  'images/ibm-cloud-roks-light.png': ['548670e0c1d856fb7a25dc2ac4c42432d477ad10effb5999a688f6c5f2f30861', '960', '540'],
+  'images/ibm-cloud-roks-dark.png': ['b31f03f791314f14cc34b124f9a50909f859a9eedaed486862245d3160ff2565', '960', '540'],
+  'images/ibm-cloud-service-icons.png': ['123801a037b685a053d9bfe0fd3ac706b0815fb00923d93b35a9286e04c20095', '1024', '292'],
 };
-for (const [relative, expected] of Object.entries(selectedAssets)) {
+for (const [relative, [sha256, width, height]] of Object.entries(selectedAssets)) {
   const absolute = path.join(root, relative);
-  require(fs.existsSync(absolute), `selected IBM Cloud evidence asset is missing: ${relative}`);
-  if (fs.existsSync(absolute)) {
-    const digest = crypto.createHash('sha256').update(fs.readFileSync(absolute)).digest('hex');
-    require(digest === expected.sha256, `selected IBM Cloud evidence asset drifted: ${relative}`);
-  }
+  require(fs.existsSync(absolute), `selected IBM Cloud asset is missing: ${relative}`);
+  if (fs.existsSync(absolute)) require(crypto.createHash('sha256').update(fs.readFileSync(absolute)).digest('hex') === sha256, `selected IBM Cloud asset drifted: ${relative}`);
   const escaped = relative.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const tag = html.match(new RegExp(`<img\\b[^>]*src="${escaped}"[^>]*>`, 'i'))?.[0] || '';
-  require(Boolean(tag), `selected IBM Cloud evidence image is not rendered: ${relative}`);
-  require(tag.includes(`width="${expected.width}"`) && tag.includes(`height="${expected.height}"`), `selected IBM Cloud evidence image has incorrect intrinsic dimensions: ${relative}`);
-  require(/\balt="[^"]+"/i.test(tag), `selected IBM Cloud evidence image needs descriptive alt text: ${relative}`);
+  require(Boolean(tag), `selected IBM Cloud image is not rendered: ${relative}`);
+  require(tag.includes(`width="${width}"`) && tag.includes(`height="${height}"`), `selected IBM Cloud image has incorrect intrinsic dimensions: ${relative}`);
+  require(/\balt="[^"]+"/i.test(tag), `selected IBM Cloud image needs descriptive alt text: ${relative}`);
+  require(sourceManifest.includes(sha256) || relative.startsWith('images/ibm-thumb-'), `IBM Cloud source manifest is missing retained asset provenance: ${relative}`);
 }
 
-require(fs.existsSync(path.join(root, 'case-studies/ibmcloud.md')), 'IBM Cloud source and publication manifest is missing');
-if (fs.existsSync(path.join(root, 'case-studies/ibmcloud.md'))) {
-  const sourceManifest = read('case-studies/ibmcloud.md');
-  for (const phrase of ['Figma node `6:7102`', 'Figma node `6:7107`', 'Figma node `6:7108`', 'Figma node `6:7238`', 'Figma node `6:8838`', 'Figma node `6:8635`', 'Figma node `6:8632`', 'Figma node `6:8633`', 'Figma node `6:8626`', 'Figma node `6:7278`', 'Figma node `6:7111`', 'sample-size metric removed', 'one-pixel export boundary removed', '40 pixels of bottom breathing room', ...Object.values(selectedAssets).map(asset => asset.sha256)]) {
-    require(sourceManifest.includes(phrase), `IBM Cloud source manifest is missing provenance: ${phrase}`);
-  }
-}
-
-const svgLabels = [...html.matchAll(/<svg\b[^>]*\baria-label="([^"]+)"/gi)].map(match => match[1]);
-require(svgLabels.length === 0, `authentic Event Notifications exports must replace the three facsimile SVGs, found ${svgLabels.length} labeled SVGs`);
-
-const images = [...html.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
-require(images.length >= 3, `expected production shell and approved hero evidence images, found ${images.length}`);
+const mainHtml = html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || '';
+const images = [...mainHtml.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
+require(images.length === 19, `expected exactly 19 case-study images representing 13 editorial display units, found ${images.length}`);
 for (const tag of images) {
   require(/\bwidth="\d+"/i.test(tag), `image missing numeric width: ${tag.slice(0, 100)}`);
   require(/\bheight="\d+"/i.test(tag), `image missing numeric height: ${tag.slice(0, 100)}`);
   require(/\balt="[^"]*"/i.test(tag), `image missing alt attribute: ${tag.slice(0, 100)}`);
 }
 
-require(fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css')), 'page-specific IBM hiring CSS is missing');
-if (fs.existsSync(path.join(root, 'css/ibmcloud-hiring.css'))) {
-  const css = read('css/ibmcloud-hiring.css');
-  require(css.includes('[data-project="ibm-cloud"]'), 'IBM hiring CSS must be scoped by data-project');
-  require(css.includes('[data-project="ibm-cloud"] .ibm-hiring-hero {') && css.includes('border-bottom: 0;'), 'IBM Cloud must remove the crowded page-header divider');
-  require(css.includes('[data-project="ibm-cloud"] .ibm-evidence-artifact'), 'IBM Cloud selected evidence artifacts are unstyled');
-  for (const selector of ['.ibm-tech-context', '.ibm-research-pair', '.ibm-adaptation-evidence', '.ibm-visual-sequence']) {
-    require(css.includes(`[data-project="ibm-cloud"] ${selector}`), `IBM Cloud revised evidence sequence is missing styles for ${selector}`);
-  }
-  require(css.includes('grid-template-rows: auto 1fr;'), 'IBM Cloud research cards must absorb unequal caption height without a white bar');
-  require(!/var\(--(?:orange|fg|fg-muted|space-7)\b/.test(css), 'IBM hiring CSS uses an undefined or stale token');
+require(css.includes('[data-project="ibm-cloud"]'), 'IBM Cloud CSS must remain route-scoped');
+for (const selector of ['.ibm-hiring-hero', '.ibm-proof', '.ibm-product-evidence', '.ibm-adaptation-evidence', '.ibm-visual-sequence', '.ibm-theme-family-grid']) {
+  require(css.includes(`[data-project="ibm-cloud"] ${selector}`), `IBM Cloud lean composition is missing styles for ${selector}`);
 }
-
-require(preflight.includes('node scripts/check-ibmcloud-hiring-cut.mjs'), 'IBM hiring-page contract is not wired into preflight');
-require(
-  dashboard.includes('eleven-artifact Figma expansion production-verified in PR #135'),
-  'Portfolio dashboard must record the approved IBM Cloud supporting-image expansion as production-verified in PR #135',
-);
+for (const deadSelector of ['.ibm-tech-context', '.ibm-product-research', '.ibm-ux-decision-rail', '.ibm-component-artifact', '.ibm-hiring-close']) {
+  require(!css.includes(`[data-project="ibm-cloud"] ${deadSelector}`), `dead IBM Cloud selector remains after the lean trim: ${deadSelector}`);
+}
+require(!/var\(--(?:orange|fg|fg-muted|space-7)\b/.test(css), 'IBM Cloud CSS uses an undefined or stale token');
+require(preflight.includes('node scripts/check-ibmcloud-hiring-cut.mjs'), 'IBM Cloud contract is not wired into preflight');
+require(dashboard.includes('eleven-artifact Figma expansion production-verified in PR #135'), 'Portfolio dashboard must retain the prior production record');
 
 if (failures.length) {
-  console.error('IBM CLOUD HIRING CUT CONTRACT: FAIL');
+  console.error('IBM CLOUD LEAN PAGE CONTRACT: FAIL');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log('IBM CLOUD HIRING CUT CONTRACT: PASS');
-console.log(`proofs=${proofIds.length} authentic_flow_images=3 evidence_assets=${Object.keys(selectedAssets).length} images=${images.length}`);
+console.log('IBM CLOUD LEAN PAGE CONTRACT: PASS');
+console.log(`proofs=${proofIds.length} display_units=13 images=${images.length} evidence_figures=5 family_pairs=5 narrative_words=${narrativeWords}`);
