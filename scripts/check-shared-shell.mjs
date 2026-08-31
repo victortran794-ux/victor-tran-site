@@ -203,6 +203,10 @@ for (const page of expectedPages) {
   if (nav.includes('data-lens="dna"') || nav.includes('dna-trigger')) {
     fail(`${page} shared viewing-mode switcher must contain only Light and Dark`);
   }
+  if (count(nav, 'data-icon-treatment="filled"') !== 1) fail(`${page} desktop switcher must declare one filled icon treatment`);
+  if (count(nav, 'class="lens-switcher-filled-icon"') !== 2) fail(`${page} desktop switcher must contain two filled SVG icons`);
+  if (count(nav, 'class="lens-switcher-rail"') !== 1) fail(`${page} desktop switcher must contain one refined visual rail`);
+  if (/&#x25D0;|&#x25CB;/.test(nav)) fail(`${page} retained retired outlined theme glyphs`);
 
   const protectedStatus = '<p class="site-route-status"><span>Private case study</span><small>Access required</small></p>';
   if (activeProtected.has(page)) {

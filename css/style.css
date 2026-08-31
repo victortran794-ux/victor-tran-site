@@ -619,6 +619,103 @@ main#main-content {
   color: var(--text-2);
 }
 
+/* Desktop filled theme control: keep 44px hit targets while reducing the
+   visible rail to a calmer 96 × 30px horizontal proportion. Mobile continues
+   to use the explicit Light/Dark controls inside the Work disclosure. */
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] {
+  width: 96px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-rail {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 7px;
+  height: 30px;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--surface-floating) 80%, transparent);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.025);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-rail::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  width: 1px;
+  background: color-mix(in srgb, var(--border) 78%, transparent);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn {
+  z-index: 1;
+  width: 48px;
+  min-width: 48px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  bottom: 8px;
+  left: 3px;
+  right: 3px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  transition: background var(--duration-fast);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn:hover::before {
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn[aria-pressed="true"] {
+  background: transparent;
+  color: var(--bg);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn[aria-pressed="true"]::before,
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-btn[aria-pressed="true"]:hover::before {
+  background: color-mix(in srgb, var(--text) 94%, transparent);
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-icon {
+  position: relative;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.nav-inner > .lens-switcher[data-icon-treatment="filled"] .lens-switcher-icon::before {
+  content: none;
+}
+
+.lens-switcher-filled-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lens-switcher-btn,
   .lens-switcher-icon { transition: none; }

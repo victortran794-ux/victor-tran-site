@@ -272,6 +272,18 @@ try {
     current: document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
     desktopThemeVisible: getComputedStyle(document.querySelector('.nav-inner > .lens-switcher')).display !== 'none',
     desktopThemeLabels: document.querySelectorAll('.nav-inner > .lens-switcher .lens-switcher-label').length,
+    desktopThemeControl: (() => {
+      const control = document.querySelector('.nav-inner > .lens-switcher');
+      const rail = control.querySelector('.lens-switcher-rail');
+      return {
+        iconStyle: control.dataset.iconTreatment,
+        width: control.getBoundingClientRect().width,
+        height: control.getBoundingClientRect().height,
+        railWidth: rail?.getBoundingClientRect().width,
+        railHeight: rail?.getBoundingClientRect().height,
+        filledIcons: control.querySelectorAll('.lens-switcher-filled-icon').length,
+      };
+    })(),
     desktopThemeButtons: [...document.querySelectorAll('.nav-inner > .lens-switcher .lens-switcher-btn')].map((button) => ({
       width: button.getBoundingClientRect().width,
       height: button.getBoundingClientRect().height,
@@ -286,7 +298,9 @@ try {
   assert(desktop.current === 'abilityexperience.html', 'public case study current-route state is wrong');
   assert(desktop.desktopThemeVisible, 'desktop Light/Dark controls are hidden');
   assert(desktop.desktopThemeLabels === 0, 'desktop Light/Dark controls retained visible text labels');
-  assert(desktop.desktopThemeButtons.length === 2 && desktop.desktopThemeButtons.every((button) => button.width >= 44 && button.height >= 44), 'desktop Light/Dark controls lost 44px targets');
+  assert(desktop.desktopThemeControl.iconStyle === 'filled' && desktop.desktopThemeControl.width === 96 && desktop.desktopThemeControl.height === 44, `desktop refined control geometry drifted: ${JSON.stringify(desktop.desktopThemeControl)}`);
+  assert(desktop.desktopThemeControl.railWidth === 96 && desktop.desktopThemeControl.railHeight === 30 && desktop.desktopThemeControl.filledIcons === 2, `desktop refined visual rail or icons drifted: ${JSON.stringify(desktop.desktopThemeControl)}`);
+  assert(desktop.desktopThemeButtons.length === 2 && desktop.desktopThemeButtons.every((button) => button.width === 48 && button.height === 44), 'desktop Light/Dark controls lost approved 48x44 targets');
   assert(desktop.desktopThemeButtons.every((button) => button.tooltip === button.label && button.tooltipHidden === 'true'), 'desktop viewing tooltips duplicate or drift from accessible labels');
   assert(desktop.previousLabel?.startsWith('Previous project:') && desktop.nextLabel?.startsWith('Next project:'), 'project navigation accessible labels are missing');
   await cdp.evaluate(`document.querySelector('.skip-link').focus()`);

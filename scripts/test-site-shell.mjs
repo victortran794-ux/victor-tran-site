@@ -110,6 +110,10 @@ try {
     assert.doesNotMatch(html, /role="menu(?:item)?"/);
     assert.equal(count(html, 'data-mobile-lens='), 2);
     assert.doesNotMatch(html, /class="lens-switcher-label"/, 'desktop viewing controls must be icon-only');
+    assert.equal(count(html, 'data-icon-treatment="filled"'), 1, 'desktop viewing control must declare the filled icon treatment');
+    assert.equal(count(html, 'class="lens-switcher-filled-icon"'), 2, 'desktop viewing control must render two filled SVG icons');
+    assert.equal(count(html, 'class="lens-switcher-rail"'), 1, 'desktop viewing control must render one visual rail');
+    assert.doesNotMatch(html, /&#x25D0;|&#x25CB;/, 'retired outlined theme glyphs must not regenerate');
     assert.match(html, /<h2 class="footer-tagline">/);
     assert.match(html, /class="footer-cta">Let&#39;s chat\.<\/a>/);
     assert.match(html, /class="footer-email"[^>]*><svg viewBox="0 0 24 24"/);
