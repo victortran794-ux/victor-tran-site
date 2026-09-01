@@ -122,6 +122,7 @@ run_required "Theme Continuity proof contract" npm run check:theme-continuity-pr
 run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "UI Gallery integration contract" npm run check:ui-gallery
+run_required "Gallery followups contract" npm run check:gallery-followups
 run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all

@@ -20,7 +20,7 @@ Selected interface studies by Victor Tran, including a high-fidelity Ekos Con vi
 
 ## Section Headings
 
-- Ekos Con 2018
+- Ekos Con
 - Magi interface studies
 
 ## Body Copy
@@ -29,7 +29,7 @@ Interface Studies
 
 A few interface studies and small experiments I liked enough to keep around.
 
-A conference landing page for craft beverage makers, shown in complete desktop and mobile frames. Event and registration details are illustrative.
+A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.
 
 A dark interface system explored through dashboards, architecture, components, and interaction patterns. Interface details use fictional sample data and are shown as design examples rather than production data.
 

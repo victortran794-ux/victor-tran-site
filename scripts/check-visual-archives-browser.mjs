@@ -556,7 +556,7 @@ const pageSpecs = {
     file: 'artillustration.html',
     bodyClass: 'art-archive-v2',
     archive: 'art-studio-wall',
-    mainImages: 46,
+    mainImages: 56,
   },
   graphic: {
     file: 'graphicgallery.html',
@@ -648,6 +648,7 @@ try {
           const focusContrast = (Math.max(outlineLum, surfaceLum) + 0.05) / (Math.min(outlineLum, surfaceLum) + 0.05);
           return {
             width: innerWidth,
+            clientWidth: document.documentElement.clientWidth,
             height: innerHeight,
             theme: document.documentElement.dataset.theme,
             storedTheme: localStorage.getItem('lens'),
@@ -668,6 +669,22 @@ try {
             focusContrast,
             artCharacters: document.querySelectorAll('.art-live-wall img').length,
             artTraditional: document.querySelectorAll('.art-restored-wall img').length,
+            artDaysigns: document.querySelectorAll('[data-daysigns-item] img').length,
+            artDaysignsLayout: (() => {
+              const grid = document.querySelector('.art-daysigns-grid');
+              if (!grid) return null;
+              const rect = grid.getBoundingClientRect();
+              const items = [...grid.querySelectorAll('[data-daysigns-item]')].map((item) => {
+                const itemRect = item.getBoundingClientRect();
+                const image = item.querySelector('img');
+                return {
+                  left: itemRect.left, top: itemRect.top, right: itemRect.right, bottom: itemRect.bottom,
+                  width: itemRect.width, height: itemRect.height,
+                  naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
+                };
+              });
+              return { left: rect.left, right: rect.right, width: rect.width, columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length, rowGap: getComputedStyle(grid).rowGap, columnGap: getComputedStyle(grid).columnGap, items };
+            })(),
             artHorned: document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img').length,
             artHornedKeyboardTriggers: [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')]
               .filter((image) => image.tabIndex === 0 && image.getAttribute('role') === 'button' && image.getAttribute('aria-haspopup') === 'dialog').length,
@@ -755,9 +772,25 @@ try {
         if (name === 'art') {
           assert(state.artCharacters === 16, `artillustration.html: expected 16 Characters and worlds images; found ${state.artCharacters}`);
           assert(state.artTraditional === 5, `artillustration.html: expected 5 Traditional work images; found ${state.artTraditional}`);
+          assert(state.artDaysigns === 10, `artillustration.html: expected 10 Daysigns; found ${state.artDaysigns}`);
+          const expectedDaysignsColumns = viewport.mobile ? 2 : 5;
+          assert(state.artDaysignsLayout?.columns === expectedDaysignsColumns,
+            `artillustration.html: expected ${expectedDaysignsColumns} Daysigns columns; found ${state.artDaysignsLayout?.columns}`);
+          assert(state.artDaysignsLayout?.rowGap === '0px' && state.artDaysignsLayout?.columnGap === '0px',
+            `artillustration.html: Daysigns grid must have zero gaps; found ${JSON.stringify(state.artDaysignsLayout)}`);
+          assert(state.artDaysignsLayout?.left >= 7 && state.artDaysignsLayout?.left <= 24 && state.artDaysignsLayout?.right <= state.clientWidth - 7 && state.artDaysignsLayout?.right >= state.clientWidth - 24,
+            `artillustration.html: Daysigns grid must remain within a near-edge 7–24px inset; found ${JSON.stringify({ left: state.artDaysignsLayout?.left, right: state.artDaysignsLayout?.right, clientWidth: state.clientWidth })}`);
+          assert(state.artDaysignsLayout?.items.every((item) => Math.abs(item.width - item.height) <= 1 && item.naturalWidth > 0 && item.naturalHeight > 0),
+            `artillustration.html: Daysigns tiles must be square with decoded media; found ${JSON.stringify(state.artDaysignsLayout?.items)}`);
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);
           assert(state.artHornedKeyboardTriggers === 1,
             `artillustration.html: exactly one visible Horned Woman image must be keyboard-operable; found ${state.artHornedKeyboardTriggers}`);
+          if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
+            if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);
+            await cdp.evaluate(`document.querySelector('.art-daysigns-grid').scrollIntoView({block:'center'}); window.scrollBy(0,-40)`);
+            await delay(160);
+            await cdp.screenshot(`art-daysigns-${viewport.label}-${theme}.png`);
+          }
         } else if (name === 'graphic') {
           assert(state.graphicEdc === 4, `graphicgallery.html: expected 4 EDC tiles; found ${state.graphicEdc}`);
           assert(state.graphicSlides === 16, `graphicgallery.html: expected 16 presentation slides; found ${state.graphicSlides}`);
@@ -862,6 +895,12 @@ try {
               `uigallery.html: Magi system pair and closing state strip drifted: ${JSON.stringify(state.uiLayout)}`);
             assert(ekosDesktop.width >= magiOverview.width,
               `uigallery.html: Ekos must remain at least as wide as the Magi dashboard lead: ${JSON.stringify(state.uiLayout)}`);
+          }
+          if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
+            if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);
+            await cdp.evaluate(`document.querySelector('.ui-study--ekos').scrollIntoView({block:'start'}); window.scrollBy(0,-80)`);
+            await delay(160);
+            await cdp.screenshot(`ui-ekos-copy-${viewport.label}-${theme}.png`);
           }
         }
 

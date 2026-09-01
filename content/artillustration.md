@@ -25,6 +25,7 @@ An evolving studio wall of character illustration, personal series, paintings, a
 ## Section Headings
 
 - Characters and worlds
+- Daysigns
 - 56th Supreme Chapter Chicago
 - Suit of Diamonds
 - Traditional work
@@ -68,6 +69,16 @@ Traditional media
 - The Flesh Golem: images/illus-flesh-golem.jpg
 - Abstract figure: images/illus-untitled-3.jpg
 - Illustration of a moka pot and coffee cup: images/art-archive-v2/coffee.webp
+- Daysigns numbered illustration 3: images/daysigns/daysign-03.webp
+- Daysigns numbered illustration 4: images/daysigns/daysign-04.webp
+- Daysigns numbered illustration 5: images/daysigns/daysign-05.webp
+- Daysigns numbered illustration 6: images/daysigns/daysign-06.webp
+- Daysigns numbered illustration 7: images/daysigns/daysign-07.webp
+- Daysigns numbered illustration 8: images/daysigns/daysign-08.webp
+- Daysigns numbered illustration 10: images/daysigns/daysign-10.webp
+- Daysigns numbered illustration 11: images/daysigns/daysign-11.webp
+- Daysigns numbered illustration 12: images/daysigns/daysign-12.webp
+- Daysigns numbered illustration 13: images/daysigns/daysign-13.webp
 - Supreme Chapter Chicago boat poster: images/illus-sc-boat.jpg
 - Supreme Chapter Chicago park map poster: images/illus-sc-park.jpg
 - Supreme Chapter Chicago tower poster: images/illus-sc-tower.jpg
