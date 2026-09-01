@@ -45,7 +45,7 @@ First-person. Conversational. A dose of humor where it lands.
 - **Headline register:** short, plain, sometimes wry. (*"I design cool things with sincerity."* / *"Do more good things."*)
 - **Body register:** full sentences, low jargon, can stretch when the story needs it. The IBM and Star & Lamp paragraphs read as someone telling you about their work over coffee — not a press release.
 - **Name convention:** use **Victor Tran** whenever the full name appears. Use **Vic** when a first name appears alone. Never use **Vic Tran**.
-- **Humor:** yes, where it doesn't undercut the work. The italic-on-hover serif, the "Tap to cycle" portrait toggle, the easter-egg DNA tab — that's the right wavelength.
+- **Humor:** yes, where it doesn't undercut the work. The palette cycle, portrait-lens portal, editable type sample, Tetris, and casual copy are the right wavelength.
 
 ---
 
@@ -64,7 +64,7 @@ The four accents form **two pairs** that work together as surface + glyph:
 
 The glyph color is reserved for **graphic punctuation only** — the section-label dot, the view-link arrow. It is never used for readable body text on its paired surface (contrast fails). Body and titles on colored surfaces are always white.
 
-**The hero color wash** uses `--blue` and `--pink` as the radial gradient hues. If the palette ever grows, decide whether the wash should expand too.
+**The hero color system** cycles four approved session/accent pairings around one fixed portrait. The fine-pointer wash borrows the active pairing and is hidden on touch/mobile; reduced-motion states keep the selected palette static.
 
 ### Dark-mode behavior
 
@@ -101,7 +101,7 @@ Eight tokens, named by **purpose**, defined in `:root`:
 | `--text-subheading`   | `1.5rem`                          | 24         | H3-equivalent                                        |
 | `--text-title`        | `clamp(1.5rem, 2.5vw, 2.25rem)`   | 24-36      | H2 / featured card titles — fluid                    |
 | `--text-display`      | `clamp(2.75rem, 7vw, 5.5rem)`     | 44-88      | Hero H1, big section heads — fluid                   |
-| `--text-hero`         | `clamp(7rem, 24vw, 26rem)`        | 112-416    | One-off: the "Visual / Designer" giant letters       |
+| `--text-hero`         | `clamp(7rem, 24vw, 26rem)`        | 112-416    | One-off: the joined Victor / TRAN hero lettering      |
 
 The migration replaced 42 inline font-size values (most within 1-2px of each other, the smell of a system grown by nudging) with these 8 tokens. **Differences ≤2px disappeared by design** — they weren't perceptible anyway.
 
@@ -187,7 +187,7 @@ The treatments are intentionally varied because the *work* is varied. There's no
 
 Where treatments *do* repeat across the site:
 
-- **Hero portraits** — cutout figures with a lens overlay, rotated through four poses on click.
+- **Hero portrait** — one fixed laughing cutout with palette-driven figure/lens tinting and two transparent lens portals into the current overlay.
 - **Featured thumbnails** — light/dark theme-paired pairs (`*-light.png` / `*-dark.png`) for IBM work where the screenshot has its own theme.
 - **DNA preview** — wide 16:9 portrait that gets tinted by hovered swatches.
 

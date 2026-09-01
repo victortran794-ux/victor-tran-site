@@ -257,7 +257,7 @@ try {
   })`);
   assert(protectedState.cue === 'Private case studyAccess required' || protectedState.cue === 'Private case study Access required', 'protected route cue drifted');
   assert(protectedState.robots?.startsWith('noindex,nofollow'), 'protected route lost noindex,nofollow');
-  assert(protectedState.gate, 'protected route lost password-gate script');
+  assert(!protectedState.gate, 'protected route loaded the retired client-side password-gate script');
   assert(protectedState.overflow === 0, `protected route has ${protectedState.overflow}px root overflow at 390px`);
   assert(protectedState.main === '-1', 'protected route main target lost tabindex=-1');
   await cdp.screenshot('document-processing-390-locked.png');

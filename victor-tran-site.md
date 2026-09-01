@@ -39,17 +39,23 @@ victor-tran-site/
 
 ## Hero (home page only)
 
-The home page hero is a full-viewport image with a cursor-reactive color wash on top:
+The current Home hero is a full-viewport, name-first composition:
 
-- `.hero-bg` — background `<img>` with `object-fit: cover`
-- `.hero-wash` — radial gradient overlay using CSS vars `--mx`, `--my`, `--hue`
-- The handler in `js/main.js` updates those vars on `mousemove` (rAF-throttled). Touch devices fall back to scroll position.
-- Dark mode swaps the wash blend mode from `multiply` to `screen`.
+- `.hero-typeblock` joins the oversized `Victor` and reduced `TRAN` lettering.
+- `.hero-portraits` contains one fixed laughing cutout, `images/hero/figure20.webp`, plus a palette-driven figure tint and matching lens mask.
+- `.hero-lens-hitarea` provides two transparent, keyboard/touch-ready controls aligned to the portrait glasses; both open the current Home overlay.
+- `.hero-cycle` rotates four approved palette pairings around the fixed portrait. It does not rotate portrait poses.
+- `.hero-pointer-wash` follows fine pointers only and borrows the selected palette. Mobile hides the wash but retains automatic palette cycling; reduced-motion states keep the selected palette static.
+- `.home-practice-proof` states Victor's current IBM watsonx Orchestrate role, enterprise-AI/product-systems focus, visual-craft throughline, and Austin location.
+
+Root `DESIGN.md` owns stable identity and current design intent. `index.html`, `css/style.css`, and `js/main.js` own the executable hero.
 
 ## Theming
 
-- Dark mode toggled via `data-theme="dark"` on `<html>`, persisted in `localStorage` under `theme`.
-- The toggle button is `.theme-toggle` in the nav. All theming uses CSS custom properties — search `style.css` for `--bg`, `--text`, `--border`, etc.
+- Dark mode uses `data-theme="dark"` on `<html>` and persists under the `lens` localStorage key.
+- The generated shared desktop header uses a filled sun/crescent switcher with a `96 × 30px` visible rail inside a `96 × 44px` effective control.
+- Mobile keeps explicit `Light` and `Dark` text controls inside the Work disclosure.
+- All theming uses CSS custom properties. Search `style.css` for `--bg`, `--text`, `--border`, and the shared `.lens-switcher` rules.
 
 ## Spacing tokens
 
@@ -76,12 +82,12 @@ All pages load Google Fonts via `<link>` tags with preconnect (not `@import`):
 
 ## Interactions (js/main.js)
 
-- Custom cursor (dot + lagged ring) — expands on hover of `a, button, .project-card, .featured-item, .explore-btn`
-- `IntersectionObserver` scroll reveal on `.reveal` elements (adds `.revealed` class)
-- Nav compacts on scroll (`.nav--scrolled` toggle past 60px)
-- Magnetic 3D tilt on `.project-card` and `.featured-item`
-- Marquee track auto-doubles its content for seamless loop
-- Hero title is split into `.char` spans and animated in on load
+- Custom cursor (dot + lagged ring) expands on supported interactive elements for fine pointers.
+- `IntersectionObserver` reveals `.reveal` elements and updates the Home chapter-progress/now-playing state.
+- Shared Work navigation supports pointer, keyboard, mobile disclosure, and exact focus restoration.
+- Magnetic tilt is scoped to `.featured-item` cards and disabled under reduced motion.
+- The marquee duplicates its source items only as needed for a seamless wide-screen loop.
+- The Home hero supports automatic palette cycling, a fine-pointer-only wash, reduced-motion static-palette behavior, and portrait-lens portal activation.
 
 ## Ask Vic / curated portfolio guide
 
@@ -154,8 +160,9 @@ Editing rules:
 
 ## Asset sources
 
-- **Hero photo:** `~/Documents/Design Work/Website/Profile/Profile_Duo_v2.png` → converted to `images/hero-vic.jpg` (JPG 85%)
-- **Thumbnails:** `~/Documents/Design Work/Website/2025/Thumbnails/` → converted to `images/thumb-*.jpg` (JPG 85%, except SGLA which stays PNG)
+- **Current Home portrait:** `images/hero/figure20.webp`
+- **Current portrait lens mask:** `images/hero/figure20-lens.webp`
+- **Thumbnails and project media:** use the owning project package, provenance record, or route source rather than treating one historical archive folder as universal authority.
 
 ## PCI case study — confidential content
 
