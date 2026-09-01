@@ -42,9 +42,9 @@ for (const token of [
   '<h1>Interfaces, in view.</h1>',
   'A few interface studies and small experiments I liked enough to keep around.',
   '<section class="ui-study ui-study--ekos archive-primary" aria-labelledby="ekos-study-title">',
-  '<h2 id="ekos-study-title">Ekos Con 2018</h2>',
-  'A conference landing page for craft beverage makers, shown in complete desktop and mobile frames.',
-  'Event and registration details are illustrative.',
+  '<h2 id="ekos-study-title">Ekos Con</h2>',
+  "A high-fidelity refinement of an original client landing-page concept from 2018.",
+  'The concept was not shipped; registration and booking are illustrative.',
   'data-ui-study-view="ekos-desktop"',
   'data-ui-study-view="ekos-mobile"',
   'data-ui-scroll-screen="desktop"',
@@ -102,6 +102,9 @@ const magiOrder = [
   'magi-components',
   'magi-node-states',
 ];
+needText(html,
+  "A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.",
+  'Ekos summary must preserve the historical concept, later study, and non-shipment boundary.');
 for (let index = 1; index < magiOrder.length; index += 1) {
   need(html.indexOf(`data-ui-study-view="${magiOrder[index - 1]}"`) < html.indexOf(`data-ui-study-view="${magiOrder[index]}"`),
     `Magi brief order must keep ${magiOrder[index - 1]} before ${magiOrder[index]}.`);
@@ -135,10 +138,12 @@ forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\
   'UI Gallery must remain a focused static gallery without Pi Kapp, duplicate detail variants, or editorial metadata blocks.');
 forbid(html, /A place for screen studies|historical landing-page concept|returns to that visual character|read-only operations dashboard|work continuity and architecture|generalizing protected infrastructure/i,
   'UI Gallery copy must stay plainspoken and must not regress to generated case-study language.');
-forbid(html, /revisited|refinement|returns to/i,
-  'UI Gallery copy must not narrate revision history when the screens can carry it.');
+forbid(html, /revisited|returns to/i,
+  'UI Gallery copy must not use generic revision narration beyond the exact Ekos provenance sentence.');
 forbid(html, /<iframe|<form|<input|<video|data-dashboard|sessionStorage|password-gate/i,
   'UI Gallery must remain a public static-study route without embedded applications, forms, media players, or private-route logic.');
+// Direct re-review confirmed the current six-board Magi edit remains sufficient;
+// Inspector & Metrics repeats overview evidence and retains a large empty canvas.
 forbid(html, /Inspector and metrics|sample dates|last checkpoint/i,
   'UI Gallery must omit the visually redundant Inspector board and stale internal review language.');
 forbid(html, /static and sanitized|sanitized dark|sanitized read-only|private dashboard experiment/i,

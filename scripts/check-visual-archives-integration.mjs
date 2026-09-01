@@ -57,7 +57,7 @@ const pages = {
     bodyClass: 'visual-archive-page art-archive-v2',
     marker: 'data-archive="art-studio-wall"',
     keepExtendedArchive: false,
-    headings: ['An open studio wall.', 'Characters and worlds', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work'],
+    headings: ['An open studio wall.', 'Characters and worlds', 'Daysigns', '56th Supreme Chapter Chicago', 'Suit of Diamonds', 'Traditional work'],
     selectedAssets: [
       'images/art-archive-v2/old-one.webp',
       'images/art-archive-v2/coffee.webp',
@@ -211,8 +211,8 @@ expect(primaryHtml(art).includes('Digital and traditional work spanning characte
   'artillustration.html: use Victor’s approved Art opener verbatim.');
 expect(!primaryHtml(art).includes('I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.'),
   'artillustration.html: remove the superseded Art opener.');
-expect((art.match(/<img\b/gi) ?? []).length === 47,
-  `artillustration.html: preserve the 47-image production baseline; found ${(art.match(/<img\b/gi) ?? []).length}.`);
+expect((art.match(/<img\b/gi) ?? []).length === 57,
+  `artillustration.html: preserve the 47-image baseline plus 10 approved Daysigns; found ${(art.match(/<img\b/gi) ?? []).length}.`);
 expect(!/<figcaption\b/i.test(primaryHtml(art)),
   'artillustration.html: artwork-only primary viewing should not show individual labels.');
 for (const restoredAsset of [

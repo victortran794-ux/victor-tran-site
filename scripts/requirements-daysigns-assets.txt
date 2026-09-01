@@ -1,0 +1,6 @@
+Pillow==12.3.0
+
+# Rebuild command:
+# uv run --isolated --with-requirements scripts/requirements-daysigns-assets.txt \
+#   scripts/build-daysigns-gallery-assets.py \
+#   --source <verified-daysigns-preview-directory>

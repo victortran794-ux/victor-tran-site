@@ -99,7 +99,7 @@ The complete nine-issue archive remains accessible.
 
 Complete archive
 
-Read all nine issues from Victor's five-year run, then continue to the magazine's latest releases.
+Read all nine issues produced across five years, then continue to the magazine's latest releases.
 
 ## Images
 
