@@ -4731,6 +4731,8 @@ html[data-theme="dark"] .spotify-frame {
   .sal-vico2-cover-wall { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   .sal-vico2-evidence > div + div { border-left: 0; border-top: 1px solid var(--border); }
 }
+/* SAL VICO2: END */
+
 /* ══════════════════════════════════════════════
    ENGRAVED DESIGN DNA HERO
    ══════════════════════════════════════════════ */
@@ -5407,5 +5409,3 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-bigtype--tran { color: #f
     will-change: auto;
   }
 }
-
-/* SAL VICO2: END */
