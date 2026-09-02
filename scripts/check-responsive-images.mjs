@@ -180,10 +180,11 @@ for (const token of [
   'patterns-hero-640.webp 640w', 'patterns-hero-1200.webp 1200w',
   'pci-handbook-1-cover-640.webp 640w', 'pci-handbook-1-cover-1200.webp 1200w',
   'thumb-sal-540.webp 540w',
-  'dna-preview-640.webp 640w', 'dna-preview-1200.webp 1200w',
 ]) {
   expect(homepage.includes(token), `Homepage must include responsive source ${token}.`);
 }
+expect(!homepage.includes('dna-preview'),
+  'Homepage must not restore retired Design DNA preview media.');
 expect(homepage.includes('sizes="(max-width: 720px) 100vw, 50vw"'), 'Homepage project cards must declare responsive display sizes.');
 
 const manifest = JSON.parse(read('data/projects.json'));
