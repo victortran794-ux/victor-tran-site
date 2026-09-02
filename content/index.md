@@ -5,14 +5,14 @@ Regenerate with: node scripts/html-to-md.mjs
 -->
 
 ---
-title: "I design cool things with sincerity."
+title: "VictorTran"
 source: "index.html"
 url: "/"
 category: "Portfolio"
 description: "Victor Tran. Visual designer at IBM. I design cool things with sincerity."
 ---
 
-# I design cool things with sincerity.
+# VictorTran
 
 ## Description
 
@@ -21,7 +21,6 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 ## Metadata
 
 - Category: Portfolio
-- Use: Six live stories
 
 ## Featured Projects
 
@@ -52,11 +51,23 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Body Copy
 
-Project-native systems stay distinct.
-
-Victor Tran ® · Visual Designer
+I design cool things with sincerity.
 
 Visual designer building clear, expressive systems across enterprise products, brands, and stories.
+
+Palette
+
+Active theme values · choose a color to wash the whole hero
+
+No hero tint selected
+
+Typography
+
+Spacing
+
+Shape
+
+Victor Tran ® · Visual Designer
 
 An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
@@ -80,11 +91,6 @@ Static screen studies focused on interface craft and visual refinement.
 
 ## Lists And Tags
 
-- Shared shellSitewide
-- Section labels9 pages
-- Transitions7 pages
-- Project facts6 stories
-- Editorial openersFamily-specific
 - Visual Design
 - Brand Identity
 - Art Direction
@@ -92,7 +98,6 @@ Static screen studies focused on interface craft and visual refinement.
 
 ## Images
 
-- Victor Tran, laughing: images/hero/figure20.webp
 - Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls: images/wxo-canvas/wxo-home-thumbnail.png
 - IBM Cloud Observability: images/ibm-thumb-dark.png
 - IBM Patterns: Contact Us: images/patterns-hero.webp

@@ -47,28 +47,29 @@ for (const file of activePages) {
   const html = read(file);
   expect(/<a\s+href="index\.html"\s+class="nav-logo"\s+aria-label="Victor Tran home">/.test(html),
     `${file}: navigation logo link must retain an accessible name when its visible text is hidden.`);
-  expect(/<img\s+src="images\/nav-logo\.webp"\s+alt=""/.test(html),
-    `${file}: navigation avatar must be decorative with alt="".`);
+  if (file === 'index.html') {
+    expect(/class="nav-logo-victor">Victor<\/span>\s*<span class="nav-logo-tran">Tran<\/span>/.test(html),
+      'index.html: canonical joined wordmark must remain visible inside the named home link.');
+  } else {
+    expect(/<img\s+src="images\/nav-logo\.webp"\s+alt=""/.test(html),
+      `${file}: navigation avatar must be decorative with alt="".`);
+  }
 }
 
 const homepage = read('index.html');
-expect(/id="dnaOverlay"[^>]*\sinert(?:\s|>)/.test(homepage),
-  'The closed Design DNA overlay must begin inert.');
-expect(/aria-label="Change color"/i.test(homepage),
-  'The hero color button accessible name must match its visible “Change color” text.');
-expect(!/Color shift/i.test(homepage),
-  'The hero color control must not expose the former “Color shift” label.');
+expect(/class="hero-dna-trigger"[^>]*aria-expanded="false"[^>]*aria-controls="heroDnaPanel"[^>]*aria-label="Reveal Victor Tran's Design DNA"/.test(homepage),
+  'The portrait trigger must name and control the inline Design DNA disclosure.');
+expect(/id="heroDnaPanel"[^>]*hidden/.test(homepage),
+  'The inline Design DNA panel must begin hidden.');
+expect(!/id="dnaOverlay"|aria-modal="true"|aria-label="Change color"|Color shift/i.test(homepage),
+  'Retired modal and independent hero color-control semantics must remain absent.');
 
 const js = read('js/main.js');
-expect(js.includes('overlay.inert = false'), 'DNA open behavior must remove inert.');
-expect(js.includes('overlay.inert = true'), 'DNA close behavior must restore inert.');
-expect(js.includes("e.key === 'Tab'"), 'DNA overlay must trap Tab focus while open.');
-expect(js.includes("[contenteditable=\"true\"]"),
-  'DNA focus discovery must include the contenteditable playground.');
-expect(js.includes('!overlay.contains(document.activeElement)'),
-  'DNA Tab handling must recover focus when the active element is outside the open dialog.');
-expect(js.includes("e.shiftKey ? last : first"),
-  'DNA outside-focus recovery must respect forward and reverse Tab direction.');
+expect(js.includes('function setDnaExpanded('), 'DNA open and close behavior must share one state setter.');
+expect(js.includes("event.key === 'Escape'") && js.includes('restoreFocus: true'),
+  'Escape and the close control must restore focus to the portrait trigger.');
+expect(js.includes('panel.hidden = false') && js.includes('panel.hidden = true'),
+  'Inline DNA behavior must expose and hide the controlled panel.');
 
 const preflight = read('scripts/preflight.sh');
 expect(preflight.includes('run_required "Accessibility quick-win regression check" node scripts/check-accessibility-quick-wins.mjs'),

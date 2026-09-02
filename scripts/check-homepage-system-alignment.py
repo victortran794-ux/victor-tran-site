@@ -51,91 +51,50 @@ manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
 projects = manifest.get("projects", [])
 by_slug = {project.get("slug"): project for project in projects}
 
-# Preserve the signature hero and all existing authored content.
+# Preserve the approved Engraved Design DNA hero and authored content.
 for token in (
-    'class="hero"', 'class="hero-stage"', 'class="hero-typeblock"',
-    'class="hero-portraits"', 'class="hero-portrait is-active"',
-    'class="hero-portrait-lens"', 'class="hero-meta"',
-    'class="hero-services"', 'class="hero-cycle"',
-    'aria-label="Change color"',
+    'class="hero"', 'class="hero-identity"', 'class="hero-typeblock"',
+    'class="hero-intro-row"', 'class="hero-dna-trigger"',
+    'class="hero-dna-panel"', 'class="hero-meta"', 'class="hero-services"',
 ):
-    need(index.count(token) == 1, f"signature hero token must remain exactly once: {token}")
+    need(index.count(token) == 1, f"Engraved DNA hero token must remain exactly once: {token}")
 for authored_copy in (
     'I design cool things with sincerity.',
     'Visual designer building clear, expressive systems across enterprise products, brands, and stories.',
 ):
     need(authored_copy in index, f"signature hero copy must remain: {authored_copy}")
 
-need(index.count('images/hero/figure20.webp') >= 2, "portrait image and mask must remain figure20.webp")
-need(index.count('images/hero/figure20-lens.webp') == 1, "hero lens mask must remain present")
-need('class="hero-pointer-wash"' in index,
-     "the Home hero needs the approved decorative pointer wash layer")
-need(".hero-pointer-wash" in css and "radial-gradient" in css and
-     "@media (min-width: 761px)" in css,
-     "the pointer wash must stay feathered and limited to desktop viewports")
-need("hero.querySelector('.hero-pointer-wash')" in js and
-     "hero.addEventListener('pointermove'" in js and
-     "event.pointerType !== 'mouse'" in js and
-     "requestAnimationFrame(updatePointerWash)" in js,
-     "the pointer wash must use a mouse-only, hero-scoped rAF update path")
-need(index.count('class="hero-lens-portal dna-trigger') == 2,
-     "each portrait lens must own a Design DNA trigger")
-need(index.count('hero-lens-portal--left') == 1 and index.count('hero-lens-portal--right') == 1,
-     "the left and right portrait lenses need distinct trigger geometry")
-need('aria-label="Open Design DNA through the left portrait lens"' in index and
-     'aria-label="Open Design DNA through the right portrait lens"' in index and
-     index.count('aria-controls="dnaOverlay"') >= 2 and index.count('aria-haspopup="dialog"') >= 2,
-     "both lens portals need accessible dialog relationships")
-need('aria-describedby="heroLensTooltip"' not in index and 'hero-lens-tooltip' not in index and
-     'See the design DNA' not in index,
-     "the hidden lens interaction must not render a tooltip or visible button label")
-need('data-lens="dna"' not in index and 'dna-trigger-label' not in index,
-     "the homepage viewing-mode switcher must contain only Light and Dark")
+need(index.count('images/hero/figure20.webp') >= 2 and
+     index.count('images/hero/figure19.webp') >= 2,
+     "Light and Dark must each retain one authentic theme portrait plus preload")
+need('data-theme-portrait="light"' in index and 'data-theme-portrait="dark"' in index,
+     "theme portraits must remain explicitly mapped")
+need('aria-expanded="false"' in index and 'aria-controls="heroDnaPanel"' in index and
+     'id="heroDnaPanel"' in index and 'data-dna-close' in index,
+     "the inline Design DNA disclosure must retain accessible open and close relationships")
+need('aria-modal="true"' not in index and 'id="dnaOverlay"' not in index,
+     "the inline Design DNA disclosure must not regress to modal semantics")
+need('Shared structure' not in index,
+     "the removed Shared structure group must stay absent")
+need('class="hero-cycle"' not in index and 'data-color=' not in index,
+     "the retired independent hero color cycle must stay absent")
+need('hero-pointer-wash' not in index and
+     not re.search(r"\.home-page--engraved-dna\s+\.hero-(?:pointer|cursor)-wash", css),
+     "the approved Engraved DNA hero must not reintroduce a cursor glow")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
 need(index.count('class="featured-heading"') == 1 and "Other cool things to check out" in index,
-     "Route 02 needs one compact archive heading in Victor’s approved voice")
-
-# Hero ambient cycle: known state, one render path, restrained timing, honest manual override.
-need("let i = 0" in js, "hero must begin from the known Pink state")
-need("12000" in js and "setInterval" in js and "clearInterval" in js,
-     "hero must use a controllable twelve-second automatic interval")
-need("manualPause" in js and re.search(r"manualPause\s*=\s*true", js),
-     "manual color selection must pause ambient cycling for the visit")
+     "the homepage needs one approved archive heading")
+need("localStorage.getItem('lens') || 'light'" in js,
+     "first visit must default to Light while preserving an explicitly saved lens")
 need("visibilitychange" in js and "document.hidden" in js,
-     "hero ambient cycling must pause while the document is hidden")
-need("prefers-reduced-motion: reduce" in js and
-     ("addEventListener('change'" in js or "addEventListener?.('change'" in js),
-     "hero must respond to reduced-motion changes at runtime")
-need("data-hero-status" in index and 'aria-live="polite"' in index,
-     "manual hero color changes need a polite live-region announcement")
-need("hero-cycle-label" not in index and "hero-cycle-label" not in css and "hero-cycle-label" not in js,
-     "hero color control must not render or update a visible text label")
-need("heroStatus" in js and ".hero-cycle .control-tooltip" in css and
-     '<span class="control-tooltip" aria-hidden="true">Change color</span>' in index,
-     "hero color control must preserve its live announcement and non-duplicative tooltip")
-need("Change color" in index and "Color shift" not in index and "Color shift" not in js,
-     "hero color control must use the neutral action label without a visible color name")
-need("state.name" not in js,
-     "hero color rendering must not expose palette names")
+     "hero ambient movement must pause while the document is hidden")
+need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero-ambient-blob[\s\S]*?animation:\s*none", css),
+     "reduced-motion CSS must freeze the ambient field")
 need("Vic Tran" not in index and "Victor Tran" in index,
      "homepage must use Victor Tran for the full name, never Vic Tran")
-need("1800ms" in css, "hero color fields need the approved 1.8-second crossfade")
 need("min-width: 44px" in css and "min-height: 44px" in css,
-     "manual hero color control must keep a 44px pointer target")
-need(re.search(r"\.hero-lens-portal\s*\{[^}]*min-width:\s*44px[^}]*min-height:\s*44px", css, re.S),
-     "the lens portal must keep a 44 by 44 minimum target")
-need(".hero-lens-portal:focus-visible" in css and
-     ".hero-lens-portal:hover::before" in css and
-     ".hero-lens-portal:focus-visible::before" in css and
-     re.search(r"\.hero-lens-portal::before\s*\{[^}]*inset:\s*-2px[^}]*border:\s*1px\s+solid\s+color-mix\([^}]*opacity:\s*0\.78", css, re.S),
-     "each lens portal needs a restrained two-pixel-offset hover and keyboard-focus outline")
-need('.hero-lens-tooltip' not in css,
-     "the retired lens tooltip must not leave styling behind")
-need("querySelectorAll('.dna-trigger')" in js and "triggers.forEach" in js,
-     "the Design DNA overlay must activate from either lens trigger")
-need(re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero[\s\S]*?transition:\s*none", css),
-     "reduced-motion CSS must remove hero color transitions")
+     "homepage controls must retain 44px pointer targets")
 
 # Canonical project facts and protection flags.
 expected = {
@@ -219,26 +178,32 @@ if ability_orange and ability_blue:
 need("featured-item--surface-ability" in css,
      "Ability identity styling must remain scoped to its homepage card")
 
-# Hero normal-text roles must pass in every ambient palette state.
-hero_block = re.search(r"\.hero\s*\{([^}]*)\}", css, re.S)
-hero_meta = None
-if hero_block:
-    token = re.search(r"--text-2\s*:\s*(#[0-9a-fA-F]{6})", hero_block.group(1))
-    hero_meta = token.group(1) if token else None
-need(hero_meta is not None, "hero needs an explicit normal-text color token")
-if hero_meta:
-    hero_state_backgrounds = {
-        "Pink": "#401e2d",
-        "Blue": "#1a2a3c",
-        "Orange": "#332217",
-        "Purple": "#261a3b",
-    }
-    for state, background in hero_state_backgrounds.items():
-        need(contrast_ratio(hero_meta, background) >= 4.5,
-             f"hero title/subtitle text must meet WCAG AA in {state}")
-subtitle_block = re.search(r"\.hero-subtitle\s*\{([^}]*)\}", css, re.S)
-need(not subtitle_block or not re.search(r"opacity\s*:\s*0?\.[0-9]+", subtitle_block.group(1)),
-     "hero subtitle must not reduce its contrast with element opacity")
+# Hero normal-text roles must pass in both supported themes.
+hero_light_block = re.search(r"\.home-page--engraved-dna\s*\{([^}]*)\}", css, re.S)
+hero_dark_block = re.search(r"html\[data-theme=\"dark\"\]\s+\.home-page--engraved-dna\s*\{([^}]*)\}", css, re.S)
+need(hero_light_block is not None and hero_dark_block is not None,
+     "Engraved DNA hero needs explicit Light and Dark theme token blocks")
+if hero_light_block:
+    light_bg = css_token(hero_light_block.group(1), "--hero-bg")
+    light_text = css_token(hero_light_block.group(1), "--hero-text")
+    light_muted = css_token(hero_light_block.group(1), "--hero-muted")
+    need(all((light_bg, light_text, light_muted)),
+         "Light hero must expose background, text, and muted text tokens")
+    if light_bg and light_text and light_muted:
+        need(contrast_ratio(light_text, light_bg) >= 4.5,
+             "Light hero primary text must meet WCAG AA")
+        need(contrast_ratio(light_muted, light_bg) >= 4.5,
+             "Light hero muted text must meet WCAG AA")
+if hero_dark_block:
+    dark_bg = css_token(hero_dark_block.group(1), "--hero-bg")
+    dark_text = css_token(hero_dark_block.group(1), "--hero-text")
+    need(dark_bg is not None and dark_text is not None,
+         "Dark hero must expose background and text tokens")
+    if dark_bg and dark_text:
+        need(contrast_ratio(dark_text, dark_bg) >= 4.5,
+             "Dark hero primary text must meet WCAG AA")
+    need("--hero-muted: rgba(255, 255, 255, 0.62)" in hero_dark_block.group(1),
+         "Dark hero muted text must retain its contrast-safe white treatment")
 
 homepage_orange = css_token(css, "--orange")
 if homepage_orange:
@@ -257,5 +222,5 @@ if failures:
     sys.exit(1)
 
 print("HOMEPAGE SYSTEM ALIGNMENT CONTRACT: PASS")
-print("- signature hero, project facts, generated hierarchy, and protected boundaries pass")
-print("- ambient hero motion, reduced motion, manual pause, and theme-safe identity roles pass")
+print("- Engraved DNA hero, project facts, generated hierarchy, and protected boundaries pass")
+print("- Light-first theme, reduced motion, no-glow, and theme-safe identity roles pass")

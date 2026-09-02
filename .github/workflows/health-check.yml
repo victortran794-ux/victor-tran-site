@@ -95,6 +95,11 @@ jobs:
       - name: Design DNA and live-component system contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: npm run check:design-dna-system
+      - name: Engraved Design DNA hero contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
+        run: |
+          npm run check:engraved-dna-hero
+          npm run check:ambient-field-selection
       - name: Theme continuity and global-control contracts
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: |
@@ -149,13 +154,29 @@ jobs:
           done
           curl --fail --silent http://127.0.0.1:8765/pikappapp.html >/dev/null
           npm run check:pikapp-page-browser
-      - name: Home lens portal contract
+      - name: Engraved Design DNA hero browser contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: |
           npm run test:site-shell
           npm run check:site-shell
           python3 scripts/check-homepage-system-alignment.py
-          npm run check:home-lens-portal-browser
+          HERO_PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')
+          python3 -m http.server "$HERO_PORT" --bind 127.0.0.1 >/tmp/engraved-dna-hero-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          HERO_SERVER_READY=0
+          for attempt in {1..20}; do
+            if curl --fail --silent "http://127.0.0.1:${HERO_PORT}/index.html" >/dev/null; then
+              HERO_SERVER_READY=1
+              break
+            fi
+            sleep 0.25
+          done
+          if [ "$HERO_SERVER_READY" -ne 1 ]; then
+            cat /tmp/engraved-dna-hero-server.log
+            exit 1
+          fi
+          SITE_URL="http://127.0.0.1:${HERO_PORT}" npm run check:engraved-dna-hero-browser
       - name: Production host regression check
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.deployable == 'true'
         run: node scripts/check-production-host.mjs

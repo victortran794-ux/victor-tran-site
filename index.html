@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <!-- favicon + social -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
@@ -29,9 +30,11 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
   <link rel="preload" as="image" href="images/hero/figure20.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero/figure19.webp" type="image/webp">
   <link rel="stylesheet" href="css/style.css">
+
 </head>
-<body class="home-page">
+<body class="home-page home-page--engraved-dna">
 
   <!-- Custom cursor -->
   <div class="cursor-dot"  aria-hidden="true"></div>
@@ -43,8 +46,8 @@
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
-        <img src="images/nav-logo.webp" alt="" width="34" height="34">
-        <span class="nav-logo-name">Victor Tran</span>
+        <span class="nav-logo-victor">Victor</span>
+        <span class="nav-logo-tran">Tran</span>
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown is-active">
@@ -90,156 +93,108 @@
   </nav>
   <!-- generated:site-shell-header:end -->
 
-  <!-- Design DNA overlay (home page only) -->
-  <div class="dna-overlay" id="dnaOverlay" role="dialog" aria-modal="true" aria-labelledby="dnaTitle" aria-describedby="dnaIntro" aria-hidden="true" inert>
-    <div class="dna-overlay-scrim" data-dna-close></div>
-    <div class="dna-panel" role="document">
-      <header class="dna-panel-head">
-        <div>
-          <h2 class="dna-title" id="dnaTitle">Design <em>DNA</em></h2>
-          <p class="dna-intro" id="dnaIntro">The live system behind this portfolio.</p>
-        </div>
-        <button class="dna-close" data-dna-close aria-label="Close design DNA overlay">
-          <span aria-hidden="true">×</span>
-        </button>
-      </header>
-
-      <div class="dna-sheet">
-        <section class="dna-section dna-section--palette" aria-labelledby="dnaPaletteTitle">
-          <header class="dna-section-head">
-            <div>
-              <h3 id="dnaPaletteTitle">Palette</h3>
-              <p>Active theme values.</p>
-            </div>
-          </header>
-          <div class="dna-palette-field">
-            <div class="dna-swatches" id="dnaSwatches"><!-- injected --></div>
-            <div class="dna-color-preview" id="dnaColorPreview">
-              <img src="images/dna-preview.jpg"
-                srcset="images/responsive/dna-preview-640.webp 640w, images/responsive/dna-preview-1200.webp 1200w"
-                sizes="(max-width: 720px) 90vw, 560px"
-                alt="" class="dna-color-preview-img" width="1600" height="900">
-              <div class="dna-color-preview-tint" aria-hidden="true"></div>
-              <span class="dna-color-preview-label" aria-live="polite">Focus or hover a swatch</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="dna-section dna-section--type" aria-labelledby="dnaTypeTitle">
-          <header class="dna-section-head">
-            <div>
-              <h3 id="dnaTypeTitle">Typography</h3>
-            </div>
-          </header>
-          <ul class="dna-fonts">
-            <li class="dna-font" data-family="'DM Serif Display', serif" data-jitter="true">
-              <span class="dna-font-meta">DM Serif Display</span>
-              <span class="dna-font-sample" style="font-family:'DM Serif Display',serif;">Aa</span>
-            </li>
-            <li class="dna-font" data-family="'Barlow', sans-serif">
-              <span class="dna-font-meta">Barlow</span>
-              <span class="dna-font-sample" style="font-family:'Barlow',sans-serif;font-weight:600;">Aa</span>
-            </li>
-            <li class="dna-font" data-family="'Source Code Pro', monospace">
-              <span class="dna-font-meta">Source Code Pro</span>
-              <span class="dna-font-sample" style="font-family:'Source Code Pro',monospace;">Aa</span>
-            </li>
-          </ul>
-          <div class="dna-playground">
-            <div class="dna-playground-head">
-              <p>Edit the line, then choose a voice.</p>
-            </div>
-            <p class="dna-playground-text" id="dnaPlayText" contenteditable="true" spellcheck="false" aria-label="Editable typography sample" style="font-family:'DM Serif Display',serif;">I design cool things with sincerity.</p>
-            <div class="dna-playground-controls" aria-label="Typography sample controls">
-              <button class="dna-chip is-active" data-font="'DM Serif Display', serif">Serif</button>
-              <button class="dna-chip" data-font="'Barlow', sans-serif">Sans</button>
-              <button class="dna-chip" data-font="'Source Code Pro', monospace">Mono</button>
-              <button class="dna-chip" data-italic>Italic</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="dna-section dna-section--rhythm" aria-labelledby="dnaRhythmTitle">
-          <header class="dna-section-head">
-            <div>
-              <h3 id="dnaRhythmTitle">Spacing &amp; shape</h3>
-            </div>
-          </header>
-          <div class="dna-rhythm-field">
-            <div>
-              <p class="dna-field-label">Spacing</p>
-              <ol class="dna-scale" id="dnaScale"><!-- injected --></ol>
-              <dl class="dna-semantic-spacing" id="dnaSemanticSpacing"><!-- injected --></dl>
-            </div>
-            <div>
-              <p class="dna-field-label">Radius</p>
-              <div class="dna-radii" id="dnaRadii"><!-- injected --></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="dna-section dna-section--components" aria-labelledby="dnaComponentsTitle">
-          <header class="dna-section-head">
-            <div>
-              <h3 id="dnaComponentsTitle">Shared structure</h3>
-            </div>
-          </header>
-          <div class="dna-component-field">
-            <div class="dna-component-specimen">
-              <p class="section-label label-default">Project facts</p>
-              <dl class="case-study-meta dna-component-meta">
-                <div class="case-study-meta-item"><dt>Use</dt><dd>Six live stories</dd></div>
-              </dl>
-            </div>
-            <ul class="dna-component-list">
-              <li><span>Shared shell</span><strong>Sitewide</strong></li>
-              <li><span>Section labels</span><strong>9 pages</strong></li>
-              <li><span>Transitions</span><strong>7 pages</strong></li>
-              <li><span>Project facts</span><strong>6 stories</strong></li>
-              <li><span>Editorial openers</span><strong>Family-specific</strong></li>
-            </ul>
-          </div>
-          <p class="dna-component-note">Project-native systems stay distinct.</p>
-        </section>
-      </div>
-    </div>
-  </div>
-
   <main class="page-content" id="main-content" tabindex="-1">
 
     <!-- Hero -->
-    <section class="hero" data-color="0">
-      <div class="hero-stage" aria-hidden="true">
-        <span class="hero-pointer-wash"></span>
-        <div class="hero-typeblock">
-          <span class="hero-bigtype hero-bigtype--victor">Victor</span>
-          <span class="hero-bigtype hero-bigtype--tran">TRAN</span>
-        </div>
+    <section class="hero">
+      <div class="hero-ambient" aria-hidden="true">
+        <span class="hero-ambient-blob hero-ambient-blob--a"></span>
+        <span class="hero-ambient-blob hero-ambient-blob--b"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--a"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--b hero-ambient-orb--node"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--c"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--d hero-ambient-orb--node"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--e"></span>
+        <span class="hero-ambient-orb hero-ambient-orb--f hero-ambient-orb--node"></span>
+        <span class="hero-ambient-companion hero-ambient-companion--a"></span>
+        <span class="hero-ambient-companion hero-ambient-companion--c"></span>
+        <span class="hero-ambient-companion hero-ambient-companion--e"></span>
+      </div>
 
-        <div class="hero-portraits">
-          <figure class="hero-portrait is-active" style="--anchor: right bottom; --portrait-mask: url(/images/hero/figure20.webp);">
-            <img class="hero-portrait-cutout" src="images/hero/figure20.webp" alt="Victor Tran, laughing" width="1200" height="1800" fetchpriority="high" decoding="async">
-            <span class="hero-portrait-lens" style="--lens-mask: url(/images/hero/figure20-lens.webp);"></span>
-          </figure>
+      <div class="hero-identity">
+        <div class="hero-typeblock">
+          <h1><span class="hero-bigtype hero-bigtype--victor">Victor</span><span class="hero-bigtype hero-bigtype--tran">Tran</span></h1>
+          <div class="hero-intro-row">
+            <button class="hero-dna-trigger" type="button" aria-expanded="false" aria-controls="heroDnaPanel" aria-label="Reveal Victor Tran's Design DNA">
+              <span class="hero-portrait-frame" aria-hidden="true">
+                <span class="hero-portrait" data-theme-portrait="light">
+                  <img class="hero-portrait-cutout" src="images/hero/figure20.webp" alt="" width="1200" height="1800" fetchpriority="high" decoding="async">
+                </span>
+                <span class="hero-portrait" data-theme-portrait="dark">
+                  <img class="hero-portrait-cutout" src="images/hero/figure19.webp" alt="" width="1226" height="1800" decoding="async">
+                </span>
+              </span>
+            </button>
+            <div class="hero-copy">
+              <p class="hero-title">I design cool things with sincerity.</p>
+              <p class="hero-subtitle">Visual designer building clear, expressive systems across enterprise products, brands, and stories.</p>
+              <a href="#work" class="hero-cta">See the work <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="hero-lens-hitarea">
-        <button class="hero-lens-portal dna-trigger hero-lens-portal--left" type="button"
-          aria-label="Open Design DNA through the left portrait lens"
-          aria-haspopup="dialog"
-          aria-controls="dnaOverlay"></button>
-        <button class="hero-lens-portal dna-trigger hero-lens-portal--right" type="button"
-          aria-label="Open Design DNA through the right portrait lens"
-          aria-haspopup="dialog"
-          aria-controls="dnaOverlay"></button>
+      <span class="hero-dna-tint" aria-hidden="true"></span>
+
+      <div class="hero-dna-panel" id="heroDnaPanel" hidden>
+        <div class="hero-dna-group hero-dna-palette">
+          <p class="hero-dna-label">Palette</p>
+          <p class="hero-dna-note">Active theme values · choose a color to wash the whole hero</p>
+          <div class="hero-dna-swatches" aria-label="Portfolio palette and hero tint controls">
+            <button class="hero-dna-swatch" type="button" data-dna-token="--blue"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Blue</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--pink"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Pink</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--purple"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Purple</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--orange"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Orange</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--bg"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Background</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--bg-2"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Background 2</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--text"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Text</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--text-2"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Text 2</span><span class="hero-dna-swatch-value"></span></button>
+            <button class="hero-dna-swatch" type="button" data-dna-token="--border"><span class="hero-dna-swatch-dot"></span><span class="hero-dna-swatch-name">Border</span><span class="hero-dna-swatch-value"></span></button>
+          </div>
+          <p class="hero-dna-tint-status" aria-live="polite">No hero tint selected</p>
+        </div>
+
+        <div class="hero-dna-group hero-dna-type">
+          <p class="hero-dna-label">Typography</p>
+          <div class="hero-dna-typefaces" aria-label="Portfolio typefaces">
+            <div class="hero-dna-type-row"><strong class="hero-dna-type-sample hero-dna-serif">Aa</strong><span><b>DM Serif Display</b><small>Display · editorial</small></span></div>
+            <div class="hero-dna-type-row"><strong class="hero-dna-type-sample hero-dna-sans">Aa</strong><span><b>Barlow</b><small>Body · interface</small></span></div>
+            <div class="hero-dna-type-row"><strong class="hero-dna-type-sample hero-dna-mono">Aa</strong><span><b>Source Code Pro</b><small>Labels · values</small></span></div>
+          </div>
+          <div class="hero-dna-type-playground">
+            <p class="hero-dna-play-text" contenteditable="true" spellcheck="false" aria-label="Editable typography sample">I design cool things with sincerity.</p>
+            <div class="hero-dna-play-controls" aria-label="Typography sample controls">
+              <button type="button" class="hero-dna-chip is-active" data-dna-font="'DM Serif Display', serif">Serif</button>
+              <button type="button" class="hero-dna-chip" data-dna-font="'Barlow', sans-serif">Sans</button>
+              <button type="button" class="hero-dna-chip" data-dna-font="'Source Code Pro', monospace">Mono</button>
+              <button type="button" class="hero-dna-chip" data-dna-italic>Italic</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-dna-group hero-dna-spacing">
+          <p class="hero-dna-label">Spacing</p>
+          <div class="hero-dna-space-row"><small class="hero-dna-space-token">--space-12</small><span style="--space-width:96px"></span><small class="hero-dna-space-value">48px</small></div>
+          <div class="hero-dna-space-row"><small class="hero-dna-space-token">--space-8</small><span style="--space-width:64px"></span><small class="hero-dna-space-value">32px</small></div>
+          <div class="hero-dna-space-row"><small class="hero-dna-space-token">--space-6</small><span style="--space-width:48px"></span><small class="hero-dna-space-value">24px</small></div>
+          <div class="hero-dna-space-row"><small class="hero-dna-space-token">--space-4</small><span style="--space-width:32px"></span><small class="hero-dna-space-value">16px</small></div>
+        </div>
+
+        <div class="hero-dna-group hero-dna-shape">
+          <p class="hero-dna-label">Shape</p>
+          <div class="hero-dna-radii" aria-label="Corner radius scale">
+            <span style="--dna-radius:0"><small class="hero-dna-radius-token">Square</small><small class="hero-dna-radius-value">0</small></span>
+            <span style="--dna-radius:6px"><small class="hero-dna-radius-token">Small</small><small class="hero-dna-radius-value">6px</small></span>
+            <span style="--dna-radius:12px"><small class="hero-dna-radius-token">Medium</small><small class="hero-dna-radius-value">12px</small></span>
+            <span style="--dna-radius:999px"><small class="hero-dna-radius-token">Pill</small><small class="hero-dna-radius-value">999px</small></span>
+          </div>
+        </div>
+
+        <button class="hero-dna-close" type="button" data-dna-close>Close panel</button>
       </div>
 
       <div class="hero-meta">
         <p class="hero-eyebrow">Victor Tran <span aria-hidden="true">®</span> · Visual Designer</p>
-        <h1 class="hero-title">I design cool things with sincerity.</h1>
-        <p class="hero-subtitle">Visual designer building clear, expressive systems across enterprise products, brands, and stories.</p>
-        <a href="#work" class="hero-cta">See the work <span aria-hidden="true">→</span></a>
       </div>
 
       <ul class="hero-services" aria-label="Practice">
@@ -249,15 +204,6 @@
         <li>Illustration</li>
       </ul>
 
-      <button class="hero-cycle" type="button" aria-label="Change color">
-        <span class="hero-cycle-dots" aria-hidden="true">
-          <span class="hero-cycle-dot is-active" style="--dot-color: var(--pink);"></span>
-          <span class="hero-cycle-dot" style="--dot-color: var(--blue);"></span>
-          <span class="hero-cycle-dot" style="--dot-color: var(--orange);"></span>
-          <span class="hero-cycle-dot" style="--dot-color: var(--purple);"></span>
-        </span>
-        <span class="control-tooltip" aria-hidden="true">Change color</span>
-      </button>
       <span class="sr-only" aria-live="polite" data-hero-status></span>
     </section>
 
@@ -462,6 +408,7 @@
   </footer>
   <!-- generated:site-shell-footer:end -->
 
+  <script src="js/ambient-field-config.js"></script>
   <script src="js/main.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script>

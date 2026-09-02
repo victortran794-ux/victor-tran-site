@@ -24,6 +24,8 @@ const sharedShellContract = read('scripts/check-shared-shell.mjs');
 const a11yContract = read('scripts/check-accessibility-quick-wins.mjs');
 const assetBuilder = read('scripts/build-ui-gallery-assets.py');
 const assetRequirements = read('scripts/requirements-ui-gallery-assets.txt');
+const publicExport = read('content/uigallery.md');
+const siteIndex = read('content/site-index.json');
 
 need(Boolean(html), 'uigallery.html must exist.');
 need(Boolean(css), 'css/ui-gallery.css must exist.');
@@ -52,20 +54,16 @@ for (const token of [
   'tabindex="0"',
   '<section class="ui-study ui-study--magi" aria-labelledby="magi-study-title">',
   '<h2 id="magi-study-title">Magi interface studies</h2>',
-  'A dark interface system explored through dashboards, architecture, components, and interaction patterns.',
+  'A dark interface system explored through dashboards, components, and interaction patterns.',
   'Interface details use fictional sample data and are shown as design examples rather than production data.',
   'data-ui-study-view="magi-overview"',
   '<strong>Dashboard overview</strong>',
   'A work-continuity dashboard organized around status, attention, and history.',
-  'data-ui-study-view="magi-architecture"',
-  '<strong>System architecture</strong>',
-  'A topology study connecting coordinators, workers, domains, and shared state.',
+
   'data-ui-study-view="magi-overlays"',
   '<strong>Overlay patterns</strong>',
   'Command-palette and confirmation-dialog studies for consequential controls.',
-  'data-ui-study-view="magi-color-type"',
-  '<strong>Color and type</strong>',
-  'Surface, signal, status, and type specimens for the visual system.',
+
   'data-ui-study-view="magi-components"',
   '<strong>Component studies</strong>',
   'Buttons, fields, status badges, task states, and activity treatments.',
@@ -82,23 +80,22 @@ for (const token of [
   'body.ui-gallery-page .cursor-ring{border-color:var(--ui-accent);box-shadow:0 0 0 1px rgba(16,24,32,.9);opacity:.8}',
   'body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.5}',
   'background: #07100f;',
-  'grid-column: span 7;',
-  'grid-column: span 5;',
+  '.ui-study-grid--magi .ui-study-view--overlays {',
+  '.ui-study-grid--magi .ui-study-view--components {',
+  'grid-column: span 6;',
   'grid-column: 1 / -1;',
 ]) needText(css, token, `UI Gallery dark-polish CSS is missing: ${token}`);
 
 forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view > img\{[^}]*box-shadow:0 0 0 1px rgba\(242,242,233,\.24\)/,
   'Magi screen edge must remain dark-theme-only.');
 
-need(count(html, /data-ui-study-view=/g) === 8, 'UI Gallery must contain two complete Ekos frames and six curated Magi study views.');
-need(count(html, /<img\b[^>]*data-ui-study-image/g) === 8, 'Each UI Gallery view must use an authored static image.');
-need(count(html, /<figcaption class="ui-study-caption">/g) === 6,
-  'All six Magi studies must have concise visible captions.');
+need(count(html, /data-ui-study-view=/g) === 6, 'UI Gallery must contain two complete Ekos frames and four retained Magi study views.');
+need(count(html, /<img\b[^>]*data-ui-study-image/g) === 6, 'Each retained UI Gallery view must use an authored static image.');
+need(count(html, /<figcaption class="ui-study-caption">/g) === 4,
+  'All four retained Magi studies must have concise visible captions.');
 const magiOrder = [
   'magi-overview',
-  'magi-architecture',
   'magi-overlays',
-  'magi-color-type',
   'magi-components',
   'magi-node-states',
 ];
@@ -109,12 +106,10 @@ for (let index = 1; index < magiOrder.length; index += 1) {
   need(html.indexOf(`data-ui-study-view="${magiOrder[index - 1]}"`) < html.indexOf(`data-ui-study-view="${magiOrder[index]}"`),
     `Magi brief order must keep ${magiOrder[index - 1]} before ${magiOrder[index]}.`);
 }
-need(count(html, /loading="lazy"/g) >= 8, 'All UI Gallery study images must use deferred loading.');
+need(count(html, /loading="lazy"/g) >= 6, 'All retained UI Gallery study images must use deferred loading.');
 for (const [asset, width, height] of [
   ['magi-overview.webp', 1440, 1024],
-  ['magi-architecture.webp', 1440, 960],
   ['magi-overlays.webp', 900, 640],
-  ['magi-color-type.webp', 800, 600],
   ['magi-components.webp', 1200, 900],
   ['magi-node-states.webp', 1400, 200],
   ['ekos-desktop.webp', 1440, 3069],
@@ -134,6 +129,13 @@ for (const asset of [
 ]) need(fs.existsSync(asset), `Missing UI Gallery asset: ${asset}`);
 forbid(html, /ekos-components|Components and provenance|original proof|source comparison/i,
   'UI Gallery must not retain the obsolete Ekos component board or an original-proof comparison.');
+for (const removed of [/magi-architecture|System architecture|magi-architecture\.webp/i, /magi-color-type|Color and type|magi-color-type\.webp/i]) {
+  forbid(html, removed, 'UI Gallery must omit the two owner-rejected cropped Magi figures and captions.');
+  forbid(publicExport, removed, 'Public UI Gallery text export must omit the two removed Magi figures.');
+  forbid(siteIndex, removed, 'Public site index must omit the two removed Magi figures.');
+}
+forbid(css, /ui-study-view--(?:architecture|color-type)/,
+  'UI Gallery CSS must not retain layout roles for the two removed Magi figures.');
 forbid(html, /<section[^>]*pikapp|data-ui-study-view="pikapp|images\/ui-gallery\/(?:pikapp|ekos-details)|Project glimpse|class="ui-study-number"|ui-study-notes|ui-study-boundary/i,
   'UI Gallery must remain a focused static gallery without Pi Kapp, duplicate detail variants, or editorial metadata blocks.');
 forbid(html, /A place for screen studies|historical landing-page concept|returns to that visual character|read-only operations dashboard|work continuity and architecture|generalizing protected infrastructure/i,
@@ -286,4 +288,4 @@ if (failures.length) {
 }
 
 console.log('UI GALLERY CONTRACT PASSED');
-console.log('- complete desktop/mobile Ekos frames, six curated Magi studies, refreshed thumbnail ownership, and CI wiring pass');
+console.log('- complete desktop/mobile Ekos frames, four retained Magi studies, rejected crops removed, and CI wiring pass');

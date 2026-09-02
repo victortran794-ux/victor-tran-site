@@ -118,12 +118,14 @@ fi
 
 run_required "Home/global completion contract" npm run check:home-global-completion
 run_required "Design DNA and live-component system contract" npm run check:design-dna-system
+run_required "Engraved Design DNA hero contract" npm run check:engraved-dna-hero
+run_required "Selected ambient field baseline contract" npm run check:ambient-field-selection
 run_required "Theme Continuity proof contract" npm run check:theme-continuity-proof
 run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "UI Gallery integration contract" npm run check:ui-gallery
 run_required "Gallery followups contract" npm run check:gallery-followups
-run_required "Home lens portal browser contract" npm run check:home-lens-portal-browser
+run_required "Engraved Design DNA hero browser contract" npm run check:engraved-dna-hero-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
 

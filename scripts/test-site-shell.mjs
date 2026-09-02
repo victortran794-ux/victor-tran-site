@@ -128,7 +128,13 @@ try {
 
   const home = fs.readFileSync(path.join(tempRoot, 'index.html'), 'utf8');
   assert.doesNotMatch(home, /aria-current="page"/);
+  assert.match(home, /<span class="nav-logo-victor">Victor<\/span>\s*<span class="nav-logo-tran">Tran<\/span>/,
+    'home shell must preserve the Engraved DNA split wordmark');
+  assert.doesNotMatch(home, /images\/nav-logo\.webp/,
+    'home shell must not overwrite the Engraved DNA wordmark with the project-page logo');
   const publicPage = fs.readFileSync(path.join(tempRoot, 'public.html'), 'utf8');
+  assert.match(publicPage, /<img src="images\/nav-logo\.webp"[^>]*>\s*<span class="nav-logo-name">Victor Tran<\/span>/,
+    'non-home pages must retain the shared image-and-name logo');
   assert.match(publicPage, /href="public\.html" class="active" aria-current="page"/);
   assert.match(publicPage, /href="gallery\.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Gallery project"/);
   const about = fs.readFileSync(path.join(tempRoot, 'about.html'), 'utf8');

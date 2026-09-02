@@ -216,8 +216,7 @@ if (!prefersReducedMotion) {
   const lensBtns = document.querySelectorAll('.lens-switcher-btn');
   if (!lensBtns.length) return;
 
-  const saved = localStorage.getItem('lens') ||
-    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const saved = localStorage.getItem('lens') || 'light';
 
   function applyLens(lens) {
     if (lens === 'dark') {
@@ -315,115 +314,372 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 })();
 
 
-// ── Hero: fixed portrait + ambient color switcher ─────
-(function () {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
+// ── Hero: theme-bound ambient field ────────────────
+(function initHeroAmbientField() {
+  const hero = document.querySelector('.home-page--engraved-dna .hero');
+  const blobs = hero ? [...hero.querySelectorAll('.hero-ambient-blob')] : [];
+  const satellites = hero ? [...hero.querySelectorAll('.hero-ambient-orb')] : [];
+  const companions = hero ? [...hero.querySelectorAll('.hero-ambient-companion')] : [];
+  if (!hero || blobs.length !== 2 || satellites.length !== 6 || companions.length !== 3) return;
 
-  const dots = Array.from(hero.querySelectorAll('.hero-cycle-dot'));
-  const cycleBtn = hero.querySelector('.hero-cycle');
-  const heroStatus = hero.querySelector('[data-hero-status]');
-  const pointerWash = hero.querySelector('.hero-pointer-wash');
-  const heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const palette = [
-    { session: '--pink', accent: '--blue' },
-    { session: '--blue', accent: '--pink' },
-    { session: '--orange', accent: '--blue' },
-    { session: '--purple', accent: '--pink' },
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const centers = [
+    { x: 0.32, y: 0.42, phase: 0, speed: 0.00055, ax: 0.16, ay: 0.13 },
+    { x: 0.7, y: 0.58, phase: Math.PI, speed: 0.00043, ax: 0.14, ay: 0.17 },
   ];
+  const current = centers.map(({ x, y }) => ({ x, y }));
+  const satellitePaths = [
+    { x: 0.22, y: 0.28, phase: 0.2, speed: 0.00028, radiusX: 0.11, radiusY: 0.09, pointerPull: 0.05 },
+    { x: 0.42, y: 0.18, phase: 1.4, speed: 0.00044, radiusX: 0.14, radiusY: 0.1, pointerPull: -0.04 },
+    { x: 0.7, y: 0.34, phase: 2.6, speed: 0.00036, radiusX: 0.12, radiusY: 0.14, pointerPull: 0.06 },
+    { x: 0.78, y: 0.68, phase: 3.7, speed: 0.00032, radiusX: 0.15, radiusY: 0.11, pointerPull: -0.05 },
+    { x: 0.48, y: 0.78, phase: 4.8, speed: 0.0004, radiusX: 0.1, radiusY: 0.15, pointerPull: 0.045 },
+    { x: 0.28, y: 0.62, phase: 5.5, speed: 0.00024, radiusX: 0.16, radiusY: 0.12, pointerPull: 0.055 },
+  ];
+  const satelliteCurrent = satellitePaths.map((path) => ({
+    x: path.x + Math.sin(path.phase) * path.radiusX,
+    y: path.y + Math.cos(path.phase) * path.radiusY,
+  }));
+  const companionRanges = [14, 11, 8];
+  const companionResponse = [0.16, 0.13, 0.1];
+  const companionSatelliteIndexes = [0, 2, 4];
+  const companionCurrent = companions.map(() => ({ x: 0, y: 0 }));
+  const blobGradients = {
+    warm: 'radial-gradient(circle at 58% 42%, #ff6847 0 18%, var(--hero-blob-a) 42%, transparent 74%)',
+    cool: 'radial-gradient(circle at 42% 58%, #7928d2 0 20%, var(--hero-blob-b) 46%, #55a2f7 62%, transparent 76%)',
+    'coral-pink': 'radial-gradient(circle at 54% 44%, #ff6847 0 18%, #ea3b99 46%, transparent 76%)',
+    'pink-purple': 'radial-gradient(circle at 48% 44%, #ea3b99 0 18%, #7928d2 50%, transparent 76%)',
+    'blue-purple': 'radial-gradient(circle at 46% 42%, #55a2f7 0 18%, #7928d2 52%, transparent 76%)',
+  };
+  const blobMeta = [
+    { id: 'blob-a', size: 100, opacity: 1, blur: 44, layer: 1, gradient: 'warm', pointerPull: 42, hidden: false },
+    { id: 'blob-b', size: 72, opacity: 1, blur: 44, layer: 1, gradient: 'cool', pointerPull: -6, hidden: false },
+  ];
+  let motionScale = 1;
+  let cursorScale = 1;
+  let ambientPaused = false;
+  let pointer = null;
+  let frame = 0;
+  let previous = 0;
 
-  let i = 0;
-  let heroTimer = null;
-  let manualPause = false;
+  const render = (time) => {
+    if (document.hidden || reducedMotion.matches) {
+      frame = 0;
+      return;
+    }
+    if (time - previous >= 32) {
+      previous = time;
+      centers.forEach((orbit, index) => {
+        const idleX = orbit.x + Math.sin(time * orbit.speed * motionScale + orbit.phase) * orbit.ax * motionScale;
+        const idleY = orbit.y + Math.cos(time * orbit.speed * motionScale * 0.83 + orbit.phase) * orbit.ay * motionScale;
+        let targetX = idleX;
+        let targetY = idleY;
+        if (pointer) {
+          const pull = blobMeta[index].pointerPull / 100;
+          if (pull >= 0) {
+            const blend = Math.min(0.8, pull * cursorScale);
+            targetX = idleX * (1 - blend) + pointer.x * blend;
+            targetY = idleY * (1 - blend) + pointer.y * blend;
+          } else {
+            const dx = idleX - pointer.x;
+            const dy = idleY - pointer.y;
+            const distance = Math.max(0.08, Math.hypot(dx, dy));
+            targetX = idleX + (dx / distance) * Math.abs(pull) * cursorScale;
+            targetY = idleY + (dy / distance) * Math.abs(pull) * cursorScale;
+          }
+        }
+        current[index].x += (targetX - current[index].x) * 0.1;
+        current[index].y += (targetY - current[index].y) * 0.1;
+        blobs[index].style.setProperty('--blob-x', `${(current[index].x * 100).toFixed(2)}%`);
+        blobs[index].style.setProperty('--blob-y', `${(current[index].y * 100).toFixed(2)}%`);
+      });
+      satellitePaths.forEach((path, index) => {
+        if (satellites[index].classList.contains('hero-ambient-orb--node')) return;
+        let targetX = path.x + Math.sin(time * path.speed * motionScale + path.phase) * path.radiusX * motionScale;
+        let targetY = path.y + Math.cos(time * path.speed * motionScale * 0.91 + path.phase) * path.radiusY * motionScale;
+        if (pointer) {
+          targetX += (pointer.x - targetX) * path.pointerPull * cursorScale;
+          targetY += (pointer.y - targetY) * path.pointerPull * cursorScale;
+        }
+        satelliteCurrent[index].x += (targetX - satelliteCurrent[index].x) * 0.09;
+        satelliteCurrent[index].y += (targetY - satelliteCurrent[index].y) * 0.09;
+        satellites[index].style.setProperty('--orb-x', `${(satelliteCurrent[index].x * 100).toFixed(2)}%`);
+        satellites[index].style.setProperty('--orb-y', `${(satelliteCurrent[index].y * 100).toFixed(2)}%`);
+      });
+      companions.forEach((companion, index) => {
+        const anchor = satelliteCurrent[companionSatelliteIndexes[index]];
+        const range = companionRanges[index];
+        const targetX = pointer ? (pointer.x - 0.5) * range * 2 * cursorScale : 0;
+        const targetY = pointer ? (pointer.y - 0.5) * range * 2 * cursorScale : 0;
+        companionCurrent[index].x += (targetX - companionCurrent[index].x) * companionResponse[index];
+        companionCurrent[index].y += (targetY - companionCurrent[index].y) * companionResponse[index];
+        companion.style.setProperty('--companion-field-x', `${(anchor.x * 100).toFixed(2)}%`);
+        companion.style.setProperty('--companion-field-y', `${(anchor.y * 100).toFixed(2)}%`);
+        companion.style.setProperty('--companion-shift-x', `${companionCurrent[index].x.toFixed(2)}px`);
+        companion.style.setProperty('--companion-shift-y', `${companionCurrent[index].y.toFixed(2)}px`);
+      });
+    }
+    frame = requestAnimationFrame(render);
+  };
 
-  if (pointerWash && !heroReducedMotion.matches) {
-    let pointerFrame = 0;
-    let pointerX = 0;
-    let pointerY = 0;
+  const start = () => {
+    if (ambientPaused) return;
+    hero.classList.remove('hero-ambient-paused');
+    if (!frame && !document.hidden && !reducedMotion.matches) frame = requestAnimationFrame(render);
+  };
+  const stop = () => {
+    hero.classList.add('hero-ambient-paused');
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    if (reducedMotion.matches) {
+      pointer = null;
+      companions.forEach((companion, index) => {
+        companionCurrent[index].x = 0;
+        companionCurrent[index].y = 0;
+        companion.style.setProperty('--companion-shift-x', '0px');
+        companion.style.setProperty('--companion-shift-y', '0px');
+      });
+    }
+  };
 
-    function updatePointerWash() {
-      pointerFrame = 0;
-      const rect = hero.getBoundingClientRect();
-      const x = Math.max(0, Math.min(100, ((pointerX - rect.left) / rect.width) * 100));
-      const y = Math.max(0, Math.min(100, ((pointerY - rect.top) / rect.height) * 100));
-      pointerWash.style.setProperty('--wash-x', `${x.toFixed(2)}%`);
-      pointerWash.style.setProperty('--wash-y', `${y.toFixed(2)}%`);
+  const colorValues = {
+    blue: '#55a2f7', pink: '#ea3b99', purple: '#7928d2', orange: '#ff6847',
+    'theme-a': 'var(--hero-blob-a)', 'theme-b': 'var(--hero-blob-b)',
+    background: 'var(--hero-bg)', 'blue-purple': 'color-mix(in oklab, #55a2f7 76%, #7928d2)',
+  };
+  const ringColorKeys = ['orange', 'theme-a', 'blue', 'theme-b', 'blue-purple', 'theme-a'];
+  const ringSizes = [42, 68, 96, 132, 176, 224];
+  const ringMeta = satellites.map((element, index) => ({
+    id: `ring-${String.fromCharCode(97 + index)}`,
+    size: ringSizes[index], opacity: 0.34, stroke: 1, layer: 1,
+    color: ringColorKeys[index], node: element.classList.contains('hero-ambient-orb--node'), hidden: false,
+  }));
+  const smallMeta = companions.map((element, index) => ({
+    id: `small-${['a', 'c', 'e'][index]}`,
+    size: [12, 20, 32][index], opacity: 1, stroke: 1, layer: 3,
+    color: 'background', offsetX: [37, -63, 109][index], offsetY: [-12, 21, -56][index], hidden: false,
+  }));
+  const ambient = hero.querySelector('.hero-ambient');
+  let generatedId = 0;
+  const number = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+  const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value));
+
+  const applyBlobStyle = index => {
+    const element = blobs[index];
+    const meta = blobMeta[index];
+    if (!element || !meta) return;
+    element.dataset.ambientId = meta.id;
+    element.style.setProperty('--blob-size-scale', meta.size / 100);
+    element.style.setProperty('--blob-blur', `${meta.blur}px`);
+    element.style.setProperty('--blob-visibility', meta.opacity);
+    element.style.background = blobGradients[meta.gradient] || blobGradients.warm;
+    element.style.zIndex = meta.layer;
+    element.hidden = Boolean(meta.hidden);
+  };
+
+  const applyRingStyle = (index, resetPosition = true) => {
+    const element = satellites[index];
+    const meta = ringMeta[index];
+    const path = satellitePaths[index];
+    if (!element || !meta || !path) return;
+    element.dataset.ambientId = meta.id;
+    element.classList.toggle('hero-ambient-orb--node', meta.node);
+    element.style.setProperty('--orb-size', `${meta.size}px`);
+    element.style.setProperty('--orb-color', colorValues[meta.color] || meta.color);
+    if (resetPosition) {
+      element.style.setProperty('--orb-x', `${path.x * 100}%`);
+      element.style.setProperty('--orb-y', `${path.y * 100}%`);
+    }
+    element.style.opacity = meta.opacity;
+    element.style.borderWidth = `${meta.stroke}px`;
+    element.style.zIndex = meta.layer;
+    element.hidden = Boolean(meta.hidden);
+  };
+  const applySmallStyle = index => {
+    const element = companions[index];
+    const meta = smallMeta[index];
+    if (!element || !meta) return;
+    element.dataset.ambientId = meta.id;
+    element.style.setProperty('--companion-size', `${meta.size}px`);
+    element.style.setProperty('--orb-color', colorValues[meta.color] || meta.color);
+    element.style.setProperty('--companion-offset-x', `${meta.offsetX}px`);
+    element.style.setProperty('--companion-offset-y', `${meta.offsetY}px`);
+    element.style.opacity = meta.opacity;
+    element.style.borderWidth = `${meta.stroke}px`;
+    element.style.borderColor = colorValues[meta.color] || meta.color;
+    element.style.zIndex = meta.layer;
+    element.hidden = Boolean(meta.hidden);
+  };
+  blobMeta.forEach((_, index) => applyBlobStyle(index));
+  ringMeta.forEach((_, index) => applyRingStyle(index, false));
+  smallMeta.forEach((_, index) => applySmallStyle(index));
+
+  const update = (id, patch = {}) => {
+    let index = blobMeta.findIndex(meta => meta.id === id);
+    if (index >= 0) {
+      const meta = blobMeta[index];
+      const path = centers[index];
+      if ('size' in patch) meta.size = clamp(number(patch.size, meta.size), 30, 160);
+      if ('opacity' in patch) meta.opacity = clamp(number(patch.opacity, meta.opacity), 0.05, 1);
+      if ('blur' in patch) meta.blur = clamp(number(patch.blur, meta.blur), 0, 100);
+      if ('layer' in patch) meta.layer = clamp(number(patch.layer, meta.layer), 0, 1);
+      if ('gradient' in patch && blobGradients[patch.gradient]) meta.gradient = patch.gradient;
+      if ('hidden' in patch) meta.hidden = Boolean(patch.hidden);
+      if ('anchorX' in patch) path.x = clamp(number(patch.anchorX, path.x * 100) / 100, -0.2, 1.2);
+      if ('anchorY' in patch) path.y = clamp(number(patch.anchorY, path.y * 100) / 100, -0.2, 1.2);
+      if ('travelX' in patch) path.ax = clamp(number(patch.travelX, path.ax * 100) / 100, 0, 0.35);
+      if ('travelY' in patch) path.ay = clamp(number(patch.travelY, path.ay * 100) / 100, 0, 0.35);
+      if ('speed' in patch) path.speed = clamp(number(patch.speed, path.speed * 1000), 0.05, 1.2) / 1000;
+      if ('pointerPull' in patch) meta.pointerPull = clamp(number(patch.pointerPull, meta.pointerPull), -20, 80);
+      current[index].x = path.x;
+      current[index].y = path.y;
+      applyBlobStyle(index);
+      return true;
+    }
+    index = ringMeta.findIndex(meta => meta.id === id);
+    if (index >= 0) {
+      const meta = ringMeta[index];
+      const path = satellitePaths[index];
+      if ('size' in patch) meta.size = clamp(number(patch.size, meta.size), 12, 360);
+      if ('opacity' in patch) meta.opacity = clamp(number(patch.opacity, meta.opacity), 0.05, 1);
+      if ('stroke' in patch) meta.stroke = clamp(number(patch.stroke, meta.stroke), 0.5, 5);
+      if ('layer' in patch) meta.layer = clamp(number(patch.layer, meta.layer), 1, 5);
+      if ('color' in patch && colorValues[patch.color]) meta.color = patch.color;
+      if ('node' in patch) meta.node = Boolean(patch.node);
+      if ('hidden' in patch) meta.hidden = Boolean(patch.hidden);
+      if ('anchorX' in patch) path.x = clamp(number(patch.anchorX, path.x * 100) / 100, -0.1, 1.1);
+      if ('anchorY' in patch) path.y = clamp(number(patch.anchorY, path.y * 100) / 100, -0.1, 1.1);
+      if ('travelX' in patch) path.radiusX = clamp(number(patch.travelX, path.radiusX * 100) / 100, 0, 0.35);
+      if ('travelY' in patch) path.radiusY = clamp(number(patch.travelY, path.radiusY * 100) / 100, 0, 0.35);
+      if ('speed' in patch) path.speed = clamp(number(patch.speed, path.speed * 1000), 0.05, 1.2) / 1000;
+      if ('pointerPull' in patch) path.pointerPull = clamp(number(patch.pointerPull, path.pointerPull * 100), -20, 20) / 100;
+      satelliteCurrent[index].x = path.x;
+      satelliteCurrent[index].y = path.y;
+      applyRingStyle(index);
+      return true;
     }
 
-    hero.addEventListener('pointerenter', (event) => {
-      if (event.pointerType !== 'mouse') return;
-      hero.dataset.pointerWash = 'active';
-    });
-    hero.addEventListener('pointermove', (event) => {
-      if (event.pointerType !== 'mouse') return;
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      if (!pointerFrame) pointerFrame = requestAnimationFrame(updatePointerWash);
-    }, { passive: true });
-    hero.addEventListener('pointerleave', () => {
-      delete hero.dataset.pointerWash;
-    });
-  }
-
-  function setHeroColor(next, announce = false) {
-    i = (next + palette.length) % palette.length;
-    const state = palette[i];
-
-    hero.style.setProperty('--bg-tint', `var(${state.session})`);
-    hero.style.setProperty('--lens-color', `var(${state.session})`);
-    hero.style.setProperty('--accent-2', `var(${state.accent})`);
-    hero.dataset.color = String(i);
-
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle('is-active', dotIndex === i);
-    });
-    if (announce && heroStatus) {
-      heroStatus.textContent = 'Hero color changed. Ambient cycling paused for this visit.';
+    index = smallMeta.findIndex(meta => meta.id === id);
+    if (index < 0) return null;
+    const meta = smallMeta[index];
+    if ('size' in patch) meta.size = clamp(number(patch.size, meta.size), 6, 42);
+    if ('opacity' in patch) meta.opacity = clamp(number(patch.opacity, meta.opacity), 0.05, 1);
+    if ('stroke' in patch) meta.stroke = clamp(number(patch.stroke, meta.stroke), 0.5, 5);
+    if ('layer' in patch) meta.layer = clamp(number(patch.layer, meta.layer), 2, 5);
+    if ('color' in patch && colorValues[patch.color]) meta.color = patch.color;
+    if ('hidden' in patch) meta.hidden = Boolean(patch.hidden);
+    if ('anchorX' in patch) meta.offsetX = clamp(number(patch.anchorX, meta.offsetX), -180, 180);
+    if ('anchorY' in patch) meta.offsetY = clamp(number(patch.anchorY, meta.offsetY), -180, 180);
+    if ('speed' in patch) companionResponse[index] = clamp(number(patch.speed, companionResponse[index] * 10), 0.2, 3) / 10;
+    if ('pointerPull' in patch) companionRanges[index] = clamp(number(patch.pointerPull, companionRanges[index]), 0, 30);
+    if ('linkedRingId' in patch) {
+      const linked = ringMeta.findIndex(ring => ring.id === patch.linkedRingId);
+      if (linked >= 0) companionSatelliteIndexes[index] = linked;
     }
-  }
+    applySmallStyle(index);
+    return true;
+  };
 
-  function stopHeroCycle() {
-    if (!heroTimer) return;
-    window.clearInterval(heroTimer);
-    heroTimer = null;
-  }
+  const addRing = (seed = {}) => {
+    const element = document.createElement('span');
+    element.className = 'hero-ambient-orb';
+    ambient.insertBefore(element, companions[0] || null);
+    const id = seed.id || `ring-new-${++generatedId}`;
+    satellites.push(element);
+    satellitePaths.push({
+      x: number(seed.anchorX, 52) / 100, y: number(seed.anchorY, 48) / 100,
+      phase: number(seed.phase, generatedId * 0.9), speed: number(seed.speed, 0.32) / 1000,
+      radiusX: number(seed.travelX, 10) / 100, radiusY: number(seed.travelY, 9) / 100,
+      pointerPull: number(seed.pointerPull, 5) / 100,
+    });
+    satelliteCurrent.push({ x: number(seed.anchorX, 52) / 100, y: number(seed.anchorY, 48) / 100 });
+    ringMeta.push({
+      id, size: number(seed.size, 84), opacity: number(seed.opacity, 0.34),
+      stroke: number(seed.stroke, 1), layer: number(seed.layer, 1),
+      color: seed.color || 'blue', node: Boolean(seed.node), hidden: Boolean(seed.hidden),
+    });
+    applyRingStyle(satellites.length - 1);
+    return id;
+  };
 
-  function startHeroCycle() {
-    if (manualPause || heroReducedMotion.matches || document.hidden || heroTimer) return;
-    heroTimer = window.setInterval(() => setHeroColor(i + 1), 12000);
-  }
+  const addSmall = (seed = {}) => {
+    const element = document.createElement('span');
+    element.className = 'hero-ambient-companion';
+    ambient.append(element);
+    const id = seed.id || `small-new-${++generatedId}`;
+    let linkedIndex = ringMeta.findIndex(meta => meta.id === seed.linkedRingId);
+    if (linkedIndex < 0) linkedIndex = satellites.findIndex(element => !element.classList.contains('hero-ambient-orb--node'));
+    companions.push(element);
+    companionSatelliteIndexes.push(Math.max(0, linkedIndex));
+    companionRanges.push(number(seed.pointerPull, 10));
+    companionResponse.push(number(seed.speed, 1.2) / 10);
+    companionCurrent.push({ x: 0, y: 0 });
+    smallMeta.push({
+      id, size: number(seed.size, 18), opacity: number(seed.opacity, 1),
+      stroke: number(seed.stroke, 1), layer: number(seed.layer, 3),
+      color: seed.color || 'background', offsetX: number(seed.anchorX, 24), offsetY: number(seed.anchorY, -18), hidden: Boolean(seed.hidden),
+    });
+    applySmallStyle(companions.length - 1);
+    return id;
+  };
 
-  function chooseNextColor() {
-    manualPause = true;
-    stopHeroCycle();
-    setHeroColor(i + 1, true);
-  }
+  const setPaused = paused => {
+    ambientPaused = Boolean(paused);
+    if (ambientPaused) stop();
+    else start();
+    return ambientPaused;
+  };
+  const setGlobals = values => {
+    if ('motionScale' in values) motionScale = clamp(number(values.motionScale, motionScale), 0, 2);
+    if ('cursorScale' in values) cursorScale = clamp(number(values.cursorScale, cursorScale), 0, 2);
+    if ('paused' in values) setPaused(values.paused);
+    return { motionScale, cursorScale, paused: ambientPaused };
+  };
+  const clearCircles = () => {
+    [...satellites, ...companions].forEach(element => element.remove());
+    satellites.splice(0); satellitePaths.splice(0); satelliteCurrent.splice(0); ringMeta.splice(0);
+    companions.splice(0); companionSatelliteIndexes.splice(0); companionRanges.splice(0);
+    companionResponse.splice(0); companionCurrent.splice(0); smallMeta.splice(0);
+  };
+  const applyConfig = config => {
+    if (!config || !Array.isArray(config.circles)) throw new Error('Ambient configuration must include a circles array.');
+    if (Array.isArray(config.blobs)) {
+      config.blobs.forEach(blob => update(blob.id, blob));
+    }
+    clearCircles();
+    config.circles.filter(circle => circle.kind === 'ring').forEach(addRing);
+    config.circles.filter(circle => circle.kind === 'small').forEach(addSmall);
+    if (!satellites.length) addRing();
+    const suffixes = config.circles.map(circle => Number(circle.id?.match(/-(?:new-)?(\d+)$/)?.[1] || 0));
+    generatedId = Math.max(generatedId, ...suffixes);
+    setGlobals(config.globals || {});
+    return true;
+  };
+  if (window.__ambientFieldBaseline) applyConfig(window.__ambientFieldBaseline);
 
-  setHeroColor(0);
-  startHeroCycle();
-
-  hero.addEventListener('click', event => {
-    if (event.target.closest('a, button, .hero-meta')) return;
-    chooseNextColor();
+  hero.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse' || reducedMotion.matches) return;
+    const rect = hero.getBoundingClientRect();
+    pointer = {
+      x: Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)),
+      y: Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)),
+    };
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => {
+    pointer = null;
   });
-
-  cycleBtn?.addEventListener('click', event => {
-    event.stopPropagation();
-    chooseNextColor();
-  });
-
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopHeroCycle();
-    else startHeroCycle();
+    if (document.hidden) stop();
+    else start();
   });
-
-  heroReducedMotion.addEventListener?.('change', () => {
-    if (heroReducedMotion.matches) stopHeroCycle();
-    else startHeroCycle();
+  reducedMotion.addEventListener?.('change', () => {
+    if (reducedMotion.matches) stop();
+    else start();
   });
+  start();
 })();
 
-// ── Deferred responsive gallery images ─────────────
+// ── Deferred responsive gallery images ────────────────
 (function initDeferredResponsiveImages() {
   const images = Array.from(document.querySelectorAll('.graphic-archive-v2 img[data-deferred-src]'));
   if (!images.length) return;
@@ -830,206 +1086,109 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
 
 
-// ── Design DNA overlay ─────────────────────────────
-(function initDesignDNA() {
-  const overlay  = document.getElementById('dnaOverlay');
-  const triggers = document.querySelectorAll('.dna-trigger');
-  if (!overlay || !triggers.length) return;
+// ── Inline Design DNA reveal ───────────────────────
+(function initInlineDesignDNA() {
+  const trigger = document.querySelector('.hero-dna-trigger');
+  const panel = document.getElementById('heroDnaPanel');
+  const closeButton = panel?.querySelector('[data-dna-close]');
+  const hero = trigger?.closest('.hero');
+  if (!trigger || !panel || !hero) return;
 
-  // Read live values from CSS custom properties so this stays truthful as tokens evolve
-  const rootStyles = getComputedStyle(document.documentElement);
-  const readVar = (name) => rootStyles.getPropertyValue(name).trim();
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const tintLayer = hero.querySelector('.hero-dna-tint');
+  const tintStatus = panel.querySelector('.hero-dna-tint-status');
+  const swatches = [...panel.querySelectorAll('.hero-dna-swatch')];
+  const playText = panel.querySelector('.hero-dna-play-text');
+  const fontChips = [...panel.querySelectorAll('[data-dna-font]')];
+  const italicChip = panel.querySelector('[data-dna-italic]');
+  let selectedTint = null;
+  let hideTimer = 0;
 
-  // Light-or-dark decision for overlay text on swatches
-  const isLightHex = (hex) => {
-    const m = hex.replace('#', '');
-    if (m.length !== 6) return false;
-    const r = parseInt(m.slice(0, 2), 16);
-    const g = parseInt(m.slice(2, 4), 16);
-    const b = parseInt(m.slice(4, 6), 16);
-    return (r * 299 + g * 587 + b * 114) / 1000 > 170;
-  };
+  const readToken = token => getComputedStyle(hero).getPropertyValue(token).trim()
+    || getComputedStyle(document.documentElement).getPropertyValue(token).trim();
 
-  // Build swatches from active computed theme values
-  const swatchKeys = [
-    '--blue',
-    '--pink',
-    '--purple',
-    '--orange',
-    '--bg',
-    '--bg-2',
-    '--text',
-    '--text-2',
-    '--border',
-  ];
+  function applyHeroTint(swatch = selectedTint) {
+    const value = swatch ? readToken(swatch.dataset.dnaToken) : '';
+    tintLayer?.style.setProperty('--dna-tint', value || 'transparent');
+    tintLayer?.classList.toggle('is-active', Boolean(value));
+    if (tintStatus) tintStatus.textContent = value
+      ? `Hero wash · ${swatch.querySelector('.hero-dna-swatch-name').textContent} · ${value}`
+      : 'No hero tint selected';
+  }
 
-  const swatchRoot = document.getElementById('dnaSwatches');
-  const preview    = document.getElementById('dnaColorPreview');
-  const previewLbl = preview.querySelector('.dna-color-preview-label');
-
-  const renderSwatches = () => {
-    swatchRoot.innerHTML = '';
-    swatchKeys.forEach((key) => {
-      const value = readVar(key);
-      if (!value) return;
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'dna-swatch';
-      btn.style.setProperty('--swatch', value);
-      btn.setAttribute('data-light', isLightHex(value));
-      btn.setAttribute('aria-label', `${key} ${value}`);
-      const name = document.createElement('span');
-      name.className = 'dna-swatch-name';
-      name.textContent = key;
-      const hex = document.createElement('span');
-      hex.className = 'dna-swatch-hex';
-      hex.textContent = value;
-      const meta = document.createElement('span');
-      meta.className = 'dna-swatch-meta';
-      meta.append(name, hex);
-      btn.append(meta);
-      const showTint = () => {
-        preview.style.setProperty('--tint', value);
-        preview.classList.add('is-tinted');
-        previewLbl.textContent = `${key} · ${value}`;
-      };
-      const clearTint = () => {
-        preview.classList.remove('is-tinted');
-        previewLbl.textContent = 'Focus or hover a swatch';
-      };
-      btn.addEventListener('mouseenter', showTint);
-      btn.addEventListener('focus', showTint);
-      btn.addEventListener('mouseleave', clearTint);
-      btn.addEventListener('blur', clearTint);
-      swatchRoot.appendChild(btn);
+  function syncDnaTokens() {
+    swatches.forEach((swatch) => {
+      const value = readToken(swatch.dataset.dnaToken);
+      swatch.style.setProperty('--dna-color', value);
+      swatch.querySelector('.hero-dna-swatch-value').textContent = value;
+      swatch.setAttribute('aria-label', `${swatch.querySelector('.hero-dna-swatch-name').textContent} ${value}; preview as hero wash`);
     });
-  };
-  renderSwatches();
+    applyHeroTint();
+  }
 
-  // Build spacing scale and semantic aliases from live values
-  const scaleKeys = [1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 20];
-  const scaleRoot = document.getElementById('dnaScale');
-  const scaleValues = scaleKeys.map((n) => parseInt(readVar(`--space-${n}`), 10) || 0);
-  const scaleMax = Math.max(...scaleValues) || 1;
-  scaleRoot.innerHTML = scaleKeys.map((n, i) => {
-    const px = scaleValues[i];
-    const widthPct = Math.max(4, (px / scaleMax) * 100);
-    return `
-      <li class="dna-scale-row">
-        <span>--space-${n}</span>
-        <span class="dna-scale-bar" style="width:${widthPct}%"></span>
-        <span class="dna-scale-px">${px}px</span>
-      </li>
-    `;
-  }).join('');
-
-  const semanticKeys = ['--page-x', '--section-y', '--gallery-x'];
-  const semanticRoot = document.getElementById('dnaSemanticSpacing');
-  semanticRoot.innerHTML = semanticKeys.map((key) => `
-    <div><dt>${key}</dt><dd>${readVar(key)}</dd></div>
-  `).join('');
-
-  const radiusKeys = ['0', 'sm', 'md', 'lg', 'xl', 'pill'];
-  const radiiRoot = document.getElementById('dnaRadii');
-  radiiRoot.innerHTML = radiusKeys.map((key) => {
-    const token = `--radius-${key}`;
-    const value = readVar(token);
-    return `<div class="dna-radius" style="--r:${value}"><span>${token}<br>${value}</span></div>`;
-  }).join('');
-
-  // Type playground
-  const playText = document.getElementById('dnaPlayText');
-  const chips    = document.querySelectorAll('.dna-chip');
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      if (chip.hasAttribute('data-italic')) {
-        playText.classList.toggle('is-italic');
-        chip.classList.toggle('is-active');
-        return;
-      }
-      chips.forEach((c) => { if (!c.hasAttribute('data-italic')) c.classList.remove('is-active'); });
-      chip.classList.add('is-active');
-      playText.style.fontFamily = chip.getAttribute('data-font');
+  swatches.forEach((swatch) => {
+    swatch.addEventListener('pointerenter', () => applyHeroTint(swatch));
+    swatch.addEventListener('pointerleave', () => applyHeroTint());
+    swatch.addEventListener('focus', () => applyHeroTint(swatch));
+    swatch.addEventListener('blur', () => applyHeroTint());
+    swatch.addEventListener('click', () => {
+      selectedTint = selectedTint === swatch ? null : swatch;
+      swatches.forEach(item => {
+        const selected = item === selectedTint;
+        item.classList.toggle('is-selected', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      applyHeroTint();
     });
   });
 
-  // Open / close overlay
-  let lastFocus = null;
-  const focusableSelector = [
-    'a[href]',
-    'button:not([disabled])',
-    'input:not([disabled])',
-    'select:not([disabled])',
-    'textarea:not([disabled])',
-    '[contenteditable="true"]',
-    '[tabindex]:not([tabindex="-1"])',
-  ].join(',');
-  const getFocusable = () => [...overlay.querySelectorAll(focusableSelector)]
-    .filter((element) => !element.hidden && element.getClientRects().length > 0);
-  const backgroundRegions = [...document.querySelectorAll('body > .skip-link, body > .nav, body > main, body > footer')];
-  const isolateBackground = (isolated) => {
-    backgroundRegions.forEach((element) => {
-      element.inert = isolated;
-      if (isolated) element.setAttribute('aria-hidden', 'true');
-      else element.removeAttribute('aria-hidden');
-    });
-  };
+  fontChips.forEach((chip) => chip.addEventListener('click', () => {
+    fontChips.forEach(item => item.classList.toggle('is-active', item === chip));
+    if (playText) playText.style.fontFamily = chip.dataset.dnaFont;
+  }));
+  italicChip?.addEventListener('click', () => {
+    const active = italicChip.classList.toggle('is-active');
+    italicChip.setAttribute('aria-pressed', String(active));
+    playText?.classList.toggle('is-italic', active);
+  });
 
-  const open = (event) => {
-    lastFocus = event?.currentTarget || document.activeElement;
-    isolateBackground(true);
-    overlay.inert = false;
-    overlay.setAttribute('aria-hidden', 'false');
-    overlay.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    // Re-read tokens in case theme toggled while overlay was closed
-    renderSwatches();
-    setTimeout(() => {
-      const firstClose = overlay.querySelector('.dna-close');
-      if (firstClose) firstClose.focus();
-    }, 50);
-  };
-  const close = () => {
-    overlay.inert = true;
-    overlay.setAttribute('aria-hidden', 'true');
-    overlay.classList.remove('is-open');
-    isolateBackground(false);
-    document.body.style.overflow = '';
-    preview.classList.remove('is-tinted');
-    previewLbl.textContent = 'Focus or hover a swatch';
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  };
+  new MutationObserver(syncDnaTokens).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  syncDnaTokens();
 
-  triggers.forEach((trigger) => trigger.addEventListener('click', open));
-  overlay.querySelectorAll('[data-dna-close]').forEach((el) => el.addEventListener('click', close));
-  document.addEventListener('keydown', (e) => {
-    if (!overlay.classList.contains('is-open')) return;
-    if (e.key === 'Escape') {
-      close();
+  function setDnaExpanded(expanded, { restoreFocus = false } = {}) {
+    window.clearTimeout(hideTimer);
+    trigger.setAttribute('aria-expanded', String(expanded));
+    hero.classList.toggle('is-dna-expanded', expanded);
+
+    if (expanded) {
+      syncDnaTokens();
+      panel.hidden = false;
+      requestAnimationFrame(() => panel.classList.add('is-active'));
       return;
     }
-    if (e.key === 'Tab') {
-      const focusable = getFocusable();
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (!overlay.contains(document.activeElement)) {
-        e.preventDefault();
-        (e.shiftKey ? last : first).focus();
-        return;
-      }
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  });
 
-  // Re-render swatches when lens mode changes so colors reflect the active theme
-  document.querySelectorAll('.lens-switcher-btn:not([data-lens="dna"])').forEach(btn => {
-    btn.addEventListener('click', () => setTimeout(renderSwatches, 50));
+    panel.classList.remove('is-active');
+    selectedTint = null;
+    swatches.forEach(swatch => {
+      swatch.classList.remove('is-selected');
+      swatch.setAttribute('aria-pressed', 'false');
+    });
+    applyHeroTint();
+    const finish = () => {
+      panel.hidden = true;
+      if (restoreFocus) trigger.focus();
+    };
+    if (reducedMotion.matches) finish();
+    else hideTimer = window.setTimeout(finish, 420);
+  }
+
+  trigger.addEventListener('click', () => {
+    setDnaExpanded(trigger.getAttribute('aria-expanded') !== 'true');
+  });
+  closeButton?.addEventListener('click', () => setDnaExpanded(false, { restoreFocus: true }));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+      setDnaExpanded(false, { restoreFocus: true });
+    }
   });
 })();

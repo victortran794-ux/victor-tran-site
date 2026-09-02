@@ -10,6 +10,10 @@ if (!['art', 'graphic', 'all'].includes(scope)) {
 }
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const expect = (condition, message) => { if (!condition) failures.push(message); };
+const browserVerifier = read('scripts/check-visual-archives-browser.mjs');
+expect(!/(?:\/home\/|\/Users\/|\.agent-browser\/browsers\/)/.test(browserVerifier)
+  && /process\.env\.CHROME_BIN/.test(browserVerifier),
+  'visual-archives browser verifier must use CHROME_BIN or portable system paths without personal cache fallbacks');
 
 function relativeLuminance(hex) {
   const channels = hex.slice(1).match(/.{2}/g).map((value) => {

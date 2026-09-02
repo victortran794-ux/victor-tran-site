@@ -183,20 +183,12 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
   grid-column: 1 / -1;
 }
 
-.ui-study-grid--magi .ui-study-view--architecture {
-  grid-column: span 7;
-}
-
 .ui-study-grid--magi .ui-study-view--overlays {
-  grid-column: span 5;
-}
-
-.ui-study-grid--magi .ui-study-view--color-type {
-  grid-column: span 5;
+  grid-column: span 6;
 }
 
 .ui-study-grid--magi .ui-study-view--components {
-  grid-column: span 7;
+  grid-column: span 6;
 }
 
 .ui-study-grid--magi .ui-study-view--node-states {
@@ -261,10 +253,8 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
 
   .ui-study-view--ekos-desktop,
   .ui-study-view--ekos-mobile,
-  .ui-study-grid--magi .ui-study-view--architecture,
   .ui-study-grid--magi .ui-study-view--overview,
   .ui-study-grid--magi .ui-study-view--overlays,
-  .ui-study-grid--magi .ui-study-view--color-type,
   .ui-study-grid--magi .ui-study-view--components,
   .ui-study-grid--magi .ui-study-view--node-states {
     grid-column: 1;

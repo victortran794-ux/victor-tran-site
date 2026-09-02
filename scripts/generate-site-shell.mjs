@@ -78,6 +78,9 @@ function buildHeader({ config, projects, currentPage, protectedPage }) {
   const aboutAttributes = ['href="about.html"'];
   if (isAbout) aboutAttributes.push('class="active"', 'aria-current="page"');
   const workClass = isHome || isProject ? 'nav-dropdown is-active' : 'nav-dropdown';
+  const logoMarkup = isHome
+    ? `        <span class="nav-logo-victor">Victor</span>\n        <span class="nav-logo-tran">Tran</span>`
+    : `        <img src="images/nav-logo.webp" alt="" width="34" height="34">\n        <span class="nav-logo-name">Victor Tran</span>`;
   const status = protectedPage
     ? `\n  <p class="site-route-status"><span>${escapeHtml(config.protectedLabel)}</span><small>${escapeHtml(config.protectedDetail)}</small></p>`
     : '';
@@ -87,8 +90,7 @@ function buildHeader({ config, projects, currentPage, protectedPage }) {
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
-        <img src="images/nav-logo.webp" alt="" width="34" height="34">
-        <span class="nav-logo-name">Victor Tran</span>
+${logoMarkup}
       </a>
       <ul class="nav-links">
         <li class="${workClass}">

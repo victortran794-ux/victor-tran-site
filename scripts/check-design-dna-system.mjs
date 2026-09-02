@@ -9,9 +9,8 @@ const expect = (condition, message) => { if (!condition) errors.push(message); }
 
 const index = read('index.html');
 const css = read('css/style.css');
-const dnaCssStart = css.indexOf('Design DNA overlay (home page)');
-const dnaCssEnd = css.indexOf('/* ABILITY EXPERIENCE: START */');
-const dnaCss = css.slice(dnaCssStart, dnaCssEnd);
+const dnaCssStart = css.indexOf('ENGRAVED DESIGN DNA HERO');
+const dnaCss = css.slice(dnaCssStart);
 const js = read('js/main.js');
 const designSystemMd = read('content/design-system.md');
 const designSystemJson = JSON.parse(read('content/design-system.json'));
@@ -50,31 +49,33 @@ expect(designSystemMd.includes('Dormant or deferred candidates'),
 expect(!designSystemMd.includes('Current shared primitives now include:'),
   'Retire the inaccurate “Current shared primitives now include” wording.');
 
-expect(index.includes('class="dna-sheet"'), 'Replace the rounded bento with the editorial dna-sheet composition.');
-expect(index.includes('class="dna-section'), 'Design DNA must use editorial sections.');
-expect(!index.includes('dna-bento'), 'Remove the generic Design DNA bento composition.');
-expect(!index.includes('dna-sample-btn'), 'Remove fake DNA-only button specimens.');
-expect(!index.includes('◐ Pill') && !index.includes('Ghost →'), 'Remove fictional Pill and Ghost component examples.');
-expect(index.includes('id="dnaRadii"'), 'Radii must render from live CSS tokens.');
-expect(index.includes('id="dnaSemanticSpacing"'), 'Spacing must expose live semantic aliases.');
-expect(index.includes('class="section-label label-default"'), 'Component evidence must reuse the real section-label component.');
-expect(index.includes('class="case-study-meta dna-component-meta"'), 'Component evidence must reuse the real case-study-meta anatomy.');
-expect(index.includes('Active theme values'), 'Palette copy must accurately describe computed active-theme values.');
+expect(index.includes('class="hero-dna-panel"') && index.includes('id="heroDnaPanel"'),
+  'Design DNA must use the accepted inline hero disclosure.');
+expect((index.match(/class="hero-dna-group\s+/g) ?? []).length === 4,
+  'Inline Design DNA must expose exactly Palette, Typography, Spacing, and Shape groups.');
+expect(index.includes('Active theme values') && index.includes('class="hero-dna-swatch-value"'),
+  'Palette copy and values must describe the computed active theme.');
+expect(index.includes('class="hero-dna-space-token"') && index.includes('class="hero-dna-radius-token"'),
+  'Spacing and Shape must expose their token names and values.');
+expect(index.includes('contenteditable="true"') && index.includes('DM Serif Display')
+  && index.includes('Barlow') && index.includes('Source Code Pro'),
+  'Typography must retain the editable specimen and the three live typeface names.');
+expect(!index.includes('id="dnaOverlay"') && !index.includes('Shared structure'),
+  'Retired modal and Shared structure samples must remain absent.');
 
-expect(css.includes('.dna-sheet'), 'CSS must style the editorial DNA sheet.');
-expect(css.includes('.dna-section'), 'CSS must style editorial DNA sections.');
-expect(!css.includes('.dna-bento'), 'Retire dna-bento CSS.');
-expect(!css.includes('.dna-sample-btn'), 'Retire DNA-only fake component CSS.');
-expect(!dnaCss.includes('var(--dur-fast)'), 'Design DNA CSS must use the canonical --duration-fast token.');
-expect(!dnaCss.includes('var(--dur-med)'), 'Design DNA CSS must use canonical --duration-* motion tokens.');
+expect(dnaCssStart >= 0 && dnaCss.includes('.hero-dna-panel'),
+  'CSS must style the canonical Engraved Design DNA disclosure.');
+expect(!dnaCss.includes('var(--dur-fast)') && !dnaCss.includes('var(--dur-med)'),
+  'Engraved Design DNA CSS must use canonical --duration-* motion tokens.');
 const largeRadiusUse = designSystemJson.radii?.tokens?.lg?.use ?? '';
 expect(!largeRadiusUse.includes('.screen-frame') || /dormant|reserved/i.test(largeRadiusUse),
   'The radius inventory must not describe dormant .screen-frame as a current production use.');
-expect(js.includes("const radiusKeys = ['0', 'sm', 'md', 'lg', 'xl', 'pill']"),
-  'Design DNA must read the complete live radius token set.');
-expect(js.includes("`--space-${n}`"), 'Spacing labels must use real --space-* token names.');
-expect(js.includes("['--page-x', '--section-y', '--gallery-x']"),
-  'Design DNA must expose the semantic spacing aliases.');
+expect(js.includes('function setDnaExpanded('),
+  'Design DNA must use one semantic inline disclosure state setter.');
+expect(js.includes('syncDnaTokens') && js.includes('getComputedStyle(document.documentElement)'),
+  'Design DNA must refresh live palette values from computed theme tokens.');
+expect(!js.includes('initDesignDNA') && !css.includes('Design DNA overlay (home page)'),
+  'Retired modal Design DNA runtime and styling must not remain as dead canonical code.');
 
 expect(packageJson.scripts?.['check:design-dna-system'] === 'node scripts/check-design-dna-system.mjs',
   'package.json must expose check:design-dna-system.');

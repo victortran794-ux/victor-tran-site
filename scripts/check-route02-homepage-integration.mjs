@@ -32,16 +32,18 @@ for (const [slug, description] of approvedRecruiterCopy) {
     `${slug} homepage card must render the approved recruiter-scan copy.`);
 }
 
-// Preserve the selected signature hero while applying the approved Route 02 refinements.
+// Preserve the accepted Engraved Design DNA signature hero and Route 02 content.
 for (const token of [
   'class="hero"',
   'class="hero-typeblock"',
-  'class="hero-portraits"',
+  'class="hero-identity"',
+  'class="hero-intro-row"',
+  'class="hero-dna-trigger"',
+  'id="heroDnaPanel"',
   'class="hero-meta"',
   'class="hero-services"',
-  'class="hero-cycle"',
   '>Victor</span>',
-  '>TRAN</span>',
+  '>Tran</span>',
   'I design cool things with sincerity.',
 ]) requireText(index, token, `Route 02 must preserve the signature hero token: ${token}`);
 
@@ -70,11 +72,10 @@ requireText(css, 'font-size: calc(var(--hero-name-size) * 0.76);',
 requireCondition(/@media\s*\(max-width:\s*600px\)[\s\S]*?\.hero-typeblock\s*\{[^}]*left:\s*var\(--route02-x\)/.test(css),
   'Mobile Victor TRAN must remain on the shared grid token.');
 requireText(css, 'max-width: 280px;', 'Top-left hero content needs the approved compact width.');
-requireText(css, '.hero-cycle .control-tooltip {', 'Hero color control tooltip must remain available.');
-requireText(index, '<span class="control-tooltip" aria-hidden="true">Change color</span>',
-  'Hero tooltip must avoid duplicating the button accessible name.');
-requireText(css, 'min-width: 44px;', 'Hero color control must preserve its 44px target.');
-requireText(css, 'padding: 0 12px;', 'Hero color control needs the approved smaller visual shell.');
+forbid(index, /class="hero-cycle"|class="hero-cycle-label"|>Change color<\/span>/,
+  'Retired independent color-cycle controls must not return.');
+requireCondition(/class="hero-dna-trigger"[^>]*aria-expanded="false"[^>]*aria-controls="heroDnaPanel"/.test(index),
+  'Portrait Design DNA trigger must expose the accepted inline-disclosure relationship.');
 
 // Remove low-value homepage navigation mechanics and let the card grid carry the page.
 forbid(index, /class="marquee"/, 'The low-value marquee must remain removed.');
@@ -161,10 +162,11 @@ requireCondition(!generator.includes('chapterMarkerMarkup'),
   'Homepage generator must not regenerate chapter headers.');
 requireText(css, '.featured-item--overlay {', 'Overlay card CSS is missing.');
 requireText(css, '.featured-item--overlay .featured-item-content {', 'Overlay tile CSS is missing.');
-requireText(index, '<body class="home-page">', 'Route 02 homepage needs a locally scoped layout token.');
+requireText(index, '<body class="home-page home-page--engraved-dna">',
+  'Route 02 homepage needs the canonical Engraved DNA scope token.');
 requireText(css, '--route02-x: clamp(48px, 5vw, 76.8px);', 'Route 02 desktop inset must cap at 76.8px.');
 requireText(css, '--route02-x: 22px;', 'Route 02 exact-390 inset must resolve to 22px.');
-for (const selector of ['.hero-typeblock', '.hero-meta', '.hero-services', '.featured-heading']) {
+for (const selector of ['.hero-identity', '.hero-meta', '.hero-services', '.featured-heading']) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   requireCondition(new RegExp(`${escaped}\\s*\\{[^}]*var\\(--route02-x\\)`, 's').test(css),
     `${selector} must use the shared Route 02 inset.`);

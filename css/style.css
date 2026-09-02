@@ -4198,384 +4198,6 @@ html[data-theme="dark"] .spotify-frame {
 }
 
 
-/* ══════════════════════════════════════════════
-   Design DNA overlay (home page)
-   ══════════════════════════════════════════════ */
-
-.dna-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--duration-base) ease;
-}
-.dna-overlay.is-open { pointer-events: auto; opacity: 1; }
-.dna-overlay[aria-hidden="false"] .dna-panel { transform: translateY(0); }
-.dna-overlay-scrim {
-  position: absolute;
-  inset: 0;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.dna-panel {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  padding: clamp(24px, 4vw, 52px) var(--page-x) clamp(56px, 8vw, 104px);
-  background: var(--bg);
-  transform: translateY(20px);
-  transition: transform var(--duration-base) var(--ease-out);
-  scrollbar-gutter: stable;
-}
-.dna-panel-head,
-.dna-sheet {
-  width: min(100%, 1320px);
-  margin-inline: auto;
-}
-.dna-panel-head {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 48px;
-  gap: var(--space-6);
-  align-items: start;
-  padding: var(--space-4) 0 clamp(48px, 6vw, 80px);
-  border-top: 1px solid var(--text);
-}
-.dna-field-label,
-.dna-font-meta,
-.dna-component-list strong,
-.dna-semantic-spacing dt {
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-.dna-title {
-  margin: 0;
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(4rem, 8vw, 8rem);
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: -0.055em;
-}
-.dna-title em { color: var(--pink); font-style: italic; }
-.dna-intro {
-  max-width: 58ch;
-  margin-top: var(--space-6);
-  color: var(--text-2);
-  font-size: var(--text-lead);
-}
-.dna-close {
-  display: grid;
-  width: 48px;
-  height: 48px;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--bg);
-  color: var(--text-2);
-  font-size: 1.7rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: color var(--duration-fast), border-color var(--duration-fast), transform var(--duration-base) var(--ease-out);
-}
-.dna-close:hover,
-.dna-close:focus-visible { color: var(--text); border-color: var(--text); transform: rotate(90deg); }
-
-.dna-sheet { border-bottom: 1px solid var(--border); }
-.dna-section {
-  display: grid;
-  grid-template-columns: minmax(130px, 2fr) minmax(0, 10fr);
-  gap: 0 clamp(28px, 5vw, 72px);
-  padding: clamp(48px, 6vw, 80px) 0;
-  border-top: 1px solid var(--border);
-}
-.dna-section-head {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column: 1 / -1;
-  gap: inherit;
-  align-items: start;
-  margin-bottom: clamp(20px, 3vw, 28px);
-}
-.dna-section-head > div { grid-column: 2; }
-.dna-section-head h3 {
-  max-width: none;
-  margin: 0;
-  color: var(--pink);
-  font-family: 'Source Code Pro', monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.dna-section-head p {
-  max-width: 58ch;
-  margin-top: var(--space-3);
-  color: var(--text-2);
-  font-size: var(--text-body);
-}
-.dna-section > :not(.dna-section-head) { grid-column: 2; }
-
-.dna-palette-field {
-  display: grid;
-  grid-template-columns: minmax(260px, 4fr) minmax(0, 7fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: stretch;
-}
-.dna-swatches { display: grid; align-content: start; }
-.dna-swatch {
-  --swatch: transparent;
-  position: relative;
-  display: grid;
-  width: 100%;
-  min-height: 52px;
-  padding: 0 0 0 var(--space-6);
-  border: 0;
-  border-top: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  text-align: left;
-}
-.dna-swatch:last-child { border-bottom: 1px solid var(--border); }
-.dna-swatch::before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 10px;
-  height: 28px;
-  background: var(--swatch);
-  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
-  content: '';
-  transform: translateY(-50%);
-  transition: width var(--duration-fast) var(--ease-out);
-}
-.dna-swatch:hover::before,
-.dna-swatch:focus-visible::before { width: 16px; }
-.dna-swatch-meta {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-4);
-  align-items: center;
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-}
-.dna-swatch-name { color: var(--text); }
-.dna-swatch-hex { color: var(--text-2); }
-.dna-color-preview {
-  position: relative;
-  min-height: 360px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-2);
-}
-.dna-color-preview-img,
-.dna-color-preview-tint { position: absolute; inset: 0; width: 100%; height: 100%; }
-.dna-color-preview-img { object-fit: cover; filter: grayscale(1) contrast(1.08); transition: filter var(--duration-base) ease; }
-.dna-color-preview-tint {
-  background: var(--tint, transparent);
-  mix-blend-mode: multiply;
-  opacity: 0;
-  transition: opacity var(--duration-base) ease, background var(--duration-base) ease;
-}
-[data-theme="dark"] .dna-color-preview-tint { mix-blend-mode: screen; }
-.dna-color-preview.is-tinted .dna-color-preview-tint { opacity: 0.82; }
-.dna-color-preview.is-tinted .dna-color-preview-img { filter: grayscale(0.7) contrast(1.12); }
-.dna-color-preview-label {
-  position: absolute;
-  right: var(--space-4);
-  bottom: var(--space-4);
-  z-index: 2;
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-}
-
-.dna-fonts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--border);
-  list-style: none;
-}
-.dna-font {
-  display: grid;
-  min-width: 0;
-  min-height: 210px;
-  padding: var(--space-5) var(--space-6) var(--space-6) 0;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-.dna-font + .dna-font { padding-left: var(--space-6); }
-.dna-font:last-child { border-right: 0; }
-.dna-font-meta { color: var(--text-2); }
-.dna-font-sample {
-  align-self: center;
-  font-size: clamp(4.5rem, 8vw, 7.5rem);
-  line-height: 0.8;
-  letter-spacing: -0.06em;
-  transition: color var(--duration-fast);
-}
-.dna-font-use { align-self: end; color: var(--text-2); font-size: var(--text-label); }
-.dna-font[data-jitter="true"]:hover .dna-font-sample { color: var(--pink); font-style: italic; }
-.dna-playground {
-  margin-top: clamp(40px, 5vw, 64px);
-  padding: var(--space-5) 0 var(--space-6);
-  border-top: 1px solid var(--text);
-  border-bottom: 1px solid var(--border);
-}
-.dna-playground-head {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-6);
-  color: var(--text-2);
-}
-.dna-playground-head p { font-size: var(--text-label); }
-.dna-playground-text {
-  min-height: 1em;
-  margin: clamp(36px, 5vw, 64px) 0;
-  outline: none;
-  font-size: clamp(3.25rem, 7vw, 7rem);
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-}
-.dna-playground-text:focus-visible { box-shadow: inset 0 -2px var(--pink); }
-.dna-playground-text.is-italic { font-style: italic; }
-.dna-playground-controls { display: flex; flex-wrap: wrap; gap: var(--space-6); }
-.dna-chip {
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  background: transparent;
-  color: var(--text-2);
-  font: 500 var(--text-label) 'Source Code Pro', monospace;
-  cursor: pointer;
-}
-.dna-chip:hover,
-.dna-chip:focus-visible,
-.dna-chip.is-active { border-bottom-color: var(--pink); color: var(--text); }
-
-.dna-rhythm-field {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(260px, 5fr);
-  gap: clamp(40px, 7vw, 96px);
-}
-.dna-field-label { margin-bottom: var(--space-5); color: var(--text-2); }
-.dna-scale { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
-.dna-scale-row {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) 48px;
-  gap: var(--space-3);
-  align-items: center;
-  min-height: 24px;
-  color: var(--text-2);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-}
-.dna-scale-bar { display: block; height: 5px; background: var(--pink); }
-.dna-scale-px { text-align: right; }
-.dna-semantic-spacing { display: grid; margin: var(--space-8) 0 0; border-top: 1px solid var(--border); }
-.dna-semantic-spacing div {
-  display: grid;
-  grid-template-columns: minmax(120px, 1fr) auto;
-  gap: var(--space-4);
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--border);
-}
-.dna-semantic-spacing dd { color: var(--text-2); font-family: 'Source Code Pro', monospace; font-size: var(--text-caption); }
-.dna-radii { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
-.dna-radius {
-  --r: 0;
-  display: grid;
-  min-height: 128px;
-  padding: var(--space-4);
-  place-items: end start;
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  background: var(--bg-2);
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--text-caption);
-}
-
-.dna-component-field {
-  display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(260px, 5fr);
-  gap: clamp(40px, 7vw, 96px);
-  align-items: start;
-}
-.dna-component-specimen { padding: var(--space-8); border: 1px solid var(--border); background: var(--bg-2); }
-.dna-component-meta { grid-template-columns: 1fr; margin: var(--space-6) 0 0; padding: 0; border: 0; }
-.dna-component-meta > div { padding: var(--space-4) 0; border-right: 0; }
-.dna-component-meta > div:last-child { border-right: 0; }
-.dna-component-list { margin: 0; padding: 0; border-top: 1px solid var(--text); list-style: none; }
-.dna-component-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-5);
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--border);
-}
-.dna-component-list strong { color: var(--text-2); font-weight: 500; }
-.dna-component-note {
-  max-width: 70ch;
-  margin-top: var(--space-10);
-  padding-left: var(--space-5);
-  border-left: 2px solid var(--pink);
-  color: var(--text-2);
-}
-
-@media (max-width: 900px) {
-  .dna-section,
-  .dna-section-head { grid-template-columns: minmax(105px, 2fr) minmax(0, 7fr); }
-  .dna-palette-field,
-  .dna-component-field { grid-template-columns: 1fr; }
-  .dna-color-preview { min-height: 360px; }
-  .dna-rhythm-field { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  .dna-panel { padding: var(--space-4) var(--space-5) var(--space-12); }
-  .dna-panel-head { grid-template-columns: minmax(0, 1fr) 48px; padding-bottom: var(--space-12); }
-  .dna-title { font-size: clamp(4rem, 20vw, 5.8rem); }
-  .dna-intro { font-size: var(--text-body); }
-  .dna-section { display: block; padding: var(--space-12) 0; }
-  .dna-section-head { display: block; margin-bottom: var(--space-6); }
-  .dna-section-head p { font-size: var(--text-body); }
-  .dna-fonts { grid-template-columns: 1fr; }
-  .dna-font { min-height: 170px; padding: var(--space-4) 0; border-right: 0; }
-  .dna-font + .dna-font { padding-left: 0; }
-  .dna-font-sample { font-size: clamp(4.5rem, 24vw, 6.4rem); }
-  .dna-playground-head { display: block; }
-  .dna-playground-head p { margin-top: var(--space-3); }
-  .dna-playground-text { font-size: clamp(2.8rem, 15vw, 4.4rem); overflow-wrap: anywhere; }
-  .dna-playground-controls { gap: var(--space-5); }
-  .dna-scale-row { grid-template-columns: 82px minmax(0, 1fr) 44px; }
-  .dna-radii { gap: var(--space-3); }
-  .dna-radius { min-height: 92px; }
-  .dna-component-specimen { padding: var(--space-5); }
-  .dna-component-meta { grid-template-columns: 1fr; }
-  .dna-component-meta > div,
-  .dna-component-meta > div + div { padding: var(--space-4) 0; border-right: 0; border-bottom: 1px solid var(--border); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .dna-overlay,
-  .dna-panel,
-  .dna-close,
-  .dna-swatch::before,
-  .dna-color-preview-img,
-  .dna-color-preview-tint { transition: none; }
-}
-
 /* ABILITY EXPERIENCE: START */
 .ability-hero {
   --ability-project: #efaa18;
@@ -5109,4 +4731,681 @@ html[data-theme="dark"] .spotify-frame {
   .sal-vico2-cover-wall { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   .sal-vico2-evidence > div + div { border-left: 0; border-top: 1px solid var(--border); }
 }
+/* ══════════════════════════════════════════════
+   ENGRAVED DESIGN DNA HERO
+   ══════════════════════════════════════════════ */
+.home-page--engraved-dna {
+  --hero-bg: #f6f6f4;
+  --hero-text: #1a1a1a;
+  --hero-muted: #6e6e6e;
+  --hero-blob-a: #ea3b99;
+  --hero-blob-b: #b06020;
+  --hero-blend: multiply;
+}
+
+html[data-theme="dark"] .home-page--engraved-dna {
+  --hero-bg: #121118;
+  --hero-text: #f7f6f3;
+  --hero-muted: rgba(255, 255, 255, 0.62);
+  --hero-blob-a: #7ab8ff;
+  --hero-blob-b: #7928d2;
+  --hero-blend: screen;
+}
+
+.home-page--engraved-dna .nav {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  color: var(--hero-text);
+}
+
+.home-page--engraved-dna .nav-inner {
+  max-width: none;
+  padding-inline: 60px;
+  gap: 22px;
+}
+
+.home-page--engraved-dna .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  min-width: max-content;
+  color: var(--hero-text);
+}
+
+.home-page--engraved-dna .nav-logo-victor {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #55a2f7;
+  transition: color 400ms ease;
+}
+
+.home-page--engraved-dna .nav-logo-tran {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #1a1a1a;
+  transition: color 400ms ease;
+  margin-left: -0.1em;
+}
+
+html[data-theme="dark"] .home-page--engraved-dna .nav-logo-victor { color: #ea3b99; }
+html[data-theme="dark"] .home-page--engraved-dna .nav-logo-tran { color: #f7f6f3; }
+
+.home-page--engraved-dna .nav-links {
+  margin-left: auto;
+}
+
+.home-page--engraved-dna .nav-links > li > a,
+.home-page--engraved-dna .nav-dropdown-toggle {
+  color: color-mix(in oklab, var(--hero-text) 65%, transparent);
+}
+
+.home-page--engraved-dna .lens-switcher { margin-left: 4px; }
+
+.home-page--engraved-dna .page-content { padding-top: 0; }
+
+.home-page--engraved-dna .hero {
+  --bg: var(--hero-bg);
+  --bg-2: color-mix(in oklab, var(--hero-bg) 94%, var(--hero-text) 6%);
+  --text: var(--hero-text);
+  --text-2: var(--hero-muted);
+  position: relative;
+  min-height: max(720px, 100svh);
+  height: auto;
+  overflow: hidden;
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  transition: background-color 400ms ease, color 400ms ease, min-height 500ms ease;
+  isolation: isolate;
+}
+
+.home-page--engraved-dna .hero-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transform-origin: center;
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-page--engraved-dna .hero.is-dna-expanded .hero-ambient { transform: scale(1.12); }
+
+.home-page--engraved-dna .hero-dna-tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--dna-tint, transparent);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 260ms ease, background-color 260ms ease;
+}
+
+html[data-theme="dark"] .home-page--engraved-dna .hero-dna-tint { mix-blend-mode: screen; }
+.home-page--engraved-dna .hero-dna-tint.is-active { opacity: 0.22; }
+
+.home-page--engraved-dna .hero-ambient-blob {
+  position: absolute;
+  left: var(--blob-x, 34%);
+  top: var(--blob-y, 44%);
+  z-index: 1;
+  --blob-size: clamp(560px, 66vw, 980px);
+  --blob-size-scale: 1;
+  --blob-blur: 44px;
+  --blob-visibility: 1;
+  width: calc(var(--blob-size) * var(--blob-size-scale));
+  aspect-ratio: 1;
+  border-radius: 44% 56% 61% 39% / 53% 42% 58% 47%;
+  opacity: 0.26;
+  filter: blur(var(--blob-blur)) saturate(1.28) opacity(var(--blob-visibility));
+  mix-blend-mode: var(--hero-blend);
+  transform: translate(-50%, -50%) scale(1);
+  will-change: left, top, transform, border-radius;
+  animation: heroBlobLava 10s ease-in-out infinite;
+  transition: background-color 400ms ease, opacity 300ms ease;
+}
+
+.home-page--engraved-dna .hero-ambient-blob--a {
+  --blob-x: 34%;
+  --blob-y: 43%;
+  background: radial-gradient(circle at 58% 42%, #ff6847 0 18%, var(--hero-blob-a) 42%, transparent 74%);
+}
+
+.home-page--engraved-dna .hero-ambient-blob--b {
+  --blob-x: 69%;
+  --blob-y: 58%;
+  --blob-size-scale: 0.72;
+  background: radial-gradient(circle at 42% 58%, #7928d2 0 20%, var(--hero-blob-b) 46%, #55a2f7 62%, transparent 76%);
+  animation-duration: 13s;
+  animation-delay: -5s;
+  animation-direction: reverse;
+}
+
+.home-page--engraved-dna .hero-ambient-paused .hero-ambient-blob { animation-play-state: paused; }
+
+@keyframes heroBlobLava {
+  0%, 100% {
+    border-radius: 44% 56% 61% 39% / 53% 42% 58% 47%;
+    opacity: 0.22;
+    transform: translate(-50%, -50%) scale(0.84) rotate(0deg);
+  }
+  33% {
+    border-radius: 62% 38% 45% 55% / 42% 63% 37% 58%;
+    opacity: 0.38;
+    transform: translate(-50%, -50%) scale(1.2) rotate(15deg);
+  }
+  66% {
+    border-radius: 38% 62% 57% 43% / 61% 39% 54% 46%;
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.04) rotate(-13deg);
+  }
+}
+
+.home-page--engraved-dna .hero-ambient-orb {
+  position: absolute;
+  left: var(--orb-x, 50%);
+  top: var(--orb-y, 50%);
+  z-index: 1;
+  width: var(--orb-size, 96px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--orb-color) 58%, transparent);
+  border-radius: 50%;
+  color: var(--orb-color);
+  opacity: 0.34;
+  filter: none;
+  mix-blend-mode: var(--hero-blend);
+  transform: translate(-50%, -50%);
+  will-change: left, top, transform;
+  background: transparent;
+}
+
+.home-page--engraved-dna .hero-ambient-orb--node {
+  animation: heroOrbNodeSpin var(--orb-spin, 18s) linear infinite;
+}
+
+.home-page--engraved-dna .hero-ambient-orb--node::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px color-mix(in srgb, currentColor 45%, transparent);
+  transform: translateX(-50%);
+}
+
+.home-page--engraved-dna .hero-ambient-companion {
+  position: absolute;
+  left: var(--companion-field-x, 50%);
+  top: var(--companion-field-y, 50%);
+  z-index: 3;
+  width: var(--companion-size, 12px);
+  aspect-ratio: 1;
+  border: 1px solid var(--hero-bg);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transform: translate(-50%, -50%) translate(
+    calc(var(--companion-offset-x, 0px) + var(--companion-shift-x, 0px)),
+    calc(var(--companion-offset-y, 0px) + var(--companion-shift-y, 0px))
+  );
+  will-change: transform;
+}
+
+.home-page--engraved-dna .hero-ambient-companion--a { --companion-field-x: 22%; --companion-field-y: 28%; --companion-size: 12px; --companion-offset-x: 37px; --companion-offset-y: -12px; --orb-color: #ff6847; }
+.home-page--engraved-dna .hero-ambient-companion--c { --companion-field-x: 70%; --companion-field-y: 34%; --companion-size: 20px; --companion-offset-x: -63px; --companion-offset-y: 21px; --orb-color: #55a2f7; }
+.home-page--engraved-dna .hero-ambient-companion--e { --companion-field-x: 48%; --companion-field-y: 78%; --companion-size: 32px; --companion-offset-x: 109px; --companion-offset-y: -56px; --orb-color: #55a2f7; }
+
+.home-page--engraved-dna .hero-ambient-orb--a { --orb-x: 22%; --orb-y: 28%; --orb-size: 42px; --orb-color: #ff6847; }
+.home-page--engraved-dna .hero-ambient-orb--b { --orb-x: 42%; --orb-y: 18%; --orb-size: 68px; --orb-color: var(--hero-blob-a); --orb-spin: 15s; }
+.home-page--engraved-dna .hero-ambient-orb--c { --orb-x: 70%; --orb-y: 34%; --orb-size: 96px; --orb-color: #55a2f7; }
+.home-page--engraved-dna .hero-ambient-orb--d { --orb-x: 78%; --orb-y: 68%; --orb-size: 132px; --orb-color: var(--hero-blob-b); --orb-spin: 21s; }
+.home-page--engraved-dna .hero-ambient-orb--e { --orb-x: 48%; --orb-y: 78%; --orb-size: 176px; --orb-color: color-mix(in oklab, #55a2f7 76%, #7928d2); }
+.home-page--engraved-dna .hero-ambient-orb--f { --orb-x: 28%; --orb-y: 62%; --orb-size: 224px; --orb-color: var(--hero-blob-a); --orb-spin: 27s; }
+.home-page--engraved-dna .hero-ambient-paused .hero-ambient-orb { animation-play-state: paused; }
+
+@keyframes heroOrbNodeSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.home-page--engraved-dna .hero-identity {
+  --name-overhang: 72px;
+  position: absolute;
+  left: var(--route02-x);
+  top: 50%;
+  z-index: 2;
+  display: block;
+  transform: translateY(-50%);
+  max-width: 620px;
+}
+
+.home-page--engraved-dna .hero-dna-trigger {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: start;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--hero-text);
+  font: inherit;
+  cursor: pointer;
+  align-self: stretch;
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.home-page--engraved-dna .hero-portrait-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--hero-text) 14%, transparent);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--hero-blob-a) 13%, var(--hero-bg));
+  box-shadow: 0 20px 50px color-mix(in srgb, var(--hero-text) 11%, transparent);
+  transition: background-color 400ms ease, border-color 400ms ease, transform 300ms ease;
+}
+
+.home-page--engraved-dna .hero-portrait-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 38% 24%, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.2) 42%, transparent 76%),
+    linear-gradient(135deg, color-mix(in oklab, var(--hero-blob-a) 28%, transparent), transparent 68%);
+  mix-blend-mode: screen;
+  transition: opacity 220ms ease;
+}
+
+.home-page--engraved-dna .hero-dna-trigger:hover .hero-portrait-frame,
+.home-page--engraved-dna .hero-dna-trigger:focus-visible .hero-portrait-frame { transform: translateY(-3px); }
+.home-page--engraved-dna .hero-dna-trigger:hover .hero-portrait-frame::after,
+.home-page--engraved-dna .hero-dna-trigger:focus-visible .hero-portrait-frame::after { opacity: 0.42; }
+.home-page--engraved-dna .hero-dna-trigger:focus-visible { outline: 2px solid var(--hero-blob-a); outline-offset: 6px; border-radius: 10px; }
+
+.home-page--engraved-dna .hero-portrait {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transform: none;
+  transition: opacity 400ms ease;
+}
+
+.home-page--engraved-dna .hero-portrait::after,
+.home-page--engraved-dna .hero-portrait-lens { display: none; }
+.home-page--engraved-dna .hero-portrait[data-theme-portrait="light"] { opacity: 1; }
+html[data-theme="dark"] .home-page--engraved-dna .hero-portrait[data-theme-portrait="light"] { opacity: 0; }
+html[data-theme="dark"] .home-page--engraved-dna .hero-portrait[data-theme-portrait="dark"] { opacity: 1; }
+
+.home-page--engraved-dna .hero-portrait-cutout {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  filter: none;
+}
+
+.home-page--engraved-dna .hero-typeblock {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  transform: none;
+  pointer-events: auto;
+  color: var(--hero-text);
+  width: 100%;
+}
+
+.home-page--engraved-dna .hero-intro-row {
+  --portrait-span: 104px;
+  display: grid;
+  grid-template-columns: var(--portrait-span) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 18px;
+  width: 100%;
+}
+
+.home-page--engraved-dna .hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: var(--portrait-span);
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.home-page--engraved-dna .hero-typeblock h1 {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  margin: 0;
+  width: max-content;
+  max-width: none;
+  transform: scale(1.151);
+  transform-origin: left bottom;
+}
+
+.home-page--engraved-dna .hero-bigtype {
+  --hero-name-size: clamp(4.2rem, 7.2vw, 6.8rem);
+  font-size: var(--hero-name-size);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  color: var(--hero-text);
+  font-style: italic;
+  flex-shrink: 0;
+  transition: color 400ms ease;
+}
+
+.home-page--engraved-dna .hero-bigtype--victor { color: #55a2f7; }
+
+.home-page--engraved-dna .hero-bigtype--tran {
+  margin-left: -0.1em;
+  transform: none;
+  font-size: var(--hero-name-size);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: #1a1a1a;
+}
+
+html[data-theme="dark"] .home-page--engraved-dna .hero-bigtype--victor { color: #ea3b99; }
+html[data-theme="dark"] .home-page--engraved-dna .hero-bigtype--tran { color: #f7f6f3; }
+
+.home-page--engraved-dna .hero-title {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--hero-text);
+}
+
+.home-page--engraved-dna .hero-subtitle {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 0.78rem;
+  color: var(--hero-muted);
+}
+
+.home-page--engraved-dna .hero-cta {
+  margin-top: 0;
+  color: var(--hero-text);
+  border-color: color-mix(in oklab, var(--hero-text) 45%, transparent);
+}
+
+.home-page--engraved-dna .hero-meta { display: none; }
+
+.home-page--engraved-dna .hero-services {
+  left: var(--route02-x);
+  right: var(--route02-x);
+  bottom: 34px;
+  justify-content: flex-start;
+  gap: 13px;
+  font-size: 0.56rem;
+  color: color-mix(in oklab, var(--hero-text) 65%, transparent);
+}
+
+.home-page--engraved-dna .featured-heading {
+  min-height: clamp(156px, 13vw, 220px);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(28px, 2.8vw, 42px);
+}
+
+.home-page--engraved-dna .hero-services li + li::before {
+  content: '·';
+  margin-right: 13px;
+}
+
+.home-page--engraved-dna .hero-dna-panel {
+  position: absolute;
+  z-index: 3;
+  top: clamp(132px, 17vh, 174px);
+  right: 60px;
+  left: max(48vw, 660px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    'palette spacing'
+    'palette shape'
+    'type type'
+    'close close';
+  gap: clamp(24px, 3vw, 44px) clamp(28px, 4vw, 64px);
+  align-items: start;
+  max-height: calc(100% - clamp(180px, 22vh, 220px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px 10px 24px 2px;
+  scrollbar-gutter: stable;
+  color: var(--hero-text);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms ease, transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-page--engraved-dna .hero-dna-panel[hidden] { display: none; }
+.home-page--engraved-dna .hero-dna-panel.is-active { opacity: 1; transform: translateY(0); }
+.home-page--engraved-dna .hero-dna-group { opacity: 0; transform: translateY(10px); transition: opacity 500ms ease, transform 600ms cubic-bezier(0.16, 1, 0.3, 1); }
+.home-page--engraved-dna .hero-dna-panel.is-active .hero-dna-group { opacity: 1; transform: translateY(0); }
+.home-page--engraved-dna .hero-dna-palette { grid-area: palette; }
+.home-page--engraved-dna .hero-dna-type { grid-area: type; }
+.home-page--engraved-dna .hero-dna-spacing { grid-area: spacing; }
+.home-page--engraved-dna .hero-dna-shape { grid-area: shape; }
+
+.home-page--engraved-dna .hero-dna-label,
+.home-page--engraved-dna .hero-dna-note,
+.home-page--engraved-dna .hero-dna-type-row span,
+.home-page--engraved-dna .hero-dna-space-row small,
+.home-page--engraved-dna .hero-dna-tint-status,
+.home-page--engraved-dna .hero-dna-radii small,
+.home-page--engraved-dna .hero-dna-chip { font-family: 'Source Code Pro', monospace; }
+
+.home-page--engraved-dna .hero-dna-label { margin-bottom: 18px; font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; }
+.home-page--engraved-dna .hero-dna-note,
+.home-page--engraved-dna .hero-dna-tint-status { margin: -10px 0 12px; color: var(--hero-muted); font-size: 0.44rem; letter-spacing: 0.02em; }
+.home-page--engraved-dna .hero-dna-tint-status { margin: 10px 0 0; }
+.home-page--engraved-dna .hero-dna-swatches { display: grid; border-top: 1px solid color-mix(in oklab, var(--hero-text) 18%, transparent); }
+.home-page--engraved-dna .hero-dna-swatch {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  min-height: 34px;
+  padding: 3px 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--hero-text) 14%, transparent);
+  background: transparent;
+  color: var(--hero-text);
+  text-align: left;
+  cursor: pointer;
+}
+.home-page--engraved-dna .hero-dna-swatch-dot { display: block; width: 22px; height: 22px; border: 1px solid color-mix(in srgb, var(--hero-text) 18%, transparent); border-radius: 50%; background: var(--dna-color); }
+.home-page--engraved-dna .hero-dna-swatch-name,
+.home-page--engraved-dna .hero-dna-swatch-value { font: 500 0.46rem/1.2 'Source Code Pro', monospace; }
+.home-page--engraved-dna .hero-dna-swatch-value { color: var(--hero-muted); }
+.home-page--engraved-dna .hero-dna-swatch:hover,
+.home-page--engraved-dna .hero-dna-swatch:focus-visible,
+.home-page--engraved-dna .hero-dna-swatch.is-selected { color: var(--hero-blob-a); }
+
+.home-page--engraved-dna .hero-dna-typefaces { border-top: 1px solid color-mix(in oklab, var(--hero-text) 18%, transparent); }
+.home-page--engraved-dna .hero-dna-type-row { display: flex; align-items: center; gap: 14px; min-height: 62px; border-bottom: 1px solid color-mix(in oklab, var(--hero-text) 14%, transparent); }
+.home-page--engraved-dna .hero-dna-type-row strong { min-width: 70px; font-weight: 400; }
+.home-page--engraved-dna .hero-dna-type-row > span { display: grid; gap: 3px; font-size: 0.48rem; letter-spacing: 0.04em; }
+.home-page--engraved-dna .hero-dna-type-row b { font-weight: 500; }
+.home-page--engraved-dna .hero-dna-type-row small { color: var(--hero-muted); font: 400 0.43rem/1.2 'Source Code Pro', monospace; }
+.home-page--engraved-dna .hero-dna-type-sample { font-size: 2.7rem; line-height: 0.82; letter-spacing: -0.05em; }
+.home-page--engraved-dna .hero-dna-serif { font-family: 'DM Serif Display', serif; }
+.home-page--engraved-dna .hero-dna-sans { font-family: 'Barlow', sans-serif; }
+.home-page--engraved-dna .hero-dna-mono { font-family: 'Source Code Pro', monospace; }
+.home-page--engraved-dna .hero-dna-type-playground { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--hero-text); }
+.home-page--engraved-dna .hero-dna-play-text { min-height: 1em; margin: 0 0 14px; outline: none; font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.7rem); line-height: 0.96; letter-spacing: -0.04em; }
+.home-page--engraved-dna .hero-dna-play-text:focus-visible { box-shadow: inset 0 -2px var(--hero-blob-a); }
+.home-page--engraved-dna .hero-dna-play-text.is-italic { font-style: italic; }
+.home-page--engraved-dna .hero-dna-play-controls { display: flex; flex-wrap: wrap; gap: 7px 12px; }
+.home-page--engraved-dna .hero-dna-chip { min-height: 32px; padding: 0; border: 0; border-bottom: 1px solid color-mix(in oklab, var(--hero-text) 24%, transparent); background: transparent; color: var(--hero-muted); font-size: 0.44rem; cursor: pointer; }
+.home-page--engraved-dna .hero-dna-chip:hover,
+.home-page--engraved-dna .hero-dna-chip:focus-visible,
+.home-page--engraved-dna .hero-dna-chip.is-active { border-bottom-color: var(--hero-blob-a); color: var(--hero-text); }
+
+.home-page--engraved-dna .hero-dna-space-row { display: grid; grid-template-columns: 72px minmax(0, 1fr) 36px; align-items: center; gap: 8px; min-height: 29px; }
+.home-page--engraved-dna .hero-dna-space-row > span { display: block; width: min(100%, var(--space-width)); height: 6px; background: color-mix(in oklab, #55a2f7 42%, transparent); }
+.home-page--engraved-dna .hero-dna-space-row small { font-size: 0.42rem; }
+.home-page--engraved-dna .hero-dna-space-token { text-transform: uppercase; }
+.home-page--engraved-dna .hero-dna-space-value { color: var(--hero-muted); text-align: right; }
+.home-page--engraved-dna .hero-dna-radii { display: flex; align-items: end; gap: 12px; }
+.home-page--engraved-dna .hero-dna-radii > span { display: grid; grid-template-rows: 1fr auto; width: 48px; height: 52px; padding: 5px; place-items: center; border: 1px solid color-mix(in oklab, var(--hero-text) 28%, transparent); border-radius: var(--dna-radius); }
+.home-page--engraved-dna .hero-dna-radii small { font-size: 0.38rem; line-height: 1; }
+.home-page--engraved-dna .hero-dna-radius-token { align-self: end; text-transform: uppercase; }
+.home-page--engraved-dna .hero-dna-radius-value { align-self: start; color: var(--hero-muted); }
+
+.home-page--engraved-dna .hero-dna-close {
+  grid-area: close;
+  justify-self: end;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid color-mix(in oklab, var(--hero-text) 22%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  padding: 0 15px;
+  color: var(--hero-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.home-page--engraved-dna .hero-dna-close:focus-visible { outline: 2px solid var(--hero-blob-a); outline-offset: 3px; }
+
+@media (min-width: 761px) {
+  .home-page--engraved-dna .hero.is-dna-expanded { min-height: max(920px, 100svh); }
+  .home-page--engraved-dna .hero-dna-type {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 clamp(28px, 4vw, 64px);
+    align-items: start;
+  }
+  .home-page--engraved-dna .hero-dna-type > .hero-dna-label { grid-column: 1 / -1; }
+  .home-page--engraved-dna .hero-dna-type-playground { margin-top: 0; }
+  .home-page--engraved-dna .hero-dna-label { font-size: 0.62rem; }
+  .home-page--engraved-dna .hero-dna-note { font-size: 0.54rem; }
+  .home-page--engraved-dna .hero-dna-swatch { grid-template-columns: 32px minmax(0, 1fr) auto; min-height: 40px; }
+  .home-page--engraved-dna .hero-dna-swatch-dot { width: 32px; height: 32px; }
+  .home-page--engraved-dna .hero-dna-swatch-name,
+  .home-page--engraved-dna .hero-dna-swatch-value { font-size: 0.52rem; }
+  .home-page--engraved-dna .hero-dna-type-row { min-height: 70px; gap: 14px; }
+  .home-page--engraved-dna .hero-dna-type-row strong { min-width: 76px; }
+  .home-page--engraved-dna .hero-dna-type-row span { font-size: 0.56rem; }
+  .home-page--engraved-dna .hero-dna-type-sample { font-size: 3.4rem; }
+  .home-page--engraved-dna .hero-dna-space-row { min-height: 29px; }
+  .home-page--engraved-dna .hero-dna-space-row > span { height: 8px; }
+  .home-page--engraved-dna .hero-dna-space-row small,
+  .home-page--engraved-dna .hero-dna-radii small { font-size: 0.48rem; }
+  .home-page--engraved-dna .hero-dna-radii { gap: 14px; }
+  .home-page--engraved-dna .hero-dna-radii > span { width: 58px; height: 62px; }
+  .home-page--engraved-dna .hero-dna-close { font-size: 0.58rem; }
+}
+
+@media (max-width: 980px) {
+  .home-page--engraved-dna .nav-inner { padding-inline: 32px; }
+  .home-page--engraved-dna .hero-identity { left: 32px; }
+  .home-page--engraved-dna .hero-dna-panel { left: 48%; right: 32px; gap: 24px; }
+  .home-page--engraved-dna .hero-services { left: 32px; right: 32px; }
+}
+
+@media (max-width: 760px) {
+  .home-page--engraved-dna .nav-inner { padding-inline: 20px; }
+  .home-page--engraved-dna .nav-logo { position: relative; z-index: 2; }
+  .home-page--engraved-dna .hero { min-height: 780px; }
+  .home-page--engraved-dna .hero.is-dna-expanded { min-height: 1760px; }
+  .home-page--engraved-dna .hero-ambient-blob { --blob-size: 360px; --blob-blur: 54px; filter: blur(var(--blob-blur)) saturate(1.08) opacity(var(--blob-visibility)); }
+  .home-page--engraved-dna .hero-identity {
+    top: 120px;
+    left: 24px;
+    right: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    transform: none;
+  }
+  .home-page--engraved-dna .hero-dna-trigger { justify-items: start; }
+  .home-page--engraved-dna .hero-portrait-frame { width: 100%; height: 100%; }
+  .home-page--engraved-dna .hero-bigtype { --hero-name-size: clamp(3.6rem, 18vw, 4.8rem); }
+  .home-page--engraved-dna .hero-title { margin: 0; }
+  .home-page--engraved-dna .hero-dna-panel {
+    top: 540px;
+    left: 24px;
+    right: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'palette palette'
+      'type type'
+      'spacing shape'
+      'close close';
+    gap: 30px 20px;
+    max-height: none;
+    overflow: visible;
+  }
+  .home-page--engraved-dna .hero-dna-close { justify-self: start; margin-top: 4px; }
+
+  .home-page--engraved-dna .hero-dna-radii { display: grid; grid-template-columns: repeat(2, 44px); }
+  .home-page--engraved-dna .hero-services {
+    top: auto;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+    max-width: none;
+    padding: 0;
+    line-height: 1.2;
+  }
+  .home-page--engraved-dna .hero.is-dna-expanded .hero-services {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .home-page--engraved-dna .hero-services li + li::before { content: none; }
+}
+
+@media (max-width: 480px) {
+  .home-page--engraved-dna .hero-intro-row {
+    --portrait-span: 112px;
+    gap: 12px;
+  }
+  .home-page--engraved-dna .hero-copy { gap: 4px; }
+  .home-page--engraved-dna .hero-title { font-size: 0.82rem; line-height: 1.25; }
+  .home-page--engraved-dna .hero-subtitle { font-size: 0.68rem; line-height: 1.35; }
+  .home-page--engraved-dna .hero-bigtype { --hero-name-size: clamp(3.35rem, 16vw, 4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page--engraved-dna .hero,
+  .home-page--engraved-dna .hero-portrait,
+  .home-page--engraved-dna .hero-ambient,
+  .home-page--engraved-dna .hero-dna-tint,
+  .home-page--engraved-dna .hero-dna-panel,
+  .home-page--engraved-dna .hero-dna-group { transition-duration: 0.01ms; }
+  .home-page--engraved-dna .hero-ambient-blob,
+  .home-page--engraved-dna .hero-ambient-orb {
+    animation: none;
+    will-change: auto;
+  }
+}
+
 /* SAL VICO2: END */

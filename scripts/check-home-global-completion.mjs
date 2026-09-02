@@ -26,12 +26,12 @@ need(index.includes('id="featuredHeading">Other cool things to check out</h2>'),
   'Home work heading must use Victor’s approved casual phrase.');
 need(!index.includes('>Selected Work</h2>'), 'Retired Selected Work heading remains visible.');
 
-need(!index.includes('class="hero-cycle-label"'), 'Hero color control must not render a visible text label.');
-need(!js.includes("querySelector('.hero-cycle-label')"), 'Hero runtime must not look up a retired visible color label.');
-need(!js.includes("heroLabel.textContent"), 'Hero runtime must not rewrite retired visible color copy.');
-need(css.includes('.hero-cycle .control-tooltip'), 'Hero color control needs a tooltip surface.');
-need(index.includes('<span class="control-tooltip" aria-hidden="true">Change color</span>'),
-  'Hero tooltip must remain visually available without duplicating the button’s accessible name.');
+need(!index.includes('class="hero-cycle"') && !index.includes('class="hero-cycle-label"'),
+  'Retired independent hero color controls must remain absent.');
+need(!js.includes("querySelector('.hero-cycle-label')") && !js.includes('heroLabel.textContent'),
+  'Hero runtime must not restore retired color-control label behavior.');
+need(/class="hero-dna-trigger"[^>]*aria-expanded="false"[^>]*aria-controls="heroDnaPanel"/.test(index),
+  'Portrait trigger must expose the accepted inline Design DNA relationship.');
 
 need(!shellGenerator.includes('class="lens-switcher-label"'),
   'Generated desktop Light/Dark controls must be icon-only.');

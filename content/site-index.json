@@ -1,6 +1,6 @@
 [
   {
-    "title": "I design cool things with sincerity.",
+    "title": "VictorTran",
     "source": "index.html",
     "url": "/",
     "category": "Portfolio",
@@ -20,10 +20,6 @@
       "Interface Studies"
     ],
     "images": [
-      {
-        "src": "images/hero/figure20.webp",
-        "alt": "Victor Tran, laughing"
-      },
       {
         "src": "images/wxo-canvas/wxo-home-thumbnail.png",
         "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
@@ -729,16 +725,8 @@
         "alt": "Dark Magi dashboard interface study with fictional status summaries, a work docket, and an operations panel"
       },
       {
-        "src": "images/ui-gallery/magi-architecture.webp",
-        "alt": "Dark Magi ecosystem-map study connecting fictional coordinator, worker, runtime, domain, and shared-state nodes"
-      },
-      {
         "src": "images/ui-gallery/magi-overlays.webp",
         "alt": "Magi overlay study with a fictional command palette and pause-agents confirmation dialog"
-      },
-      {
-        "src": "images/ui-gallery/magi-color-type.webp",
-        "alt": "Magi visual-system study showing dark surface colors, emerald signals, status colors, and a Space Grotesk type scale"
       },
       {
         "src": "images/ui-gallery/magi-components.webp",
