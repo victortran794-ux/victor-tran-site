@@ -4688,7 +4688,6 @@ html[data-theme="dark"] .spotify-frame {
 .sal-vico2-cover-stories figure { margin: 0; }
 .sal-vico2-evidence { margin-top: 0; background: var(--bg-2); }
 .sal-vico2-evidence > div { padding: clamp(32px, 5vw, 64px); }
-.sal-vico2-evidence > div + div { border-left: 1px solid var(--border); }
 .sal-vico2-awards p { margin: 0; padding: var(--space-5) 0; border-top: 1px solid var(--border); font-family: 'Source Code Pro', monospace; font-size: var(--text-label); letter-spacing: 0.08em; text-transform: uppercase; }
 .sal-vico2-cover-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-8); }
 .sal-vico2-cover-wall a { color: inherit; text-decoration: none; }
@@ -4730,7 +4729,6 @@ html[data-theme="dark"] .spotify-frame {
   .sal-vico2-system-path { grid-template-columns: 1fr; }
   .sal-vico2-system-path > div + div { border-left: 0; border-top: 1px solid var(--border); }
   .sal-vico2-cover-wall { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  .sal-vico2-evidence > div + div { border-left: 0; border-top: 1px solid var(--border); }
 }
 /* SAL VICO2: END */
 

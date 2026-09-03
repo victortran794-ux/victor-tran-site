@@ -239,6 +239,10 @@ def main() -> int:
     )
     need(".sal-vico2-hero,\n.sal-vico2-case-study {" in sal_css, "SAL skin tokens must reach both hero and case-study components")
     need("@media (max-width: 700px)" in sal_css, "SAL layer needs narrow recomposition")
+    need(
+        ".sal-vico2-evidence > div + div" not in sal_css,
+        "recognition evidence must not draw an internal divider through long award headings",
+    )
     need(".sal-vico2-cover-wall a:focus-visible" in sal_css,
          "issue-cover focus must be scoped so the cover and caption column are not awkwardly outlined together")
     need(".sal-vico2-cover-wall a:focus-visible img" in sal_css,

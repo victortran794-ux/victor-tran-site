@@ -140,6 +140,7 @@ try {
         const awardLabel=document.querySelector('.sal-vico2-awards p');
         const archiveLabel=document.querySelector('.sal-vico2-archive-link');
         const cover=document.querySelector('.sal-vico2-cover-wall img');
+        const recognitionSecondPanel=document.querySelector('.sal-vico2-evidence > div + div');
         const computed=(element,properties)=>Object.fromEntries(properties.map((property)=>[property,getComputedStyle(element)[property]]));
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
@@ -149,6 +150,7 @@ try {
             awardLabel:computed(awardLabel,['fontSize','letterSpacing']),
             archiveLabel:computed(archiveLabel,['fontSize','letterSpacing']),
             cover:computed(cover,['transitionProperty','transitionDuration']),
+            recognitionSecondPanel:computed(recognitionSecondPanel,['borderLeftWidth','borderTopWidth']),
           },
           cta:Boolean(cta),actions:actions.map((a)=>({text:a.textContent.trim(),href:a.href,target:a.target,rel:a.rel})),
           duplicateConnie:[...document.querySelectorAll('img[src="images/sal-f2020-connie-owen.jpg"]')].length,
@@ -164,16 +166,23 @@ try {
       assert(state.tokenOutcomes.awardLabel.fontSize==='13px'&&state.tokenOutcomes.awardLabel.letterSpacing==='1.04px',`award label token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
       assert(state.tokenOutcomes.archiveLabel.fontSize==='13px',`archive label token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
       assert(state.tokenOutcomes.cover.transitionProperty==='transform'&&state.tokenOutcomes.cover.transitionDuration==='0.3s',`cover motion token outcome failed: ${JSON.stringify(state.tokenOutcomes)}`);
+      assert(state.tokenOutcomes.recognitionSecondPanel.borderLeftWidth==='0px'&&state.tokenOutcomes.recognitionSecondPanel.borderTopWidth==='0px',`recognition divider returned: ${JSON.stringify(state.tokenOutcomes.recognitionSecondPanel)}`);
       assert(state.cta && state.actions.length === 2 && state.actions.every((action)=>action.target === '_blank' && action.rel.includes('noopener')), `archive actions failed: ${JSON.stringify(state.actions)}`);
       assert(state.duplicateConnie === 1 && state.shell, `page structure drifted: ${JSON.stringify(state)}`);
       if (viewport.width === 390 && theme === 'light') {
         await cdp.screenshot('sal-390-light-opening.png');
+        await cdp.evaluate(`document.querySelector('.sal-vico2-evidence').scrollIntoView({block:'center',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('sal-390-light-recognition.png');
         await cdp.evaluate(`document.querySelector('.sal-vico2-archive-cta').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('sal-390-light-archive.png');
       }
       if (viewport.width === 1440 && theme === 'dark') {
         await cdp.screenshot('sal-1440-dark-opening.png');
+        await cdp.evaluate(`document.querySelector('.sal-vico2-evidence').scrollIntoView({block:'center',behavior:'instant'})`);
+        await delay(800);
+        await cdp.screenshot('sal-1440-dark-recognition.png');
         await cdp.evaluate(`document.querySelector('.sal-vico2-archive-cta').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
         await cdp.screenshot('sal-1440-dark-archive.png');
