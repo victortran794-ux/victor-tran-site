@@ -936,15 +936,15 @@
       "width": 640
     },
     "images/responsive/pci-handbook-1-cover-1200.webp": {
-      "bytes": 166970,
+      "bytes": 167600,
       "height": 927,
-      "sha256": "867d03adde845758d633a4e763ab72bf6bb62ba0117a944a846f5d00885ef2f8",
+      "sha256": "bab7aad858168394388866647f7d0f0d5af6a261d705167b4a9b90cd7a9b97c4",
       "width": 1200
     },
     "images/responsive/pci-handbook-1-cover-640.webp": {
-      "bytes": 61848,
+      "bytes": 62740,
       "height": 495,
-      "sha256": "ec591f2fd98b9e78d5fd9e727b44e594993109aa1190630d79a47d53fa0789f1",
+      "sha256": "1fdfe370f9f05997a0c5a8e6a98d9a8851d713ca2fca482aa93ba5b7a0a8aaad",
       "width": 640
     },
     "images/responsive/thumb-sal-540.webp": {
