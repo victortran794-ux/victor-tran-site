@@ -211,13 +211,23 @@ try {
           roleSizes: [parseFloat(getComputedStyle(primaryTitle).fontSize), parseFloat(getComputedStyle(secondaryTitle).fontSize)],
           roleRows: [primaryTitle, secondaryTitle].map(title => {
             const role = title.closest('.about-role');
+            const metadata = role.querySelector(':scope > p:last-child');
             const roleStyle = getComputedStyle(role);
             const markerStyle = getComputedStyle(role, '::before');
+            const titleStyle = getComputedStyle(title);
+            const metadataStyle = getComputedStyle(metadata);
+            const titleRect = title.getBoundingClientRect();
+            const metadataRect = metadata.getBoundingClientRect();
             return {
               backgroundColor: roleStyle.backgroundColor,
               borderBottomWidth: roleStyle.borderBottomWidth,
               markerContent: markerStyle.content,
               markerWidth: parseFloat(markerStyle.width),
+              titleSize: parseFloat(titleStyle.fontSize),
+              metadataSize: parseFloat(metadataStyle.fontSize),
+              metadataAlign: metadataStyle.textAlign,
+              titleBottom: titleRect.bottom,
+              metadataTop: metadataRect.top,
             };
           }),
           tagRadius: getComputedStyle(tag).borderRadius,
@@ -240,6 +250,10 @@ try {
         `${viewport.label}/${theme}: current role must be visually stronger ${state.roleSizes}`);
       assert(state.roleSizes[0] <= (viewport.mobile ? 34 : 38),
         `${viewport.label}/${theme}: current role title is oversized ${state.roleSizes[0]}px`);
+      assert(state.roleRows[0].titleSize <= 30 && state.roleRows[1].titleSize <= 26,
+        `${viewport.label}/${theme}: role title scale still competes with chronology ${JSON.stringify(state.roleRows)}`);
+      assert(state.roleRows.every(row => row.metadataTop >= row.titleBottom && row.metadataAlign === 'left' && row.metadataSize <= 16),
+        `${viewport.label}/${theme}: role chronology must stack below the title as secondary metadata ${JSON.stringify(state.roleRows)}`);
       assert(state.roleRows.every(row =>
         row.backgroundColor === 'rgba(0, 0, 0, 0)' &&
         row.borderBottomWidth === '1px' &&

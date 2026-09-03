@@ -144,8 +144,9 @@ forbid(html, /revisited|returns to/i,
   'UI Gallery copy must not use generic revision narration beyond the exact Ekos provenance sentence.');
 forbid(html, /<iframe|<form|<input|<video|data-dashboard|sessionStorage|password-gate/i,
   'UI Gallery must remain a public static-study route without embedded applications, forms, media players, or private-route logic.');
-// Direct re-review confirmed the current six-board Magi edit remains sufficient;
-// Inspector & Metrics repeats overview evidence and retains a large empty canvas.
+// Direct re-review confirmed the current four-study Magi edit remains sufficient;
+// The two cropped studies are owner-rejected; Inspector & Metrics repeats overview
+// evidence and retains a large empty canvas.
 forbid(html, /Inspector and metrics|sample dates|last checkpoint/i,
   'UI Gallery must omit the visually redundant Inspector board and stale internal review language.');
 forbid(html, /static and sanitized|sanitized dark|sanitized read-only|private dashboard experiment/i,

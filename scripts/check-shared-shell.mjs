@@ -129,6 +129,7 @@ const expectedConfig = {
   protectedDetail: 'Access required',
   contactEmail: 'victortran794@gmail.com',
   linkedInUrl: 'https://www.linkedin.com/in/victortrandesign/',
+  resumeUrl: 'documents/Victor-Tran-Resume.pdf',
   footerTagline: 'Do more good things.',
   footerSubtitle: '',
   footerCta: "Let's chat.",
@@ -233,6 +234,7 @@ for (const page of expectedPages) {
     fail(`${page} footer must not regenerate retired copy-email behavior`);
   }
   if (!footerBlock.includes('href="https://www.linkedin.com/in/victortrandesign/"')) fail(`${page} footer lost LinkedIn action`);
+  if (!footerBlock.includes('href="documents/Victor-Tran-Resume.pdf" target="_blank" rel="noopener">Résumé</a>')) fail(`${page} footer lost résumé action`);
 
   if (projectNavigationSnapshot[page]) {
     const projectNav = extractTag(html, /<nav class="project-nav"[\s\S]*?<\/nav>/i);

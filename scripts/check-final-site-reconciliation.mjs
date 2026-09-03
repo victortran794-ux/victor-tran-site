@@ -125,10 +125,9 @@ requireText(preflight, 'check:final-site-reconciliation', 'preflight must run th
 requireText(preflight, 'test:health-check-scope', 'preflight must run the scope fixture');
 
 for (const [name, text] of Object.entries(docs)) {
-  requirePhrase(text, 'static client-side password gate is visitor deterrence and discovery reduction, not server-side access control', `${name} must state the client-side gate limitation`);
-  requirePhrase(text, 'served HTML can contain the page source', `${name} must state served-source exposure`);
-  requirePhrase(text, 'No material requiring true confidentiality may be added', `${name} must prohibit truly confidential material`);
-  requirePhrase(text, 'server-side protection or private-hosting architecture', `${name} must name the required future protection architecture`);
+  requirePhrase(text, 'current request boundary denies unauthenticated protected HTML and media delivery', `${name} must state the current protected-delivery boundary`);
+  requirePhrase(text, 'Preserve the server-side access checks', `${name} must preserve server-side access checks`);
+  requirePhrase(text, 'do not add material outside the approved protection and provenance boundaries', `${name} must preserve approved protection and provenance boundaries`);
 }
 
 for (const [name, text] of Object.entries({ system: docs.system, workflows: docs.workflows, workflow: workflow })) {
@@ -136,12 +135,12 @@ for (const [name, text] of Object.entries({ system: docs.system, workflows: docs
 }
 for (const [name, text] of Object.entries({ system: docs.system, workflows: docs.workflows, dashboard: docs.dashboard })) {
   requirePhrase(text, 'manifest nav=false/homepage=false', `${name} must document Document Processing manifest visibility`);
-  requirePhrase(text, 'permanently redirects to `/wxo-canvas#document-processing`', `${name} must document the intentional Document Processing redirect`);
-  requirePhrase(text, 'raw `.html`', `${name} must document the raw HTML route artifact`);
-  requirePhrase(text, 'implementation artifact', `${name} must document the raw HTML route artifact`);
+  requirePhrase(text, '`/document-processing` is a protected direct route', `${name} must document the protected direct Document Processing route`);
+  requirePhrase(text, 'linked from wxO as its feature deep dive', `${name} must document the wxO parent relationship`);
 }
 
 forbid(docs.dashboard, /de404074ee680f9cdccbf5ab85817562bc709ef6/, 'dashboard must not pin current status to the stale Pi Kapp production SHA');
+forbid(docs.dashboard, /static client-side gate is visitor deterrence/i, 'dashboard must not describe the retired client-side Document Processing gate as current');
 forbid(docs.dashboard, /production is clean through Pi Kapp PR #123/i, 'dashboard must not claim the Pi Kapp checkpoint is the current production boundary');
 forbid(docs.dashboard, /Art & Illustration \| next active page lane/i, 'dashboard Art tracker status must be refreshed');
 forbid(docs.dashboard, /Graphic Design \| queued after Art/i, 'dashboard Graphic tracker status must be refreshed');

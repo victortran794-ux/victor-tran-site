@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "pillarDiagram": {
+    "artifact": "images/pci-booklet-pillar-diagram.jpg",
+    "sourcePdf": {
+      "intakeIdentifier": "owner-handoff/pci-handbook-2026/Booklet_020526.pdf",
+      "filename": "Booklet_020526.pdf",
+      "sha256": "a230554824f1a583e0e8ca05e65357039f6783d57265c7d17e3e3ab16ade272d",
+      "pageCount": 42
+    },
+    "cleanPageRender": {
+      "page": 12,
+      "sha256": "a560d5366604ff6a385bbd06eb2d18d3dfb5a00d6d5106847255f640535bf61b",
+      "dimensions": [830, 642]
+    },
+    "sanitizedDerivative": {
+      "sha256": "06c8f2328c2a7aa692756efe16a57b2a61f8397aaff12eb8259371ff422042d",
+      "dimensions": [830, 660]
+    },
+    "repair": {
+      "clearResidualStrip": {
+        "x": [35, 265],
+        "y": [165, 175],
+        "fill": "page-white"
+      },
+      "replaceSourcePixels": {
+        "x": [35, 265],
+        "y": [175, 214],
+        "sourcePage": 12
+      },
+      "preserved": [
+        "sanitized derivative outside the bounded repair regions",
+        "TEAM",
+        "burgundy bar",
+        "caption",
+        "sanitized body copy"
+      ]
+    },
+    "finalDerivative": {
+      "sha256": "9610afe7ad2b62e8bbf22b1d73c20777d03b98e6842822dd9427b9491fddf1f7",
+      "dimensions": [830, 660]
+    }
+  }
+}

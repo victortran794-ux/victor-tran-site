@@ -38,8 +38,13 @@ expect(/<h2\b[^>]*id="about-current-title"[^>]*>\s*What I’m doing now\s*<\/h2>
   'The current-practice section must use the approved direct heading “What I’m doing now”.');
 expect(html.includes('Visual Designer, IBM watsonx Orchestrate'),
   'About must preserve Victor’s current IBM watsonx Orchestrate role.');
-expect(html.includes('Visual Designer, IBM Cloud | Observability'),
+expect(html.includes('Visual Designer, IBM Cloud'),
   'About must preserve Victor’s IBM Cloud role history.');
+const roleTitles = [...html.matchAll(/<h3>([\s\S]*?)<\/h3>/gi)]
+  .map((match) => normalize(match[1]))
+  .filter((title) => title.startsWith('Visual Designer, IBM'));
+expect(roleTitles.length === 2 && roleTitles.every((title) => !title.includes('|')),
+  'IBM role titles must not use pipe separators.');
 expect(html.includes('January 2024 to present'),
   'About must identify January 2024 as the start of Victor’s IBM watsonx Orchestrate work.');
 expect(html.includes('January 2021 to December 2023'),
@@ -52,7 +57,7 @@ const currentPractice = html.match(/<section\b[^>]*class="[^"]*\babout-current\b
 const roleHistory = html.match(/<section\b[^>]*class="[^"]*\babout-role-history\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
 expect(currentPractice.includes('Visual Designer, IBM watsonx Orchestrate') && !currentPractice.includes('Visual Designer, IBM Cloud'),
   'The current-practice section must contain only Victor’s current IBM watsonx Orchestrate role.');
-expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual Designer, IBM Cloud | Observability'),
+expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual Designer, IBM Cloud'),
   'IBM Cloud must be labeled and contained as previous role history.');
 expect(/class="about-current"[\s\S]*class="about-role-history"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
   'Current work and IBM role history must precede skills and past work in the About narrative.');
@@ -76,7 +81,7 @@ expect((aboutMarkdown.match(/^# About Victor Tran$/gm) || []).length === 1,
   'content/about.md must contain one About Victor Tran Markdown h1.');
 for (const requiredRole of [
   'Visual Designer, IBM watsonx Orchestrate',
-  'Visual Designer, IBM Cloud | Observability',
+  'Visual Designer, IBM Cloud',
   'January 2024 to present',
   'January 2021 to December 2023',
 ]) {

@@ -123,15 +123,15 @@ Read all nine issues produced across five years, then continue to the magazine's
 - Spring 2019 feature page: images/sal-spr2019-page25.jpg
 - Spring 2019 closing feature page: images/sal-spr2019-page37.jpg
 - Fall 2016 cover story spread: images/sal-f2016-cover-story.jpg
-- Winter 2018 cover story spread: images/sal-f2017-cover-story.jpg
+- Winter 2017 cover story spread: images/sal-f2017-cover-story.jpg
 - Fall 2019 cover story spread: images/sal-f2019-cover-story.jpg
 - Summer 2020 cover story spread: images/sal-s2020-cover-story.jpg
 - Fall 2016 cover: images/sal-cover-2016-fall.jpg
 - Summer 2017 cover: images/sal-cover-2017-summer.jpg
-- Fall 2017 cover: images/sal-cover-2017-fall.jpg
-- Spring 2018 cover: images/sal-cover-2018-spring.jpg
+- Winter 2017 cover: images/sal-cover-2017-fall.jpg
+- Summer 2018 cover: images/sal-cover-2018-spring.jpg
 - Fall 2018 cover: images/sal-cover-2018-fall.jpg
-- Spring 2019 cover: images/sal-cover-2019-spring.jpg
+- Summer 2019 cover: images/sal-cover-2019-spring.jpg
 - Fall 2019 cover: images/sal-cover-2019-fall.jpg
-- Spring 2020 cover: images/sal-cover-2020-spring.jpg
+- Summer 2020 cover: images/sal-cover-2020-spring.jpg
 - Fall 2020 cover: images/sal-cover-2020-fall.jpg

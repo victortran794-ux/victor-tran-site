@@ -1074,6 +1074,38 @@ body.wxo-gallery-open {
   }
 }
 
+.wxo-public-pilot .pilot-theme-sequence {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 8rem);
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: 0 var(--page-x);
+  list-style: none;
+}
+
+.wxo-public-pilot .pilot-theme-screen {
+  min-width: 0;
+}
+
+.wxo-public-pilot .pilot-theme-screen + .pilot-theme-screen {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+}
+
+.wxo-public-pilot .pilot-form-sequence {
+  min-width: 0;
+}
+
+[data-theme='dark'] .wxo-public-pilot .pilot-theme-screen {
+  border-color: color-mix(in srgb, var(--border) 84%, var(--pilot-blue));
+}
+
+@media (max-width: 720px) {
+  .wxo-public-pilot .pilot-theme-sequence {
+    gap: 3rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wxo-public-pilot *,
   .wxo-public-pilot *::before,

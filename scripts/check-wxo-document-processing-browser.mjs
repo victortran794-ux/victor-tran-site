@@ -185,7 +185,7 @@ class Cdp {
 }
 
 const pages = {
-  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonx Orchestrate', mainImages: 12, current: 'wxo-canvas.html?lock=1' },
+  wxo: { file: 'wxo-canvas.html', bodyClass: 'wxo-page', title: 'IBM watsonx Orchestrate', mainImages: 11, current: 'wxo-canvas.html?lock=1' },
   doc: { file: 'document-processing.html', bodyClass: 'doc-processing-page', title: 'Document Processing', mainImages: 13, current: null },
 };
 const protectedPages = JSON.parse(fs.readFileSync(path.join(root, 'data', 'content-export-policy.json'), 'utf8'))
@@ -201,6 +201,14 @@ try {
   await cdp.call('Runtime.enable');
   await cdp.call('Network.enable');
   await cdp.call('Network.setCacheDisabled', { cacheDisabled: true });
+
+  const closeMobileMenuForEvidence = async (pageName) => {
+    await cdp.evaluate(`(()=>{const toggle=document.querySelector('.nav-dropdown-toggle');if(!toggle)throw new Error('Missing Work menu toggle');if(toggle.getAttribute('aria-expanded')==='true')toggle.click()})()`);
+    await delay(220);
+    const menu = await cdp.evaluate(`(()=>{const toggle=document.querySelector('.nav-dropdown-toggle'),panel=toggle?.nextElementSibling,style=panel&&getComputedStyle(panel);return {expanded:toggle?.getAttribute('aria-expanded'),visibility:style?.visibility,opacity:style?parseFloat(style.opacity):null,pointerEvents:style?.pointerEvents}})()`);
+    assert(menu.expanded === 'false' && menu.visibility === 'hidden' && menu.opacity === 0 && menu.pointerEvents === 'none',
+      `${pageName}: Work menu remained visible before mobile evidence capture ${JSON.stringify(menu)}`);
+  };
 
   let gateChecks = 0;
   for (const viewport of [
@@ -305,7 +313,7 @@ try {
           const heading=document.querySelector('.workflow-label')?.getBoundingClientRect();
           const candidateImages=[...document.querySelectorAll('.pilot-evidence img')];
           const expected=${JSON.stringify(name === 'wxo'
-            ? [[3168,2084],[2944,1984],[3168,1800],[3168,1800],[3168,1800],[3780,884],[2952,1992],[2952,2712],[2600,276],[2992,2012]]
+            ? [[3168,2084],[2944,1984],[3168,1800],[3168,1800],[3168,1800],[3780,884],[3168,2084],[3168,2114],[3168,2156]]
             : [[1024,664],[1024,780],[1024,674],[1024,674]])};
           const gridColumns=(selector)=>{const grid=document.querySelector(selector);return grid?getComputedStyle(grid).gridTemplateColumns.split(' ').length:null};
           const contrastTarget=document.querySelector(${name === 'wxo' ? "'.pilot-section-heading > div > p'" : "'.doc-feature-arc-intro > p:last-child'"});
@@ -326,7 +334,7 @@ try {
             candidateLoaded:candidateImages.length===expected.length&&candidateImages.every((image,index)=>image.complete&&image.naturalWidth===expected[index][0]&&image.naturalHeight===expected[index][1]),
             candidateTriggers:[...document.querySelectorAll('[data-wxo-evidence]')].map((trigger)=>({label:trigger.getAttribute('aria-label'),tag:trigger.tagName,type:trigger.type,src:trigger.querySelector('img')?.getAttribute('src')})),
             candidateActivity:document.querySelectorAll('.pilot-activity-frame').length,candidateExpansions:document.querySelectorAll('.pilot-expansion-frame').length,candidateDocs:document.querySelectorAll('.pilot-doc-frame').length,
-            candidateSystemColumns:gridColumns('.pilot-system-grid'),candidateExpansionColumns:gridColumns('.pilot-expansion-grid'),
+            candidateSystemColumns:gridColumns('.pilot-system-grid'),
             activityStepColumns:[...document.querySelectorAll('.pilot-activity-epic .pilot-flow-step')].map((step)=>getComputedStyle(step).gridTemplateColumns.split(' ').length),
             docStepColumns:[...document.querySelectorAll('.pilot-doc-epic .pilot-flow-step')].map((step)=>getComputedStyle(step).gridTemplateColumns.split(' ').length),
             epicContainers:[...document.querySelectorAll('.pilot-epic-container')].map((container)=>{const r=container.getBoundingClientRect();const style=getComputedStyle(container);return {left:r.left,right:r.right,width:r.width,background:style.backgroundColor,backgroundImage:style.backgroundImage}}),
@@ -337,8 +345,8 @@ try {
             candidateVignette:(()=>{const image=document.querySelector('.pilot-vignettes img');const main=document.querySelector('.pilot-story');if(!image||!main)return null;const r=image.getBoundingClientRect(),m=main.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width,container:m.width,center:(r.left+r.right)/2,railCenter:(m.left+m.right)/2}})(),
             heroOrbit:(()=>{const orbit=document.querySelector('.pilot-hero-aside .wxo-orbits');const hero=document.querySelector('.pilot-hero');if(!orbit||!hero)return null;const r=orbit.getBoundingClientRect(),h=hero.getBoundingClientRect(),s=getComputedStyle(orbit);return {dots:orbit.querySelectorAll(':scope > span').length,left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height,heroLeft:h.left,heroRight:h.right,heroTop:h.top,heroBottom:h.bottom,background:s.backgroundImage}})(),
             canvasOpening:(()=>{const root=document.querySelector('.pilot-canvas-opening');const copy=root?.querySelector('.pilot-section-heading');const image=root?.querySelector('.pilot-main-illustration');if(!root||!copy||!image)return null;const rr=root.getBoundingClientRect(),cr=copy.getBoundingClientRect(),ir=image.getBoundingClientRect();return {columns:getComputedStyle(root).gridTemplateColumns.split(' ').length,left:rr.left,right:rr.right,copyRight:cr.right,imageLeft:ir.left}})(),
-            evolutionPrimary:[...document.querySelectorAll('.pilot-evolution-primary')].map((node)=>{const r=node.getBoundingClientRect(),m=document.querySelector('.pilot-story').getBoundingClientRect();return {left:r.left,right:r.right,center:(r.left+r.right)/2,railCenter:(m.left+m.right)/2}}),
-            flowComposition:(()=>{const root=document.querySelector('.pilot-flow-control-composition');if(!root)return null;const r=root.getBoundingClientRect();const boxes=[...root.querySelectorAll('.pilot-expansion-frame')].map((node)=>{const b=node.getBoundingClientRect();return {className:node.className,left:b.left,right:b.right,center:(b.left+b.right)/2}});return {left:r.left,right:r.right,center:(r.left+r.right)/2,columns:getComputedStyle(root).gridTemplateColumns.split(' ').length,boxes}})(),
+            themeSequence:(()=>{const sequence=document.querySelector('.pilot-theme-sequence');const screens=[...document.querySelectorAll('.pilot-theme-sequence .pilot-theme-screen')];if(!sequence)return null;const r=sequence.getBoundingClientRect();return {tag:sequence.tagName,labels:screens.map((screen)=>screen.querySelector('figcaption strong')?.textContent.trim()),contained:r.left>=-1&&r.right<=innerWidth+1,screens:screens.map((screen)=>{const sr=screen.getBoundingClientRect(),image=screen.querySelector('[data-wxo-theme-image]'),ir=image?.getBoundingClientRect();return {left:sr.left,right:sr.right,inside:sr.left>=-1&&sr.right<=innerWidth+1&&ir&&ir.left>=sr.left-1&&ir.right<=sr.right+1,source:image?.getAttribute('src'),light:image?.dataset.themeLightSrc,dark:image?.dataset.themeDarkSrc,natural:[image?.naturalWidth,image?.naturalHeight]}})}})(),
+            themeImages:[...document.querySelectorAll('[data-wxo-theme-image]')].map((image)=>({name:image.dataset.wxoThemeImage,src:image.getAttribute('src'),light:image.dataset.themeLightSrc,dark:image.dataset.themeDarkSrc,natural:[image.naturalWidth,image.naturalHeight],complete:image.complete})),
             canvasReturn:(()=>{const links=[...document.querySelectorAll('main a[href="wxo-canvas.html"]')];const close=document.querySelector('.workflow-close')?.getBoundingClientRect();const finalLink=links.at(-1);const arrow=finalLink?.querySelector('span[aria-hidden="true"]');let arrowGap=null;if(finalLink?.firstChild&&arrow){const range=document.createRange();range.selectNodeContents(finalLink.firstChild);arrowGap=arrow.getBoundingClientRect().left-range.getBoundingClientRect().right;}return {count:links.length,arrowGap,finalInside:Boolean(close&&finalLink&&(()=>{const r=finalLink.getBoundingClientRect();return r.top>=close.top&&r.bottom<=close.bottom})())}})(),
             outlinedPilotFrames:[...document.querySelectorAll('.pilot-activity-frame .pilot-image-button, .pilot-doc-frame .pilot-image-button')].map((node)=>{const s=getComputedStyle(node);return {radius:parseFloat(s.borderTopLeftRadius),overflow:s.overflow,border:parseFloat(s.borderTopWidth)}}),
             bridgeThumbnail:(()=>{const node=document.querySelector('.pilot-bridge-thumbnail');const image=node?.querySelector('img');if(!node||!image)return null;const r=node.getBoundingClientRect();const s=getComputedStyle(node);return {left:r.left,right:r.right,radius:parseFloat(s.borderTopLeftRadius),overflow:s.overflow,loaded:image.complete&&image.naturalWidth>0}})(),
@@ -355,7 +363,7 @@ try {
               chapterBody:lefts('.workflow-chapter > p'),featureIntro:left('.doc-feature-arc-intro'),docEpicOuter:left('.pilot-doc-epic')
             }})(),
             currentStages:document.querySelectorAll('.doc-current-stage').length,currentFrames:document.querySelectorAll('.doc-current-frame').length,
-            currentFramesLoaded:[...document.querySelectorAll('.doc-current-frame img')].every((image)=>image.complete&&image.naturalWidth===1024&&[664,674,780].includes(image.naturalHeight)),
+            currentFramesLoaded:[...document.querySelectorAll('.doc-current-frame img')].every((image)=>image.complete&&((image.naturalWidth===984&&image.naturalHeight===624)||(image.naturalWidth===1024&&[674,780].includes(image.naturalHeight)))),
             currentStoryGeometry:(()=>{const story=document.querySelector('.doc-current-story');if(!story||story.getClientRects().length===0)return null;const rect=story.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width}})(),
             currentPairColumns:[...document.querySelectorAll('.doc-current-pair')].filter((pair)=>pair.getClientRects().length).map((pair)=>getComputedStyle(pair).gridTemplateColumns.split(' ').length),
             currentEvaluatorColumns:[...document.querySelectorAll('.doc-current-evaluator-grid')].filter((grid)=>grid.getClientRects().length).map((grid)=>getComputedStyle(grid).gridTemplateColumns.split(' ').length),
@@ -382,7 +390,7 @@ try {
         assert(parseFloat(state.reduced)<=0.001,`${spec.file}: reduced-motion transition remained ${state.reduced}`);
         const evidenceNarrow=viewport.width<=860;
         assert(state.gallerySemantics?.tag==='DIALOG'&&state.gallerySemantics.labelledBy===state.gallerySemantics.titleId&&state.gallerySemantics.closeLabel==='Close image viewer'&&state.gallerySemantics.prev&&state.gallerySemantics.next,`${spec.file}: evidence carousel semantics failed ${JSON.stringify(state.gallerySemantics)}`);
-        assert(state.candidateTriggers.every(({label,tag,type,src})=>label?.startsWith('Open ')&&tag==='BUTTON'&&type==='button'&&src?.startsWith('protected/wxo/assets/public-candidate/')),`${spec.file}: in-window evidence triggers failed ${JSON.stringify(state.candidateTriggers)}`);
+        assert(state.candidateTriggers.every(({label,tag,type,src})=>label?.startsWith('Open ')&&tag==='BUTTON'&&type==='button'&&/^protected\/wxo\/assets\/(?:public-candidate|theme-sequences)\//.test(src||'')),`${spec.file}: in-window evidence triggers failed ${JSON.stringify(state.candidateTriggers)}`);
         assert(state.imageContainment.every(({ratio,natural,inside})=>inside&&Math.abs(ratio-natural)<0.015),`${spec.file}: evidence containment or aspect ratio failed ${JSON.stringify(state.imageContainment)}`);
         if(name==='wxo'){
           const systemNarrow=viewport.width<=860;
@@ -401,17 +409,24 @@ try {
             const [openingTitle,...chapterTitles]=state.spineGeometry.sectionTitles;
             assert(near(openingTitle,expectedText)&&chapterTitles.every((left)=>near(left,state.spineGeometry.bridgeTitle)),`${spec.file}: desktop opening copy and later chapter rails must align ${JSON.stringify(state.spineGeometry)}`);
           }
-          assert(state.candidateCount===10&&state.candidateLoaded&&state.candidateActivity===3&&state.candidateExpansions===4&&state.candidateDocs===0,`${spec.file}: approved ten-image umbrella narrative or native dimensions failed ${JSON.stringify(state)}`);
-          assert(state.candidateTriggers.length===10&&state.imageContainment.length===10,`${spec.file}: umbrella carousel evidence count failed`);
-          assert(state.candidateSystemColumns===(systemNarrow?1:2)&&state.candidateExpansionColumns===(evidenceNarrow?1:12)&&state.activityStepColumns.length===3&&state.activityStepColumns.every((columns)=>columns===(evidenceNarrow?1:12))&&state.docStepColumns.length===0,`${spec.file}: responsive umbrella grids failed at ${viewport.label} ${JSON.stringify(state)}`);
+          assert(state.candidateCount===9&&state.candidateLoaded&&state.candidateActivity===3&&state.candidateExpansions===3&&state.candidateDocs===0,`${spec.file}: approved nine-image theme-aware narrative or native dimensions failed ${JSON.stringify(state)}`);
+          assert(state.candidateTriggers.length===9&&state.imageContainment.length===9,`${spec.file}: umbrella carousel evidence count failed`);
+          assert(state.candidateSystemColumns===(systemNarrow?1:2)&&state.activityStepColumns.length===3&&state.activityStepColumns.every((columns)=>columns===(evidenceNarrow?1:12))&&state.docStepColumns.length===0,`${spec.file}: responsive umbrella grids failed at ${viewport.label} ${JSON.stringify(state)}`);
           assert(state.epicContainers.length===1&&state.epicContainers.every(({left,right,width,background,backgroundImage})=>left>=-1&&right<=viewport.width+1&&width>0&&(background!=='rgba(0, 0, 0, 0)'||backgroundImage!=='none')),`${spec.file}: User Activity epic containment failed ${JSON.stringify(state.epicContainers)}`);
           assert(state.stepArrows.length===2&&state.stepArrows.every(({width,height,display,head})=>width>=5&&height>20&&head>=10&&display!=='none')&&!state.longArrowHeight,`${spec.file}: substantial User Activity progression arrows failed ${JSON.stringify(state.stepArrows)}`);
           assert(state.heroOrbit&&state.heroOrbit.dots===3&&Math.abs(state.heroOrbit.width-state.heroOrbit.height)<=2&&state.heroOrbit.width>=140&&state.heroOrbit.left>=state.heroOrbit.heroLeft&&state.heroOrbit.right<=state.heroOrbit.heroRight&&state.heroOrbit.top>=state.heroOrbit.heroTop&&state.heroOrbit.bottom<=state.heroOrbit.heroBottom&&state.heroOrbit.background!=='none',`${spec.file}: original three-dot hero orbital failed ${JSON.stringify(state.heroOrbit)}`);
           assert(state.canvasOpening&&state.canvasOpening.columns===(viewport.width<=1000?1:2)&&state.canvasOpening.left>=0&&state.canvasOpening.right<=viewport.width&&(viewport.width<=1000||state.canvasOpening.copyRight<state.canvasOpening.imageLeft),`${spec.file}: side-by-side Canvas opening failed ${JSON.stringify(state.canvasOpening)}`);
           assert(state.candidateVignette&&state.candidateVignette.width>=state.candidateVignette.container*.98&&Math.abs(state.candidateVignette.center-state.candidateVignette.railCenter)<=2&&state.candidateVignette.left>=-1&&state.candidateVignette.right<=viewport.width+1,`${spec.file}: later illustration vignette must remain centered across the full evidence rail ${JSON.stringify(state.candidateVignette)}`);
-          assert(state.evolutionPrimary.length===2&&state.evolutionPrimary.every(({left,right,center,railCenter})=>left>=-1&&right<=viewport.width+1&&Math.abs(center-railCenter)<=2),`${spec.file}: Agent and Workflow detail boards must remain centered ${JSON.stringify(state.evolutionPrimary)}`);
-          assert(state.flowComposition&&state.flowComposition.columns===(evidenceNarrow?1:12)&&state.flowComposition.boxes.length===2&&state.flowComposition.boxes.every(({left,right})=>left>=-1&&right<=viewport.width+1),`${spec.file}: Flow Controls composition or Node States containment failed ${JSON.stringify(state.flowComposition)}`);
-          if(!evidenceNarrow){const centered=state.flowComposition.boxes.filter(({className})=>/pilot-study--nodes|pilot-flow-control-primary/.test(className));assert(centered.length===2&&centered.every(({center})=>Math.abs(center-state.flowComposition.center)<=2),`${spec.file}: node states and Flow Controls must anchor the centered composition ${JSON.stringify(centered)}`);}
+          const expectedThemeImages=[
+            ['form-workflow',[3168,1800]],['form-configuration',[3168,1800]],['form-summary',[3168,1800]],
+            ['current-workflow',[3168,2084]],['v2-workflow',[3168,2114]],['v2-agent-flow',[3168,2156]],
+          ];
+          const expectedSource=(name)=>`protected/wxo/assets/theme-sequences/${name}-${theme}.png`;
+          assert(state.themeImages.length===6&&expectedThemeImages.every(([name,dimensions],index)=>{const image=state.themeImages[index];return image?.name===name&&image.complete&&image.src===expectedSource(name)&&image.natural[0]===dimensions[0]&&image.natural[1]===dimensions[1]&&image.light===`protected/wxo/assets/theme-sequences/${name}-light.png`&&image.dark===`protected/wxo/assets/theme-sequences/${name}-dark.png`; }),`${spec.file}: theme image source or intrinsic dimensions failed at ${viewport.label} ${theme} ${JSON.stringify(state.themeImages)}`);
+          assert(state.themeSequence?.tag==='OL'&&state.themeSequence.contained&&JSON.stringify(state.themeSequence.labels)===JSON.stringify(['01 · Current builder','02 · V2 workflow evolution','03 · V2 agent hierarchy'])&&state.themeSequence.screens.length===3&&state.themeSequence.screens.every((screen,index)=>screen.inside&&screen.source===expectedSource(expectedThemeImages[index+3][0])&&JSON.stringify(screen.natural)===JSON.stringify(expectedThemeImages[index+3][1])),`${spec.file}: approved current-to-V2 evolution sequence geometry, order, or containment failed ${JSON.stringify(state.themeSequence)}`);
+          const alternateTheme=theme==='light'?'dark':'light';
+          const toggled=await cdp.evaluate(`(async()=>{const images=[...document.querySelectorAll('[data-wxo-theme-image]')];const before=images.map((image)=>image.getAttribute('src'));document.querySelector('.lens-switcher [data-lens=${JSON.stringify(alternateTheme)}]').click();await new Promise((resolve)=>setTimeout(resolve,80));await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));const changed=images.map((image)=>image.getAttribute('src'));document.querySelector('.lens-switcher [data-lens=${JSON.stringify(theme)}]').click();await new Promise((resolve)=>setTimeout(resolve,80));await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));return {before,changed,restored:images.map((image)=>image.getAttribute('src')),theme:document.documentElement.dataset.theme||'light',overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,contained:images.every((image)=>{const r=image.getBoundingClientRect(),b=image.closest('button').getBoundingClientRect();return r.left>=b.left-1&&r.right<=b.right+1&&r.top>=b.top-1&&r.bottom<=b.bottom+1})}})()`);
+          assert(toggled.theme===theme&&toggled.overflow===0&&toggled.contained&&toggled.before.every((source,index)=>source!==toggled.changed[index]&&toggled.restored[index]===source)&&toggled.changed.every((source,index)=>source===`protected/wxo/assets/theme-sequences/${expectedThemeImages[index][0]}-${alternateTheme}.png`),`${spec.file}: visible theme toggle did not switch and restore all six sequence sources safely ${JSON.stringify(toggled)}`);
           assert(state.outlinedPilotFrames.length===3&&state.outlinedPilotFrames.every(({radius,overflow,border})=>radius>=13&&overflow==='hidden'&&border>=1),`${spec.file}: User Activity screens must use complete outlined rounded frames ${JSON.stringify(state.outlinedPilotFrames)}`);
           assert(state.bridgeThumbnail?.loaded&&state.bridgeThumbnail.radius>=13&&state.bridgeThumbnail.overflow==='hidden'&&state.bridgeThumbnail.left>=0&&state.bridgeThumbnail.right<=viewport.width,`${spec.file}: Document Processing handoff thumbnail failed ${JSON.stringify(state.bridgeThumbnail)}`);
         }
@@ -438,10 +453,27 @@ try {
         }
         if(viewport.mobile){const undersized=state.controls.filter((control)=>control.width<44||control.height<44);assert(!undersized.length,`${spec.file}: undersized mobile controls ${JSON.stringify(undersized)}`);}
         if(name==='wxo'&&viewport.label==='390'&&theme==='light'){
-          await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);await delay(60);await cdp.screenshot('wxo-canvas-390-light-opening.png');
+          await closeMobileMenuForEvidence(spec.file);await cdp.evaluate(`scrollTo(0,0)`);await delay(60);await cdp.screenshot('wxo-canvas-390-light-opening.png');
           await cdp.screenshotElement('.pilot-hero','wxo-canvas-390-light-hero-full.png');
-          for(const [selector,fileName] of [['.pilot-main-illustration','wxo-canvas-390-light-main-illustration.png'],['.pilot-system-grid','wxo-canvas-390-light-system.png'],['.pilot-activity-epic','wxo-canvas-390-light-user-activity.png'],['.pilot-vignettes','wxo-canvas-390-light-vignettes.png'],['.pilot-side-quest-bridge','wxo-canvas-390-light-document-processing-bridge.png'],['.pilot-expansion-grid','wxo-canvas-390-light-expansions.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
-          await cdp.screenshotElement('.pilot-flow-control-composition','wxo-canvas-390-light-flow-control-composition-full.png');
+          for(const [selector,fileName] of [['.pilot-main-illustration','wxo-canvas-390-light-main-illustration.png'],['.pilot-system-grid','wxo-canvas-390-light-system.png'],['.pilot-activity-epic','wxo-canvas-390-light-user-activity.png'],['.pilot-vignettes','wxo-canvas-390-light-vignettes.png'],['.pilot-side-quest-bridge','wxo-canvas-390-light-document-processing-bridge.png'],['.pilot-theme-sequence','wxo-canvas-390-light-canvas-evolution.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
+          const formSequenceFull=await cdp.evaluate(`(()=>{
+            const section=document.querySelector('.pilot-activity-epic');
+            const steps=[...(section?.querySelectorAll('.pilot-form-sequence > .pilot-flow-step')||[])];
+            const bounds=(node)=>{const r=node.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+            const contains=(outer,inner)=>inner.left>=outer.left&&inner.right<=outer.right&&inner.top>=outer.top&&inner.bottom<=outer.bottom;
+            const clip=section&&bounds(section);
+            return {clip,steps:steps.map((step)=>{
+              const frame=step.querySelector('.pilot-activity-frame');
+              const caption=step.querySelector('.pilot-flow-note');
+              const image=frame?.querySelector('img');
+              const frameBounds=frame&&bounds(frame);
+              const captionBounds=caption&&bounds(caption);
+              return {frame:frameBounds,caption:captionBounds,imageLoaded:Boolean(image?.complete&&image.naturalWidth>0),inside:Boolean(clip&&frameBounds&&captionBounds&&contains(clip,frameBounds)&&contains(clip,captionBounds))};
+            })};
+          })()`);
+          assert(formSequenceFull.clip&&formSequenceFull.steps.length===3&&formSequenceFull.steps.every(({frame,caption,imageLoaded,inside})=>frame?.width>0&&frame?.height>0&&caption?.width>0&&caption?.height>0&&imageLoaded&&inside),`wxo-canvas.html: full Form sequence clip omitted a frame or caption ${JSON.stringify(formSequenceFull)}`);
+          await cdp.screenshotElement('.pilot-activity-epic','wxo-canvas-390-light-user-activity-full.png');
+          await cdp.screenshotElement('.pilot-theme-sequence','wxo-canvas-390-light-canvas-evolution-full.png');
           await cdp.evaluate(`(()=>{const trigger=document.querySelectorAll('[data-wxo-evidence]')[0];trigger.dataset.originalTitle=trigger.dataset.title;trigger.dataset.title='AgentCanvasOrchestrationVocabularyForComplexHumanAndAutomatedWorkflowRelationshipsWithoutWhitespace';trigger.click()})()`);await delay(100);
           const longTitleMobile=await cdp.evaluate(`(()=>{const d=document.querySelector('[data-wxo-gallery]'),layout=d.querySelector('.pilot-gallery-layout'),details=d.querySelector('.pilot-gallery-details'),title=d.querySelector('[data-wxo-gallery-title]'),close=d.querySelector('.pilot-gallery-close');const dr=d.getBoundingClientRect(),cr=close.getBoundingClientRect(),style=getComputedStyle(title);return {documentOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,dialogOverflow:d.scrollWidth-d.clientWidth,layoutOverflow:layout.scrollWidth-layout.clientWidth,detailsOverflow:details.scrollWidth-details.clientWidth,titleOverflow:title.scrollWidth-title.clientWidth,dialogLeft:dr.left,dialogRight:dr.right,closeLeft:cr.left,closeRight:cr.right,titleWrap:style.overflowWrap,titleFont:parseFloat(style.fontSize)}})()`);
           assert(longTitleMobile.documentOverflow===0&&longTitleMobile.dialogOverflow===0&&longTitleMobile.layoutOverflow===0&&longTitleMobile.detailsOverflow===0&&longTitleMobile.titleOverflow===0&&longTitleMobile.dialogLeft>=0&&longTitleMobile.dialogRight<=viewport.width&&longTitleMobile.closeLeft>=longTitleMobile.dialogLeft&&longTitleMobile.closeRight<=longTitleMobile.dialogRight&&longTitleMobile.titleWrap==='anywhere'&&longTitleMobile.titleFont<=32,`wxo-canvas.html: mobile long gallery title overflowed or remained oversized ${JSON.stringify(longTitleMobile)}`);
@@ -449,17 +481,17 @@ try {
           await cdp.key('Escape','Escape',27);await delay(60);
           await cdp.evaluate(`(()=>{const trigger=document.querySelectorAll('[data-wxo-evidence]')[0];trigger.dataset.title=trigger.dataset.originalTitle;delete trigger.dataset.originalTitle;trigger.click()})()`);await delay(100);
           const galleryOpen=await cdp.evaluate(`(async()=>{const d=document.querySelector('[data-wxo-gallery]');const i=d.querySelector('[data-wxo-gallery-image]');try{await i.decode()}catch{}const r=i.getBoundingClientRect();const s=d.querySelector('.pilot-gallery-stage').getBoundingClientRect();return {open:d.open,body:document.body.classList.contains('wxo-gallery-open'),count:d.querySelector('[data-wxo-gallery-count]').textContent.trim(),title:d.querySelector('[data-wxo-gallery-title]').textContent.trim(),loaded:i.complete&&i.naturalWidth>0,contained:r.left>=s.left&&r.right<=s.right&&r.top>=s.top&&r.bottom<=s.bottom,focus:document.activeElement===d.querySelector('.pilot-gallery-close')}})()`);
-          assert(galleryOpen.open&&galleryOpen.body&&galleryOpen.count==='01 / 10'&&galleryOpen.title==='Released canvas'&&galleryOpen.loaded&&galleryOpen.contained&&galleryOpen.focus,`wxo-canvas.html: mobile gallery open failed ${JSON.stringify(galleryOpen)}`);
+          assert(galleryOpen.open&&galleryOpen.body&&galleryOpen.count==='01 / 09'&&galleryOpen.title==='Released canvas'&&galleryOpen.loaded&&galleryOpen.contained&&galleryOpen.focus,`wxo-canvas.html: mobile gallery open failed ${JSON.stringify(galleryOpen)}`);
           await cdp.key('ArrowRight','ArrowRight',39);
           const galleryNext=await cdp.evaluate(`({count:document.querySelector('[data-wxo-gallery-count]').textContent.trim(),title:document.querySelector('[data-wxo-gallery-title]').textContent.trim()})`);
-          assert(galleryNext.count==='02 / 10'&&galleryNext.title==='Component showcase',`wxo-canvas.html: gallery next failed ${JSON.stringify(galleryNext)}`);
+          assert(galleryNext.count==='02 / 09'&&galleryNext.title==='Component showcase',`wxo-canvas.html: gallery next failed ${JSON.stringify(galleryNext)}`);
           await cdp.screenshot('wxo-canvas-390-light-gallery.png');
           await cdp.key('Escape','Escape',27);await delay(60);
           const galleryClosed=await cdp.evaluate(`({open:document.querySelector('[data-wxo-gallery]').open,body:document.body.classList.contains('wxo-gallery-open'),focus:document.activeElement===document.querySelectorAll('[data-wxo-evidence]')[0]})`);
           assert(!galleryClosed.open&&!galleryClosed.body&&galleryClosed.focus,`wxo-canvas.html: gallery close and focus return failed ${JSON.stringify(galleryClosed)}`);
         }
         if(name==='wxo'&&viewport.label==='1280'&&theme==='dark'){
-          for(const [selector,fileName] of [['.pilot-activity-epic','wxo-canvas-1280-dark-user-activity.png'],['.pilot-side-quest-bridge','wxo-canvas-1280-dark-document-processing-bridge.png'],['.pilot-expansion-grid','wxo-canvas-1280-dark-expansions.png'],['.pilot-flow-control-composition','wxo-canvas-1280-dark-flow-control-composition.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
+          for(const [selector,fileName] of [['.pilot-activity-epic','wxo-canvas-1280-dark-user-activity.png'],['.pilot-side-quest-bridge','wxo-canvas-1280-dark-document-processing-bridge.png'],['.pilot-theme-sequence','wxo-canvas-1280-dark-canvas-evolution.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
           const handoffPoint=await cdp.evaluate(`(()=>{const el=document.querySelector('.pilot-bridge-copy a');scrollTo({top:el.getBoundingClientRect().top+scrollY-innerHeight/2,behavior:'instant'});const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}})()`);
           await cdp.call('Input.dispatchMouseEvent',{type:'mouseMoved',x:handoffPoint.x,y:handoffPoint.y});await delay(250);
           const handoffHover=await cdp.evaluate(`(()=>{const el=document.querySelector('.pilot-bridge-copy a');const s=getComputedStyle(el);return {hover:el.matches(':hover'),transform:s.transform,decoration:s.textDecorationThickness}})()`);
@@ -478,11 +510,11 @@ try {
         }
         if(name==='wxo'&&viewport.label==='1600'&&theme==='dark'){
           await cdp.screenshotElement('.pilot-hero','wxo-canvas-1600-dark-hero-full.png');
-          for(const [selector,fileName] of [['.pilot-canvas-opening','wxo-canvas-1600-dark-canvas-opening.png'],['.pilot-vignettes','wxo-canvas-1600-dark-vignettes.png'],['.pilot-released-canvas','wxo-canvas-1600-dark-released-canvas.png'],['.pilot-activity-epic','wxo-canvas-1600-dark-user-activity.png'],['.pilot-side-quest-bridge','wxo-canvas-1600-dark-document-processing-bridge.png'],['.pilot-expansion-grid','wxo-canvas-1600-dark-expansions.png'],['.pilot-flow-control-composition','wxo-canvas-1600-dark-flow-control-composition.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
-          await cdp.screenshotElement('.pilot-flow-control-composition','wxo-canvas-1600-dark-flow-control-composition-full.png');
+          for(const [selector,fileName] of [['.pilot-canvas-opening','wxo-canvas-1600-dark-canvas-opening.png'],['.pilot-vignettes','wxo-canvas-1600-dark-vignettes.png'],['.pilot-released-canvas','wxo-canvas-1600-dark-released-canvas.png'],['.pilot-activity-epic','wxo-canvas-1600-dark-user-activity.png'],['.pilot-side-quest-bridge','wxo-canvas-1600-dark-document-processing-bridge.png'],['.pilot-theme-sequence','wxo-canvas-1600-dark-canvas-evolution.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}
+          await cdp.screenshotElement('.pilot-theme-sequence','wxo-canvas-1600-dark-canvas-evolution-full.png');
         }
         if(name==='doc'&&viewport.label==='390'&&theme==='light'){
-          await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click();scrollTo(0,0)`);
+          await closeMobileMenuForEvidence(spec.file);await cdp.evaluate(`scrollTo(0,0)`);
           await delay(60);
           await cdp.screenshot('document-processing-390-light-opening.png');
           for(const [selector,fileName] of [['.pilot-doc-epic','document-processing-390-light-feature-arc.png'],['.pilot-doc-epic .pilot-flow-step--late','document-processing-390-light-accuracy-evaluation.png']]){await cdp.evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:'instant'})})()`);await delay(80);await cdp.screenshot(fileName);}

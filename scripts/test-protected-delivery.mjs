@@ -373,12 +373,14 @@ const candidatePattern = /(?:src|href|poster)="(protected\/wxo\/assets\/public-c
 const wxoCandidateRefs = [...wxoHtml.matchAll(candidatePattern)].map((match) => match[1]);
 const documentCandidateRefs = [...documentProcessingHtml.matchAll(candidatePattern)].map((match) => match[1]);
 const candidateRefs = [...wxoCandidateRefs, ...documentCandidateRefs];
-assert.equal(wxoCandidateRefs.length, 11, 'protected wxO umbrella must use ten guarded carousel sources plus one guarded Document Processing handoff thumbnail');
+const themeSequenceRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/theme-sequences\/[^"]+)"/gu)].map((match) => match[1]);
+assert.equal(wxoCandidateRefs.length, 4, 'protected wxO umbrella must retain its four guarded public-candidate screens and handoff thumbnail.');
+assert.equal(themeSequenceRefs.length, 12, 'protected wxO umbrella must declare six guarded light/dark image pairs.');
 assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 1, 'protected wxO umbrella must use exactly one guarded opening illustration');
 assert.equal(documentCandidateRefs.length, 4, 'protected Document Processing route must use exactly four guarded feature-arc sources');
-assert.equal(new Set(candidateRefs).size, 14, 'the route-aware candidate package must expose fourteen unique guarded sources');
+assert.equal(new Set(candidateRefs).size, 7, 'the remaining route-aware candidate package must expose seven unique guarded sources.');
 const protectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
-for (const asset of new Set(protectedRefs)) {
+for (const asset of new Set([...protectedRefs, ...themeSequenceRefs])) {
   assert.equal(fs.existsSync(asset), true, `guarded media is missing: ${asset}`);
 }
 

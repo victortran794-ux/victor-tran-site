@@ -34,6 +34,24 @@
 })();
 
 (() => {
+  const images = [...document.querySelectorAll('[data-wxo-theme-image]')];
+  if (!images.length) return;
+
+  const syncThemeImages = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    images.forEach((image) => {
+      const nextSource = isDark ? image.dataset.themeDarkSrc : image.dataset.themeLightSrc;
+      if (!nextSource || image.dataset.wxoThemeSource === nextSource) return;
+      image.src = nextSource;
+      image.dataset.wxoThemeSource = nextSource;
+    });
+  };
+
+  syncThemeImages();
+  new MutationObserver(syncThemeImages).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+
+(() => {
   const dialog = document.querySelector('[data-wxo-gallery]');
   const triggers = [...document.querySelectorAll('[data-wxo-evidence]')];
   if (!dialog || !triggers.length) return;

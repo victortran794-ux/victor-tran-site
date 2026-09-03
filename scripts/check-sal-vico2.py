@@ -156,12 +156,50 @@ def main() -> int:
             need(bool(image.get("alt", "").strip()), f"missing alt text: {image.get('src')}")
             need(image.get("width", "").isdigit() and image.get("height", "").isdigit(), f"missing dimensions: {image.get('src')}")
 
-    cover_links = [
-        attrs for tag, attrs in audit.tags
-        if tag == "a" and attrs.get("href") == "https://issuu.com/pikappaphi"
+    issue_cards = [
+        ("Fall 2016", "starandlamp_fall16_issuu"),
+        ("Summer 2017", "star_lamp_sum2017_online"),
+        ("Winter 2017", "starandlamp_fall17_issuu"),
+        ("Summer 2018", "s_l_spr2018"),
+        ("Fall 2018", "s_l_fal2018_issuu"),
+        ("Summer 2019", "issuu_s_l_spr2019"),
+        ("Fall 2019", "s_l_fal2019_issuu"),
+        ("Summer 2020", "s_l_spr2020_digital__4_"),
+        ("Fall 2020", "s_l_fall2020_final_proof"),
     ]
-    need(len(cover_links) >= 9, "all nine Issuu cover links must remain")
+    issue_hrefs = [
+        f"https://issuu.com/pikappaphi/docs/{slug}"
+        for _, slug in issue_cards
+    ]
+    linked_issues = [
+        attrs.get("href") for tag, attrs in audit.tags
+        if tag == "a" and attrs.get("href", "").startswith("https://issuu.com/pikappaphi/docs/")
+    ]
+    need(linked_issues == issue_hrefs, "all nine issue cards must use the exact official Issuu document URLs")
+    for label, slug in issue_cards:
+        href = f"https://issuu.com/pikappaphi/docs/{slug}"
+        need(
+            bool(re.search(
+                rf'<a href="{re.escape(href)}"[^>]*><img[^>]*alt="{re.escape(label)} cover"[^>]*><span>{re.escape(label)}</span></a>',
+                html,
+            )),
+            f"issue card must preserve its exact accessible cover title and visible label: {label}",
+        )
+    need(
+        bool(re.search(
+            r'<a class="sal-vico2-archive-link" href="https://issuu\.com/pikappaphi"[^>]*>View the complete issue archive',
+            html,
+        )),
+        "separate generic all-issues archive CTA must remain",
+    )
     need("https://pikapp.org/about/star-lamp/" in html, "latest-issues link must remain")
+    need(
+        bool(re.search(
+            r'<img[^>]*src="images/sal-f2017-cover-story\.jpg"[^>]*alt="Winter 2017 cover story spread"[^>]*><figcaption><span class="section-label">Winter 2017 · Cover Story</span>',
+            html,
+        )),
+        "Winter 2017 cover-story image and section label must use the official issue date",
+    )
 
     # Bounded CSS and responsive contracts.
     need("/* VICO2 CASE STUDY: START */" in css and "/* VICO2 CASE STUDY: END */" in css, "missing shared VicO2 CSS boundary")

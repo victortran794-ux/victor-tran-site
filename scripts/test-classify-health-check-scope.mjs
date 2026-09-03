@@ -19,6 +19,7 @@ assert.deepEqual(docsOnly, {
   sal: false,
   ability: false,
   wxo: false,
+  resume: false,
   images: false,
   links: false,
   deployable: false,
@@ -43,6 +44,7 @@ assert.deepEqual(galleryVisual, {
   sal: false,
   ability: false,
   wxo: false,
+  resume: false,
   images: true,
   links: true,
   deployable: true,
@@ -68,6 +70,7 @@ assert.deepEqual(sharedSystem, {
   sal: false,
   ability: false,
   wxo: false,
+  resume: false,
   images: false,
   links: true,
   deployable: true,
@@ -128,6 +131,24 @@ assert.equal(wxoProvenance.deployable, false, 'repository-only wxO provenance mu
 assert.equal(wxoProvenance.links, false, 'repository-only wxO provenance must not select link checks');
 assert.equal(wxoProvenance.all, false, 'repository-only wxO provenance must not force the full suite');
 
+for (const changedPath of [
+  'documents/Victor-Tran-Resume.pdf',
+  'data/resume.json',
+  'data/resume-artifact.json',
+  'scripts/build-resume.py',
+  'scripts/check-resume-artifact.py',
+  'scripts/check-resume-artifact.sh',
+  'scripts/verify-resume-build.sh',
+  'scripts/requirements-resume.txt',
+  'assets/resume-fonts/barlow/Barlow-Regular.ttf',
+]) {
+  const scope = classifyPaths([changedPath]);
+  assert.equal(scope.resume, true, `${changedPath} must select resume validation`);
+  assert.equal(scope.deployable, true, `${changedPath} must select deployable checks`);
+  assert.equal(scope.links, true, `${changedPath} must select link checks`);
+  assert.equal(scope.all, false, `${changedPath} must not force the full suite`);
+}
+
 const unknownPage = classifyPaths(['new-case-study.html']);
 assert.equal(unknownPage.shared, true, 'unknown public HTML must fail safely to shared coverage');
 assert.equal(unknownPage.deployable, true);
@@ -160,6 +181,7 @@ assert.deepEqual(designDocumentation, {
   sal: false,
   ability: false,
   wxo: false,
+  resume: false,
   images: false,
   links: false,
   deployable: false,

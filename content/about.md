@@ -21,9 +21,9 @@ Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Au
 ## Section Headings
 
 - What I’m doing now
-- Visual Designer, IBM watsonx Orchestrate | AI & Automation
+- Visual Designer, IBM watsonx Orchestrate
 - Previously at IBM
-- Visual Designer, IBM Cloud | Observability
+- Visual Designer, IBM Cloud
 - What I design
 - How I work
 - Past work
@@ -49,11 +49,11 @@ Since January 2024, I’ve been a Visual Designer at IBM watsonx Orchestrate in 
 
 Now
 
-January 2024 to present · Enterprise product workflows
+January 2024 to present · AI & Automation · Enterprise product workflows
 
 Previous role
 
-January 2021 to December 2023 · Enterprise cloud products
+January 2021 to December 2023 · Observability · Enterprise cloud products
 
 Clients & employers
 

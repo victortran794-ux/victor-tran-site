@@ -7,6 +7,11 @@ const requireText = (text, value, message) => { if (!text.includes(value)) fail(
 const forbid = (text, pattern, message) => { if (pattern.test(text)) fail(message); };
 const count = (text, pattern) => [...text.matchAll(pattern)].length;
 const sha256 = (path) => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
+const pngDimensions = (path) => {
+  const bytes = fs.readFileSync(path);
+  if (bytes.subarray(0, 8).compare(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) !== 0) return null;
+  return [bytes.readUInt32BE(16), bytes.readUInt32BE(20)];
+};
 const mainHtml = (html) => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? '';
 
 const wxoPath = 'wxo-canvas.html';
@@ -20,6 +25,7 @@ const doc = read(docPath);
 const sitemap = read('sitemap.xml');
 const robots = read('robots.txt');
 const projects = JSON.parse(read('data/projects.json'));
+const documentCurrentProvenance = JSON.parse(read('data/document-processing-current-provenance.json'));
 const exportPolicy = JSON.parse(read('data/content-export-policy.json'));
 const shellConfig = JSON.parse(read('data/site-shell.json'));
 const workflowCss = read('css/wxo-workflows-vico2.css');
@@ -128,14 +134,14 @@ for (const value of [
   'User activities stay connected to the canvas.',
   'Canvas evolution',
   'A visual system that kept expanding.',
-  'I also supported the agent canvas vision',
+  'I supported the agent canvas vision',
   'Feature deep dive',
   'Document Processing needed its own trust loop.',
   'Developed in parallel with the broader canvas work',
   'One system for automation, specialized work, and human judgment.',
 ]) requireText(wxo, value, `Canonical wxO candidate missing approved marker: ${value}`);
 
-if (count(wxo, /protected\/wxo\/assets\/public-candidate\//gi) !== 11) fail('Canonical-local wxO umbrella must keep ten carousel sources plus one handoff thumbnail under guarded delivery until publication approval.');
+if (count(wxo, /protected\/wxo\/assets\/public-candidate\//gi) !== 4) fail('Canonical-local wxO umbrella must keep four guarded public-candidate references alongside the paired theme sequences.');
 forbid(wxo, /<video\b|<iframe\b/i, 'Canonical wxO candidate must remain a static evidence narrative.');
 forbid(mainHtml(wxo), /target="_blank"|Open full board/i, 'Canonical evidence must use the in-window carousel instead of new tabs.');
 requireText(wxo, 'data-wxo-gallery', 'Canonical wxO candidate must provide the in-window evidence carousel.');
@@ -146,10 +152,10 @@ forbid(wxo, /wxo-workflows-vico2\.css|wxo-workflows-vico2\.js/i, 'Canonical wxO 
 forbid(wxo, /V2 system evolution|V2 authored exploration|Visual system in motion|prototype sequence|Canvas Future/i, 'Canonical wxO candidate must not expose retired V2, motion-prototype, or Canvas Future framing.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|measured (?:improvement|increase|decrease|impact|result)/i, 'Canonical wxO candidate must not add unsupported outcome claims.');
 forbid(mainHtml(wxo), /—/, 'Canonical wxO candidate primary copy must not use em dashes.');
-if (count(wxo, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 10) fail('Canonical wxO umbrella must contain exactly ten evidence units.');
+if (count(wxo, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 9) fail('Canonical wxO umbrella must contain exactly nine evidence units.');
 if (count(wxo, /class="[^"]*\bpilot-activity-frame\b[^"]*"/gi) !== 3) fail('Canonical wxO candidate must contain three User Activity frames.');
-if (count(wxo, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 4) fail('Canonical wxO candidate must contain four Canvas evolution studies.');
-if (count(mainHtml(wxo), /<img\b/gi) !== 12) fail('Canonical wxO umbrella must contain ten carousel images, one opening illustration, and one handoff thumbnail inside main.');
+if (count(wxo, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) fail('Canonical wxO candidate must contain three Canvas evolution states.');
+if (count(mainHtml(wxo), /<img\b/gi) !== 11) fail('Canonical wxO umbrella must contain nine carousel images, one opening illustration, and one handoff thumbnail inside main.');
 
 const candidateManifestPath = 'data/wxo-canvas-public-provenance.json';
 const candidateFiles = [
@@ -170,6 +176,18 @@ const candidateFiles = [
   '13b-flow-types.png',
   '13c-connector-mechanics.png',
   '13-floating-studies.png',
+  'current-workflow-light.png',
+  'current-workflow-dark.png',
+  'v2-workflow-light.png',
+  'v2-workflow-dark.png',
+  'v2-agent-flow-light.png',
+  'v2-agent-flow-dark.png',
+  'form-workflow-light.png',
+  'form-workflow-dark.png',
+  'form-configuration-light.png',
+  'form-configuration-dark.png',
+  'form-summary-light.png',
+  'form-summary-dark.png',
 ];
 if (!fs.existsSync(candidateManifestPath)) fail('Repository-only canonical wxO candidate provenance must exist.');
 else {
@@ -178,17 +196,23 @@ else {
     fail('Canonical wxO candidate provenance must preserve the approved canonical migration and production release gates.');
   }
   if (JSON.stringify((candidateManifest.assets ?? []).map((entry) => entry.file)) !== JSON.stringify(candidateFiles)) {
-    fail('Canonical wxO candidate provenance must list fourteen routed derivatives plus three retained source-only studies.');
+    fail('Canonical wxO candidate provenance must retain seventeen legacy derivatives and list all twelve theme-sequence exports.');
   }
   for (const entry of candidateManifest.assets ?? []) {
-    const assetPath = `protected/wxo/assets/public-candidate/${entry.file}`;
+    const assetPath = entry.namespace === 'theme-sequences'
+      ? `protected/wxo/assets/theme-sequences/${entry.file}`
+      : `protected/wxo/assets/public-candidate/${entry.file}`;
     if (!entry.source || !entry.sourceSha256 || !entry.sha256 || !entry.figmaNode || !Array.isArray(entry.dimensions) || !['wxo-canvas.html', 'document-processing.html', 'source-only'].includes(entry.route)) fail(`Incomplete canonical wxO candidate provenance: ${entry.file}`);
     if (!fs.existsSync(assetPath)) fail(`Missing canonical wxO candidate derivative: ${assetPath}`);
     else if (sha256(assetPath) !== entry.sha256) fail(`Canonical wxO candidate derivative hash drift: ${entry.file}`);
-    if (entry.route === 'source-only') continue;
+    if (entry.route === 'source-only') {
+      if (!entry.retainedReason) fail(`Source-only candidate provenance must state why its unrendered derivative is retained: ${entry.file}`);
+      continue;
+    }
     const routeHtml = entry.route === 'wxo-canvas.html' ? wxo : doc;
     requireText(routeHtml, assetPath, `${entry.route} missing routed candidate asset ${assetPath}.`);
-    requireText(routeHtml, `width="${entry.dimensions[0]}" height="${entry.dimensions[1]}"`, `${entry.route} dimensions must match ${entry.file}.`);
+    if (entry.namespace !== 'theme-sequences') requireText(routeHtml, `width="${entry.dimensions[0]}" height="${entry.dimensions[1]}"`, `${entry.route} dimensions must match ${entry.file}.`);
+    else if (!entry.ownerExportContext || !entry.prototypeDataClassification?.includes('fictional')) fail(`Theme-sequence provenance must retain owner-export context and fictional prototype-data classification: ${entry.file}`);
   }
 }
 if (fs.existsSync('protected/wxo/assets/public-candidate/manifest.json')) fail('Detailed canonical wxO provenance must remain outside the guarded image namespace.');
@@ -223,11 +247,18 @@ requireText(doc, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'Doc
 forbid(doc, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
 if (count(doc, /class="doc-story-grid/gi) !== 0) fail('The redundant standalone Document Processing storyboard must be removed.');
 
+const classifyDisplayAsset = 'protected/wxo/assets/document-processing/current/classify-suggested-display-sanitized.png';
+requireText(doc, `<img src="${classifyDisplayAsset}" width="984" height="624"`, 'Classify must use the 984×624 edge-trimmed display derivative.');
+if (!fs.existsSync(classifyDisplayAsset)) fail('Classify edge-trimmed display derivative must exist beside the approved source asset.');
+else if (JSON.stringify(pngDimensions(classifyDisplayAsset)) !== JSON.stringify([984, 624])) fail('Classify display derivative must remove only the confirmed 20/10/20/30px exterior matte.');
+const classifyDisplayProvenance = documentCurrentProvenance.assets?.find((entry) => entry.file === classifyDisplayAsset);
+if (!classifyDisplayProvenance || classifyDisplayProvenance.source !== 'protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png' || classifyDisplayProvenance.sourceSha256 !== '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933' || JSON.stringify(classifyDisplayProvenance.crop) !== JSON.stringify([20, 10, 1004, 634]) || JSON.stringify(classifyDisplayProvenance.dimensions) !== JSON.stringify([984, 624]) || !classifyDisplayProvenance.outputSha256 || (fs.existsSync(classifyDisplayAsset) && sha256(classifyDisplayAsset) !== classifyDisplayProvenance.outputSha256)) fail('Classify display provenance must record the source-preserving exterior-matte crop.');
+
 for (const asset of [
   'doc-pro-evaluation-loop-sanitized.webm',
   'doc-pro-evaluation-loop-sanitized.mp4',
   'doc-pro-poster-sanitized.png',
-  'classify-suggested-sanitized.png',
+  'classify-suggested-display-sanitized.png',
   'extract-field-sanitized.png',
   'extract-error-sanitized.png',
   'review-table-sanitized.png',
@@ -255,6 +286,7 @@ const expectedDocumentAssets = {
   'protected/wxo/assets/document-processing/storyboard/02-review-and-correct-sanitized.png': 'f4e01d2d8c3665321cf53c6ba2f902182062da6485e03994bf44e12bfbab8b45',
   'protected/wxo/assets/document-processing/storyboard/03-evaluation-details-sanitized.png': 'e60feb0d7b7de1105e2b40d640598d2a81250d48effd60747fd05e105589f1b9',
   'protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png': '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933',
+  'protected/wxo/assets/document-processing/current/classify-suggested-display-sanitized.png': '7a8191aeba38a813e48cfad04f3d193b228cc3095125a9cc1a7a2185aca52465',
   'protected/wxo/assets/document-processing/current/extract-field-sanitized.png': 'c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab',
   'protected/wxo/assets/document-processing/current/extract-error-sanitized.png': 'a4b1510fe034d6503de89caa0ace9ca3a9b9889ebdf454b42a3387a35022387e',
   'protected/wxo/assets/document-processing/current/review-table-sanitized.png': '3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240',

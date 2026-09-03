@@ -53,8 +53,8 @@ const assetHashes = {
   'images/pikapp-case-study/v2-responsibility-detail-dark-clean.png': '945577aa42d95cfe14d0c258028488f96d01b069b7973b903c2a07b3e9c7372c',
   'images/pikapp-case-study/v2-update-review-dark-clean.png': '997b246e8ce2252f3dccf9459b0acbb57702c839a879ff41def74c5a1dbf3c0d',
   'images/pikapp-case-study/v2-correction-requested-dark-clean.png': 'f65eba0f9bf4ec7d58b102016a0cc8a4613f3d1d994cdc82aa31e3f53e63d157',
-  'images/pikapp-case-study/v2-all-caught-up-dark-clean.png': 'fee611f2495f7b16411372839a3cc99a0936bc89b2cfe8076a02d7c85711db6c',
-  'images/pikapp-case-study/v2-all-caught-up-light-clean.png': '8f5aa2ee9586ab354823d9af8282684d3a3a0eba4a9585584fd409fcfa4c2482',
+  'images/pikapp-case-study/v2-all-caught-up-dark-clean.png': 'bf9eeada6a6ae5789525ed60074789406871c7747db7639cf3b785fd51328e56',
+  'images/pikapp-case-study/v2-all-caught-up-light-clean.png': '04d7e1a6c3f25e666bb48e363ab30f71b1015724b015cee5756d1c7101d70d52',
   'images/pikapp-case-study/v2-chapter-light-clean.png': 'ee4b7c9daaa2afbd808b1c97ddd11f0aaebe4378bbdd0bca6c2d4c3bb93b945f',
   'images/pikapp-case-study/pattern-dark-blue.svg': 'c351c176e21cba2ec26506c444018502b9214ddd49036b1f2d07f6a5c7bb5436',
 

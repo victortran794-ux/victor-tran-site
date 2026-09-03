@@ -23,8 +23,27 @@ function forbid(pattern, sources, label) {
   }
 }
 
+function inspectJpeg(buffer) {
+  if (!buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]))) throw new Error('not a JPEG');
+  let offset = 2;
+  while (offset < buffer.length) {
+    if (buffer[offset] !== 0xff) throw new Error('invalid JPEG marker');
+    while (buffer[offset] === 0xff) offset += 1;
+    const marker = buffer[offset++];
+    if (marker === 0xd9 || marker === 0xda) break;
+    const length = buffer.readUInt16BE(offset);
+    if (length < 2 || offset + length > buffer.length) throw new Error('invalid JPEG segment length');
+    if ((marker >= 0xc0 && marker <= 0xc3) || (marker >= 0xc5 && marker <= 0xc7) || (marker >= 0xc9 && marker <= 0xcb) || (marker >= 0xcd && marker <= 0xcf)) {
+      return { width: buffer.readUInt16BE(offset + 5), height: buffer.readUInt16BE(offset + 3) };
+    }
+    offset += length;
+  }
+  throw new Error('JPEG has no frame dimensions');
+}
+
 let manifest;
 let exportPolicy;
+let pillarProvenance;
 try {
   manifest = JSON.parse(read('data/projects.json'));
 } catch (error) {
@@ -36,6 +55,12 @@ try {
 } catch (error) {
   fail(`data/content-export-policy.json is missing or invalid: ${error.message}`);
   exportPolicy = { protectedPages: [] };
+}
+try {
+  pillarProvenance = JSON.parse(read('data/pci-pillar-diagram-provenance.json'));
+} catch (error) {
+  fail(`PCI pillar provenance is missing or invalid: ${error.message}`);
+  pillarProvenance = {};
 }
 
 const pci = (manifest.projects || []).find(project => project.slug === 'pci');
@@ -82,9 +107,51 @@ for (const [relativePath, expectedHash] of bookletSamples) {
 const hierarchyArtifacts = new Map([
   ['images/pci-booklet-statement-hierarchy.jpg', 'fc0839a0e15b7c589f8f25d7c4579fc970812f108623be4535d763aab0a23134'],
   ['images/pci-booklet-icon-supported-principles.jpg', 'ee3e4b7fbd4e8c5859a6153dbaf59a1888c1446aa496d66da2a73d5ba1a2ac86'],
-  ['images/pci-booklet-pillar-diagram.jpg', '06c8f2328c2a7aa692756efe16a57b2a61f8397aaff12eb8259371ff422042d0'],
+  ['images/pci-booklet-pillar-diagram.jpg', '9610afe7ad2b62e8bbf22b1d73c20777d03b98e6842822dd9427b9491fddf1f7'],
   ['images/pci-booklet-editorial-feature.jpg', 'a4fbb0c10c1450f495e1f5b1f32a4998c36773b1bac5ef044167508291722e1f'],
 ]);
+const pillarDiagram = pillarProvenance.pillarDiagram || {};
+const sourcePdf = pillarDiagram.sourcePdf || {};
+const cleanPageRender = pillarDiagram.cleanPageRender || {};
+const sanitizedDerivative = pillarDiagram.sanitizedDerivative || {};
+const repair = pillarDiagram.repair || {};
+const finalDerivative = pillarDiagram.finalDerivative || {};
+const requiredPillarFacts = [
+  [pillarDiagram.artifact, 'images/pci-booklet-pillar-diagram.jpg', 'artifact'],
+  [sourcePdf.intakeIdentifier, 'owner-handoff/pci-handbook-2026/Booklet_020526.pdf', 'portable PDF intake identifier'],
+  [sourcePdf.filename, 'Booklet_020526.pdf', 'PDF filename'],
+  [sourcePdf.sha256, 'a230554824f1a583e0e8ca05e65357039f6783d57265c7d17e3e3ab16ade272d', 'PDF SHA-256'],
+  [sourcePdf.pageCount, 42, 'PDF page count'],
+  [cleanPageRender.page, 12, 'clean PDF render page'],
+  [cleanPageRender.sha256, 'a560d5366604ff6a385bbd06eb2d18d3dfb5a00d6d5106847255f640535bf61b', 'clean PDF render SHA-256'],
+  [JSON.stringify(cleanPageRender.dimensions), JSON.stringify([830, 642]), 'clean PDF render dimensions'],
+  [sanitizedDerivative.sha256, '06c8f2328c2a7aa692756efe16a57b2a61f8397aaff12eb8259371ff422042d', 'pre-repair sanitized derivative SHA-256'],
+  [JSON.stringify(sanitizedDerivative.dimensions), JSON.stringify([830, 660]), 'pre-repair sanitized derivative dimensions'],
+  [JSON.stringify(repair.clearResidualStrip), JSON.stringify({ x: [35, 265], y: [165, 175], fill: 'page-white' }), 'residual-strip clearance bounds'],
+  [JSON.stringify(repair.replaceSourcePixels), JSON.stringify({ x: [35, 265], y: [175, 214], sourcePage: 12 }), 'source-pixel replacement bounds'],
+  [finalDerivative.sha256, '9610afe7ad2b62e8bbf22b1d73c20777d03b98e6842822dd9427b9491fddf1f7', 'final repaired derivative SHA-256'],
+  [JSON.stringify(finalDerivative.dimensions), JSON.stringify([830, 660]), 'final repaired derivative dimensions'],
+];
+for (const [actual, expected, label] of requiredPillarFacts) {
+  if (actual !== expected) fail(`PCI pillar provenance must preserve the approved ${label}`);
+}
+if (/^(?:[A-Za-z]:[\\/]|\/)/.test(sourcePdf.intakeIdentifier || '')) {
+  fail('PCI pillar provenance intake identifier must be portable, not an absolute path');
+}
+const pillarDiagramPath = path.join(root, 'images/pci-booklet-pillar-diagram.jpg');
+if (fs.existsSync(pillarDiagramPath)) {
+  const buffer = fs.readFileSync(pillarDiagramPath);
+  const actualHash = crypto.createHash('sha256').update(buffer).digest('hex');
+  if (actualHash !== finalDerivative.sha256) fail('PCI pillar derivative must match the provenance-record final SHA-256');
+  try {
+    const dimensions = inspectJpeg(buffer);
+    if (JSON.stringify([dimensions.width, dimensions.height]) !== JSON.stringify(finalDerivative.dimensions)) {
+      fail('PCI pillar derivative dimensions must match the provenance record');
+    }
+  } catch (error) {
+    fail(`PCI pillar derivative cannot be inspected: ${error.message}`);
+  }
+}
 for (const [relativePath, expectedHash] of hierarchyArtifacts) {
   const absolutePath = path.join(root, relativePath);
   if (!fs.existsSync(absolutePath)) {
@@ -105,7 +172,7 @@ for (const composite of ['images/pci-booklet-information-hierarchy-desktop.jpg',
 
 const selectedArtifacts = new Map([
   ['images/pci-handbook-2-interstitial.jpg', 'fca40568ddedde2dacdca76ac33c926900bd7249af4f90981596ee52934de41e'],
-  ['images/pci-handbook-1-cover.jpg', 'a953c5bb889daa2d51232e01b1379fdf14a7bbcf72b36742f64511bbe7aae3e0'],
+  ['images/pci-handbook-1-cover.jpg', '41237171c4a77bf7f8453a74447335885403935e72a045f0a31185f0b024efb6'],
   ['images/pci-handbook-41-locations.jpg', 'df1f7e1466919062a3fc7bd850f8c0fbab72f4bd80c970f1fcb52f5d2961248e'],
   ['images/pci-banners-1.jpg', 'c7b8e6efe776962226e102a16cb84ed138776f4776c5d31733f76675dba01e4b'],
   ['images/pci-banners-2.jpg', '312a7b4797de219bc53570770b1cc924e3ade64019b98d8f95233bdceb1786b4'],

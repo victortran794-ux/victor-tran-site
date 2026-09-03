@@ -1,0 +1,12 @@
+{
+  "artifact": "documents/Victor-Tran-Resume.pdf",
+  "source": "data/resume.json",
+  "sha256": "613fac319c7619cb1705e3f5f91362907c4067d95d55761623f08d2d599655cf",
+  "sourceSha256": "112bd81900ec27ca4257190704bb765ab180089858f45a5891191163b7ea845d",
+  "pages": 1,
+  "pageSizePoints": [
+    612.0,
+    792.0
+  ],
+  "fixedBuildDate": "2026-09-03T00:00:00+00:00"
+}

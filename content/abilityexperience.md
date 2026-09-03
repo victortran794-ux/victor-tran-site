@@ -80,5 +80,5 @@ The cycling kits carried the anniversary iconography into Gear Up Florida and Jo
 - Inside panels of the 2019 Ability Experience recruitment handout: images/ability-experience/abex-2019-handout-2.webp
 - Ability Experience cycling kit in use during a team ride: images/abex-kits-3.jpg
 - Ability Experience cycling kit front: images/abex-kits-1.jpg
-- Ability Experience cycling kit back: images/abex-kits-2.jpg
+- Ability Experience cycling kit front: images/abex-kits-2.jpg
 - SC56 event backdrop map for The Ability Experience: images/abex-map.jpg

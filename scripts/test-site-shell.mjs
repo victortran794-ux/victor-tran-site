@@ -22,6 +22,7 @@ const shellConfig = {
   protectedDetail: 'Access required',
   contactEmail: 'victortran794@gmail.com',
   linkedInUrl: 'https://www.linkedin.com/in/victortrandesign/',
+  resumeUrl: 'documents/Victor-Tran-Resume.pdf',
   footerTagline: 'Do more good things.',
   footerSubtitle: '',
   footerCta: "Let's chat.",
@@ -119,6 +120,7 @@ try {
     assert.match(html, /class="footer-email"[^>]*><svg viewBox="0 0 24 24"/);
     assert.doesNotMatch(html, /data-copy-email|data-copy-email-status|>Copy email</);
     assert.match(html, /<nav class="footer-social" aria-label="Contact options">/);
+    assert.match(html, /href="documents\/Victor-Tran-Resume\.pdf" target="_blank" rel="noopener">Résumé<\/a>/);
     if (['public.html', 'protected.html'].includes(page)) {
       assert.match(html, /<!-- generated:project-nav:start -->/);
       assert.match(html, /aria-label="Previous project:/);

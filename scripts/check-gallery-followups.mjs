@@ -72,9 +72,10 @@ expect(ui.includes('<h2 id="ekos-study-title">Ekos Con</h2>'),'Ekos must keep th
 expect(!ui.includes('<h2 id="ekos-study-title">Ekos Con 2018</h2>'),'Ekos large heading must not repeat 2018');
 expect(ui.includes(ekosCopy),'Ekos summary must include the approved provenance/status clarification');
 expect(uiContract.includes(ekosCopy),'UI Gallery contract must lock the Ekos clarification');
-expect(count(ui,'data-ui-study-view="magi-')===6,'Magi public edit must remain the six-board curation');
+expect(count(ui,'data-ui-study-view="magi-')===4,'Magi public edit must remain the four-study owner-approved curation');
 expect(!ui.includes('magi-inspector-metrics'),'Redundant Inspector & Metrics board must remain omitted');
-expect(uiContract.includes('current six-board Magi edit remains sufficient'),'UI Gallery contract must document the intentional Magi no-add decision');
+expect(uiContract.includes('four retained Magi studies'),'UI Gallery contract must preserve the four-study owner-approved curation');
+expect(uiContract.includes('owner-rejected cropped Magi'),'UI Gallery contract must keep the two rejected cropped figures excluded');
 expect(packageJson.scripts?.['check:gallery-followups']==='node scripts/check-gallery-followups.mjs','package.json must expose the Gallery followups contract');
 expect(preflight.includes('npm run check:gallery-followups'),'preflight must run the Gallery followups contract');
 for(const page of activeVisitorPages){
@@ -87,4 +88,4 @@ expect(read('salmagazine.html').includes("Read all nine issues produced across f
 
 if(failures.length){console.error(`GALLERY FOLLOWUPS CONTRACT: FAIL (${failures.length})`);for(const failure of failures)console.error(`- ${failure}`);process.exit(1)}
 console.log('GALLERY FOLLOWUPS CONTRACT: PASS');
-console.log('- 10-piece Daysigns square grid, bounded Ekos clarification, and intentional six-board Magi edit');
+console.log('- 10-piece Daysigns square grid, bounded Ekos clarification, and intentional four-study Magi edit');

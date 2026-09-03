@@ -28,6 +28,7 @@ const uvSetup = `      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17
         if: >-
           needs.changes.outputs.all == 'true' ||
           needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.resume == 'true' ||
           needs.changes.outputs.images == 'true' ||
           needs.changes.outputs.gallery == 'true'
         with:

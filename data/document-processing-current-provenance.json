@@ -234,6 +234,17 @@
           30
         ]
       ]
+    },
+    {
+      "file": "protected/wxo/assets/document-processing/current/classify-suggested-display-sanitized.png",
+      "source": "protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png",
+      "sourceSha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
+      "outputSha256": "7a8191aeba38a813e48cfad04f3d193b228cc3095125a9cc1a7a2185aca52465",
+      "operations": [
+        "Cropped confirmed exterior matte only: left 20px, top 10px, right 20px, bottom 30px"
+      ],
+      "crop": [20, 10, 1004, 634],
+      "dimensions": [984, 624]
     }
   ],
   "selection": "Nine current Figma frames: one Classify setup, two Extract states, two Review states, and a four-screen Evaluate finale.",

@@ -44,15 +44,15 @@ for (const phrase of [
   'Developed in parallel with the broader canvas work',
   'Canvas evolution',
   'A visual system that kept expanding.',
-  'I also supported the agent canvas vision',
+  'I supported the agent canvas vision',
   'One system for automation, specialized work, and human judgment.',
 ]) requireText(main, phrase, `Pilot missing approved phrase: ${phrase}`);
 
 forbid(main, /—/, 'Canonical candidate primary copy must not use em dashes.');
 forbid(main, /V2 system evolution|V2 authored exploration|Visual system in motion|prototype sequence|Canvas Future/i,
   'Canonical candidate must not expose retired V2, motion-prototype, or Canvas Future framing.');
-if (count(main, /protected\/wxo\/assets\/public-candidate\//gi) !== 11) {
-  fail('Canonical-local umbrella must keep ten carousel sources plus one guarded handoff thumbnail.');
+if (count(main, /protected\/wxo\/assets\/public-candidate\//gi) !== 4) {
+  fail('Canonical-local umbrella must retain four guarded public-candidate sources alongside the paired theme sequences.');
 }
 forbid(main, /<video\b|<iframe\b/i, 'Canonical candidate must remain a static evidence narrative.');
 forbid(main, /target="_blank"|Open full board/i, 'Evidence must open in the in-window carousel, not a new tab or repeated full-board action.');
@@ -73,23 +73,23 @@ forbid(main, /pilot-doc-epic|pilot-doc-frame|id="document-processing"/i, 'wxO um
 forbid(main, /accuracy improvement|efficiency improvement|adoption|customer impact|measured (?:improvement|increase|decrease|impact|result)/i,
   'Canonical candidate must not add unsupported outcome claims.');
 
-if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 10) {
-  fail('Canonical umbrella must contain exactly ten evidence display units.');
+if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 9) {
+  fail('Canonical umbrella must contain exactly nine evidence display units.');
 }
 if (count(main, /class="[^"]*\bpilot-activity-frame\b[^"]*"/gi) !== 3) {
   fail('Canonical candidate must contain the three approved User Activity frames.');
 }
 
-if (count(main, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 4) {
-  fail('Canonical candidate must contain two centered primary studies plus Node States and Flow Controls.');
+if (count(main, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) {
+  fail('Canonical candidate must contain the three required canvas-evolution screens.');
 }
-if (count(main, /data-wxo-evidence/gi) !== 10 || count(main, /<img\b/gi) !== 12) {
-  fail('Canonical umbrella must contain ten carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
+if (count(main, /data-wxo-evidence/gi) !== 9 || count(main, /<img\b/gi) !== 11) {
+  fail('Canonical umbrella must contain nine carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
 }
 forbid(main, /src="protected\/wxo\/assets\/public-candidate\/13-floating-studies\.png"/i, 'The monolithic Floating Studies board must not remain in the rendered composition.');
 forbid(main, /13b-flow-types\.png|13c-connector-mechanics\.png|pilot-study--types|pilot-study--connectors/i, 'Removed trailing Floating Studies must not remain rendered.');
-for (const token of ['pilot-evolution-primary', 'pilot-flow-control-composition', '13a-node-states.png']) {
-  requireText(main, token, `Canvas evolution must use centered primary boards and authentic component crops: ${token}`);
+for (const token of ['pilot-theme-sequence', 'Current builder', 'V2 workflow evolution', 'V2 agent hierarchy']) {
+  requireText(main, token, `Canvas evolution must expose the required ordered state: ${token}`);
 }
 if (!(main.indexOf('pilot-main-illustration') < main.indexOf('pilot-released-canvas') && main.indexOf('pilot-activity-epic') < main.indexOf('pilot-vignettes') && main.indexOf('pilot-vignettes') < main.indexOf('pilot-side-quest-bridge'))) {
   fail('Main illustration must open Canvas; wide centered vignettes must return after User Activity and before the route handoff.');
@@ -113,10 +113,22 @@ const expectedAssets = [
   '13b-flow-types.png',
   '13c-connector-mechanics.png',
   '13-floating-studies.png',
+  'current-workflow-light.png',
+  'current-workflow-dark.png',
+  'v2-workflow-light.png',
+  'v2-workflow-dark.png',
+  'v2-agent-flow-light.png',
+  'v2-agent-flow-dark.png',
+  'form-workflow-light.png',
+  'form-workflow-dark.png',
+  'form-configuration-light.png',
+  'form-configuration-dark.png',
+  'form-summary-light.png',
+  'form-summary-dark.png',
 ];
 const manifestFiles = (manifest.assets ?? []).map((asset) => asset.file);
 if (JSON.stringify(manifestFiles) !== JSON.stringify(expectedAssets)) {
-  fail('Canonical candidate provenance manifest must list fourteen routed assets plus three retained source-only derivatives.');
+  fail('Canonical candidate provenance manifest must retain legacy derivatives and list all twelve theme-sequence exports.');
 }
 if (manifest.status !== 'production-release-approved' || manifest.publicationApproved !== true || manifest.commitApproved !== true || manifest.productionApproved !== true) {
   fail('Canonical provenance manifest must record the approved production release gate.');
@@ -128,7 +140,9 @@ for (const entry of manifest.assets ?? []) {
   if (/^(?:[A-Za-z]:[\\/]|\/mnt\/|\/home\/)/.test(entry.source ?? '')) {
     fail(`Provenance source must be portable and must not expose an absolute local path: ${entry.file}`);
   }
-  const assetPath = `protected/wxo/assets/public-candidate/${entry.file}`;
+  const assetPath = entry.namespace === 'theme-sequences'
+    ? `protected/wxo/assets/theme-sequences/${entry.file}`
+    : `protected/wxo/assets/public-candidate/${entry.file}`;
   if (!fs.existsSync(assetPath)) {
     fail(`Missing pilot derivative: ${assetPath}`);
     continue;
@@ -137,8 +151,11 @@ for (const entry of manifest.assets ?? []) {
     fail(`Incomplete provenance entry: ${entry.file}`);
   }
   if (sha256(assetPath) !== entry.sha256) fail(`Canonical candidate derivative hash drift: ${entry.file}`);
-  if (entry.route !== 'wxo-canvas.html') continue;
+  if (entry.route === 'source-only' && !entry.retainedReason) fail(`Source-only provenance must state why its unrendered derivative is retained: ${entry.file}`);
+  if (entry.namespace === 'theme-sequences' && (!entry.ownerExportContext || !entry.prototypeDataClassification?.includes('fictional'))) fail(`Theme-sequence provenance must retain owner-export context and fictional prototype-data classification: ${entry.file}`);
+  if (entry.route !== 'wxo-canvas.html' || !main.includes(assetPath)) continue;
   requireText(main, assetPath, `Canonical umbrella HTML must reference ${assetPath}.`);
+  if (entry.namespace === 'theme-sequences') continue;
   const escapedPath = assetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const imageTag = main.match(new RegExp(`<img\\b[^>]*src=["']${escapedPath}["'][^>]*>`, 'i'))?.[0] ?? '';
   requireText(imageTag, `width="${entry.dimensions[0]}"`, `Canonical candidate HTML width must match ${entry.file}.`);

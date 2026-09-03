@@ -143,9 +143,9 @@
     "contentFile": "content/about.md",
     "headings": [
       "What I’m doing now",
-      "Visual Designer, IBM watsonx Orchestrate | AI & Automation",
+      "Visual Designer, IBM watsonx Orchestrate",
       "Previously at IBM",
-      "Visual Designer, IBM Cloud | Observability",
+      "Visual Designer, IBM Cloud",
       "What I design",
       "How I work",
       "Past work",
@@ -491,7 +491,7 @@
       },
       {
         "src": "images/abex-kits-2.jpg",
-        "alt": "Ability Experience cycling kit back"
+        "alt": "Ability Experience cycling kit front"
       },
       {
         "src": "images/abex-map.jpg",

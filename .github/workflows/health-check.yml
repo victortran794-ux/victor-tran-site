@@ -29,6 +29,7 @@ jobs:
       sal: ${{ steps.scope.outputs.sal }}
       ability: ${{ steps.scope.outputs.ability }}
       wxo: ${{ steps.scope.outputs.wxo }}
+      resume: ${{ steps.scope.outputs.resume }}
       images: ${{ steps.scope.outputs.images }}
       links: ${{ steps.scope.outputs.links }}
       deployable: ${{ steps.scope.outputs.deployable }}
@@ -79,6 +80,8 @@ jobs:
           node-version: "22.22.0"
       - name: Health-check scope classifier fixture
         run: node scripts/test-classify-health-check-scope.mjs
+      - name: Portable PCI and Graphic contract path fixture
+        run: npm run test:contract-portability
       - name: Install Design.md dependencies
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.design == 'true'
         run: npm ci --ignore-scripts
@@ -290,6 +293,7 @@ jobs:
           needs.changes.outputs.all == 'true' ||
           needs.changes.outputs.shared == 'true' ||
           needs.changes.outputs.wxo == 'true' ||
+          needs.changes.outputs.resume == 'true' ||
           needs.changes.outputs.images == 'true' ||
           needs.changes.outputs.gallery == 'true'
         with:
@@ -298,10 +302,14 @@ jobs:
         if: >-
           needs.changes.outputs.all == 'true' ||
           needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.resume == 'true' ||
           needs.changes.outputs.images == 'true' ||
           needs.changes.outputs.gallery == 'true'
         with:
           version: "0.11.14"
+      - name: Résumé deterministic build and artifact contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.resume == 'true'
+        run: npm run test:resume-build
       - name: wxO and Document Processing protected deep-link regression
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.wxo == 'true'
         run: |
