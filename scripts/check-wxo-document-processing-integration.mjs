@@ -219,6 +219,9 @@ for (const text of [
   'data-wxo-gallery',
 ]) requireText(doc, text, `Standalone Document Processing feature arc missing: ${text}`);
 if (count(mainHtml(doc), /data-wxo-evidence/gi) !== 4) fail('Standalone Document Processing must contain four feature-arc carousel triggers.');
+forbid(doc, /protected\/wxo\/assets\/public-candidate\/(?:09-document-classify|10-document-extract|11-document-review|12-document-evaluate)\.png/i, 'Document Processing must not render retired legacy neutralized feature-arc derivatives.');
+forbid(wxo, /protected\/wxo\/assets\/public-candidate\/09-document-classify\.png/i, 'wxO bridge must not render the retired legacy neutralized Classify derivative.');
+requireText(wxo, 'protected/wxo/assets/document-processing/current/classify-setup.png', 'wxO bridge must render the authentic current Classify owner export.');
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
 forbid(doc, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'Document Processing viewer-facing copy must not expose internal release-gate language.');
@@ -245,6 +248,8 @@ for (const entry of documentCurrentProvenance.assets || []) {
   if (entry.route !== 'document-processing.html' || entry.sourceRecordType !== 'owner-supplied-export-filename-and-sha256' || entry.sourceSha256 !== entry.outputSha256 || !entry.operations?.includes('None; repository asset is byte-identical to the owner export')) fail(`Document Processing active provenance must record an unaltered owner export: ${entry.file}`);
   else if (!fs.existsSync(entry.file) || sha256(entry.file) !== entry.outputSha256 || JSON.stringify(pngDimensions(entry.file)) !== JSON.stringify(entry.dimensions)) fail(`Document Processing active owner export changed: ${entry.file}`);
 }
+const classifyProvenance = documentCurrentProvenance.assets?.find((entry) => entry.file.endsWith('/classify-setup.png'));
+if (!classifyProvenance?.additionalRoutes?.includes('wxo-canvas.html')) fail('Current Classify provenance must declare its additional wxO bridge route.');
 forbid(doc, /doc-ending|doc-decision-row|doc-contribution-row|The screens carry the story|02 \/ Decisions \+ contribution/i, 'Redundant website-only decisions and contribution chapter must be removed.');
 forbid(doc, /pilot-step-arrow--long/, 'The final Document Processing arrow must use the same contained geometry as the earlier arrows.');
 forbid(doc, /doc-loop-title|class="doc-loop|class="doc-decision-grid|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from Document Processing.');

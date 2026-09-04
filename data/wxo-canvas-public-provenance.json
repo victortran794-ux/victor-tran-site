@@ -122,7 +122,8 @@
       "sha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Retired guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the authentic owner export replaced it in active presentation."
     },
     {
       "file": "10-document-extract.png",

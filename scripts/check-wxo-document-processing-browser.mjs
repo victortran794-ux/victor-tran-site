@@ -314,7 +314,7 @@ try {
           const candidateImages=[...document.querySelectorAll('.pilot-evidence img')];
           const expected=${JSON.stringify(name === 'wxo'
             ? [[3168,2084],[1440,665],[1440,412],[3168,1800],[3168,1800],[3168,1800],theme === 'dark' ? [1890,442] : [3780,884],[3168,2084],[3168,2114],[3168,2156],[1440,314],[1440,729],[1440,766],[1440,356]]
-            : [[1024,664],[1024,780],[1024,674],[1024,674]])};
+            : [[2624,1692],[1376,1048],[1584,1042],[1584,1042]])};
           const gridColumns=(selector)=>{const grid=document.querySelector(selector);return grid?getComputedStyle(grid).gridTemplateColumns.split(' ').length:null};
           const contrastTarget=document.querySelector(${name === 'wxo' ? "'.pilot-section-heading > div > p'" : "'.doc-feature-arc-intro > p:last-child'"});
           const contrastSurface=document.querySelector('body');
@@ -390,7 +390,7 @@ try {
         assert(parseFloat(state.reduced)<=0.001,`${spec.file}: reduced-motion transition remained ${state.reduced}`);
         const evidenceNarrow=viewport.width<=860;
         assert(state.gallerySemantics?.tag==='DIALOG'&&state.gallerySemantics.labelledBy===state.gallerySemantics.titleId&&state.gallerySemantics.closeLabel==='Close image viewer'&&state.gallerySemantics.prev&&state.gallerySemantics.next,`${spec.file}: evidence carousel semantics failed ${JSON.stringify(state.gallerySemantics)}`);
-        assert(state.candidateTriggers.every(({label,tag,type,src})=>label?.startsWith('Open ')&&tag==='BUTTON'&&type==='button'&&/^protected\/wxo\/assets\/(?:public-candidate|theme-sequences)\//.test(src||'')),`${spec.file}: in-window evidence triggers failed ${JSON.stringify(state.candidateTriggers)}`);
+        assert(state.candidateTriggers.every(({label,tag,type,src})=>label?.startsWith('Open ')&&tag==='BUTTON'&&type==='button'&&/^protected\/wxo\/assets\/(?:public-candidate|theme-sequences|document-processing\/current)\//.test(src||'')),`${spec.file}: in-window evidence triggers failed ${JSON.stringify(state.candidateTriggers)}`);
         assert(state.imageContainment.every(({ratio,natural,inside})=>inside&&Math.abs(ratio-natural)<0.015),`${spec.file}: evidence containment or aspect ratio failed ${JSON.stringify(state.imageContainment)}`);
         if(name==='wxo'){
           const systemNarrow=viewport.width<=860;

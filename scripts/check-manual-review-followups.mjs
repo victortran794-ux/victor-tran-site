@@ -114,10 +114,23 @@ const activeProtected = new Set((policy.protectedPages || []).filter((entry) => 
 for (const page of ['wxo-canvas.html', 'document-processing.html']) {
   if (!activeProtected.has(page)) fail(`${page} must remain in the active protected-route policy`);
 }
-const currentDocImages = [...doc.matchAll(/<img\b[^>]*src="(protected\/wxo\/assets\/document-processing\/current\/[^"]+)"/g)].map((match) => match[1]);
-if (currentDocImages.length !== 8) fail(`Document Processing must render eight unaltered owner-export evidence screens, found ${currentDocImages.length}`);
+const currentDocReferences = [...doc.matchAll(/<img\b[^>]*src="(protected\/wxo\/assets\/document-processing\/current\/[^"]+)"/g)].map((match) => match[1]);
+const currentDocImages = [...new Set(currentDocReferences)];
+const expectedCurrentDocImages = (docLedger.assets || []).map((item) => item.file);
+if (currentDocImages.length !== 8 || JSON.stringify(currentDocImages.slice().sort()) !== JSON.stringify(expectedCurrentDocImages.slice().sort())) {
+  fail(`Document Processing must render only the eight declared owner-export evidence screens, found ${currentDocImages.length}`);
+}
 if (currentDocImages.some((source) => source.includes('-sanitized'))) {
   fail('Document Processing current screens still reference identity-neutralized derivatives');
+}
+for (const legacy of ['09-document-classify.png', '10-document-extract.png', '11-document-review.png', '12-document-evaluate.png']) {
+  if (doc.includes(`protected/wxo/assets/public-candidate/${legacy}`)) fail(`Document Processing still renders retired legacy derivative ${legacy}`);
+}
+if (wxo.includes('protected/wxo/assets/public-candidate/09-document-classify.png')) {
+  fail('wxO bridge still renders the retired legacy Classify derivative');
+}
+if (!wxo.includes('protected/wxo/assets/document-processing/current/classify-setup.png')) {
+  fail('wxO bridge must use the authentic current Classify owner export');
 }
 if (!/^None on the active eight-image set\./.test(docLedger.sanitation || '')) {
   fail('Document Processing provenance must state that active evidence has no identity hiding');
@@ -129,6 +142,10 @@ for (const item of docLedger.assets || []) {
   if (item.route !== 'document-processing.html' || item.sourceSha256 !== item.outputSha256 || item.outputSha256 !== sha256(item.file)) {
     fail(`Document Processing active provenance must bind a byte-identical owner export to the protected route: ${item.file}`);
   }
+}
+const classifyRecord = (docLedger.assets || []).find((item) => item.file.endsWith('/classify-setup.png'));
+if (!classifyRecord?.additionalRoutes?.includes('wxo-canvas.html')) {
+  fail('Classify owner-export provenance must declare its additional wxO bridge route');
 }
 if (/doc-motion-section|doc-pro-(?:poster|evaluation-loop)-sanitized/.test(doc)) {
   fail('Document Processing must not render the retired identity-neutralized motion derivative');
