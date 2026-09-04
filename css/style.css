@@ -1835,8 +1835,8 @@ html[data-finish-proof] .home-practice-proof strong {
 .featured-galleries .featured-item--gallery:is(.featured-item--surface-orange, .featured-item--surface-purple, .featured-item--surface-teal) .featured-item-title { color: #ffffff; }
 
 .featured-item--surface-orange .featured-item-desc,
-.featured-item--surface-purple .featured-item-desc,
-.featured-item--surface-teal .featured-item-desc { color: rgba(255, 255, 255, 0.82); }
+.featured-item--surface-purple .featured-item-desc { color: rgba(255, 255, 255, 0.82); }
+.featured-item--surface-teal .featured-item-desc { color: #ffffff; }
 
 .featured-item--surface-orange .section-label,
 .featured-item--surface-purple .section-label,

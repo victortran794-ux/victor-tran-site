@@ -41,6 +41,7 @@ need(/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?is-work-arriving/.tes
 need(/\.home-page--engraved-dna \.hero-dna-label\s*\{[^}]*font-size:\s*0\.72rem/i.test(css.shared), 'Desktop DNA labels must use readable 0.72rem type.');
 need(/\.home-page--engraved-dna \.hero-dna-swatch-name,[\s\S]*?font-size:\s*0\.64rem/i.test(css.shared), 'Desktop DNA token text must use readable 0.64rem type.');
 has(css.shared, '.featured-item--surface-teal .featured-item-content', 'Homepage gallery must support teal card bodies.');
+need(/\.featured-item--surface-teal \.featured-item-desc\s*\{\s*color:\s*#ffffff;/is.test(css.shared), 'Teal gallery description text must use full white for WCAG AA contrast.');
 
 // wxO / Document Processing: honest theme-aware evidence, space, and a prominent return.
 for (const file of [
@@ -67,9 +68,9 @@ need(/\.wxo-public-pilot \.doc-motion-section\s*\{[^}]*padding-top:/is.test(css.
 has(html.doc, 'class="workflow-return-link workflow-return-link--prominent"', 'Document Processing must end with a prominent Canvas return.');
 has(css.wxo, '.workflow-return-link--prominent', 'Prominent Canvas return must have a dedicated treatment.');
 need(/\.wxo-public-pilot \.doc-current-stage-head\s*\{[^}]*gap:\s*clamp\(10px/is.test(css.wxo), 'Document Processing stage number must sit closer to its heading.');
-
 // IBM Patterns: simpler, subtler close without the rejected caveat sentences.
 lacks(html.patterns, 'The IBM Patterns prototype did not become the production page.', 'Remove rejected prototype sentence.');
+lacks(html.patterns, 'The future-state concept did not become the production page.', 'Remove the rephrased production-page disclaimer too.');
 lacks(html.patterns, 'What I remember carrying forward', 'Remove rejected recollection phrasing.');
 has(html.patterns, 'The useful idea was simple:', 'IBM Patterns close must use the approved simpler reflection.');
 

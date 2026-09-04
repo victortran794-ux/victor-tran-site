@@ -40,7 +40,7 @@ I chose the IBM.com Contact Us experience from the incubator assignments and joi
 
 My official role was Visual Designer, but the work crossed disciplines. I conducted several early sponsor-user interviews, helped guide team decisions, and took a larger hand in the mid- and high-fidelity UX as the concept became tangible.
 
-Five-person team · 2021 · six-week concept. This was collaborative work. I helped connect research, interaction decisions, visual direction, prototype, and final story. The future-state concept did not become the production page.
+Five-person team · 2021 · six-week concept. This was collaborative work. I helped connect research, interaction decisions, visual direction, prototype, and final story.
 
 Chapter 02 | The dead end
 
