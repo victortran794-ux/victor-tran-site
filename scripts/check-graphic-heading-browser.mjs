@@ -31,11 +31,12 @@ try {
   await new Promise((resolve, reject) => { socket.addEventListener('open', resolve, { once: true }); socket.addEventListener('error', reject, { once: true }); });
   socket.addEventListener('message', (event) => { const message = JSON.parse(event.data); if (message.id && pending.has(message.id)) { const { resolve, reject } = pending.get(message.id); pending.delete(message.id); message.error ? reject(Error(message.error.message)) : resolve(message.result); } });
   const call = (method, params = {}) => new Promise((resolve, reject) => { const id = nextId++; pending.set(id, { resolve, reject }); socket.send(JSON.stringify({ id, method, params })); });
-  const evaluate = async (expression) => { const result = await call('Runtime.evaluate', { expression, returnByValue: true }); if (result.exceptionDetails) throw Error(result.exceptionDetails.text); return result.result.value; };
+  const evaluate = async (expression) => { const result = await call('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }); if (result.exceptionDetails) throw Error(result.exceptionDetails.text); return result.result.value; };
   await call('Page.enable');
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
   await call('Page.navigate', { url: `${baseUrl}/graphicgallery.html` });
-  await wait(300);
+  await evaluate('document.fonts.ready.then(() => true)');
+  await wait(100);
   const state = await evaluate(`(() => { const heading = document.querySelector('#graphic-archive-title'); const rect = heading.getBoundingClientRect(); return { text: heading.textContent.trim(), rootOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, headingRight: rect.right, viewport: innerWidth, fontSize: getComputedStyle(heading).fontSize }; })()`);
   if (state.text !== 'Graphics. Design. Print.') throw new Error(`hero heading drifted: ${JSON.stringify(state)}`);
   if (Number.parseFloat(state.fontSize) > 75) throw new Error(`390px heading typography is too large for the exact title: ${JSON.stringify(state)}`);

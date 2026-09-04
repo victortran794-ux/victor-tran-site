@@ -20,7 +20,7 @@ Five years of layout and art direction for Pi Kappa Phi’s official magazine.
 
 ## Page Intro
 
-I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.
+Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.
 
 ## Metadata
 
@@ -43,13 +43,13 @@ Five years of issues, art direction, and editorial design.
 
 01 / Redrawing a legacy
 
-My role grew from primary designer to creative director while I continued designing.
+The work grew from hands-on layout design into creative direction, while I kept designing each issue.
 
 Publication context
 
 First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.
 
-"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, in my last issue as creative director.
+"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, from the final issue I art directed.
 
 02 / Editorial system
 
@@ -61,7 +61,7 @@ Artifact reading
 
 System relationship
 
-Four highlight spreads from my first issue as creative director.
+Four favorite spreads from the Summer 2017 issue.
 
 03 / Art direction in practice
 

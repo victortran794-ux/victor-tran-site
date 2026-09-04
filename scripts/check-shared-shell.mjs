@@ -180,6 +180,13 @@ for (const page of expectedPages) {
   if (!nav.includes(`href="mailto:${config.contactEmail}" class="nav-contact">Contact</a>`)) {
     fail(`${page} primary navigation must preserve direct Contact access`);
   }
+  if (!nav.includes('<span class="nav-logo-victor">Victor</span>') ||
+      !nav.includes('<span class="nav-logo-tran">Tran</span>')) {
+    fail(`${page} must use the approved split Victor / Tran header wordmark`);
+  }
+  if (nav.includes('images/nav-logo.webp') || nav.includes('class="nav-logo-name"')) {
+    fail(`${page} must not retain the older image-plus-name header lockup`);
+  }
   const dropdown = extractTag(nav, /<ul id="work-menu" class="nav-dropdown-menu"[\s\S]*?<\/ul>/i);
   const actualNavUrls = [...dropdown.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
   if (JSON.stringify(actualNavUrls) !== JSON.stringify(expectedNavUrls)) {

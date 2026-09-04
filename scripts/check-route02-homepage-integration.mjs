@@ -86,6 +86,8 @@ requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
   'Homepage needs exactly one compact archive heading.');
 requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
   'Compact homepage heading must preserve Victor’s approved casual phrase.');
+requireCondition(/\.home-page--engraved-dna\s+\.featured-heading h2\s*\{[^}]*font-size:\s*clamp\(1\.35rem,\s*2vw,\s*1\.65rem\)/is.test(css),
+  'Other cool things heading type must be approximately double its former 0.78rem size.');
 forbid(index, /Product Systems · Protected/, 'Homepage must not label IBM watsonx Orchestrate as Protected.');
 forbid(index, /View Protected Case Study/, 'Homepage CTA must not repeat the protected state.');
 requireText(css, '.featured-item .section-label::before {', 'All homepage project labels need one consistent square marker.');
@@ -104,9 +106,13 @@ requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
 forbid(index, />Creative work<\/p>/i, 'Gallery pair must not carry a redundant eyebrow label.');
 requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct cover treatment.');
-requireText(css, 'grid-column: span 6;', 'The first two gallery covers need equal desktop weight.');
-requireText(css, '.featured-galleries .featured-item--gallery.featured-item--span-12 {',
-  'The third UI Gallery cover needs a deliberate full-width desktop treatment.');
+requireText(css, 'grid-column: span 4;', 'The three gallery covers need equal desktop weight.');
+requireCondition((index.match(/featured-item--gallery featured-item--span-4/g) ?? []).length === 3,
+  'Art, Graphic Design, and Interface Studies must render as three equal-width gallery cards.');
+forbid(index, /uigallery\.html" class="[^"]*featured-item--span-12/,
+  'Interface Studies must not retain the exceptional full-width treatment.');
+forbid(css, /\.featured-galleries \.featured-item--gallery\.featured-item--span-12/,
+  'Retired full-width gallery-card CSS must not remain.');
 
 // Preserve the live Ability and Star & Lamp card anatomy.
 requireCondition(/abilityexperience\.html" class="[^"]*featured-item--span-7[^"]*featured-item--surface-ability/.test(index),

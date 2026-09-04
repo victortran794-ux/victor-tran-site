@@ -50,6 +50,12 @@ need(cloud?.images?.length === 1 && cloud.images[0].src === 'images/ibm-thumb-da
   'IBM Cloud inverse card must use the existing dark-theme thumbnail exactly once.');
 need(css.includes('.featured-item--surface-ibm-inverse .featured-item-content'),
   'IBM Cloud inverse surface styling is missing.');
+need(css.includes('html[data-theme="dark"] .featured-item--surface-ibm-inverse'),
+  'IBM Cloud needs a Dark-mode-specific separation treatment.');
+need(css.includes('background: #0b2f55;'),
+  'IBM Cloud Dark-mode surface must use the approved more deliberate blue-black tone.');
+need(css.includes('border-color: rgba(120, 169, 255, 0.48);'),
+  'IBM Cloud Dark-mode surface must retain a restrained IBM-blue edge.');
 need(css.includes('.featured-list .featured-item--span-5 .featured-item-content'),
   'Narrow homepage cards need a deliberate compact content rhythm.');
 
@@ -58,6 +64,8 @@ const graphic = bySlug.get('graphicgallery');
 const uiGallery = bySlug.get('uigallery');
 need(art?.homepageLabel === false && graphic?.homepageLabel === false && uiGallery?.homepageLabel === false,
   'The Art, Graphic Design, and UI Gallery covers must rely on their titles without repetitive category labels.');
+need([art, graphic, uiGallery].every((project) => project?.homepageVariant === 'span-4'),
+  'All three homepage galleries must use the same equal-width desktop card size.');
 need(projectGenerator.includes("project.homepageLabel === false"),
   'Homepage generator must reproduce optional bounded label suppression.');
 need(manifestValidator.includes("expected.homepageLabel === false ? ''"),

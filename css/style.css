@@ -368,19 +368,19 @@ main#main-content {
   flex-shrink: 0;
 }
 
-.nav-logo img {
-  width: 34px; height: 34px;
-  border-radius: 8px;
-  object-fit: cover;
+.nav-logo-victor,
+.nav-logo-tran {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  transition: color 400ms ease;
 }
 
-.nav-logo-name {
-  font-family: 'Barlow', sans-serif;
-  font-weight: 700;
-  font-size: var(--text-body);
-  color: var(--text);
-  letter-spacing: 0.01em;
-}
+.nav-logo-victor { color: #1667b9; }
+.nav-logo-tran { color: var(--text); margin-left: -0.1em; }
+html[data-theme="dark"] .nav-logo-victor { color: #ea3b99; }
+html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
 
 .nav-links {
   display: flex;
@@ -1613,7 +1613,7 @@ html[data-finish-proof] .home-practice-proof strong {
 }
 
 .featured-galleries .featured-item--gallery {
-  grid-column: span 6;
+  grid-column: span 4;
   border: 1px solid var(--border);
   background: var(--bg);
 }
@@ -1627,17 +1627,12 @@ html[data-finish-proof] .home-practice-proof strong {
   border-bottom: 1px solid var(--border);
 }
 
-.featured-galleries .featured-item--gallery.featured-item--span-12 {
-  grid-column: span 12;
-}
-
 @media (max-width: 600px) {
   .featured-galleries .featured-gallery-list {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .featured-galleries .featured-item--gallery,
-  .featured-galleries .featured-item--gallery.featured-item--span-12 {
+  .featured-galleries .featured-item--gallery {
     grid-column: 1 / -1;
   }
 }
@@ -1786,6 +1781,15 @@ html[data-finish-proof] .home-practice-proof strong {
 .featured-item--surface-ibm-inverse .section-label::before { background: #78a9ff; }
 .featured-item--surface-ibm-inverse .view-link:hover { color: #ffffff; }
 .featured-item--surface-ibm-inverse .view-link::after { color: #78a9ff; }
+
+html[data-theme="dark"] .featured-item--surface-ibm-inverse {
+  border-color: rgba(120, 169, 255, 0.48);
+  box-shadow: inset 0 0 0 1px rgba(120, 169, 255, 0.12);
+}
+
+html[data-theme="dark"] .featured-item--surface-ibm-inverse .featured-item-content {
+  background: #0b2f55;
+}
 
 /* Keep normal-size copy contrast-safe on the darker orange surface. */
 .featured-item--surface-orange .featured-item-desc,
@@ -4774,23 +4778,8 @@ html[data-theme="dark"] .home-page--engraved-dna {
   color: var(--hero-text);
 }
 
-.home-page--engraved-dna .nav-logo-victor {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem;
-  font-weight: 400;
-  font-style: italic;
-  color: #55a2f7;
-  transition: color 400ms ease;
-}
-
 .home-page--engraved-dna .nav-logo-tran {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem;
-  font-weight: 400;
-  font-style: italic;
   color: #1a1a1a;
-  transition: color 400ms ease;
-  margin-left: -0.1em;
 }
 
 html[data-theme="dark"] .home-page--engraved-dna .nav-logo-victor { color: #ea3b99; }
@@ -5167,6 +5156,15 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-bigtype--tran { color: #f
   display: flex;
   align-items: flex-end;
   padding-block: clamp(28px, 2.8vw, 42px);
+}
+
+.home-page--engraved-dna .featured-heading h2 {
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.2;
+}
+
+@media (max-width: 760px) {
+  .home-page--engraved-dna .featured-heading { padding-bottom: 22px; }
 }
 
 .home-page--engraved-dna .hero-services li + li::before {

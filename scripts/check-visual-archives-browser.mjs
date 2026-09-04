@@ -464,8 +464,8 @@ async function checkHomepageGalleryChapter() {
     const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => Math.round(card.getBoundingClientRect().width));
     return { cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
   })()`);
-  assert(desktop.cards.length === 3 && desktop.overflow === 0 && Math.abs(desktop.cards[0] - desktop.cards[1]) <= 1 && desktop.cards[2] > desktop.cards[0],
-    `index.html: desktop gallery hierarchy drifted: ${JSON.stringify(desktop)}`);
+  assert(desktop.cards.length === 3 && desktop.overflow === 0 && desktop.cards.every((width) => Math.abs(width - desktop.cards[0]) <= 1),
+    `index.html: desktop gallery cards must share equal weight: ${JSON.stringify(desktop)}`);
 }
 
 function graphicRequestsSince(mark) {

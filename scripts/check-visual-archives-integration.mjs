@@ -215,8 +215,8 @@ expect(primaryHtml(art).includes('Digital and traditional work spanning characte
   'artillustration.html: use Victor’s approved Art opener verbatim.');
 expect(!primaryHtml(art).includes('I draw and paint: characters, strange worlds, and whatever else keeps pulling me back to the page.'),
   'artillustration.html: remove the superseded Art opener.');
-expect((art.match(/<img\b/gi) ?? []).length === 57,
-  `artillustration.html: preserve the 47-image baseline plus 10 approved Daysigns; found ${(art.match(/<img\b/gi) ?? []).length}.`);
+expect((primaryHtml(art).match(/<img\b/gi) ?? []).length === 56,
+  `artillustration.html: preserve the 46-image artwork baseline plus 10 approved Daysigns inside main; found ${(primaryHtml(art).match(/<img\b/gi) ?? []).length}.`);
 expect(!/<figcaption\b/i.test(primaryHtml(art)),
   'artillustration.html: artwork-only primary viewing should not show individual labels.');
 for (const restoredAsset of [

@@ -29,11 +29,31 @@ const staticStates = [
   ['v2-responsibility-detail-dark-clean.png', '02 Responsibility detail', 'What to do next'],
   ['v2-all-caught-up-light-clean.png', '03 Completion', 'Nothing needs your attention right now'],
 ];
+const v1States = [
+  'v1-clean-login.png',
+  'v1-clean-loading.png',
+  'v1-clean-member-dashboard.png',
+  'v1-clean-task-expand.png',
+  'v1-clean-milestones.png',
+  'v1-clean-chapter.png',
+];
+const finalStates = [
+  'v2-final-loading.png',
+  'v2-final-login.png',
+  'v2-final-member-dashboard.png',
+  'v2-final-today-light.png',
+  'v2-final-responsibility-detail-dark.png',
+  'v2-final-task-expand.png',
+  'v2-final-all-caught-up-light.png',
+  'v2-final-milestones-detail.png',
+  'v2-final-chapter.png',
+];
 
 expect(html.includes('<span>04</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
 expect(html.includes('Earlier static V2 states'), 'Chapter 04 must identify the V2 evidence as static historical states.');
 expect(count(html, '<p class="v2-history__boundary">Illustrative concept screens.</p>') === 1, 'V2 history must carry one concise viewer-facing boundary.');
-expect(count(html, '<p class="coda__boundary">Illustrative concept screens.</p>') === 1, 'Final remaster must carry one concise viewer-facing boundary.');
+expect(count(html, '<p class="coda__boundary">Illustrative concept screens. Names, dates, rankings, and activity are fictional.</p>') === 1,
+  'Final remaster must carry one concise viewer-facing fictional-data boundary.');
 expect(!html.includes('concept-history'), 'Redundant supporting-chronology callout must remain removed.');
 expect(!html.includes('coda__meta'), 'Redundant final-remaster metadata kicker must remain removed.');
 expect(html.includes('The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.'), 'Chapter 04 must keep the concise V2 transition.');
@@ -125,29 +145,36 @@ for (const [source, destination] of [
 }
 
 for (const preserved of [
-  'images/pikapp-case-study/login-screen.png',
-  'images/pikapp-case-study/member.png',
-  'images/pikapp-case-study/task-expand.png',
-  'images/pikapp-case-study/remaster-login.png',
-  'images/pikapp-case-study/remaster-dashboard.png',
-  'images/pikapp-case-study/remaster-milestones.png',
+  ...v1States.map((filename) => `images/pikapp-case-study/${filename}`),
+  ...finalStates.map((filename) => `images/pikapp-case-study/${filename}`),
   'data-archive-master="cover"',
   'data-archive-master="context"',
 ]) expect(html.includes(preserved), `Stable Pi Kapp evidence must remain: ${preserved}`);
 
 const piKappIndex = siteIndex.find((entry) => entry.source === 'pikappapp.html');
 const indexedImages = new Set((piKappIndex?.images || []).map((image) => image.src));
-for (const preserved of [
+const expectedIndexedImages = [
+  'images/pikapp-case-study/belltower-expansion.jpg',
+  'images/pikapp-case-study/expansion-cover-preview.jpg',
+  'images/pikapp-case-study/wireframes.png',
+  'images/pikapp-case-study/sitemap.png',
+  'images/pikapp-case-study/app-star-shield.svg',
+  ...v1States.map((filename) => `images/pikapp-case-study/${filename}`),
   ...staticStates.map(([filename]) => `images/pikapp-case-study/${filename}`),
-  'images/pikapp-case-study/remaster-login.png',
-  'images/pikapp-case-study/remaster-dashboard.png',
-  'images/pikapp-case-study/remaster-milestones.png',
-  'images/pikapp-case-study/expansion-cover-detail.jpg',
-]) expect(indexedImages.has(preserved), `Pi Kapp site-index metadata must preserve evidence: ${preserved}`);
+  `images/pikapp-case-study/${finalStates[0]}`,
+];
+expect(indexedImages.size === 15, 'Pi Kapp site-index summary must retain its intentional 15-image cap.');
+for (const expected of expectedIndexedImages) {
+  expect(indexedImages.has(expected), `Pi Kapp site-index summary must preserve representative evidence: ${expected}`);
+}
+for (const deferred of [...finalStates.slice(1), 'expansion-cover-detail.jpg']) {
+  expect(!indexedImages.has(`images/pikapp-case-study/${deferred}`),
+    `Pi Kapp site-index summary must not pull deferred/detail evidence past its cap: ${deferred}`);
+}
 
 if (failures.length) {
   console.error(`PI KAPP STATIC SIMPLIFICATION: FAIL (${failures.length})`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('PI KAPP STATIC SIMPLIFICATION: PASS states=3 runtime=removed redirects=2 stable-evidence=preserved');
+console.log('PI KAPP STATIC SIMPLIFICATION: PASS history=3 v1=6 final=9 runtime=removed redirects=2 stable-evidence=preserved');

@@ -67,6 +67,21 @@ const assetHashes = {
   'images/pikapp-case-study/remaster-login.png': '47cd04deeb73a1ba707a002102b436cb995d3a6fc2531c501de7e640c74c3bf3',
   'images/pikapp-case-study/remaster-dashboard.png': '01cf2880f8f1fd85e2a36d0c692cb0ba1a25916edffdac56b0e8379c6ed70e2f',
   'images/pikapp-case-study/remaster-milestones.png': 'e5ff72d4ef7e1ce7d48b82f9a4b75b5cef6e5f670b773cbda92caa6f92c95a43',
+  'images/pikapp-case-study/v1-clean-chapter.png': '5c7d4525941b6897b7a7aead9f88e5a1c93b0b26488d13bc93114f6339b406b8',
+  'images/pikapp-case-study/v1-clean-loading.png': '995c0f7a0f92c916455b133e3d7483e6c71d254a7f0150a0786ba4551b58e58a',
+  'images/pikapp-case-study/v1-clean-login.png': '23e0075b6470c532f1e6fa9ed2090070ec67e40ecd3d4a27097d7f106bffa8f2',
+  'images/pikapp-case-study/v1-clean-member-dashboard.png': 'bb0418e0b61701e69f754cfd9bf50e687912bcaa2bb13f806f36680a6657d203',
+  'images/pikapp-case-study/v1-clean-milestones.png': 'e96600e0b3631bae8d65b096f415ba009470d372f773c074dcedd651b28976a5',
+  'images/pikapp-case-study/v1-clean-task-expand.png': '90b61f1a035aa5687ce5b8c7bcf68a1f2bd0745c53ce2316b6b0b2e650472627',
+  'images/pikapp-case-study/v2-final-all-caught-up-light.png': '5c26488f4a7437ce1af7d19160cc610e56baa5652b3241be3103e6992198f4ae',
+  'images/pikapp-case-study/v2-final-chapter.png': '59355d4dafdc5adeacfca90b2db850796658fb519edbcf689fdf5f69430773dd',
+  'images/pikapp-case-study/v2-final-loading.png': '7f1c594bd5455f6169b32b0921580871cfe92b1ba8cc1adc5ad45963080e0ac1',
+  'images/pikapp-case-study/v2-final-login.png': '9d27b5af9b31a5fc61390590b712df022d67f7f0334c80a6b34ca023722123db',
+  'images/pikapp-case-study/v2-final-member-dashboard.png': 'edeecfea17d2b4c94a43cbe3c9ea3a251366e6c4083bc8d6f1469aa186262dbe',
+  'images/pikapp-case-study/v2-final-milestones-detail.png': 'd1f69de64b40e6e73c7ee507a9f7ad6a806b583b90ab1e6d30186d04bdadda02',
+  'images/pikapp-case-study/v2-final-responsibility-detail-dark.png': '5659e5a6777021bcb521653077d4a6fd3be3a3170082740bda8fa2a0f1481dd3',
+  'images/pikapp-case-study/v2-final-task-expand.png': '13a9d82817c036ddbadb03be05918cae4f2245b2758ad06128082bdc4121b056',
+  'images/pikapp-case-study/v2-final-today-light.png': '0a5f2120a67846f719ba99a9a8f5dc1c7331c93509401aac05e512f2ee871abe',
 };
 for (const [relativePath, expected] of Object.entries(assetHashes)) {
   const actual = sha256(relativePath);
@@ -112,15 +127,27 @@ const explorationDisplayAssets = [
   'exploration-support.png', 'exploration-profile.png',
 ];
 const remasterDisplayAssets = ['remaster-login.png', 'remaster-dashboard.png', 'remaster-milestones.png'];
+const v1ExportAssets = [
+  'v1-clean-loading.png', 'v1-clean-login.png', 'v1-clean-member-dashboard.png',
+  'v1-clean-task-expand.png', 'v1-clean-milestones.png', 'v1-clean-chapter.png',
+];
+const finalV2ExportAssets = [
+  'v2-final-loading.png', 'v2-final-login.png', 'v2-final-member-dashboard.png',
+  'v2-final-today-light.png', 'v2-final-responsibility-detail-dark.png', 'v2-final-task-expand.png',
+  'v2-final-all-caught-up-light.png', 'v2-final-milestones-detail.png', 'v2-final-chapter.png',
+];
 for (const filename of explorationDisplayAssets) {
   if (html.includes(`images/pikapp-case-study/${filename}`)) {
     fail(`pikappapp.html must not reference removed AI-assisted flow asset: ${filename}`);
   }
 }
 for (const filename of remasterDisplayAssets) {
-  if (!html.includes(`images/pikapp-case-study/${filename}`)) {
-    fail(`pikappapp.html must use the approved public derivative: ${filename}`);
+  if (html.includes(`images/pikapp-case-study/${filename}`)) {
+    fail(`pikappapp.html must retire the superseded three-screen derivative: ${filename}`);
   }
+}
+for (const filename of [...v1ExportAssets, ...finalV2ExportAssets]) {
+  if (!html.includes(`images/pikapp-case-study/${filename}`)) fail(`pikappapp.html must use the owner-supplied export: ${filename}`);
 }
 const js = text('js/pikappapp.js');
 const workflow = text('.github/workflows/health-check.yml');
@@ -161,7 +188,7 @@ for (const required of [
   'identity-board__section identity-board__section--mark',
   'identity-board__section identity-board__section--components',
   'identity-board__card',
-  'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used in three remastered concept screens.',
+  'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.',
   'Brand foundation and interface layers',
   '>Brand blue</h4>',
   '>Brand gold</h4>',
@@ -184,12 +211,14 @@ for (const required of [
   'Chapter 05',
   'The final remaster brings the app back to its source.',
   'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
-  '01 Welcome',
-  'A cleaner login keeps the original composition, mark, and color field.',
-  '02 Member view',
-  'The dashboard keeps progress and milestones visible without crowding the next action.',
-  '03 Milestone detail',
-  'Expanded tasks preserve context while making completion state easier to scan.',
+  '01 App launch',
+  'The launch state carries the original mark and cyan field into the updated system.',
+  '02 Welcome',
+  'A clearer login keeps the original identity while simplifying entry.',
+  '03 Member view',
+  'The dashboard keeps progress, milestones, and chapter activity in one readable view.',
+  '09 Chapter',
+  'The chapter view returns shared activity and context to the member experience.',
   'Illustrative concept screens.',
   'Earlier static V2 states',
   'The prototype clarified the attention-to-completion loop.',
@@ -209,9 +238,9 @@ if (count(html, 'class="exploration-screen"') !== 0) fail('AI-assisted explorati
 for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted studies.', 'later AI-assisted visual studies', 'Other explorations.']) {
   if (html.includes(removedExplorationCopy)) fail(`public Pi Kapp page retained removed exploration copy: ${removedExplorationCopy}`);
 }
-if (count(html, 'class="coda__screen"') !== 3) fail('Pi Kapp coda must contain exactly three source-faithful remaster screens');
+if (count(html, 'class="coda__screen"') !== 9) fail('Pi Kapp coda must contain exactly nine owner-exported final V2 screens');
 if (count(html, 'class="v2-history__screen"') !== 3) fail('Earlier V2 history must contain exactly three static screens');
-if (count(html, 'class="coda__step"') !== 3) fail('Pi Kapp coda must expose the explicit 01, 02, 03 story order');
+if (count(html, 'class="coda__step"') !== 9) fail('Pi Kapp coda must expose the explicit 01–09 story order');
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
 if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
@@ -234,8 +263,9 @@ for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted s
 }
 if (html.includes('class="future-principle"') || html.includes('class="coda__state-pair')) fail('obsolete seven-screen V2 support structures must not remain in the concise remaster coda');
 const renderedV2Assets = [...html.matchAll(/src="images\/pikapp-case-study\/(v2-[^"]+\.png)"/g)].map((match) => match[1]);
-if (JSON.stringify(renderedV2Assets) !== JSON.stringify(['v2-today-light-clean.png','v2-responsibility-detail-dark-clean.png','v2-all-caught-up-light-clean.png'])) fail(`Pi Kapp must render only the approved static V2 sequence: ${JSON.stringify(renderedV2Assets)}`);
-if (count(html, 'class="phone-slide') !== 3) fail('Earlier-concept viewer must contain exactly three historical screens');
+const expectedV2Assets = ['v2-today-light-clean.png','v2-responsibility-detail-dark-clean.png','v2-all-caught-up-light-clean.png', ...finalV2ExportAssets];
+if (JSON.stringify(renderedV2Assets) !== JSON.stringify(expectedV2Assets)) fail(`Pi Kapp must render the three earlier static V2 states followed by the nine owner-exported final states: ${JSON.stringify(renderedV2Assets)}`);
+if (count(html, 'class="phone-slide') !== 6) fail('Earlier-concept viewer must contain exactly six owner-exported V1 screens');
 for (const obsoleteAsset of ['exploration-placeholder.webp', 'exploration-design-system.webp', 'app-crest.png', 'app-icon.png']) {
   if (html.includes(obsoleteAsset)) fail(`Pi Kapp page still references superseded public asset: ${obsoleteAsset}`);
 }
@@ -420,7 +450,7 @@ for (const [key, value] of Object.entries(expectedProject)) {
 }
 if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
 if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
-if (!html.includes('<p class="coda__boundary">Illustrative concept screens.</p>')) fail('Pi Kapp remaster boundary must be a restrained caption');
+if (!html.includes('<p class="coda__boundary">Illustrative concept screens. Names, dates, rankings, and activity are fictional.</p>')) fail('Pi Kapp remaster boundary must clearly frame fictional screen data');
 if (html.includes('concept-history') || html.includes('coda__meta')) fail('Pi Kapp page must not restore redundant chronology or final-remaster kicker chrome');
 
 if (failures.length) {
@@ -428,4 +458,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=43 remaster=3 v2=static-history');
+console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=58 v1=6 v2-history=3 v2-final=9');

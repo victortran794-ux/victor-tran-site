@@ -152,11 +152,11 @@ const copy = {
   abilityHeading: 'Applying the anniversary identity to the ride.',
   abilityKits: 'The cycling kits carried the anniversary iconography into Gear Up Florida and Journey of Hope and incorporated safety-feature standards.',
   salDescription: 'Five years of layout and art direction for Pi Kappa Phi’s official magazine.',
-  salIntro: 'I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.',
+  salIntro: 'Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.',
   salNote: 'Five years of issues, art direction, and editorial design.',
-  salProgression: 'My role grew from primary designer to creative director while I continued designing.',
+  salProgression: 'The work grew from hands-on layout design into creative direction, while I kept designing each issue.',
   salContext: 'First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.',
-  piKappRemaster: 'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used in three remastered concept screens.',
+  piKappRemaster: 'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.',
   piKappBoundary: 'Illustrative concept screens.',
   artIntro: 'Digital and traditional work spanning character illustration, paintings, and personal series.',
   graphicIntro: 'Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.',
@@ -195,6 +195,8 @@ requireExact('salmagazine.html .page-header-desc', classText('salmagazine.html',
 requireExact('salmagazine.html .sal-vico2-hero-note', classText('salmagazine.html', 'sal-vico2-hero-note'), copy.salNote);
 requireIncludes('salmagazine.html .vico2-chapter-header', classText('salmagazine.html', 'vico2-chapter-header'), copy.salProgression);
 requireIncludes('salmagazine.html .sal-vico2-story', classText('salmagazine.html', 'sal-vico2-story'), copy.salContext);
+requireIncludes('salmagazine.html .sal-vico2-summer-head', classText('salmagazine.html', 'sal-vico2-summer-head'), 'Four favorite spreads from the Summer 2017 issue.');
+forbidRendered('salmagazine.html', 'my first issue as creative director');
 
 requireIncludes('pikappapp.html #chapter-3', idText('pikappapp.html', 'chapter-3'), copy.piKappRemaster);
 requireIncludes('pikappapp.html #chapter-5', idText('pikappapp.html', 'chapter-5'), copy.piKappBoundary);

@@ -170,7 +170,11 @@ const geometryExpression = `(() => {
     height: innerHeight,
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     controls,
-    logoDecoded: document.querySelector('.nav-logo img')?.complete && document.querySelector('.nav-logo img')?.naturalWidth > 0,
+    logoText: document.querySelector('.nav-logo')?.textContent.replace(/\\s+/g, ' ').trim(),
+    logoParts: [...document.querySelectorAll('.nav-logo-victor, .nav-logo-tran')].map((part) => ({
+      text: part.textContent.trim(),
+      fontStyle: getComputedStyle(part).fontStyle,
+    })),
   };
 })()`;
 
@@ -197,7 +201,10 @@ try {
   const mobile = await cdp.evaluate(geometryExpression);
   assert(mobile.width === 390 && mobile.height === 844, `mobile viewport drifted: ${mobile.width}x${mobile.height}`);
   assert(mobile.overflow === 0, `index.html has ${mobile.overflow}px root overflow at 390px`);
-  assert(mobile.logoDecoded, 'homepage shell logo did not decode');
+  assert(mobile.logoText === 'Victor Tran'
+    && mobile.logoParts.map((part) => part.text).join('|') === 'Victor|Tran'
+    && mobile.logoParts.every((part) => part.fontStyle === 'italic'),
+  `homepage shell wordmark drifted: ${JSON.stringify(mobile.logoParts)}`);
   const undersized = mobile.controls.filter((control) => control.width < 44 || control.height < 44);
   assert(!undersized.length, `undersized 390px shell controls: ${JSON.stringify(undersized)}`);
   assert(mobile.controls.some((control) => control.label === 'Light mode'), 'mobile Light control is unavailable');

@@ -353,7 +353,7 @@ try {
     if (item.width >= 1200) assert(dormant.name.overhang >= 60 && dormant.name.overhang <= 84,
       `${item.label}: VictorTran must overhang the content by about 72px ${dormant.name.overhang}`);
     const expectedNameColors = item.theme === 'light'
-      ? ['rgb(85, 162, 247)', 'rgb(26, 26, 26)', 'rgb(85, 162, 247)', 'rgb(26, 26, 26)']
+      ? ['rgb(85, 162, 247)', 'rgb(26, 26, 26)', 'rgb(22, 103, 185)', 'rgb(26, 26, 26)']
       : ['rgb(234, 59, 153)', 'rgb(247, 246, 243)', 'rgb(234, 59, 153)', 'rgb(247, 246, 243)'];
     assert(dormant.name.colors.every((color, index) => color === expectedNameColors[index]), `${item.label}: name palette mismatch ${dormant.name.colors}`);
     const expectedNameTransition = item.reduced ? '1e-05s' : '0.4s';
@@ -572,7 +572,16 @@ try {
     if (item.width <= 760) assert(active.gridColumns === 2 && active.panel[0] <= active.hero[0] + 25 && active.panel[2] >= active.hero[2] - 25,
       `${item.label}: mobile DNA layout parity failed ${JSON.stringify(active)}`);
     await cdp.clickCenter('.hero-dna-swatch[data-dna-token="--pink"]', item.mobile);
-    await delay(item.reduced ? 30 : 420);
+    await cdp.evaluate(`new Promise((resolve) => {
+      const startedAt = performance.now();
+      const waitForTint = () => {
+        const tint = document.querySelector('.hero-dna-tint');
+        const ready = tint.classList.contains('is-active') && parseFloat(getComputedStyle(tint).opacity) >= 0.2;
+        if (ready || performance.now() - startedAt >= 2000) return resolve();
+        requestAnimationFrame(waitForTint);
+      };
+      waitForTint();
+    })`);
     const tintState = await cdp.evaluate(`(() => {
       const tint = document.querySelector('.hero-dna-tint');
       const swatch = document.querySelector('.hero-dna-swatch[data-dna-token="--pink"]');
@@ -625,6 +634,21 @@ try {
       await delay(80);
       await cdp.screenshot(`${item.label}-work-heading.png`);
     }
+    if (['desktop-light', 'desktop-dark'].includes(item.label)) {
+      await cdp.evaluate(`document.querySelector('.featured-item--surface-ibm-inverse .featured-item-content').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await delay(900);
+      await cdp.screenshot(`${item.label}-ibm-cloud-card.png`);
+      await cdp.evaluate(`document.getElementById('galleries').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await cdp.evaluate(`Promise.all([...document.querySelectorAll('#galleries img')].map(async (image) => { try { await image.decode(); } catch {} }))`);
+      await delay(900);
+      await cdp.screenshot(`${item.label}-equal-galleries.png`);
+    }
+    if (item.label === 'mobile-light') {
+      await cdp.evaluate(`document.querySelector('#galleries .featured-item--gallery').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await cdp.evaluate(`Promise.all([...document.querySelectorAll('#galleries img')].map(async (image) => { try { await image.decode(); } catch {} }))`);
+      await delay(900);
+      await cdp.screenshot('mobile-light-equal-galleries.png');
+    }
     states.push({ label: item.label, dormant, pointerProof, active, closed });
   }
 
@@ -651,5 +675,5 @@ try {
   try { cdp?.socket?.close(); } catch {}
   browser.kill('SIGTERM');
   await delay(120);
-  fs.rmSync(profile, { recursive: true, force: true });
+  try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch {}
 }

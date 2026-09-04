@@ -152,9 +152,10 @@ expect(/--name-overhang:\s*72px/i.test(css),
   'desktop VictorTran lockup must target a 72px overhang beyond the content row');
 expect(/\.home-page--engraved-dna\s+\.hero-bigtype\s*\{[^}]*font-style:\s*italic/i.test(css),
   'both hero name parts must be italic');
-expect(/\.home-page--engraved-dna\s+\.nav-logo-victor\s*\{[^}]*font-style:\s*italic[^}]*color:\s*#55a2f7/i.test(css)
-  && /\.home-page--engraved-dna\s+\.nav-logo-tran\s*\{[^}]*font-family:\s*['"]DM Serif Display['"][^}]*font-style:\s*italic[^}]*color:\s*#1a1a1a/i.test(css),
-  'Light header wordmark must mirror the italic blue Victor and black Tran hero');
+expect(/\.nav-logo-victor,\s*\.nav-logo-tran\s*\{[^}]*font-family:\s*['"]DM Serif Display['"][^}]*font-style:\s*italic/i.test(css)
+  && /\.nav-logo-victor\s*\{\s*color:\s*#1667b9/i.test(css)
+  && /\.home-page--engraved-dna\s+\.nav-logo-tran\s*\{[^}]*color:\s*#1a1a1a/i.test(css),
+  'Light header wordmark must preserve italic Victor and black Tran while using an accessible blue on white');
 expect(/html\[data-theme="dark"\][^}]*\.hero-bigtype--victor\s*\{[^}]*color:\s*#ea3b99/i.test(css)
   && /html\[data-theme="dark"\][^}]*\.hero-bigtype--tran\s*\{[^}]*color:\s*#f7f6f3/i.test(css),
   'Dark hero name must use pink Victor and white Tran');

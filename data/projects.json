@@ -262,7 +262,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-7"
+      "homepageVariant": "span-4"
     },
     {
       "slug": "graphicgallery",
@@ -291,7 +291,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-5"
+      "homepageVariant": "span-4"
     },
     {
       "slug": "uigallery",
@@ -320,7 +320,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-12"
+      "homepageVariant": "span-4"
     }
   ]
 }

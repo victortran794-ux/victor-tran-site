@@ -967,9 +967,11 @@ html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-col
 }
 
 @media (max-width: 700px){
-.pikapp-page .coda__triptych{grid-template-columns:1fr;gap:38px}
+.pikapp-page .coda__triptych{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(78vw,310px);gap:18px;max-width:none;margin-inline:0;padding:0 2px 18px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:inline mandatory;scrollbar-width:thin}
 
-.pikapp-page .coda__screen{width:100%;max-width:390px;margin-inline:auto}
+.pikapp-page .coda__screen{width:auto;max-width:none;margin:0;scroll-snap-align:start}
+
+.pikapp-page .coda__triptych:focus-visible{outline:3px solid var(--gold);outline-offset:6px}
 }
 
 @media (max-width: 430px){
