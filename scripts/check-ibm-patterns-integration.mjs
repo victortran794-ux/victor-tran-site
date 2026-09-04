@@ -77,7 +77,7 @@ for (const required of [
   'Five-person team',
   'six-week concept',
   'Visual Designer',
-  'did not become the production page',
+  'The useful idea was simple:',
   'Influence and concept boundary',
   'Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation.',
   '<script src="js/ibm-patterns.js"></script>',
@@ -112,6 +112,7 @@ for (const required of [
   'For someone without an established IBM relationship, the page could become a dead end.',
   'I am still especially proud of the final playback and the way our team made the concept understandable beyond the sprint.',
   'I later recognized parts of its direction in the page.',
+  'The useful idea was simple:',
 ]) {
   if (!html.includes(required)) fail(`ibm-patterns.html missing approved copy polish: ${required}`);
 }
@@ -120,6 +121,8 @@ for (const removed of [
   'very, very well received',
   'sharing glowing comments afterward',
   'I remember the work being well received and later recognizing parts of its direction in the page.',
+  'The IBM Patterns prototype did not become the production page.',
+  'What I remember carrying forward',
 ]) {
   if (html.includes(removed)) fail(`ibm-patterns.html retained superseded copy: ${removed}`);
 }

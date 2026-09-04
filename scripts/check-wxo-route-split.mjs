@@ -17,7 +17,7 @@ requireText(wxo, 'Developed in parallel with the broader canvas work', 'wxO brid
 forbid(main(wxo), /id="document-processing"|pilot-doc-epic|pilot-doc-frame|10-document-extract|11-document-review|12-document-evaluate/i,
   'wxO umbrella page must not embed the full Document Processing feature arc.');
 if (count(main(wxo), /09-document-classify\.png/gi) !== 1 || !main(wxo).includes('pilot-bridge-thumbnail')) fail('wxO handoff must reuse exactly one Classify thumbnail without embedding the feature arc.');
-if (count(main(wxo), /data-wxo-evidence/gi) !== 9) fail('wxO umbrella page must contain exactly nine carousel evidence triggers.');
+if (count(main(wxo), /data-wxo-evidence/gi) !== 15) fail('wxO umbrella page must contain exactly fifteen carousel evidence triggers.');
 
 requireText(doc, '<link rel="stylesheet" href="css/wxo-public-candidate.css">', 'Standalone route must load the shared evidence presentation layer.');
 requireText(doc, '<script src="js/wxo-public-candidate.js" defer></script>', 'Standalone route must load the shared evidence carousel behavior.');
@@ -43,9 +43,9 @@ for (const asset of manifest.assets ?? []) {
 for (const file of ['03-user-activity-workflow.png', '04-user-activity-configuration.png', '05-user-activity-summary.png', '10-document-extract.png', '11-document-review.png', '12-document-evaluate.png', '07-agent-orchestration-light.png', '14-workflow-detail.png', '13a-node-states.png', '08-flow-control-elements-light.png', '13b-flow-types.png', '13c-connector-mechanics.png', '13-floating-studies.png']) {
   if (placements[file] !== 'source-only') fail(`Retired legacy derivative must remain source-only provenance: ${file}.`);
 }
-if ((manifest.assets ?? []).filter((asset) => asset.route === 'wxo-canvas.html').length !== 16) fail('Manifest must route four retained legacy derivatives and twelve theme-sequence exports to wxO canvas.');
+if ((manifest.assets ?? []).filter((asset) => asset.route === 'wxo-canvas.html').length !== 18) fail('Manifest must route the complete reviewed eighteen-asset Canvas narrative to wxO canvas.');
 if ((manifest.assets ?? []).filter((asset) => asset.route === 'document-processing.html').length !== 0) fail('Document Processing current assets must be governed by their dedicated provenance manifest, not the wxO legacy manifest.');
-if ((manifest.assets ?? []).filter((asset) => asset.route === 'source-only').length !== 13) fail('Manifest must retain thirteen retired legacy derivatives as source-only provenance.');
+if ((manifest.assets ?? []).filter((asset) => asset.route === 'source-only').length !== 19) fail('Manifest must retain nineteen superseded derivatives as source-only provenance.');
 
 if (process.exitCode) process.exit(1);
 console.log('PASS: wxO umbrella and standalone Document Processing route split contract');

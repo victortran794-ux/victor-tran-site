@@ -158,8 +158,10 @@ requireCondition(documentProject?.homepage === false && documentProject?.nav ===
   'Document Processing must be hidden from homepage and primary navigation.');
 requireCondition(documentProject?.protected === true && documentProject?.noindex === true && documentProject?.sitemap === false,
   'Document Processing privacy flags must remain protected.');
-requireCondition((index.match(/featured-item--overlay/g) ?? []).length === 1,
-  'Homepage must contain exactly one overlaid card variant.');
+requireCondition((index.match(/<div class="[^"]*featured-item-shell[^"]*featured-item--overlay[^"]*"/g) ?? []).length === 1,
+  'Homepage must contain exactly one overlaid card shell.');
+requireCondition((index.match(/<a href="wxo-canvas\.html\?lock=1" class="[^"]*featured-item--overlay[^"]*featured-item-primary[^"]*"/g) ?? []).length === 1,
+  'Homepage must contain exactly one overlaid primary card owned by wxO.');
 requireCondition(/wxo-canvas\.html\?lock=1" class="[^"]*featured-item--lead[^"]*featured-item--overlay/.test(index),
   'wxO must own the full-width overlay card.');
 requireText(generator, "if (project.homepageOverlay) classes.push('featured-item--overlay');",
@@ -179,7 +181,9 @@ for (const selector of ['.hero-identity', '.hero-meta', '.hero-services', '.feat
 }
 
 // Homepage cards are links, never miniature applications.
-for (const card of index.matchAll(/<a\s+[^>]*class="[^"]*featured-item[^"]*"[\s\S]*?<\/a>/g)) {
+for (const card of index.matchAll(/<a\s+([^>]*)>([\s\S]*?)<\/a>/g)) {
+  const classes = card[1].match(/class="([^"]*)"/)?.[1].split(/\s+/) ?? [];
+  if (!classes.includes('featured-item')) continue;
   forbid(card[0], /<button|role="tab"|role="tablist"|data-story|chapter-nav/i,
     'Homepage project cards must not contain buttons, tabs, switchers, or chapter controls.');
   requireCondition((card[0].match(/class="featured-item-img/g) ?? []).length === 1,

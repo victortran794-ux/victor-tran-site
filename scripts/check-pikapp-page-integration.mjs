@@ -168,12 +168,9 @@ for (const required of [
   'From expansion work to one member view.',
   'Every year looked a little different. The same stuff still had to get done.',
   'There was already a system. It was just spread everywhere.',
-  'It still needed to look like Pi Kappa Phi.',
   'images/pikapp-case-study/app-star-shield.svg',
-  'Five chapters',
-  '<span>05</span>Final remaster',
-  'System for the final remaster',
-  'Mark &amp; pattern',
+  'Four chapters',
+  '<span>04</span>Final remaster',
   'Form controls',
   'Member progress card',
   'Bulletin row',
@@ -185,7 +182,6 @@ for (const required of [
   'Source vocabulary',
   'identity-board__section identity-board__section--color',
   'identity-board__section identity-board__section--type',
-  'identity-board__section identity-board__section--mark',
   'identity-board__section identity-board__section--components',
   'identity-board__card',
   'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.',
@@ -196,19 +192,17 @@ for (const required of [
   '>App navy</h4>',
   '>White</h4>',
   'Brand, interface, and status roles',
-  'Original vector mark on its intended field',
   'Only the pieces used by the final remaster',
   'identity-palette',
-  'Original app Star Shield on the cyan hex field',
-  'Original vector mark, kept small and crisp inside its intended app layer.',
+
   'role="group" aria-label="Source palette color roles"',
   'role="group" aria-label="Member, Chapter, National HQ, and Settings interface icons"',
   'role="group" aria-label="Display, interface, and status type roles"',
   'V1 established the structure. V2 clarified the loop.',
 
-  '<span>04</span>V1 + static V2',
+  '<span>03</span>V1 + static V2',
   'A formative project that changed how I approached product design.',
-  'Chapter 05',
+  'Chapter 04',
   'The final remaster brings the app back to its source.',
   'The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   '01 App launch',
@@ -242,7 +236,7 @@ if (count(html, 'class="coda__screen"') !== 9) fail('Pi Kapp coda must contain e
 if (count(html, 'class="v2-history__screen"') !== 3) fail('Earlier V2 history must contain exactly three static screens');
 if (count(html, 'class="coda__step"') !== 9) fail('Pi Kapp coda must expose the explicit 01–09 story order');
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
-if (count(html, 'identity-board__card--pattern') !== 1) fail('mark and pattern must resolve into one composed source lockup');
+if (html.includes('identity-board__card--pattern') || html.includes('Mark &amp; pattern')) fail('retired Mark & pattern markup must not return to the public page');
 if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
 for (const repeatedNarrative of ['From system to screen', 'A smorgasbord of directions, not one shipped system.', 'Five visual directions.', 'Five equal mobile studies', 'It is illustrative and not shipped.', 'Concept · not shipped', 'Not researched or shipped.', 'illustrative and unshipped']) {
   if (html.includes(repeatedNarrative)) fail(`consolidated page still contains repeated narrative: ${repeatedNarrative}`);
@@ -344,15 +338,12 @@ for (const obsolete of ['remaster-attention.png', 'remaster-trust.png', 'remaste
 }
 if (/src="assets\//.test(html) || /url\(["']?assets\//.test(css)) fail('Pi Kapp integration must use repository-owned public asset paths');
 
-const patternCardRule = css.match(/\.pikapp-page \.identity-board__card--pattern\{([^}]*)\}/)?.[1] || '';
-if (!patternCardRule.includes("url('../images/pikapp-case-study/pattern-dark-blue-display.svg')")) {
-  fail('Mark & pattern card must use the edge-clean display derivative');
+if (!fs.existsSync(path.join(root, 'images/pikapp-case-study/pattern-dark-blue.svg')) ||
+    !fs.existsSync(path.join(root, 'images/pikapp-case-study/pattern-dark-blue-display.svg'))) {
+  fail('retired pattern source and display assets must remain preserved in the repository');
 }
-if (patternCardRule.includes("url('../images/pikapp-case-study/pattern-dark-blue.svg')")) {
-  fail('Mark & pattern card must not repeat the raw SVG with malformed edge slivers');
-}
-if (css.includes('pattern-dark-blue.svg')) {
-  fail('Public Pi Kapp CSS must use the edge-clean pattern derivative consistently');
+if (html.includes('pattern-dark-blue.svg') || html.includes('pattern-dark-blue-display.svg')) {
+  fail('retired pattern assets must not return to public Pi Kapp markup');
 }
 
 for (const required of [
@@ -362,7 +353,7 @@ for (const required of [
   '@media (max-width: 800px)',
   '@media (max-width: 430px)',
   'min-height: 44px',
-  'images/pikapp-case-study/pattern-dark-blue-display.svg',
+
   'scroll-margin-top:',
   '.archive-dialog',
   '.archive-trigger',
@@ -374,7 +365,7 @@ for (const required of [
   '.v2-history__grid',
   '.v2-history__frame',
   '.coda__triptych',
-  'grid-template-columns:repeat(3,minmax(0,1fr))',
+  'grid-template-columns:repeat(4,minmax(0,1fr))',
   'aspect-ratio:390/844',
   '@media (max-width: 700px)',
   'font-style:italic',
@@ -394,19 +385,15 @@ for (const forbidden of ['.reviewbar', '.boundary__inner', '.decision', '.explor
 const screenRadiusRules = [
   ['V1 phone screen', css.match(/\.pikapp-page \.phone-slide\{([^}]*)\}/)?.[1] || '', 'border-radius:26px'],
   ['V2 history screens', css.match(/\.pikapp-page \.v2-history__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
-  ['remaster screens', css.match(/\.pikapp-page \.coda__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:24px'],
+  ['remaster screens', css.match(/\.pikapp-page \.coda__frame\{([^}]*)\}/)?.[1] || '', 'border-radius:0'],
 ];
 for (const [label, rule, expected] of screenRadiusRules) {
   if (!rule.includes(expected)) fail(`${label} must preserve its approved rounded-corner treatment: ${expected}`);
 }
-for (const [label, rule] of [
-  ['V2 history screens', screenRadiusRules[1][1]],
-  ['remaster screens', screenRadiusRules[2][1]],
-]) {
-  if (!rule.includes('overflow:hidden')) fail(`${label} must keep overflow hidden on its rounded clipping owner`);
-}
-if (!css.includes('.pikapp-page .coda__image{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain;max-width:390px;border-radius:0;box-shadow:none}')) {
-  fail('remaster image pixels must remain complete and shadow-free inside the rounded outer screen frame');
+if (!screenRadiusRules[1][1].includes('overflow:hidden')) fail('V2 history screens must keep overflow hidden on their rounded clipping owner');
+if (!screenRadiusRules[2][1].includes('overflow:visible')) fail('remaster screens must not crop complete source pixels');
+if (!css.includes('.pikapp-page .coda__image{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain;max-width:none;border-radius:0;box-shadow:none}')) {
+  fail('remaster image pixels must remain complete and shadow-free without a crop shell');
 }
 if (/\.pikapp-page \.coda__image\{[^}]*box-shadow:(?!none)/.test(css)) {
   fail('future-state screenshots must not restore a fuzzy box shadow');

@@ -303,7 +303,6 @@
     "headings": [
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
-      "It still needed to look like Pi Kappa Phi.",
       "V1 established the structure. V2 clarified the loop.",
       "The final remaster brings the app back to its source.",
       "A formative project that changed how I approached product design.",
@@ -325,10 +324,6 @@
       {
         "src": "images/pikapp-case-study/sitemap.png",
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
-      },
-      {
-        "src": "images/pikapp-case-study/app-star-shield.svg",
-        "alt": "Original vector Pi Kapp App Star Shield"
       },
       {
         "src": "images/pikapp-case-study/v1-clean-login.png",
@@ -369,6 +364,10 @@
       {
         "src": "images/pikapp-case-study/v2-final-loading.png",
         "alt": "Owner-exported final Pi Kapp App launch screen with the star-and-swords mark"
+      },
+      {
+        "src": "images/pikapp-case-study/v2-final-login.png",
+        "alt": "Owner-exported final Pi Kapp App login screen"
       }
     ],
     "projects": []

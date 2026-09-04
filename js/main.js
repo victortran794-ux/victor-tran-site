@@ -184,6 +184,31 @@ const stabilizeFinishProofHashTarget = () => {
 window.addEventListener('load', stabilizeFinishProofHashTarget, { once: true });
 window.addEventListener('hashchange', stabilizeFinishProofHashTarget);
 
+// ── Home: bounded work arrival ──────────────────────
+function initWorkArrival() {
+  const work = document.querySelector('.featured#work');
+  if (!work) return;
+
+  let clearTimer = 0;
+  const arrive = () => {
+    work.classList.remove('is-work-arriving');
+    void work.offsetWidth;
+    work.classList.add('is-work-arriving');
+    window.clearTimeout(clearTimer);
+    clearTimer = window.setTimeout(() => work.classList.remove('is-work-arriving'), prefersReducedMotion ? 0 : 800);
+  };
+
+  document.querySelectorAll('a[href="#work"]').forEach(link => {
+    link.addEventListener('click', arrive);
+  });
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#work') arrive();
+  });
+  if (window.location.hash === '#work') arrive();
+}
+
+initWorkArrival();
+
 
 // ── Magnetic Cards (rAF-batched) ───────────────────
 if (!prefersReducedMotion) {

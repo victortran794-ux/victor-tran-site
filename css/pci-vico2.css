@@ -384,3 +384,10 @@
     gap: 0.3rem;
   }
 }
+
+/* Review refinement: a larger editorial quartet keeps full-page artifacts intact. */
+.pci-vico2 .pci-artifact-quartet--editorial{grid-template-columns:repeat(3,minmax(0,1fr));width:min(100%,1440px);gap:clamp(1.5rem,3.5vw,4rem);align-items:start}
+.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact:nth-child(3){grid-column:span 2}
+.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:span 2;width:100%;justify-self:stretch}
+@media (max-width:800px){.pci-vico2 .pci-artifact-quartet--editorial{grid-template-columns:repeat(2,minmax(0,1fr))}.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact:nth-child(3),.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:span 2}}
+@media (max-width:620px){.pci-vico2 .pci-artifact-quartet--editorial{grid-template-columns:1fr}.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact:nth-child(3),.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:1}}

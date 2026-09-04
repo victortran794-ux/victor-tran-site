@@ -156,8 +156,12 @@ need("chapterMarkerMarkup" not in generator,
      "homepage generator must not emit chapter controls")
 need(index.count('class="featured-chapter') == 0,
      "homepage chapter markers must remain removed")
-need(index.count("featured-item--overlay") == 1,
-     "wxO must remain the single homepage overlay variant")
+need(index.count('class="featured-item-shell featured-item--wide featured-item--lead featured-item--overlay') == 1,
+     "wxO must remain the single homepage overlay card")
+need(index.count('featured-item--overlay reveal featured-item-primary') == 1,
+     "wxO must retain one primary overlay case-study link")
+need(index.count('class="featured-item-related" href="document-processing.html?lock=1"') == 1,
+     "wxO must expose exactly one separate Case Study 2 link")
 for variant in ("lead", "span-7", "span-5", "span-4"):
     need(f"featured-item--{variant}" in index, f"generated cards missing variant class: {variant}")
 need("grid-template-columns: repeat(12" in css,

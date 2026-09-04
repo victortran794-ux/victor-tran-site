@@ -92,6 +92,12 @@ jobs:
           npm run test:design-md
           npm run check:design-md
 
+      - name: Vercel review feedback contract
+        if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true' || needs.changes.outputs.about == 'true' || needs.changes.outputs.ibm == 'true' || needs.changes.outputs.pikapp == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.pci == 'true' || needs.changes.outputs.wxo == 'true'
+        run: |
+          npm run test:vercel-review-feedback-wiring
+          npm run check:vercel-review-feedback
+
       - name: Home/global completion contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'
         run: npm run check:home-global-completion

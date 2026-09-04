@@ -49,8 +49,8 @@ const finalStates = [
   'v2-final-chapter.png',
 ];
 
-expect(html.includes('<span>04</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
-expect(html.includes('Earlier static V2 states'), 'Chapter 04 must identify the V2 evidence as static historical states.');
+expect(html.includes('<span>03</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
+expect(html.includes('Earlier static V2 states'), 'Chapter 03 must identify the V2 evidence as static historical states.');
 expect(count(html, '<p class="v2-history__boundary">Illustrative concept screens.</p>') === 1, 'V2 history must carry one concise viewer-facing boundary.');
 expect(count(html, '<p class="coda__boundary">Illustrative concept screens. Names, dates, rankings, and activity are fictional.</p>') === 1,
   'Final remaster must carry one concise viewer-facing fictional-data boundary.');
@@ -60,12 +60,12 @@ expect(html.includes('The later V2 explored how attention, responsibility detail
 expect(html.includes('Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.'), 'V2 history must keep its concise evidence summary.');
 expect(!html.includes('V1 established the member flow.'), 'Chapter 04 must not repeat the V1-established claim from its heading.');
 expect(!html.toLowerCase().includes('supporting chronology'), 'Viewer-facing copy must not restore internal chronology language.');
-expect(count(html, 'class="v2-history__screen"') === 3, 'Chapter 04 must contain exactly three static V2 history screens.');
+expect(count(html, 'class="v2-history__screen"') === 3, 'Chapter 03 must contain exactly three static V2 history screens.');
 expect(html.includes('aria-label="Earlier V2 orientation, responsibility-detail, and completion states" tabindex="0"'), 'Static V2 history must expose a keyboard-scrollable labeled sequence.');
 for (const [filename, step, visibleText] of staticStates) {
-  expect(html.includes(`images/pikapp-case-study/${filename}`), `Chapter 04 must render ${filename}.`);
-  expect(html.includes(`class="v2-history__step">${step}</strong>`), `Chapter 04 must label ${step}.`);
-  expect(html.includes(visibleText), `Chapter 04 must describe the visible ${step} state.`);
+  expect(html.includes(`images/pikapp-case-study/${filename}`), `Chapter 03 must render ${filename}.`);
+  expect(html.includes(`class="v2-history__step">${step}</strong>`), `Chapter 03 must label ${step}.`);
+  expect(html.includes(visibleText), `Chapter 03 must describe the visible ${step} state.`);
 }
 for (const forbidden of [
   'pikappapp/demo',
@@ -158,16 +158,15 @@ const expectedIndexedImages = [
   'images/pikapp-case-study/expansion-cover-preview.jpg',
   'images/pikapp-case-study/wireframes.png',
   'images/pikapp-case-study/sitemap.png',
-  'images/pikapp-case-study/app-star-shield.svg',
   ...v1States.map((filename) => `images/pikapp-case-study/${filename}`),
   ...staticStates.map(([filename]) => `images/pikapp-case-study/${filename}`),
-  `images/pikapp-case-study/${finalStates[0]}`,
+  ...finalStates.slice(0, 2).map((filename) => `images/pikapp-case-study/${filename}`),
 ];
 expect(indexedImages.size === 15, 'Pi Kapp site-index summary must retain its intentional 15-image cap.');
 for (const expected of expectedIndexedImages) {
   expect(indexedImages.has(expected), `Pi Kapp site-index summary must preserve representative evidence: ${expected}`);
 }
-for (const deferred of [...finalStates.slice(1), 'expansion-cover-detail.jpg']) {
+for (const deferred of [...finalStates.slice(2), 'app-star-shield.svg', 'expansion-cover-detail.jpg']) {
   expect(!indexedImages.has(`images/pikapp-case-study/${deferred}`),
     `Pi Kapp site-index summary must not pull deferred/detail evidence past its cap: ${deferred}`);
 }

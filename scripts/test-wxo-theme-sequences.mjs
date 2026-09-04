@@ -47,12 +47,14 @@ try {
 const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? '';
 
 const expectedPairs = [
-  ['current-workflow', 'current-workflow-light.png', 'current-workflow-dark.png'],
-  ['v2-workflow', 'v2-workflow-light.png', 'v2-workflow-dark.png'],
-  ['v2-agent-flow', 'v2-agent-flow-light.png', 'v2-agent-flow-dark.png'],
-  ['form-workflow', 'form-workflow-light.png', 'form-workflow-dark.png'],
-  ['form-configuration', 'form-configuration-light.png', 'form-configuration-dark.png'],
-  ['form-summary', 'form-summary-light.png', 'form-summary-dark.png'],
+  ['home-thumbnail', 'protected/wxo/images/current/01-skill-studio-main.png', 'images/wxo-canvas/wxo-home-thumbnail-dark.png'],
+  ['illustration-vignettes', 'protected/wxo/assets/public-candidate/06-illustration-vignettes.png', 'protected/wxo/assets/public-candidate/20-illustration-vignettes-dark.png'],
+  ['form-workflow', 'protected/wxo/assets/theme-sequences/form-workflow-light.png', 'protected/wxo/assets/theme-sequences/form-workflow-dark.png'],
+  ['form-configuration', 'protected/wxo/assets/theme-sequences/form-configuration-light.png', 'protected/wxo/assets/theme-sequences/form-configuration-dark.png'],
+  ['form-summary', 'protected/wxo/assets/theme-sequences/form-summary-light.png', 'protected/wxo/assets/theme-sequences/form-summary-dark.png'],
+  ['current-workflow', 'protected/wxo/assets/theme-sequences/current-workflow-light.png', 'protected/wxo/assets/theme-sequences/current-workflow-dark.png'],
+  ['v2-workflow', 'protected/wxo/assets/theme-sequences/v2-workflow-light.png', 'protected/wxo/assets/theme-sequences/v2-workflow-dark.png'],
+  ['v2-agent-flow', 'protected/wxo/assets/theme-sequences/v2-agent-flow-light.png', 'protected/wxo/assets/theme-sequences/v2-agent-flow-dark.png'],
 ];
 
 const ownerHandoffFilenames = new Map([
@@ -97,16 +99,17 @@ for (const [file, sourceFilename] of ownerHandoffFilenames) {
 for (const [name, light, dark] of expectedPairs) {
   const pattern = new RegExp(`<img\\b[^>]*data-wxo-theme-image=["']${name}["'][^>]*>`, 'i');
   const tag = main.match(pattern)?.[0] ?? '';
-  requireText(tag, `data-theme-light-src="protected/wxo/assets/theme-sequences/${light}"`, `${name} must declare its light source.`);
-  requireText(tag, `data-theme-dark-src="protected/wxo/assets/theme-sequences/${dark}"`, `${name} must declare its dark source.`);
-  requireText(tag, `src="protected/wxo/assets/theme-sequences/${light}"`, `${name} must start from its light source.`);
+  requireText(tag, `data-theme-light-src="${light}"`, `${name} must declare its light source.`);
+  requireText(tag, `data-theme-dark-src="${dark}"`, `${name} must declare its dark source.`);
+  requireText(tag, `src="${light}"`, `${name} must start from its light source.`);
 }
 
-if (count(main, /data-wxo-theme-image=/g) !== 6) fail('Canvas evolution and Form sequence must expose exactly six theme-aware screens.');
+if (count(main, /data-wxo-theme-image=/g) !== 8) fail('The opening illustration, vignettes, Form sequence, and preserved Canvas evolution must expose eight theme-aware images.');
 requireText(main, 'id="canvas-evolution"', 'Canvas evolution must be an addressable semantic section.');
-requireText(main, 'Current builder', 'Canvas evolution must begin with the current builder state.');
-requireText(main, 'V2 workflow evolution', 'Canvas evolution must include the V2 workflow state.');
-requireText(main, 'V2 agent hierarchy', 'Canvas evolution must include the V2 agent hierarchy state.');
+requireText(main, 'Canvas evolution', 'Canvas evolution must retain its approved narrative marker.');
+requireText(main, 'A visual system that kept expanding.', 'Canvas evolution must retain its approved narrative heading.');
+requireText(main, 'pilot-flow-evidence', 'Canvas evolution must use the reviewed flow-control narrative group.');
+for (const token of ['pilot-theme-sequence', 'Current builder', 'V2 workflow evolution', 'V2 agent hierarchy']) requireText(main, token, `Canvas evolution must preserve the approved ordered state: ${token}`);
 requireText(main, 'Form sequence', 'The existing Form flow must have a semantic sequence heading.');
 requireText(main, '<ol class="pilot-flow-sequence pilot-flow-sequence--three pilot-form-sequence">', 'Form screens must retain a three-step ordered sequence.');
 
@@ -124,4 +127,4 @@ for (const selector of [
 ]) requireText(css, selector, `Missing scoped, responsive theme-sequence style: ${selector}`);
 
 if (process.exitCode) process.exit(process.exitCode);
-console.log('PASS: WXO theme-aware evolution and Form sequence source contract');
+console.log('PASS: WXO theme-aware narrative and Form sequence source contract');

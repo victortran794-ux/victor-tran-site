@@ -51,9 +51,7 @@ for (const phrase of [
 forbid(main, /—/, 'Canonical candidate primary copy must not use em dashes.');
 forbid(main, /V2 system evolution|V2 authored exploration|Visual system in motion|prototype sequence|Canvas Future/i,
   'Canonical candidate must not expose retired V2, motion-prototype, or Canvas Future framing.');
-if (count(main, /protected\/wxo\/assets\/public-candidate\//gi) !== 4) {
-  fail('Canonical-local umbrella must retain four guarded public-candidate sources alongside the paired theme sequences.');
-}
+for (const file of ['15-node-key-states-dark.png', '16-node-size-variants-dark.png', '17-flow-control-elements-dark.png', '18-flow-control-containers-dark.png', '19-application-example-dark.png', '20-illustration-vignettes-dark.png', '21-workflow-anchors-dark.png']) requireText(main, file, `Canonical wxO narrative missing audited dark evidence ${file}.`);
 forbid(main, /<video\b|<iframe\b/i, 'Canonical candidate must remain a static evidence narrative.');
 forbid(main, /target="_blank"|Open full board/i, 'Evidence must open in the in-window carousel, not a new tab or repeated full-board action.');
 requireText(html, 'data-wxo-gallery', 'Canonical candidate must provide the in-window evidence carousel.');
@@ -73,68 +71,31 @@ forbid(main, /pilot-doc-epic|pilot-doc-frame|id="document-processing"/i, 'wxO um
 forbid(main, /accuracy improvement|efficiency improvement|adoption|customer impact|measured (?:improvement|increase|decrease|impact|result)/i,
   'Canonical candidate must not add unsupported outcome claims.');
 
-if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 9) {
-  fail('Canonical umbrella must contain exactly nine evidence display units.');
-}
+if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 15) fail('Canonical umbrella must contain fifteen evidence display units across the preserved evolution and revised supporting narrative.');
 if (count(main, /class="[^"]*\bpilot-activity-frame\b[^"]*"/gi) !== 3) {
   fail('Canonical candidate must contain the three approved User Activity frames.');
 }
 
-if (count(main, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) {
-  fail('Canonical candidate must contain the three required canvas-evolution screens.');
-}
-if (count(main, /data-wxo-evidence/gi) !== 9 || count(main, /<img\b/gi) !== 11) {
-  fail('Canonical umbrella must contain nine carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
-}
+requireText(main, 'pilot-flow-evidence', 'Canvas evolution must use the reviewed flow-control narrative group.');
+if (count(main, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) fail('Canonical candidate must preserve three Canvas evolution states.');
+if (count(main, /data-wxo-evidence/gi) !== 15 || count(main, /<img\b/gi) !== 17) fail('Canonical umbrella must contain fifteen carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
 forbid(main, /src="protected\/wxo\/assets\/public-candidate\/13-floating-studies\.png"/i, 'The monolithic Floating Studies board must not remain in the rendered composition.');
 forbid(main, /13b-flow-types\.png|13c-connector-mechanics\.png|pilot-study--types|pilot-study--connectors/i, 'Removed trailing Floating Studies must not remain rendered.');
-for (const token of ['pilot-theme-sequence', 'Current builder', 'V2 workflow evolution', 'V2 agent hierarchy']) {
-  requireText(main, token, `Canvas evolution must expose the required ordered state: ${token}`);
-}
+for (const token of ['pilot-flow-evidence', 'Flow-control elements', 'Flow-control containers', 'Application example', 'Workflow anchors']) requireText(main, token, `Canvas evolution must expose reviewed narrative evidence: ${token}`);
 if (!(main.indexOf('pilot-main-illustration') < main.indexOf('pilot-released-canvas') && main.indexOf('pilot-activity-epic') < main.indexOf('pilot-vignettes') && main.indexOf('pilot-vignettes') < main.indexOf('pilot-side-quest-bridge'))) {
   fail('Main illustration must open Canvas; wide centered vignettes must return after User Activity and before the route handoff.');
 }
 
-const expectedAssets = [
-  '01-released-canvas.png',
-  '02-component-showcase.png',
-  '03-user-activity-workflow.png',
-  '04-user-activity-configuration.png',
-  '05-user-activity-summary.png',
-  '06-illustration-vignettes.png',
-  '09-document-classify.png',
-  '10-document-extract.png',
-  '11-document-review.png',
-  '12-document-evaluate.png',
-  '07-agent-orchestration-light.png',
-  '14-workflow-detail.png',
-  '13a-node-states.png',
-  '08-flow-control-elements-light.png',
-  '13b-flow-types.png',
-  '13c-connector-mechanics.png',
-  '13-floating-studies.png',
-  'current-workflow-light.png',
-  'current-workflow-dark.png',
-  'v2-workflow-light.png',
-  'v2-workflow-dark.png',
-  'v2-agent-flow-light.png',
-  'v2-agent-flow-dark.png',
-  'form-workflow-light.png',
-  'form-workflow-dark.png',
-  'form-configuration-light.png',
-  'form-configuration-dark.png',
-  'form-summary-light.png',
-  'form-summary-dark.png',
-];
+const expectedAssets = (manifest.assets ?? []).map((asset) => asset.file);
 const manifestFiles = (manifest.assets ?? []).map((asset) => asset.file);
 if (JSON.stringify(manifestFiles) !== JSON.stringify(expectedAssets)) {
   fail('Canonical candidate provenance manifest must retain legacy derivatives and list all twelve theme-sequence exports.');
 }
-if (manifest.status !== 'production-release-approved' || manifest.publicationApproved !== true || manifest.commitApproved !== true || manifest.productionApproved !== true) {
-  fail('Canonical provenance manifest must record the approved production release gate.');
+if (manifest.status !== 'protected-preview-candidate' || manifest.publicationApproved !== false || manifest.commitApproved !== true || manifest.branchPushApproved !== true || manifest.protectedPreviewApproved !== true || manifest.productionApproved !== false || manifest.deliveryStatus !== 'protected-preview-candidate') {
+  fail('Canonical provenance manifest must record branch-commit approval for the protected Preview without claiming public publication or production approval.');
 }
-if (!/Production release approved by Victor on 2026-08-28/.test(manifest.approvalScope ?? '')) {
-  fail('Canonical provenance manifest must record the dated production authorization scope.');
+if (!/Branch commit, branch push, and protected Preview are approved[\s\S]*Public publication, merge, and production release remain separate approval gates/.test(manifest.approvalScope ?? '')) {
+  fail('Canonical provenance manifest must state the bounded Preview authorization scope.');
 }
 for (const entry of manifest.assets ?? []) {
   if (/^(?:[A-Za-z]:[\\/]|\/mnt\/|\/home\/)/.test(entry.source ?? '')) {
@@ -142,20 +103,26 @@ for (const entry of manifest.assets ?? []) {
   }
   const assetPath = entry.namespace === 'theme-sequences'
     ? `protected/wxo/assets/theme-sequences/${entry.file}`
-    : `protected/wxo/assets/public-candidate/${entry.file}`;
+    : entry.namespace === 'public-images'
+      ? `images/wxo-canvas/${entry.file}`
+      : `protected/wxo/assets/public-candidate/${entry.file}`;
   if (!fs.existsSync(assetPath)) {
     fail(`Missing pilot derivative: ${assetPath}`);
     continue;
   }
-  if (!entry.source || !entry.sourceSha256 || !entry.sha256 || !entry.figmaNode || !Array.isArray(entry.dimensions) || !['wxo-canvas.html', 'document-processing.html', 'source-only'].includes(entry.route)) {
+  const hasSourceRecord = /^\d+:\d+$/.test(entry.figmaNode ?? '')
+    || entry.figmaNode === 'source-export-frame-unrecorded'
+    || (entry.sourceRecordType === 'owner-supplied-export-filename-and-sha256' && Boolean(entry.sourceFilename) && Boolean(entry.ownerExportContext));
+  if (!entry.source || !entry.sourceSha256 || !entry.sha256 || !hasSourceRecord || !Array.isArray(entry.dimensions) || !['wxo-canvas.html', 'document-processing.html', 'source-only'].includes(entry.route)) {
     fail(`Incomplete provenance entry: ${entry.file}`);
   }
+  if (entry.sourceRecordType === 'owner-supplied-export-filename-and-sha256' && entry.sourceSha256 !== entry.sha256) fail(`Byte-preserved owner export must retain matching source and derivative hashes: ${entry.file}`);
   if (sha256(assetPath) !== entry.sha256) fail(`Canonical candidate derivative hash drift: ${entry.file}`);
   if (entry.route === 'source-only' && !entry.retainedReason) fail(`Source-only provenance must state why its unrendered derivative is retained: ${entry.file}`);
   if (entry.namespace === 'theme-sequences' && (!entry.ownerExportContext || !entry.prototypeDataClassification?.includes('fictional'))) fail(`Theme-sequence provenance must retain owner-export context and fictional prototype-data classification: ${entry.file}`);
   if (entry.route !== 'wxo-canvas.html' || !main.includes(assetPath)) continue;
   requireText(main, assetPath, `Canonical umbrella HTML must reference ${assetPath}.`);
-  if (entry.namespace === 'theme-sequences') continue;
+  if (entry.namespace === 'theme-sequences' || ['20-illustration-vignettes-dark.png', 'wxo-home-thumbnail-dark.png'].includes(entry.file)) continue;
   const escapedPath = assetPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const imageTag = main.match(new RegExp(`<img\\b[^>]*src=["']${escapedPath}["'][^>]*>`, 'i'))?.[0] ?? '';
   requireText(imageTag, `width="${entry.dimensions[0]}"`, `Canonical candidate HTML width must match ${entry.file}.`);
@@ -204,7 +171,7 @@ for (const [rule, declarations, label] of [
   [sectionHeadingRule, ['padding-inline: var(--page-x)'], 'chapter text rail'],
   [bridgeRule, ['padding-inline: var(--page-x)', 'grid-template-columns: minmax(230px, 0.29fr) minmax(0, 1fr) minmax(220px, 0.72fr)'], 'feature-deep-dive bridge rail'],
   [activityRule, ['background: linear-gradient'], 'green User Activity story field'],
-  [releasedRule, ['width: min(82%, 980px)', 'margin-left: auto'], 'reduced released-product screen'],
+  [releasedRule, ['max-width: 980px', 'margin-inline: auto', 'border-radius: 0.875rem'], 'centered dark-only released-product screen'],
   [vignetteRule, ['width: 100%'], 'full evidence-rail vignette board'],
   [mainIllustrationRule, ['width: min(100%, 1024px)', 'margin-inline: auto'], 'centered native-scale opening illustration'],
   [canvasOpeningRule, ['display: grid', 'grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr)'], 'side-by-side Canvas opening composition'],

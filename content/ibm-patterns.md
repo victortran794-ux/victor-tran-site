@@ -96,9 +96,7 @@ Chapter 05 | Influence and reflection
 
 We shared the future state with the team responsible for the real Contact Us experience. I later recognized parts of its direction in the page.
 
-The IBM Patterns prototype did not become the production page. What I remember carrying forward was a warmer entry, card-based choices, more useful routes up front, and clearer guidance based on someone's relationship with IBM.
-
-If I revisited the problem now, I would keep that human goal: interpret intent, make the next destination clear, confirm where a request went, and keep a real person within reach.
+The useful idea was simple: make the next destination clear and keep a person within reach.
 
 Influence and concept boundaryThis is a bounded first-person recollection. Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation.
 

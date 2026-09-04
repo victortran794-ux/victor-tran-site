@@ -198,8 +198,8 @@ requireIncludes('salmagazine.html .sal-vico2-story', classText('salmagazine.html
 requireIncludes('salmagazine.html .sal-vico2-summer-head', classText('salmagazine.html', 'sal-vico2-summer-head'), 'Four favorite spreads from the Summer 2017 issue.');
 forbidRendered('salmagazine.html', 'my first issue as creative director');
 
-requireIncludes('pikappapp.html #chapter-3', idText('pikappapp.html', 'chapter-3'), copy.piKappRemaster);
-requireIncludes('pikappapp.html #chapter-5', idText('pikappapp.html', 'chapter-5'), copy.piKappBoundary);
+requireIncludes('pikappapp.html #chapter-4', idText('pikappapp.html', 'chapter-4'), copy.piKappRemaster);
+requireIncludes('pikappapp.html #chapter-4', idText('pikappapp.html', 'chapter-4'), copy.piKappBoundary);
 
 requireIncludes('artillustration.html .art-opening', classText('artillustration.html', 'art-opening'), copy.artIntro);
 requireIncludes('graphicgallery.html .graphic-opening', classText('graphicgallery.html', 'graphic-opening'), copy.graphicIntro);

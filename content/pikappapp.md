@@ -26,7 +26,6 @@ A mobile application concept for undergraduate fraternity members to track miles
 
 - Every year looked a little different. The same stuff still had to get done.
 - There was already a system. It was just spread everywhere.
-- It still needed to look like Pi Kappa Phi.
 - V1 established the structure. V2 clarified the loop.
 - The final remaster brings the app back to its source.
 - A formative project that changed how I approached product design.
@@ -64,6 +63,22 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
+The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
+
+Earlier concept sequence
+
+The sequence shows how the original identity, member dashboard, and milestone detail were explored before the current remaster.
+
+Earlier static V2 states
+
+Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.
+
+Illustrative concept screens.
+
+Chapter 04
+
+The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
+
 The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.
 
 Pi Kapp App
@@ -88,12 +103,6 @@ Interface hierarchy
 
 Short labels keep the next action clear. Supporting text explains only what the member needs in that moment.
 
-Original vector mark on its intended field
-
-Original app Star Shield on the cyan hex field
-
-Original vector mark, kept small and crisp inside its intended app layer.
-
 Only the pieces used by the final remaster
 
 Form controls
@@ -107,22 +116,6 @@ Illustrative information appears here with a clear source and next step.
 Milestone states
 
 Bottom navigation
-
-The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
-
-Earlier concept sequence
-
-The sequence shows how the original identity, member dashboard, and milestone detail were explored before the current remaster.
-
-Earlier static V2 states
-
-Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.
-
-Illustrative concept screens.
-
-Chapter 05
-
-The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
 
 Illustrative concept screens. Names, dates, rankings, and activity are fictional.
 
@@ -144,7 +137,6 @@ Cover view selected.
 - Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
-- Original vector Pi Kapp App Star Shield: images/pikapp-case-study/app-star-shield.svg
 - Clean owner export of the original Pi Kapp App login concept: images/pikapp-case-study/v1-clean-login.png
 - Clean owner export of the original Pi Kapp App loading state: images/pikapp-case-study/v1-clean-loading.png
 - Clean owner export of the original Pi Kapp App member dashboard: images/pikapp-case-study/v1-clean-member-dashboard.png

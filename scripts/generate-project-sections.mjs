@@ -50,7 +50,14 @@ function cardMarkup(project, indent = '        ') {
   const lock = project.homepageLock
     ? ' <span class="featured-item-lock" role="img" aria-label="Password required"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>'
     : '';
-  return `${indent}<a href="${escapeHtml(projectHref(project))}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${labelMarkup}${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>\n${indent}  </div>\n${indent}</a>`;
+  const viewLink = `<span class="view-link"><span class="shape-cue" aria-hidden="true"></span>${escapeHtml(project.cta ?? 'View Project')}</span>`;
+  const cardBody = `${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${labelMarkup}${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    ${viewLink}\n${indent}  </div>`;
+  if (project.homepageRelated) {
+    const related = project.homepageRelated;
+    const shellClass = projectClass(project).replace('featured-item', 'featured-item-shell');
+    return `${indent}<div class="${shellClass} featured-item--has-related" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <a href="${escapeHtml(projectHref(project))}" class="${projectClass(project)} featured-item-primary" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${cardBody}\n${indent}  </a>\n${indent}  <a class="featured-item-related" href="${escapeHtml(related.url)}">${escapeHtml(related.label)}</a>\n${indent}</div>`;
+  }
+  return `${indent}<a href="${escapeHtml(projectHref(project))}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${cardBody}\n${indent}</a>`;
 }
 
 function generatedBlock(name, body, indent = '') {

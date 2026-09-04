@@ -443,22 +443,32 @@ async function checkHornedWomanCadenceAndPause() {
 }
 
 async function checkHomepageGalleryChapter() {
-  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: false });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
   await cdp.navigate(`${baseUrl}/index.html`);
   const mobile = await cdp.evaluate(`(() => {
     document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
     const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => {
       const rect = card.getBoundingClientRect();
-      return { left: Math.round(rect.left), width: Math.round(rect.width) };
+      const content = card.querySelector('.featured-item-content');
+      return { left: Math.round(rect.left), width: Math.round(rect.width), background: getComputedStyle(content).backgroundColor, titleColor: getComputedStyle(card.querySelector('.featured-item-title')).color };
     });
-    return { title: document.querySelector('.featured-galleries-title')?.textContent.trim(), cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+    const viewportWidth = document.documentElement.clientWidth;
+    const overflowers = [...document.querySelectorAll('body *')].map((element) => {
+      const rect = element.getBoundingClientRect();
+      return { selector: element.id ? '#' + element.id : element.tagName.toLowerCase() + '.' + [...element.classList].join('.'), left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width) };
+    }).filter(({ left, right }) => left < -1 || right > viewportWidth + 1).slice(0, 12);
+    return { title: document.querySelector('.featured-galleries-title')?.textContent.trim(), viewportWidth, cards, overflow: document.documentElement.scrollWidth - viewportWidth, overflowers };
   })()`);
   assert(mobile.title === 'And some galleries.' && mobile.cards.length === 3 && mobile.overflow === 0,
     `index.html: mobile three-gallery chapter contract drifted: ${JSON.stringify(mobile)}`);
-  assert(mobile.cards.every((card) => card.width >= 340) && mobile.cards.every((card) => Math.abs(card.left - mobile.cards[0].left) <= 1),
+  assert(mobile.cards.every((card) => Math.abs(card.width - (mobile.viewportWidth - 44)) <= 1) && mobile.cards.every((card) => Math.abs(card.left - 22) <= 1),
     `index.html: mobile gallery cards must share one full-width column: ${JSON.stringify(mobile.cards)}`);
+  assert(new Set(mobile.cards.map((card) => card.background)).size === 3 && mobile.cards.every((card) => card.background !== 'rgb(255, 255, 255)' && card.titleColor === 'rgb(255, 255, 255)'),
+    `index.html: gallery surfaces must render as three distinct color treatments with readable titles: ${JSON.stringify(mobile.cards)}`);
 
   await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: false });
   await cdp.navigate(`${baseUrl}/index.html`);
   const desktop = await cdp.evaluate(`(() => {
     const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => Math.round(card.getBoundingClientRect().width));
@@ -878,11 +888,13 @@ try {
           assert(scrolledEkos.length === 2 && scrolledEkos.every((distance) => distance > 0), `uigallery.html: both Ekos frames must scroll through their complete pages.`);
           const [ekosDesktop, ekosMobile, magiOverview, magiOverlays, magiComponents, magiNodeStates] = state.uiLayout;
           if (viewport.mobile) {
-            assert(state.uiLayout.every((view) => Math.abs(ekosDesktop.left - view.left) <= 1) &&
+            const ekosAligned = Math.abs(ekosDesktop.left - ekosMobile.left) <= 1;
+            const magiAligned = [magiOverview, magiOverlays, magiComponents, magiNodeStates].every((view) => Math.abs(magiOverview.left - view.left) <= 1);
+            assert(ekosAligned && magiAligned &&
               state.uiLayout.every((view, index, views) => index === 0 || views[index - 1].top < view.top),
               `uigallery.html: mobile studies do not stack in authored order: ${JSON.stringify(state.uiLayout)}`);
           } else {
-            assert(ekosDesktop.top < ekosMobile.top && ekosDesktop.width > ekosMobile.width && ekosMobile.left > ekosDesktop.left,
+            assert(Math.abs(ekosDesktop.top - ekosMobile.top) <= 2 && ekosDesktop.width > ekosMobile.width && ekosMobile.left > ekosDesktop.left,
               `uigallery.html: Ekos desktop/mobile hierarchy drifted: ${JSON.stringify(state.uiLayout)}`);
             assert(magiOverview.top < magiOverlays.top && magiOverview.width > magiOverlays.width &&
               magiOverlays.top === magiComponents.top && Math.abs(magiOverlays.width - magiComponents.width) <= 1,
@@ -890,8 +902,9 @@ try {
             assert(
               magiNodeStates.top > magiComponents.top && magiNodeStates.width === magiOverview.width,
               `uigallery.html: Magi retained support pair and closing state strip drifted: ${JSON.stringify(state.uiLayout)}`);
-            assert(ekosDesktop.width >= magiOverview.width,
-              `uigallery.html: Ekos must remain at least as wide as the Magi dashboard lead: ${JSON.stringify(state.uiLayout)}`);
+            const ekosPairSpan = (ekosMobile.left + ekosMobile.width) - ekosDesktop.left;
+            assert(ekosDesktop.left >= magiOverview.left && ekosMobile.left + ekosMobile.width <= magiOverview.left + magiOverview.width && ekosPairSpan >= magiOverview.width * .9,
+              `uigallery.html: paired Ekos container must occupy the shared study rail without escaping it: ${JSON.stringify(state.uiLayout)}`);
           }
           if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
             if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);

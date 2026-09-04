@@ -16,12 +16,21 @@ if (!chrome) throw new Error('Chrome binary not found; set CHROME_BIN');
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
+async function waitForViewport(cdp, width, height) {
+  let actual = null;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    actual = await cdp.evaluate(`({inner:[innerWidth,innerHeight],visual:[visualViewport?.width,visualViewport?.height,visualViewport?.scale],client:[document.documentElement.clientWidth,document.documentElement.clientHeight],screen:[screen.width,screen.height]})`);
+    if ((actual.inner[0] === width && actual.inner[1] === height) || (actual.client[0] === width && actual.client[1] === height)) return;
+    await delay(50);
+  }
+  throw new Error(`viewport did not settle at ${width}x${height}: ${JSON.stringify(actual)}`);
+}
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'dna-hero-pilot-'));
-const cdpPort = 10040 + (process.pid % 70);
+const portFile = path.join(profile, 'DevToolsActivePort');
 let chromeLog = '';
 const browser = spawn(chrome, [
   '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
-  '--remote-allow-origins=*', `--remote-debugging-port=${cdpPort}`,
+  '--remote-allow-origins=*', '--remote-debugging-port=0',
   `--user-data-dir=${profile}`, '--window-size=1440,900', 'about:blank',
 ], { stdio: ['ignore', 'ignore', 'pipe'] });
 browser.stderr.on('data', chunk => { chromeLog += chunk.toString(); });
@@ -131,6 +140,17 @@ try {
   const siteResponse = await fetch(`${baseUrl}/index.html`);
   assert(siteResponse.ok, `pilot server returned ${siteResponse.status}`);
 
+  let cdpPort;
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    if (fs.existsSync(portFile)) {
+      cdpPort = Number(fs.readFileSync(portFile, 'utf8').split(/\r?\n/, 1)[0]);
+      if (Number.isInteger(cdpPort) && cdpPort > 0) break;
+    }
+    if (browser.exitCode !== null) throw new Error(`Chrome exited ${browser.exitCode}: ${chromeLog}`);
+    await delay(100);
+  }
+  assert(cdpPort, 'Chrome DevTools port did not become ready');
+
   let page;
   for (let attempt = 0; attempt < 100; attempt += 1) {
     try {
@@ -185,6 +205,8 @@ try {
     await cdp.navigate(`${baseUrl}/index.html?state=${item.label}`);
     await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(item.theme)})`);
     await cdp.navigate(`${baseUrl}/index.html?state=${item.label}&fresh=1`);
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width: item.width, height: item.height, screenWidth: item.width, screenHeight: item.height, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false });
+    await waitForViewport(cdp, item.width, item.height);
 
     const dormant = await cdp.evaluate(`(() => {
       const hero = document.querySelector('.hero');
@@ -267,8 +289,8 @@ try {
         };
       });
       return {
-        viewport: [innerWidth, innerHeight],
-        overflow: document.documentElement.scrollWidth - innerWidth,
+        viewport: [Math.max(innerWidth, document.documentElement.clientWidth), innerHeight],
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         theme: document.documentElement.getAttribute('data-theme') || 'light',
         frame: [frame.width, frame.height],
         frameEdges: [frame.top, frame.bottom],

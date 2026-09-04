@@ -82,6 +82,8 @@ run_required "Route 02 homepage integration contract" npm run check:route02-home
 run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs
 run_required "Final site reconciliation contract" npm run check:final-site-reconciliation
 run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
+run_required "Vercel review feedback wiring" npm run test:vercel-review-feedback-wiring
+run_required "Vercel review feedback contract" npm run check:vercel-review-feedback
 run_required "Résumé deterministic build and artifact contract" npm run test:resume-build
 
 section "Generating project sections"
@@ -131,7 +133,6 @@ run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "UI Gallery integration contract" npm run check:ui-gallery
 run_required "Gallery followups contract" npm run check:gallery-followups
-run_required "Engraved Design DNA hero browser contract" npm run check:engraved-dna-hero-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
 
@@ -155,6 +156,7 @@ run_visual_archives_browser_contract() {
   done
 
   if [ "$ready" -eq 1 ]; then
+    SITE_URL="$site_url" DNA_HERO_EVIDENCE_DIR="$(mktemp -d)" npm run check:engraved-dna-hero-browser || status=$?
     SITE_URL="$site_url" VISUAL_ARCHIVES_EVIDENCE_DIR="$(mktemp -d)" npm run check:visual-archives-lightbox-browser || status=$?
     SITE_URL="$site_url" npm run check:graphic-heading-browser || status=$?
   else

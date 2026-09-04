@@ -1,0 +1,119 @@
+import fs from 'node:fs';
+
+const read = (path) => fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+const html = {
+  home: read('index.html'),
+  about: read('about.html'),
+  wxo: read('wxo-canvas.html'),
+  doc: read('document-processing.html'),
+  patterns: read('ibm-patterns.html'),
+  pikapp: read('pikappapp.html'),
+  ui: read('uigallery.html'),
+  pci: read('pci.html'),
+};
+const css = {
+  shared: read('css/style.css'),
+  wxo: read('css/wxo-public-candidate.css'),
+  pikapp: read('css/pikappapp.css'),
+  ui: read('css/ui-gallery.css'),
+  pci: read('css/pci-vico2.css'),
+};
+const main = read('js/main.js');
+const projects = JSON.parse(read('data/projects.json'));
+const generator = read('scripts/generate-project-sections.mjs');
+const failures = [];
+const need = (condition, message) => { if (!condition) failures.push(message); };
+const has = (source, token, message = token) => need(source.includes(token), message);
+const lacks = (source, token, message = token) => need(!source.includes(token), message);
+
+// Home: varied gallery color, legible DNA, elastic work arrival, and two-link wxO card.
+const bySlug = new Map(projects.projects.map((project) => [project.slug, project]));
+need(bySlug.get('artillustration')?.surface === 'orange', 'Art gallery card must keep orange surface.');
+need(bySlug.get('graphicgallery')?.surface === 'purple', 'Graphic gallery card must keep purple surface.');
+need(bySlug.get('uigallery')?.surface === 'teal', 'Interface Studies gallery card must use teal surface.');
+need(bySlug.get('wxo-canvas')?.homepageRelated?.url === 'document-processing.html?lock=1', 'wxO manifest must expose protected Case Study 2 link.');
+has(generator, 'homepageRelated', 'Homepage generator must own optional related case-study links.');
+has(html.home, 'class="featured-item-related" href="document-processing.html?lock=1"', 'Generated wxO card must expose Case Study 2.');
+has(main, 'initWorkArrival', 'Home runtime must own a bounded work-arrival interaction.');
+has(css.shared, '@keyframes work-arrival-bounce', 'Home work target must have a spring arrival keyframe.');
+has(css.shared, '.featured.is-work-arriving', 'Home work section must expose the arrival state.');
+need(/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?is-work-arriving/.test(css.shared), 'Work arrival must have a reduced-motion fallback.');
+need(/\.home-page--engraved-dna \.hero-dna-label\s*\{[^}]*font-size:\s*0\.72rem/i.test(css.shared), 'Desktop DNA labels must use readable 0.72rem type.');
+need(/\.home-page--engraved-dna \.hero-dna-swatch-name,[\s\S]*?font-size:\s*0\.64rem/i.test(css.shared), 'Desktop DNA token text must use readable 0.64rem type.');
+has(css.shared, '.featured-item--surface-teal .featured-item-content', 'Homepage gallery must support teal card bodies.');
+
+// wxO / Document Processing: honest theme-aware evidence, space, and a prominent return.
+for (const file of [
+  '15-node-key-states-dark.png',
+  '16-node-size-variants-dark.png',
+  '17-flow-control-elements-dark.png',
+  '18-flow-control-containers-dark.png',
+  '19-application-example-dark.png',
+  '20-illustration-vignettes-dark.png',
+  '21-workflow-anchors-dark.png',
+]) {
+  has(html.wxo, file, `wxO must render ${file}.`);
+}
+has(html.wxo, 'wxo-home-thumbnail-dark.png', 'wxO main illustration must expose the supplied dark-theme counterpart.');
+has(html.wxo, 'pilot-system-theme pilot-system-theme--light', 'wxO node library must retain a light evidence group.');
+has(html.wxo, 'pilot-system-theme pilot-system-theme--dark', 'wxO node library must add a dark evidence group.');
+has(css.wxo, '.pilot-released-canvas', 'Released Canvas must retain a dedicated media wrapper.');
+need(/\.wxo-public-pilot \.pilot-released-canvas\s*\{[^}]*max-width:[^;}]+;[^}]*margin-inline:\s*auto[^}]*border-radius:/is.test(css.wxo), 'Released Canvas must be centered in a bounded rounded container.');
+has(html.wxo, 'data-title="Historical Canvas"', 'wxO must describe the dark-only source pixel without an unsupported release claim.');
+has(html.wxo, '<strong>Historical Canvas</strong><span>Dark-only source pixel, preserved without simulating a light-theme counterpart.</span>', 'wxO historical Canvas caption must stay provenance-bounded.');
+need(!/(?:data-title|data-caption|alt|figcaption)[^>]*(?:Released Canvas|released product|preserved as released|release view)/i.test(html.wxo), 'wxO visitor-facing media labels must not imply independently unverified release status.');
+has(css.wxo, '.doc-motion-section', 'Accuracy Evaluation motion block must own top spacing.');
+need(/\.wxo-public-pilot \.doc-motion-section\s*\{[^}]*padding-top:/is.test(css.wxo), 'Accuracy Evaluation must have explicit top breathing room.');
+has(html.doc, 'class="workflow-return-link workflow-return-link--prominent"', 'Document Processing must end with a prominent Canvas return.');
+has(css.wxo, '.workflow-return-link--prominent', 'Prominent Canvas return must have a dedicated treatment.');
+need(/\.wxo-public-pilot \.doc-current-stage-head\s*\{[^}]*gap:\s*clamp\(10px/is.test(css.wxo), 'Document Processing stage number must sit closer to its heading.');
+
+// IBM Patterns: simpler, subtler close without the rejected caveat sentences.
+lacks(html.patterns, 'The IBM Patterns prototype did not become the production page.', 'Remove rejected prototype sentence.');
+lacks(html.patterns, 'What I remember carrying forward', 'Remove rejected recollection phrasing.');
+has(html.patterns, 'The useful idea was simple:', 'IBM Patterns close must use the approved simpler reflection.');
+
+// Pi Kapp: four chapter starts, no Mark & pattern card, complete uncropped screens, calmer grid.
+need((html.pikapp.match(/<li><a href="#chapter-/g) || []).length === 4, 'Pi Kapp chapter index must contain four starts.');
+need((html.pikapp.match(/data-chapter/g) || []).length === 4, 'Pi Kapp must render four chapter sections.');
+lacks(html.pikapp, 'id="chapter-5"', 'Pi Kapp must not retain a fifth chapter.');
+lacks(html.pikapp, 'Mark &amp; pattern', 'Pi Kapp must remove the Mark & pattern section.');
+lacks(html.pikapp, 'identity-board__card--pattern', 'Pi Kapp must remove the Mark & pattern card.');
+has(html.pikapp, 'id="chapter-4" data-chapter aria-labelledby="coda-title"', 'Final remaster must become chapter 04.');
+need(html.pikapp.indexOf('identity-board') > html.pikapp.indexOf('id="chapter-4"'), 'Useful identity foundations must move inside the final remaster chapter.');
+need(/\.pikapp-page \.coda__triptych\s*\{[^}]*grid-template-columns:\s*repeat\(4,/is.test(css.pikapp), 'Final remaster desktop must use a four-up row.');
+need(/\.pikapp-page \.coda__frame\s*\{[^}]*overflow:\s*visible[^}]*border-radius:\s*0/is.test(css.pikapp), 'Final remaster must remove the extra rounded crop shell.');
+need(/\.pikapp-page \.coda__image\s*\{[^}]*object-fit:\s*contain[^}]*border-radius:\s*0/is.test(css.pikapp), 'Final remaster screens must remain complete and uncropped.');
+
+// Shared shell/About: compact wordmark, right-aligned controls, hover polish, one outline-shape family.
+need(/\.nav-logo\s*\{[^}]*gap:\s*4px/is.test(css.shared), 'Shared Victor Tran wordmark must use tighter 4px kerning gap.');
+need(/\.nav-inner\s*\{[^}]*justify-content:\s*space-between/is.test(css.shared), 'Shared header controls must align to the right edge.');
+has(css.shared, '.lens-switcher-btn:hover', 'Header theme controls must retain a visible hover state.');
+has(html.about, 'class="about-bio-lead"', 'About opening paragraph must have a distinct intermediate lead role.');
+need(/\.about-bio-lead\s*\{[^}]*font-size:\s*clamp\(1\.35rem,/is.test(css.shared), 'About opening must use an intermediate header scale.');
+has(css.shared, '--shape-cue-size:', 'Shared shell must define one outline-shape cue token.');
+has(css.shared, '.shape-cue', 'Shared outline-shape cue family must exist.');
+need(/\.shape-cue[^}]*border:[^}]*transform:\s*rotate\(45deg\)/is.test(css.shared), 'Shared cue must be an outlined diamond.');
+need(/:is\(:hover,\s*:focus-visible\)[^{]*\.shape-cue/is.test(css.shared), 'Shared cue must fill on hover/focus.');
+
+need(/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-item-shell\s*\{\s*grid-column:\s*1\s*\/\s*-1;/i.test(css.shared), 'Home related-case-study shell must collapse to the single mobile grid track.');
+need(/\.featured-item-shell\s*\{[^}]*min-width:\s*0;[^}]*width:\s*100%;/is.test(css.shared), 'Home related-case-study shell must not expand its mobile grid track from intrinsic media width.');
+need(/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-list,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\);/i.test(css.shared), 'Home mobile project grid must use a zero-minimum single track.');
+
+// Interface Studies: Ekos desktop/mobile share one contained pair.
+has(html.ui, 'ui-study-grid--ekos-paired', 'Ekos desktop and mobile must use the paired container layout.');
+need(/\.ui-study-grid--ekos-paired\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.65fr\)\s+minmax\(220px,\s*\.75fr\)/is.test(css.ui), 'Ekos desktop/mobile must sit side by side with deliberate hierarchy.');
+need(/\.ui-study-grid--ekos-paired\s*>\s*\.ui-study-view\s*\{[^}]*border-radius:/is.test(css.ui), 'Both Ekos views must receive one container treatment.');
+
+// PCI: larger full-page evidence, fewer wonky crop captions, portrait application leads its row.
+has(html.pci, 'pci-artifact-quartet pci-artifact-quartet--editorial', 'PCI interior examples must use the refined editorial grid.');
+need((html.pci.match(/<figcaption class="pci-caption">/g) || []).length <= 6, 'PCI must reduce redundant artifact captions.');
+has(css.pci, '.pci-artifact-quartet--editorial', 'PCI must own a larger editorial evidence composition.');
+need(/\.pci-artifact--portrait\s*\{[^}]*grid-column:\s*span\s*2/is.test(css.pci), 'PCI portrait application board must receive larger full-page emphasis.');
+
+if (failures.length) {
+  console.error('VERCEL REVIEW FEEDBACK CONTRACT: FAIL');
+  failures.forEach((failure) => console.error(`- ${failure}`));
+  process.exit(1);
+}
+console.log('VERCEL REVIEW FEEDBACK CONTRACT: PASS');

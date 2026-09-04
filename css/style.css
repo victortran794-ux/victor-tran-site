@@ -73,6 +73,8 @@
   --radius-lg: 20px;
   --radius-xl: 32px;
   --radius-pill: 999px;
+  --shape-cue-size: 0.56rem;
+  --shape-cue-border: 1px;
 
   /* Motion scale */
   --duration-fast: 0.2s;
@@ -364,7 +366,7 @@ main#main-content {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
@@ -523,7 +525,7 @@ html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
   gap: 5px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
   line-height: 1;
 }
 
@@ -583,6 +585,7 @@ html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
 .lens-switcher-btn:hover {
   color: var(--text);
   background: var(--bg-2);
+  transform: translateY(-1px);
 }
 
 .lens-switcher-btn.is-active {
@@ -1446,6 +1449,21 @@ html[data-finish-proof] .home-practice-proof strong {
 ══════════════════════════════════════════════ */
 .featured { padding: 0 0 var(--section-y); }
 
+.featured.is-work-arriving {
+  animation: work-arrival-bounce 720ms cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+
+@keyframes work-arrival-bounce {
+  0% { transform: translateY(20px); }
+  56% { transform: translateY(-7px); }
+  78% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured.is-work-arriving { animation: none; }
+}
+
 .featured-heading {
   padding: var(--space-10) var(--route02-x);
   border-bottom: 1px solid var(--border);
@@ -1491,6 +1509,14 @@ html[data-finish-proof] .home-practice-proof strong {
   overflow: hidden;
   transition: transform var(--duration-slow) var(--ease-out),
               opacity var(--duration-reveal) var(--ease-out);
+}
+
+.featured-item-primary {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  color: inherit;
 }
 
 .featured-item-img {
@@ -1618,6 +1644,48 @@ html[data-finish-proof] .home-practice-proof strong {
   background: var(--bg);
 }
 
+.featured-item--has-related {
+  position: relative;
+}
+
+.featured-item-shell {
+  display: block;
+  grid-column: span 12;
+  min-width: 0;
+  width: 100%;
+}
+
+.featured-item--has-related.featured-item--overlay .featured-item-primary {
+  display: block;
+  height: 100%;
+}
+
+.featured-item-related {
+  position: absolute;
+  right: var(--route02-x);
+  bottom: clamp(28px, 4vw, 56px);
+  z-index: 2;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--text) 65%, transparent);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  color: var(--text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
+}
+
+.featured-item-related:hover,
+.featured-item-related:focus-visible {
+  background: var(--text);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
 .featured-galleries-title {
   margin: 0;
   padding: clamp(22px, 3vw, 36px) var(--route02-x);
@@ -1723,6 +1791,22 @@ html[data-finish-proof] .home-practice-proof strong {
 }
 .view-link:hover::after { transform: translateX(6px); }
 
+.shape-cue {
+  width: var(--shape-cue-size);
+  height: var(--shape-cue-size);
+  display: inline-block;
+  flex: none;
+  border: var(--shape-cue-border) solid currentColor;
+  background: transparent;
+  transform: rotate(45deg);
+  transition: background var(--duration-fast), transform var(--duration-fast);
+}
+
+:is(a, button, .featured-item, .project-nav-item):is(:hover, :focus-visible) .shape-cue {
+  background: currentColor;
+  transform: rotate(45deg) scale(1.08);
+}
+
 /* ── Colored surface variants ──
    Paired-token rule: orange surface → blue accent only;
    purple surface → pink accent only.
@@ -1730,27 +1814,41 @@ html[data-finish-proof] .home-practice-proof strong {
    the paired accent is reserved for graphic punctuation
    (the dot, the arrow), never for readable body text. */
 .featured-item--surface-orange .featured-item-content,
-.featured-item--surface-purple .featured-item-content {
+.featured-item--surface-purple .featured-item-content,
+.featured-item--surface-teal .featured-item-content {
   color: #ffffff;
 }
 .featured-item--surface-orange .featured-item-content { background: var(--orange); }
 .featured-item--surface-purple .featured-item-content { background: var(--purple); }
+.featured-item--surface-teal .featured-item-content { background: #087d78; }
+
+/* Gallery defaults carry an extra wrapper selector, so keep the approved
+   project surfaces explicit at the same composition boundary. */
+.featured-galleries .featured-item--gallery.featured-item--surface-orange .featured-item-content { background: var(--orange); color: #ffffff; }
+.featured-galleries .featured-item--gallery.featured-item--surface-purple .featured-item-content { background: var(--purple); color: #ffffff; }
+.featured-galleries .featured-item--gallery.featured-item--surface-teal .featured-item-content { background: #087d78; color: #ffffff; }
 
 .featured-item--surface-orange .featured-item-title,
-.featured-item--surface-purple .featured-item-title { color: #ffffff; }
+.featured-item--surface-purple .featured-item-title,
+.featured-item--surface-teal .featured-item-title { color: #ffffff; }
+
+.featured-galleries .featured-item--gallery:is(.featured-item--surface-orange, .featured-item--surface-purple, .featured-item--surface-teal) .featured-item-title { color: #ffffff; }
 
 .featured-item--surface-orange .featured-item-desc,
-.featured-item--surface-purple .featured-item-desc { color: rgba(255, 255, 255, 0.82); }
+.featured-item--surface-purple .featured-item-desc,
+.featured-item--surface-teal .featured-item-desc { color: rgba(255, 255, 255, 0.82); }
 
 .featured-item--surface-orange .section-label,
-.featured-item--surface-purple .section-label {
+.featured-item--surface-purple .section-label,
+.featured-item--surface-teal .section-label {
   color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 .featured-item--surface-orange .section-label::before,
-.featured-item--surface-purple .section-label::before {
+.featured-item--surface-purple .section-label::before,
+.featured-item--surface-teal .section-label::before {
   content: '';
   width: 8px;
   height: 8px;
@@ -1760,13 +1858,19 @@ html[data-finish-proof] .home-practice-proof strong {
 }
 .featured-item--surface-orange .section-label::before { background: var(--blue); }
 .featured-item--surface-purple .section-label::before { background: var(--pink); }
+.featured-item--surface-teal .section-label::before { background: #ffffff; }
 
 .featured-item--surface-orange .view-link,
-.featured-item--surface-purple .view-link { color: rgba(255, 255, 255, 0.82); }
+.featured-item--surface-purple .view-link,
+.featured-item--surface-teal .view-link { color: rgba(255, 255, 255, 0.82); }
+.featured-galleries .featured-item--gallery:is(.featured-item--surface-orange, .featured-item--surface-purple, .featured-item--surface-teal) :is(.section-label, .view-link) { color: rgba(255, 255, 255, 0.82); }
+.featured-galleries .featured-item--gallery.featured-item--surface-teal :is(.section-label, .view-link) { color: #ffffff; }
 .featured-item--surface-orange .view-link:hover,
-.featured-item--surface-purple .view-link:hover { color: #ffffff; }
+.featured-item--surface-purple .view-link:hover,
+.featured-item--surface-teal .view-link:hover { color: #ffffff; }
 .featured-item--surface-orange .view-link::after { color: var(--blue); }
 .featured-item--surface-purple .view-link::after { color: var(--pink); }
+.featured-item--surface-teal .view-link::after { color: #ffffff; }
 
 /* IBM Cloud uses the approved dark thumbnail as a bounded inverse card.
    The treatment remains local to this one homepage surface in both themes. */
@@ -2464,6 +2568,22 @@ html[data-finish-proof] .page-context + .page-header { padding-top: var(--space-
   color: var(--text-2);
 }
 
+.project-nav-item::before {
+  content: '';
+  width: var(--shape-cue-size);
+  height: var(--shape-cue-size);
+  border: var(--shape-cue-border) solid currentColor;
+  background: transparent;
+  transform: rotate(45deg);
+  transition: background var(--duration-fast), transform var(--duration-fast);
+}
+
+.project-nav-item--next::before { order: 2; }
+.project-nav-item:is(:hover, :focus-visible)::before {
+  background: currentColor;
+  transform: rotate(45deg) scale(1.08);
+}
+
 .project-nav-title {
   font-family: 'DM Serif Display', serif;
   font-size: var(--text-title);
@@ -2561,9 +2681,9 @@ html[data-finish-proof] #about-play {
   margin-bottom: 0;
 }
 
-.about-bio p:first-child {
+.about-bio-lead {
   font-family: 'DM Serif Display', serif;
-  font-size: var(--text-title);
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
   line-height: 1.55;
   color: var(--text);
 }
@@ -3876,11 +3996,12 @@ html[data-theme="dark"] .spotify-frame {
   }
 
   .featured-list,
-  .featured-gallery-list { grid-template-columns: 1fr; }
+  .featured-gallery-list { grid-template-columns: minmax(0, 1fr); }
 
   .featured-item--lead,
   .featured-item--span-7,
-  .featured-item--span-5 { grid-column: 1 / -1; }
+  .featured-item--span-5,
+  .featured-item-shell { grid-column: 1 / -1; }
 
   .featured-galleries {
     margin-top: var(--space-12);
@@ -5301,12 +5422,12 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-bigtype--tran { color: #f
   }
   .home-page--engraved-dna .hero-dna-type > .hero-dna-label { grid-column: 1 / -1; }
   .home-page--engraved-dna .hero-dna-type-playground { margin-top: 0; }
-  .home-page--engraved-dna .hero-dna-label { font-size: 0.62rem; }
+  .home-page--engraved-dna .hero-dna-label { font-size: 0.72rem; }
   .home-page--engraved-dna .hero-dna-note { font-size: 0.54rem; }
   .home-page--engraved-dna .hero-dna-swatch { grid-template-columns: 32px minmax(0, 1fr) auto; min-height: 40px; }
   .home-page--engraved-dna .hero-dna-swatch-dot { width: 32px; height: 32px; }
   .home-page--engraved-dna .hero-dna-swatch-name,
-  .home-page--engraved-dna .hero-dna-swatch-value { font-size: 0.52rem; }
+  .home-page--engraved-dna .hero-dna-swatch-value { font-size: 0.64rem; }
   .home-page--engraved-dna .hero-dna-type-row { min-height: 70px; gap: 14px; }
   .home-page--engraved-dna .hero-dna-type-row strong { min-width: 76px; }
   .home-page--engraved-dna .hero-dna-type-row span { font-size: 0.56rem; }

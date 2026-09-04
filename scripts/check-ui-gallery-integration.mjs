@@ -90,6 +90,11 @@ forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view 
   'Magi screen edge must remain dark-theme-only.');
 
 need(count(html, /data-ui-study-view=/g) === 6, 'UI Gallery must contain two complete Ekos frames and four retained Magi study views.');
+needText(html, 'ui-study-grid--ekos-paired', 'Ekos desktop and mobile must share the paired-study container.');
+need(/\.ui-study-grid--ekos-paired\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.65fr\)\s+minmax\(220px,\s*\.75fr\)/s.test(css),
+  'Ekos paired study must place desktop and mobile side by side on desktop.');
+need(/\.ui-study-grid--ekos-paired\s*>\s*\.ui-study-view\s*\{[^}]*border-radius:[^;}]+;[^}]*overflow:hidden/s.test(css),
+  'Ekos paired views must use one neutral rounded contained treatment.');
 need(count(html, /<img\b[^>]*data-ui-study-image/g) === 6, 'Each retained UI Gallery view must use an authored static image.');
 need(count(html, /<figcaption class="ui-study-caption">/g) === 4,
   'All four retained Magi studies must have concise visible captions.');

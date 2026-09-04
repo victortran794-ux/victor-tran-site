@@ -374,11 +374,11 @@ const wxoCandidateRefs = [...wxoHtml.matchAll(candidatePattern)].map((match) => 
 const documentCandidateRefs = [...documentProcessingHtml.matchAll(candidatePattern)].map((match) => match[1]);
 const candidateRefs = [...wxoCandidateRefs, ...documentCandidateRefs];
 const themeSequenceRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/theme-sequences\/[^"]+)"/gu)].map((match) => match[1]);
-assert.equal(wxoCandidateRefs.length, 4, 'protected wxO umbrella must retain its four guarded public-candidate screens and handoff thumbnail.');
-assert.equal(themeSequenceRefs.length, 12, 'protected wxO umbrella must declare six guarded light/dark image pairs.');
-assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 1, 'protected wxO umbrella must use exactly one guarded opening illustration');
+assert.equal(wxoCandidateRefs.length, 12, 'protected wxO umbrella must retain the audited guarded public-candidate narrative evidence.');
+assert.equal(themeSequenceRefs.length, 12, 'protected wxO umbrella must declare the six guarded Form and Canvas-evolution light/dark pairs.');
+assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 3, 'protected wxO umbrella must declare the guarded light opening illustration for the theme switcher');
 assert.equal(documentCandidateRefs.length, 4, 'protected Document Processing route must use exactly four guarded feature-arc sources');
-assert.equal(new Set(candidateRefs).size, 7, 'the remaining route-aware candidate package must expose seven unique guarded sources.');
+assert.equal(new Set(candidateRefs).size, 14, 'the revised route-aware candidate package must expose fourteen unique guarded sources.');
 const protectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
 for (const asset of new Set([...protectedRefs, ...themeSequenceRefs])) {
   assert.equal(fs.existsSync(asset), true, `guarded media is missing: ${asset}`);
@@ -388,6 +388,6 @@ const publicWxoFiles = fs.readdirSync('images/wxo-canvas', { recursive: true, wi
   .filter((entry) => entry.isFile())
   .map((entry) => entry.name)
   .sort();
-assert.deepEqual(publicWxoFiles, ['wxo-home-thumbnail.png'], 'only the public homepage thumbnail may remain outside the guard');
+assert.deepEqual(publicWxoFiles, ['wxo-home-thumbnail-dark.png', 'wxo-home-thumbnail.png'], 'only the audited public wxO theme thumbnails may remain outside the guard');
 
 console.log('Protected delivery unit and deployable-boundary contracts passed.');

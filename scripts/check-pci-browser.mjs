@@ -141,7 +141,8 @@ try {
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),ratioDrift,framed,controls,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
-          artifacts:artifacts.length,three:document.querySelectorAll('[data-pci-artifact-count="3"]').length,four:document.querySelectorAll('[data-pci-artifact-count="4"]').length,
+          artifacts:artifacts.length,three:document.querySelectorAll('[data-pci-artifact-count="3"]').length,four:document.querySelectorAll('[data-pci-artifact-count="4"]').length,captions:document.querySelectorAll('.pci-caption').length,
+          editorial:[...document.querySelectorAll('.pci-artifact-quartet--editorial')].map((quartet)=>({columns:getComputedStyle(quartet).gridTemplateColumns,portraitColumn:getComputedStyle(quartet.querySelector('.pci-artifact--portrait') || quartet.querySelector('.pci-artifact:nth-child(3)')).gridColumn})),
           hero:Boolean(document.querySelector('[data-pci-artifact="red-hexagon-hero"]')),map:Boolean(document.querySelector('[data-pci-artifact="national-footprint-map"]')),
           openingEvidenceTop:document.querySelector('[data-pci-artifact="red-hexagon-hero"]').getBoundingClientRect().top,
           rejected:[...document.querySelectorAll('img')].map((image)=>image.getAttribute('src')||'').filter((src)=>/pci-(?:handbook-3-ceo-letter|handbook-42-back|banners-5)/.test(src))};
@@ -152,7 +153,8 @@ try {
       assert(state.images === 12 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(!state.ratioDrift.length, `artifact ratio drift at ${viewport.label} ${theme}: ${JSON.stringify(state.ratioDrift)}`);
       assert(!state.framed.length, `faux artifact frame at ${viewport.label} ${theme}: ${JSON.stringify(state.framed)}`);
-      assert(state.shell && !state.gate && state.artifacts === 12 && state.three === 1 && state.four === 1 && state.hero && state.map && !state.rejected.length, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.shell && !state.gate && state.artifacts === 12 && state.three === 1 && state.four === 1 && state.captions <= 6 && state.editorial.length === 2 && state.hero && state.map && !state.rejected.length, `approved page state drifted: ${JSON.stringify(state)}`);
+      if (viewport.width > 800) assert(state.editorial.every((quartet)=>quartet.columns.split(' ').length === 3 && quartet.portraitColumn === 'span 2'), `PCI editorial quartet hierarchy drifted: ${JSON.stringify(state.editorial)}`);
       if (viewport.width === 390) {
         assert(state.openingEvidenceTop <= 720, `PCI opening evidence begins too late at ${state.openingEvidenceTop}px`);
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);

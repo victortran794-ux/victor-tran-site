@@ -218,13 +218,15 @@ try {
     { label: '820', width: 820, height: 900, mobile: false, tablet: true },
     { label: '1280', width: 1280, height: 720, mobile: false },
   ]) {
-    await cdp.call('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile });
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false });
+    await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: viewport.mobile, maxTouchPoints: 1 });
     for (const theme of ['light', 'dark']) {
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
       const topContext = await cdp.evaluate(`({href:location.href,origin:location.origin,isTop:window===top})`);
       assert(topContext.href===`${baseUrl}/pikappapp.html`&&topContext.isTop,`main-frame context drifted before theme setup: ${JSON.stringify(topContext)}`);
       await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
       await cdp.navigate(`${baseUrl}/pikappapp.html`);
+      await cdp.call('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, screenWidth: viewport.width, screenHeight: viewport.height, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false });
       await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
       const state = await cdp.evaluate(`(async()=>{
         const images=[...document.querySelectorAll('.pikapp-page img[src]')];
@@ -257,7 +259,7 @@ try {
         const identitySignatureMarkRect=identitySignatureMark.getBoundingClientRect();
         const identitySpecimenGrid=document.querySelector('.identity-board__component-grid');
         const identityPalette=document.querySelector('.identity-palette');
-        const identityRects=['.identity-board','.identity-board__type-grid','.identity-palette','.identity-board__card--pattern'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
+        const identityRects=['.identity-board','.identity-board__type-grid','.identity-palette','.identity-board__component-grid'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
         const finaleRects=['.coda__head','.coda__triptych','.coda__boundary','.project-nav-item--prev','.project-nav-item--next'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
@@ -274,10 +276,10 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===24&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===23&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
       assert(state.principles===0&&state.codaScreens===9&&state.phoneSlides===6&&state.explorationStudyCount===0&&state.explorationScreenCount===0&&!state.explorationBoundary&&!state.explorationFlow,'approved source-first evidence counts drifted');
-      assert(state.identity.paletteItems===5&&state.identity.specimens===8&&state.identity.icons===4&&state.identity.markLockups===1&&state.identity.handoffs===0,`identity-board inventory drifted: ${JSON.stringify(state.identity)}`);
+      assert(state.identity.paletteItems===5&&state.identity.specimens===7&&state.identity.icons===4&&state.identity.markLockups===0&&state.identity.handoffs===0,`identity-board inventory drifted: ${JSON.stringify(state.identity)}`);
       assert(state.identity.signatureMark.backgroundColor==='rgb(0, 111, 158)'&&state.identity.signatureMark.padding==='8px'&&state.identity.signatureMark.borderRadius==='14px'&&state.identity.signatureMark.boxSizing==='border-box'&&state.identity.signatureMark.width===72&&state.identity.signatureMark.height===72,`header Star Shield lost its accessible intended field: ${JSON.stringify(state.identity.signatureMark)}`);
       assert(state.identity.rects.every((rect)=>rect.width>0&&rect.height>0&&rect.left>=-1&&rect.right<=viewport.width+1),`identity-board escaped the viewport: ${JSON.stringify(state.identity.rects)}`);
       const identityColumnCount=(value)=>value.split(' ').filter(Boolean).length;
@@ -289,21 +291,16 @@ try {
       assert(state.remasterScreens.length===9&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 App launch|02 Welcome|03 Member view|04 Today|05 Responsibility|06 Task detail|07 Completion|08 Milestones|09 Chapter',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.personaLabels.join('|')==='Associate member|Chapter secretary|Graduating senior',`member journey lost its role-based persona labels: ${JSON.stringify(state.personaLabels)}`);
       assert(state.phoneSlideRadii.length===6&&state.phoneSlideRadii.every((radius)=>radius==='26px'),`V1 phone screens lost their rounded treatment: ${JSON.stringify(state.phoneSlideRadii)}`);
-      assert(state.remasterScreens.every((screen)=>screen.frameBorderRadius==='24px'&&screen.frameOverflow==='hidden'&&screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete rounded 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
+      assert(state.remasterScreens.every((screen)=>screen.frameBorderRadius==='0px'&&screen.frameOverflow==='visible'&&screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete uncropped 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.explorationScreens.length===0,'AI-assisted exploration screens returned to the public case-study sequence');
       assert(state.explorationStudies.length===0,`redundant broad exploration studies returned: ${JSON.stringify(state.explorationStudies)}`);
       const expectedV2StepColor=theme==='dark'?'rgb(173, 197, 250)':'rgb(31, 67, 143)';
       assert(state.v2HistoryScreens.length===3&&state.v2HistoryScreens.map((screen)=>screen.step).join('|')==='01 Orientation|02 Responsibility detail|03 Completion'&&state.v2HistoryScreens.every((screen)=>screen.loaded&&screen.stepColor===expectedV2StepColor&&screen.borderRadius==='24px'&&screen.overflow==='hidden'&&Math.abs(screen.aspect-(390/844))<0.002),`static V2 history drifted: ${JSON.stringify(state.v2HistoryScreens)}`);
       if (viewport.mobile||viewport.compact) {
         assert(state.finaleRects.every((rect)=>rect.left>=24-1&&rect.right<=viewport.width-24+1),`compact finale gutter escaped 24px boundary: ${JSON.stringify(state.finaleRects)}`);
-        assert(state.triptych.display==='grid'&&state.triptych.columns.split(' ').length===9&&state.triptych.overflowX==='auto'&&state.triptych.scrollWidth>state.triptych.clientWidth&&state.triptych.tabindex==='0',`compact remaster must be a focusable nine-screen horizontal rail: ${JSON.stringify(state.triptych)}`);
-        const widths=state.remasterScreens.map((screen)=>screen.image.width); const gaps=state.remasterScreens.map((screen)=>screen.caption.top-screen.image.bottom);
-        assert(Math.max(...widths)-Math.min(...widths)<=1&&Math.max(...gaps)-Math.min(...gaps)<=1&&state.remasterScreens[0].image.left>=24-1&&state.remasterScreens[0].image.right<=viewport.width-24+1,`compact remaster frames or captions lost equal alignment: ${JSON.stringify(state.remasterScreens)}`);
-        await cdp.evaluate(`document.querySelector('.coda__triptych').focus()`);
-        await cdp.key('ArrowRight','ArrowRight',39);
-        await delay(80);
-        const codaKeyboard=await cdp.evaluate(`(()=>{const grid=document.querySelector('.coda__triptych');const style=getComputedStyle(grid);return {focused:document.activeElement===grid,scrollLeft:grid.scrollLeft,outlineStyle:style.outlineStyle,outlineWidth:style.outlineWidth}})()`);
-        assert(codaKeyboard.focused&&codaKeyboard.scrollLeft>0&&codaKeyboard.outlineStyle==='solid'&&codaKeyboard.outlineWidth==='3px',`compact final sequence keyboard affordance drifted: ${JSON.stringify(codaKeyboard)}`);
+        assert(state.triptych.display==='grid'&&state.triptych.columns.split(' ').length===2&&state.triptych.overflowX==='visible'&&state.triptych.scrollWidth===state.triptych.clientWidth,`compact remaster must be a complete two-up grid without clipping: ${JSON.stringify(state.triptych)}`);
+        const widths=state.remasterScreens.map((screen)=>screen.image.width);
+        assert(Math.max(...widths)-Math.min(...widths)<=1&&state.remasterScreens.every((screen)=>screen.image.left>=24-1&&screen.image.right<=viewport.width-24+1),`compact remaster screens escaped their contained two-up layout: ${JSON.stringify(state.remasterScreens)}`);
         await cdp.evaluate(`document.querySelector('.v2-history__grid').focus()`);
         await cdp.key('ArrowRight','ArrowRight',39);
         await delay(80);
@@ -314,12 +311,17 @@ try {
         const v2Widths=state.v2HistoryScreens.map((screen)=>screen.width); const v2Heights=state.v2HistoryScreens.map((screen)=>screen.height);
         assert(Math.max(...v2Widths)-Math.min(...v2Widths)<=1&&Math.max(...v2Heights)-Math.min(...v2Heights)<=1,`desktop static V2 frames lost equal geometry: ${JSON.stringify(state.v2HistoryScreens)}`);
         const widths=state.remasterScreens.map((screen)=>screen.image.width); const heights=state.remasterScreens.map((screen)=>screen.image.height);
-        const rows=[0,3,6].map((start)=>state.remasterScreens.slice(start,start+3));
+        const rows=[0,4,8].map((start)=>state.remasterScreens.slice(start,start+4));
         const rowsAligned=rows.every((row)=>Math.max(...row.map((screen)=>screen.image.top))-Math.min(...row.map((screen)=>screen.image.top))<=1&&Math.max(...row.map((screen)=>screen.caption.top))-Math.min(...row.map((screen)=>screen.caption.top))<=1);
         assert(state.triptych.display==='grid'&&Math.max(...widths)-Math.min(...widths)<=1&&Math.max(...heights)-Math.min(...heights)<=1&&rowsAligned,`desktop/tablet remaster frames must share geometry and per-row caption baselines: ${JSON.stringify(state.remasterScreens)}`);
         const gridWidths=state.triptychRhythm.map((grid)=>grid.width); const gridLefts=state.triptychRhythm.map((grid)=>grid.left); const gridRights=state.triptychRhythm.map((grid)=>grid.right);
-        const alignedCenters=[0,1,2].every((index)=>Math.max(...state.triptychRhythm.map((grid)=>grid.centers[index]))-Math.min(...state.triptychRhythm.map((grid)=>grid.centers[index]))<=1);
-        assert(Math.max(...gridWidths)-Math.min(...gridWidths)<=1&&Math.max(...gridLefts)-Math.min(...gridLefts)<=1&&Math.max(...gridRights)-Math.min(...gridRights)<=1&&alignedCenters,`desktop three-part story grids lost their shared column rhythm: ${JSON.stringify(state.triptychRhythm)}`);
+        const [memberGrid,historyGrid,finalGrid]=state.triptychRhythm;
+        if (viewport.tablet) {
+          assert(Math.max(...gridWidths)-Math.min(...gridWidths)<=1&&Math.max(...gridLefts)-Math.min(...gridLefts)<=1&&Math.max(...gridRights)-Math.min(...gridRights)<=1&&state.triptych.columns.split(' ').length===4,`tablet evidence grids must share one contained rail and retain four columns: ${JSON.stringify(state.triptychRhythm)}`);
+        } else {
+          const leftOverhang=memberGrid.left-finalGrid.left; const rightOverhang=finalGrid.right-memberGrid.right;
+          assert(Math.abs(memberGrid.width-historyGrid.width)<=1&&Math.abs(memberGrid.left-historyGrid.left)<=1&&Math.abs(memberGrid.right-historyGrid.right)<=1&&finalGrid.width>memberGrid.width&&Math.abs(leftOverhang-rightOverhang)<=1&&leftOverhang>0&&leftOverhang<=32&&state.triptych.columns.split(' ').length===4,`desktop evidence grids lost their aligned support rails or bounded symmetric four-across breakout: ${JSON.stringify(state.triptychRhythm)}`);
+        }
         if(viewport.width>=1000) assert(Math.max(...v2Widths)<=Math.min(...widths)*0.84,`historical V2 screens must remain visibly subordinate to the final remaster: ${JSON.stringify({v2Widths,widths})}`);
       }
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
@@ -336,17 +338,15 @@ try {
         await cdp.screenshot('pikapp-390-light-opening.png');
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-members.png');
-        await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-390-light-identity-opening.png');
+        await cdp.evaluate(`document.getElementById('chapter-4').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-final-remaster-opening.png');
         await cdp.evaluate(`document.querySelector('.identity-palette').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-identity-palette.png');
         await cdp.evaluate(`document.querySelector('.identity-board__component-grid').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-identity-components.png');
-        await cdp.evaluate(`document.querySelector('.identity-board__card--pattern').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-390-light-identity-mark-pattern.png');
         await cdp.evaluate(`document.querySelector('.v2-history').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-390-light-v2-history.png');
-        await cdp.evaluate(`document.getElementById('chapter-5').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.getElementById('chapter-4').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__triptych').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-remaster-sequence.png');
@@ -358,17 +358,15 @@ try {
       if (viewport.label==='1280'&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-members.png');
-        await cdp.evaluate(`document.getElementById('chapter-3').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-1280-dark-identity-opening.png');
+        await cdp.evaluate(`document.getElementById('chapter-4').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-final-remaster-opening.png');
         await cdp.evaluate(`document.querySelector('.identity-palette').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-identity-palette.png');
         await cdp.evaluate(`document.querySelector('.identity-board__component-grid').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-identity-components.png');
-        await cdp.evaluate(`document.querySelector('.identity-board__card--pattern').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-1280-dark-identity-mark-pattern.png');
         await cdp.evaluate(`document.querySelector('.v2-history').scrollIntoView({block:'center',behavior:'instant'})`); await delay(2200);
         await cdp.screenshot('pikapp-1280-dark-v2-history.png');
-        await cdp.evaluate(`document.getElementById('chapter-5').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
+        await cdp.evaluate(`document.getElementById('chapter-4').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-coda.png');
         await cdp.evaluate(`document.querySelector('.coda__triptych').scrollIntoView({block:'start',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-remaster-sequence.png');

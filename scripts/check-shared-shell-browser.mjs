@@ -149,6 +149,16 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function waitForViewport(cdp, width, height) {
+  let actual = null;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    actual = await cdp.evaluate(`({inner:[innerWidth,innerHeight],client:[document.documentElement.clientWidth,document.documentElement.clientHeight],visual:[visualViewport?.width,visualViewport?.height]})`);
+    if ((actual.inner[0] === width && actual.inner[1] === height) || (actual.client[0] === width && actual.client[1] === height)) return;
+    await delay(50);
+  }
+  throw new Error(`viewport did not settle at ${width}x${height}: ${JSON.stringify(actual)}`);
+}
+
 const geometryExpression = `(() => {
   const selectors = [
     '.nav-logo', '.nav-dropdown-toggle', '.nav-links > li > a',
@@ -189,12 +199,17 @@ try {
   await cdp.call('Network.enable');
 
   await cdp.call('Emulation.setDeviceMetricsOverride', {
-    width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
+    width: 390, height: 844, deviceScaleFactor: 1, mobile: false,
   });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
   await cdp.navigate(`${baseUrl}/index.html`);
+  await cdp.call('Emulation.setDeviceMetricsOverride', {
+    width: 390, height: 844, screenWidth: 390, screenHeight: 844, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false,
+  });
+  await waitForViewport(cdp, 390, 844);
   await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click()`);
   await delay(100);
 
@@ -272,6 +287,7 @@ try {
   await cdp.call('Emulation.setDeviceMetricsOverride', {
     width: 1280, height: 720, deviceScaleFactor: 1, mobile: false,
   });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: false });
   await cdp.navigate(`${baseUrl}/abilityexperience.html`);
   const desktop = await cdp.evaluate(`({
     width: innerWidth,

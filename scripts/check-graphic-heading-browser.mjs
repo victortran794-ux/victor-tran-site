@@ -37,11 +37,11 @@ try {
   await call('Page.navigate', { url: `${baseUrl}/graphicgallery.html` });
   await evaluate('document.fonts.ready.then(() => true)');
   await wait(100);
-  const state = await evaluate(`(() => { const heading = document.querySelector('#graphic-archive-title'); const rect = heading.getBoundingClientRect(); return { text: heading.textContent.trim(), rootOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, headingRight: rect.right, viewport: innerWidth, fontSize: getComputedStyle(heading).fontSize }; })()`);
+  const state = await evaluate(`(() => { const heading = document.querySelector('#graphic-archive-title'); const rect = heading.getBoundingClientRect(); const style = getComputedStyle(heading); return { text: heading.textContent.trim(), rootOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, headingRight: rect.right, viewport: innerWidth, fontSize: style.fontSize, fontFamily: style.fontFamily }; })()`);
   if (state.text !== 'Graphics. Design. Print.') throw new Error(`hero heading drifted: ${JSON.stringify(state)}`);
   if (Number.parseFloat(state.fontSize) > 75) throw new Error(`390px heading typography is too large for the exact title: ${JSON.stringify(state)}`);
   if (state.rootOverflow !== 0 || state.headingRight > state.viewport - 20) throw new Error(`390px heading escapes its 20px content rail: ${JSON.stringify(state)}`);
-  console.log(`Graphic heading browser contract passed: 390px overflow=0 fontSize=${state.fontSize}.`);
+  console.log(`Graphic heading browser contract passed: 390px overflow=0 fontSize=${state.fontSize} headingRight=${state.headingRight} fontFamily=${state.fontFamily}.`);
 } finally {
   try { socket?.close(); } catch {}
   browser.kill('SIGTERM');

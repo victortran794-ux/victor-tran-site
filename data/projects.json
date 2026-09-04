@@ -30,7 +30,11 @@
       "sitemap": false,
       "homepageVariant": "lead",
       "homepageOverlay": true,
-      "homepageLock": true
+      "homepageLock": true,
+      "homepageRelated": {
+        "url": "document-processing.html?lock=1",
+        "label": "View Case Study 2"
+      }
     },
     {
       "slug": "document-processing",
@@ -304,7 +308,7 @@
       "nav": true,
       "homepage": true,
       "wide": false,
-      "surface": "purple",
+      "surface": "teal",
       "chapter": "03",
       "chapterTitle": "And some galleries.",
       "description": "Static screen studies focused on interface craft and visual refinement.",

@@ -38,8 +38,8 @@ expect(packageJson.scripts?.['check:engraved-dna-hero'] === 'node scripts/check-
   'package scripts must expose the canonical Engraved DNA, ambient-baseline, and browser contracts');
 expect(preflight.includes('run_required "Engraved Design DNA hero contract" npm run check:engraved-dna-hero')
   && preflight.includes('run_required "Selected ambient field baseline contract" npm run check:ambient-field-selection')
-  && preflight.includes('run_required "Engraved Design DNA hero browser contract" npm run check:engraved-dna-hero-browser'),
-  'preflight must run the canonical Engraved DNA, ambient-baseline, and browser contracts');
+  && preflight.includes('SITE_URL="$site_url" DNA_HERO_EVIDENCE_DIR="$(mktemp -d)" npm run check:engraved-dna-hero-browser'),
+  'preflight must run the canonical Engraved DNA and ambient-baseline contracts, then run the browser contract against its owned server');
 expect(workflow.includes('npm run check:engraved-dna-hero')
   && workflow.includes('npm run check:ambient-field-selection')
   && workflow.includes('npm run check:engraved-dna-hero-browser'),
@@ -166,7 +166,7 @@ expect(/\.home-page--engraved-dna\s+\.hero-copy\s*\{[^}]*height:\s*var\(--portra
   'portrait and responsive copy must share one deterministic square span');
 expect(/\.home-page--engraved-dna\s+\.hero-dna-panel\.is-active\s+\.hero-dna-group\s*\{[^}]*opacity:\s*1/i.test(css),
   'expanded DNA content must render at normal opacity');
-expect(/@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-label\s*\{[^}]*font-size:\s*0\.62rem/i.test(css)
+expect(/@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-label\s*\{[^}]*font-size:\s*0\.72rem/i.test(css)
   && /@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-swatch-dot\s*\{[^}]*width:\s*32px[^}]*height:\s*32px/i.test(css)
   && /@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-type-sample\s*\{[^}]*font-size:\s*3\.4rem/i.test(css),
   'desktop DNA specimens and labels must be enlarged for easier reading');

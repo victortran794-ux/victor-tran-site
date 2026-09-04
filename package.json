@@ -65,7 +65,9 @@
     "check:ui-gallery-browser": "node scripts/check-visual-archives-browser.mjs ui",
     "check:gallery-followups": "node scripts/check-gallery-followups.mjs",
     "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs",
-    "check:global-theme-control": "node scripts/check-global-theme-control.mjs"
+    "check:global-theme-control": "node scripts/check-global-theme-control.mjs",
+    "test:vercel-review-feedback-wiring": "node scripts/test-vercel-review-feedback-wiring.mjs",
+    "check:vercel-review-feedback": "node scripts/check-vercel-review-feedback.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.5"
