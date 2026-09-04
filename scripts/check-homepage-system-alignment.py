@@ -108,8 +108,9 @@ expected = {
     "pikappapp": ("Pi Kapp App", "pikappapp.html", "A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity."),
     "artillustration": ("Art & Illustration", "artillustration.html", "Standalone digital and traditional work, including posters, paintings, and personal series."),
     "graphicgallery": ("Graphic Design", "graphicgallery.html", "Standalone identity, print, illustration, and event graphics."),
+    "uigallery": ("Interface Studies", "uigallery.html", "Static screen studies focused on interface craft and visual refinement."),
 }
-need(set(expected).issubset(by_slug), "all ten portfolio projects must remain in the manifest")
+need(set(expected).issubset(by_slug), "all eleven portfolio projects must remain in the manifest")
 for slug, (title, url, description) in expected.items():
     project = by_slug.get(slug, {})
     need(project.get("title") == title, f"project title changed: {slug}")
@@ -140,8 +141,9 @@ expected_variants = {
     "abilityexperience": "span-7",
     "salmagazine": "span-7",
     "pikappapp": "span-5",
-    "artillustration": "span-7",
-    "graphicgallery": "span-5",
+    "artillustration": "span-4",
+    "graphicgallery": "span-4",
+    "uigallery": "span-4",
 }
 for slug, variant in expected_variants.items():
     need(by_slug.get(slug, {}).get("homepageVariant") == variant,
@@ -156,11 +158,11 @@ need(index.count('class="featured-chapter') == 0,
      "homepage chapter markers must remain removed")
 need(index.count("featured-item--overlay") == 1,
      "wxO must remain the single homepage overlay variant")
-for variant in ("lead", "span-7", "span-5"):
+for variant in ("lead", "span-7", "span-5", "span-4"):
     need(f"featured-item--{variant}" in index, f"generated cards missing variant class: {variant}")
 need("grid-template-columns: repeat(12" in css,
      "homepage project layout needs a twelve-column desktop grid")
-for span in ("span 12", "span 7", "span 5"):
+for span in ("span 12", "span 7", "span 5", "span 4"):
     need(f"grid-column: {span}" in css, f"homepage project CSS missing {span}")
 need(re.search(r"@media\s*\(max-width:\s*720px\)[\s\S]*?featured-item--span-7[\s\S]*?grid-column:\s*1\s*/\s*-1", css),
      "narrow homepage cards must collapse to one column")
