@@ -141,7 +141,7 @@ for (const value of [
   'One system for automation, specialized work, and human judgment.',
 ]) requireText(wxo, value, `Canonical wxO candidate missing approved marker: ${value}`);
 
-for (const file of ['15-node-key-states-dark.png', '16-node-size-variants-dark.png', '17-flow-control-elements-dark.png', '18-flow-control-containers-dark.png', '19-application-example-dark.png', '20-illustration-vignettes-dark.png', '21-workflow-anchors-dark.png']) requireText(wxo, file, `Canonical wxO narrative missing audited dark evidence ${file}.`);
+for (const file of ['15-node-key-states-light.png', '15-node-key-states-dark.png', '16-node-size-variants-light.png', '16-node-size-variants-dark.png', '17-flow-control-elements-light.png', '17-flow-control-elements-dark.png', '18-flow-control-containers-light.png', '18-flow-control-containers-dark.png', '19-application-example-light.png', '19-application-example-dark.png', '20-illustration-vignettes-dark.png', '21-workflow-anchors-light.png', '21-workflow-anchors-dark.png']) requireText(wxo, file, `Canonical wxO narrative missing audited theme evidence ${file}.`);
 forbid(wxo, /<video\b|<iframe\b/i, 'Canonical wxO candidate must remain a static evidence narrative.');
 forbid(mainHtml(wxo), /target="_blank"|Open full board/i, 'Canonical evidence must use the in-window carousel instead of new tabs.');
 requireText(wxo, 'data-wxo-gallery', 'Canonical wxO candidate must provide the in-window evidence carousel.');
@@ -152,17 +152,17 @@ forbid(wxo, /wxo-workflows-vico2\.css|wxo-workflows-vico2\.js/i, 'Canonical wxO 
 forbid(wxo, /V2 system evolution|V2 authored exploration|Visual system in motion|prototype sequence|Canvas Future/i, 'Canonical wxO candidate must not expose retired V2, motion-prototype, or Canvas Future framing.');
 forbid(wxo, /accuracy improvement|efficiency improvement|adoption|customer impact|measured (?:improvement|increase|decrease|impact|result)/i, 'Canonical wxO candidate must not add unsupported outcome claims.');
 forbid(mainHtml(wxo), /—/, 'Canonical wxO candidate primary copy must not use em dashes.');
-if (count(wxo, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 15) fail('Canonical wxO umbrella must contain fifteen evidence units across the preserved evolution and revised supporting narrative.');
+if (count(wxo, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 14) fail('Canonical wxO umbrella must contain fourteen evidence units after retiring the old enterprise component board.');
 if (count(wxo, /class="[^"]*\bpilot-activity-frame\b[^"]*"/gi) !== 3) fail('Canonical wxO candidate must contain three User Activity frames.');
 if (count(wxo, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) fail('Canonical wxO candidate must preserve three Canvas evolution states.');
 requireText(wxo, 'pilot-flow-evidence', 'Canonical wxO Canvas evolution must use the reviewed narrative flow evidence group.');
-if (count(mainHtml(wxo), /<img\b/gi) !== 17) fail('Canonical wxO umbrella must contain fifteen carousel images, one theme-aware opening illustration, and one handoff thumbnail inside main.');
+if (count(mainHtml(wxo), /<img\b/gi) !== 16) fail('Canonical wxO umbrella must contain fourteen carousel images, one theme-aware opening illustration, and one handoff thumbnail inside main.');
 
 const candidateManifestPath = 'data/wxo-canvas-public-provenance.json';
 const candidateFiles = [
   '01-released-canvas.png', '02-component-showcase.png', '03-user-activity-workflow.png', '04-user-activity-configuration.png', '05-user-activity-summary.png', '06-illustration-vignettes.png', '09-document-classify.png', '10-document-extract.png', '11-document-review.png', '12-document-evaluate.png', '07-agent-orchestration-light.png', '14-workflow-detail.png', '13a-node-states.png', '08-flow-control-elements-light.png', '13b-flow-types.png', '13c-connector-mechanics.png', '13-floating-studies.png',
   'current-workflow-light.png', 'current-workflow-dark.png', 'v2-workflow-light.png', 'v2-workflow-dark.png', 'v2-agent-flow-light.png', 'v2-agent-flow-dark.png', 'form-workflow-light.png', 'form-workflow-dark.png', 'form-configuration-light.png', 'form-configuration-dark.png', 'form-summary-light.png', 'form-summary-dark.png',
-  '15-node-key-states-dark.png', '16-node-size-variants-dark.png', '17-flow-control-elements-dark.png', '18-flow-control-containers-dark.png', '19-application-example-dark.png', '20-illustration-vignettes-dark.png', '21-workflow-anchors-dark.png', 'wxo-home-thumbnail-dark.png',
+  '15-node-key-states-light.png', '15-node-key-states-dark.png', '16-node-size-variants-light.png', '16-node-size-variants-dark.png', '17-flow-control-elements-light.png', '17-flow-control-elements-dark.png', '18-flow-control-containers-light.png', '18-flow-control-containers-dark.png', '19-application-example-light.png', '19-application-example-dark.png', '20-illustration-vignettes-dark.png', '21-workflow-anchors-light.png', '21-workflow-anchors-dark.png', 'wxo-home-thumbnail-dark.png',
 ];
 if (!fs.existsSync(candidateManifestPath)) fail('Repository-only canonical wxO candidate provenance must exist.');
 else {
@@ -171,7 +171,7 @@ else {
     fail('Canonical wxO candidate provenance must record branch-commit approval for the bounded protected Preview without claiming public publication or production approval.');
   }
   if (JSON.stringify((candidateManifest.assets ?? []).map((entry) => entry.file)) !== JSON.stringify(candidateFiles)) {
-    fail('Canonical wxO candidate provenance must retain legacy derivatives and list the audited Vercel-feedback dark exports.');
+    fail('Canonical wxO candidate provenance must retain legacy derivatives and list the audited paired exploration exports.');
   }
   for (const entry of candidateManifest.assets ?? []) {
     const assetPath = entry.namespace === 'theme-sequences'
@@ -222,37 +222,29 @@ if (count(mainHtml(doc), /data-wxo-evidence/gi) !== 4) fail('Standalone Document
 
 forbid(doc, /Evidence boundary:/i, 'Document Processing must not repeat evidence-boundary callouts.');
 forbid(doc, /Protected private candidate|local sanitized assets|source-backed|no shipment claim|no public implementation authorized|Current Figma source\. Fictional prototype data shown|(?:alt|aria-label)="Sanitized/i, 'Document Processing viewer-facing copy must not expose internal release-gate language.');
-requireText(doc, '<video autoplay muted loop playsinline', 'Document Processing journey must autoplay silently and loop.');
-requireText(doc, 'data-doc-motion-toggle', 'Document Processing journey must provide a pause control.');
 requireText(doc, '<script src="js/wxo-workflows-vico2.js" defer></script>', 'Document Processing must load the scoped workflow behavior.');
-forbid(doc, /<video[^>]*\bcontrols\b/i, 'Document Processing journey must not require manual playback controls.');
+forbid(doc, /doc-motion-section|doc-pro-(?:poster|evaluation-loop)-sanitized/i, 'Document Processing must retire the identity-neutralized motion derivative from active markup.');
 if (count(doc, /class="doc-story-grid/gi) !== 0) fail('The redundant standalone Document Processing storyboard must be removed.');
 
-const classifyDisplayAsset = 'protected/wxo/assets/document-processing/current/classify-suggested-display-sanitized.png';
-requireText(doc, `<img src="${classifyDisplayAsset}" width="984" height="624"`, 'Classify must use the 984×624 edge-trimmed display derivative.');
-if (!fs.existsSync(classifyDisplayAsset)) fail('Classify edge-trimmed display derivative must exist beside the approved source asset.');
-else if (JSON.stringify(pngDimensions(classifyDisplayAsset)) !== JSON.stringify([984, 624])) fail('Classify display derivative must remove only the confirmed 20/10/20/30px exterior matte.');
-const classifyDisplayProvenance = documentCurrentProvenance.assets?.find((entry) => entry.file === classifyDisplayAsset);
-if (!classifyDisplayProvenance || classifyDisplayProvenance.source !== 'protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png' || classifyDisplayProvenance.sourceSha256 !== '5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933' || JSON.stringify(classifyDisplayProvenance.crop) !== JSON.stringify([20, 10, 1004, 634]) || JSON.stringify(classifyDisplayProvenance.dimensions) !== JSON.stringify([984, 624]) || !classifyDisplayProvenance.outputSha256 || (fs.existsSync(classifyDisplayAsset) && sha256(classifyDisplayAsset) !== classifyDisplayProvenance.outputSha256)) fail('Classify display provenance must record the source-preserving exterior-matte crop.');
-
 for (const asset of [
-  'doc-pro-evaluation-loop-sanitized.webm',
-  'doc-pro-evaluation-loop-sanitized.mp4',
-  'doc-pro-poster-sanitized.png',
-  'classify-suggested-display-sanitized.png',
-  'extract-field-sanitized.png',
-  'extract-error-sanitized.png',
-  'review-table-sanitized.png',
-  'review-verified-sanitized.png',
-  'evaluate-rerun-sanitized.png',
-  'evaluate-test-set-sanitized.png',
-  'evaluate-results-sanitized.png',
-  'evaluate-indicators-sanitized.png',
-]) requireText(doc, asset, `Document Processing missing approved sanitized evidence ${asset}`);
+  'classify-setup.png',
+  'extract-field.png',
+  'review-table.png',
+  'review-verified.png',
+  'evaluate-rerun.png',
+  'evaluate-test-set.png',
+  'evaluate-results.png',
+  'evaluate-indicators.png',
+]) requireText(doc, asset, `Document Processing missing unaltered owner-export evidence ${asset}`);
 if (count(doc, /class="doc-current-stage"/gi) !== 4) fail('Document Processing must show four current evidence stages.');
-if (count(doc, /class="doc-current-frame"/gi) !== 9) fail('Document Processing must show nine curated current Figma frames.');
+if (count(doc, /class="doc-current-frame"/gi) !== 8) fail('Document Processing must show eight unaltered owner-export frames.');
 if (count(doc, /class="doc-current-stage-head"/gi) !== 4) fail('Standalone current stage headers must stay compact and text-light.');
 requireText(doc, 'class="doc-current-evaluator-grid"', 'The standalone Evaluate finale must use a distinct four-screen grid.');
+if (documentCurrentProvenance.assets?.length !== 8) fail('Document Processing active provenance must contain exactly eight owner-export records.');
+for (const entry of documentCurrentProvenance.assets || []) {
+  if (entry.route !== 'document-processing.html' || entry.sourceRecordType !== 'owner-supplied-export-filename-and-sha256' || entry.sourceSha256 !== entry.outputSha256 || !entry.operations?.includes('None; repository asset is byte-identical to the owner export')) fail(`Document Processing active provenance must record an unaltered owner export: ${entry.file}`);
+  else if (!fs.existsSync(entry.file) || sha256(entry.file) !== entry.outputSha256 || JSON.stringify(pngDimensions(entry.file)) !== JSON.stringify(entry.dimensions)) fail(`Document Processing active owner export changed: ${entry.file}`);
+}
 forbid(doc, /doc-ending|doc-decision-row|doc-contribution-row|The screens carry the story|02 \/ Decisions \+ contribution/i, 'Redundant website-only decisions and contribution chapter must be removed.');
 forbid(doc, /pilot-step-arrow--long/, 'The final Document Processing arrow must use the same contained geometry as the earlier arrows.');
 forbid(doc, /doc-loop-title|class="doc-loop|class="doc-decision-grid|class="workflow-role-grid"|classify → extract → review → evaluate → improve/i, 'The redundant trust-loop and card-heavy ending must be removed from Document Processing.');
@@ -276,6 +268,14 @@ const expectedDocumentAssets = {
   'protected/wxo/assets/document-processing/current/evaluate-rerun-sanitized.png': 'bbbf63b69e6ac4b31f9b1fe039b153c108672f46c71d0c8ba1ee01d3f772b283',
   'protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png': '7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403',
   'protected/wxo/assets/document-processing/current/evaluate-indicators-sanitized.png': 'bfd12f4b657c364dc03f7b88f58f695f816c16e46fc953f34b4c4e4fb2db66e5',
+  'protected/wxo/assets/document-processing/current/classify-setup.png': 'c04f64dcc9f1cdaef88f63418ecce74474ece789d7856294ad18ec0e451611aa',
+  'protected/wxo/assets/document-processing/current/extract-field.png': 'c3316636665ae2fd842fafa0a30c73fe558aedf728b7ce0e5ab8e354dd9c0adb',
+  'protected/wxo/assets/document-processing/current/review-table.png': '6c8aaecb2c99e62365f369ee3202849658f11be871c93fb1342b357ff28f93e1',
+  'protected/wxo/assets/document-processing/current/review-verified.png': '31424dcd26a0557aaba70c6b9ada575fdffb93d0e463391ad54fb4ffbe094827',
+  'protected/wxo/assets/document-processing/current/evaluate-test-set.png': '104988f7a0d5b29733564fbe51ae9b28d2625fa6ec522dd3b41a498b20c53384',
+  'protected/wxo/assets/document-processing/current/evaluate-rerun.png': '7ea69cc5082841f07541e68f99912fa78f295602877e06ebfe6df5c6257291ac',
+  'protected/wxo/assets/document-processing/current/evaluate-results.png': '51c06c4e4411ae699d0430432c0804dc02e29121114c949dceeab6e4ae9fb826',
+  'protected/wxo/assets/document-processing/current/evaluate-indicators.png': '860889f1c73187cd407b9083eac9ceaeebbca4b13972a0b37abb1876fa23b6da',
 };
 for (const [asset, expected] of Object.entries(expectedDocumentAssets)) {
   if (!fs.existsSync(asset)) fail(`Missing approved Document Processing evidence ${asset}.`);

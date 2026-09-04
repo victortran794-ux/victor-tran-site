@@ -154,7 +154,6 @@ Cover view selected.
 - Owner-exported final Pi Kapp App expanded task screen: images/pikapp-case-study/v2-final-task-expand.png
 - Owner-exported final Pi Kapp App all-caught-up state: images/pikapp-case-study/v2-final-all-caught-up-light.png
 - Owner-exported final Pi Kapp App milestones detail screen: images/pikapp-case-study/v2-final-milestones-detail.png
-- Owner-exported final Pi Kapp App chapter screen: images/pikapp-case-study/v2-final-chapter.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Complete Creighton University opener from the Expansion Portfolio: images/pikapp-case-study/expansion-creighton-opener.webp
 - Complete expansion timeline page from the Expansion Portfolio: images/pikapp-case-study/expansion-timeline.webp

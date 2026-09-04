@@ -67,7 +67,9 @@
     "check:theme-continuity-proof": "node scripts/check-theme-continuity-proof.mjs",
     "check:global-theme-control": "node scripts/check-global-theme-control.mjs",
     "test:vercel-review-feedback-wiring": "node scripts/test-vercel-review-feedback-wiring.mjs",
-    "check:vercel-review-feedback": "node scripts/check-vercel-review-feedback.mjs"
+    "check:vercel-review-feedback": "node scripts/check-vercel-review-feedback.mjs",
+    "test:manual-review-followups-wiring": "node scripts/test-manual-review-followups-wiring.mjs",
+    "check:manual-review-followups": "node scripts/check-manual-review-followups.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.5"

@@ -278,6 +278,7 @@
 
 .pci-vico2 .pci-outcome h2 {
   font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: .94;
 }
 
 .pci-vico2 .pci-native-note {
@@ -391,3 +392,12 @@
 .pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:span 2;width:100%;justify-self:stretch}
 @media (max-width:800px){.pci-vico2 .pci-artifact-quartet--editorial{grid-template-columns:repeat(2,minmax(0,1fr))}.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact:nth-child(3),.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:span 2}}
 @media (max-width:620px){.pci-vico2 .pci-artifact-quartet--editorial{grid-template-columns:1fr}.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact:nth-child(3),.pci-vico2 .pci-artifact-quartet--editorial .pci-artifact--portrait{grid-column:1}}
+
+/* Manual-review refinements: preserve source pixels while clarifying the export. */
+.pci-vico2 .pci-caption--pillar{grid-template-columns:1fr;margin-top:.65rem}
+.pci-vico2 .pci-artifact[data-pci-hierarchy-artifact="pillar-diagram"]{width:min(100%,830px);justify-self:start}
+.pci-vico2 .pci-map .pci-artifact{position:relative;overflow:hidden}
+.pci-vico2 .pci-map .pci-artifact::before,.pci-vico2 .pci-map .pci-artifact::after{content:"";position:absolute;z-index:1;bottom:0;width:5%;height:12%;background:color-mix(in srgb,#fff 100%,transparent);pointer-events:none}
+.pci-vico2 .pci-map .pci-artifact::before{left:0}
+.pci-vico2 .pci-map .pci-artifact::after{right:0}
+.pci-vico2 .project-nav-item--next .project-nav-title::before{content:"◆";display:inline-block;margin-right:.5em;color:var(--pci-red);font-family:"Source Code Pro",monospace;font-size:.62em;vertical-align:.12em}

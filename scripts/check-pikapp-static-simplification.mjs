@@ -46,7 +46,6 @@ const finalStates = [
   'v2-final-task-expand.png',
   'v2-final-all-caught-up-light.png',
   'v2-final-milestones-detail.png',
-  'v2-final-chapter.png',
 ];
 
 expect(html.includes('<span>03</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
@@ -61,6 +60,10 @@ expect(html.includes('Three states preserve the earlier direction: orientation, 
 expect(!html.includes('V1 established the member flow.'), 'Chapter 04 must not repeat the V1-established claim from its heading.');
 expect(!html.toLowerCase().includes('supporting chronology'), 'Viewer-facing copy must not restore internal chronology language.');
 expect(count(html, 'class="v2-history__screen"') === 3, 'Chapter 03 must contain exactly three static V2 history screens.');
+expect(count(html, 'class="coda__screen"') === 8, 'Final remaster must contain exactly eight screens.');
+expect(count(html, 'class="coda__step"') === 8, 'Final remaster must expose an eight-step sequence.');
+expect(!html.includes('v2-final-chapter.png'), 'Retired final Chapter screen must not return to the active remaster.');
+expect(html.includes('aria-label="Eight-screen source-faithful final Pi Kapp App concept sequence"'), 'Final remaster must identify its eight-screen set.');
 expect(html.includes('aria-label="Earlier V2 orientation, responsibility-detail, and completion states" tabindex="0"'), 'Static V2 history must expose a keyboard-scrollable labeled sequence.');
 for (const [filename, step, visibleText] of staticStates) {
   expect(html.includes(`images/pikapp-case-study/${filename}`), `Chapter 03 must render ${filename}.`);
@@ -89,6 +92,7 @@ for (const required of [
   'html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-color:#adc5fa}',
   '@media (max-width: 700px)',
 ]) expect(css.includes(required), `Pi Kapp CSS must include static-history contract: ${required}`);
+expect(css.includes('.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))'), 'Pi Kapp final remaster must retain four desktop columns.');
 for (const forbidden of ['.prototype-embed', '.prototype-dialog']) {
   expect(!css.includes(forbidden), `Pi Kapp CSS must remove runtime selector: ${forbidden}`);
   expect(!js.includes(forbidden), `Pi Kapp JavaScript must remove runtime selector: ${forbidden}`);
@@ -176,4 +180,4 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('PI KAPP STATIC SIMPLIFICATION: PASS history=3 v1=6 final=9 runtime=removed redirects=2 stable-evidence=preserved');
+console.log('PI KAPP STATIC SIMPLIFICATION: PASS history=3 v1=6 final=8 runtime=removed redirects=2 stable-evidence=preserved');

@@ -46,6 +46,22 @@ if (canUseCustomCursor) {
     dot.style.opacity  = '1';
     ring.style.opacity = '1';
   });
+
+  // Native modal dialogs live in the browser top layer, above ordinary body
+  // stacking. Move the decorative cursor into an open dialog so it remains
+  // visible over archive tearsheets, then restore it when the dialog closes.
+  const cursorHome = document.body;
+  function syncCursorOverlayHost() {
+    const dialog = document.querySelector('dialog[open]');
+    (dialog || cursorHome).append(dot, ring);
+  }
+  new MutationObserver(syncCursorOverlayHost).observe(document.body, {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['open'],
+  });
+  document.addEventListener('close', syncCursorOverlayHost, true);
+  syncCursorOverlayHost();
 }
 
 
@@ -243,12 +259,20 @@ if (!prefersReducedMotion) {
 
   const saved = localStorage.getItem('lens') || 'light';
 
+  function syncHomeThemeImages(lens) {
+    document.querySelectorAll('[data-home-theme-image]').forEach(image => {
+      const nextSource = lens === 'dark' ? image.dataset.themeDarkSrc : image.dataset.themeLightSrc;
+      if (nextSource && image.getAttribute('src') !== nextSource) image.setAttribute('src', nextSource);
+    });
+  }
+
   function applyLens(lens) {
     if (lens === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
+    syncHomeThemeImages(lens);
     lensBtns.forEach(btn => {
       const active = btn.dataset.lens === lens && lens !== 'dna';
       btn.classList.toggle('is-active', active);

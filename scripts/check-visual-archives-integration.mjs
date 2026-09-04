@@ -102,7 +102,6 @@ const pages = {
       'images/graphic-archive-v2/chantico.webp',
       'images/graphic-archive-v2/dog.webp',
       'images/graphic-archive-v2/abex.webp',
-      'images/graphic-archive-v2/sc56-instagram-panel-series.webp',
       'images/graphic-archive-v2/ibm-paltron-illustration-system.webp',
       'images/graphic-archive-v2/wxo-illustration-system.webp',
     ],
@@ -190,8 +189,8 @@ for (const [name, page] of Object.entries(pages).filter(([name]) => scope === 'a
     `${page.file}: preserve generator-owned shared-footer fences.`);
   expect((html.match(/<main\b[^>]*\bid="main-content"[^>]*\btabindex="-1"[^>]*>/gi) ?? []).length === 1,
     `${page.file}: preserve the validated main focus target.`);
-  expect(!html.includes('generated:site-shell-project-nav:start'),
-    `${page.file}: visual archives stay outside primary case-study previous/next navigation.`);
+  expect(html.includes('generated:gallery-project-nav:start') && html.includes('generated:gallery-project-nav:end'),
+    `${page.file}: include generator-owned previous/next gallery navigation before the shared footer.`);
   expect(!html.includes('Design DNA'), `${page.file}: Design DNA remains homepage-only.`);
   expect(html.includes('class="footer"'), `${page.file}: preserve the shared footer.`);
 }
@@ -324,6 +323,10 @@ expect(art.includes('.art-opening-stack .is-large { grid-column: span 6; }') &&
 const diamondStack = art.match(/<div class="art-diamonds">([\s\S]*?)<\/div>/i)?.[1] ?? '';
 expect(Boolean(diamondStack), 'artillustration.html: preserve the Suit of Diamonds stack.');
 expect(!/<figcaption\b/i.test(diamondStack), 'artillustration.html: Diamond cards must not show individual labels.');
+expect(art.includes('width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);') && art.includes('margin: 0 auto;'),
+  'artillustration.html: Daysigns must retain intentional side padding rather than touching the viewport edges.');
+expect(art.includes('.art-restored-wall figure:first-child { grid-column: span 2; grid-row: span 2; }'),
+  'artillustration.html: Traditional work must lead with a larger first artwork.');
 }
 
 const sharedMain = read('js/main.js');
@@ -346,6 +349,26 @@ expect(sharedCss.includes('.gallery-spotlight img:focus-visible') && sharedCss.i
   'css/style.css: gallery triggers need a visible keyboard focus indicator.');
 expect(sharedCss.includes('outline-color: var(--orange)') && sharedCss.includes('outline-color: var(--acid)'),
   'css/style.css: Art and Graphic gallery focus indicators need high-contrast surface-specific colors.');
+expect(/\.cursor-dot,\s*\.cursor-ring\s*\{[^}]*z-index:\s*10001/s.test(sharedCss) && /\.lightbox\s*\{[^}]*z-index:\s*9000/s.test(sharedCss),
+  'css/style.css: the custom cursor must stack above the script-owned lightbox.');
+expect(sharedMain.includes('syncCursorOverlayHost') && sharedMain.includes("document.querySelector('dialog[open]')"),
+  'js/main.js: the custom cursor must move into native top-layer archive dialogs while open.');
+expect(/\.nav-logo\s*\{[^}]*gap:\s*0/s.test(sharedCss) && /\.nav-logo-tran\s*\{[^}]*margin-left:\s*-0\.16em/s.test(sharedCss),
+  'css/style.css: the shared Victor Tran wordmark must use the tighter Home-aligned lockup spacing.');
+
+const ui = read('uigallery.html');
+expect(ui.includes('generated:gallery-project-nav:start') && ui.includes('generated:gallery-project-nav:end'),
+  'uigallery.html: include the gallery previous/next navigation before the shared footer.');
+for (const [file, previous, next] of [
+  ['artillustration.html', 'uigallery.html', 'graphicgallery.html'],
+  ['graphicgallery.html', 'artillustration.html', 'uigallery.html'],
+  ['uigallery.html', 'graphicgallery.html', 'artillustration.html'],
+]) {
+  const html = read(file);
+  const nav = html.match(/<!-- generated:gallery-project-nav:start -->([\s\S]*?)<!-- generated:gallery-project-nav:end -->/)?.[1] ?? '';
+  expect(nav.includes(`href="${previous}"`) && nav.includes(`href="${next}"`),
+    `${file}: gallery navigation must point to its intended previous and next gallery.`);
+}
 
 if (scope !== 'art') {
 const graphic = read('graphicgallery.html');
@@ -380,9 +403,11 @@ expect(marksStack.indexOf('data-deferred-src="images/gg-day-of-giving.png"') >= 
 const eventsStack = graphicPrimary.match(/<div class="graphic-events">([\s\S]*?)<\/div>/i)?.[1] ?? '';
 expect(!eventsStack.includes('dog.webp') && eventsStack.includes('abex.webp'),
   'graphicgallery.html: rebalance events around AbEx after moving Day of Giving to its logo study.');
-for (const eventAsset of ['sc56-instagram-panel-series.webp', 'ibm-paltron-illustration-system.webp', 'wxo-illustration-system.webp']) {
+for (const eventAsset of ['ibm-paltron-illustration-system.webp', 'wxo-illustration-system.webp']) {
   expect(eventsStack.includes(eventAsset), `graphicgallery.html: Campaigns and illustration systems is missing ${eventAsset}.`);
 }
+expect(!graphicPrimary.includes('sc56-instagram-panel-series.webp'),
+  'graphicgallery.html: remove the duplicated Chicago Instagram three-panel composite.');
 expect(graphic.includes('.graphic-brand-grid .is-third { grid-column: span 4; aspect-ratio: 4 / 3; display: grid; place-items: center;') &&
   graphic.includes('.graphic-brand-grid .is-third img { width: 100%; height: 100%; object-fit: contain; }'),
   'graphicgallery.html: normalize the three-across identity row with equal contain-fit frames.');

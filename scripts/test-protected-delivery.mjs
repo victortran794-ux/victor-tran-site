@@ -369,18 +369,20 @@ assert.equal(fs.existsSync('assets/wxo-canvas-v2'), false, 'protected V2 media m
 const protectedRouteHtml = `${wxoHtml}\n${documentProcessingHtml}`;
 const legacyProtectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(?:images\/wxo-canvas\/(?:current|v2)|assets\/(?:wxo-canvas-v2|document-processing))\//gu)];
 assert.equal(legacyProtectedRefs.length, 0, 'case-study media must not remain on public asset paths');
-const candidatePattern = /(?:src|href|poster)="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu;
+const candidatePattern = /(?:^|\s)(?:src|href|poster)="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu;
 const wxoCandidateRefs = [...wxoHtml.matchAll(candidatePattern)].map((match) => match[1]);
 const documentCandidateRefs = [...documentProcessingHtml.matchAll(candidatePattern)].map((match) => match[1]);
-const candidateRefs = [...wxoCandidateRefs, ...documentCandidateRefs];
+const candidateThemeRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu)].map((match) => match[1]);
+const candidateRefs = [...wxoCandidateRefs, ...candidateThemeRefs, ...documentCandidateRefs];
 const themeSequenceRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/theme-sequences\/[^"]+)"/gu)].map((match) => match[1]);
-assert.equal(wxoCandidateRefs.length, 12, 'protected wxO umbrella must retain the audited guarded public-candidate narrative evidence.');
-assert.equal(themeSequenceRefs.length, 12, 'protected wxO umbrella must declare the six guarded Form and Canvas-evolution light/dark pairs.');
+assert.equal(wxoCandidateRefs.length, 8, 'protected wxO umbrella must initially load eight guarded public-candidate narrative images.');
+assert.equal(candidateThemeRefs.length, 14, 'protected wxO umbrella must declare seven guarded public-candidate Light/Dark exploration pairs.');
+assert.equal(themeSequenceRefs.length, 14, 'protected wxO umbrella must declare the guarded Form, Historical Canvas, and Canvas-evolution theme sources.');
 assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 3, 'protected wxO umbrella must declare the guarded light opening illustration for the theme switcher');
 assert.equal(documentCandidateRefs.length, 4, 'protected Document Processing route must use exactly four guarded feature-arc sources');
-assert.equal(new Set(candidateRefs).size, 14, 'the revised route-aware candidate package must expose fourteen unique guarded sources.');
-const protectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
-for (const asset of new Set([...protectedRefs, ...themeSequenceRefs])) {
+assert.equal(new Set(candidateRefs).size, 18, 'the revised route-aware candidate package must expose eighteen unique guarded public-candidate sources.');
+const protectedRefs = [...protectedRouteHtml.matchAll(/(?:^|\s)(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
+for (const asset of new Set([...protectedRefs, ...candidateThemeRefs, ...themeSequenceRefs])) {
   assert.equal(fs.existsSync(asset), true, `guarded media is missing: ${asset}`);
 }
 

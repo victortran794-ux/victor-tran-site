@@ -20,6 +20,7 @@
       "images": [
         {
           "src": "images/wxo-canvas/wxo-home-thumbnail.png",
+          "themeDarkSrc": "images/wxo-canvas/wxo-home-thumbnail-dark.png",
           "width": 1024,
           "height": 686,
           "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
@@ -33,7 +34,7 @@
       "homepageLock": true,
       "homepageRelated": {
         "url": "document-processing.html?lock=1",
-        "label": "View Case Study 2"
+        "label": "Document Processing"
       }
     },
     {

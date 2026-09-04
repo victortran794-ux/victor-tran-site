@@ -52,9 +52,16 @@ const expectedPairs = [
   ['form-workflow', 'protected/wxo/assets/theme-sequences/form-workflow-light.png', 'protected/wxo/assets/theme-sequences/form-workflow-dark.png'],
   ['form-configuration', 'protected/wxo/assets/theme-sequences/form-configuration-light.png', 'protected/wxo/assets/theme-sequences/form-configuration-dark.png'],
   ['form-summary', 'protected/wxo/assets/theme-sequences/form-summary-light.png', 'protected/wxo/assets/theme-sequences/form-summary-dark.png'],
+  ['historical-canvas', 'protected/wxo/assets/theme-sequences/current-workflow-light.png', 'protected/wxo/assets/theme-sequences/current-workflow-dark.png'],
   ['current-workflow', 'protected/wxo/assets/theme-sequences/current-workflow-light.png', 'protected/wxo/assets/theme-sequences/current-workflow-dark.png'],
   ['v2-workflow', 'protected/wxo/assets/theme-sequences/v2-workflow-light.png', 'protected/wxo/assets/theme-sequences/v2-workflow-dark.png'],
   ['v2-agent-flow', 'protected/wxo/assets/theme-sequences/v2-agent-flow-light.png', 'protected/wxo/assets/theme-sequences/v2-agent-flow-dark.png'],
+  ['node-key-states', 'protected/wxo/assets/public-candidate/15-node-key-states-light.png', 'protected/wxo/assets/public-candidate/15-node-key-states-dark.png'],
+  ['node-size-variants', 'protected/wxo/assets/public-candidate/16-node-size-variants-light.png', 'protected/wxo/assets/public-candidate/16-node-size-variants-dark.png'],
+  ['flow-control-elements', 'protected/wxo/assets/public-candidate/17-flow-control-elements-light.png', 'protected/wxo/assets/public-candidate/17-flow-control-elements-dark.png'],
+  ['flow-control-containers', 'protected/wxo/assets/public-candidate/18-flow-control-containers-light.png', 'protected/wxo/assets/public-candidate/18-flow-control-containers-dark.png'],
+  ['application-example', 'protected/wxo/assets/public-candidate/19-application-example-light.png', 'protected/wxo/assets/public-candidate/19-application-example-dark.png'],
+  ['workflow-anchors', 'protected/wxo/assets/public-candidate/21-workflow-anchors-light.png', 'protected/wxo/assets/public-candidate/21-workflow-anchors-dark.png'],
 ];
 
 const ownerHandoffFilenames = new Map([
@@ -104,7 +111,7 @@ for (const [name, light, dark] of expectedPairs) {
   requireText(tag, `src="${light}"`, `${name} must start from its light source.`);
 }
 
-if (count(main, /data-wxo-theme-image=/g) !== 8) fail('The opening illustration, vignettes, Form sequence, and preserved Canvas evolution must expose eight theme-aware images.');
+if (count(main, /data-wxo-theme-image=/g) !== 15) fail('The opening, Historical Canvas, node explorations, vignettes, Form sequence, Canvas evolution, and workflow panels must expose fifteen theme-aware images.');
 requireText(main, 'id="canvas-evolution"', 'Canvas evolution must be an addressable semantic section.');
 requireText(main, 'Canvas evolution', 'Canvas evolution must retain its approved narrative marker.');
 requireText(main, 'A visual system that kept expanding.', 'Canvas evolution must retain its approved narrative heading.');

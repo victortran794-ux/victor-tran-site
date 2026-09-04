@@ -197,6 +197,7 @@ requireText(pciHtml, 'data-pci-artifact-count="4"', 'PCI four-artifact publicati
 requireText(pciHtml, 'data-pci-artifact="national-footprint-map"', 'PCI standalone map');
 requireText(pciHtml, 'landscape US Letter', 'PCI native-format disclosure');
 requireText(pciHtml, 'four coordinated artifacts', 'PCI four-artifact composition disclosure');
+requireText(pciHtml, '<figcaption class="pci-caption pci-caption--pillar"><strong>Pillar diagram</strong></figcaption>', 'PCI pillar diagram export caption');
 
 for (const rejectedArtifact of [
   'images/pci-handbook-3-ceo-letter.jpg',
@@ -213,6 +214,17 @@ requireText(pciCss, '.pci-artifact img', 'PCI native-ratio image rule');
 requireText(pciCss, 'height: auto', 'PCI native-ratio image rule');
 requireText(pciCss, 'width: 100%;', 'PCI edge-touching hero width');
 requireText(pciCss, 'grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);', 'PCI dominant hero artwork scale');
+for (const required of [
+  '.pci-vico2 .pci-caption--pillar',
+  '.pci-vico2 .pci-artifact[data-pci-hierarchy-artifact="pillar-diagram"]',
+  'width:min(100%,830px)',
+  '.pci-vico2 .pci-map .pci-artifact::before',
+  '.pci-vico2 .pci-map .pci-artifact::after',
+  '.pci-vico2 .pci-outcome h2',
+  'line-height: .94',
+  '.pci-vico2 .project-nav-item--next .project-nav-title::before',
+  'content:"◆"',
+]) requireText(pciCss, required, 'PCI manual-review refinement');
 const unscopedPciSelectors = pciCss
   .split('\n')
   .filter(line => /^\s*\.pci-(?!vico2\b)/.test(line));

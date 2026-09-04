@@ -73,6 +73,11 @@ const tagRule = css.match(/\.tag\s*\{[^}]*\}/s)?.[0] ?? '';
 expect(tagRule.length > 0, 'The About tag treatment must remain defined.');
 expect(!/border-radius:\s*var\(--radius-pill\)/.test(tagRule),
   'About tags must no longer use the generic pill treatment.');
+expect(/\.about-divider\s*\{[^}]*display:\s*none/s.test(css),
+  'About must remove the redundant divider between the jump navigation and current-practice hierarchy.');
+expect(/\.about-current-roles\s*\{[^}]*border-top:\s*0/s.test(css)
+  && /\.about-role\s*\{[^}]*border-bottom:\s*0/s.test(css),
+  'About role hierarchy must not repeat separator rules around each single role.');
 
 const aboutMarkdown = fs.readFileSync(path.join(root, 'content/about.md'), 'utf8');
 expect((aboutMarkdown.match(/^title:\s*"About Victor Tran"$/gm) || []).length === 1,

@@ -93,7 +93,6 @@ Complete poster view selected.
 - STM banner: images/logos-3.jpg
 - Brand identity hero composition: images/logos-4.jpg
 - Ability Experience fortieth anniversary event graphic: images/graphic-archive-v2/abex.webp
-- Three coordinated Instagram campaign panels for the fifty-sixth Supreme Chapter in Chicago: images/graphic-archive-v2/sc56-instagram-panel-series.webp
 - IBM Cloud PALtron illustration system sheet with separated assets, color treatments, and object explorations: images/graphic-archive-v2/ibm-paltron-illustration-system.webp
 - IBM watsonx Orchestrate illustration composition with people, gestures, gradients, paths, and interface motifs: images/graphic-archive-v2/wxo-illustration-system.webp
 - Little Shop: images/gg-illus-1.jpg

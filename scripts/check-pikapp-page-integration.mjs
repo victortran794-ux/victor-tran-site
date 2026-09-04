@@ -134,7 +134,7 @@ const v1ExportAssets = [
 const finalV2ExportAssets = [
   'v2-final-loading.png', 'v2-final-login.png', 'v2-final-member-dashboard.png',
   'v2-final-today-light.png', 'v2-final-responsibility-detail-dark.png', 'v2-final-task-expand.png',
-  'v2-final-all-caught-up-light.png', 'v2-final-milestones-detail.png', 'v2-final-chapter.png',
+  'v2-final-all-caught-up-light.png', 'v2-final-milestones-detail.png',
 ];
 for (const filename of explorationDisplayAssets) {
   if (html.includes(`images/pikapp-case-study/${filename}`)) {
@@ -211,8 +211,6 @@ for (const required of [
   'A clearer login keeps the original identity while simplifying entry.',
   '03 Member view',
   'The dashboard keeps progress, milestones, and chapter activity in one readable view.',
-  '09 Chapter',
-  'The chapter view returns shared activity and context to the member experience.',
   'Illustrative concept screens.',
   'Earlier static V2 states',
   'The prototype clarified the attention-to-completion loop.',
@@ -232,9 +230,10 @@ if (count(html, 'class="exploration-screen"') !== 0) fail('AI-assisted explorati
 for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted studies.', 'later AI-assisted visual studies', 'Other explorations.']) {
   if (html.includes(removedExplorationCopy)) fail(`public Pi Kapp page retained removed exploration copy: ${removedExplorationCopy}`);
 }
-if (count(html, 'class="coda__screen"') !== 9) fail('Pi Kapp coda must contain exactly nine owner-exported final V2 screens');
+if (count(html, 'class="coda__screen"') !== 8) fail('Pi Kapp coda must contain exactly eight owner-exported final V2 screens');
 if (count(html, 'class="v2-history__screen"') !== 3) fail('Earlier V2 history must contain exactly three static screens');
-if (count(html, 'class="coda__step"') !== 9) fail('Pi Kapp coda must expose the explicit 01–09 story order');
+if (count(html, 'class="coda__step"') !== 8) fail('Pi Kapp coda must expose the explicit 01–08 story order');
+if (html.includes('v2-final-chapter.png')) fail('Pi Kapp coda must not restore the retired final Chapter screen');
 if (count(html, 'class="identity-palette__item') !== 5) fail('consolidated source palette must preserve exactly five color roles');
 if (html.includes('identity-board__card--pattern') || html.includes('Mark &amp; pattern')) fail('retired Mark & pattern markup must not return to the public page');
 if (html.includes('identity-board__card--mark') || html.includes('identity-handoff')) fail('superseded duplicate mark and system-handoff structures must remain removed');
@@ -258,7 +257,7 @@ for (const removedExplorationCopy of ['AI-assisted flow studies', 'AI-assisted s
 if (html.includes('class="future-principle"') || html.includes('class="coda__state-pair')) fail('obsolete seven-screen V2 support structures must not remain in the concise remaster coda');
 const renderedV2Assets = [...html.matchAll(/src="images\/pikapp-case-study\/(v2-[^"]+\.png)"/g)].map((match) => match[1]);
 const expectedV2Assets = ['v2-today-light-clean.png','v2-responsibility-detail-dark-clean.png','v2-all-caught-up-light-clean.png', ...finalV2ExportAssets];
-if (JSON.stringify(renderedV2Assets) !== JSON.stringify(expectedV2Assets)) fail(`Pi Kapp must render the three earlier static V2 states followed by the nine owner-exported final states: ${JSON.stringify(renderedV2Assets)}`);
+if (JSON.stringify(renderedV2Assets) !== JSON.stringify(expectedV2Assets)) fail(`Pi Kapp must render the three earlier static V2 states followed by the eight owner-exported final states: ${JSON.stringify(renderedV2Assets)}`);
 if (count(html, 'class="phone-slide') !== 6) fail('Earlier-concept viewer must contain exactly six owner-exported V1 screens');
 for (const obsoleteAsset of ['exploration-placeholder.webp', 'exploration-design-system.webp', 'app-crest.png', 'app-icon.png']) {
   if (html.includes(obsoleteAsset)) fail(`Pi Kapp page still references superseded public asset: ${obsoleteAsset}`);
@@ -445,4 +444,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=58 v1=6 v2-history=3 v2-final=9');
+console.log('PI KAPP PAGE INTEGRATION CONTRACT: PASS assets=58 v1=6 v2-history=3 v2-final=8');

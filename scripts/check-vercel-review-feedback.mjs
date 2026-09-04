@@ -56,12 +56,13 @@ for (const file of [
   has(html.wxo, file, `wxO must render ${file}.`);
 }
 has(html.wxo, 'wxo-home-thumbnail-dark.png', 'wxO main illustration must expose the supplied dark-theme counterpart.');
-has(html.wxo, 'pilot-system-theme pilot-system-theme--light', 'wxO node library must retain a light evidence group.');
-has(html.wxo, 'pilot-system-theme pilot-system-theme--dark', 'wxO node library must add a dark evidence group.');
-has(css.wxo, '.pilot-released-canvas', 'Released Canvas must retain a dedicated media wrapper.');
-need(/\.wxo-public-pilot \.pilot-released-canvas\s*\{[^}]*max-width:[^;}]+;[^}]*margin-inline:\s*auto[^}]*border-radius:/is.test(css.wxo), 'Released Canvas must be centered in a bounded rounded container.');
-has(html.wxo, 'data-title="Historical Canvas"', 'wxO must describe the dark-only source pixel without an unsupported release claim.');
-has(html.wxo, '<strong>Historical Canvas</strong><span>Dark-only source pixel, preserved without simulating a light-theme counterpart.</span>', 'wxO historical Canvas caption must stay provenance-bounded.');
+has(html.wxo, 'pilot-exploration-grid pilot-exploration-grid--node', 'wxO node library must use the paired exploration-panel grid.');
+has(html.wxo, '15-node-key-states-light.png', 'wxO node library must retain the owner-supplied Light exploration.');
+has(html.wxo, '15-node-key-states-dark.png', 'wxO node library must pair the owner-supplied Dark exploration.');
+has(css.wxo, '.pilot-canvas-media-stack', 'Historical Canvas must share the Canvas opening media stack.');
+need(/\.wxo-public-pilot \.pilot-history-canvas\s*\{[^}]*padding:[^}]*border-radius:/is.test(css.wxo), 'Historical Canvas must retain a padded bounded media wrapper.');
+has(html.wxo, 'data-title="Historical Canvas"', 'wxO must describe Historical Canvas without an unsupported release claim.');
+has(html.wxo, '<strong>Historical Canvas</strong><span>Authored Light and Dark views follow the selected theme.</span>', 'wxO historical Canvas caption must stay theme- and provenance-bounded.');
 need(!/(?:data-title|data-caption|alt|figcaption)[^>]*(?:Released Canvas|released product|preserved as released|release view)/i.test(html.wxo), 'wxO visitor-facing media labels must not imply independently unverified release status.');
 has(css.wxo, '.doc-motion-section', 'Accuracy Evaluation motion block must own top spacing.');
 need(/\.wxo-public-pilot \.doc-motion-section\s*\{[^}]*padding-top:/is.test(css.wxo), 'Accuracy Evaluation must have explicit top breathing room.');
@@ -87,7 +88,7 @@ need(/\.pikapp-page \.coda__frame\s*\{[^}]*overflow:\s*visible[^}]*border-radius
 need(/\.pikapp-page \.coda__image\s*\{[^}]*object-fit:\s*contain[^}]*border-radius:\s*0/is.test(css.pikapp), 'Final remaster screens must remain complete and uncropped.');
 
 // Shared shell/About: compact wordmark, right-aligned controls, hover polish, one outline-shape family.
-need(/\.nav-logo\s*\{[^}]*gap:\s*4px/is.test(css.shared), 'Shared Victor Tran wordmark must use tighter 4px kerning gap.');
+need(/\.nav-logo\s*\{[^}]*gap:\s*0(?:px)?\s*;/is.test(css.shared), 'Shared Victor Tran wordmark must use the approved tight zero-gap lockup.');
 need(/\.nav-inner\s*\{[^}]*justify-content:\s*space-between/is.test(css.shared), 'Shared header controls must align to the right edge.');
 has(css.shared, '.lens-switcher-btn:hover', 'Header theme controls must retain a visible hover state.');
 has(html.about, 'class="about-bio-lead"', 'About opening paragraph must have a distinct intermediate lead role.');

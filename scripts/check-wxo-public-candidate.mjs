@@ -71,18 +71,18 @@ forbid(main, /pilot-doc-epic|pilot-doc-frame|id="document-processing"/i, 'wxO um
 forbid(main, /accuracy improvement|efficiency improvement|adoption|customer impact|measured (?:improvement|increase|decrease|impact|result)/i,
   'Canonical candidate must not add unsupported outcome claims.');
 
-if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 15) fail('Canonical umbrella must contain fifteen evidence display units across the preserved evolution and revised supporting narrative.');
+if (count(main, /class="[^"]*\bpilot-evidence\b[^"]*"/gi) !== 14) fail('Canonical umbrella must contain fourteen evidence display units after retiring the old enterprise component board.');
 if (count(main, /class="[^"]*\bpilot-activity-frame\b[^"]*"/gi) !== 3) {
   fail('Canonical candidate must contain the three approved User Activity frames.');
 }
 
 requireText(main, 'pilot-flow-evidence', 'Canvas evolution must use the reviewed flow-control narrative group.');
 if (count(main, /class="[^"]*\bpilot-expansion-frame\b[^"]*"/gi) !== 3) fail('Canonical candidate must preserve three Canvas evolution states.');
-if (count(main, /data-wxo-evidence/gi) !== 15 || count(main, /<img\b/gi) !== 17) fail('Canonical umbrella must contain fifteen carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
+if (count(main, /data-wxo-evidence/gi) !== 14 || count(main, /<img\b/gi) !== 16) fail('Canonical umbrella must contain fourteen carousel images, one opening illustration, and one Document Processing handoff thumbnail.');
 forbid(main, /src="protected\/wxo\/assets\/public-candidate\/13-floating-studies\.png"/i, 'The monolithic Floating Studies board must not remain in the rendered composition.');
 forbid(main, /13b-flow-types\.png|13c-connector-mechanics\.png|pilot-study--types|pilot-study--connectors/i, 'Removed trailing Floating Studies must not remain rendered.');
 for (const token of ['pilot-flow-evidence', 'Flow-control elements', 'Flow-control containers', 'Application example', 'Workflow anchors']) requireText(main, token, `Canvas evolution must expose reviewed narrative evidence: ${token}`);
-if (!(main.indexOf('pilot-main-illustration') < main.indexOf('pilot-released-canvas') && main.indexOf('pilot-activity-epic') < main.indexOf('pilot-vignettes') && main.indexOf('pilot-vignettes') < main.indexOf('pilot-side-quest-bridge'))) {
+if (!(main.indexOf('pilot-main-illustration') < main.indexOf('pilot-history-canvas') && main.indexOf('pilot-history-canvas') < main.indexOf('pilot-system-library') && main.indexOf('pilot-activity-epic') < main.indexOf('pilot-vignettes') && main.indexOf('pilot-vignettes') < main.indexOf('pilot-side-quest-bridge'))) {
   fail('Main illustration must open Canvas; wide centered vignettes must return after User Activity and before the route handoff.');
 }
 
@@ -160,7 +160,8 @@ const storyRule = css.match(/\.wxo-public-pilot \.pilot-story\s*\{([^}]*)\}/)?.[
 const sectionHeadingRule = css.match(/\.wxo-public-pilot \.pilot-section-heading\s*\{([^}]*)\}/)?.[1] ?? '';
 const bridgeRule = css.match(/\.wxo-public-pilot \.pilot-side-quest-bridge\s*\{([^}]*)\}/)?.[1] ?? '';
 const activityRule = css.match(/\.wxo-public-pilot \.pilot-activity-epic\s*\{([^}]*)\}/)?.[1] ?? '';
-const releasedRule = css.match(/\.wxo-public-pilot \.pilot-released-canvas\s*\{([^}]*)\}/)?.[1] ?? '';
+const historyRule = css.match(/\.wxo-public-pilot \.pilot-history-canvas\s*\{([^}]*)\}/)?.[1] ?? '';
+const canvasStackRule = css.match(/\.wxo-public-pilot \.pilot-canvas-media-stack\s*\{([^}]*)\}/)?.[1] ?? '';
 const vignetteRule = css.match(/\.wxo-public-pilot \.pilot-vignettes\s*\{([^}]*)\}/)?.[1] ?? '';
 const mainIllustrationRule = css.match(/\.wxo-public-pilot \.pilot-main-illustration\s*\{([^}]*)\}/)?.[1] ?? '';
 const canvasOpeningRule = css.match(/\.wxo-public-pilot \.pilot-canvas-opening\s*\{([^}]*)\}/)?.[1] ?? '';
@@ -171,7 +172,8 @@ for (const [rule, declarations, label] of [
   [sectionHeadingRule, ['padding-inline: var(--page-x)'], 'chapter text rail'],
   [bridgeRule, ['padding-inline: var(--page-x)', 'grid-template-columns: minmax(230px, 0.29fr) minmax(0, 1fr) minmax(220px, 0.72fr)'], 'feature-deep-dive bridge rail'],
   [activityRule, ['background: linear-gradient'], 'green User Activity story field'],
-  [releasedRule, ['max-width: 980px', 'margin-inline: auto', 'border-radius: 0.875rem'], 'centered dark-only released-product screen'],
+  [historyRule, ['padding: clamp(', 'border-radius: 0.875rem'], 'padded theme-aware Historical Canvas screen'],
+  [canvasStackRule, ['display: grid', 'gap: clamp('], 'stacked opening media arrangement'],
   [vignetteRule, ['width: 100%'], 'full evidence-rail vignette board'],
   [mainIllustrationRule, ['width: min(100%, 1024px)', 'margin-inline: auto'], 'centered native-scale opening illustration'],
   [canvasOpeningRule, ['display: grid', 'grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr)'], 'side-by-side Canvas opening composition'],

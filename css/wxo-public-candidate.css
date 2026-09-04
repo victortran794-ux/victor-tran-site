@@ -215,6 +215,20 @@
   padding: 0;
 }
 
+.wxo-public-pilot .pilot-canvas-media-stack {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  min-width: 0;
+}
+
+.wxo-public-pilot .pilot-history-canvas {
+  overflow: hidden;
+  padding: clamp(0.85rem, 1.6vw, 1.35rem);
+  border: 1px solid color-mix(in srgb, var(--border) 75%, var(--text) 25%);
+  border-radius: 0.875rem;
+  background: var(--bg-2);
+}
+
 .wxo-public-pilot .pilot-evidence {
   margin: 0;
 }
@@ -266,28 +280,41 @@
   text-transform: uppercase;
 }
 
-.wxo-public-pilot .pilot-released-canvas {
-  width: min(82%, 980px);
+.wxo-public-pilot .pilot-system-library { margin-top: clamp(6rem, 12vw, 11rem); }
+.wxo-public-pilot .pilot-system-library .pilot-section-heading { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.wxo-public-pilot .pilot-section-heading--stacked {
+  display: block;
+}
+.wxo-public-pilot .pilot-section-heading--stacked .workflow-label {
+  margin-bottom: clamp(1.1rem, 2vw, 1.75rem);
+}
+.wxo-public-pilot .pilot-section-heading--stacked > div {
   max-width: 980px;
-  margin: clamp(4rem, 8vw, 7rem) auto 0;
-  margin-inline: auto;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--border) 75%, var(--text) 25%);
+}
+.wxo-public-pilot .pilot-exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0 var(--page-x);
+  list-style: none;
+}
+.wxo-public-pilot .pilot-exploration-grid > li {
+  min-width: 0;
+  padding: clamp(1rem, 2.2vw, 1.75rem);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--text) 22%);
   border-radius: 0.875rem;
   background: var(--bg-2);
 }
-
-.wxo-public-pilot .pilot-released-canvas .pilot-image-button,
-.wxo-public-pilot .pilot-released-canvas img { border-radius: inherit; }
-
-.wxo-public-pilot .pilot-system-library { margin-top: clamp(6rem, 12vw, 11rem); }
-.wxo-public-pilot .pilot-system-library .pilot-section-heading { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.wxo-public-pilot .pilot-system-themes { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(2rem, 5vw, 5rem); padding-inline: var(--page-x); }
-.wxo-public-pilot .pilot-system-theme { min-width: 0; }
-.wxo-public-pilot .pilot-system-theme > p { margin: 0 0 1rem; font: 700 .7rem/1.4 var(--pilot-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.wxo-public-pilot .pilot-system-theme--dark { padding: clamp(1rem, 2.5vw, 2rem); border-radius: .875rem; background: #161616; color: #f4f4f4; }
-.wxo-public-pilot .pilot-system-theme--dark .pilot-evidence figcaption strong { color: #f4f4f4; }
-.wxo-public-pilot .pilot-dark-split { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+.wxo-public-pilot .pilot-exploration-grid .pilot-image-button {
+  overflow: hidden;
+  border-radius: 0.55rem;
+  background: var(--bg);
+}
+.wxo-public-pilot .pilot-exploration-grid .pilot-evidence figcaption {
+  grid-template-columns: minmax(130px, 0.28fr) minmax(0, 1fr);
+  padding-inline: clamp(0.15rem, 0.8vw, 0.65rem);
+}
 .wxo-public-pilot .pilot-flow-story { padding-top: clamp(2rem, 5vw, 5rem); }
 .wxo-public-pilot .pilot-flow-evidence-intro { max-width: 760px; margin: clamp(4rem, 8vw, 7rem) var(--page-x) 2rem; }
 .wxo-public-pilot .pilot-flow-evidence-intro > p:last-child { margin: .65rem 0 0; color: var(--muted); }
@@ -295,6 +322,7 @@
 .wxo-public-pilot .pilot-flow-evidence li:nth-child(even) { padding-top: clamp(3rem, 9vw, 8rem); }
 .wxo-public-pilot .pilot-flow-evidence .pilot-image-button { overflow: hidden; border: 1px solid color-mix(in srgb, var(--border) 75%, var(--text) 25%); border-radius: .875rem; background: #161616; }
 .wxo-public-pilot .pilot-flow-evidence img { border-radius: inherit; }
+.wxo-public-pilot .pilot-flow-evidence.pilot-exploration-grid li:nth-child(even) { padding-top: clamp(1rem, 2.2vw, 1.75rem); }
 
 .wxo-public-pilot .doc-motion-section { padding-top: clamp(4rem, 8vw, 7rem); }
 .wxo-public-pilot .doc-current-stage-head { gap: clamp(10px, 1.4vw, 16px); }
@@ -950,7 +978,8 @@ body.wxo-gallery-open {
 @media (max-width: 860px) {
   .wxo-public-pilot .pilot-system-grid,
   .wxo-public-pilot .pilot-system-themes,
-  .wxo-public-pilot .pilot-flow-evidence {
+  .wxo-public-pilot .pilot-flow-evidence,
+  .wxo-public-pilot .pilot-exploration-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }

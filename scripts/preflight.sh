@@ -84,6 +84,8 @@ run_required "Final site reconciliation contract" npm run check:final-site-recon
 run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
 run_required "Vercel review feedback wiring" npm run test:vercel-review-feedback-wiring
 run_required "Vercel review feedback contract" npm run check:vercel-review-feedback
+run_required "Manual review follow-up wiring" npm run test:manual-review-followups-wiring
+run_required "Manual review follow-up contract" npm run check:manual-review-followups
 run_required "Résumé deterministic build and artifact contract" npm run test:resume-build
 
 section "Generating project sections"

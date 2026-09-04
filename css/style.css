@@ -273,7 +273,7 @@ main#main-content {
   top: 0; left: 0;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10001;
   will-change: transform;
   transform: translate(-100px, -100px);
 }
@@ -366,7 +366,7 @@ main#main-content {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0;
   flex-shrink: 0;
 }
 
@@ -380,7 +380,7 @@ main#main-content {
 }
 
 .nav-logo-victor { color: #1667b9; }
-.nav-logo-tran { color: var(--text); margin-left: -0.1em; }
+.nav-logo-tran { color: var(--text); margin-left: -0.16em; }
 html[data-theme="dark"] .nav-logo-victor { color: #ea3b99; }
 html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
 
@@ -1660,30 +1660,38 @@ html[data-finish-proof] .home-practice-proof strong {
   height: 100%;
 }
 
+.featured-card-actions {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .featured-item-related {
   position: absolute;
-  right: var(--route02-x);
-  bottom: clamp(28px, 4vw, 56px);
+  left: calc(var(--route02-x) + clamp(28px, 3.5vw, 48px) + 176px);
+  bottom: calc(clamp(28px, 4vw, 56px) + clamp(28px, 3.5vw, 48px) - 12px);
   z-index: 2;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  padding: 0 14px;
-  border: 1px solid color-mix(in srgb, var(--text) 65%, transparent);
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  color: var(--text);
+  gap: 6px;
+  padding: 0;
+  color: var(--text-2);
   font-family: 'Source Code Pro', monospace;
   font-size: var(--text-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: background var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.24em;
+  transition: color var(--duration-fast), text-decoration-color var(--duration-fast), transform var(--duration-fast);
 }
 
 .featured-item-related:hover,
 .featured-item-related:focus-visible {
-  background: var(--text);
-  color: var(--bg);
-  transform: translateY(-2px);
+  color: var(--text);
+  text-decoration-color: currentColor;
+  transform: translateX(3px);
 }
 
 .featured-galleries-title {
@@ -2705,10 +2713,7 @@ html[data-finish-proof] #about-play {
 }
 
 .about-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  max-width: var(--max-w);
-  margin: 0 auto 64px;
+  display: none;
 }
 
 .about-current {
@@ -2747,7 +2752,7 @@ html[data-finish-proof] #about-play {
 }
 
 .about-current-roles {
-  border-top: 1px solid var(--border);
+  border-top: 0;
 }
 
 .about-role-history {
@@ -2777,7 +2782,7 @@ html[data-finish-proof] #about-play {
   row-gap: var(--space-2);
   align-items: center;
   padding: var(--space-6) 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 0;
   background: transparent;
 }
 
@@ -4021,7 +4026,12 @@ html[data-theme="dark"] .spotify-frame {
     right: var(--route02-x);
     bottom: var(--route02-x);
     width: auto;
-    padding: 28px 24px;
+    padding: 28px 24px 72px;
+  }
+
+  .featured-item--has-related .featured-item-related {
+    left: calc(var(--route02-x) + 24px);
+    bottom: calc(var(--route02-x) + 16px);
   }
 
   .featured-item--overlay .featured-item-title {

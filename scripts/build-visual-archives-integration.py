@@ -84,9 +84,8 @@ ART_CSS = r'''
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0;
-      width: calc(100vw - clamp(31px, calc(2vw + 15px), 47px));
-      margin-left: 50%;
-      transform: translateX(-50%);
+      width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);
+      margin: 0 auto;
     }
     .art-archive-v2 .art-daysigns-grid figure { margin: 0; padding: 0; min-width: 0; }
     .art-archive-v2 .art-daysigns-grid img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
@@ -95,6 +94,7 @@ ART_CSS = r'''
     .art-archive-v2 .art-sc56 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
     .art-archive-v2 .art-restored-wall figure { margin: 0; }
+    .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 2; grid-row: span 2; }
     .art-archive-v2 .art-restored-wall img { width: 100%; height: auto; }
     .art-archive-v2 .art-sc56 img,
     .art-archive-v2 .art-restored-wall img { width: 100%; }
@@ -116,8 +116,9 @@ ART_CSS = r'''
       .art-archive-v2 .art-live-wall { grid-template-columns: 1fr; }
       .art-archive-v2 .art-live-wall .is-wide,
       .art-archive-v2 .art-live-wall .is-third { grid-column: 1; }
-      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100vw - 16px); }
+      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100% - 2rem); }
       .art-archive-v2 .art-restored-wall { grid-template-columns: 1fr 1fr; }
+      .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 2; grid-row: auto; }
       .art-archive-v2 .art-sc56 { grid-template-columns: 1fr; }
       .art-archive-v2 .art-diamonds { grid-template-columns: 1fr 1fr; }
       .art-archive-v2 .art-diamonds figure,
@@ -491,7 +492,7 @@ GRAPHIC_PRIMARY = r'''
           <div class="archive-chapter-head"><p class="graphic-section-kicker">Selected visual systems</p><h2 id="graphic-events-title">Campaigns and illustration systems</h2></div>
           <div class="graphic-events">
             <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/abex.webp" width="1250" height="1875" alt="Ability Experience fortieth anniversary event graphic"><figcaption>AbEx 40</figcaption></figure>
-            <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/sc56-instagram-panel-series.webp" width="2400" height="1432" alt="Three coordinated Instagram campaign panels for the fifty-sixth Supreme Chapter in Chicago"><figcaption>Supreme Chapter social campaign</figcaption></figure>
+
             <figure class="archive-frame is-event-tall"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/ibm-paltron-illustration-system.webp" width="2400" height="4168" alt="IBM Cloud PALtron illustration system sheet with separated assets, color treatments, and object explorations"><figcaption>IBM Cloud PALtron illustration system</figcaption></figure>
             <figure class="archive-frame is-event-wide"><img loading="lazy" decoding="async" src="images/graphic-archive-v2/wxo-illustration-system.webp" width="2400" height="1920" alt="IBM watsonx Orchestrate illustration composition with people, gestures, gradients, paths, and interface motifs"><figcaption>IBM watsonx Orchestrate illustration system</figcaption></figure>
           </div>
@@ -561,7 +562,7 @@ GRAPHIC_RESPONSIVE = {
     'images/gg-edc-0.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-2.jpg': ('half', [480, 768, 1280]), 'images/gg-edc-3.jpg': ('half', [480, 768, 1280]),
     'images/thumb-sgla.webp': ('third', [320, 480, 768]), 'images/graphic-archive-v2/sgla-2024-identity-development.webp': ('feature', [480, 768, 1200]), 'images/graphic-archive-v2/sgla-2023-brand-guidelines.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-ballroom-system.webp': ('half', [480, 768, 1280]), 'images/graphic-archive-v2/sgla-2024-signage-system.webp': ('full', [768, 1280, 2048]),
     **{f'images/gg-slides-{number}.jpg': ('slides', [320, 480, 640]) for number in range(1, 17)},
-    'images/gg-day-of-giving.png': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/dog.webp': ('third', [480, 768, 1024]), 'images/gg-ibm-fan.jpg': ('feature', [480, 1024, 1600]), 'images/logos-1.jpg': ('full', [768, 1280, 2048]), 'images/graphic-archive-v2/chantico.webp': ('third', [480, 768, 1024]), 'images/logos-3.jpg': ('third', [480, 768, 1024]), 'images/logos-4.jpg': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/abex.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/sc56-instagram-panel-series.webp': ('wide', [480, 768, 1280]), 'images/graphic-archive-v2/ibm-paltron-illustration-system.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/wxo-illustration-system.webp': ('wide', [480, 768, 1280]), 'images/gg-illus-1.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-2.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-3.jpg': ('illustration', [320, 480, 768]), 'images/gg-infographic.jpg': ('full', [768, 1280, 2048]),
+    'images/gg-day-of-giving.png': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/dog.webp': ('third', [480, 768, 1024]), 'images/gg-ibm-fan.jpg': ('feature', [480, 1024, 1600]), 'images/logos-1.jpg': ('full', [768, 1280, 2048]), 'images/graphic-archive-v2/chantico.webp': ('third', [480, 768, 1024]), 'images/logos-3.jpg': ('third', [480, 768, 1024]), 'images/logos-4.jpg': ('third', [480, 768, 1024]), 'images/graphic-archive-v2/abex.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/ibm-paltron-illustration-system.webp': ('tall', [480, 768, 1200]), 'images/graphic-archive-v2/wxo-illustration-system.webp': ('wide', [480, 768, 1280]), 'images/gg-illus-1.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-2.jpg': ('illustration', [320, 480, 768]), 'images/gg-illus-3.jpg': ('illustration', [320, 480, 768]), 'images/gg-infographic.jpg': ('full', [768, 1280, 2048]),
 }
 GRAPHIC_SIZES = {
     'opening': '(max-width: 720px) calc(100vw - 40px), (max-width: 1600px) calc(61.75vw - 62px), 926px', 'half': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(50vw - 60px), 740px', 'third': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(33.333vw - 48px), 485px', 'feature': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(66.667vw - 104px), 995px', 'full': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(100vw - 96px), 1504px', 'slides': '(max-width: 720px) calc((100vw - 48px) / 2), (max-width: 900px) calc((100vw - 72px) / 4), (max-width: 1199px) calc((100vw - 120px) / 4), (max-width: 1600px) calc((100vw - 128px) / 5), 294px', 'tall': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(41.667vw - 78px), 589px', 'wide': '(max-width: 720px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 48px), (max-width: 1600px) calc(58.333vw - 114px), 851px', 'illustration': '(max-width: 720px) calc((100vw - 56px) / 2), (max-width: 1600px) calc(25vw - 42px), 358px',
@@ -621,7 +622,7 @@ def replace_one(html: str, pattern: str, replacement: str, label: str, flags: in
 def build(file_name: str, body_classes: str, data_archive: str, primary: str, skin_css: str,
           extended_title: str, extended_intro: str, meta_desc: str, og_image: str,
           og_width: str, og_height: str, alt_replacements: dict[str, str] | None = None,
-          include_extended: bool = True) -> None:
+          include_extended: bool = True, gallery_nav: str = '') -> None:
     page = ROOT / file_name
     html = page.read_text(encoding='utf-8')
     for marker in [
@@ -646,7 +647,7 @@ def build(file_name: str, body_classes: str, data_archive: str, primary: str, sk
 ''' if include_extended else ''
     new_main = (
         f'  <main id="main-content" tabindex="-1" class="page-content" data-archive="{data_archive}">\n'
-        f'{primary}{extended}  </main>'
+        f'{primary}{gallery_nav}{extended}  </main>'
     )
     html = replace_one(html, r'<body\b[^>]*>', f'<body class="{body_classes}">', 'body start tag', re.I)
     html = replace_one(html, r'(?m)^[ \t]*<main\b[^>]*>[\s\S]*?</main>', new_main, 'main region', re.I)
@@ -678,6 +679,13 @@ if args.scope in {'art', 'all'}:
         'https://www.victortrandesign.com/images/art-archive-v2/old-one.webp', '1600', '2071',
         None,
         False,
+        '''    <!-- generated:gallery-project-nav:start -->
+    <nav class="gallery-project-nav project-nav" aria-label="Gallery navigation">
+      <a href="uigallery.html" class="project-nav-item project-nav-item--prev" aria-label="Previous gallery: Interface Studies"><span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span><span class="project-nav-title">Interface Studies</span></a>
+      <a href="graphicgallery.html" class="project-nav-item project-nav-item--next" aria-label="Next gallery: Graphic Design"><span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span><span class="project-nav-title">Graphic Design</span></a>
+    </nav>
+    <!-- generated:gallery-project-nav:end -->
+''',
     )
 
 if args.scope in {'graphic', 'all'}:
@@ -695,6 +703,13 @@ if args.scope in {'graphic', 'all'}:
           'alt="Infographic"': 'alt="Wide informational graphic"',
         },
         False,
+        '''    <!-- generated:gallery-project-nav:start -->
+    <nav class="gallery-project-nav project-nav" aria-label="Gallery navigation">
+      <a href="artillustration.html" class="project-nav-item project-nav-item--prev" aria-label="Previous gallery: Art and Illustration"><span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span><span class="project-nav-title">Art &amp; Illustration</span></a>
+      <a href="uigallery.html" class="project-nav-item project-nav-item--next" aria-label="Next gallery: Interface Studies"><span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span><span class="project-nav-title">Interface Studies</span></a>
+    </nav>
+    <!-- generated:gallery-project-nav:end -->
+''',
     )
 
 print(f'Built generator-integrated visual archive scope={args.scope}.')

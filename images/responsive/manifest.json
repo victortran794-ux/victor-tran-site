@@ -641,24 +641,6 @@
       "sha256": "a15110247235eb255731f64bf5c1c223c32b5fbde0adb9decab719989d745be2",
       "width": 768
     },
-    "images/responsive/graphic/sc56-instagram-panel-series-w1280.webp": {
-      "bytes": 69558,
-      "height": 764,
-      "sha256": "5adff886720b41e333641ee324a4cad51579b0af3b7c1e28b3e37440a8d8a3db",
-      "width": 1280
-    },
-    "images/responsive/graphic/sc56-instagram-panel-series-w480.webp": {
-      "bytes": 19852,
-      "height": 286,
-      "sha256": "0f58e4ddeea234ca05328f645790feff4ae16fc0b93a095b9ccce6562d0af180",
-      "width": 480
-    },
-    "images/responsive/graphic/sc56-instagram-panel-series-w768.webp": {
-      "bytes": 36716,
-      "height": 458,
-      "sha256": "f6e552524f1d2243096e23fe2e5e21a0ffd20ac71be8a1104d2649b8c364c0df",
-      "width": 768
-    },
     "images/responsive/graphic/sgla-2023-brand-guidelines-w1280.webp": {
       "bytes": 73218,
       "height": 802,
@@ -1091,10 +1073,6 @@
     "images/graphic-archive-v2/ibm-paltron-illustration-system.webp": {
       "bytes": 248812,
       "sha256": "939d9170e207a7a4834199fb4bbfdb00194f2375a6ebb1bcf1a410eeb41f1f0c"
-    },
-    "images/graphic-archive-v2/sc56-instagram-panel-series.webp": {
-      "bytes": 186916,
-      "sha256": "b5f0d92d866e250240a601a7d001d94625268db3d9b78992b4a7d14fdfdd80df"
     },
     "images/graphic-archive-v2/sgla-2023-brand-guidelines.webp": {
       "bytes": 200734,

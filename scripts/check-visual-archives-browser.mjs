@@ -488,7 +488,7 @@ async function checkGraphicResponsiveMedia() {
     'images/logos-2.jpg', 'images/gg-edc-1.jpg', 'images/thumb-sgla.webp',
     'images/graphic-archive-v2/sgla-2024-identity-development.webp', 'images/logos-1.jpg',
     'images/gg-slides-1.jpg', 'images/graphic-archive-v2/abex.webp',
-    'images/graphic-archive-v2/sc56-instagram-panel-series.webp', 'images/gg-illus-1.jpg',
+    'images/graphic-archive-v2/ibm-paltron-illustration-system.webp', 'images/gg-illus-1.jpg',
   ];
   for (const viewport of [
     { label: '390', width: 390, height: 844, mobile: true },
@@ -509,7 +509,7 @@ async function checkGraphicResponsiveMedia() {
         pending: document.querySelectorAll('main img[data-deferred-src]').length,
         responsive: document.querySelectorAll('main img[data-full-src]').length,
       }))()`);
-      assert(fallback.pending === 0 && fallback.responsive === 41,
+      assert(fallback.pending === 0 && fallback.responsive === 40,
         `graphicgallery.html: no-observer fallback did not synchronously hydrate all eligible media: ${JSON.stringify(fallback)}`);
     } else {
       assert(graphic.length === eager.length && eager.length === 2,
@@ -571,7 +571,7 @@ const pageSpecs = {
     file: 'graphicgallery.html',
     bodyClass: 'graphic-archive-v2',
     archive: 'graphic-contact-sheet',
-    mainImages: 42,
+    mainImages: 41,
   },
   ui: {
     file: 'uigallery.html',
@@ -765,7 +765,7 @@ try {
         assert(state.archive === spec.archive && state.mainTabindex === '-1', `${spec.file}: main archive/focus contract drifted`);
         assert(state.currentHref === spec.file, `${spec.file}: current-route state is wrong`);
         assert(state.shellHeader && state.shellFooter, `${spec.file}: shared shell is incomplete`);
-        assert(!state.projectNav, `${spec.file}: gallery gained primary case-study previous/next navigation`);
+        assert(state.projectNav, `${spec.file}: gallery must continue the previous/next archive navigation pattern`);
         assert(!state.designDna, `${spec.file}: Design DNA escaped the homepage`);
         assert(!state.extendedArchive, `${spec.file}: duplicate hidden archive returned`);
         assert(state.captions === (spec.captions ?? 0), `${spec.file}: expected ${spec.captions ?? 0} primary captions; found ${state.captions}`);
@@ -787,8 +787,8 @@ try {
             `artillustration.html: expected ${expectedDaysignsColumns} Daysigns columns; found ${state.artDaysignsLayout?.columns}`);
           assert(state.artDaysignsLayout?.rowGap === '0px' && state.artDaysignsLayout?.columnGap === '0px',
             `artillustration.html: Daysigns grid must have zero gaps; found ${JSON.stringify(state.artDaysignsLayout)}`);
-          assert(state.artDaysignsLayout?.left >= 7 && state.artDaysignsLayout?.left <= 24 && state.artDaysignsLayout?.right <= state.clientWidth - 7 && state.artDaysignsLayout?.right >= state.clientWidth - 24,
-            `artillustration.html: Daysigns grid must remain within a near-edge 7–24px inset; found ${JSON.stringify({ left: state.artDaysignsLayout?.left, right: state.artDaysignsLayout?.right, clientWidth: state.clientWidth })}`);
+          assert(state.artDaysignsLayout?.left >= 32 && state.artDaysignsLayout?.right <= state.clientWidth - 32 && Math.abs(state.artDaysignsLayout.left - (state.clientWidth - state.artDaysignsLayout.right)) <= 2,
+            `artillustration.html: Daysigns grid must use an intentional symmetric inset of at least 32px; found ${JSON.stringify({ left: state.artDaysignsLayout?.left, right: state.artDaysignsLayout?.right, clientWidth: state.clientWidth })}`);
           assert(state.artDaysignsLayout?.items.every((item) => Math.abs(item.width - item.height) <= 1 && item.naturalWidth > 0 && item.naturalHeight > 0),
             `artillustration.html: Daysigns tiles must be square with decoded media; found ${JSON.stringify(state.artDaysignsLayout?.items)}`);
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);

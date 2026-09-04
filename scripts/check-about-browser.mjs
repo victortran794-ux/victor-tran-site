@@ -256,7 +256,7 @@ try {
         `${viewport.label}/${theme}: role chronology must stack below the title as secondary metadata ${JSON.stringify(state.roleRows)}`);
       assert(state.roleRows.every(row =>
         row.backgroundColor === 'rgba(0, 0, 0, 0)' &&
-        row.borderBottomWidth === '1px' &&
+        row.borderBottomWidth === '0px' &&
         row.markerContent !== 'none' &&
         row.markerWidth >= 8
       ), `${viewport.label}/${theme}: positions must use editorial list rows ${JSON.stringify(state.roleRows)}`);

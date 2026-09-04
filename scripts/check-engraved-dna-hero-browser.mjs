@@ -207,6 +207,12 @@ try {
     await cdp.navigate(`${baseUrl}/index.html?state=${item.label}&fresh=1`);
     await cdp.call('Emulation.setDeviceMetricsOverride', { width: item.width, height: item.height, screenWidth: item.width, screenHeight: item.height, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false });
     await waitForViewport(cdp, item.width, item.height);
+    await cdp.evaluate(`(async () => {
+      if (document.fonts?.ready) await document.fonts.ready;
+      const image = document.querySelector('[data-home-theme-image]');
+      if (image && !image.complete) await new Promise((resolve) => image.addEventListener('load', resolve, { once: true }));
+      if (image) { try { await image.decode(); } catch {} }
+    })()`);
 
     const dormant = await cdp.evaluate(`(() => {
       const hero = document.querySelector('.hero');
@@ -288,6 +294,12 @@ try {
           shiftY: parseFloat(style.getPropertyValue('--companion-shift-y')) || 0,
         };
       });
+      const workPrimary = document.querySelector('.featured-item-primary[href="wxo-canvas.html?lock=1"]');
+      const workShell = workPrimary?.closest('.featured-item-shell');
+      const workRelated = workShell?.querySelector('.featured-item-related[href="document-processing.html?lock=1"]');
+      const workImage = workPrimary?.querySelector('[data-home-theme-image]');
+      const relatedStyle = workRelated ? getComputedStyle(workRelated) : null;
+      const relatedRect = workRelated?.getBoundingClientRect();
       return {
         viewport: [Math.max(innerWidth, document.documentElement.clientWidth), innerHeight],
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -334,6 +346,19 @@ try {
         orbCount: orbs.length,
         orbs,
         companions,
+        workCard: {
+          hasPrimary: !!workPrimary,
+          hasRelated: !!workRelated,
+          relatedLabel: (workRelated?.textContent || '').replace('↳', '').trim(),
+          relatedNested: !!workPrimary?.contains(workRelated),
+          relatedHeight: relatedRect?.height || 0,
+          relatedTextTransform: relatedStyle?.textTransform || '',
+          relatedDecoration: relatedStyle?.textDecorationLine || '',
+          source: workImage?.getAttribute('src') || '',
+          lightSource: workImage?.dataset.themeLightSrc || '',
+          darkSource: workImage?.dataset.themeDarkSrc || '',
+          decoded: !!workImage?.complete && (workImage?.naturalWidth || 0) > 0,
+        },
         hasAmbientTunerSurface: '__ambientFieldTunerApi' in window,
         hasCursorGlow: !!document.querySelector('.hero-cursor-wash'),
         dnaHidden: document.getElementById('heroDnaPanel').hidden,
@@ -349,6 +374,14 @@ try {
     assert(dormant.viewport[0] === item.width && dormant.viewport[1] === item.height, `${item.label}: viewport mismatch`);
     assert(dormant.overflow <= 0, `${item.label}: horizontal overflow ${dormant.overflow}`);
     assert(dormant.theme === item.theme, `${item.label}: theme mismatch ${dormant.theme}`);
+    assert(dormant.workCard.hasPrimary && dormant.workCard.hasRelated,
+      `${item.label}: wxO card must expose primary and subtle Document Processing actions ${JSON.stringify(dormant.workCard)}`);
+    assert(!dormant.workCard.relatedNested && dormant.workCard.relatedLabel === 'Document Processing' && dormant.workCard.relatedHeight >= 44,
+      `${item.label}: secondary action must remain a sibling, named, keyboard-sized link ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.relatedTextTransform === 'none' && dormant.workCard.relatedDecoration.includes('underline'),
+      `${item.label}: secondary action must retain quieter text-link treatment ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.decoded && dormant.workCard.source === dormant.workCard[`${item.theme}Source`],
+      `${item.label}: wxO thumbnail must decode from the selected theme source ${JSON.stringify(dormant.workCard)}`);
     assert(Math.abs(dormant.frame[0] - dormant.frame[1]) < 1, `${item.label}: portrait frame must stay square ${dormant.frame}`);
     assert(Math.abs(dormant.frameEdges[0] - dormant.copyEdges[0]) < 2 && Math.abs(dormant.frameEdges[1] - dormant.copyEdges[1]) < 2,
       `${item.label}: portrait must span I design through See the work ${JSON.stringify({ frame: dormant.frameEdges, copy: dormant.copyEdges, copyBox: dormant.copyBox, children: dormant.copyChildren })}`);

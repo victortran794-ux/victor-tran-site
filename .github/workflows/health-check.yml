@@ -97,6 +97,8 @@ jobs:
         run: |
           npm run test:vercel-review-feedback-wiring
           npm run check:vercel-review-feedback
+          npm run test:manual-review-followups-wiring
+          npm run check:manual-review-followups
 
       - name: Home/global completion contract
         if: needs.changes.outputs.all == 'true' || needs.changes.outputs.shared == 'true' || needs.changes.outputs.home == 'true'

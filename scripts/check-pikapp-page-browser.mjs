@@ -276,9 +276,9 @@ try {
       assert(state.viewport[0]===viewport.width&&state.viewport[1]===viewport.height,`viewport drift ${state.viewport}`);
       assert((theme==='dark'?state.theme==='dark':!state.theme||state.theme==='light')&&state.stored===theme,`theme failed ${viewport.label} ${theme}`);
       assert(state.overflow===0,`${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images===23&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images===22&&state.deferredImages===16&&!state.failed.length,`media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main==='main-content'&&state.tabindex==='-1'&&state.current==='pikappapp.html'&&state.shell,'shell or route state failed');
-      assert(state.principles===0&&state.codaScreens===9&&state.phoneSlides===6&&state.explorationStudyCount===0&&state.explorationScreenCount===0&&!state.explorationBoundary&&!state.explorationFlow,'approved source-first evidence counts drifted');
+      assert(state.principles===0&&state.codaScreens===8&&state.phoneSlides===6&&state.explorationStudyCount===0&&state.explorationScreenCount===0&&!state.explorationBoundary&&!state.explorationFlow,'approved source-first evidence counts drifted');
       assert(state.identity.paletteItems===5&&state.identity.specimens===7&&state.identity.icons===4&&state.identity.markLockups===0&&state.identity.handoffs===0,`identity-board inventory drifted: ${JSON.stringify(state.identity)}`);
       assert(state.identity.signatureMark.backgroundColor==='rgb(0, 111, 158)'&&state.identity.signatureMark.padding==='8px'&&state.identity.signatureMark.borderRadius==='14px'&&state.identity.signatureMark.boxSizing==='border-box'&&state.identity.signatureMark.width===72&&state.identity.signatureMark.height===72,`header Star Shield lost its accessible intended field: ${JSON.stringify(state.identity.signatureMark)}`);
       assert(state.identity.rects.every((rect)=>rect.width>0&&rect.height>0&&rect.left>=-1&&rect.right<=viewport.width+1),`identity-board escaped the viewport: ${JSON.stringify(state.identity.rects)}`);
@@ -288,7 +288,7 @@ try {
       assert(identityColumnCount(state.identity.specimenColumns)===(viewport.width<=800?1:12),`identity specimen columns drifted at ${viewport.label}: ${state.identity.specimenColumns}`);
       assert(state.boundary==='Illustrative concept screens. Names, dates, rankings, and activity are fictional.','boundary copy drifted');
       assert(state.boundaryStyle.fontStyle==='italic'&&state.boundaryStyle.fontSize==='13px'&&state.boundaryStyle.padding==='0px'&&state.boundaryStyle.borderLeftWidth==='0px'&&state.boundaryStyle.backgroundColor==='rgba(0, 0, 0, 0)',`boundary caption styling drifted: ${JSON.stringify(state.boundaryStyle)}`);
-      assert(state.remasterScreens.length===9&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 App launch|02 Welcome|03 Member view|04 Today|05 Responsibility|06 Task detail|07 Completion|08 Milestones|09 Chapter',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
+      assert(state.remasterScreens.length===8&&state.remasterScreens.map((screen)=>screen.step).join('|')==='01 App launch|02 Welcome|03 Member view|04 Today|05 Responsibility|06 Task detail|07 Completion|08 Milestones',`remaster sequence drifted: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.personaLabels.join('|')==='Associate member|Chapter secretary|Graduating senior',`member journey lost its role-based persona labels: ${JSON.stringify(state.personaLabels)}`);
       assert(state.phoneSlideRadii.length===6&&state.phoneSlideRadii.every((radius)=>radius==='26px'),`V1 phone screens lost their rounded treatment: ${JSON.stringify(state.phoneSlideRadii)}`);
       assert(state.remasterScreens.every((screen)=>screen.frameBorderRadius==='0px'&&screen.frameOverflow==='visible'&&screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete uncropped 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
@@ -311,7 +311,7 @@ try {
         const v2Widths=state.v2HistoryScreens.map((screen)=>screen.width); const v2Heights=state.v2HistoryScreens.map((screen)=>screen.height);
         assert(Math.max(...v2Widths)-Math.min(...v2Widths)<=1&&Math.max(...v2Heights)-Math.min(...v2Heights)<=1,`desktop static V2 frames lost equal geometry: ${JSON.stringify(state.v2HistoryScreens)}`);
         const widths=state.remasterScreens.map((screen)=>screen.image.width); const heights=state.remasterScreens.map((screen)=>screen.image.height);
-        const rows=[0,4,8].map((start)=>state.remasterScreens.slice(start,start+4));
+        const rows=[0,4].map((start)=>state.remasterScreens.slice(start,start+4));
         const rowsAligned=rows.every((row)=>Math.max(...row.map((screen)=>screen.image.top))-Math.min(...row.map((screen)=>screen.image.top))<=1&&Math.max(...row.map((screen)=>screen.caption.top))-Math.min(...row.map((screen)=>screen.caption.top))<=1);
         assert(state.triptych.display==='grid'&&Math.max(...widths)-Math.min(...widths)<=1&&Math.max(...heights)-Math.min(...heights)<=1&&rowsAligned,`desktop/tablet remaster frames must share geometry and per-row caption baselines: ${JSON.stringify(state.remasterScreens)}`);
         const gridWidths=state.triptychRhythm.map((grid)=>grid.width); const gridLefts=state.triptychRhythm.map((grid)=>grid.left); const gridRights=state.triptychRhythm.map((grid)=>grid.right);
@@ -467,7 +467,7 @@ try {
   assert(previousMotion.index===(motion.index+5)%6&&previousMotion.count===`${previousMotion.index+1} / 6`&&previousMotion.direction==='previous'&&previousMotion.advancing&&previousMotion.screenAnimation==='phone-enter-previous'&&previousMotion.titleAnimation==='phone-copy-rise',`previous normal-motion transition failed: ${JSON.stringify({motion,previousMotion})}`);
   assert(!cdp.exceptions.length,`JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length,`console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=24 overflow=0 archive=8 reduced-motion=pass transitions=pass controls=pass v2-static=pass explorations=0 remaster=9`);
+  console.log(`PI KAPP BROWSER CONTRACT: PASS states=${checks} images=22 overflow=0 archive=8 reduced-motion=pass transitions=pass controls=pass v2-static=pass explorations=0 remaster=8`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   try { cdp?.socket?.close(); } catch {}

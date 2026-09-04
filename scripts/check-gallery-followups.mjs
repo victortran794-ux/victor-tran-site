@@ -59,7 +59,7 @@ for(const token of [
   '.art-daysigns-grid {',
   'grid-template-columns: repeat(5, minmax(0, 1fr));',
   'gap: 0;',
-  'width: calc(100vw - clamp(31px, calc(2vw + 15px), 47px));',
+  'width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);',
   '.art-daysigns-grid figure { margin: 0; padding: 0;',
   'aspect-ratio: 1 / 1;',
   'object-fit: cover;',
