@@ -61,9 +61,9 @@ expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual
   'IBM Cloud must be labeled and contained as previous role history.');
 expect(/class="about-current"[\s\S]*class="about-role-history"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
   'Current work and IBM role history must precede skills and past work in the About narrative.');
-expect(html.includes('While you’re here, enjoy some Tetris because I like Tetris.'),
+expect(html.includes('While you’re here, have some Tetris. I like Tetris.'),
   'About must use Victor’s approved direct Tetris invitation.');
-expect(html.includes('A few songs from various phases of listening. Enjoy the eclectic mix.'),
+expect(html.includes('A few songs from over the years. It’s a bit of a mix.'),
   'About must use Victor’s approved music line.');
 expect(!html.includes('Tetris, but soft'),
   'The superseded “Tetris, but soft” heading must be removed.');

@@ -27,11 +27,11 @@ Selected interface studies by Victor Tran, including a high-fidelity Ekos Con vi
 
 Interface Studies
 
-A few interface studies and small experiments I liked enough to keep around.
+Interface studies exploring campaign layouts, dashboards, and the details between states.
 
-A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.
+A refined version of a client landing page concept from 2018. It wasn’t shipped; registration and booking are illustrative.
 
-A dark interface system explored through dashboards, components, and interaction patterns. Interface details use fictional sample data and are shown as design examples rather than production data.
+A dark interface study for tracking work, with dashboards, components, and interaction states. All data shown is fictional.
 
 ## Images
 

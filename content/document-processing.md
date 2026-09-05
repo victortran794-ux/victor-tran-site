@@ -20,15 +20,15 @@ A product-design study of classification, extraction, human review, and evaluati
 
 ## Page Intro
 
-Document automation does not stop at extracting a value. Builders need to know what the system recognized, where it is uncertain, how a person can correct it, and whether a change improved the result. I worked across Watson Orchestrate's Document Processing experience to help connect those moments into one platform workflow.
+Builders need to see what a document extractor found, check uncertain results against the source, and see whether their changes improved the output. I worked on Classifier and Extractor specifications and led the design of Accuracy Evaluation in IBM watsonx Orchestrate.
 
 ## Metadata
 
 - Role: Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation
-- Period: Product design · 2025–2026
-- Scope: Classifier + Extractor specifications
-- Throughline: Human-in-the-loop shared patterns
-- Release: Evaluation direction · released July 2026
+- Period: 2025–2026
+- Scope: Classifier and Extractor specifications; Accuracy Evaluation design
+- Throughline: Shared patterns for human review
+- Release: Document Extractor and Accuracy Evaluation · July 2026
 
 ## Section Headings
 
@@ -37,19 +37,19 @@ Document automation does not stop at extracting a value. Builders need to know w
 
 ## Body Copy
 
-Document Processing / Watson Orchestrate
+Document Processing / IBM watsonx Orchestrate
 
 Return to the broader IBM watsonx Orchestrate canvas story →
 
-A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.
+The workflow identifies the document type, extracts its fields and tables, supports human review, and compares the results with a reference.
 
-I joined the work in 2025 and ramped up alongside the existing designer, Cate. Together, we made up the design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.
+I joined Cate on the design team in 2025. I helped adapt earlier concepts to the newer agent model, delivered interaction designs and specifications for Document Classifier and Extractor, and contributed shared canvas and component patterns.
 
-I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.
+I also worked with adjacent teams on shared document-review patterns.
 
 Parallel feature arc
 
-Developed in parallel with the broader canvas work, the feature moved from document setup into human review. Accuracy Evaluation came later, extending that trust loop into field-level quality inspection.
+I worked on document setup and human review alongside the broader canvas work. Accuracy Evaluation came later, adding a way to compare extracted fields with reference values.
 
 Document Processing feature arc
 
@@ -59,11 +59,11 @@ Field setup connects the source document to the structure the workflow needs.
 
 Review keeps uncertain output and its source close enough for a person to resolve the difference.
 
-The Accuracy Evaluator direction brought field-level quality into view near the end of the feature arc.
+Accuracy Evaluation compares extracted and reference values field by field.
 
-Interface details use fictional sample data and are shown as design examples, not measured outcomes. These are unaltered owner exports, including their fictional profile markers.
+The screens use fictional sample data. The values shown are examples, not measured product results.
 
-Document Extractor and Evaluation released in July 2026, connecting extraction with a quality-review workflow people could inspect.
+Document Extractor and Accuracy Evaluation were released in July 2026.
 
 Document Processing study
 
@@ -72,7 +72,7 @@ Document Processing study
 - 01 · ClassifyEstablish the document type Suggested classes make the system recommendation visible before the workflow moves forward.
 - 02 · ExtractShape the information model Field setup connects the source document to the structure the workflow needs.
 - 03 · ReviewPut uncertainty in context Review keeps uncertain output and its source close enough for a person to resolve the difference.
-- Later phase · EvaluateMake quality inspectable The Accuracy Evaluator direction brought field-level quality into view near the end of the feature arc.
+- Later phase · EvaluateMake quality inspectable Accuracy Evaluation compares extracted and reference values field by field.
 
 ## Images
 

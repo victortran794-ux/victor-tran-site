@@ -44,7 +44,7 @@ try {
     process.exit(1);
   }
 
-  const approvedBody = 'I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows. I work closely with UX, product, and development partners through implementation.';
+  const approvedBody = 'I work on interface hierarchy and reusable components for AI and automation workflows, alongside UX, product, and development partners.';
   const aboutPath = path.join(fixture, 'about.html');
   const about = fs.readFileSync(aboutPath, 'utf8');
   if (!about.includes(approvedBody)) throw new Error('Self-test could not locate approved About body copy');

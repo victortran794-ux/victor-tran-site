@@ -154,7 +154,7 @@ try {
     await cdp.key('Enter', 'Enter', 13);
     const opened = await cdp.evaluate(`(()=>{const dialog=document.querySelector('[data-wxo-gallery]');return {open:dialog?.open,focus:document.activeElement===dialog?.querySelector('.pilot-gallery-close'),count:dialog?.querySelector('[data-wxo-gallery-count]')?.textContent.trim(),title:dialog?.querySelector('[data-wxo-gallery-title]')?.textContent.trim(),semantics:dialog?.tagName==='DIALOG'&&dialog.getAttribute('aria-labelledby')===dialog.querySelector('[data-wxo-gallery-title]')?.id}})()`);
     assert(opened.open && opened.focus && opened.count === spec.count && opened.title === spec.title && opened.semantics, `${spec.file}: keyboard gallery open failed ${JSON.stringify(opened)}`);
-    await cdp.key('Tab', 'Tab', 9); await cdp.key('Tab', 'Tab', 9); await cdp.key('Tab', 'Tab', 9);
+    await cdp.key('Tab', 'Tab', 9); await cdp.key('Tab', 'Tab', 9); await cdp.key('Tab', 'Tab', 9); await cdp.key('Tab', 'Tab', 9);
     assert(await cdp.evaluate(`document.activeElement === document.querySelector('.pilot-gallery-close')`), `${spec.file}: gallery focus trap failed.`);
     await cdp.key('ArrowRight', 'ArrowRight', 39);
     const next = await cdp.evaluate(`({count:document.querySelector('[data-wxo-gallery-count]').textContent.trim(),title:document.querySelector('[data-wxo-gallery-title]').textContent.trim()})`);

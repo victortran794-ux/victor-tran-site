@@ -763,6 +763,24 @@ body.wxo-gallery-open {
   text-transform: uppercase;
 }
 
+.wxo-public-pilot .pilot-gallery-topbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wxo-public-pilot .pilot-gallery-fullscreen {
+  min-height: 44px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font: 700 0.68rem/1 var(--pilot-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .wxo-public-pilot .pilot-gallery-close {
   flex: 0 0 48px;
   width: 48px;
@@ -779,6 +797,12 @@ body.wxo-gallery-open {
 .wxo-public-pilot .pilot-gallery-close:focus-visible {
   background: var(--text);
   color: var(--bg);
+}
+
+.wxo-public-pilot .pilot-gallery-fullscreen:hover,
+.wxo-public-pilot .pilot-gallery-fullscreen:focus-visible {
+  border-color: var(--pilot-blue);
+  color: var(--pilot-blue);
 }
 
 .wxo-public-pilot .pilot-gallery-layout {
@@ -807,6 +831,35 @@ body.wxo-gallery-open {
   max-width: none;
   max-height: none;
   object-fit: contain;
+}
+
+/* Fit is the default. Full size preserves native pixels, with internal pan
+   and scroll for wide boards and tall exports inside this same viewer. */
+.wxo-public-pilot .pilot-gallery-dialog[data-wxo-gallery-zoom='full'] .pilot-gallery-stage {
+  overflow: auto;
+}
+
+.wxo-public-pilot .pilot-gallery-dialog[data-wxo-gallery-zoom='full'] .pilot-gallery-stage img {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: initial;
+}
+
+.wxo-public-pilot .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .wxo-public-pilot .pilot-gallery-details {

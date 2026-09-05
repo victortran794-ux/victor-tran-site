@@ -139,7 +139,7 @@ function forbidRendered(relativePath, retired) {
 
 const copy = {
   aboutDescription: 'Victor Tran is a visual designer at IBM working on IBM watsonx Orchestrate in Austin, Texas.',
-  aboutBody: 'I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows. I work closely with UX, product, and development partners through implementation.',
+  aboutBody: 'I work on interface hierarchy and reusable components for AI and automation workflows, alongside UX, product, and development partners.',
   ibmPosition: 'I used product design and reusable visual systems to make complex cloud work easier to understand and extend.',
   ibmEvent: 'My first start-to-finish product-design project consolidated sources, destinations, subscriptions, and conditions into a simpler stepped flow. Concept testing supported the direction.',
   ibmLogs: 'I explored how IBM Cloud Logs could adopt IBM Cloud visual conventions.',
@@ -148,22 +148,19 @@ const copy = {
   gateDescription: 'Password access for the protected IBM watsonx Orchestrate case study.',
   abilityDescription: 'Brand identity and collateral for The Ability Experience’s 40th anniversary.',
   abilityPrint: 'The illustrated print shows the philanthropy’s origins and volunteer projects from across the country. The same iconography carried into cycling kits worn by riders on the journey from the West Coast to Washington, D.C.',
-  abilityChapter: 'The identity carried into cycling kits for The Ability Experience’s summer events.',
-  abilityHeading: 'Applying the anniversary identity to the ride.',
-  abilityKits: 'The cycling kits carried the anniversary iconography into Gear Up Florida and Journey of Hope and incorporated safety-feature standards.',
+  abilityChapter: 'I applied the anniversary iconography to cycling kits for Gear Up Florida and Journey of Hope.',
   salDescription: 'Five years of layout and art direction for Pi Kappa Phi’s official magazine.',
   salIntro: 'Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.',
-  salNote: 'Five years of issues, art direction, and editorial design.',
-  salProgression: 'The work grew from hands-on layout design into creative direction, while I kept designing each issue.',
+  salProgression: 'My role grew from layout design into creative direction, and I continued designing each issue.',
   salContext: 'First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.',
-  piKappRemaster: 'The later V2 direction keeps the original cyan field and member flow recognizable while tightening type, spacing, controls, contrast, and accessibility.',
+  piKappRemaster: 'The later V2 study revisits the original member flow with a navy-and-gold palette and updated typography, spacing, and controls.',
   piKappBoundary: 'Illustrative concept screens.',
   artIntro: 'Digital and traditional work spanning character illustration, paintings, and personal series.',
   graphicIntro: 'Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.',
   uiTitle: 'Interface Studies · Victor Tran Design',
   uiDescription: 'Selected interface studies by Victor Tran, including a high-fidelity Ekos Con visual study.',
-  uiIntro: 'A few interface studies and small experiments I liked enough to keep around.',
-  magiBoundary: 'Interface details use fictional sample data and are shown as design examples rather than production data.',
+  uiIntro: 'Interface studies exploring campaign layouts, dashboards, and the details between states.',
+  magiBoundary: 'All data shown is fictional.',
 };
 
 requireExact('about.html meta[name=description]', metaValues('about.html', 'name', 'description'), copy.aboutDescription);
@@ -186,13 +183,12 @@ requireExact('abilityexperience.html meta[property=og:description]', metaValues(
 requireIncludes('abilityexperience.html .ability-hero-intro', classText('abilityexperience.html', 'ability-hero-intro'), copy.abilityDescription);
 requireIncludes('abilityexperience.html .ability-thesis', classText('abilityexperience.html', 'ability-thesis'), copy.abilityPrint);
 requireIncludes('abilityexperience.html .ability-chapter-header', classText('abilityexperience.html', 'ability-chapter-header'), copy.abilityChapter);
-requireIncludes('abilityexperience.html .ability-kit-copy', classText('abilityexperience.html', 'ability-kit-copy'), copy.abilityHeading);
-requireIncludes('abilityexperience.html .ability-kit-copy', classText('abilityexperience.html', 'ability-kit-copy'), copy.abilityKits);
+
 
 requireExact('salmagazine.html meta[name=description]', metaValues('salmagazine.html', 'name', 'description'), copy.salDescription);
 requireExact('salmagazine.html meta[property=og:description]', metaValues('salmagazine.html', 'property', 'og:description'), copy.salDescription);
 requireExact('salmagazine.html .page-header-desc', classText('salmagazine.html', 'page-header-desc'), copy.salIntro);
-requireExact('salmagazine.html .sal-vico2-hero-note', classText('salmagazine.html', 'sal-vico2-hero-note'), copy.salNote);
+forbidRendered('salmagazine.html', 'Five years of issues, art direction, and editorial design.');
 requireIncludes('salmagazine.html .vico2-chapter-header', classText('salmagazine.html', 'vico2-chapter-header'), copy.salProgression);
 requireIncludes('salmagazine.html .sal-vico2-story', classText('salmagazine.html', 'sal-vico2-story'), copy.salContext);
 requireIncludes('salmagazine.html .sal-vico2-summer-head', classText('salmagazine.html', 'sal-vico2-summer-head'), 'Four favorite spreads from the Summer 2017 issue.');

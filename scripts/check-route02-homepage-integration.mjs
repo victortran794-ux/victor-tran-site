@@ -84,7 +84,7 @@ forbid(index, /featured-tracklist|now-playing-chip|data-now-playing-/,
 forbid(index, /class="featured-chapter/, 'Large chapter headers must not interrupt the flush card grid.');
 requireCondition((index.match(/class="featured-heading"/g) ?? []).length === 1,
   'Homepage needs exactly one compact archive heading.');
-requireText(index, 'id="featuredHeading">Other cool things to check out</h2>',
+requireText(index, 'id="featuredHeading">Selected work</h2>',
   'Compact homepage heading must preserve Victor’s approved casual phrase.');
 requireCondition(/\.home-page--engraved-dna\s+\.featured-heading h2\s*\{[^}]*font-size:\s*clamp\(1\.35rem,\s*2vw,\s*1\.65rem\)/is.test(css),
   'Other cool things heading type must be approximately double its former 0.78rem size.');
@@ -163,7 +163,7 @@ requireCondition((index.match(/<a href="wxo-canvas\.html" class="[^"]*featured-i
   'Homepage must contain one public wxO lead-card link.');
 requireText(index, '<p class="featured-practice"><span>Current practice</span><strong>Visual Designer</strong><span>Enterprise AI · Product systems · Visual craft</span><span>Austin, Texas</span></p>',
   'Public wxO lead card must integrate the approved current-practice detail.');
-requireText(index, '<em>There’s a bonus one here</em>', 'Public wxO lead card must retain the approved italic bonus.');
+requireText(index, '<em>Includes Document Processing</em>', 'Public wxO lead card must retain the approved italic bonus.');
 requireText(generator, "if (project.homepageOverlay) classes.push('featured-item--overlay');",
   'Manifest generator must reproduce the wxO overlay class.');
 requireCondition(!generator.includes('chapterMarkerMarkup'),

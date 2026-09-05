@@ -77,16 +77,16 @@
 
   <main class="page-content" id="main-content" tabindex="-1">
     <header class="page-header">
-      <p class="workflow-label">Document Processing / Watson Orchestrate</p>
+      <p class="workflow-label">Document Processing / IBM watsonx Orchestrate</p>
       <h1 class="page-header-title">Make the trust loop visible.</h1>
-      <p class="page-header-desc">Document automation does not stop at extracting a value. Builders need to know what the system recognized, where it is uncertain, how a person can correct it, and whether a change improved the result. I worked across Watson Orchestrate's Document Processing experience to help connect those moments into one platform workflow.</p>
+      <p class="page-header-desc">Builders need to see what a document extractor found, check uncertain results against the source, and see whether their changes improved the output. I worked on Classifier and Extractor specifications and led the design of Accuracy Evaluation in IBM watsonx Orchestrate.</p>
       <p class="workflow-companion-link"><a href="wxo-canvas.html">Return to the broader IBM watsonx Orchestrate canvas story <span aria-hidden="true">→</span></a></p>
       <dl class="case-study-meta">
         <div class="case-study-meta-item"><dt>Role</dt><dd>Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation</dd></div>
-        <div class="case-study-meta-item"><dt>Period</dt><dd>Product design · 2025–2026</dd></div>
-        <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier + Extractor specifications</dd></div>
-        <div class="case-study-meta-item"><dt>Throughline</dt><dd>Human-in-the-loop shared patterns</dd></div>
-        <div class="case-study-meta-item"><dt>Release</dt><dd>Evaluation direction · released July 2026</dd></div>
+        <div class="case-study-meta-item"><dt>Period</dt><dd>2025–2026</dd></div>
+        <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier and Extractor specifications; Accuracy Evaluation design</dd></div>
+        <div class="case-study-meta-item"><dt>Throughline</dt><dd>Shared patterns for human review</dd></div>
+        <div class="case-study-meta-item"><dt>Release</dt><dd>Document Extractor and Accuracy Evaluation · July 2026</dd></div>
       </dl>
     </header>
 
@@ -96,15 +96,15 @@
           <span class="workflow-label">01 / Platform context</span>
           <div>
             <h2 id="doc-platform-title">The work started with the platform, not the dashboard.</h2>
-            <p class="workflow-chapter-lead">A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.</p>
+            <p class="workflow-chapter-lead">The workflow identifies the document type, extracts its fields and tables, supports human review, and compares the results with a reference.</p>
           </div>
         </div>
-        <p>I joined the work in 2025 and ramped up alongside the existing designer, Cate. Together, we made up the design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
-        <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
+        <p>I joined Cate on the design team in 2025. I helped adapt earlier concepts to the newer agent model, delivered interaction designs and specifications for Document Classifier and Extractor, and contributed shared canvas and component patterns.</p>
+        <p>I also worked with adjacent teams on shared document-review patterns.</p>
         <div class="doc-feature-arc-intro">
           <p class="workflow-label">Parallel feature arc</p>
           <h3>Classify, extract, review, then evaluate.</h3>
-          <p>Developed in parallel with the broader canvas work, the feature moved from document setup into human review. Accuracy Evaluation came later, extending that trust loop into field-level quality inspection.</p>
+          <p>I worked on document setup and human review alongside the broader canvas work. Accuracy Evaluation came later, adding a way to compare extracted fields with reference values.</p>
         </div>
         <div class="pilot-epic-container pilot-doc-epic">
           <p class="pilot-epic-label">Document Processing feature arc</p>
@@ -123,7 +123,7 @@
             </li>
             <li class="pilot-flow-step pilot-flow-step--late">
               <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Accuracy Evaluation" data-caption="Inspect field-level quality in the later evaluation direction."><img src="images/document-processing/public/evaluate-results.png" width="1584" height="1042" alt="Evaluation screen with fictional field-level comparison" loading="lazy" decoding="async"></button></figure>
-              <div class="pilot-flow-note"><span>Later phase · Evaluate</span><h3>Make quality inspectable</h3><p>The Accuracy Evaluator direction brought field-level quality into view near the end of the feature arc.</p></div>
+              <div class="pilot-flow-note"><span>Later phase · Evaluate</span><h3>Make quality inspectable</h3><p>Accuracy Evaluation compares extracted and reference values field by field.</p></div>
             </li>
           </ol>
         </div>
@@ -156,7 +156,7 @@
               <figure class="doc-current-frame"><img src="images/document-processing/public/evaluate-indicators.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Evaluation screen with extraction indicators on a fictional source document"><figcaption>Field indicators</figcaption></figure>
             </div>
           </section>
-          <p class="doc-current-note">Interface details use fictional sample data and are shown as design examples, not measured outcomes. These are unaltered owner exports, including their fictional profile markers.</p>
+          <p class="doc-current-note">The screens use fictional sample data. The values shown are examples, not measured product results.</p>
         </div>
       </section>
 
@@ -164,7 +164,7 @@
         <div class="workflow-close-grid">
           <h2 id="doc-close-title">Trust comes from a workflow people can inspect.</h2>
           <div>
-            <p>Document Extractor and Evaluation released in July 2026, connecting extraction with a quality-review workflow people could inspect.</p>
+            <p>Document Extractor and Accuracy Evaluation were released in July 2026.</p>
             <a class="workflow-return-link workflow-return-link--prominent" href="wxo-canvas.html">Return to the Canvas work <span aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -173,7 +173,7 @@
   </main>
 
   <dialog class="pilot-gallery-dialog" data-wxo-gallery aria-labelledby="pilot-gallery-title">
-    <div class="pilot-gallery-topbar"><p>Document Processing study</p><button type="button" class="pilot-gallery-close" aria-label="Close image viewer"><span aria-hidden="true">×</span></button></div>
+    <div class="pilot-gallery-topbar"><p>Document Processing study</p><div class="pilot-gallery-topbar-controls"><button type="button" class="pilot-gallery-fullscreen" data-wxo-gallery-fullscreen aria-pressed="false">Full size</button><button type="button" class="pilot-gallery-close" aria-label="Close image viewer"><span aria-hidden="true">×</span></button></div></div>
     <div class="pilot-gallery-layout">
       <div class="pilot-gallery-stage"><img data-wxo-gallery-image src="" alt=""></div>
       <div class="pilot-gallery-details">

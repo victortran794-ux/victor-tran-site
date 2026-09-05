@@ -31,7 +31,7 @@ const bySlug = new Map(projects.projects.map((project) => [project.slug, project
 need(bySlug.get('artillustration')?.surface === 'orange', 'Art gallery card must keep orange surface.');
 need(bySlug.get('graphicgallery')?.surface === 'purple', 'Graphic gallery card must keep purple surface.');
 need(bySlug.get('uigallery')?.surface === 'teal', 'Interface Studies gallery card must use teal surface.');
-need(bySlug.get('wxo-canvas')?.homepageBonus === 'There’s a bonus one here', 'wxO manifest must own the non-link bonus note.');
+need(bySlug.get('wxo-canvas')?.homepageBonus === 'Includes Document Processing', 'wxO manifest must own the non-link bonus note.');
 has(generator, 'homepageBonus', 'Homepage generator must own optional bonus notes.');
 has(html.home, 'class="featured-item-bonus"', 'Generated wxO card must expose the non-link bonus note.');
 has(main, 'initWorkArrival', 'Home runtime must own a bounded work-arrival interaction.');
@@ -39,7 +39,7 @@ has(css.shared, '@keyframes work-arrival-bounce', 'Home work target must have a 
 has(css.shared, '.featured.is-work-arriving', 'Home work section must expose the arrival state.');
 need(/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?is-work-arriving/.test(css.shared), 'Work arrival must have a reduced-motion fallback.');
 need(/\.home-page--engraved-dna \.hero-dna-label\s*\{[^}]*font-size:\s*0\.72rem/i.test(css.shared), 'Desktop DNA labels must use readable 0.72rem type.');
-need(/\.home-page--engraved-dna \.hero-dna-swatch-name,[\s\S]*?font-size:\s*0\.64rem/i.test(css.shared), 'Desktop DNA token text must use readable 0.64rem type.');
+need(/\.home-page--engraved-dna \.hero-dna-swatch-name,[\s\S]*?font-size:\s*0\.75rem/i.test(css.shared), 'Desktop DNA token text must use readable 0.64rem type.');
 has(css.shared, '.featured-item--surface-teal .featured-item-content', 'Homepage gallery must support teal card bodies.');
 need(/\.featured-item--surface-teal \.featured-item-desc\s*\{\s*color:\s*#ffffff;/is.test(css.shared), 'Teal gallery description text must use full white for WCAG AA contrast.');
 
@@ -63,7 +63,7 @@ has(html.wxo, '15-node-key-states-dark.png', 'wxO node library must pair the own
 has(css.wxo, '.pilot-canvas-media-stack', 'Historical Canvas must share the Canvas opening media stack.');
 need(/\.wxo-public-pilot \.pilot-history-canvas\s*\{[^}]*padding:[^}]*border-radius:/is.test(css.wxo), 'Historical Canvas must retain a padded bounded media wrapper.');
 has(html.wxo, 'data-title="Historical Canvas"', 'wxO must describe Historical Canvas without an unsupported release claim.');
-has(html.wxo, '<strong>Historical Canvas</strong><span>Authored Light and Dark views follow the selected theme.</span>', 'wxO historical Canvas caption must stay theme- and provenance-bounded.');
+has(html.wxo, '<strong>Historical Canvas</strong><span>Switch themes to compare the light and dark designs.</span>', 'wxO historical Canvas caption must stay theme-bounded.');
 need(!/(?:data-title|data-caption|alt|figcaption)[^>]*(?:Released Canvas|released product|preserved as released|release view)/i.test(html.wxo), 'wxO visitor-facing media labels must not imply independently unverified release status.');
 has(css.wxo, '.doc-motion-section', 'Accuracy Evaluation motion block must own top spacing.');
 need(/\.wxo-public-pilot \.doc-motion-section\s*\{[^}]*padding-top:/is.test(css.wxo), 'Accuracy Evaluation must have explicit top breathing room.');
@@ -101,7 +101,7 @@ lacks(generator, 'shape-cue', 'Home generator must not regenerate the rejected d
 lacks(html.home, 'featured-item-shell', 'Home must not restore the competing related-link shell.');
 lacks(html.home, 'featured-item-related', 'Home must retain one wxO action, not a second Document Processing link.');
 has(html.home, 'featured-practice', 'Current practice must remain integrated into the wxO card.');
-has(html.home, '<em>There’s a bonus one here</em>', 'The bonus note must remain subdued supporting copy.');
+has(html.home, '<em>Includes Document Processing</em>', 'The bonus note must remain subdued supporting copy.');
 need(/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-list,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\);/i.test(css.shared), 'Home mobile project grid must use a zero-minimum single track.');
 
 // Interface Studies: Ekos desktop/mobile share one contained pair.

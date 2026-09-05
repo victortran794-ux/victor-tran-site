@@ -37,7 +37,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 ## Section Headings
 
-- Other cool things to check out
+- Selected work
 - IBM watsonx Orchestrate
 - IBM Cloud Observability
 - IBM Patterns: Contact Us
@@ -53,7 +53,7 @@ Victor Tran. Visual designer at IBM. I design cool things with sincerity.
 
 I design cool things with sincerity.
 
-Visual designer building clear, expressive systems across enterprise products, brands, and stories.
+I’m a visual designer working across enterprise products, brand identity, editorial design, and illustration.
 
 Palette
 
@@ -81,7 +81,7 @@ Freelance publication and environmental design extending PCI's existing brand in
 
 A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities.
 
-Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.
+Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine.
 
 A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity.
 

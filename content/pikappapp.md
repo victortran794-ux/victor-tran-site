@@ -42,7 +42,7 @@ I reviewed the resources we already had, including recruitment guides, and spoke
 
 The same issues kept coming up: information was spread across tools, and the member experience became harder to follow whenever another system entered the mix.
 
-Research context: this was practical internal discovery for an experimental concept, not a funded usability study.
+This was an exploratory concept informed by internal conversations. I didn’t conduct a formal usability study.
 
 Starting out · Associate member
 
@@ -72,17 +72,17 @@ The launch state introduced the star-and-swords mark on the original cyan field.
 
 Chapter 04
 
-The later V2 direction keeps the original cyan field and member flow recognizable while tightening type, spacing, controls, contrast, and accessibility.
+The later V2 study revisits the original member flow with a navy-and-gold palette and updated typography, spacing, and controls.
 
-Four focused alterations connect the source to the final concept screens.
+The six screens below show that direction.
 
 Tighter type and spacing make responsibilities easier to scan.
 
-Member, chapter, national, and settings destinations remain visible and consistent.
+The updated navigation uses Today, Chapter, Support, and You.
 
 Status, source, and next actions are separated more clearly.
 
-The original cyan field and identity cues still anchor the experience.
+The star-and-swords mark connects the updated screens to the original identity.
 
 Illustrative concept screens. Names, dates, rankings, and activity are fictional.
 
@@ -100,7 +100,7 @@ Cover view selected.
 
 More visual work
 
-Art, graphic design, and interface studies continue as one connected set.
+There’s more in the art, graphic design, and interface galleries.
 
 ## Images
 

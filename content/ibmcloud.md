@@ -52,13 +52,13 @@ Token translation mapped source visualization roles toward IBM theme values.
 
 I created most of the original product illustrations and reusable components, then partnered with the team to document and scale the method.
 
-Exploration narrowed composition, service metaphors, and hierarchy.
+These sketches explore service metaphors and composition.
 
-Shared construction, color, gradient, and lighting rules made the method easier to inspect and extend.
+The foundations define shared rules for geometry, color, gradients, and lighting.
 
-Observability opens the page. Five additional product pairs show how the shared method adapted across themes and services.
+Five services, each shown in light and dark themes.
 
-The same geometry and color discipline carried into smaller icon surfaces.
+These service icons use the same geometry and color palette.
 
 ## Images
 

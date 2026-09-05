@@ -32,24 +32,22 @@ Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s
 
 ## Section Headings
 
-- From brochure to publication.
+- From layout to creative direction.
 - One publication, many reading modes.
 - Range inside the system.
-- The work stays available in full.
+- Read the issues.
 
 ## Body Copy
 
-Five years of issues, art direction, and editorial design.
-
 01 / Redrawing a legacy
 
-The work grew from hands-on layout design into creative direction, while I kept designing each issue.
+My role grew from layout design into creative direction, and I continued designing each issue.
 
 Publication context
 
 First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.
 
-"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, from the final issue I art directed.
+“To Connie, the rose of Pi Kappa Phi.” A tribute to the fraternity’s First Lady, from my final issue as art director.
 
 02 / Editorial system
 
@@ -57,7 +55,7 @@ Feature openers, reporting, captions, and issue markers form a flexible editoria
 
 "Test on 10th" balances photography, pull quotes, and dense reporting across the spread.
 
-Artifact reading
+Design details
 
 System relationship
 
@@ -65,7 +63,7 @@ Four favorite spreads from the Summer 2017 issue.
 
 03 / Art direction in practice
 
-Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.
+Editorial features and chapter stories from issues I art directed.
 
 "A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.
 
@@ -73,21 +71,21 @@ Representative work across reporting, information design, photography, illustrat
 
 "Thirty Under 30" celebrates thirty alumni redefining what it means to lead.
 
-Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.
+Stories of the men who ride, build, and serve through The Ability Experience.
 
-One cover story from each of the remaining issues, with five years of features in chronological order.
+Four more cover stories from the archive, presented chronologically.
 
 "Woven into the lives of others" collects stories from the summer Ability Experience.
 
-"The Challenge We Must Face." takes a hard look at the fraternity in the wake of a brother's death.
+“The Challenge We Must Face” takes a hard look at the fraternity in the wake of a brother’s death.
 
 "Throwing Bones" follows Kenny Capps as he runs the Mountains-to-Sea Trail in the face of cancer.
 
-"Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.
+“Leading the Decade” marks ten years of Pi Kapp College for Emerging Leaders.
 
 04 / Five years of issues
 
-Five years of issues, archived in full on Issuu. Click any cover to read the issue.
+Select a cover to read that issue on Issuu.
 
 Verified recognition
 
@@ -95,11 +93,7 @@ Verified recognition
 
 2018 · 3rd Place Overall Magazine Excellence
 
-The complete nine-issue archive remains accessible.
-
 Complete archive
-
-Read all nine issues produced across five years, then continue to the magazine's latest releases.
 
 ## Images
 

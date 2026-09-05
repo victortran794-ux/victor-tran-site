@@ -86,25 +86,26 @@ def main() -> int:
 
     # Approved public narrative must not silently disappear or regress to the
     # earlier over-direct ownership framing.
+    need('class="sal-vico2-hero-note"' not in html, "removed repetitive hero note must not return")
+    need('The Final Issue' not in html, "caption must not imply that the magazine ended")
     required_copy = [
         "Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.",
-        "Five years of issues, art direction, and editorial design.",
-        '"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity\'s First Lady, from the final issue I art directed.',
-        "The work grew from hands-on layout design into creative direction, while I kept designing each issue.",
+        '“To Connie, the rose of Pi Kappa Phi.” A tribute to the fraternity’s First Lady, from my final issue as art director.',
+        "My role grew from layout design into creative direction, and I continued designing each issue.",
         "First published in fall 1909, Star &amp; Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.",
-        "Five years of issues, archived in full on Issuu. Click any cover to read the issue.",
+        "Select a cover to read that issue on Issuu.",
         "View the complete issue archive",
-        "Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.",
+        "Editorial features and chapter stories from issues I art directed.",
         '"A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.',
         '"Thirty Under 30" celebrates thirty alumni redefining what it means to lead.',
-        "Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.",
+        "Stories of the men who ride, build, and serve through The Ability Experience.",
         "Four favorite spreads from the Summer 2017 issue.",
         '"Test on 10th" balances photography, pull quotes, and dense reporting across the spread.',
-        "One cover story from each of the remaining issues, with five years of features in chronological order.",
+        "Four more cover stories from the archive, presented chronologically.",
         '"Woven into the lives of others" collects stories from the summer Ability Experience.',
-        '"The Challenge We Must Face." takes a hard look at the fraternity in the wake of a brother\'s death.',
+        '“The Challenge We Must Face” takes a hard look at the fraternity in the wake of a brother’s death.',
         '"Throwing Bones" follows Kenny Capps as he runs the Mountains-to-Sea Trail in the face of cancer.',
-        '"Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.',
+        '“Leading the Decade” marks ten years of Pi Kapp College for Emerging Leaders.',
     ]
     for copy in required_copy:
         need(copy in html, f"missing existing public narrative: {copy[:72]}")
@@ -139,7 +140,7 @@ def main() -> int:
     )
     need("sal-vico2-archive-note" not in html, "legacy padded archive note must be removed")
     need(
-        '"description": "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."' in projects,
+        '"description": "Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine."' in projects,
         "homepage SAL description must use the approved third-person voice",
     )
 

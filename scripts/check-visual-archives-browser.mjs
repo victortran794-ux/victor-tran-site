@@ -224,7 +224,7 @@ async function checkLightbox(spec) {
   const opened = await cdp.evaluate(`(() => {
     const dialog = document.querySelector('.lightbox');
     const main = document.querySelector('main#main-content');
-    const focusables = [...dialog.querySelectorAll('button:not([disabled])')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
+    const focusables = [...dialog.querySelectorAll('button:not([disabled]), [tabindex="0"]')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
     return { open: dialog.classList.contains('is-open'), inert: dialog.inert, ariaHidden: dialog.getAttribute('aria-hidden'), active: document.activeElement?.className, overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), focusables: focusables.map((element) => element.className) };
   })()`);
   assert(opened.open && !opened.inert && opened.ariaHidden === 'false' && opened.active.includes('lb-close') && opened.overflow === 'hidden' && opened.mainInert && opened.mainHidden === 'true',
@@ -232,7 +232,7 @@ async function checkLightbox(spec) {
   assert(opened.focusables.length >= 4, `${spec.file}: lightbox controls are unexpectedly incomplete.`);
   await cdp.evaluate(`document.querySelector('.lightbox .lb-thumb:last-child').focus()`);
   await cdp.key('Tab', 'Tab', 9);
-  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-close')`), `${spec.file}: Tab escapes the visible lightbox controls.`);
+  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-size')`), `${spec.file}: Tab must wrap to the first visible lightbox control, View actual size.`);
   await cdp.key('Tab', 'Tab', 9, 8);
   assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-thumb:last-child')`), `${spec.file}: Shift+Tab escapes the visible lightbox controls.`);
   const countBefore = await cdp.evaluate(`document.querySelector('.lb-count').textContent`);

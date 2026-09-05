@@ -29,7 +29,7 @@ if (!wxoProject || wxoProject.protected || wxoProject.noindex || wxoProject.site
   fail('wxO manifest must describe the approved public route.');
 }
 if (wxoProject?.homepageRelated) fail('Home wxO card must not expose a separate Document Processing link');
-if (wxoProject?.homepageBonus !== 'There’s a bonus one here') fail('Home wxO card must carry the approved non-link bonus note');
+if (wxoProject?.homepageBonus !== 'Includes Document Processing') fail('Home wxO card must carry the approved non-link bonus note');
 for (const marker of ['featured-card-actions', 'featured-practice', 'featured-item-bonus']) {
   if (!homeGenerator.includes(marker) || !home.includes(marker)) fail(`Home missing approved wxO action marker: ${marker}`);
 }

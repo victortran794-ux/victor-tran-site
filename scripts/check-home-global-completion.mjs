@@ -22,8 +22,8 @@ const healthWorkflow = read('.github/workflows/health-check.yml');
 const pages = shell.pages.map(read);
 const bySlug = new Map(manifest.projects.map((project) => [project.slug, project]));
 
-need(index.includes('id="featuredHeading">Other cool things to check out</h2>'),
-  'Home work heading must use Victor’s approved casual phrase.');
+need(index.includes('id="featuredHeading">Selected work</h2>'),
+  'Home work heading must use the selected review wording.');
 need(!index.includes('>Selected Work</h2>'), 'Retired Selected Work heading remains visible.');
 
 need(!index.includes('class="hero-cycle"') && !index.includes('class="hero-cycle-label"'),

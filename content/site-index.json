@@ -7,7 +7,7 @@
     "description": "Victor Tran. Visual designer at IBM. I design cool things with sincerity.",
     "contentFile": "content/index.md",
     "headings": [
-      "Other cool things to check out",
+      "Selected work",
       "IBM watsonx Orchestrate",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
@@ -219,9 +219,9 @@
     "contentFile": "content/wxo-canvas.md",
     "headings": [
       "Make complex workflows easier to read.",
-      "A stable grammar, inspected in both themes.",
+      "Node states and sizes",
       "User activities stay connected to the canvas.",
-      "Document Processing needed its own trust loop.",
+      "A closer look at Document Processing",
       "A visual system that kept expanding.",
       "One system for automation, specialized work, and human judgment."
     ],
@@ -492,11 +492,11 @@
     "contentFile": "content/pci.md",
     "headings": [
       "Dense material, given room to move.",
-      "A publication system for consequential information.",
+      "A handbook for hourly employees.",
       "Pacing first. Detail where it matters.",
       "The hexagon becomes geography.",
       "From page rhythm to environmental scale.",
-      "One implemented publication. One exploratory extension."
+      "A distributed handbook and recruitment concepts."
     ],
     "images": [
       {
@@ -618,10 +618,10 @@
     "description": "Five years of layout and art direction for Pi Kappa Phi’s official magazine.",
     "contentFile": "content/salmagazine.md",
     "headings": [
-      "From brochure to publication.",
+      "From layout to creative direction.",
       "One publication, many reading modes.",
       "Range inside the system.",
-      "The work stays available in full."
+      "Read the issues."
     ],
     "images": [
       {

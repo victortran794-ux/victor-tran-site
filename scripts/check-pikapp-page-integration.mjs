@@ -183,13 +183,13 @@ for (const required of [
   'A formative project that changed how I approached product design.',
   'Chapter 04',
   'V2 carries the original app forward.',
-  'The later V2 direction keeps the original cyan field and member flow recognizable while tightening type, spacing, controls, contrast, and accessibility.',
+  'The later V2 study revisits the original member flow with a navy-and-gold palette and updated typography, spacing, and controls.',
   '01 App launch',
-  'The launch state carries the original mark and cyan field into the updated system.',
+  'The launch screen pairs the original mark with the updated navy-and-gold palette.',
   '02 Welcome',
-  'A clearer login keeps the original identity while simplifying entry.',
+  'The login screen keeps the mark above the sign-in fields.',
   '03 Member view',
-  'The dashboard keeps progress, milestones, and chapter activity in one readable view.',
+  'The dashboard brings term progress and chapter updates together.',
   'Illustrative concept screens. Names, dates, rankings, and activity are fictional.',
   '<script src="js/pikappapp.js"></script>',
 ]) {
@@ -219,11 +219,11 @@ for (const requiredExport of [
   'The first app established the member flow.',
   'These original V1 exports preserve the first member flow as it was presented in 2020.',
   'V2 carries the original app forward.',
-  'Four focused alterations connect the source to the final concept screens.',
+  'The six screens below show that direction.',
   'Tighter type and spacing make responsibilities easier to scan.',
-  'Member, chapter, national, and settings destinations remain visible and consistent.',
+  'The updated navigation uses Today, Chapter, Support, and You.',
   'Status, source, and next actions are separated more clearly.',
-  'The original cyan field and identity cues still anchor the experience.',
+  'The star-and-swords mark connects the updated screens to the original identity.',
 ]) {
   if (!publicExport.includes(requiredExport)) fail(`public Pi Kapp export missing consolidated semantic content: ${requiredExport}`);
 }

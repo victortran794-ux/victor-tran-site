@@ -75,7 +75,7 @@ for(const token of [
   '.art-restored-wall figure:not(:first-child) { grid-column: span 3; }',
 ]) expect(generator.includes(token),`Traditional work generator CSS missing balanced desktop arrangement: ${token}`);
 
-const ekosCopy='A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.';
+const ekosCopy='A refined version of a client landing page concept from 2018. It wasn’t shipped; registration and booking are illustrative.';
 expect(ui.includes('<h2 id="ekos-study-title">Ekos Con</h2>'),'Ekos must keep the year only in supporting copy, not the large heading');
 expect(!ui.includes('<h2 id="ekos-study-title">Ekos Con 2018</h2>'),'Ekos large heading must not repeat 2018');
 expect(ui.includes(ekosCopy),'Ekos summary must include the approved provenance/status clarification');
@@ -92,7 +92,7 @@ for(const page of activeVisitorPages){
   expect(!/Victor(?:'s|’s)/.test(main),`${page} visitor-facing content must use first person instead of third-person possessive`);
 }
 expect(read('about.html').includes('title="Spotify playlist"'),'About playlist accessible title must avoid unnecessary possessive wording');
-expect(read('salmagazine.html').includes("Read all nine issues produced across five years, then continue to the magazine's latest releases."),'Star & Lamp archive copy must avoid unnecessary possessive wording');
+expect(read('salmagazine.html').includes('View the complete issue archive'),'Star & Lamp must retain its direct archive action after removing repetitive copy');
 
 if(failures.length){console.error(`GALLERY FOLLOWUPS CONTRACT: FAIL (${failures.length})`);for(const failure of failures)console.error(`- ${failure}`);process.exit(1)}
 console.log('GALLERY FOLLOWUPS CONTRACT: PASS');

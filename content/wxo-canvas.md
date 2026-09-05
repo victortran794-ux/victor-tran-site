@@ -30,9 +30,9 @@ I evolved an inherited Flow Builder toward a more robust, Carbon-aligned canvas 
 ## Section Headings
 
 - Make complex workflows easier to read.
-- A stable grammar, inspected in both themes.
+- Node states and sizes
 - User activities stay connected to the canvas.
-- Document Processing needed its own trust loop.
+- A closer look at Document Processing
 - A visual system that kept expanding.
 - One system for automation, specialized work, and human judgment.
 
@@ -46,17 +46,17 @@ Canvas system
 
 Nodes, connectors, flow controls, and user activities share a consistent grammar across the builder.
 
-The challenge was not a single screen. It was keeping roles, states, direction, and human intervention legible as separate epics added new kinds of work.
+Each feature added more types of work to the canvas. I helped keep nodes, states, and connections consistent as the builder expanded.
 
 Node library
 
-Focused explorations compare state and scale without losing the product theme they were designed for.
+These studies compare node states and sizes in light and dark modes.
 
 Human work in the flow
 
-I added the green User Activity family to make human work feel native to the workflow rather than separate from it.
+I added a green User Activity family for tasks that need a person’s input.
 
-The epic moves from placement, through form configuration, and back into the larger flow without sending authors into a disconnected experience.
+The sequence shows how authors add an activity, configure its form, and return to the workflow.
 
 Form sequence
 
@@ -68,21 +68,21 @@ The completed activity resolves back into the workflow as a readable part of the
 
 Parallel feature deep dive
 
-Developed in parallel with the broader canvas work, this feature arc connects classification, extraction, human review, and a later Accuracy Evaluation phase.
+I also worked on Document Processing, from classification and extraction to human review. Accuracy Evaluation followed later. The case study covers that work and my contribution.
 
 Canvas evolution
 
-The canvas progressed from an as-is builder into a V2 workflow and then an explicit agent hierarchy, while retaining a readable visual grammar.
+These examples show the existing builder, a V2 workflow, and a view of agent relationships.
 
-I supported the agent canvas vision, helping align it with the broader agentic workflow builder and the component language already taking shape.
+I supported the agent canvas vision by helping align it with the workflow builder and its components.
 
 Workflow vocabulary
 
-Elements establish the parts, containers organize behavior, application puts the system to work, and anchors keep connection points legible.
+The studies below show individual flow controls, their containers, an example workflow, and the points where connections attach.
 
 Throughline
 
-The canvas language created continuity while focused features could still develop their own depth.
+These studies show how the same components could support several kinds of work.
 
 Canvas visual study
 

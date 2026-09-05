@@ -60,7 +60,7 @@ for token in (
     need(index.count(token) == 1, f"Engraved DNA hero token must remain exactly once: {token}")
 for authored_copy in (
     'I design cool things with sincerity.',
-    'Visual designer building clear, expressive systems across enterprise products, brands, and stories.',
+    'I’m a visual designer working across enterprise products, brand identity, editorial design, and illustration.',
 ):
     need(authored_copy in index, f"signature hero copy must remain: {authored_copy}")
 
@@ -83,7 +83,7 @@ need('hero-pointer-wash' not in index and
      "the approved Engraved DNA hero must not reintroduce a cursor glow")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
-need(index.count('class="featured-heading"') == 1 and "Other cool things to check out" in index,
+need(index.count('class="featured-heading"') == 1 and "Selected work" in index,
      "the homepage needs one approved archive heading")
 need("localStorage.getItem('lens') || 'light'" in js,
      "first visit must default to Light while preserving an explicitly saved lens")
@@ -104,7 +104,7 @@ expected = {
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
     "abilityexperience": ("The Ability Experience", "abilityexperience.html", "A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities."),
-    "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."),
+    "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine."),
     "pikappapp": ("Pi Kapp App", "pikappapp.html", "A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity."),
     "artillustration": ("Art & Illustration", "artillustration.html", "Standalone digital and traditional work, including posters, paintings, and personal series."),
     "graphicgallery": ("Graphic Design", "graphicgallery.html", "Standalone identity, print, illustration, and event graphics."),

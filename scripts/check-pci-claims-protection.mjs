@@ -195,8 +195,8 @@ requireText(pciHtml, 'data-pci-artifact="red-hexagon-hero"', 'PCI red-hexagon he
 requireText(pciHtml, 'data-pci-artifact-count="3"', 'PCI three-artifact interior sequence');
 requireText(pciHtml, 'data-pci-artifact-count="4"', 'PCI four-artifact publication composition');
 requireText(pciHtml, 'data-pci-artifact="national-footprint-map"', 'PCI standalone map');
-requireText(pciHtml, 'landscape US Letter', 'PCI native-format disclosure');
-requireText(pciHtml, 'four coordinated artifacts', 'PCI four-artifact composition disclosure');
+requireText(pciHtml, 'Internal text is obscured in these approved portfolio images.', 'PCI confidentiality disclosure');
+requireText(pciHtml, 'Four examples: statement hierarchy, icon-supported principles, a pillar diagram, and a feature with photography.', 'PCI four-artifact composition disclosure');
 requireText(pciHtml, '<figcaption class="pci-caption pci-caption--pillar"><strong>Pillar diagram</strong></figcaption>', 'PCI pillar diagram export caption');
 
 for (const rejectedArtifact of [
@@ -260,11 +260,11 @@ if (!/<loc>https:\/\/www\.victortrandesign\.com\/pci<\/loc>/i.test(sitemap)) {
   fail('sitemap.xml must include PCI');
 }
 
-requireText(pciHtml, 'freelance designer', 'PCI role framing');
+requireText(pciHtml, 'Freelance designer', 'PCI role framing');
 requireText(pciHtml, "PCI's existing brand", 'PCI brand-extension framing');
 requireText(pciHtml, 'distributed to hourly employees company-wide', 'PCI confirmed handbook outcome');
 requireText(pciHtml, 'remained concepts', 'PCI banner status');
-requireText(pciHtml, 'top national specialty contractor', 'PCI researched company-scale framing');
+if (pciHtml.includes('top national specialty contractor')) fail('PCI page must not retain unsupported company-scale framing');
 requireText(homepage, 'Freelance publication and environmental design', 'Homepage PCI description');
 requireText(homepage, 'recruitment banner concepts', 'Homepage PCI description');
 

@@ -378,7 +378,7 @@ try {
     assert(dormant.workCard.hasPrimary && dormant.workCard.hasRelated,
       `${item.label}: wxO card must expose one primary action with its subtle bonus note ${JSON.stringify(dormant.workCard)}`);
     assert(dormant.workCard.relatedNested && dormant.workCard.relatedHref === 'wxo-canvas.html'
-      && dormant.workCard.relatedLabel === 'There’s a bonus one here',
+      && dormant.workCard.relatedLabel === 'Includes Document Processing',
       `${item.label}: bonus note must remain inside the singular wxO case-study link ${JSON.stringify(dormant.workCard)}`);
     assert(dormant.workCard.relatedTextTransform === 'none' && dormant.workCard.relatedDecoration === 'none'
       && dormant.workCard.relatedHeight > 0,
