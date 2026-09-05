@@ -29,6 +29,7 @@ body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.
 .ui-gallery-hero {
   min-height: min(72vh, 760px);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: end;
   padding: clamp(150px, 20vh, 230px) var(--page-x) clamp(64px, 8vw, 112px);
   border-bottom: 1px solid var(--ui-line);
@@ -234,7 +235,7 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
   }
 
   .ui-gallery-hero h1 {
-    font-size: clamp(3.7rem, 17vw, 5.9rem);
+    font-size: clamp(2.75rem, 14vw, 5.9rem);
   }
 
   .ui-gallery-intro {

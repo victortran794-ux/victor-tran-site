@@ -899,7 +899,7 @@ body.wxo-gallery-open {
   .wxo-public-pilot .pilot-section-heading,
   .wxo-public-pilot .pilot-canvas-opening,
   .wxo-public-pilot .pilot-side-quest-bridge {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .wxo-public-pilot .pilot-hero-grid {
@@ -1024,7 +1024,7 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .page-header-title {
     max-width: 10ch;
-    font-size: clamp(3.25rem, 17.8vw, 5.3rem);
+    font-size: clamp(3rem, 15vw, 5.3rem);
   }
 
   .wxo-public-pilot .pilot-chapter-index {
@@ -1038,7 +1038,7 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .pilot-chapter-index a {
     min-height: 5.5rem;
-    padding-inline: 0;
+    padding-inline: var(--page-x);
   }
 
   .wxo-public-pilot .pilot-section-heading h2,

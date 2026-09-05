@@ -1150,6 +1150,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const playText = panel.querySelector('.hero-dna-play-text');
   const fontChips = [...panel.querySelectorAll('[data-dna-font]')];
   const italicChip = panel.querySelector('[data-dna-italic]');
+  const italicState = panel.querySelector('[data-dna-italic-state]');
   let selectedTint = null;
   let hideTimer = 0;
 
@@ -1198,6 +1199,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   italicChip?.addEventListener('click', () => {
     const active = italicChip.classList.toggle('is-active');
     italicChip.setAttribute('aria-pressed', String(active));
+    if (italicState) italicState.textContent = active ? 'On' : 'Off';
     playText?.classList.toggle('is-italic', active);
   });
 

@@ -127,6 +127,16 @@ expect(/DM Serif Display/.test(html) && /Barlow/.test(html) && /Source Code Pro/
   && /class="hero-dna-type-playground"/.test(html)
   && /contenteditable="true"/.test(html),
   'inline Typography must restore real face labels and the editable larger specimen');
+expect(/class="hero-dna-font-group"[^>]*role="group"[^>]*aria-label="Typeface"[\s\S]*data-dna-font="'DM Serif Display', serif"[\s\S]*data-dna-font="'Barlow', sans-serif"[\s\S]*data-dna-font="'Source Code Pro', monospace"/i.test(html)
+  && /class="hero-dna-modifier-group"[^>]*role="group"[^>]*aria-label="Typeface modifier"[\s\S]*class="hero-dna-modifier-label"[^>]*>Modifier<\/[\s\S]*?data-dna-italic[^>]*aria-pressed="false"[\s\S]*data-dna-italic-state[^>]*>Off<\//i.test(html),
+  'Typography must keep typeface choices distinct from an explicit Italic modifier group with visible Off state and aria-pressed');
+expect(/\.hero-dna-modifier-group\s*\{[^}]*border-inline-start/i.test(css)
+  && /\.hero-dna-italic-state/i.test(css)
+  && /\.hero-dna-chip--italic\.is-active[\s\S]*\.hero-dna-italic-state::before[\s\S]*content:\s*['"]On['"]/i.test(css),
+  'Italic must receive its own visually separated modifier treatment with an explicit On state');
+expect(/const\s+italicState\s*=\s*panel\.querySelector\(['"][^)]*data-dna-italic-state/.test(js)
+  && /italicState\.textContent\s*=\s*active\s*\?\s*['"]On['"]\s*:\s*['"]Off['"]/.test(js),
+  'Italic interaction must synchronize the visible On or Off state with aria-pressed');
 expect(/class="hero-dna-space-token"/.test(html) && /class="hero-dna-space-value"/.test(html)
   && /class="hero-dna-radius-token"/.test(html) && /class="hero-dna-radius-value"/.test(html),
   'Spacing and Shape must restore their token names and values');

@@ -347,6 +347,21 @@ try {
   assert(desktopTooltip.left >= 0 && desktopTooltip.right <= desktop.width && desktopTooltip.top >= 0 && desktopTooltip.bottom <= 720, 'desktop viewing tooltip is clipped outside the viewport');
   await cdp.screenshot('abilityexperience-1280-dark.png');
 
+  let textRailStates = 0;
+  for (const width of [320, 390, 760, 761, 1280]) {
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: false });
+    for (const [route, selector] of [['salmagazine.html', '.sal-vico2-evidence'], ['uigallery.html', '.ui-gallery-hero'], ['wxo-canvas.html', '.pilot-hero'], ['wxo-canvas.html', '.pilot-chapter-index'], ['pikappapp.html', '#chapter-2 .chapter-head'], ['graphicgallery.html', '.graphic-opening']]) {
+      await cdp.navigate(`${baseUrl}/${route}`);
+      for (const theme of ['light', 'dark']) {
+        await cdp.evaluate(`(async()=>{document.querySelector('.nav-inner > .lens-switcher [data-lens="${theme}"]').click();await document.fonts.ready;document.querySelector('${selector}').scrollIntoView({block:'center',behavior:'instant'});await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));})()`);
+        const rail = await cdp.evaluate(`(()=>{const el=document.querySelector('${selector}');const viewport=document.documentElement.clientWidth;const token=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-x'));const blocks=[...el.querySelectorAll('h1,h2,h3,p,a:not(:has(img))')].map(e=>{const range=document.createRange();range.selectNodeContents(e);const rects=[...range.getClientRects()].filter(r=>r.width>0);return {text:e.textContent.trim(),left:Math.min(...rects.map(r=>r.left)),right:Math.max(...rects.map(r=>r.right))};});return {viewport,token,blocks};})()`);
+        assert(rail.blocks.length >= 1 && rail.blocks.every(b=>b.left>=rail.token-1 && b.right<=rail.viewport-rail.token+1), `${route} ${width} ${theme} text escaped its page gutter: ${JSON.stringify(rail)}`);
+        await cdp.screenshot(`${route.replace('.html','')}-${selector.replace(/[^a-z0-9-]/gi,'')}-text-rail-${width}-${theme}.png`);
+        textRailStates += 1;
+      }
+    }
+  }
+  assert(textRailStates === 60, 'text rail matrix is incomplete');
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);
   console.log(`SHARED SHELL BROWSER CHECK: PASS mobile_controls=${mobile.controls.length} evidence=${evidenceDir}`);
 } finally {

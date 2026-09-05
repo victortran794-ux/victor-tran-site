@@ -219,7 +219,7 @@ GRAPHIC_CSS = r'''
     .graphic-archive-v2 .archive-frame figcaption { color: var(--acid); }
     @media (max-width: 720px) {
       .graphic-archive-v2 .graphic-opening { min-height: auto; grid-template-columns: 1fr; }
-      .graphic-archive-v2 .archive-title { font-size: clamp(4.3rem, 18vw, 7rem); }
+      .graphic-archive-v2 .archive-title { font-size: clamp(3.5rem, 16vw, 7rem); }
       .graphic-archive-v2 .graphic-opening figure { margin-top: 2rem; border-width: 8px; }
       .graphic-archive-v2 .graphic-opening::after { font-size: 9rem; bottom: -2rem; }
       .graphic-archive-v2 .graphic-edc,

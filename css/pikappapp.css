@@ -692,8 +692,7 @@ html[data-theme="dark"] .pikapp-page .gallery-handoff__item>span{color:#adc5fa}
 .pikapp-page .chapter{padding:56px 0}
 
 .pikapp-page .chapter-head{margin-bottom:32px}
-
-.pikapp-page .chapter-head h2{font-size:48px}
+.pikapp-page .chapter-head h2{font-size:clamp(38px,10vw,44px)}
 
 .pikapp-page .chapter-copy__body p{font-size:17px}
 

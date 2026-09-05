@@ -164,10 +164,15 @@
           <div class="hero-dna-type-playground">
             <p class="hero-dna-play-text" contenteditable="true" spellcheck="false" aria-label="Editable typography sample">I design cool things with sincerity.</p>
             <div class="hero-dna-play-controls" aria-label="Typography sample controls">
-              <button type="button" class="hero-dna-chip is-active" data-dna-font="'DM Serif Display', serif">Serif</button>
-              <button type="button" class="hero-dna-chip" data-dna-font="'Barlow', sans-serif">Sans</button>
-              <button type="button" class="hero-dna-chip" data-dna-font="'Source Code Pro', monospace">Mono</button>
-              <button type="button" class="hero-dna-chip" data-dna-italic>Italic</button>
+              <div class="hero-dna-font-group" role="group" aria-label="Typeface">
+                <button type="button" class="hero-dna-chip is-active" data-dna-font="'DM Serif Display', serif">Serif</button>
+                <button type="button" class="hero-dna-chip" data-dna-font="'Barlow', sans-serif">Sans</button>
+                <button type="button" class="hero-dna-chip" data-dna-font="'Source Code Pro', monospace">Mono</button>
+              </div>
+              <div class="hero-dna-modifier-group" role="group" aria-label="Typeface modifier">
+                <span class="hero-dna-modifier-label">Modifier</span>
+                <button type="button" class="hero-dna-chip hero-dna-chip--italic" data-dna-italic aria-pressed="false">Italic <span class="hero-dna-italic-state" data-dna-italic-state>Off</span></button>
+              </div>
             </div>
           </div>
         </div>

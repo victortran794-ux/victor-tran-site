@@ -87,6 +87,11 @@ for (const item of docLedger.assets || []) {
 const classify = (docLedger.assets || []).find((item) => item.file.endsWith('/classify-setup.png'));
 if (classify?.additionalRoutes) fail('Classify provenance must not allow the obsolete public wxO image bridge.');
 
+const mobileUiCss = read('css/ui-gallery.css');
+if (!/\.ui-gallery-hero\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s.test(mobileUiCss)) fail('UI gallery hero must allow its grid track to shrink');
+if (!mobileUiCss.includes('font-size: clamp(2.75rem, 14vw, 5.9rem)')) fail('UI gallery mobile heading must fit its text rail');
+if (!sharedCss.includes('.sal-vico2-evidence > div { min-width: 0; overflow-wrap: anywhere;')) fail('SAL recognition copy must shrink and wrap inside its card');
+
 if (failures.length) {
   console.error('MANUAL REVIEW FOLLOW-UPS: FAIL');
   for (const failure of failures) console.error(`- ${failure}`);

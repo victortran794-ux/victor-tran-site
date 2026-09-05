@@ -587,6 +587,20 @@ try {
         faceNames: [...panel.querySelectorAll('.hero-dna-type-row b')].map(face => face.textContent.trim()),
         typeSampleSize: parseFloat(getComputedStyle(panel.querySelector('.hero-dna-type-sample')).fontSize),
         editableSample: panel.querySelector('.hero-dna-play-text')?.getAttribute('contenteditable'),
+        typographyControls: (() => {
+          const fontGroup = panel.querySelector('.hero-dna-font-group');
+          const modifierGroup = panel.querySelector('.hero-dna-modifier-group');
+          const italic = panel.querySelector('[data-dna-italic]');
+          return {
+            fontRole: fontGroup?.getAttribute('role'),
+            fontLabel: fontGroup?.getAttribute('aria-label'),
+            modifierRole: modifierGroup?.getAttribute('role'),
+            modifierLabel: modifierGroup?.getAttribute('aria-label'),
+            modifierText: panel.querySelector('.hero-dna-modifier-label')?.textContent.trim(),
+            italicPressed: italic?.getAttribute('aria-pressed'),
+            italicState: italic?.querySelector('[data-dna-italic-state]')?.textContent.trim(),
+          };
+        })(),
         sharedStructure: panel.textContent.includes('Shared structure'),
         layout: (() => {
           const box = selector => {
@@ -618,6 +632,11 @@ try {
     assert(active.faceNames.join('|') === 'DM Serif Display|Barlow|Source Code Pro'
       && active.editableSample === 'true' && !active.sharedStructure,
       `${item.label}: restored DNA typography or section boundary failed ${JSON.stringify(active)}`);
+    assert(active.typographyControls.fontRole === 'group' && active.typographyControls.fontLabel === 'Typeface'
+      && active.typographyControls.modifierRole === 'group' && active.typographyControls.modifierLabel === 'Typeface modifier'
+      && active.typographyControls.modifierText === 'Modifier' && active.typographyControls.italicPressed === 'false'
+      && active.typographyControls.italicState === 'Off',
+    `${item.label}: Italic must be a distinct off-state modifier, not a fourth typeface ${JSON.stringify(active.typographyControls)}`);
     if (item.width > 760) assert(active.labelFontSize >= 9.9 && active.swatchWidth >= 32 && active.typeSampleSize >= 54,
       `${item.label}: desktop DNA content was not enlarged ${JSON.stringify({ labelFontSize: active.labelFontSize, swatchWidth: active.swatchWidth, typeSampleSize: active.typeSampleSize })}`);
     if (item.width > 760) assert(Math.abs(active.layout.spacing[0] - active.layout.shape[0]) <= 1
@@ -671,10 +690,30 @@ try {
       await cdp.screenshot('desktop-light-dna-lower.png');
     }
 
-    if (item.label === 'mobile-light') {
+    if (item.label === 'desktop-dark') {
+      let focusedItalic = false;
+      for (let tab = 0; tab < 20; tab += 1) {
+        await cdp.key('Tab', 'Tab', 9);
+        focusedItalic = await cdp.evaluate(`document.activeElement === document.querySelector('[data-dna-italic]')`);
+        if (focusedItalic) break;
+      }
+      assert(focusedItalic, 'desktop-dark: trusted Tab traversal did not reach the Italic modifier');
+      await cdp.key(' ', 'Space', 32, ' ');
+      const keyboardItalic = await cdp.evaluate(`(() => {
+        const italic = document.querySelector('[data-dna-italic]');
+        const sample = document.querySelector('.hero-dna-play-text');
+        return { pressed: italic.getAttribute('aria-pressed'), state: italic.querySelector('[data-dna-italic-state]').textContent.trim(), style: getComputedStyle(sample).fontStyle };
+      })()`);
+      assert(keyboardItalic.pressed === 'true' && keyboardItalic.state === 'On' && keyboardItalic.style === 'italic',
+        `desktop-dark: keyboard Italic modifier state failed ${JSON.stringify(keyboardItalic)}`);
+    }
+
+    if (item.mobile) {
       await cdp.evaluate(`document.querySelector('[data-dna-close]').scrollIntoView({ block: 'center', behavior: 'instant' })`);
       await delay(350);
-      await cdp.screenshot('mobile-light-dna-lower.png');
+      await cdp.screenshot(`${item.label}-dna-lower.png`);
+    }
+    if (item.label === 'mobile-light') {
       await cdp.clickCenter('[data-dna-close]', true);
     } else {
       await cdp.key('Escape', 'Escape', 27);

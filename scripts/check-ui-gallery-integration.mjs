@@ -166,7 +166,7 @@ for (const token of [
   '.ui-gallery-page',
   '.ui-gallery-hero h1 {',
   'font-weight: 600;',
-  'font-size: clamp(3.7rem, 17vw, 5.9rem);',
+  'font-size: clamp(2.75rem, 14vw, 5.9rem);',
   '.ui-study-grid',
   '.ui-study--magi',
   '.ui-study-grid--magi',
