@@ -299,6 +299,10 @@
   padding: 0 var(--page-x);
   list-style: none;
 }
+.wxo-public-pilot .pilot-exploration-grid--node {
+  grid-template-columns: 1fr;
+  max-width: 1080px;
+}
 .wxo-public-pilot .pilot-exploration-grid > li {
   min-width: 0;
   padding: 0;
@@ -382,6 +386,16 @@
 .wxo-public-pilot .pilot-activity-epic {
   border-top: 3px solid var(--pilot-green);
   background: linear-gradient(145deg, var(--pilot-green-soft), var(--bg-2) 72%);
+}
+
+.wxo-public-pilot .pilot-activity-intro {
+  display: block;
+  margin: 0 0 clamp(2.5rem, 5vw, 4.5rem);
+  padding: 0;
+}
+
+.wxo-public-pilot .pilot-activity-intro .workflow-label {
+  margin-bottom: clamp(1.1rem, 2vw, 1.75rem);
 }
 
 [data-theme='dark'] .wxo-public-pilot .pilot-activity-epic {
@@ -688,7 +702,8 @@
 }
 
 .wxo-public-pilot .pilot-close h2 {
-  max-width: 14ch;
+  max-width: 100%;
+  font-size: clamp(2.25rem, 2.9vw, 3.25rem);
 }
 
 .wxo-public-pilot .pilot-close-copy > p:last-child {
@@ -700,6 +715,7 @@
 }
 
 .wxo-public-pilot .pilot-close-media {
+  min-width: 0;
   margin: 0;
 }
 
@@ -1096,6 +1112,10 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .pilot-section-heading h2,
   .wxo-public-pilot .pilot-close h2 {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .wxo-public-pilot .pilot-section-heading:not(.pilot-activity-intro) h2 {
     font-size: clamp(2.7rem, 13.8vw, 4.2rem);
   }
 

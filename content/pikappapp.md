@@ -30,7 +30,6 @@ A mobile application concept for undergraduate fraternity members to track miles
 - V2 carries the original app forward.
 - A formative project that changed how I approached product design.
 - Expansion Portfolio
-- Keep looking through the galleries.
 
 ## Body Copy
 
@@ -97,10 +96,6 @@ A selected sequence of complete pages from the original Creighton University exp
 Views
 
 Cover view selected.
-
-More visual work
-
-There’s more in the art, graphic design, and interface galleries.
 
 ## Images
 

@@ -32,7 +32,9 @@ const projects = {
   projects: [
     { slug: 'public', title: 'Public project', url: 'public.html', type: 'primary', nav: true, projectNavNext: 'gallery' },
     { slug: 'protected', title: 'Protected project', url: 'protected.html', type: 'primary', nav: true },
-    { slug: 'gallery', title: 'Gallery project', url: 'gallery.html', type: 'gallery', nav: true },
+    { slug: 'gallery', title: 'Gallery project', url: 'gallery.html', type: 'gallery', nav: true, projectNavDescription: 'First gallery description' },
+    { slug: 'gallery-two', title: 'Second gallery', url: 'gallery-two.html', type: 'gallery', nav: true, projectNavDescription: 'Second gallery description' },
+    { slug: 'gallery-three', title: 'Third gallery', url: 'gallery-three.html', type: 'gallery', nav: true, projectNavDescription: 'Third gallery description' },
   ],
 };
 const policy = {
@@ -124,7 +126,8 @@ try {
     if (['public.html', 'protected.html'].includes(page)) {
       assert.match(html, /<!-- generated:project-nav:start -->/);
       assert.match(html, /aria-label="Previous project:/);
-      assert.match(html, /aria-label="Next project:/);
+      if (page === 'public.html') assert.match(html, /class="project-nav-gallery-panel"/);
+      else assert.match(html, /aria-label="Next project:/);
     }
   }
 
@@ -140,7 +143,28 @@ try {
   assert.doesNotMatch(publicPage, /images\/nav-logo\.webp|class="nav-logo-name"/,
     'non-home pages must not retain the older image-and-name lockup');
   assert.match(publicPage, /href="public\.html" class="active" aria-current="page"/);
-  assert.match(publicPage, /href="gallery\.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Gallery project"/);
+  const publicNav = publicPage.match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)?.[1] ?? '';
+  assert.match(publicNav, /class="project-nav-gallery-panel" aria-label="Next galleries"/,
+    'a primary route entering a gallery sequence must consolidate the sequence into its Next panel');
+  assert.match(publicNav, /href="gallery\.html" class="project-nav-gallery-primary"[^>]*>[^]*?First gallery description/,
+    'the named next gallery must remain the primary linked destination with its short description');
+  assert.match(publicNav, /href="gallery-two\.html"[^>]*>[^]*?Second gallery description/,
+    'secondary gallery links must retain their short descriptions');
+  assert.deepEqual([...publicNav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]),
+    ['protected.html', 'gallery.html', 'gallery-two.html', 'gallery-three.html']);
+  assert.equal((publicNav.match(/class="project-nav-gallery-primary"/g) || []).length, 1,
+    'the first gallery must not be repeated as a non-link panel title');
+  assert.doesNotMatch(publicNav, /<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/,
+    'the consolidated gallery panel must not nest destination links');
+  projects.projects[0].projectNavNext = 'gallery-two';
+  writeJson('projects.json', projects);
+  generateSiteShell(tempRoot);
+  const reorderedNav = fs.readFileSync(path.join(tempRoot, 'public.html'), 'utf8').match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)[1];
+  assert.deepEqual([...reorderedNav.matchAll(/href="([^"]+)"/g)].map(match => match[1]),
+    ['protected.html', 'gallery-two.html', 'gallery.html', 'gallery-three.html'], 'configured gallery destination must not be duplicated or drop another gallery');
+  projects.projects[0].projectNavNext = 'gallery';
+  writeJson('projects.json', projects);
+  generateSiteShell(tempRoot);
   const about = fs.readFileSync(path.join(tempRoot, 'about.html'), 'utf8');
   assert.match(about, /href="about\.html" class="active" aria-current="page"/);
   const protectedPage = fs.readFileSync(path.join(tempRoot, 'protected.html'), 'utf8');

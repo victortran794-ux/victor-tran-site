@@ -138,16 +138,29 @@ function buildProjectNav(projects, currentPage) {
     fail(`${current.slug} projectNavNext does not resolve to a navigable project: ${current.projectNavNext}`);
   }
   const next = configuredNext || primary[(currentIndex + 1) % primary.length];
+  const gallerySequence = next.type === 'gallery'
+    ? projects.filter((project) => project.nav && project.type === 'gallery')
+    : [];
+  const galleryDescription = (gallery) => gallery.projectNavDescription || gallery.description || '';
+  const nextMarkup = gallerySequence.length
+    ? `    <section class="project-nav-gallery-panel" aria-label="Next galleries">
+      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
+      <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-gallery-primary" aria-label="Next gallery: ${escapeHtml(next.title)}"><span class="project-nav-title">${escapeHtml(next.title)}</span><small>${escapeHtml(galleryDescription(next))}</small></a>
+      <div class="project-nav-gallery-links" aria-label="Gallery destinations">
+${gallerySequence.filter((gallery) => gallery.slug !== next.slug).map((gallery, index) => `        <a href="${escapeHtml(gallery.entryUrl || gallery.url)}" class="project-nav-gallery-link" aria-label="Gallery ${index + 2}: ${escapeHtml(gallery.title)}"><span>${String(index + 2).padStart(2, '0')}</span><strong>${escapeHtml(gallery.title)}</strong><small>${escapeHtml(galleryDescription(gallery))}</small></a>`).join('\n')}
+      </div>
+    </section>`
+    : `    <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
+      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
+      <span class="project-nav-title">${escapeHtml(next.title)}</span>
+    </a>`;
   return `  <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
     <a href="${escapeHtml(previous.entryUrl || previous.url)}" class="project-nav-item project-nav-item--prev" aria-label="Previous project: ${escapeHtml(previous.title)}">
       <span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span>
       <span class="project-nav-title">${escapeHtml(previous.title)}</span>
     </a>
-    <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
-      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
-      <span class="project-nav-title">${escapeHtml(next.title)}</span>
-    </a>
+${nextMarkup}
   </nav>
   <!-- generated:project-nav:end -->`;
 }

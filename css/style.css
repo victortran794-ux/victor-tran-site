@@ -732,6 +732,8 @@ html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
   padding: var(--section-y) 0 var(--space-12);
   background: var(--bg);
   border-top: 1px solid var(--border);
+  /* Keep shared contact typography and list treatment outside project-local CSS. */
+  font-family: 'Barlow', sans-serif;
 }
 
 .footer-inner {
@@ -795,6 +797,14 @@ html[data-theme="dark"] .nav-logo-tran { color: #f7f6f3; }
   flex-wrap: wrap;
   gap: 12px 18px;
   list-style: none;
+}
+
+.footer-social li {
+  list-style: none;
+}
+
+.footer-social li::before {
+  content: none;
 }
 
 .footer-social a,
@@ -2503,6 +2513,68 @@ html[data-finish-proof] .page-context + .page-header { padding-top: var(--space-
   padding-left: var(--space-8);
 }
 
+.project-nav-gallery-panel {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-12) 0 var(--space-12) var(--space-8);
+  text-align: right;
+}
+
+.project-nav-gallery-primary {
+  display: grid;
+  gap: var(--space-2);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.project-nav-gallery-primary small,
+.project-nav-gallery-link small {
+  color: var(--text-2);
+  font-size: var(--text-caption);
+  line-height: 1.45;
+}
+
+.project-nav-gallery-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: var(--space-4);
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.project-nav-gallery-link {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-4);
+  color: var(--text);
+  background: var(--bg);
+  text-align: left;
+  text-decoration: none;
+}
+
+.project-nav-gallery-link > span {
+  color: var(--text-2);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  letter-spacing: .12em;
+}
+
+.project-nav-gallery-link > strong {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.project-nav-gallery-primary:is(:hover, :focus-visible),
+.project-nav-gallery-link:is(:hover, :focus-visible) {
+  color: var(--blue);
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
 .project-nav-label {
   font-family: 'Source Code Pro', monospace;
   font-size: var(--text-caption);
@@ -2513,19 +2585,7 @@ html[data-finish-proof] .page-context + .page-header { padding-top: var(--space-
 }
 
 .project-nav-item::before {
-  content: '';
-  width: var(--shape-cue-size);
-  height: var(--shape-cue-size);
-  border: var(--shape-cue-border) solid currentColor;
-  background: transparent;
-  transform: rotate(45deg);
-  transition: background var(--duration-fast), transform var(--duration-fast);
-}
-
-.project-nav-item--next::before { order: 2; }
-.project-nav-item:is(:hover, :focus-visible)::before {
-  background: currentColor;
-  transform: rotate(45deg) scale(1.08);
+  content: none;
 }
 
 .project-nav-title {
@@ -4050,6 +4110,8 @@ html[data-theme="dark"] .spotify-frame {
   .project-nav { grid-template-columns: 1fr; }
   .project-nav-item--prev { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; }
   .project-nav-item--next { align-items: flex-start; text-align: left; padding-left: 0; }
+  .project-nav-gallery-panel { padding-left: 0; text-align: left; }
+  .project-nav-gallery-links { grid-template-columns: 1fr; }
 }
 
 
@@ -4774,6 +4836,7 @@ main img[aria-haspopup="dialog"] { cursor: zoom-in; }
 .sal-vico2-cover-stories figure { margin: 0; }
 .sal-vico2-evidence { margin-top: 0; background: var(--bg-2); }
 .sal-vico2-evidence > div { min-width: 0; overflow-wrap: anywhere; padding: clamp(32px, 5vw, 64px); }
+.sal-vico2-evidence h3 { font-size: clamp(2.4rem, 3vw, 3rem); overflow-wrap: normal; }
 .sal-vico2-awards p { margin: 0; padding: var(--space-5) 0; border-top: 1px solid var(--border); font-family: 'Source Code Pro', monospace; font-size: var(--text-label); letter-spacing: 0.08em; text-transform: uppercase; }
 .sal-vico2-cover-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-8); }
 .sal-vico2-cover-wall a { color: inherit; text-decoration: none; }

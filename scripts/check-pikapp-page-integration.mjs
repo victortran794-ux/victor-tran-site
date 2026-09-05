@@ -404,7 +404,9 @@ for (const [key, value] of Object.entries(expectedProject)) {
   if (project?.[key] !== value) fail(`data/projects.json Pi Kapp ${key} drifted`);
 }
 if (project?.projectNavNext !== 'artillustration') fail('Pi Kapp project navigation must continue to Art & Illustration');
-if (!html.includes('href="artillustration.html" class="project-nav-item project-nav-item--next" aria-label="Next project: Art &amp; Illustration"')) fail('Pi Kapp generated next link must point to Art & Illustration');
+const projectNav = html.match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)?.[1] ?? '';
+if (!projectNav.includes('class="project-nav-gallery-panel"')) fail('Pi Kapp generated Next panel must consolidate the gallery sequence');
+if (!projectNav.includes('href="artillustration.html"') || !projectNav.includes('href="graphicgallery.html"') || !projectNav.includes('href="uigallery.html"')) fail('Pi Kapp generated Next panel must point to every gallery destination');
 if (!html.includes('<p class="coda__boundary">Illustrative concept screens. Names, dates, rankings, and activity are fictional.</p>')) fail('Pi Kapp remaster boundary must clearly frame fictional screen data');
 if (html.includes('concept-history') || html.includes('coda__meta')) fail('Pi Kapp page must not restore redundant chronology or final-remaster kicker chrome');
 

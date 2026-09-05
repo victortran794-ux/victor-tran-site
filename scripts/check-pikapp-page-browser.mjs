@@ -234,7 +234,7 @@ try {
         images.forEach((image)=>{image.loading='eager'});
         await Promise.all(images.map(async(image)=>{try{await image.decode()}catch{}}));
         const root=document.documentElement;
-        const controls=[...document.querySelectorAll('.phone-story__controls button,.gallery-handoff__item,.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
+        const controls=[...document.querySelectorAll('.phone-story__controls button,.project-nav-gallery-primary,.project-nav-gallery-link,.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
         const page=document.querySelector('.pikapp-page');
@@ -252,10 +252,10 @@ try {
         const triptychStyle=getComputedStyle(triptych);
         const triptychRhythm=['.member-cards','.coda__triptych'].map((selector)=>{const grid=document.querySelector(selector);const rect=grid.getBoundingClientRect();const children=[...grid.children].map((child)=>{const childRect=child.getBoundingClientRect();return childRect.left+(childRect.width/2)});return {selector,left:rect.left,right:rect.right,width:rect.width,centers:children}});
         const cue=document.querySelector('.expansion-archive-cue');
-        const finaleRects=['.coda__head','.coda__triptych','.coda__boundary','.gallery-handoff__head','.gallery-handoff__grid','.project-nav-item--prev','.project-nav-item--next'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
-        const galleryGrid=document.querySelector('.gallery-handoff__grid');
+        const finaleRects=['.coda__head','.coda__triptych','.coda__boundary','.project-nav-item--prev','.project-nav-gallery-panel'].map((selector)=>{const rect=document.querySelector(selector).getBoundingClientRect();return {selector,left:rect.left,right:rect.right,width:rect.width}});
+        const galleryGrid=document.querySelector('.project-nav-gallery-links');
         const galleryStyle=getComputedStyle(galleryGrid);
-        const galleryItems=[...galleryGrid.querySelectorAll('.gallery-handoff__item')].map((link)=>{const rect=link.getBoundingClientRect();return {href:link.getAttribute('href'),left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
+        const galleryItems=[document.querySelector('.project-nav-gallery-primary'),...galleryGrid.querySelectorAll('.project-nav-gallery-link')].map((link)=>{const rect=link.getBoundingClientRect();return {href:link.getAttribute('href'),left:rect.left,right:rect.right,width:rect.width,height:rect.height}});
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,deferredImages:deferredImages.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),
           controls,main:page?.id,tabindex:page?.getAttribute('tabindex'),current:document.querySelector('nav[aria-label="Primary"] [aria-current="page"]')?.getAttribute('href'),
@@ -263,7 +263,7 @@ try {
           principles:document.querySelectorAll('.future-principle').length,codaScreens:document.querySelectorAll('.coda__screen').length,phoneSlides:document.querySelectorAll('.phone-slide').length,explorationStudyCount:explorationStudies.length,explorationScreenCount:explorationScreens.length,
           boundary:boundaryElement?.textContent.trim().replace(/\\s+/g,' '),boundaryStyle:{fontStyle:boundaryStyle.fontStyle,fontSize:boundaryStyle.fontSize,padding:boundaryStyle.padding,borderLeftWidth:boundaryStyle.borderLeftWidth,backgroundColor:boundaryStyle.backgroundColor},avatars,personaLabels,phoneSlideRadii,remasterScreens,explorationScreens,explorationStudies,explorationBoundary:explorationBoundary?.textContent.trim().replace(/\\s+/g,' '),explorationFlow:explorationFlow?{display:getComputedStyle(explorationFlow).display,columns:getComputedStyle(explorationFlow).gridTemplateColumns,overflowX:getComputedStyle(explorationFlow).overflowX,clientWidth:explorationFlow.clientWidth,scrollWidth:explorationFlow.scrollWidth,tabindex:explorationFlow.getAttribute('tabindex')}:null,
           cue:{text:cue.textContent.trim(),opacity:getComputedStyle(cue).opacity},hoverNone:matchMedia('(hover: none)').matches,archiveViewLabels:[...document.querySelectorAll('.archive-view')].map((button)=>({text:button.textContent.trim(),label:button.getAttribute('aria-label')})),
-          next:{href:document.querySelector('.project-nav-item--next')?.getAttribute('href'),label:document.querySelector('.project-nav-item--next')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
+          next:{title:document.querySelector('.project-nav-gallery-panel .project-nav-title')?.textContent.trim(),label:document.querySelector('.project-nav-gallery-panel')?.getAttribute('aria-label')},pattern:getComputedStyle(document.querySelector('.poster'),'::after').backgroundImage,
           triptych:{display:triptychStyle.display,columns:triptychStyle.gridTemplateColumns,overflowX:triptychStyle.overflowX,clientWidth:triptych.clientWidth,scrollWidth:triptych.scrollWidth,tabindex:triptych.getAttribute('tabindex')},triptychRhythm,finaleRects,gallery:{columns:galleryStyle.gridTemplateColumns,items:galleryItems},
           reviewUi:Boolean(document.querySelector('.reviewbar,.decision,[data-view-button]')),privateText:['Private page review','Requested decision','KEEP / ADJUST / REJECT'].some((text)=>document.body.textContent.includes(text))};
       })()`);
@@ -281,9 +281,9 @@ try {
       assert(state.remasterScreens.every((screen)=>screen.frameBorderRadius==='0px'&&screen.frameOverflow==='visible'&&screen.borderRadius==='0px'&&screen.boxShadow==='none'&&screen.objectFit==='contain'&&Math.abs(screen.aspect-(390/844))<0.002),`remaster screens lost complete uncropped 390/844 treatment: ${JSON.stringify(state.remasterScreens)}`);
       assert(state.explorationScreens.length===0,'AI-assisted exploration screens returned to the public case-study sequence');
       assert(state.explorationStudies.length===0,`redundant broad exploration studies returned: ${JSON.stringify(state.explorationStudies)}`);
-      assert(state.gallery.items.map((item)=>item.href).join('|')==='artillustration.html|graphicgallery.html|uigallery.html',`gallery handoff order drifted: ${JSON.stringify(state.gallery)}`);
-      assert(state.gallery.items.every((item)=>item.left>=-1&&item.right<=viewport.width+1&&item.width>0&&item.height>=44),`gallery handoff escaped or became undersized: ${JSON.stringify(state.gallery)}`);
-      assert(state.gallery.columns.split(' ').length===(viewport.width<=700?1:3),`gallery handoff columns drifted at ${viewport.label}: ${JSON.stringify(state.gallery)}`);
+      assert(state.gallery.items.map((item)=>item.href).join('|')==='artillustration.html|graphicgallery.html|uigallery.html',`consolidated gallery order drifted: ${JSON.stringify(state.gallery)}`);
+      assert(state.gallery.items.every((item)=>item.left>=-1&&item.right<=viewport.width+1&&item.width>0&&item.height>=44),`consolidated gallery panel escaped or became undersized: ${JSON.stringify(state.gallery)}`);
+      assert(state.gallery.columns.split(' ').length===(viewport.width<=760?1:2),`consolidated secondary gallery columns drifted at ${viewport.label}: ${JSON.stringify(state.gallery)}`);
       if (viewport.mobile||viewport.compact) {
         assert(state.finaleRects.every((rect)=>rect.left>=24-1&&rect.right<=viewport.width-24+1),`compact finale gutter escaped 24px boundary: ${JSON.stringify(state.finaleRects)}`);
         assert(state.triptych.display==='grid'&&state.triptych.columns.split(' ').length===2&&state.triptych.overflowX==='visible'&&state.triptych.scrollWidth===state.triptych.clientWidth,`compact remaster must be a complete two-up grid without clipping: ${JSON.stringify(state.triptych)}`);
@@ -300,7 +300,7 @@ try {
       assert(state.avatars.length===3&&state.avatars.every((avatar)=>avatar.color===avatar.border&&avatar.width>=42&&avatar.height>=42),`member avatar treatment drifted: ${JSON.stringify(state.avatars)}`);
       assert(state.cue.text===''&&state.cue.opacity===(state.hoverNone?'1':'0'),`archive cue initial state drifted at ${viewport.label}: ${JSON.stringify({cue:state.cue,hoverNone:state.hoverNone})}`);
       assert(state.archiveViewLabels.length===8&&state.archiveViewLabels.every((view)=>!view.text)&&state.archiveViewLabels.map((view)=>view.label).join('|')==='View portfolio cover|View Creighton opener|View expansion timeline|View post-expansion support|View national statistics|View regional map|View event application|View environmental context',`archive page labels drifted: ${JSON.stringify(state.archiveViewLabels)}`);
-      assert(state.next.href==='artillustration.html'&&state.next.label==='Next project: Art & Illustration',`Pi Kapp next-project route drifted: ${JSON.stringify(state.next)}`);
+      assert(state.next.title==='Art & Illustration'&&state.next.label==='Next galleries',`Pi Kapp Next gallery panel drifted: ${JSON.stringify(state.next)}`);
       assert(state.pattern.includes('pattern-dark-blue-display.svg'),'edge-clean pattern hero failed to resolve');
       assert(!state.reviewUi&&!state.privateText,'private review UI or copy escaped production');
       if (viewport.mobile) {
@@ -322,8 +322,8 @@ try {
         await cdp.screenshot('pikapp-390-light-boundary.png');
         await cdp.evaluate(`document.querySelector('.close').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-390-light-looking-back.png');
-        await cdp.evaluate(`document.querySelector('.gallery-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-390-light-gallery-handoff.png');
+        await cdp.evaluate(`document.querySelector('.project-nav-gallery-panel').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-390-light-next-galleries.png');
       }
       if (viewport.label==='1280'&&theme==='dark') {
         await cdp.evaluate(`document.querySelector('.member-cards').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
@@ -339,12 +339,34 @@ try {
         await cdp.screenshot('pikapp-1280-dark-boundary.png');
         await cdp.evaluate(`document.querySelector('.close').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
         await cdp.screenshot('pikapp-1280-dark-looking-back.png');
-        await cdp.evaluate(`document.querySelector('.gallery-handoff').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
-        await cdp.screenshot('pikapp-1280-dark-gallery-handoff.png');
+        await cdp.evaluate(`document.querySelector('.project-nav-gallery-panel').scrollIntoView({block:'center',behavior:'instant'})`); await delay(80);
+        await cdp.screenshot('pikapp-1280-dark-next-galleries.png');
       }
       checks += 1;
     }
   }
+
+  const waitForPath = async (expectedPath, label) => {
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      cdp.contextsByFrame.clear();
+      try {
+        if (await cdp.evaluate('location.pathname') === expectedPath) return;
+      } catch {}
+      await delay(100);
+    }
+    throw new Error(`${label}: expected ${expectedPath}, found ${await cdp.evaluate('location.pathname')}`);
+  };
+  await cdp.navigate(`${baseUrl}/pikappapp.html`);
+  await cdp.evaluate(`document.querySelector('.project-nav-gallery-primary').scrollIntoView({block:'center',behavior:'instant'}); document.querySelector('.project-nav-gallery-primary').focus({preventScroll:true});`);
+  await cdp.key('Enter', 'Enter', 13);
+  await waitForPath('/artillustration.html', 'Pi Kapp primary gallery keyboard activation');
+  await cdp.navigate(`${baseUrl}/pikappapp.html`);
+  const interfacePoint = await cdp.evaluate(`(()=>{const link=document.querySelector('.project-nav-gallery-link[href="uigallery.html"]');link.scrollIntoView({block:'center',behavior:'instant'});const rect=link.getBoundingClientRect();return {x:rect.left+rect.width/2,y:rect.top+rect.height/2};})()`);
+  await cdp.clickAt(interfacePoint.x, interfacePoint.y);
+  await waitForPath('/uigallery.html', 'Pi Kapp interface-gallery pointer activation');
+  await cdp.evaluate(`document.querySelector('.project-nav-item--next[href="about.html"]').scrollIntoView({block:'center',behavior:'instant'}); document.querySelector('.project-nav-item--next[href="about.html"]').focus({preventScroll:true});`);
+  await cdp.key('Enter', 'Enter', 13);
+  await waitForPath('/about.html', 'Interface Studies About keyboard activation');
 
   const verifyArchive = async ({ label, width, height, mobile }) => {
     await cdp.call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });

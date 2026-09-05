@@ -28,7 +28,7 @@ const projectNavigationSnapshot = {
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
   'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
-  'pikappapp.html': ['salmagazine.html', 'artillustration.html'],
+  'pikappapp.html': ['salmagazine.html', 'artillustration.html', 'graphicgallery.html', 'uigallery.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
 };
 
@@ -245,7 +245,8 @@ for (const page of expectedPages) {
     if (!html.includes('<!-- generated:project-nav:start -->') || !html.includes('<!-- generated:project-nav:end -->')) {
       fail(`${page} project navigation must be generator-owned`);
     }
-    if (!projectNav.includes('aria-label="Previous project:') || !projectNav.includes('aria-label="Next project:')) {
+    const nextLabel = page === 'pikappapp.html' ? 'aria-label="Next gallery: Art &amp; Illustration"' : 'aria-label="Next project:';
+    if (!projectNav.includes('aria-label="Previous project:') || !projectNav.includes(nextLabel)) {
       fail(`${page} project navigation links need directional accessible names`);
     }
     const actualProjectLinks = [...projectNav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);

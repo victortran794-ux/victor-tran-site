@@ -11,6 +11,7 @@ const count = (value, needle) => value.split(needle).length - 1;
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+const sharedCss = text('css/style.css');
 const js = text('js/pikappapp.js');
 const packageJson = JSON.parse(text('package.json'));
 const packageLock = JSON.parse(text('package-lock.json'));
@@ -79,19 +80,20 @@ expect(!html.includes('class="identity-board'), 'The oversized source board must
 expect(count(html, 'class="v2-change-ledger__item"') === 4, 'V2 alterations must be consolidated into four concise notes beside the final screens.');
 expect(css.includes('.pikapp-page .v2-change-ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))'), 'V2 change notes must use a compact four-column desktop composition.');
 expect(css.includes('.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'), 'Pi Kapp final remaster must use three desktop columns for two balanced rows.');
-expect(html.includes('<section class="gallery-handoff" aria-labelledby="gallery-handoff-title">'), 'Pi Kapp must hand off into the three-gallery group before project navigation.');
-expect(html.includes('<nav class="gallery-handoff__grid" aria-label="Gallery navigation">'), 'Gallery handoff must expose a named navigation landmark.');
+expect(!html.includes('<section class="gallery-handoff"'), 'Pi Kapp must not duplicate the gallery handoff above project navigation.');
+const projectNav = html.match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)?.[1] ?? '';
+expect(projectNav.includes('class="project-nav-gallery-panel"'), 'Pi Kapp must consolidate the gallery sequence into its Next panel.');
 for (const [href, label] of [
   ['artillustration.html', 'Art &amp; Illustration'],
   ['graphicgallery.html', 'Graphic Design'],
   ['uigallery.html', 'Interface Studies'],
 ]) {
-  expect(html.includes(`<a href="${href}" class="gallery-handoff__item">`) && html.includes(`<strong>${label}</strong>`),
-    `Gallery handoff must include ${label}.`);
+  expect(projectNav.includes(`href="${href}"`) && projectNav.includes(label),
+    `Consolidated gallery panel must include ${label}.`);
 }
-expect(count(html, 'class="gallery-handoff__item"') === 3, 'Gallery handoff must treat the three galleries as one complete group.');
-expect(html.indexOf('class="gallery-handoff"') < html.indexOf('<!-- generated:project-nav:start -->'), 'Gallery group must lead into, not replace, the main project navigation.');
-expect(css.includes('.pikapp-page .gallery-handoff__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'), 'Gallery handoff must use one balanced three-column desktop group.');
+expect(count(projectNav, 'class="project-nav-gallery-primary"') === 1 && count(projectNav, 'class="project-nav-gallery-link"') === 2, 'Consolidated Next panel must make Art the primary link without duplicating it.');
+expect(!/<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/.test(projectNav), 'Consolidated gallery links must not be nested.');
+expect(sharedCss.includes('.project-nav-gallery-links {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));'), 'Consolidated gallery panel must balance the two secondary links below the primary Art link.');
 for (const forbidden of ['.prototype-embed', '.prototype-dialog']) {
   expect(!css.includes(forbidden), `Pi Kapp CSS must remove runtime selector: ${forbidden}`);
   expect(!js.includes(forbidden), `Pi Kapp JavaScript must remove runtime selector: ${forbidden}`);

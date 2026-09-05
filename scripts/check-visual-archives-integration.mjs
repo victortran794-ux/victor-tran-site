@@ -364,7 +364,7 @@ expect(ui.includes('generated:gallery-project-nav:start') && ui.includes('genera
 for (const [file, previous, next] of [
   ['artillustration.html', 'uigallery.html', 'graphicgallery.html'],
   ['graphicgallery.html', 'artillustration.html', 'uigallery.html'],
-  ['uigallery.html', 'graphicgallery.html', 'artillustration.html'],
+  ['uigallery.html', 'graphicgallery.html', 'about.html'],
 ]) {
   const html = read(file);
   const nav = html.match(/<!-- generated:gallery-project-nav:start -->([\s\S]*?)<!-- generated:gallery-project-nav:end -->/)?.[1] ?? '';
