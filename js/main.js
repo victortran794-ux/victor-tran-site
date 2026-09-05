@@ -46,6 +46,22 @@ if (canUseCustomCursor) {
     dot.style.opacity  = '1';
     ring.style.opacity = '1';
   });
+
+  // Native modal dialogs live in the browser top layer, above ordinary body
+  // stacking. Move the decorative cursor into an open dialog so it remains
+  // visible over archive tearsheets, then restore it when the dialog closes.
+  const cursorHome = document.body;
+  function syncCursorOverlayHost() {
+    const dialog = document.querySelector('dialog[open]');
+    (dialog || cursorHome).append(dot, ring);
+  }
+  new MutationObserver(syncCursorOverlayHost).observe(document.body, {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['open'],
+  });
+  document.addEventListener('close', syncCursorOverlayHost, true);
+  syncCursorOverlayHost();
 }
 
 
@@ -99,7 +115,15 @@ const closeOtherDropdowns = (except) => {
 };
 
 navDropdowns.forEach(({ group, toggle, links }) => {
+  let openedByHover = false;
+
   toggle.addEventListener('click', () => {
+    // Pointer entry opens the menu before its click fires. Keep that first
+    // click open; a subsequent click still provides the intentional close.
+    if (openedByHover && toggle.getAttribute('aria-expanded') === 'true') {
+      openedByHover = false;
+      return;
+    }
     const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
     closeOtherDropdowns(toggle);
     setDropdownOpen(toggle, willOpen);
@@ -119,9 +143,13 @@ navDropdowns.forEach(({ group, toggle, links }) => {
       clearTimeout(hoverTimer);
       closeOtherDropdowns(toggle);
       setDropdownOpen(toggle, true);
+      openedByHover = true;
     });
     group.addEventListener('mouseleave', () => {
-      hoverTimer = setTimeout(() => setDropdownOpen(toggle, false), 120);
+      hoverTimer = setTimeout(() => {
+        setDropdownOpen(toggle, false);
+        openedByHover = false;
+      }, 120);
     });
   }
 
@@ -184,6 +212,31 @@ const stabilizeFinishProofHashTarget = () => {
 window.addEventListener('load', stabilizeFinishProofHashTarget, { once: true });
 window.addEventListener('hashchange', stabilizeFinishProofHashTarget);
 
+// ── Home: bounded work arrival ──────────────────────
+function initWorkArrival() {
+  const work = document.querySelector('.featured#work');
+  if (!work) return;
+
+  let clearTimer = 0;
+  const arrive = () => {
+    work.classList.remove('is-work-arriving');
+    void work.offsetWidth;
+    work.classList.add('is-work-arriving');
+    window.clearTimeout(clearTimer);
+    clearTimer = window.setTimeout(() => work.classList.remove('is-work-arriving'), prefersReducedMotion ? 0 : 800);
+  };
+
+  document.querySelectorAll('a[href="#work"]').forEach(link => {
+    link.addEventListener('click', arrive);
+  });
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#work') arrive();
+  });
+  if (window.location.hash === '#work') arrive();
+}
+
+initWorkArrival();
+
 
 // ── Magnetic Cards (rAF-batched) ───────────────────
 if (!prefersReducedMotion) {
@@ -218,12 +271,20 @@ if (!prefersReducedMotion) {
 
   const saved = localStorage.getItem('lens') || 'light';
 
+  function syncHomeThemeImages(lens) {
+    document.querySelectorAll('[data-home-theme-image]').forEach(image => {
+      const nextSource = lens === 'dark' ? image.dataset.themeDarkSrc : image.dataset.themeLightSrc;
+      if (nextSource && image.getAttribute('src') !== nextSource) image.setAttribute('src', nextSource);
+    });
+  }
+
   function applyLens(lens) {
     if (lens === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
+    syncHomeThemeImages(lens);
     lensBtns.forEach(btn => {
       const active = btn.dataset.lens === lens && lens !== 'dna';
       btn.classList.toggle('is-active', active);
@@ -711,8 +772,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 // ── Gallery Lightbox ──────────────────────────────
 (function () {
   const pageImgs = Array.from(document.querySelectorAll(
-    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img, .ui-gallery-page .archive-frame > img'
-  )).filter((img) => !img.closest('[aria-controls="mendenhall-archive-dialog"]') && !img.hasAttribute('data-ui-scroll-image'));
+    '.gallery-spotlight img, .gallery-grid img, .gallery-section img, .series-slideshow img, .gallery-feature img, .art-archive-v2 .archive-frame > img, .graphic-archive-v2 .archive-frame > img, .ui-gallery-page .archive-frame > img, .coda__image, .ibm-flow-image, .ibm-evidence-artifact img, .pci-artifact img, .ability-case-study img, .sal-vico2-feature img, .sal-vico2-tribute img, .sal-vico2-page-pair img, .sal-vico2-case-study figure img'
+  )).filter((img) => !img.closest('[aria-controls="mendenhall-archive-dialog"]') && !img.hasAttribute('data-ui-scroll-image') && !img.closest('a, button'));
   if (!pageImgs.length) return;
 
   let current = 0;
@@ -737,6 +798,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
         <p class="lb-count"></p>
       </div>
       <div class="lb-header-actions">
+        <button class="lb-btn lb-size" aria-pressed="false">View actual size</button>
         <button class="lb-btn lb-close" aria-label="Close lightbox">✕</button>
       </div>
     </header>
@@ -747,6 +809,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       </div>
       <button class="lb-arrow lb-arrow--next" aria-label="Next image">&#8250;</button>
     </div>
+    <p class="lb-caption" aria-live="polite"></p>
     <div class="lb-strip"></div>
   `;
   document.body.appendChild(lb);
@@ -757,6 +820,17 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const lbCount = lb.querySelector('.lb-count');
   const lbStrip = lb.querySelector('.lb-strip');
   const lbClose = lb.querySelector('.lb-close');
+  const lbSize = lb.querySelector('.lb-size');
+  const lbWrap = lb.querySelector('.lb-img-wrap');
+  lbWrap.tabIndex = 0;
+  lbWrap.setAttribute('role', 'region');
+  lbWrap.setAttribute('aria-label', 'Image detail. Scroll to explore at actual size.');
+  lbSize.addEventListener('click', () => {
+    const actual = lb.classList.toggle('is-actual-size');
+    lbSize.setAttribute('aria-pressed', String(actual));
+    lbSize.textContent = actual ? 'Fit image' : 'View actual size';
+    lbWrap.scrollTo(0, 0);
+  });
   const lbPrev  = lb.querySelector('.lb-arrow--prev');
   const lbNext  = lb.querySelector('.lb-arrow--next');
 
@@ -786,7 +860,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   }
 
   function lightboxControls() {
-    return Array.from(lb.querySelectorAll('button:not([disabled])')).filter((element) => {
+    return Array.from(lb.querySelectorAll('button:not([disabled]), [tabindex="0"]')).filter((element) => {
       const style = getComputedStyle(element);
       return style.display !== 'none' && style.visibility !== 'hidden';
     });
@@ -818,6 +892,11 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     current = (idx + activeItems.length) % activeItems.length;
     const src = activeItems[current].src;
     const alt = activeItems[current].alt;
+    lb.classList.remove('is-actual-size');
+    lbSize.setAttribute('aria-pressed', 'false');
+    lbSize.textContent = 'View actual size';
+    lbWrap.scrollTo(0, 0);
+    lb.querySelector('.lb-caption').textContent = alt;
 
     lbImg.classList.add('is-fading');
     setTimeout(() => {
@@ -909,11 +988,11 @@ document.querySelectorAll('.marquee-track').forEach(track => {
       e.preventDefault();
       close();
     }
-    if (e.key === 'ArrowLeft') {
+    if (e.key === 'ArrowLeft' && e.target !== lbWrap) {
       e.preventDefault();
       goTo(current - 1);
     }
-    if (e.key === 'ArrowRight') {
+    if (e.key === 'ArrowRight' && e.target !== lbWrap) {
       e.preventDefault();
       goTo(current + 1);
     }
@@ -1101,18 +1180,31 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   const playText = panel.querySelector('.hero-dna-play-text');
   const fontChips = [...panel.querySelectorAll('[data-dna-font]')];
   const italicChip = panel.querySelector('[data-dna-italic]');
+  const italicState = panel.querySelector('[data-dna-italic-state]');
   let selectedTint = null;
   let hideTimer = 0;
 
   const readToken = token => getComputedStyle(hero).getPropertyValue(token).trim()
     || getComputedStyle(document.documentElement).getPropertyValue(token).trim();
 
+  const colorCanvas = document.createElement('canvas');
+  colorCanvas.width = colorCanvas.height = 1;
+  const colorContext = colorCanvas.getContext('2d', { willReadFrequently: true });
+  function readableColor(value) {
+    if (!colorContext) return value;
+    colorContext.clearRect(0, 0, 1, 1);
+    colorContext.fillStyle = value;
+    colorContext.fillRect(0, 0, 1, 1);
+    const channels = [...colorContext.getImageData(0, 0, 1, 1).data];
+    return `#${channels.slice(0, channels[3] === 255 ? 3 : 4).map(n => n.toString(16).padStart(2, '0')).join('')}`;
+  }
+
   function applyHeroTint(swatch = selectedTint) {
     const value = swatch ? readToken(swatch.dataset.dnaToken) : '';
     tintLayer?.style.setProperty('--dna-tint', value || 'transparent');
     tintLayer?.classList.toggle('is-active', Boolean(value));
     if (tintStatus) tintStatus.textContent = value
-      ? `Hero wash · ${swatch.querySelector('.hero-dna-swatch-name').textContent} · ${value}`
+      ? `Hero wash · ${swatch.querySelector('.hero-dna-swatch-name').textContent} · ${readableColor(value)}`
       : 'No hero tint selected';
   }
 
@@ -1120,8 +1212,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     swatches.forEach((swatch) => {
       const value = readToken(swatch.dataset.dnaToken);
       swatch.style.setProperty('--dna-color', value);
-      swatch.querySelector('.hero-dna-swatch-value').textContent = value;
-      swatch.setAttribute('aria-label', `${swatch.querySelector('.hero-dna-swatch-name').textContent} ${value}; preview as hero wash`);
+      swatch.querySelector('.hero-dna-swatch-value').textContent = readableColor(value);
+      swatch.setAttribute('aria-label', `${swatch.querySelector('.hero-dna-swatch-name').textContent} ${readableColor(value)}; preview as hero wash`);
     });
     applyHeroTint();
   }
@@ -1149,6 +1241,7 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   italicChip?.addEventListener('click', () => {
     const active = italicChip.classList.toggle('is-active');
     italicChip.setAttribute('aria-pressed', String(active));
+    if (italicState) italicState.textContent = active ? 'On' : 'Off';
     playText?.classList.toggle('is-italic', active);
   });
 

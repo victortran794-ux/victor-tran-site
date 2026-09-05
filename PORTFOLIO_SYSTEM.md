@@ -1,5 +1,10 @@
 # Portfolio System
 
+## Current branch visibility override
+
+In the approved local candidate, Document Processing is public. `/document-processing` is a public direct route, indexable and included in the sitemap, with `manifest nav=false/homepage=false`, and linked from wxO as its feature deep dive. Document Processing is a public chapter inside wxO, not a separate Home card. Only its eight audited current owner exports are promoted; historical `/protected/wxo/` resources remain guarded. This supersedes protected-Doc instructions below for candidate source only. Commit, Preview push, merge, and production remain separate gates; this paragraph does not claim the latest local change is deployed.
+
+
 This file is the operating layer for Vic's portfolio work: where context lives, how to avoid huge chat-context dumps, and how site health is monitored.
 
 ## Authority note
@@ -73,12 +78,12 @@ Do **not** put durable planning/source notes in `content/`; most of `content/` i
 
 ## Current case-study state
 
-- `document-processing.html` is a raw `.html` implementation artifact for a protected Document Processing page. `data/projects.json` sets `manifest nav=false/homepage=false`; it is omitted from Work and homepage, while the protected wxO umbrella reaches its chapter. `/document-processing` intentionally permanently redirects to `/wxo-canvas#document-processing`.
+- `document-processing.html` is the source page for the protected Document Processing chapter. `data/projects.json` records `manifest nav=false/homepage=false`. `/document-processing` is a protected direct route, omitted from public navigation, homepage cards, and the sitemap, and linked from wxO as its feature deep dive.
 - `case-studies/document-processing.md` is the current package manifest for future Document Processing refinements.
 - `archive/doc-pro-case-study-handoff.md` is a historical Doc Pro handoff; the active Document Processing planning file is `case-studies/document-processing.md`.
 - `content/document-processing.md` exists as generated/exported content, but check the live/current HTML before treating it as source of truth.
 - Preserve the password gate/noindex and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval.
-- The static client-side password gate is visitor deterrence and discovery reduction, not server-side access control. Served HTML can contain the page source. No material requiring true confidentiality may be added until a separately approved server-side protection or private-hosting architecture exists.
+- The current request boundary denies unauthenticated protected HTML and media delivery. Preserve the server-side access checks, origin validation, `noindex` policy, and sanitized-source requirement; do not add material outside the approved protection and provenance boundaries.
 
 ## Health automation currently present
 

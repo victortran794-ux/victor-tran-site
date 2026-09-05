@@ -33,7 +33,7 @@ Brand identity and collateral for The Ability Experience’s 40th anniversary.
 
 ## Body Copy
 
-A connected identity system carried from anniversary mark to print, iconography, and cycling kits.
+An anniversary mark, iconography, a commemorative print, and cycling kits.
 
 01 / Anniversary moment
 
@@ -47,11 +47,11 @@ The illustrated print shows the philanthropy’s origins and volunteer projects 
 
 02 / Identity system
 
-The anniversary moment became a shared visual language across identity, illustration, and event artifacts.
+The same symbols appear in the anniversary identity, commemorative print, and cycling kits.
 
 Artifact · Anniversary mark
 
-As a special tribute to the 40th anniversary of The Ability Experience, the brand package connected iconography, illustration, and cycling-kit design around one commemorative moment.
+Primary and alternate marks, shown with early explorations.
 
 System relationship
 
@@ -59,15 +59,13 @@ The public artifacts form one connected identity story without adding operationa
 
 Recruitment collateral · 2019
 
-The identity moved into a two-sided recruitment piece that paired program stories, participant photography, and a clear next step.
+The two-sided handout combines program stories, participant photography, and a call to action.
 
 03 / Cycling kits
 
-The identity carried into cycling kits for The Ability Experience’s summer events.
+I applied the anniversary iconography to cycling kits for Gear Up Florida and Journey of Hope.
 
 Applied identity
-
-The cycling kits carried the anniversary iconography into Gear Up Florida and Journey of Hope and incorporated safety-feature standards.
 
 ## Images
 
@@ -80,5 +78,5 @@ The cycling kits carried the anniversary iconography into Gear Up Florida and Jo
 - Inside panels of the 2019 Ability Experience recruitment handout: images/ability-experience/abex-2019-handout-2.webp
 - Ability Experience cycling kit in use during a team ride: images/abex-kits-3.jpg
 - Ability Experience cycling kit front: images/abex-kits-1.jpg
-- Ability Experience cycling kit back: images/abex-kits-2.jpg
+- Ability Experience cycling kit front: images/abex-kits-2.jpg
 - SC56 event backdrop map for The Ability Experience: images/abex-map.jpg

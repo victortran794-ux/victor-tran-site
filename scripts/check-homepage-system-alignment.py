@@ -60,7 +60,7 @@ for token in (
     need(index.count(token) == 1, f"Engraved DNA hero token must remain exactly once: {token}")
 for authored_copy in (
     'I design cool things with sincerity.',
-    'Visual designer building clear, expressive systems across enterprise products, brands, and stories.',
+    'I’m a visual designer working across enterprise products, brand identity, editorial design, and illustration.',
 ):
     need(authored_copy in index, f"signature hero copy must remain: {authored_copy}")
 
@@ -83,7 +83,7 @@ need('hero-pointer-wash' not in index and
      "the approved Engraved DNA hero must not reintroduce a cursor glow")
 need('class="marquee"' not in index, "retired homepage marquee must remain removed")
 need('class="featured-tracklist"' not in index, "homepage project switcher must remain removed")
-need(index.count('class="featured-heading"') == 1 and "Other cool things to check out" in index,
+need(index.count('class="featured-heading"') == 1 and "Selected work" in index,
      "the homepage needs one approved archive heading")
 need("localStorage.getItem('lens') || 'light'" in js,
      "first visit must default to Light while preserving an explicitly saved lens")
@@ -99,17 +99,18 @@ need("min-width: 44px" in css and "min-height: 44px" in css,
 # Canonical project facts and protection flags.
 expected = {
     "wxo-canvas": ("IBM watsonx Orchestrate", "wxo-canvas.html", "An agentic workflow canvas for building, inspecting, and improving AI workflows."),
-    "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
+    "document-processing": ("Document Processing", "document-processing.html", "A platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "Research, product workflows, and reusable visual methods for IBM Cloud Observability."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
     "abilityexperience": ("The Ability Experience", "abilityexperience.html", "A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities."),
-    "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."),
+    "salmagazine": ("Star & Lamp Magazine", "salmagazine.html", "Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine."),
     "pikappapp": ("Pi Kapp App", "pikappapp.html", "A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity."),
     "artillustration": ("Art & Illustration", "artillustration.html", "Standalone digital and traditional work, including posters, paintings, and personal series."),
     "graphicgallery": ("Graphic Design", "graphicgallery.html", "Standalone identity, print, illustration, and event graphics."),
+    "uigallery": ("Interface Studies", "uigallery.html", "Static screen studies focused on interface craft and visual refinement."),
 }
-need(set(expected).issubset(by_slug), "all ten portfolio projects must remain in the manifest")
+need(set(expected).issubset(by_slug), "all eleven portfolio projects must remain in the manifest")
 for slug, (title, url, description) in expected.items():
     project = by_slug.get(slug, {})
     need(project.get("title") == title, f"project title changed: {slug}")
@@ -123,10 +124,10 @@ for slug, (title, url, description) in expected.items():
     else:
         need(f'href="{url}" class="featured-item' not in index, f"hidden homepage entry leaked: {slug}")
 
-protected = by_slug.get("document-processing", {})
-need(protected.get("protected") is True, "Document Processing must remain protected")
-need(protected.get("noindex") is True, "Document Processing must remain noindex")
-need(protected.get("sitemap") is False, "Document Processing must remain excluded from the sitemap")
+document = by_slug.get("document-processing", {})
+need(document.get("protected") is False, "Document Processing must be public")
+need(document.get("noindex") is False, "Document Processing must be indexable")
+need(document.get("sitemap") is True, "Document Processing must appear in the sitemap")
 need("IBM watsonx Orchestrate" in index and "A2UI" not in index, "homepage needs IBM watsonx Orchestrate without A2UI claims")
 for private_rationale in ("Shared anatomy", "Project color is bounded", "Current behavior remains intact"):
     need(private_rationale not in index, f"private comparison rationale leaked into public copy: {private_rationale}")
@@ -140,8 +141,9 @@ expected_variants = {
     "abilityexperience": "span-7",
     "salmagazine": "span-7",
     "pikappapp": "span-5",
-    "artillustration": "span-7",
-    "graphicgallery": "span-5",
+    "artillustration": "span-4",
+    "graphicgallery": "span-4",
+    "uigallery": "span-4",
 }
 for slug, variant in expected_variants.items():
     need(by_slug.get(slug, {}).get("homepageVariant") == variant,
@@ -154,13 +156,21 @@ need("chapterMarkerMarkup" not in generator,
      "homepage generator must not emit chapter controls")
 need(index.count('class="featured-chapter') == 0,
      "homepage chapter markers must remain removed")
-need(index.count("featured-item--overlay") == 1,
-     "wxO must remain the single homepage overlay variant")
-for variant in ("lead", "span-7", "span-5"):
+need(index.count('href="wxo-canvas.html" class="featured-item featured-item--wide featured-item--lead featured-item--overlay reveal"') == 1,
+     "wxO must retain one singular public homepage case-study link")
+need('href="wxo-canvas.html?lock=1"' not in index,
+     "public wxO homepage links must not retain the obsolete forced-lock URL")
+need('featured-item-related' not in index and 'home-practice-proof' not in index,
+     "wxO must absorb current-practice context and retire the separate Document Processing link")
+need(index.count('class="featured-practice"') == 1 and index.count('class="featured-item-bonus"') == 1,
+     "wxO homepage card needs one compact practice line and one non-link bonus note")
+need('shape-cue' not in index and 'shape-cue' not in generator,
+     "homepage project actions must not retain the redundant diamond cue")
+for variant in ("lead", "span-7", "span-5", "span-4"):
     need(f"featured-item--{variant}" in index, f"generated cards missing variant class: {variant}")
 need("grid-template-columns: repeat(12" in css,
      "homepage project layout needs a twelve-column desktop grid")
-for span in ("span 12", "span 7", "span 5"):
+for span in ("span 12", "span 7", "span 5", "span 4"):
     need(f"grid-column: {span}" in css, f"homepage project CSS missing {span}")
 need(re.search(r"@media\s*\(max-width:\s*720px\)[\s\S]*?featured-item--span-7[\s\S]*?grid-column:\s*1\s*/\s*-1", css),
      "narrow homepage cards must collapse to one column")

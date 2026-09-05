@@ -140,9 +140,9 @@ try {
       assert(state.viewport[0] === viewport.width && state.viewport[1] === viewport.height, `viewport drift ${state.viewport}`);
       assert((theme === 'dark' ? state.theme === 'dark' : !state.theme || state.theme === 'light') && state.stored === theme, `theme failed ${viewport.label} ${theme}`);
       assert(state.overflow === 0, `${state.overflow}px root overflow at ${viewport.label} ${theme}`);
-      assert(state.images === 12 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
+      assert(state.images === 11 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(state.main === 'main-content' && state.tabindex === '-1' && state.current === 'ibm-patterns.html' && state.shell, 'shell or route state failed');
-      assert(!state.gate && state.process === 4 && state.heroes === 2 && state.atlas === 3 && !state.reviewText, 'approved public page state drifted');
+      assert(!state.gate && state.process === 3 && state.heroes === 2 && state.atlas === 3 && !state.reviewText, 'approved public page state drifted');
       assert(state.captionContrast >= 4.5, `playback caption contrast ${state.captionContrast.toFixed(2)}:1 at ${viewport.label} ${theme}`);
       if (viewport.mobile) {
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
@@ -178,7 +178,7 @@ try {
   assert(reduced.animation === 'none' && reduced.transform === 'none' && reduced.button === 'none', `reduced motion failed: ${JSON.stringify(reduced)}`);
   assert(!cdp.exceptions.length, `JavaScript exceptions: ${JSON.stringify(cdp.exceptions)}`);
   assert(!cdp.consoleErrors.length, `console errors: ${JSON.stringify(cdp.consoleErrors)}`);
-  console.log(`IBM PATTERNS BROWSER CONTRACT: PASS states=${checks} images=12 overflow=0 public=pass reduced-motion=pass motion-toggle=${motionChecks} controls=pass`);
+  console.log(`IBM PATTERNS BROWSER CONTRACT: PASS states=${checks} images=11 overflow=0 public=pass reduced-motion=pass motion-toggle=${motionChecks} controls=pass`);
   console.log(`Evidence: ${evidenceDir}`);
 } finally {
   if (cdp?.socket) cdp.socket.close();

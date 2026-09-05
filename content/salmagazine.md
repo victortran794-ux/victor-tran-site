@@ -20,7 +20,7 @@ Five years of layout and art direction for Pi Kappa Phi’s official magazine.
 
 ## Page Intro
 
-I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.
+Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.
 
 ## Metadata
 
@@ -32,24 +32,22 @@ I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 
 
 ## Section Headings
 
-- From brochure to publication.
+- From layout to creative direction.
 - One publication, many reading modes.
 - Range inside the system.
-- The work stays available in full.
+- Read the issues.
 
 ## Body Copy
 
-Five years of issues, art direction, and editorial design.
-
 01 / Redrawing a legacy
 
-My role grew from primary designer to creative director while I continued designing.
+My role grew from layout design into creative direction, and I continued designing each issue.
 
 Publication context
 
 First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.
 
-"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity's First Lady, in my last issue as creative director.
+“To Connie, the rose of Pi Kappa Phi.” A tribute to the fraternity’s First Lady, from my final issue as art director.
 
 02 / Editorial system
 
@@ -57,15 +55,15 @@ Feature openers, reporting, captions, and issue markers form a flexible editoria
 
 "Test on 10th" balances photography, pull quotes, and dense reporting across the spread.
 
-Artifact reading
+Design details
 
 System relationship
 
-Four highlight spreads from my first issue as creative director.
+Four favorite spreads from the Summer 2017 issue.
 
 03 / Art direction in practice
 
-Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.
+Editorial features and chapter stories from issues I art directed.
 
 "A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.
 
@@ -73,21 +71,21 @@ Representative work across reporting, information design, photography, illustrat
 
 "Thirty Under 30" celebrates thirty alumni redefining what it means to lead.
 
-Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.
+Stories of the men who ride, build, and serve through The Ability Experience.
 
-One cover story from each of the remaining issues, with five years of features in chronological order.
+Four more cover stories from the archive, presented chronologically.
 
 "Woven into the lives of others" collects stories from the summer Ability Experience.
 
-"The Challenge We Must Face." takes a hard look at the fraternity in the wake of a brother's death.
+“The Challenge We Must Face” takes a hard look at the fraternity in the wake of a brother’s death.
 
 "Throwing Bones" follows Kenny Capps as he runs the Mountains-to-Sea Trail in the face of cancer.
 
-"Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.
+“Leading the Decade” marks ten years of Pi Kapp College for Emerging Leaders.
 
 04 / Five years of issues
 
-Five years of issues, archived in full on Issuu. Click any cover to read the issue.
+Select a cover to read that issue on Issuu.
 
 Verified recognition
 
@@ -95,11 +93,7 @@ Verified recognition
 
 2018 · 3rd Place Overall Magazine Excellence
 
-The complete nine-issue archive remains accessible.
-
 Complete archive
-
-Read all nine issues produced across five years, then continue to the magazine's latest releases.
 
 ## Images
 
@@ -123,15 +117,15 @@ Read all nine issues produced across five years, then continue to the magazine's
 - Spring 2019 feature page: images/sal-spr2019-page25.jpg
 - Spring 2019 closing feature page: images/sal-spr2019-page37.jpg
 - Fall 2016 cover story spread: images/sal-f2016-cover-story.jpg
-- Winter 2018 cover story spread: images/sal-f2017-cover-story.jpg
+- Winter 2017 cover story spread: images/sal-f2017-cover-story.jpg
 - Fall 2019 cover story spread: images/sal-f2019-cover-story.jpg
 - Summer 2020 cover story spread: images/sal-s2020-cover-story.jpg
 - Fall 2016 cover: images/sal-cover-2016-fall.jpg
 - Summer 2017 cover: images/sal-cover-2017-summer.jpg
-- Fall 2017 cover: images/sal-cover-2017-fall.jpg
-- Spring 2018 cover: images/sal-cover-2018-spring.jpg
+- Winter 2017 cover: images/sal-cover-2017-fall.jpg
+- Summer 2018 cover: images/sal-cover-2018-spring.jpg
 - Fall 2018 cover: images/sal-cover-2018-fall.jpg
-- Spring 2019 cover: images/sal-cover-2019-spring.jpg
+- Summer 2019 cover: images/sal-cover-2019-spring.jpg
 - Fall 2019 cover: images/sal-cover-2019-fall.jpg
-- Spring 2020 cover: images/sal-cover-2020-spring.jpg
+- Summer 2020 cover: images/sal-cover-2020-spring.jpg
 - Fall 2020 cover: images/sal-cover-2020-fall.jpg

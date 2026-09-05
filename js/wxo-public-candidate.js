@@ -34,6 +34,24 @@
 })();
 
 (() => {
+  const images = [...document.querySelectorAll('[data-wxo-theme-image]')];
+  if (!images.length) return;
+
+  const syncThemeImages = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    images.forEach((image) => {
+      const nextSource = isDark ? image.dataset.themeDarkSrc : image.dataset.themeLightSrc;
+      if (!nextSource || image.dataset.wxoThemeSource === nextSource) return;
+      image.src = nextSource;
+      image.dataset.wxoThemeSource = nextSource;
+    });
+  };
+
+  syncThemeImages();
+  new MutationObserver(syncThemeImages).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+
+(() => {
   const dialog = document.querySelector('[data-wxo-gallery]');
   const triggers = [...document.querySelectorAll('[data-wxo-evidence]')];
   if (!dialog || !triggers.length) return;
@@ -44,6 +62,7 @@
   const count = dialog.querySelector('[data-wxo-gallery-count]');
   const status = dialog.querySelector('[data-wxo-gallery-status]');
   const closeButton = dialog.querySelector('.pilot-gallery-close');
+  const fullSizeButton = dialog.querySelector('[data-wxo-gallery-fullscreen]');
   const previousButton = dialog.querySelector('[data-wxo-gallery-prev]');
   const nextButton = dialog.querySelector('[data-wxo-gallery-next]');
   let activeIndex = 0;
@@ -81,6 +100,9 @@
     document.body.style.setProperty('--wxo-gallery-scrollbar', `${scrollbar}px`);
     document.body.classList.add('wxo-gallery-open');
     dialog.showModal();
+    dialog.dataset.wxoGalleryZoom = 'fit';
+    fullSizeButton.setAttribute('aria-pressed', 'false');
+    fullSizeButton.textContent = 'Full size';
     closeButton.focus();
   };
 
@@ -92,6 +114,13 @@
 
   previousButton.addEventListener('click', () => render(activeIndex - 1));
   nextButton.addEventListener('click', () => render(activeIndex + 1));
+  fullSizeButton.addEventListener('click', () => {
+    const fullSize = dialog.dataset.wxoGalleryZoom !== 'full';
+    dialog.dataset.wxoGalleryZoom = fullSize ? 'full' : 'fit';
+    fullSizeButton.setAttribute('aria-pressed', String(fullSize));
+    fullSizeButton.textContent = fullSize ? 'Fit image' : 'Full size';
+    status.textContent = fullSize ? 'Full-size inspection enabled.' : 'Image fitted to the viewer.';
+  });
   closeButton.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
@@ -128,6 +157,7 @@
     document.body.classList.remove('wxo-gallery-open');
     document.body.style.removeProperty('--wxo-gallery-scrollbar');
     image.removeAttribute('src');
+    delete dialog.dataset.wxoGalleryZoom;
     if (returnFocus?.isConnected) returnFocus.focus();
   });
 })();

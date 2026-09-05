@@ -7,7 +7,7 @@ import { spawn } from 'node:child_process';
 const root = process.cwd();
 const baseUrl = process.env.SITE_URL || 'http://127.0.0.1:8765';
 const evidenceDir = process.env.PCI_EVIDENCE_DIR || path.join(root, '.hermes', 'evidence', 'pci');
-const chrome = [process.env.CHROME_BIN, '/home/victortran794/.agent-browser/browsers/chrome-149.0.7827.55/chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find((candidate) => fs.existsSync(candidate));
+const chrome = [process.env.CHROME_BIN, '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find((candidate) => fs.existsSync(candidate));
 if (!chrome) throw new Error('Chrome binary not found; set CHROME_BIN');
 
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'pci-browser-'));
@@ -138,10 +138,17 @@ try {
         const controls=[...document.querySelectorAll('.project-nav-item,.nav-logo,.nav-dropdown-toggle,.nav-links>li>a,.footer-cta,.footer-social a,.footer-copy-email')]
           .filter((element)=>{const r=element.getBoundingClientRect();const s=getComputedStyle(element);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'})
           .map((element)=>{const r=element.getBoundingClientRect();return {label:element.getAttribute('aria-label')||element.textContent.trim().replace(/\\s+/g,' ').slice(0,60),width:r.width,height:r.height}});
+        const pillar=document.querySelector('[data-pci-hierarchy-artifact="pillar-diagram"]');
+        const pillarImage=pillar.querySelector('img');
+        const pillarRect=pillar.getBoundingClientRect(); const pillarImageRect=pillarImage.getBoundingClientRect();
+        const mapArtifact=document.querySelector('[data-pci-artifact="national-footprint-map"] .pci-artifact');
+        const nextTitle=document.querySelector('.project-nav-item--next .project-nav-title');
         return {viewport:[innerWidth,innerHeight],theme:root.dataset.theme,stored:localStorage.getItem('lens'),overflow:root.scrollWidth-root.clientWidth,
           images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<=0).map((image)=>image.getAttribute('src')),ratioDrift,framed,controls,
           shell:Boolean(document.querySelector('nav.nav')&&document.querySelector('footer.footer')&&document.querySelector('.project-nav')),gate:Boolean(document.getElementById('vtd-gate')),
-          artifacts:artifacts.length,three:document.querySelectorAll('[data-pci-artifact-count="3"]').length,four:document.querySelectorAll('[data-pci-artifact-count="4"]').length,
+          artifacts:artifacts.length,three:document.querySelectorAll('[data-pci-artifact-count="3"]').length,four:document.querySelectorAll('[data-pci-artifact-count="4"]').length,captions:document.querySelectorAll('.pci-caption').length,
+          editorial:[...document.querySelectorAll('.pci-artifact-quartet--editorial')].map((quartet)=>({columns:getComputedStyle(quartet).gridTemplateColumns,portraitColumn:getComputedStyle(quartet.querySelector('.pci-artifact--portrait') || quartet.querySelector('.pci-artifact:nth-child(3)')).gridColumn})),
+          pillar:{caption:pillar.querySelector('.pci-caption--pillar')?.textContent.trim(),width:pillarRect.width,imageWidth:pillarImageRect.width},mapMasks:[getComputedStyle(mapArtifact,'::before').content,getComputedStyle(mapArtifact,'::after').content],nextDiamond:{content:getComputedStyle(nextTitle,'::before').content,display:getComputedStyle(nextTitle,'::before').display},
           hero:Boolean(document.querySelector('[data-pci-artifact="red-hexagon-hero"]')),map:Boolean(document.querySelector('[data-pci-artifact="national-footprint-map"]')),
           openingEvidenceTop:document.querySelector('[data-pci-artifact="red-hexagon-hero"]').getBoundingClientRect().top,
           rejected:[...document.querySelectorAll('img')].map((image)=>image.getAttribute('src')||'').filter((src)=>/pci-(?:handbook-3-ceo-letter|handbook-42-back|banners-5)/.test(src))};
@@ -152,7 +159,10 @@ try {
       assert(state.images === 12 && !state.failed.length, `media failure at ${viewport.label} ${theme}: ${JSON.stringify(state)}`);
       assert(!state.ratioDrift.length, `artifact ratio drift at ${viewport.label} ${theme}: ${JSON.stringify(state.ratioDrift)}`);
       assert(!state.framed.length, `faux artifact frame at ${viewport.label} ${theme}: ${JSON.stringify(state.framed)}`);
-      assert(state.shell && !state.gate && state.artifacts === 12 && state.three === 1 && state.four === 1 && state.hero && state.map && !state.rejected.length, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.shell && !state.gate && state.artifacts === 12 && state.three === 1 && state.four === 1 && state.captions <= 6 && state.editorial.length === 2 && state.hero && state.map && !state.rejected.length, `approved page state drifted: ${JSON.stringify(state)}`);
+      assert(state.pillar.caption==='Pillar diagram'&&state.mapMasks.every((content)=>content==='""')&&state.nextDiamond.content==='"◆"'&&state.nextDiamond.display==='inline-block',`PCI manual-review refinements drifted: ${JSON.stringify({pillar:state.pillar,mapMasks:state.mapMasks,nextDiamond:state.nextDiamond})}`);
+      if (viewport.width > 800) assert(state.editorial.every((quartet)=>quartet.columns.split(' ').length === 3 && quartet.portraitColumn === 'span 2'), `PCI editorial quartet hierarchy drifted: ${JSON.stringify(state.editorial)}`);
+      if (viewport.width > 800) assert(state.pillar.width<=830.01&&state.pillar.imageWidth<=830.01,`PCI pillar export must not upscale in-browser: ${JSON.stringify(state.pillar)}`);
       if (viewport.width === 390) {
         assert(state.openingEvidenceTop <= 720, `PCI opening evidence begins too late at ${state.openingEvidenceTop}px`);
         const undersized = state.controls.filter((control) => control.width < 44 || control.height < 44);
@@ -160,9 +170,9 @@ try {
       }
       if (viewport.width === 390 && theme === 'light') {
         await cdp.screenshot('pci-390-light-opening.png');
-        await cdp.evaluate(`document.querySelector('[data-pci-hierarchy-artifact]').scrollIntoView({block:'start',behavior:'instant'})`);
+        await cdp.evaluate(`document.querySelector('[data-pci-hierarchy-artifact="pillar-diagram"]').scrollIntoView({block:'center',behavior:'instant'})`);
         await delay(800);
-        await cdp.screenshot('pci-390-light-four-artifacts.png');
+        await cdp.screenshot('pci-390-light-pillar-diagram.png');
       }
       if (viewport.width === 1440 && theme === 'dark') {
         await cdp.screenshot('pci-1440-dark-opening.png');

@@ -41,6 +41,7 @@ fi
 
 run_required "Whitespace/conflict marker check" git diff --check
 run_required "Path-aware health-check scope fixture" npm run test:health-check-scope
+run_required "Portable PCI and Graphic contract path fixture" npm run test:contract-portability
 
 section "Documentation contracts"
 run_required "Design.md wiring contract" npm run test:design-md-wiring
@@ -56,7 +57,9 @@ run_required "Public archive-route contract" npm run check:public-archive-routes
 run_required "Production-host regression check" node scripts/check-production-host.mjs
 run_required "Production artifact containment contract" npm run check:artifact-containment
 run_required "PCI claims and publication contract" npm run check:pci-claims-protection
+run_required "PCI approved cover-source parity" npm run check:pci-cover-source
 run_required "Star & Lamp bounded revision contract" npm run check:sal-vico2
+run_required "Star & Lamp official issue-link contract" npm run check:sal-issue-links
 run_required "Ability Experience bounded sequence contract" npm run check:ability-vico2
 run_required "Responsive-image regression check" node scripts/check-responsive-images.mjs
 run_required "Graphic responsive-image ownership contract" npm run check:graphic-responsive-images
@@ -73,10 +76,18 @@ run_required "IBM Patterns approved page integration contract" npm run check:ibm
 run_required "Gallery motion system contract" npm run check:gallery-motion-system
 run_required "Server-side protected delivery contract" npm run check:protected-delivery
 run_required "wxO Canvas and Document Processing integration contract" npm run check:wxo-document-processing
+run_required "wxO public candidate contract" node scripts/check-wxo-public-candidate.mjs
+run_required "wxO and Document Processing route-split contract" node scripts/check-wxo-route-split.mjs
+run_required "wxO theme-sequence source contract" npm run test:wxo-theme-sequences
 run_required "Route 02 homepage integration contract" npm run check:route02-homepage
 run_required "Content export generator policy fixture" node scripts/test-html-to-md.mjs
 run_required "Final site reconciliation contract" npm run check:final-site-reconciliation
 run_required "Shared site shell generator fixture" node scripts/test-site-shell.mjs
+run_required "Vercel review feedback wiring" npm run test:vercel-review-feedback-wiring
+run_required "Vercel review feedback contract" npm run check:vercel-review-feedback
+run_required "Manual review follow-up wiring" npm run test:manual-review-followups-wiring
+run_required "Manual review follow-up contract" npm run check:manual-review-followups
+run_required "Résumé deterministic build and artifact contract" npm run test:resume-build
 
 section "Generating project sections"
 if [ -f "scripts/generate-project-sections.mjs" ]; then
@@ -125,7 +136,6 @@ run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
 run_required "UI Gallery integration contract" npm run check:ui-gallery
 run_required "Gallery followups contract" npm run check:gallery-followups
-run_required "Engraved Design DNA hero browser contract" npm run check:engraved-dna-hero-browser
 run_required "About voice-calibration browser contract" npm run check:about-browser
 run_required "Visual archives integration contract" node scripts/check-visual-archives-integration.mjs all
 
@@ -149,7 +159,9 @@ run_visual_archives_browser_contract() {
   done
 
   if [ "$ready" -eq 1 ]; then
+    SITE_URL="$site_url" DNA_HERO_EVIDENCE_DIR="$(mktemp -d)" npm run check:engraved-dna-hero-browser || status=$?
     SITE_URL="$site_url" VISUAL_ARCHIVES_EVIDENCE_DIR="$(mktemp -d)" npm run check:visual-archives-lightbox-browser || status=$?
+    SITE_URL="$site_url" npm run check:graphic-heading-browser || status=$?
   else
     echo "  local visual-archives browser-contract server did not become ready"
     status=1

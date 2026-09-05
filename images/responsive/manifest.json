@@ -641,24 +641,6 @@
       "sha256": "a15110247235eb255731f64bf5c1c223c32b5fbde0adb9decab719989d745be2",
       "width": 768
     },
-    "images/responsive/graphic/sc56-instagram-panel-series-w1280.webp": {
-      "bytes": 69558,
-      "height": 764,
-      "sha256": "5adff886720b41e333641ee324a4cad51579b0af3b7c1e28b3e37440a8d8a3db",
-      "width": 1280
-    },
-    "images/responsive/graphic/sc56-instagram-panel-series-w480.webp": {
-      "bytes": 19852,
-      "height": 286,
-      "sha256": "0f58e4ddeea234ca05328f645790feff4ae16fc0b93a095b9ccce6562d0af180",
-      "width": 480
-    },
-    "images/responsive/graphic/sc56-instagram-panel-series-w768.webp": {
-      "bytes": 36716,
-      "height": 458,
-      "sha256": "f6e552524f1d2243096e23fe2e5e21a0ffd20ac71be8a1104d2649b8c364c0df",
-      "width": 768
-    },
     "images/responsive/graphic/sgla-2023-brand-guidelines-w1280.webp": {
       "bytes": 73218,
       "height": 802,
@@ -936,15 +918,15 @@
       "width": 640
     },
     "images/responsive/pci-handbook-1-cover-1200.webp": {
-      "bytes": 166970,
+      "bytes": 167600,
       "height": 927,
-      "sha256": "867d03adde845758d633a4e763ab72bf6bb62ba0117a944a846f5d00885ef2f8",
+      "sha256": "bab7aad858168394388866647f7d0f0d5af6a261d705167b4a9b90cd7a9b97c4",
       "width": 1200
     },
     "images/responsive/pci-handbook-1-cover-640.webp": {
-      "bytes": 61848,
+      "bytes": 62740,
       "height": 495,
-      "sha256": "ec591f2fd98b9e78d5fd9e727b44e594993109aa1190630d79a47d53fa0789f1",
+      "sha256": "1fdfe370f9f05997a0c5a8e6a98d9a8851d713ca2fca482aa93ba5b7a0a8aaad",
       "width": 640
     },
     "images/responsive/thumb-sal-540.webp": {
@@ -1092,10 +1074,6 @@
       "bytes": 248812,
       "sha256": "939d9170e207a7a4834199fb4bbfdb00194f2375a6ebb1bcf1a410eeb41f1f0c"
     },
-    "images/graphic-archive-v2/sc56-instagram-panel-series.webp": {
-      "bytes": 186916,
-      "sha256": "b5f0d92d866e250240a601a7d001d94625268db3d9b78992b4a7d14fdfdd80df"
-    },
     "images/graphic-archive-v2/sgla-2023-brand-guidelines.webp": {
       "bytes": 200734,
       "sha256": "96a12c6e044cee5c0643d487cbd4e906fb44661e509ba2a9614712764e003caf"
@@ -1169,8 +1147,8 @@
       "sha256": "25d3ae87436d367efbda585d5ecd9859ce813d1bcc98cdc961dcc0a2de965d89"
     },
     "images/pci-handbook-1-cover.webp": {
-      "bytes": 262032,
-      "sha256": "3aa596bf0fe9c796e0cea7933f54eafbc93cd49145a45de98aef4e830831ef88"
+      "bytes": 380716,
+      "sha256": "ff72c1a6cff4592ecd82a40a9db553981b6b02bda1577a03c313f89a9ae806ba"
     },
     "images/thumb-sal.webp": {
       "bytes": 217374,

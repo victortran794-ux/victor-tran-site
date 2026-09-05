@@ -1,6 +1,6 @@
 # Document Processing — Case Study Notes
 
-Last updated: 2026-07-28
+Last updated: 2026-09-03
 
 Status: `live`
 
@@ -8,24 +8,24 @@ This is the durable project-package notes file for the live Document Processing 
 
 ## Quick status
 
-- Intended visibility: live password-protected portfolio project page
-- Classification: normal protected portfolio project package; the `case-studies/` note exists for consistent project documentation, not special emphasis
+- Intended visibility: production-verified protected chapter inside the wxO case study
+- Classification: protected subordinate chapter; the `case-studies/` note exists for consistent project documentation, not special emphasis
 - Public indexing: keep `noindex,nofollow`
-- Current publication state: live/protected is acceptable as-is; the password gate is the visitor-privacy layer, not an unresolved launch blocker
+- Current publication state: live/protected inside wxO; the password gate is the visitor-privacy layer, not an unresolved launch blocker
 - Screenshot/media safety: use the consolidated Claude Code + Figma media-audit handoff before adding or replacing visuals: `C:\Users\Victor\Documents\Portfolio\Handoffs\Document Processing\document-processing-claude-code-figma-media-audit-consolidated-2026-06-02.md`
-- Change safety: preserve the gate and current navigation visibility; do not add homepage/sitemap promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
+- Change safety: preserve the gate, wxO parent relationship, `noindex` state, and sitemap omission; do not add separate homepage promotion, screenshots, metrics, launch claims, or major copy changes without Vic approval
 - Package model: source page `document-processing.html`, generated export `content/document-processing.md`, package manifest `case-studies/document-processing.md`, historical source notes in `archive/doc-pro-case-study-handoff.md`, and private media-audit source material in the PC-side `Portfolio\Handoffs` area
 - Current private review checkpoint: `C:\Users\Victor\Documents\Portfolio\Handoffs\Document Processing\2026-07-27-vico2-asset-integration\Document-Processing-VicO2-asset-integration.html`; it uses sanitized derivatives and does not reference the raw bundle
 - Current source material: restored 2026-05-11 handoff, tightened 2026-05-12, the working notes below, and the source-cross-checked 2026-07-27 private comparison
 
 ## Next action
 
-The private VicO2 comparison is `LO-FI COMPLETE — HELD FOR IN-PERSON REVIEW` with the grouped portfolio docket. Keep the live password-protected page stable until that review. Approval would authorize a separate implementation branch using only reviewed sanitized derivatives and approved copy; it would not authorize gate, indexing, sitemap, navigation, homepage, or additional claims changes.
+No separate page lane is active. The September local enhancement batch contains one bounded Classify display crop that preserves the original workflow-builder meaning and removes only the exterior matte; it remains at owner review before any commit or publication gate. Keep Document Processing protected and subordinate to wxO, and use only reviewed sanitized derivatives and approved copy for future changes.
 
 ## Do not do without explicit approval
 
 - Do not remove or weaken the password gate or `noindex,nofollow`.
-- Do not change the current homepage card, Work navigation visibility, or sitemap omission until Vic asks.
+- Do not change the wxO homepage/Work entry, introduce a separate Document Processing promotion, or change sitemap omission until Vic asks.
 - Do not invent screenshots, image paths, metrics, launch claims, or new final wording.
 - Do not treat the mere existence of the live protected route as a problem; the current protected live state is acceptable.
 - Do not create generic “document processing” tasks, dashboards, workflows, or automation plans from this name. In this repo, Document Processing refers to this IBM portfolio project page unless Vic explicitly says otherwise.
@@ -71,11 +71,11 @@ Recommended category:
 ## Target page
 
 - Suggested file: `document-processing.html`
-- Suggested public URL: `https://www.victortrandesign.com/document-processing`
+- Protected route: `https://www.victortrandesign.com/document-processing`, presented as a subordinate chapter inside wxO
 - Suggested title: `Document Processing · Victor Tran Design`
 - Suggested nav label: `Document Processing`
 - Suggested project type label: `Product Design / AI Workflow Design`
-- Protection: same password gate pattern as `pci.html`, `ibmcloud.html`, and `ibm-patterns.html`
+- Protection: use the current wxO request boundary and `noindex,nofollow`; PCI, IBM Cloud, and IBM Patterns are public and are not protection precedents
 
 ## Source-of-truth / site conventions
 
@@ -327,7 +327,7 @@ For the later larger transfer, use prompts/Codex or Claude-first workflows to cr
 - Classifier and extractor are fully shipped.
 - Document Extractor and its combined Evaluation experience released in July 2026.
 - Vic was the lead designer on the Accuracy Evaluation experience.
-- The current homepage Selected Work card sits above IBM Cloud; preserve that visibility unless Victor explicitly approves a change.
+- Document Processing appears inside the protected wxO story rather than as a separate homepage project card; preserve that parent/child relationship unless Victor explicitly approves a change.
 
 ## Still confirm before future refinements
 
@@ -337,14 +337,14 @@ The page may remain live in its current password-gated/noindex state. Confirm th
 - Any additional confidentiality constraints beyond the current password-gated/noindex setup.
 - Which screens, diagrams, or media are safe to add or replace.
 - Whether “newer agent model” is safe/public language.
-- Whether to promote the page in homepage, navigation, or sitemap. Default: do not promote.
+- Whether to promote Document Processing separately from wxO in the homepage, navigation, or sitemap. Default: do not promote it separately.
 
 ## Future refinement plan for Claude Code / Codex
 
 1. Preserve the existing `document-processing.html` implementation, password gate, and `noindex,nofollow` metadata.
 2. Treat `document-processing.html` as the implemented page and this file as planning/source context.
 3. Scope future work narrowly: copy polish, approved media replacement, claim verification, or optional promotion should be separate tasks.
-4. Preserve the existing Work dropdown and homepage card, and keep the page omitted from the sitemap unless Vic explicitly approves a visibility change.
+4. Preserve the wxO Work-dropdown/homepage entry, keep Document Processing subordinate to it, and keep the chapter omitted from the sitemap unless Vic explicitly approves a visibility change.
 5. Do not invent assets, metrics, dates, launch claims, or new final wording.
 6. After page copy changes, run:
 
@@ -360,7 +360,7 @@ node scripts/html-to-md.mjs
    - Generated `content/document-processing.md` and `content/site-index.json` update correctly when copy changes.
 8. Commit/push only after Vic approves the specific task and review path.
 
-## Current homepage/card state
+## Current protected chapter state
 
 **Title:** Document Processing
 
@@ -368,17 +368,17 @@ node scripts/html-to-md.mjs
 
 **Current category:** Product Design
 
-**Current thumbnail:** `images/document-processing-evaluation-results-placeholder.png`
+**Current placement:** Protected chapter within wxO; no separate homepage card or sitemap entry.
 
 ## Review checklist for Vic
 
-Before implementation/publishing, confirm:
+Current confirmed state:
 
-- [x] Public project name is `Document Processing`; the current homepage label is `Product Design`.
+- [x] Protected chapter name is `Document Processing`; it has no separate homepage label.
 - [x] Document Extractor and its combined Evaluation experience released in July 2026.
 - [x] Victor was the lead designer on the Accuracy Evaluation experience.
 - [x] Password-protected page is acceptable for this work.
-- [x] Current homepage and Work-navigation visibility are approved; sitemap omission remains intentional.
-- [x] Sanitized private-comparison imagery is selected for in-person review; live placeholder imagery remains unchanged until approval.
-- [ ] Grouped in-person review decision: Keep / Adjust / Reject.
+- [x] wxO owns the homepage and Work-navigation entry; Document Processing remains subordinate and omitted from the sitemap.
+- [x] Sanitized imagery is in use; the September Classify boundary correction is locally prepared with provenance and remains at owner review.
+- [x] The earlier grouped in-person review state is closed and is retained only as historical source context above.
 - [ ] For any approved implementation, confirm the exact commit/push/PR boundary separately.

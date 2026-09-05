@@ -89,17 +89,18 @@
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0;
-      width: calc(100vw - clamp(31px, calc(2vw + 15px), 47px));
-      margin-left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      margin: 0;
     }
     .art-archive-v2 .art-daysigns-grid figure { margin: 0; padding: 0; min-width: 0; }
     .art-archive-v2 .art-daysigns-grid img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
     .art-archive-v2 .art-sc56,
     .art-archive-v2 .art-restored-wall { align-items: start; gap: clamp(.8rem, 2vw, 1.5rem); }
     .art-archive-v2 .art-sc56 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
     .art-archive-v2 .art-restored-wall figure { margin: 0; }
+    .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 6; grid-row: span 2; }
+    .art-archive-v2 .art-restored-wall figure:not(:first-child) { grid-column: span 3; }
     .art-archive-v2 .art-restored-wall img { width: 100%; height: auto; }
     .art-archive-v2 .art-sc56 img,
     .art-archive-v2 .art-restored-wall img { width: 100%; }
@@ -121,8 +122,10 @@
       .art-archive-v2 .art-live-wall { grid-template-columns: 1fr; }
       .art-archive-v2 .art-live-wall .is-wide,
       .art-archive-v2 .art-live-wall .is-third { grid-column: 1; }
-      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100vw - 16px); }
+      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
       .art-archive-v2 .art-restored-wall { grid-template-columns: 1fr 1fr; }
+      .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 2; grid-row: auto; }
+      .art-archive-v2 .art-restored-wall figure:not(:first-child) { grid-column: auto; }
       .art-archive-v2 .art-sc56 { grid-template-columns: 1fr; }
       .art-archive-v2 .art-diamonds { grid-template-columns: 1fr 1fr; }
       .art-archive-v2 .art-diamonds figure,
@@ -144,15 +147,15 @@
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
-        <img src="images/nav-logo.webp" alt="" width="34" height="34">
-        <span class="nav-logo-name">Victor Tran</span>
+        <span class="nav-logo-victor">Victor</span>
+        <span class="nav-logo-tran">Tran</span>
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown is-active">
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="wxo-canvas.html?lock=1">IBM watsonx Orchestrate</a></li>
+            <li><a href="wxo-canvas.html">IBM watsonx Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -306,6 +309,12 @@
         </section>
       </div>
     </section>
+    <!-- generated:gallery-project-nav:start -->
+    <nav class="gallery-project-nav project-nav" aria-label="Gallery navigation">
+      <a href="uigallery.html" class="project-nav-item project-nav-item--prev" aria-label="Previous gallery: Interface Studies"><span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span><span class="project-nav-title">Interface Studies</span></a>
+      <a href="graphicgallery.html" class="project-nav-item project-nav-item--next" aria-label="Next gallery: Graphic Design"><span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span><span class="project-nav-title">Graphic Design</span></a>
+    </nav>
+    <!-- generated:gallery-project-nav:end -->
   </main>
 
     <!-- generated:site-shell-footer:start -->
@@ -318,6 +327,7 @@
         <nav class="footer-social" aria-label="Contact options">
           <ul>
             <li><a href="mailto:victortran794@gmail.com" class="footer-email" aria-label="Email Victor Tran at victortran794@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>Email</span></a></li>
+            <li><a href="documents/Victor-Tran-Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
             <li><a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </nav>

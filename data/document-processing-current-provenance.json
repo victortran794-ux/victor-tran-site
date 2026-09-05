@@ -1,9 +1,148 @@
 {
-  "source": "Figma Updates / Document Processing section 7:103917",
-  "classification": "current Figma derivatives with fictional prototype data",
-  "dataStatus": "Victor confirmed the document records, workflow names, values, metrics, and model labels shown in these prototype screens are fictional.",
-  "sanitation": "Actual top-right prototype identity markers are neutralized on every frame, and one internal design annotation is obscured; fictional interface data remains visible to preserve the design evidence.",
+  "source": "Owner-supplied exports from iCloud Design Work/IBM/_wxO/Document Processing",
+  "classification": "publication-approved, unaltered owner exports with fictional prototype data",
+  "publication": "Victor explicitly approved the active eight-image Document Processing route and its screenshots for public delivery. Only images/document-processing/public/ is public; all historical protected/wxo assets remain guarded.",
+  "dataStatus": "Victor confirmed the visible names, profile markers, document records, workflow names, values, metrics, and model labels are fictional sample content.",
+  "sanitation": "None on the active eight-image set. Active route assets are byte-identical owner exports. Previously neutralized derivatives are retained only as protected source history and are not rendered.",
   "assets": [
+    {
+      "file": "images/document-processing/public/classify-setup.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/UAB Classifier Class added.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "c04f64dcc9f1cdaef88f63418ecce74474ece789d7856294ad18ec0e451611aa",
+      "outputSha256": "c04f64dcc9f1cdaef88f63418ecce74474ece789d7856294ad18ec0e451611aa",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        2624,
+        1692
+      ],
+      "stage": "Classify",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/extract-field.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Edit field 4.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "c3316636665ae2fd842fafa0a30c73fe558aedf728b7ce0e5ab8e354dd9c0adb",
+      "outputSha256": "c3316636665ae2fd842fafa0a30c73fe558aedf728b7ce0e5ab8e354dd9c0adb",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1376,
+        1048
+      ],
+      "stage": "Extract",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/review-table.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Table editing.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "6c8aaecb2c99e62365f369ee3202849658f11be871c93fb1342b357ff28f93e1",
+      "outputSha256": "6c8aaecb2c99e62365f369ee3202849658f11be871c93fb1342b357ff28f93e1",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Review",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/review-verified.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Verified.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "31424dcd26a0557aaba70c6b9ada575fdffb93d0e463391ad54fb4ffbe094827",
+      "outputSha256": "31424dcd26a0557aaba70c6b9ada575fdffb93d0e463391ad54fb4ffbe094827",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Review",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/evaluate-test-set.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Test uploaded.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "104988f7a0d5b29733564fbe51ae9b28d2625fa6ec522dd3b41a498b20c53384",
+      "outputSha256": "104988f7a0d5b29733564fbe51ae9b28d2625fa6ec522dd3b41a498b20c53384",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Evaluate",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/evaluate-rerun.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Eval 9.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "7ea69cc5082841f07541e68f99912fa78f295602877e06ebfe6df5c6257291ac",
+      "outputSha256": "7ea69cc5082841f07541e68f99912fa78f295602877e06ebfe6df5c6257291ac",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Evaluate",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/evaluate-results.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Eval 11.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "51c06c4e4411ae699d0430432c0804dc02e29121114c949dceeab6e4ae9fb826",
+      "outputSha256": "51c06c4e4411ae699d0430432c0804dc02e29121114c949dceeab6e4ae9fb826",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Evaluate",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    },
+    {
+      "file": "images/document-processing/public/evaluate-indicators.png",
+      "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Extration view with indicators.png",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "sourceSha256": "860889f1c73187cd407b9083eac9ceaeebbca4b13972a0b37abb1876fa23b6da",
+      "outputSha256": "860889f1c73187cd407b9083eac9ceaeebbca4b13972a0b37abb1876fa23b6da",
+      "operations": [
+        "None; repository asset is byte-identical to the owner export"
+      ],
+      "dimensions": [
+        1584,
+        1042
+      ],
+      "stage": "Evaluate",
+      "route": "document-processing.html",
+      "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
+    }
+  ],
+  "retiredSanitizedAssets": [
     {
       "file": "protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png",
       "figmaNode": "7:104016",
@@ -29,7 +168,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/extract-field-sanitized.png",
@@ -56,7 +197,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/extract-error-sanitized.png",
@@ -83,7 +226,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/review-table-sanitized.png",
@@ -110,7 +255,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/review-verified-sanitized.png",
@@ -137,7 +284,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png",
@@ -164,7 +313,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/evaluate-indicators-sanitized.png",
@@ -191,7 +342,9 @@
           1024,
           70
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/evaluate-rerun-sanitized.png",
@@ -212,7 +365,9 @@
           1024,
           30
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     },
     {
       "file": "protected/wxo/assets/document-processing/current/evaluate-test-set-sanitized.png",
@@ -233,9 +388,32 @@
           1024,
           30
         ]
-      ]
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
+    },
+    {
+      "file": "protected/wxo/assets/document-processing/current/classify-suggested-display-sanitized.png",
+      "source": "protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png",
+      "sourceSha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
+      "outputSha256": "7a8191aeba38a813e48cfad04f3d193b228cc3095125a9cc1a7a2185aca52465",
+      "operations": [
+        "Cropped confirmed exterior matte only: left 20px, top 10px, right 20px, bottom 30px"
+      ],
+      "crop": [
+        20,
+        10,
+        1004,
+        634
+      ],
+      "dimensions": [
+        984,
+        624
+      ],
+      "route": "source-only",
+      "retainedReason": "Retired neutralized derivative retained inside the protected namespace for provenance and rollback; it is not rendered by the active route."
     }
   ],
-  "selection": "Nine current Figma frames: one Classify setup, two Extract states, two Review states, and a four-screen Evaluate finale.",
-  "excluded": "Classifier data mapping was removed after visual review because it duplicated setup evidence without strengthening the story."
+  "selection": "Eight unaltered owner-export frames: one Classify setup, one Extract field setup, two Review states, and a four-screen Evaluate finale.",
+  "excluded": "The prior nine-frame current-Figma set and its motion derivative were retired from active markup because their identity markers had been neutralized in the pixels and matching unaltered originals were not present in the bounded owner-export folder."
 }

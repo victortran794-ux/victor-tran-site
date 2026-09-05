@@ -16,7 +16,7 @@ const sources = [
 ];
 const graphicArchiveSources = [
   'sgla-2024-identity-development.webp', 'sgla-2023-brand-guidelines.webp', 'sgla-2024-ballroom-system.webp',
-  'sgla-2024-signage-system.webp', 'dog.webp', 'chantico.webp', 'abex.webp', 'sc56-instagram-panel-series.webp',
+  'sgla-2024-signage-system.webp', 'dog.webp', 'chantico.webp', 'abex.webp',
   'ibm-paltron-illustration-system.webp', 'wxo-illustration-system.webp',
 ];
 const copy = (relative) => fs.cpSync(path.join(root, relative), path.join(fixture, relative), { recursive: true });
@@ -28,6 +28,7 @@ const uvSetup = `      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17
         if: >-
           needs.changes.outputs.all == 'true' ||
           needs.changes.outputs.shared == 'true' ||
+          needs.changes.outputs.resume == 'true' ||
           needs.changes.outputs.images == 'true' ||
           needs.changes.outputs.gallery == 'true'
         with:

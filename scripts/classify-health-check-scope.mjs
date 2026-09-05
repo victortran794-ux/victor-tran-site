@@ -13,6 +13,7 @@ const emptyScope = () => ({
   sal: false,
   ability: false,
   wxo: false,
+  resume: false,
   images: false,
   links: false,
   deployable: false,
@@ -28,6 +29,11 @@ export function classifyPaths(paths) {
     path === 'content/design-system.md' ||
     path === 'content/design-system.json' ||
     /^scripts\/(?:check-design-md-contract|test-design-md-contract|test-design-md-wiring)\.mjs$/.test(path);
+  const isResumePath = path =>
+    path === 'documents/Victor-Tran-Resume.pdf' ||
+    /^data\/resume(?:-artifact)?\.json$/.test(path) ||
+    /^assets\/resume-fonts\//.test(path) ||
+    /^scripts\/(?:build-resume\.py|check-resume-artifact\.(?:py|sh)|verify-resume-build\.sh|requirements-resume\.txt)$/.test(path);
   const isFullSuitePath = path =>
     path === '.github/workflows/health-check.yml' ||
     path === '.github/lighthouse-budget.json' ||
@@ -63,6 +69,7 @@ export function classifyPaths(paths) {
     path === 'robots.txt';
 
   scope.design = paths.some(isDesignPath);
+  scope.resume = paths.some(isResumePath);
   scope.docs = paths.some(isDocumentationPath) || scope.design;
   scope.all = paths.some(isFullSuitePath);
   scope.shared = paths.some(isSharedPath);
@@ -143,7 +150,7 @@ export function classifyPaths(paths) {
     path === 'vercel.json' ||
     path === 'sitemap.xml' ||
     path === 'robots.txt';
-  const deployable = paths.some(isDeployablePath);
+  const deployable = paths.some(isDeployablePath) || scope.resume;
   scope.deployable = scope.deployable || deployable;
   scope.links = scope.links || deployable;
 
@@ -156,6 +163,7 @@ export function classifyPaths(paths) {
   const hasUnknownPath = paths.some(path =>
     !isDocumentationPath(path) &&
     !isDesignPath(path) &&
+    !isResumePath(path) &&
     !isFullSuitePath(path) &&
     !isSharedPath(path) &&
     !isDeployablePath(path) &&

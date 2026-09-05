@@ -84,29 +84,38 @@ def main() -> int:
         "editorial-system diagram needs a concise text equivalent",
     )
 
-    # Existing public narrative must not silently disappear.
+    # Approved public narrative must not silently disappear or regress to the
+    # earlier over-direct ownership framing.
+    need('class="sal-vico2-hero-note"' not in html, "removed repetitive hero note must not return")
+    need('The Final Issue' not in html, "caption must not imply that the magazine ended")
     required_copy = [
-        "I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.",
-        "Five years of issues, art direction, and editorial design.",
-        '"To Connie, the rose of Pi Kappa Phi." A tribute to the fraternity\'s First Lady, in my last issue as creative director.',
-        "My role grew from primary designer to creative director while I continued designing.",
+        "Over five years, I helped shape the layout and art direction of Pi Kappa Phi’s official magazine, stepping into the creative director role in 2018.",
+        '“To Connie, the rose of Pi Kappa Phi.” A tribute to the fraternity’s First Lady, from my final issue as art director.',
+        "My role grew from layout design into creative direction, and I continued designing each issue.",
         "First published in fall 1909, Star &amp; Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.",
-        "Five years of issues, archived in full on Issuu. Click any cover to read the issue.",
+        "Select a cover to read that issue on Issuu.",
         "View the complete issue archive",
-        "Editorial features, chapter coverage, and visual storytelling pulled from the issues I art-directed.",
+        "Editorial features and chapter stories from issues I art directed.",
         '"A Common Bond": six brothers from across generations weigh in on the call to lead and the duty to serve.',
         '"Thirty Under 30" celebrates thirty alumni redefining what it means to lead.',
-        "Documenting the men who ride, build, and serve through TAE, the philanthropic heart of Pi Kappa Phi.",
-        "Four highlight spreads from my first issue as creative director.",
+        "Stories of the men who ride, build, and serve through The Ability Experience.",
+        "Four favorite spreads from the Summer 2017 issue.",
         '"Test on 10th" balances photography, pull quotes, and dense reporting across the spread.',
-        "One cover story from each of the remaining issues, with five years of features in chronological order.",
+        "Four more cover stories from the archive, presented chronologically.",
         '"Woven into the lives of others" collects stories from the summer Ability Experience.',
-        '"The Challenge We Must Face." takes a hard look at the fraternity in the wake of a brother\'s death.',
+        '“The Challenge We Must Face” takes a hard look at the fraternity in the wake of a brother’s death.',
         '"Throwing Bones" follows Kenny Capps as he runs the Mountains-to-Sea Trail in the face of cancer.',
-        '"Leading the Decade" marks Pi Kapp College for Emerging Leaders at ten years.',
+        '“Leading the Decade” marks ten years of Pi Kapp College for Emerging Leaders.',
     ]
     for copy in required_copy:
         need(copy in html, f"missing existing public narrative: {copy[:72]}")
+    for retired_copy in [
+        "I led layout and art direction for Pi Kappa Phi’s official magazine from 2016 to 2020.",
+        "in my last issue as creative director",
+        "My role grew from primary designer to creative director while I continued designing.",
+        "Four highlight spreads from my first issue as creative director.",
+    ]:
+        need(retired_copy not in html, f"retired ownership framing returned: {retired_copy[:72]}")
 
     for award in [
         "2019 · 3rd Place Overall Magazine Excellence",
@@ -131,7 +140,7 @@ def main() -> int:
     )
     need("sal-vico2-archive-note" not in html, "legacy padded archive note must be removed")
     need(
-        '"description": "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi."' in projects,
+        '"description": "Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine."' in projects,
         "homepage SAL description must use the approved third-person voice",
     )
 
@@ -156,12 +165,50 @@ def main() -> int:
             need(bool(image.get("alt", "").strip()), f"missing alt text: {image.get('src')}")
             need(image.get("width", "").isdigit() and image.get("height", "").isdigit(), f"missing dimensions: {image.get('src')}")
 
-    cover_links = [
-        attrs for tag, attrs in audit.tags
-        if tag == "a" and attrs.get("href") == "https://issuu.com/pikappaphi"
+    issue_cards = [
+        ("Fall 2016", "starandlamp_fall16_issuu"),
+        ("Summer 2017", "star_lamp_sum2017_online"),
+        ("Winter 2017", "starandlamp_fall17_issuu"),
+        ("Summer 2018", "s_l_spr2018"),
+        ("Fall 2018", "s_l_fal2018_issuu"),
+        ("Summer 2019", "issuu_s_l_spr2019"),
+        ("Fall 2019", "s_l_fal2019_issuu"),
+        ("Summer 2020", "s_l_spr2020_digital__4_"),
+        ("Fall 2020", "s_l_fall2020_final_proof"),
     ]
-    need(len(cover_links) >= 9, "all nine Issuu cover links must remain")
+    issue_hrefs = [
+        f"https://issuu.com/pikappaphi/docs/{slug}"
+        for _, slug in issue_cards
+    ]
+    linked_issues = [
+        attrs.get("href") for tag, attrs in audit.tags
+        if tag == "a" and attrs.get("href", "").startswith("https://issuu.com/pikappaphi/docs/")
+    ]
+    need(linked_issues == issue_hrefs, "all nine issue cards must use the exact official Issuu document URLs")
+    for label, slug in issue_cards:
+        href = f"https://issuu.com/pikappaphi/docs/{slug}"
+        need(
+            bool(re.search(
+                rf'<a href="{re.escape(href)}"[^>]*><img[^>]*alt="{re.escape(label)} cover"[^>]*><span>{re.escape(label)}</span></a>',
+                html,
+            )),
+            f"issue card must preserve its exact accessible cover title and visible label: {label}",
+        )
+    need(
+        bool(re.search(
+            r'<a class="sal-vico2-archive-link" href="https://issuu\.com/pikappaphi"[^>]*>View the complete issue archive',
+            html,
+        )),
+        "separate generic all-issues archive CTA must remain",
+    )
     need("https://pikapp.org/about/star-lamp/" in html, "latest-issues link must remain")
+    need(
+        bool(re.search(
+            r'<img[^>]*src="images/sal-f2017-cover-story\.jpg"[^>]*alt="Winter 2017 cover story spread"[^>]*><figcaption><span class="section-label">Winter 2017 · Cover Story</span>',
+            html,
+        )),
+        "Winter 2017 cover-story image and section label must use the official issue date",
+    )
 
     # Bounded CSS and responsive contracts.
     need("/* VICO2 CASE STUDY: START */" in css and "/* VICO2 CASE STUDY: END */" in css, "missing shared VicO2 CSS boundary")
@@ -201,6 +248,10 @@ def main() -> int:
     )
     need(".sal-vico2-hero,\n.sal-vico2-case-study {" in sal_css, "SAL skin tokens must reach both hero and case-study components")
     need("@media (max-width: 700px)" in sal_css, "SAL layer needs narrow recomposition")
+    need(
+        ".sal-vico2-evidence > div + div" not in sal_css,
+        "recognition evidence must not draw an internal divider through long award headings",
+    )
     need(".sal-vico2-cover-wall a:focus-visible" in sal_css,
          "issue-cover focus must be scoped so the cover and caption column are not awkwardly outlined together")
     need(".sal-vico2-cover-wall a:focus-visible img" in sal_css,

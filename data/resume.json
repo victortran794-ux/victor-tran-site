@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "name": "Victor Tran",
+    "location": "Austin, Texas",
+    "phone": "517 677 7926",
+    "email": "victortran794@gmail.com",
+    "portfolio": "www.victortrandesign.com",
+    "linkedin": "www.linkedin.com/in/victortrandesign/"
+  },
+  "resume": {
+    "headline": "Visual Designer at IBM | Enterprise AI & Automation, Product Design & Design Systems",
+    "summary": "Visual designer with 10 years of experience making complex enterprise products and communication systems clear, useful, and scalable. I combine visual and interaction design, reusable systems, research, close cross-functional delivery, mentoring, and practical design-to-code fluency.",
+    "expertise": "Visual Design | Product Design | Design Systems | Enterprise AI & Automation | UX/UI | Research | Accessibility | Design-to-Code",
+    "experience": [
+      {
+        "company": "IBM",
+        "location": "Austin, Texas",
+        "role": "Visual Designer, IBM watsonx Orchestrate | AI & Automation",
+        "dates": "January 2024–Present",
+        "bullets": [
+          "Design visual and interaction experiences for enterprise AI and automation workflows in IBM watsonx Orchestrate.",
+          "Lead visual design for complex document-processing experiences and contribute interaction specifications and reusable canvas patterns with product, UX, and engineering partners.",
+          "Maintain and review component-library patterns, tokens, and system standards as part of the visual-quality gate for product delivery.",
+          "Pioneered AI-assisted design-to-code workflows within the team, translating Figma explorations into working Storybook components and sharing the approach with other designers.",
+          "Lead research and translate findings into product recommendations; mentor designers and host or co-host Design Guild sessions."
+        ]
+      },
+      {
+        "company": "IBM",
+        "location": "Raleigh, North Carolina / Austin, Texas",
+        "role": "Visual Designer, IBM Cloud | Observability",
+        "dates": "January 2021–December 2023",
+        "bullets": [
+          "Designed and evaluated enterprise cloud experiences through research, prototyping, concept testing, heuristic review, and Carbon-aligned interface work.",
+          "Co-created reusable illustration components, visual guidance, documentation, and review practices while supporting product teams and contributors."
+        ]
+      },
+      {
+        "company": "Pi Kappa Phi Fraternity Headquarters & The Ability Experience",
+        "location": "Charlotte, North Carolina",
+        "roles": [
+          "Assistant Executive Director of Communications | September 2018–January 2021",
+          "Graphic Designer | July 2016–August 2018"
+        ],
+        "bullets": [
+          "Progressed from graphic designer to communications leadership, directing visual, editorial, brand, and multichannel work while improving creative operations and stakeholder delivery.",
+          "Led layout and art direction for The Star & Lamp across five years and nine issues."
+        ]
+      }
+    ],
+    "education": "Western Michigan University | BFA, Graphic Design, 2016 | Lee Honors College Graduate",
+    "tools": "Figma | Adobe Creative Suite | Storybook | HTML | CSS | React | TypeScript | Design tokens | Accessibility"
+  }
+}

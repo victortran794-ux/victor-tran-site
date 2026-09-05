@@ -5,7 +5,6 @@
       "slug": "wxo-canvas",
       "title": "IBM watsonx Orchestrate",
       "url": "wxo-canvas.html",
-      "entryUrl": "wxo-canvas.html?lock=1",
       "category": "Product Systems",
       "labelClass": "label-default",
       "type": "primary",
@@ -20,17 +19,23 @@
       "images": [
         {
           "src": "images/wxo-canvas/wxo-home-thumbnail.png",
+          "themeDarkSrc": "images/wxo-canvas/wxo-home-thumbnail-dark.png",
           "width": 1024,
           "height": 686,
           "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "lead",
       "homepageOverlay": true,
-      "homepageLock": true
+      "homepagePractice": {
+        "role": "Visual Designer",
+        "focus": "Enterprise AI · Product systems · Visual craft",
+        "location": "Austin, Texas"
+      },
+      "homepageBonus": "Includes Document Processing"
     },
     {
       "slug": "document-processing",
@@ -45,19 +50,19 @@
       "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
+      "description": "A platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
       "cta": "View Project",
       "images": [
         {
-          "src": "images/document-processing-evaluation-results-placeholder.png",
-          "width": 2400,
-          "height": 1428,
+          "src": "images/document-processing/public/evaluate-results.png",
+          "width": 1584,
+          "height": 1042,
           "alt": "Document Processing evaluation results dashboard"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "lead"
     },
     {
@@ -189,7 +194,7 @@
       "surface": "orange",
       "chapter": "02",
       "chapterTitle": "Brand, publication, and community work",
-      "description": "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.",
+      "description": "Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine.",
       "cta": "View Project",
       "images": [
         {
@@ -250,6 +255,7 @@
       "chapter": "03",
       "chapterTitle": "And some galleries.",
       "description": "Standalone digital and traditional work, including posters, paintings, and personal series.",
+      "projectNavDescription": "Drawing, painting, and visual experiments",
       "cta": "View Gallery",
       "images": [
         {
@@ -262,7 +268,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-7"
+      "homepageVariant": "span-4"
     },
     {
       "slug": "graphicgallery",
@@ -279,6 +285,7 @@
       "chapter": "03",
       "chapterTitle": "And some galleries.",
       "description": "Standalone identity, print, illustration, and event graphics.",
+      "projectNavDescription": "Identity, editorial, and campaign work",
       "cta": "View Gallery",
       "images": [
         {
@@ -291,7 +298,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-5"
+      "homepageVariant": "span-4"
     },
     {
       "slug": "uigallery",
@@ -304,10 +311,11 @@
       "nav": true,
       "homepage": true,
       "wide": false,
-      "surface": "purple",
+      "surface": "teal",
       "chapter": "03",
       "chapterTitle": "And some galleries.",
       "description": "Static screen studies focused on interface craft and visual refinement.",
+      "projectNavDescription": "Focused product and interaction studies",
       "cta": "View Gallery",
       "images": [
         {
@@ -320,7 +328,7 @@
       "protected": false,
       "noindex": false,
       "sitemap": true,
-      "homepageVariant": "span-12"
+      "homepageVariant": "span-4"
     }
   ]
 }

@@ -54,7 +54,7 @@
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="wxo-canvas.html?lock=1">IBM watsonx Orchestrate</a></li>
+            <li><a href="wxo-canvas.html">IBM watsonx Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -127,7 +127,7 @@
             </button>
             <div class="hero-copy">
               <p class="hero-title">I design cool things with sincerity.</p>
-              <p class="hero-subtitle">Visual designer building clear, expressive systems across enterprise products, brands, and stories.</p>
+              <p class="hero-subtitle">I’m a visual designer working across enterprise products, brand identity, editorial design, and illustration.</p>
               <a href="#work" class="hero-cta">See the work <span aria-hidden="true">→</span></a>
             </div>
           </div>
@@ -164,10 +164,15 @@
           <div class="hero-dna-type-playground">
             <p class="hero-dna-play-text" contenteditable="true" spellcheck="false" aria-label="Editable typography sample">I design cool things with sincerity.</p>
             <div class="hero-dna-play-controls" aria-label="Typography sample controls">
-              <button type="button" class="hero-dna-chip is-active" data-dna-font="'DM Serif Display', serif">Serif</button>
-              <button type="button" class="hero-dna-chip" data-dna-font="'Barlow', sans-serif">Sans</button>
-              <button type="button" class="hero-dna-chip" data-dna-font="'Source Code Pro', monospace">Mono</button>
-              <button type="button" class="hero-dna-chip" data-dna-italic>Italic</button>
+              <div class="hero-dna-font-group" role="group" aria-label="Typeface">
+                <button type="button" class="hero-dna-chip is-active" data-dna-font="'DM Serif Display', serif">Serif</button>
+                <button type="button" class="hero-dna-chip" data-dna-font="'Barlow', sans-serif">Sans</button>
+                <button type="button" class="hero-dna-chip" data-dna-font="'Source Code Pro', monospace">Mono</button>
+              </div>
+              <div class="hero-dna-modifier-group" role="group" aria-label="Typeface modifier">
+                <span class="hero-dna-modifier-label">Modifier</span>
+                <button type="button" class="hero-dna-chip hero-dna-chip--italic" data-dna-italic aria-pressed="false">Italic <span class="hero-dna-italic-state" data-dna-italic-state>Off</span></button>
+              </div>
             </div>
           </div>
         </div>
@@ -207,34 +212,29 @@
       <span class="sr-only" aria-live="polite" data-hero-status></span>
     </section>
 
-    <aside class="home-practice-proof" aria-label="Current practice">
-      <span class="home-practice-proof-label">Current practice</span>
-      <strong>Visual Designer at IBM watsonx Orchestrate</strong>
-      <span>Enterprise AI · Product systems · Visual craft</span>
-      <span>Austin, Texas</span>
-    </aside>
 
     <!-- Featured Projects -->
     <section class="featured" id="work" aria-labelledby="featuredHeading">
       <header class="featured-heading">
-        <h2 id="featuredHeading">Other cool things to check out</h2>
+        <h2 id="featuredHeading">Selected work</h2>
       </header>
 
       <div class="featured-list">
 
         <!-- generated:homepage-primary-projects:start -->
-        <a href="wxo-canvas.html?lock=1" class="featured-item featured-item--wide featured-item--lead featured-item--overlay reveal" data-chapter="01" data-chapter-title="Agentic workflow canvas">
+        <a href="wxo-canvas.html" class="featured-item featured-item--wide featured-item--lead featured-item--overlay reveal" data-chapter="01" data-chapter-title="Agentic workflow canvas">
           <div class="featured-item-img">
-            <img loading="lazy" decoding="async"
+            <img loading="lazy" decoding="async" data-home-theme-image data-theme-light-src="images/wxo-canvas/wxo-home-thumbnail.png" data-theme-dark-src="images/wxo-canvas/wxo-home-thumbnail-dark.png"
               src="images/wxo-canvas/wxo-home-thumbnail.png" width="1024" height="686"
               alt="Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
             >
           </div>
           <div class="featured-item-content">
             <p class="section-label label-default">Product Systems</p>
-            <h2 class="featured-item-title">IBM watsonx Orchestrate <span class="featured-item-lock" role="img" aria-label="Password required"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span></h2>
+            <h2 class="featured-item-title">IBM watsonx Orchestrate</h2>
+            <p class="featured-practice"><span>Current practice</span><strong>Visual Designer</strong><span>Enterprise AI · Product systems · Visual craft</span><span>Austin, Texas</span></p>
             <p class="featured-item-desc">An agentic workflow canvas for building, inspecting, and improving AI workflows.</p>
-            <span class="view-link">View Case Study</span>
+            <div class="featured-card-actions"><span class="view-link">View Case Study</span><span class="featured-item-bonus"><span aria-hidden="true">↳</span><em>Includes Document Processing</em></span></div>
           </div>
         </a>
 
@@ -249,7 +249,7 @@
             <p class="section-label label-default">Product Design</p>
             <h2 class="featured-item-title">IBM Cloud Observability</h2>
             <p class="featured-item-desc">Research, product workflows, and reusable visual methods for IBM Cloud Observability.</p>
-            <span class="view-link">View Project</span>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
 
@@ -266,7 +266,7 @@
             <p class="section-label label-default">Product Design</p>
             <h2 class="featured-item-title">IBM Patterns: Contact Us</h2>
             <p class="featured-item-desc">A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form.</p>
-            <span class="view-link">View Project</span>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
 
@@ -283,7 +283,7 @@
             <p class="section-label label-default">Brand &amp; Print</p>
             <h2 class="featured-item-title">Performance Contracting, Inc.</h2>
             <p class="featured-item-desc">Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts.</p>
-            <span class="view-link">View Project</span>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
 
@@ -298,7 +298,7 @@
             <p class="section-label label-default">Brand Identity</p>
             <h2 class="featured-item-title">The Ability Experience</h2>
             <p class="featured-item-desc">A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities.</p>
-            <span class="view-link">View Project</span>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
 
@@ -314,8 +314,8 @@
           <div class="featured-item-content">
             <p class="section-label label-default">Art Direction</p>
             <h2 class="featured-item-title">Star &amp; Lamp Magazine</h2>
-            <p class="featured-item-desc">Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.</p>
-            <span class="view-link">View Project</span>
+            <p class="featured-item-desc">Five years of editorial design and art direction for Pi Kappa Phi’s century-old magazine.</p>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
 
@@ -330,7 +330,7 @@
             <p class="section-label label-default">Product Design</p>
             <h2 class="featured-item-title">Pi Kapp App</h2>
             <p class="featured-item-desc">A member-facing app concept connecting milestones, chapter activity, and Pi Kappa Phi's visual identity.</p>
-            <span class="view-link">View Project</span>
+            <div class="featured-card-actions"><span class="view-link">View Project</span></div>
           </div>
         </a>
         <!-- generated:homepage-primary-projects:end -->
@@ -341,7 +341,7 @@
         <h3 class="featured-galleries-title">And some galleries.</h3>
         <div class="featured-gallery-list">
           <!-- generated:homepage-gallery-projects:start -->
-          <a href="artillustration.html" class="featured-item featured-item--gallery featured-item--span-7 featured-item--surface-orange reveal" data-chapter="03" data-chapter-title="And some galleries.">
+          <a href="artillustration.html" class="featured-item featured-item--gallery featured-item--span-4 featured-item--surface-orange reveal" data-chapter="03" data-chapter-title="And some galleries.">
             <div class="featured-item-img">
               <img loading="lazy" decoding="async"
                 src="images/illus-glow.jpg" width="1117" height="1600"
@@ -351,11 +351,11 @@
             <div class="featured-item-content">
               <h2 class="featured-item-title">Art &amp; Illustration</h2>
               <p class="featured-item-desc">Standalone digital and traditional work, including posters, paintings, and personal series.</p>
-              <span class="view-link">View Gallery</span>
+              <div class="featured-card-actions"><span class="view-link">View Gallery</span></div>
             </div>
           </a>
 
-          <a href="graphicgallery.html" class="featured-item featured-item--gallery featured-item--span-5 featured-item--surface-purple reveal" data-chapter="03" data-chapter-title="And some galleries.">
+          <a href="graphicgallery.html" class="featured-item featured-item--gallery featured-item--span-4 featured-item--surface-purple reveal" data-chapter="03" data-chapter-title="And some galleries.">
             <div class="featured-item-img">
               <img loading="lazy" decoding="async"
                 src="images/gg-edc-0.jpg" width="1600" height="1279"
@@ -365,11 +365,11 @@
             <div class="featured-item-content">
               <h2 class="featured-item-title">Graphic Design</h2>
               <p class="featured-item-desc">Standalone identity, print, illustration, and event graphics.</p>
-              <span class="view-link">View Gallery</span>
+              <div class="featured-card-actions"><span class="view-link">View Gallery</span></div>
             </div>
           </a>
 
-          <a href="uigallery.html" class="featured-item featured-item--gallery featured-item--span-12 featured-item--surface-purple reveal" data-chapter="03" data-chapter-title="And some galleries.">
+          <a href="uigallery.html" class="featured-item featured-item--gallery featured-item--span-4 featured-item--surface-teal reveal" data-chapter="03" data-chapter-title="And some galleries.">
             <div class="featured-item-img">
               <img loading="lazy" decoding="async"
                 src="images/ui-gallery/ekos-cover.webp" width="1366" height="939"
@@ -379,7 +379,7 @@
             <div class="featured-item-content">
               <h2 class="featured-item-title">Interface Studies</h2>
               <p class="featured-item-desc">Static screen studies focused on interface craft and visual refinement.</p>
-              <span class="view-link">View Gallery</span>
+              <div class="featured-card-actions"><span class="view-link">View Gallery</span></div>
             </div>
           </a>
           <!-- generated:homepage-gallery-projects:end -->
@@ -400,6 +400,7 @@
         <nav class="footer-social" aria-label="Contact options">
           <ul>
             <li><a href="mailto:victortran794@gmail.com" class="footer-email" aria-label="Email Victor Tran at victortran794@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>Email</span></a></li>
+            <li><a href="documents/Victor-Tran-Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
             <li><a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </nav>

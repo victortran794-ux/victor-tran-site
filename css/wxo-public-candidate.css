@@ -215,6 +215,20 @@
   padding: 0;
 }
 
+.wxo-public-pilot .pilot-canvas-media-stack {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  min-width: 0;
+}
+
+.wxo-public-pilot .pilot-history-canvas {
+  overflow: hidden;
+  padding: clamp(0.85rem, 1.6vw, 1.35rem);
+  border: 1px solid color-mix(in srgb, var(--border) 75%, var(--text) 25%);
+  border-radius: 0.875rem;
+  background: var(--bg-2);
+}
+
 .wxo-public-pilot .pilot-evidence {
   margin: 0;
 }
@@ -266,31 +280,57 @@
   text-transform: uppercase;
 }
 
-.wxo-public-pilot .pilot-released-canvas {
-  width: min(82%, 980px);
-  margin-top: clamp(4rem, 8vw, 7rem);
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.wxo-public-pilot .pilot-main-illustration {
-  width: min(100%, 1024px);
-  margin: 0 auto;
-  margin-inline: auto;
-}
-
-.wxo-public-pilot .pilot-main-illustration img {
+.wxo-public-pilot .pilot-system-library { margin-top: clamp(6rem, 12vw, 11rem); }
+.wxo-public-pilot .pilot-system-library .pilot-section-heading { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.wxo-public-pilot .pilot-section-heading--stacked {
   display: block;
-  width: 100%;
-  height: auto;
 }
+.wxo-public-pilot .pilot-section-heading--stacked .workflow-label {
+  margin-bottom: clamp(1.1rem, 2vw, 1.75rem);
+}
+.wxo-public-pilot .pilot-section-heading--stacked > div {
+  max-width: 980px;
+}
+.wxo-public-pilot .pilot-exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0 var(--page-x);
+  list-style: none;
+}
+.wxo-public-pilot .pilot-exploration-grid--node {
+  grid-template-columns: 1fr;
+  max-width: 1080px;
+}
+.wxo-public-pilot .pilot-exploration-grid > li {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.wxo-public-pilot .pilot-exploration-grid .pilot-image-button {
+  overflow: hidden;
+  border-radius: 0.55rem;
+  background: var(--bg);
+}
+.wxo-public-pilot .pilot-exploration-grid .pilot-evidence figcaption {
+  grid-template-columns: minmax(130px, 0.28fr) minmax(0, 1fr);
+  padding-inline: clamp(0.15rem, 0.8vw, 0.65rem);
+}
+.wxo-public-pilot .pilot-flow-story { padding-top: clamp(2rem, 5vw, 5rem); }
+.wxo-public-pilot .pilot-flow-evidence-intro { max-width: 760px; margin: clamp(4rem, 8vw, 7rem) var(--page-x) 2rem; }
+.wxo-public-pilot .pilot-flow-evidence-intro > p:last-child { margin: .65rem 0 0; color: var(--muted); }
+.wxo-public-pilot .pilot-flow-evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4rem); margin: 0; padding: 0 var(--page-x); list-style: none; }
+.wxo-public-pilot .pilot-exploration-grid--clean .pilot-image-button { overflow: hidden; border: 1px solid var(--border); border-radius: .25rem; background: transparent; }
+.wxo-public-pilot .pilot-exploration-grid--clean img { border-radius: inherit; }
 
-.wxo-public-pilot .pilot-main-illustration figcaption {
-  max-width: 54ch;
-  margin: 1rem 0 0;
-  color: var(--muted);
-  line-height: 1.55;
-}
+.wxo-public-pilot .doc-motion-section { padding-top: clamp(4rem, 8vw, 7rem); }
+.wxo-public-pilot .doc-current-stage-head { gap: clamp(10px, 1.4vw, 16px); }
+.wxo-public-pilot .workflow-return-link--prominent { display: inline-flex; align-items: center; min-height: 48px; padding: .7rem 1rem; border: 1px solid currentColor; border-radius: .35rem; font-weight: 700; }
+.wxo-public-pilot .workflow-return-link--prominent:hover,
+.wxo-public-pilot .workflow-return-link--prominent:focus-visible { background: var(--pilot-blue); border-color: var(--pilot-blue); color: #fff; }
+
 
 .wxo-public-pilot .pilot-activity-frame .pilot-image-button,
 .wxo-public-pilot .pilot-doc-frame .pilot-image-button {
@@ -346,6 +386,16 @@
 .wxo-public-pilot .pilot-activity-epic {
   border-top: 3px solid var(--pilot-green);
   background: linear-gradient(145deg, var(--pilot-green-soft), var(--bg-2) 72%);
+}
+
+.wxo-public-pilot .pilot-activity-intro {
+  display: block;
+  margin: 0 0 clamp(2.5rem, 5vw, 4.5rem);
+  padding: 0;
+}
+
+.wxo-public-pilot .pilot-activity-intro .workflow-label {
+  margin-bottom: clamp(1.1rem, 2vw, 1.75rem);
 }
 
 [data-theme='dark'] .wxo-public-pilot .pilot-activity-epic {
@@ -470,16 +520,12 @@
   margin-top: clamp(4rem, 9vw, 8rem);
 }
 
-.wxo-public-pilot .pilot-vignettes {
-  width: 100%;
-  margin: clamp(4rem, 8vw, 7rem) auto 0;
-}
 
 .wxo-public-pilot .pilot-side-quest-bridge {
   --pilot-bridge-bleed: max(0px, calc((100vw - var(--max-w)) / 2));
   position: relative;
   display: grid;
-  grid-template-columns: minmax(230px, 0.29fr) minmax(0, 1fr) minmax(220px, 0.72fr);
+  grid-template-columns: minmax(230px, 0.29fr) minmax(0, 1fr);
   gap: clamp(2rem, 6vw, 6rem);
   margin: clamp(7rem, 14vw, 13rem) 0;
   margin-inline: calc(-1 * var(--pilot-bridge-bleed));
@@ -494,39 +540,6 @@
   background: #111d30;
 }
 
-.wxo-public-pilot .pilot-bridge-thumbnail {
-  align-self: center;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--pilot-blue) 58%, var(--border));
-  border-radius: 0.875rem;
-  background: var(--bg);
-  color: var(--text);
-  text-decoration: none;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.wxo-public-pilot .pilot-bridge-thumbnail:hover,
-.wxo-public-pilot .pilot-bridge-thumbnail:focus-visible {
-  transform: translateY(-0.3rem);
-  border-color: var(--pilot-blue);
-  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--pilot-blue) 18%, transparent);
-}
-
-.wxo-public-pilot .pilot-bridge-thumbnail img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 0.8rem 0.8rem 0 0;
-}
-
-.wxo-public-pilot .pilot-bridge-thumbnail span {
-  display: block;
-  padding: 0.75rem 0.9rem;
-  border-top: 1px solid var(--border);
-  font: 700 0.68rem/1.4 var(--pilot-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 
 .wxo-public-pilot .pilot-side-quest-bridge h2 {
   max-width: 16ch;
@@ -679,21 +692,46 @@
 }
 
 .wxo-public-pilot .pilot-close {
-  max-width: 1020px;
+  max-width: 1320px;
   padding-block: 0 clamp(8rem, 14vw, 13rem);
   padding-inline: var(--page-x);
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 7rem);
 }
 
 .wxo-public-pilot .pilot-close h2 {
-  max-width: 14ch;
+  max-width: 100%;
+  font-size: clamp(2.25rem, 2.9vw, 3.25rem);
 }
 
-.wxo-public-pilot .pilot-close > p:last-child {
+.wxo-public-pilot .pilot-close-copy > p:last-child {
   max-width: 42ch;
   margin: 1.6rem 0 0;
   color: var(--muted);
   font-size: clamp(1.05rem, 1.5vw, 1.25rem);
   line-height: 1.65;
+}
+
+.wxo-public-pilot .pilot-close-media {
+  min-width: 0;
+  margin: 0;
+}
+
+.wxo-public-pilot .pilot-close-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+
+.wxo-public-pilot .pilot-close-media figcaption {
+  max-width: 46ch;
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
 }
 
 body.wxo-gallery-open {
@@ -741,6 +779,24 @@ body.wxo-gallery-open {
   text-transform: uppercase;
 }
 
+.wxo-public-pilot .pilot-gallery-topbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wxo-public-pilot .pilot-gallery-fullscreen {
+  min-height: 44px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font: 700 0.68rem/1 var(--pilot-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .wxo-public-pilot .pilot-gallery-close {
   flex: 0 0 48px;
   width: 48px;
@@ -757,6 +813,12 @@ body.wxo-gallery-open {
 .wxo-public-pilot .pilot-gallery-close:focus-visible {
   background: var(--text);
   color: var(--bg);
+}
+
+.wxo-public-pilot .pilot-gallery-fullscreen:hover,
+.wxo-public-pilot .pilot-gallery-fullscreen:focus-visible {
+  border-color: var(--pilot-blue);
+  color: var(--pilot-blue);
 }
 
 .wxo-public-pilot .pilot-gallery-layout {
@@ -785,6 +847,35 @@ body.wxo-gallery-open {
   max-width: none;
   max-height: none;
   object-fit: contain;
+}
+
+/* Fit is the default. Full size preserves native pixels, with internal pan
+   and scroll for wide boards and tall exports inside this same viewer. */
+.wxo-public-pilot .pilot-gallery-dialog[data-wxo-gallery-zoom='full'] .pilot-gallery-stage {
+  overflow: auto;
+}
+
+.wxo-public-pilot .pilot-gallery-dialog[data-wxo-gallery-zoom='full'] .pilot-gallery-stage img {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: initial;
+}
+
+.wxo-public-pilot .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .wxo-public-pilot .pilot-gallery-details {
@@ -847,19 +938,15 @@ body.wxo-gallery-open {
     --pilot-visual-overhang: min(8vw, calc((100vw - var(--max-w)) / 3));
   }
 
-  .wxo-public-pilot .pilot-vignettes,
   .wxo-public-pilot .pilot-activity-epic,
   .wxo-public-pilot .pilot-expansion-grid,
   .doc-processing-page .pilot-doc-epic {
     margin-inline: calc(-1 * var(--pilot-visual-overhang));
   }
 
-  .wxo-public-pilot .pilot-vignettes {
-    width: calc(100% + (2 * var(--pilot-visual-overhang)));
-  }
 
   .wxo-public-pilot .pilot-side-quest-bridge {
-    grid-template-columns: minmax(227px, 0.29fr) minmax(0, 1fr) minmax(220px, 0.72fr);
+    grid-template-columns: minmax(227px, 0.29fr) minmax(0, 1fr);
   }
 
   .doc-processing-page .doc-motion-frame {
@@ -881,7 +968,7 @@ body.wxo-gallery-open {
   .wxo-public-pilot .pilot-section-heading,
   .wxo-public-pilot .pilot-canvas-opening,
   .wxo-public-pilot .pilot-side-quest-bridge {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .wxo-public-pilot .pilot-hero-grid {
@@ -912,14 +999,14 @@ body.wxo-gallery-open {
     gap: clamp(2.5rem, 7vw, 4rem);
   }
 
-  .wxo-public-pilot .pilot-main-illustration figcaption {
-    text-align: center;
-  }
 
 }
 
 @media (max-width: 860px) {
-  .wxo-public-pilot .pilot-system-grid {
+  .wxo-public-pilot .pilot-system-grid,
+  .wxo-public-pilot .pilot-system-themes,
+  .wxo-public-pilot .pilot-flow-evidence,
+  .wxo-public-pilot .pilot-exploration-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
@@ -928,6 +1015,10 @@ body.wxo-gallery-open {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0 1.5rem;
+  }
+
+  .wxo-public-pilot .pilot-close {
+    grid-template-columns: 1fr;
   }
 
   .wxo-public-pilot .pilot-flow-step,
@@ -1002,7 +1093,7 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .page-header-title {
     max-width: 10ch;
-    font-size: clamp(3.25rem, 17.8vw, 5.3rem);
+    font-size: clamp(3rem, 15vw, 5.3rem);
   }
 
   .wxo-public-pilot .pilot-chapter-index {
@@ -1016,11 +1107,15 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .pilot-chapter-index a {
     min-height: 5.5rem;
-    padding-inline: 0;
+    padding-inline: var(--page-x);
   }
 
   .wxo-public-pilot .pilot-section-heading h2,
   .wxo-public-pilot .pilot-close h2 {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .wxo-public-pilot .pilot-section-heading:not(.pilot-activity-intro) h2 {
     font-size: clamp(2.7rem, 13.8vw, 4.2rem);
   }
 
@@ -1041,7 +1136,6 @@ body.wxo-gallery-open {
     grid-template-columns: 1fr;
   }
 
-  .wxo-public-pilot .pilot-vignettes,
   .wxo-public-pilot .pilot-released-canvas {
     width: 100%;
   }
@@ -1071,6 +1165,38 @@ body.wxo-gallery-open {
 
   .wxo-public-pilot .pilot-gallery-controls span {
     display: none;
+  }
+}
+
+.wxo-public-pilot .pilot-theme-sequence {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 8rem);
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: 0 var(--page-x);
+  list-style: none;
+}
+
+.wxo-public-pilot .pilot-theme-screen {
+  min-width: 0;
+}
+
+.wxo-public-pilot .pilot-theme-screen + .pilot-theme-screen {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+}
+
+.wxo-public-pilot .pilot-form-sequence {
+  min-width: 0;
+}
+
+[data-theme='dark'] .wxo-public-pilot .pilot-theme-screen {
+  border-color: color-mix(in srgb, var(--border) 84%, var(--pilot-blue));
+}
+
+@media (max-width: 720px) {
+  .wxo-public-pilot .pilot-theme-sequence {
+    gap: 3rem;
   }
 }
 

@@ -59,22 +59,31 @@ for(const token of [
   '.art-daysigns-grid {',
   'grid-template-columns: repeat(5, minmax(0, 1fr));',
   'gap: 0;',
-  'width: calc(100vw - clamp(31px, calc(2vw + 15px), 47px));',
+  'width: 100%;',
+  'margin: 0;',
   '.art-daysigns-grid figure { margin: 0; padding: 0;',
   'aspect-ratio: 1 / 1;',
   'object-fit: cover;',
   '@media (max-width: 720px)',
   '.art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr));',
 ]) expect(generator.includes(token),`Daysigns generator CSS missing: ${token}`);
+expect(!generator.includes('width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);'),
+  'Daysigns must not reintroduce a separate capped-width rail.');
+for(const token of [
+  '.art-restored-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }',
+  '.art-restored-wall figure:first-child { grid-column: span 6; grid-row: span 2; }',
+  '.art-restored-wall figure:not(:first-child) { grid-column: span 3; }',
+]) expect(generator.includes(token),`Traditional work generator CSS missing balanced desktop arrangement: ${token}`);
 
-const ekosCopy='A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.';
+const ekosCopy='A refined version of a client landing page concept from 2018. It wasn’t shipped; registration and booking are illustrative.';
 expect(ui.includes('<h2 id="ekos-study-title">Ekos Con</h2>'),'Ekos must keep the year only in supporting copy, not the large heading');
 expect(!ui.includes('<h2 id="ekos-study-title">Ekos Con 2018</h2>'),'Ekos large heading must not repeat 2018');
 expect(ui.includes(ekosCopy),'Ekos summary must include the approved provenance/status clarification');
 expect(uiContract.includes(ekosCopy),'UI Gallery contract must lock the Ekos clarification');
-expect(count(ui,'data-ui-study-view="magi-')===6,'Magi public edit must remain the six-board curation');
+expect(count(ui,'data-ui-study-view="magi-')===4,'Magi public edit must remain the four-study owner-approved curation');
 expect(!ui.includes('magi-inspector-metrics'),'Redundant Inspector & Metrics board must remain omitted');
-expect(uiContract.includes('current six-board Magi edit remains sufficient'),'UI Gallery contract must document the intentional Magi no-add decision');
+expect(uiContract.includes('four retained Magi studies'),'UI Gallery contract must preserve the four-study owner-approved curation');
+expect(uiContract.includes('owner-rejected cropped Magi'),'UI Gallery contract must keep the two rejected cropped figures excluded');
 expect(packageJson.scripts?.['check:gallery-followups']==='node scripts/check-gallery-followups.mjs','package.json must expose the Gallery followups contract');
 expect(preflight.includes('npm run check:gallery-followups'),'preflight must run the Gallery followups contract');
 for(const page of activeVisitorPages){
@@ -83,8 +92,8 @@ for(const page of activeVisitorPages){
   expect(!/Victor(?:'s|’s)/.test(main),`${page} visitor-facing content must use first person instead of third-person possessive`);
 }
 expect(read('about.html').includes('title="Spotify playlist"'),'About playlist accessible title must avoid unnecessary possessive wording');
-expect(read('salmagazine.html').includes("Read all nine issues produced across five years, then continue to the magazine's latest releases."),'Star & Lamp archive copy must avoid unnecessary possessive wording');
+expect(read('salmagazine.html').includes('View the complete issue archive'),'Star & Lamp must retain its direct archive action after removing repetitive copy');
 
 if(failures.length){console.error(`GALLERY FOLLOWUPS CONTRACT: FAIL (${failures.length})`);for(const failure of failures)console.error(`- ${failure}`);process.exit(1)}
 console.log('GALLERY FOLLOWUPS CONTRACT: PASS');
-console.log('- 10-piece Daysigns square grid, bounded Ekos clarification, and intentional six-board Magi edit');
+console.log('- 10-piece Daysigns square grid, bounded Ekos clarification, and intentional four-study Magi edit');

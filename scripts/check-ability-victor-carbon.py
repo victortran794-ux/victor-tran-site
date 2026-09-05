@@ -63,6 +63,11 @@ def main():
         if src.startswith('images/abex-') or src.endswith('thumb-abex.webp'):
             need(bool(image.get('alt','').strip()),f'missing alt text: {src}')
             need(image.get('width','').isdigit() and image.get('height','').isdigit(),f'missing dimensions: {src}')
+    kit_two=next((image for image in audit.images if image.get('src')=='images/abex-kits-2.jpg'),None)
+    need(bool(kit_two),'missing second cycling-kit image')
+    if kit_two:
+        need(kit_two.get('alt')=='Ability Experience cycling kit front','second cycling-kit image must be identified as the front, not the back')
+    need('<figcaption>Cycling kit · Front</figcaption>' in html[html.find('images/abex-kits-2.jpg'):html.find('images/abex-kits-2.jpg')+240], 'second cycling-kit caption must identify the visible front')
 
     need('/* ABILITY EXPERIENCE: START */' in css and '/* ABILITY EXPERIENCE: END */' in css,'missing bounded Ability Experience CSS markers')
     slice_start=css.find('/* ABILITY EXPERIENCE: START */'); slice_end=css.find('/* ABILITY EXPERIENCE: END */')

@@ -224,7 +224,7 @@ async function checkLightbox(spec) {
   const opened = await cdp.evaluate(`(() => {
     const dialog = document.querySelector('.lightbox');
     const main = document.querySelector('main#main-content');
-    const focusables = [...dialog.querySelectorAll('button:not([disabled])')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
+    const focusables = [...dialog.querySelectorAll('button:not([disabled]), [tabindex="0"]')].filter((element) => getComputedStyle(element).display !== 'none' && getComputedStyle(element).visibility !== 'hidden');
     return { open: dialog.classList.contains('is-open'), inert: dialog.inert, ariaHidden: dialog.getAttribute('aria-hidden'), active: document.activeElement?.className, overflow: document.body.style.overflow, mainInert: main.inert, mainHidden: main.getAttribute('aria-hidden'), focusables: focusables.map((element) => element.className) };
   })()`);
   assert(opened.open && !opened.inert && opened.ariaHidden === 'false' && opened.active.includes('lb-close') && opened.overflow === 'hidden' && opened.mainInert && opened.mainHidden === 'true',
@@ -232,7 +232,7 @@ async function checkLightbox(spec) {
   assert(opened.focusables.length >= 4, `${spec.file}: lightbox controls are unexpectedly incomplete.`);
   await cdp.evaluate(`document.querySelector('.lightbox .lb-thumb:last-child').focus()`);
   await cdp.key('Tab', 'Tab', 9);
-  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-close')`), `${spec.file}: Tab escapes the visible lightbox controls.`);
+  assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-size')`), `${spec.file}: Tab must wrap to the first visible lightbox control, View actual size.`);
   await cdp.key('Tab', 'Tab', 9, 8);
   assert(await cdp.evaluate(`document.activeElement === document.querySelector('.lightbox .lb-thumb:last-child')`), `${spec.file}: Shift+Tab escapes the visible lightbox controls.`);
   const countBefore = await cdp.evaluate(`document.querySelector('.lb-count').textContent`);
@@ -443,29 +443,39 @@ async function checkHornedWomanCadenceAndPause() {
 }
 
 async function checkHomepageGalleryChapter() {
-  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  await cdp.call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: false });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
   await cdp.navigate(`${baseUrl}/index.html`);
   const mobile = await cdp.evaluate(`(() => {
     document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
     const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => {
       const rect = card.getBoundingClientRect();
-      return { left: Math.round(rect.left), width: Math.round(rect.width) };
+      const content = card.querySelector('.featured-item-content');
+      return { left: Math.round(rect.left), width: Math.round(rect.width), background: getComputedStyle(content).backgroundColor, titleColor: getComputedStyle(card.querySelector('.featured-item-title')).color };
     });
-    return { title: document.querySelector('.featured-galleries-title')?.textContent.trim(), cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+    const viewportWidth = document.documentElement.clientWidth;
+    const overflowers = [...document.querySelectorAll('body *')].map((element) => {
+      const rect = element.getBoundingClientRect();
+      return { selector: element.id ? '#' + element.id : element.tagName.toLowerCase() + '.' + [...element.classList].join('.'), left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width) };
+    }).filter(({ left, right }) => left < -1 || right > viewportWidth + 1).slice(0, 12);
+    return { title: document.querySelector('.featured-galleries-title')?.textContent.trim(), viewportWidth, cards, overflow: document.documentElement.scrollWidth - viewportWidth, overflowers };
   })()`);
   assert(mobile.title === 'And some galleries.' && mobile.cards.length === 3 && mobile.overflow === 0,
     `index.html: mobile three-gallery chapter contract drifted: ${JSON.stringify(mobile)}`);
-  assert(mobile.cards.every((card) => card.width >= 340) && mobile.cards.every((card) => Math.abs(card.left - mobile.cards[0].left) <= 1),
+  assert(mobile.cards.every((card) => Math.abs(card.width - (mobile.viewportWidth - 44)) <= 1) && mobile.cards.every((card) => Math.abs(card.left - 22) <= 1),
     `index.html: mobile gallery cards must share one full-width column: ${JSON.stringify(mobile.cards)}`);
+  assert(new Set(mobile.cards.map((card) => card.background)).size === 3 && mobile.cards.every((card) => card.background !== 'rgb(255, 255, 255)' && card.titleColor === 'rgb(255, 255, 255)'),
+    `index.html: gallery surfaces must render as three distinct color treatments with readable titles: ${JSON.stringify(mobile.cards)}`);
 
   await cdp.call('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: false });
   await cdp.navigate(`${baseUrl}/index.html`);
   const desktop = await cdp.evaluate(`(() => {
     const cards = [...document.querySelectorAll('#galleries .featured-item--gallery')].map((card) => Math.round(card.getBoundingClientRect().width));
     return { cards, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
   })()`);
-  assert(desktop.cards.length === 3 && desktop.overflow === 0 && Math.abs(desktop.cards[0] - desktop.cards[1]) <= 1 && desktop.cards[2] > desktop.cards[0],
-    `index.html: desktop gallery hierarchy drifted: ${JSON.stringify(desktop)}`);
+  assert(desktop.cards.length === 3 && desktop.overflow === 0 && desktop.cards.every((width) => Math.abs(width - desktop.cards[0]) <= 1),
+    `index.html: desktop gallery cards must share equal weight: ${JSON.stringify(desktop)}`);
 }
 
 function graphicRequestsSince(mark) {
@@ -478,7 +488,7 @@ async function checkGraphicResponsiveMedia() {
     'images/logos-2.jpg', 'images/gg-edc-1.jpg', 'images/thumb-sgla.webp',
     'images/graphic-archive-v2/sgla-2024-identity-development.webp', 'images/logos-1.jpg',
     'images/gg-slides-1.jpg', 'images/graphic-archive-v2/abex.webp',
-    'images/graphic-archive-v2/sc56-instagram-panel-series.webp', 'images/gg-illus-1.jpg',
+    'images/graphic-archive-v2/ibm-paltron-illustration-system.webp', 'images/gg-illus-1.jpg',
   ];
   for (const viewport of [
     { label: '390', width: 390, height: 844, mobile: true },
@@ -499,7 +509,7 @@ async function checkGraphicResponsiveMedia() {
         pending: document.querySelectorAll('main img[data-deferred-src]').length,
         responsive: document.querySelectorAll('main img[data-full-src]').length,
       }))()`);
-      assert(fallback.pending === 0 && fallback.responsive === 41,
+      assert(fallback.pending === 0 && fallback.responsive === 40,
         `graphicgallery.html: no-observer fallback did not synchronously hydrate all eligible media: ${JSON.stringify(fallback)}`);
     } else {
       assert(graphic.length === eager.length && eager.length === 2,
@@ -561,7 +571,7 @@ const pageSpecs = {
     file: 'graphicgallery.html',
     bodyClass: 'graphic-archive-v2',
     archive: 'graphic-contact-sheet',
-    mainImages: 42,
+    mainImages: 41,
   },
   ui: {
     file: 'uigallery.html',
@@ -671,8 +681,12 @@ try {
             artDaysigns: document.querySelectorAll('[data-daysigns-item] img').length,
             artDaysignsLayout: (() => {
               const grid = document.querySelector('.art-daysigns-grid');
-              if (!grid) return null;
+              const title = document.querySelector('#art-daysigns-title');
+              const divider = title?.closest('.archive-chapter')?.querySelector('.archive-chapter-head');
+              if (!grid || !title || !divider) return null;
               const rect = grid.getBoundingClientRect();
+              const titleRect = title.getBoundingClientRect();
+              const dividerRect = divider.getBoundingClientRect();
               const items = [...grid.querySelectorAll('[data-daysigns-item]')].map((item) => {
                 const itemRect = item.getBoundingClientRect();
                 const image = item.querySelector('img');
@@ -682,7 +696,22 @@ try {
                   naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
                 };
               });
-              return { left: rect.left, right: rect.right, width: rect.width, columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length, rowGap: getComputedStyle(grid).rowGap, columnGap: getComputedStyle(grid).columnGap, items };
+              return {
+                left: rect.left, right: rect.right, width: rect.width,
+                titleLeft: titleRect.left, dividerLeft: dividerRect.left, dividerRight: dividerRect.right,
+                columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+                rowGap: getComputedStyle(grid).rowGap, columnGap: getComputedStyle(grid).columnGap, items,
+              };
+            })(),
+            artTraditionalLayout: (() => {
+              const wall = document.querySelector('.art-restored-wall');
+              if (!wall) return null;
+              const wallRect = wall.getBoundingClientRect();
+              const items = [...wall.querySelectorAll('figure')].map((item) => {
+                const rect = item.getBoundingClientRect();
+                return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height };
+              });
+              return { left: wallRect.left, right: wallRect.right, width: wallRect.width, items };
             })(),
             artHorned: document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img').length,
             artHornedKeyboardTriggers: [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')]
@@ -755,7 +784,7 @@ try {
         assert(state.archive === spec.archive && state.mainTabindex === '-1', `${spec.file}: main archive/focus contract drifted`);
         assert(state.currentHref === spec.file, `${spec.file}: current-route state is wrong`);
         assert(state.shellHeader && state.shellFooter, `${spec.file}: shared shell is incomplete`);
-        assert(!state.projectNav, `${spec.file}: gallery gained primary case-study previous/next navigation`);
+        assert(state.projectNav, `${spec.file}: gallery must continue the previous/next archive navigation pattern`);
         assert(!state.designDna, `${spec.file}: Design DNA escaped the homepage`);
         assert(!state.extendedArchive, `${spec.file}: duplicate hidden archive returned`);
         assert(state.captions === (spec.captions ?? 0), `${spec.file}: expected ${spec.captions ?? 0} primary captions; found ${state.captions}`);
@@ -777,8 +806,30 @@ try {
             `artillustration.html: expected ${expectedDaysignsColumns} Daysigns columns; found ${state.artDaysignsLayout?.columns}`);
           assert(state.artDaysignsLayout?.rowGap === '0px' && state.artDaysignsLayout?.columnGap === '0px',
             `artillustration.html: Daysigns grid must have zero gaps; found ${JSON.stringify(state.artDaysignsLayout)}`);
-          assert(state.artDaysignsLayout?.left >= 7 && state.artDaysignsLayout?.left <= 24 && state.artDaysignsLayout?.right <= state.clientWidth - 7 && state.artDaysignsLayout?.right >= state.clientWidth - 24,
-            `artillustration.html: Daysigns grid must remain within a near-edge 7–24px inset; found ${JSON.stringify({ left: state.artDaysignsLayout?.left, right: state.artDaysignsLayout?.right, clientWidth: state.clientWidth })}`);
+          const daysigns = state.artDaysignsLayout;
+          assert(Math.abs(daysigns?.left - daysigns?.titleLeft) <= 1 &&
+            Math.abs(daysigns?.left - daysigns?.dividerLeft) <= 1 &&
+            Math.abs(daysigns?.right - daysigns?.dividerRight) <= 1,
+          `artillustration.html: Daysigns grid, heading text, and divider must share one rail; found ${JSON.stringify(daysigns && { grid: [daysigns.left, daysigns.right], titleLeft: daysigns.titleLeft, divider: [daysigns.dividerLeft, daysigns.dividerRight] })}`);
+          if (!viewport.mobile) {
+            const [lead, upperLeft, upperRight, lowerLeft, lowerRight] = state.artTraditionalLayout?.items ?? [];
+            const tolerance = 2;
+            assert(lead && upperLeft && upperRight && lowerLeft && lowerRight &&
+              Math.abs(lead.left - state.artTraditionalLayout.left) <= tolerance &&
+              Math.abs(lowerRight.right - state.artTraditionalLayout.right) <= tolerance &&
+              Math.abs(lead.width - (upperLeft.width + upperRight.width + upperRight.left - upperLeft.right)) <= tolerance &&
+              Math.abs(upperLeft.width - upperRight.width) <= tolerance &&
+              Math.abs(upperLeft.width - lowerLeft.width) <= tolerance &&
+              Math.abs(upperRight.width - lowerRight.width) <= tolerance &&
+              Math.abs(upperLeft.left - lowerLeft.left) <= tolerance &&
+              Math.abs(upperRight.left - lowerRight.left) <= tolerance &&
+              Math.abs(upperLeft.top - upperRight.top) <= tolerance &&
+              Math.abs(lowerLeft.top - lowerRight.top) <= tolerance &&
+              lowerLeft.top > upperLeft.top &&
+              lead.width > upperLeft.width && lead.height > upperLeft.height && lead.height > upperRight.height &&
+              lead.height > lowerLeft.height && lead.height > lowerRight.height,
+            `artillustration.html: Traditional work must retain one enlarged lead beside a balanced two-column support matrix; found ${JSON.stringify(state.artTraditionalLayout)}`);
+          }
           assert(state.artDaysignsLayout?.items.every((item) => Math.abs(item.width - item.height) <= 1 && item.naturalWidth > 0 && item.naturalHeight > 0),
             `artillustration.html: Daysigns tiles must be square with decoded media; found ${JSON.stringify(state.artDaysignsLayout?.items)}`);
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);
@@ -786,7 +837,7 @@ try {
             `artillustration.html: exactly one visible Horned Woman image must be keyboard-operable; found ${state.artHornedKeyboardTriggers}`);
           if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
             if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);
-            await cdp.evaluate(`document.querySelector('.art-daysigns-grid').scrollIntoView({block:'center'}); window.scrollBy(0,-40)`);
+            await cdp.evaluate(`document.querySelector('#art-daysigns-title').scrollIntoView({block:'start'}); window.scrollBy(0,-80)`);
             await delay(160);
             await cdp.screenshot(`art-daysigns-${viewport.label}-${theme}.png`);
           }
@@ -878,11 +929,13 @@ try {
           assert(scrolledEkos.length === 2 && scrolledEkos.every((distance) => distance > 0), `uigallery.html: both Ekos frames must scroll through their complete pages.`);
           const [ekosDesktop, ekosMobile, magiOverview, magiOverlays, magiComponents, magiNodeStates] = state.uiLayout;
           if (viewport.mobile) {
-            assert(state.uiLayout.every((view) => Math.abs(ekosDesktop.left - view.left) <= 1) &&
+            const ekosAligned = Math.abs(ekosDesktop.left - ekosMobile.left) <= 1;
+            const magiAligned = [magiOverview, magiOverlays, magiComponents, magiNodeStates].every((view) => Math.abs(magiOverview.left - view.left) <= 1);
+            assert(ekosAligned && magiAligned &&
               state.uiLayout.every((view, index, views) => index === 0 || views[index - 1].top < view.top),
               `uigallery.html: mobile studies do not stack in authored order: ${JSON.stringify(state.uiLayout)}`);
           } else {
-            assert(ekosDesktop.top < ekosMobile.top && ekosDesktop.width > ekosMobile.width && ekosMobile.left > ekosDesktop.left,
+            assert(Math.abs(ekosDesktop.top - ekosMobile.top) <= 2 && ekosDesktop.width > ekosMobile.width && ekosMobile.left > ekosDesktop.left,
               `uigallery.html: Ekos desktop/mobile hierarchy drifted: ${JSON.stringify(state.uiLayout)}`);
             assert(magiOverview.top < magiOverlays.top && magiOverview.width > magiOverlays.width &&
               magiOverlays.top === magiComponents.top && Math.abs(magiOverlays.width - magiComponents.width) <= 1,
@@ -890,8 +943,9 @@ try {
             assert(
               magiNodeStates.top > magiComponents.top && magiNodeStates.width === magiOverview.width,
               `uigallery.html: Magi retained support pair and closing state strip drifted: ${JSON.stringify(state.uiLayout)}`);
-            assert(ekosDesktop.width >= magiOverview.width,
-              `uigallery.html: Ekos must remain at least as wide as the Magi dashboard lead: ${JSON.stringify(state.uiLayout)}`);
+            const ekosPairSpan = (ekosMobile.left + ekosMobile.width) - ekosDesktop.left;
+            assert(ekosDesktop.left >= magiOverview.left && ekosMobile.left + ekosMobile.width <= magiOverview.left + magiOverview.width && ekosPairSpan >= magiOverview.width * .9,
+              `uigallery.html: paired Ekos container must occupy the shared study rail without escaping it: ${JSON.stringify(state.uiLayout)}`);
           }
           if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
             if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);

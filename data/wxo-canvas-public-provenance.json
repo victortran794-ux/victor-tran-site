@@ -1,11 +1,18 @@
 {
-  "status": "production-release-approved",
+  "status": "public-route-authorized-candidate",
   "publicationApproved": true,
   "commitApproved": true,
+  "branchPushApproved": true,
+  "protectedPreviewApproved": true,
   "sourceFigmaFile": "PKr7T6508DtrWg9FhTTc75",
   "sourcePage": "0:1",
-  "approvedByVictor": "2026-08-28",
-  "approvalScope": "Production release approved by Victor on 2026-08-28 after the final spine-alignment, clarity, responsive, interaction, protected-delivery, and release-readiness checks pass.",
+  "reviewRequestedByVictor": "2026-09-03",
+  "approvalScope": "Victor explicitly authorized making the wxO route public in this batch on 2026-09-04. The public-ready source and media namespace may be committed and reviewed on PR #184; merge and production release remain separate approval gates.",
+  "sourceVerification": {
+    "method": "Owner-supplied external exports matched by exact filename and SHA-256 during local intake; repository derivatives preserve those bytes exactly.",
+    "verifiedOn": "2026-09-04",
+    "externalSourceRetainedInRepository": false
+  },
   "assets": [
     {
       "file": "01-released-canvas.png",
@@ -20,7 +27,8 @@
       "sha256": "633a52e653ebae41a2ef7bdcc8add08d3ee18ab4700062fd37a956adf6baa8a2",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Superseded metadata-stripped Dark derivative retained for provenance; the protected route now renders the byte-preserved paired Light and Dark owner exports."
     },
     {
       "file": "02-component-showcase.png",
@@ -35,7 +43,8 @@
       "sha256": "e96271c1b8aa176e35530bfca279b37aad6d9b7ae0105df69af579fd69a99fb2",
       "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Retired enterprise component-board derivative retained for provenance; the protected route now uses the newer paired node and flow-control exploration panels."
     },
     {
       "file": "03-user-activity-workflow.png",
@@ -50,7 +59,8 @@
       "sha256": "95ba96f35745c9a6e9e89cb359bb4c60b75e7a3d75e2aaa824bd211b301307ef",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "04-user-activity-configuration.png",
@@ -65,7 +75,8 @@
       "sha256": "d7caa32d72593f94d965e0ef955abdf1c2effa3c659424a21d72884f5e83c2ac",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "05-user-activity-summary.png",
@@ -80,7 +91,8 @@
       "sha256": "9463024deefa77963f85a9fef6ab1cc80705876aeef550a23d4f9f1278964703",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "06-illustration-vignettes.png",
@@ -95,7 +107,8 @@
       "sha256": "3e63b436201982327bc246ecc8f386b53ecd6410e545ab55a0a20141b34820b9",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved owner export retained for provenance and rollback after Victor requested removal from the active wxO presentation on 2026-09-04."
     },
     {
       "file": "09-document-classify.png",
@@ -110,7 +123,8 @@
       "sha256": "5887a9bb43c1d70bf1262112289751046d79fc61f7c985627cc9bbb1befcc933",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "document-processing.html"
+      "route": "source-only",
+      "retainedReason": "Retired guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the authentic owner export replaced it in active presentation."
     },
     {
       "file": "10-document-extract.png",
@@ -125,7 +139,8 @@
       "sha256": "c88c80dd393a1570a1d737cd7e3116b5144836e8bad057242561632210c2cbab",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "document-processing.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "11-document-review.png",
@@ -140,7 +155,8 @@
       "sha256": "3fcff8622aff6c432c250b16b03cb2960bb9f0090d4c790e467a407d8b021240",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "document-processing.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "12-document-evaluate.png",
@@ -155,7 +171,8 @@
       "sha256": "7f74584271f90011c692f0dab6e51716bf27e4a5d552723835dddff3a1cae403",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "document-processing.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "07-agent-orchestration-light.png",
@@ -170,7 +187,8 @@
       "sha256": "61f9674a6dc52834aec4fb263d613f0a3f9112710afa9fa279ab34529976dc2f",
       "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "14-workflow-detail.png",
@@ -185,7 +203,8 @@
       "sha256": "2a1206f7d20288c109dafd78432ae81df828535f57efc96e26fe42127b55ce9a",
       "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 128px); all remaining authored pixels are preserved and PNG metadata is stripped.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "13a-node-states.png",
@@ -194,13 +213,14 @@
       "figmaNode": "source-export-frame-unrecorded",
       "sourceSha256": "a3aa003d46744622297f2c70c937b58b1942cb0355777513f31d20e844bce5a3",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html",
+      "route": "source-only",
       "dimensions": [
         2600,
         276
       ],
       "sha256": "127ab74307da578cf29f1f55b7a03ed2837d987a20e4bbcafda90a2b43f00046",
-      "treatment": "Literal alpha-preserving crop of source pixels x=80–2680, y=80–356; includes the complete node-state family with transparent padding, excludes the mini-map, and strips PNG metadata."
+      "treatment": "Literal alpha-preserving crop of source pixels x=80–2680, y=80–356; includes the complete node-state family with transparent padding, excludes the mini-map, and strips PNG metadata.",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "08-flow-control-elements-light.png",
@@ -215,7 +235,8 @@
       "sha256": "117c0fe91ee13fde268e6baa999965fc0cf9f2d934b19fa27d99201fd91bd899",
       "treatment": "Editorial crop removes only the repeated Carbon Flow System navigation header (top 148px); all remaining authored pixels are preserved and PNG metadata is stripped.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "13b-flow-types.png",
@@ -230,7 +251,8 @@
         199
       ],
       "sha256": "641246bbd68e39cd76f168c3f1a30be8e0f10e60bd8d8bddb4c97423002709b1",
-      "treatment": "Literal alpha-preserving crop of source pixels x=88–1286, y=445–644; includes Branch, Loop, For each, Parallel, and User Activity with transparent padding, excludes the mini-map, and strips PNG metadata."
+      "treatment": "Literal alpha-preserving crop of source pixels x=88–1286, y=445–644; includes Branch, Loop, For each, Parallel, and User Activity with transparent padding, excludes the mini-map, and strips PNG metadata.",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "13c-connector-mechanics.png",
@@ -245,7 +267,8 @@
         244
       ],
       "sha256": "4a4de2e860409068ccb57c4f3489ad3b335fce7d09e3bf8cae3257fae49529ef",
-      "treatment": "Literal alpha-preserving crop of source pixels x=1414–3160, y=436–680; includes complete input, output, variable, path, and node-attachment studies with transparent padding, excludes the mini-map, and strips PNG metadata."
+      "treatment": "Literal alpha-preserving crop of source pixels x=1414–3160, y=436–680; includes complete input, output, variable, path, and node-attachment studies with transparent padding, excludes the mini-map, and strips PNG metadata.",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
     },
     {
       "file": "13-floating-studies.png",
@@ -260,13 +283,560 @@
       "sha256": "0d17cdefcd0f0629f9c8b7a05d286f5e2981c35419bcef039f8bea352386641c",
       "treatment": "Pixel content and transparency preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "source-only"
+      "route": "source-only",
+      "retainedReason": "Preserved guarded legacy derivative retained for provenance and deterministic asset-integrity verification after the theme-sequence migration; it is intentionally not rendered by an active route."
+    },
+    {
+      "file": "current-workflow-light.png",
+      "namespace": "public-route",
+      "role": "Current builder, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/v1 agentic workflow@2x.png",
+      "sourceFilename": "v1 agentic workflow@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "6:22131",
+      "dimensions": [
+        3168,
+        2084
+      ],
+      "sourceSha256": "ac2eed0810db190889d32b1bdc53e96998ba07f1e6ea20778fdc7c656b6b0cc6",
+      "sha256": "ac2eed0810db190889d32b1bdc53e96998ba07f1e6ea20778fdc7c656b6b0cc6",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "current-workflow-dark.png",
+      "namespace": "public-route",
+      "role": "Current builder, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/v1 agentic workflowDark@2x.png",
+      "sourceFilename": "v1 agentic workflowDark@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "6:22131",
+      "dimensions": [
+        3168,
+        2084
+      ],
+      "sourceSha256": "92df560d930ee161c18c13d4e8a127c73ab417e6a8091aea0cfb58ed15d7ba73",
+      "sha256": "92df560d930ee161c18c13d4e8a127c73ab417e6a8091aea0cfb58ed15d7ba73",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "v2-workflow-light.png",
+      "namespace": "public-route",
+      "role": "V2 workflow evolution, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/v2 agentic workflow@2x.png",
+      "sourceFilename": "v2 agentic workflow@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        3168,
+        2114
+      ],
+      "sourceSha256": "eea957ea13b155dd15691482d3b81c02390d5945cce39a741e93d9094be3bdff",
+      "sha256": "eea957ea13b155dd15691482d3b81c02390d5945cce39a741e93d9094be3bdff",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "v2-workflow-dark.png",
+      "namespace": "public-route",
+      "role": "V2 workflow evolution, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/v2 agentic workflowDark@2x.png",
+      "sourceFilename": "v2 agentic workflowDark@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        3168,
+        2114
+      ],
+      "sourceSha256": "d844d405bef379dd4726d330f12b59818c5c1fa54649779662e97d4004a74ecb",
+      "sha256": "d844d405bef379dd4726d330f12b59818c5c1fa54649779662e97d4004a74ecb",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "v2-agent-flow-light.png",
+      "namespace": "public-route",
+      "role": "V2 agent hierarchy, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/v2 agent flow@2x.png",
+      "sourceFilename": "v2 agent flow@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        3168,
+        2156
+      ],
+      "sourceSha256": "7c2a1d1db1525cd9fd78ec4943b79de576f4b8d30b2dd62e593b07d54cff0c31",
+      "sha256": "7c2a1d1db1525cd9fd78ec4943b79de576f4b8d30b2dd62e593b07d54cff0c31",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "v2-agent-flow-dark.png",
+      "namespace": "public-route",
+      "role": "V2 agent hierarchy, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/v2 agent flowDark@2x.png",
+      "sourceFilename": "v2 agent flowDark@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        3168,
+        2156
+      ],
+      "sourceSha256": "d2d8eba86c1ad272e8b6e5e1ea7f482a3086f90810b7333e01572fda73e48d7f",
+      "sha256": "d2d8eba86c1ad272e8b6e5e1ea7f482a3086f90810b7333e01572fda73e48d7f",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-workflow-light.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Place, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/1 — Workflow Canvas@2x-1.png",
+      "sourceFilename": "1 — Workflow Canvas@2x-1.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "68:64813",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "bf1ad88b7b6965133dae35231fd3e65c35616cf5f3f43558757b8f96f5a3ccee",
+      "sha256": "bf1ad88b7b6965133dae35231fd3e65c35616cf5f3f43558757b8f96f5a3ccee",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-workflow-dark.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Place, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/1 — Workflow Canvas@2x.png",
+      "sourceFilename": "1 — Workflow Canvas@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "68:64813",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "281693694bb7507f31f9b88af6df48772d4c2355698790113a0746d39c878cb2",
+      "sha256": "281693694bb7507f31f9b88af6df48772d4c2355698790113a0746d39c878cb2",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-configuration-light.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Configure, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/2 — Form Configuration@2x-1.png",
+      "sourceFilename": "2 — Form Configuration@2x-1.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "94:51137",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "69cfe8008f5e8d53952dc3d4068d205d9d28d1ddb239cd19f086793ff6cae9c0",
+      "sha256": "69cfe8008f5e8d53952dc3d4068d205d9d28d1ddb239cd19f086793ff6cae9c0",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-configuration-dark.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Configure, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/2 — Form Configuration@2x.png",
+      "sourceFilename": "2 — Form Configuration@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "94:51137",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "8642bba02163d4e356fa7f8efef5bb9d10eaa999f9f8121d9ca1a6165975a442",
+      "sha256": "8642bba02163d4e356fa7f8efef5bb9d10eaa999f9f8121d9ca1a6165975a442",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-summary-light.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Resolve, Light theme",
+      "source": "owner-handoff/wxo-theme-sequences/3 — Form Summary@2x-1.png",
+      "sourceFilename": "3 — Form Summary@2x-1.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "68:70005",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "cad18411f6b487c8c278f6c3ca64b8074e066d784f06f081884943e24c87a9a6",
+      "sha256": "cad18411f6b487c8c278f6c3ca64b8074e066d784f06f081884943e24c87a9a6",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "form-summary-dark.png",
+      "namespace": "public-route",
+      "role": "Form sequence: Resolve, Dark theme",
+      "source": "owner-handoff/wxo-theme-sequences/3 — Form Summary@2x.png",
+      "sourceFilename": "3 — Form Summary@2x.png",
+      "ownerExportContext": "Victor-provided paired Light/Dark Figma owner export for the protected wxO theme sequence migration.",
+      "figmaNode": "68:70005",
+      "dimensions": [
+        3168,
+        1800
+      ],
+      "sourceSha256": "b7acc4d0cb719dbec5af7720f3b0f8f0801a39bae6ce09c508c8c3732cec227a",
+      "sha256": "b7acc4d0cb719dbec5af7720f3b0f8f0801a39bae6ce09c508c8c3732cec227a",
+      "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "15-node-key-states-light.png",
+      "role": "Node library: key states, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/canvas-node-key-states.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/canvas-node-key-states.png",
+      "sourceFilename": "canvas-node-key-states.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        665
+      ],
+      "sourceSha256": "878beeb9e7ed8f51ccf3e3b11c70a6ca3dbf58bb9329181e788cf197af51e0a9",
+      "sha256": "878beeb9e7ed8f51ccf3e3b11c70a6ca3dbf58bb9329181e788cf197af51e0a9",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "15-node-key-states-dark.png",
+      "role": "Node library: key states, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/canvas-node-key-states — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/canvas-node-key-states — Dark.png",
+      "sourceFilename": "canvas-node-key-states — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        665
+      ],
+      "sourceSha256": "196c886d157dbb0989a8e6df71169563760e6a55455a9e55c308f726b5acef74",
+      "sha256": "196c886d157dbb0989a8e6df71169563760e6a55455a9e55c308f726b5acef74",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "16-node-size-variants-light.png",
+      "role": "Node library: size variants, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/canvas-node-size-variants.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/canvas-node-size-variants.png",
+      "sourceFilename": "canvas-node-size-variants.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        412
+      ],
+      "sourceSha256": "0845dabcc5d40001b714d8a21f9ece59d20bfb1286dce83ceee034e490a8ef45",
+      "sha256": "0845dabcc5d40001b714d8a21f9ece59d20bfb1286dce83ceee034e490a8ef45",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "16-node-size-variants-dark.png",
+      "role": "Node library: size variants, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/canvas-node-size-variants — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/canvas-node-size-variants — Dark.png",
+      "sourceFilename": "canvas-node-size-variants — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        412
+      ],
+      "sourceSha256": "b868be0302d59e689e66c7959c786ea66e8d8ade1a0d3995a11a819c7724ce36",
+      "sha256": "b868be0302d59e689e66c7959c786ea66e8d8ade1a0d3995a11a819c7724ce36",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "17-flow-control-elements-light.png",
+      "role": "Flow controls: elements, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/flow-control-elements.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/flow-control-elements.png",
+      "sourceFilename": "flow-control-elements.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        314
+      ],
+      "sourceSha256": "aa61456cb8c69ba9dc9e003d51472adf7f430d63a600e4c424eda6dff755a21f",
+      "sha256": "aa61456cb8c69ba9dc9e003d51472adf7f430d63a600e4c424eda6dff755a21f",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "17-flow-control-elements-dark.png",
+      "role": "Flow controls: elements, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/flow-control-elements — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/flow-control-elements — Dark.png",
+      "sourceFilename": "flow-control-elements — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        314
+      ],
+      "sourceSha256": "d7c61d84703da4b1e2c7b8465da0fa59906c3b86f19bc8e2c9b8c7d9525dfbd4",
+      "sha256": "d7c61d84703da4b1e2c7b8465da0fa59906c3b86f19bc8e2c9b8c7d9525dfbd4",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "18-flow-control-containers-light.png",
+      "role": "Flow controls: containers, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/flow-control-containers.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/flow-control-containers.png",
+      "sourceFilename": "flow-control-containers.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        729
+      ],
+      "sourceSha256": "bfe62713f06ec6764b9e74306b51c9ee6e953ca1046b84a4e6cb2d7a03e36b0e",
+      "sha256": "bfe62713f06ec6764b9e74306b51c9ee6e953ca1046b84a4e6cb2d7a03e36b0e",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "18-flow-control-containers-dark.png",
+      "role": "Flow controls: containers, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/flow-control-containers — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/flow-control-containers — Dark.png",
+      "sourceFilename": "flow-control-containers — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        729
+      ],
+      "sourceSha256": "dfdb7cd4e3d75607c0c3bc48a203544db9ba9dd270b104de80b2c72bb9704d39",
+      "sha256": "dfdb7cd4e3d75607c0c3bc48a203544db9ba9dd270b104de80b2c72bb9704d39",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "19-application-example-light.png",
+      "role": "Flow controls: application example, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/application-example.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/application-example.png",
+      "sourceFilename": "application-example.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        766
+      ],
+      "sourceSha256": "fc1c864f36b43bad818ac03aea0f68350d63f651e9541a42fa4bf71b65f0e0ac",
+      "sha256": "fc1c864f36b43bad818ac03aea0f68350d63f651e9541a42fa4bf71b65f0e0ac",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "19-application-example-dark.png",
+      "role": "Workflow application example, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/application-example — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/application-example — Dark.png",
+      "sourceFilename": "application-example — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        766
+      ],
+      "sourceSha256": "2b4c92d59a3fc8df8d8c96de1a9a734231c1f07ea2dcc09bf04e8f83f445f9d7",
+      "sha256": "2b4c92d59a3fc8df8d8c96de1a9a734231c1f07ea2dcc09bf04e8f83f445f9d7",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "20-illustration-vignettes-dark.png",
+      "role": "Illustration vignettes: canvas interactions, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/Illustration Vignettes — Canvas Interactions — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/Illustration Vignettes — Canvas Interactions — Dark.png",
+      "sourceFilename": "Illustration Vignettes — Canvas Interactions — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1890,
+        442
+      ],
+      "sourceSha256": "6a292147cb92cb5ac0c86a452632e0b08237ee34429fd00c0e97ff9092143042",
+      "sha256": "6a292147cb92cb5ac0c86a452632e0b08237ee34429fd00c0e97ff9092143042",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "source-only",
+      "retainedReason": "Preserved owner export retained for provenance and rollback after Victor requested removal from the active wxO presentation on 2026-09-04."
+    },
+    {
+      "file": "21-workflow-anchors-light.png",
+      "role": "Flow controls: anchors, Light theme",
+      "source": "owner-handoff/2026-09-04-desktop-owner-exports/workflow-anchors.png",
+      "sourcePath": "owner-handoff/2026-09-04-desktop-owner-exports/workflow-anchors.png",
+      "sourceFilename": "workflow-anchors.png",
+      "ownerExportContext": "Victor-provided 1x Light owner export preserved in the 2026-09-04 desktop handoff and paired with the matching Dark exploration export for the protected manual-review update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        356
+      ],
+      "sourceSha256": "61cdac90a844a9abe0b2f4893eeaa3dbb6c443213028d095155b6b2dffc4289f",
+      "sha256": "61cdac90a844a9abe0b2f4893eeaa3dbb6c443213028d095155b6b2dffc4289f",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "21-workflow-anchors-dark.png",
+      "role": "Workflow anchors, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/workflow-anchors — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/workflow-anchors — Dark.png",
+      "sourceFilename": "workflow-anchors — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1440,
+        356
+      ],
+      "sourceSha256": "29443591de85c9694b9a1c87e1b8b23ca5a4474b63f6536c46bee4f92a4098aa",
+      "sha256": "29443591de85c9694b9a1c87e1b8b23ca5a4474b63f6536c46bee4f92a4098aa",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
+    },
+    {
+      "file": "closing-illustration-light.png",
+      "namespace": "public-route",
+      "role": "Canvas closing illustration, Light theme",
+      "source": "images/wxo-canvas/wxo-home-thumbnail.png",
+      "sourceFilename": "wxo-home-thumbnail.png",
+      "ownerExportContext": "The existing public Home Light thumbnail is the historical 01-skill-studio main illustration; it is copied byte-for-byte into the wxO public route for the approved closing placement.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1024,
+        686
+      ],
+      "sourceSha256": "690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee",
+      "sha256": "690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee",
+      "treatment": "Existing authentic Light illustration copied byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "closing-illustration-dark.png",
+      "namespace": "public-route",
+      "role": "Canvas closing illustration, Dark theme",
+      "source": "images/wxo-canvas/wxo-home-thumbnail-dark.png",
+      "sourceFilename": "wxo-home-thumbnail-dark.png",
+      "ownerExportContext": "The existing public Home Dark thumbnail is the owner-supplied authentic Dark counterpart to the historical Light illustration; it is copied byte-for-byte into the wxO public route for the approved closing placement.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1079,
+        722
+      ],
+      "sourceSha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "sha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "treatment": "Existing authentic Dark illustration copied byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "wxo-home-thumbnail-dark.png",
+      "namespace": "public-images",
+      "role": "Canvas opening illustration, Dark theme",
+      "source": "owner-handoff/vercel-review-feedback/Main illustration — Dark.png",
+      "sourcePath": "owner-handoff/vercel-review-feedback/Main illustration — Dark.png",
+      "sourceFilename": "Main illustration — Dark.png",
+      "ownerExportContext": "Victor-provided 1x Dark export supplied for the Vercel review-feedback update.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1079,
+        722
+      ],
+      "sourceSha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "sha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "index.html"
     }
   ],
-  "canonicalMigrationApproved": true,
-  "canonicalMigrationApprovedOn": "2026-08-28",
-  "deliveryStatus": "protected-until-publication-approval",
+  "canonicalIntegrationStatus": "local-review-complete",
+  "canonicalIntegrationCompletedOn": "2026-09-04",
+  "deliveryStatus": "public-route-authorized-candidate",
   "guardedNamespace": "protected/wxo/assets/public-candidate/",
   "futurePublicNamespace": "images/wxo-canvas/public/",
-  "productionApproved": true
+  "productionApproved": false
 }

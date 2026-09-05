@@ -1,15 +1,15 @@
 # Performance Contracting, Inc. — case-study planning
 
-Last updated: 2026-07-28
-Status: `lo-fi-complete-held-for-in-person-review`
+Last updated: 2026-09-03
+Status: `live-public-sanitized`
 
 ## Identity and visibility
 
 - Source page: `pci.html`
 - Generated export: `content/pci.md`
 - Current route: `/pci`
-- Visibility: password-protected and `noindex,nofollow`
-- Sitemap/public-promotion changes: not authorized
+- Visibility: public and indexable
+- Sitemap/public promotion: live in the current production portfolio
 
 ## Source-supported story
 
@@ -22,13 +22,13 @@ An authorized read-only source review found a broader 2023–2026 body of work t
 5. Cash Management Principles, structured as ten scannable operational principles.
 6. Confidential leadership white papers and presentation systems demonstrating high-trust executive editorial work.
 
-The recommended case study is a selective, protected anthology of Victor's strongest PCI communication work—not a comprehensive archive and not one linear product narrative.
+The July source review proposed a broader selective anthology of Victor's strongest PCI communication work. That proposal is historical context, not an active expansion lane; the current public page remains the approved sanitized story.
 
 Primary framing: turning dense, sensitive material into clear, repeatable communication systems for different audiences and scales. The handbook-to-banner hexagon connection remains a useful visual throughline inside the broader story.
 
 ## Media boundary
 
-- Current live/source images remain unchanged until an approved migration.
+- Keep production images stable except through a specifically approved, source-verified review batch; broader asset migration remains separately gated.
 - Victor guarantees that future PCI Codex-package artifacts contain no sensitive information.
 - Approved sanitized package assets and copy may be unblurred; reproducing the legacy body-copy blur is not required.
 - Do not OCR, sharpen, recover, or transcribe confidential content from current source images.
@@ -68,10 +68,6 @@ Primary framing: turning dense, sensitive material into clear, repeatable commun
 
 ## Next gate
 
-PCI's private lo-fi migration is complete in the isolated `PCI-vico2-migration` worktree. Hold it with Document Processing and IBM Patterns for Victor's grouped in-person review. Do not request a separate Signal approval.
+PCI is a production-verified public sanitized story. The September local enhancement batch replaces the handbook cover with an authoritative PDF-derived export and repairs only the bounded `CULTURE` headline region; that batch remains at owner review before any commit or publication gate.
 
-After grouped approval, use:
-
-`C:\Users\Victor\Documents\Portfolio\Handoffs\Codex Asset Intake\PCI\SLOT_MAP.md`
-
-No commit, push, deployment, publication, visibility change, or Codex asset integration is authorized before that grouped review closes.
+Do not expand the story into the broader private anthology without a new source review and explicit approval. Preserve conservative claims, sanitized copy, concept/composite boundaries, and the rule against implying logo authorship.

@@ -26,9 +26,9 @@ const projectNavigationSnapshot = {
   'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
-  'ibmcloud.html': ['wxo-canvas.html?lock=1', 'ibm-patterns.html'],
+  'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
-  'pikappapp.html': ['salmagazine.html', 'artillustration.html'],
+  'pikappapp.html': ['salmagazine.html', 'artillustration.html', 'graphicgallery.html', 'uigallery.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
 };
 
@@ -114,12 +114,9 @@ const policyEntries = policy.protectedPages || [];
 const activeProtected = new Set(
   policyEntries.filter((entry) => !entry.provisional).map((entry) => entry.source),
 );
-const expectedProtected = new Set([
-  'document-processing.html',
-  'wxo-canvas.html',
-]);
+const expectedProtected = new Set();
 if (JSON.stringify([...activeProtected].sort()) !== JSON.stringify([...expectedProtected].sort())) {
-  fail('active protected shell policy drifted from the two approved routes');
+  fail('active protected shell policy must not retain the public Document Processing route');
 }
 
 const expectedConfig = {
@@ -129,6 +126,7 @@ const expectedConfig = {
   protectedDetail: 'Access required',
   contactEmail: 'victortran794@gmail.com',
   linkedInUrl: 'https://www.linkedin.com/in/victortrandesign/',
+  resumeUrl: 'documents/Victor-Tran-Resume.pdf',
   footerTagline: 'Do more good things.',
   footerSubtitle: '',
   footerCta: "Let's chat.",
@@ -178,6 +176,13 @@ for (const page of expectedPages) {
   }
   if (!nav.includes(`href="mailto:${config.contactEmail}" class="nav-contact">Contact</a>`)) {
     fail(`${page} primary navigation must preserve direct Contact access`);
+  }
+  if (!nav.includes('<span class="nav-logo-victor">Victor</span>') ||
+      !nav.includes('<span class="nav-logo-tran">Tran</span>')) {
+    fail(`${page} must use the approved split Victor / Tran header wordmark`);
+  }
+  if (nav.includes('images/nav-logo.webp') || nav.includes('class="nav-logo-name"')) {
+    fail(`${page} must not retain the older image-plus-name header lockup`);
   }
   const dropdown = extractTag(nav, /<ul id="work-menu" class="nav-dropdown-menu"[\s\S]*?<\/ul>/i);
   const actualNavUrls = [...dropdown.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
@@ -233,13 +238,15 @@ for (const page of expectedPages) {
     fail(`${page} footer must not regenerate retired copy-email behavior`);
   }
   if (!footerBlock.includes('href="https://www.linkedin.com/in/victortrandesign/"')) fail(`${page} footer lost LinkedIn action`);
+  if (!footerBlock.includes('href="documents/Victor-Tran-Resume.pdf" target="_blank" rel="noopener">Résumé</a>')) fail(`${page} footer lost résumé action`);
 
   if (projectNavigationSnapshot[page]) {
     const projectNav = extractTag(html, /<nav class="project-nav"[\s\S]*?<\/nav>/i);
     if (!html.includes('<!-- generated:project-nav:start -->') || !html.includes('<!-- generated:project-nav:end -->')) {
       fail(`${page} project navigation must be generator-owned`);
     }
-    if (!projectNav.includes('aria-label="Previous project:') || !projectNav.includes('aria-label="Next project:')) {
+    const nextLabel = page === 'pikappapp.html' ? 'aria-label="Next gallery: Art &amp; Illustration"' : 'aria-label="Next project:';
+    if (!projectNav.includes('aria-label="Previous project:') || !projectNav.includes(nextLabel)) {
       fail(`${page} project navigation links need directional accessible names`);
     }
     const actualProjectLinks = [...projectNav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
@@ -254,6 +261,12 @@ for (const page of expectedPages) {
 const mainJs = fs.readFileSync(path.join(root, 'js', 'main.js'), 'utf8');
 for (const marker of ['ArrowDown', 'ArrowUp', "case 'Home'", "case 'End'"]) {
   if (!mainJs.includes(marker)) fail(`Work disclosure keyboard behavior missing marker: ${marker}`);
+}
+
+const documentProcessing = fs.readFileSync(path.join(root, 'document-processing.html'), 'utf8');
+if (!documentProcessing.includes('<meta name="robots" content="index,follow">') ||
+    /noindex,nofollow,noarchive,nosnippet,noimageindex|site-route-status|wxo-access\.html|protected\/wxo\//i.test(documentProcessing)) {
+  fail('document-processing.html must be an indexable public route without protected-route or guarded-media references');
 }
 
 if (failures.length) {

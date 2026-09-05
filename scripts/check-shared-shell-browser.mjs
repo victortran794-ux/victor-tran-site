@@ -149,6 +149,16 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function waitForViewport(cdp, width, height) {
+  let actual = null;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    actual = await cdp.evaluate(`({inner:[innerWidth,innerHeight],client:[document.documentElement.clientWidth,document.documentElement.clientHeight],visual:[visualViewport?.width,visualViewport?.height]})`);
+    if ((actual.inner[0] === width && actual.inner[1] === height) || (actual.client[0] === width && actual.client[1] === height)) return;
+    await delay(50);
+  }
+  throw new Error(`viewport did not settle at ${width}x${height}: ${JSON.stringify(actual)}`);
+}
+
 const geometryExpression = `(() => {
   const selectors = [
     '.nav-logo', '.nav-dropdown-toggle', '.nav-links > li > a',
@@ -170,7 +180,11 @@ const geometryExpression = `(() => {
     height: innerHeight,
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     controls,
-    logoDecoded: document.querySelector('.nav-logo img')?.complete && document.querySelector('.nav-logo img')?.naturalWidth > 0,
+    logoText: document.querySelector('.nav-logo')?.textContent.replace(/\\s+/g, ' ').trim(),
+    logoParts: [...document.querySelectorAll('.nav-logo-victor, .nav-logo-tran')].map((part) => ({
+      text: part.textContent.trim(),
+      fontStyle: getComputedStyle(part).fontStyle,
+    })),
   };
 })()`;
 
@@ -185,19 +199,27 @@ try {
   await cdp.call('Network.enable');
 
   await cdp.call('Emulation.setDeviceMetricsOverride', {
-    width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
+    width: 390, height: 844, deviceScaleFactor: 1, mobile: false,
   });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
   await cdp.call('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
   });
   await cdp.navigate(`${baseUrl}/index.html`);
+  await cdp.call('Emulation.setDeviceMetricsOverride', {
+    width: 390, height: 844, screenWidth: 390, screenHeight: 844, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false,
+  });
+  await waitForViewport(cdp, 390, 844);
   await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle').click()`);
   await delay(100);
 
   const mobile = await cdp.evaluate(geometryExpression);
   assert(mobile.width === 390 && mobile.height === 844, `mobile viewport drifted: ${mobile.width}x${mobile.height}`);
   assert(mobile.overflow === 0, `index.html has ${mobile.overflow}px root overflow at 390px`);
-  assert(mobile.logoDecoded, 'homepage shell logo did not decode');
+  assert(mobile.logoText === 'Victor Tran'
+    && mobile.logoParts.map((part) => part.text).join('|') === 'Victor|Tran'
+    && mobile.logoParts.every((part) => part.fontStyle === 'italic'),
+  `homepage shell wordmark drifted: ${JSON.stringify(mobile.logoParts)}`);
   const undersized = mobile.controls.filter((control) => control.width < 44 || control.height < 44);
   assert(!undersized.length, `undersized 390px shell controls: ${JSON.stringify(undersized)}`);
   assert(mobile.controls.some((control) => control.label === 'Light mode'), 'mobile Light control is unavailable');
@@ -255,16 +277,17 @@ try {
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     main: document.querySelector('main#main-content')?.getAttribute('tabindex')
   })`);
-  assert(protectedState.cue === 'Private case studyAccess required' || protectedState.cue === 'Private case study Access required', 'protected route cue drifted');
-  assert(protectedState.robots?.startsWith('noindex,nofollow'), 'protected route lost noindex,nofollow');
+  assert(!protectedState.cue, 'public Document Processing must not retain the private route cue');
+  assert(protectedState.robots === 'index,follow', 'public Document Processing must be indexable');
   assert(!protectedState.gate, 'protected route loaded the retired client-side password-gate script');
   assert(protectedState.overflow === 0, `protected route has ${protectedState.overflow}px root overflow at 390px`);
   assert(protectedState.main === '-1', 'protected route main target lost tabindex=-1');
-  await cdp.screenshot('document-processing-390-locked.png');
+  await cdp.screenshot('document-processing-390-public.png');
 
   await cdp.call('Emulation.setDeviceMetricsOverride', {
     width: 1280, height: 720, deviceScaleFactor: 1, mobile: false,
   });
+  await cdp.call('Emulation.setTouchEmulationEnabled', { enabled: false });
   await cdp.navigate(`${baseUrl}/abilityexperience.html`);
   const desktop = await cdp.evaluate(`({
     width: innerWidth,
@@ -324,6 +347,21 @@ try {
   assert(desktopTooltip.left >= 0 && desktopTooltip.right <= desktop.width && desktopTooltip.top >= 0 && desktopTooltip.bottom <= 720, 'desktop viewing tooltip is clipped outside the viewport');
   await cdp.screenshot('abilityexperience-1280-dark.png');
 
+  let textRailStates = 0;
+  for (const width of [320, 390, 760, 761, 1280]) {
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: false });
+    for (const [route, selector] of [['salmagazine.html', '.sal-vico2-evidence'], ['uigallery.html', '.ui-gallery-hero'], ['wxo-canvas.html', '.pilot-hero'], ['wxo-canvas.html', '.pilot-chapter-index'], ['pikappapp.html', '#chapter-2 .chapter-head'], ['graphicgallery.html', '.graphic-opening']]) {
+      await cdp.navigate(`${baseUrl}/${route}`);
+      for (const theme of ['light', 'dark']) {
+        await cdp.evaluate(`(async()=>{document.querySelector('.nav-inner > .lens-switcher [data-lens="${theme}"]').click();await document.fonts.ready;document.querySelector('${selector}').scrollIntoView({block:'center',behavior:'instant'});await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));})()`);
+        const rail = await cdp.evaluate(`(()=>{const el=document.querySelector('${selector}');const viewport=document.documentElement.clientWidth;const token=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-x'));const blocks=[...el.querySelectorAll('h1,h2,h3,p,a:not(:has(img))')].map(e=>{const range=document.createRange();range.selectNodeContents(e);const rects=[...range.getClientRects()].filter(r=>r.width>0);return {text:e.textContent.trim(),left:Math.min(...rects.map(r=>r.left)),right:Math.max(...rects.map(r=>r.right))};});return {viewport,token,blocks};})()`);
+        assert(rail.blocks.length >= 1 && rail.blocks.every(b=>b.left>=rail.token-1 && b.right<=rail.viewport-rail.token+1), `${route} ${width} ${theme} text escaped its page gutter: ${JSON.stringify(rail)}`);
+        await cdp.screenshot(`${route.replace('.html','')}-${selector.replace(/[^a-z0-9-]/gi,'')}-text-rail-${width}-${theme}.png`);
+        textRailStates += 1;
+      }
+    }
+  }
+  assert(textRailStates === 60, 'text rail matrix is incomplete');
   assert(cdp.exceptions.length === 0, `uncaught browser exceptions: ${cdp.exceptions.map((entry) => entry.text).join('; ')}`);
   console.log(`SHARED SHELL BROWSER CHECK: PASS mobile_controls=${mobile.controls.length} evidence=${evidenceDir}`);
 } finally {

@@ -587,6 +587,7 @@ html[data-theme="dark"] .pikapp-page .identity-board .system-icons svg{stroke:cu
 .pikapp-page .chapter-copy,
 .pikapp-page .close__grid{grid-template-columns:1fr;gap:20px}
 
+
 .pikapp-page .index ol{grid-template-columns:1fr 1fr}
 
 .pikapp-page .media figcaption{grid-template-columns:1fr;gap:4px}
@@ -650,8 +651,7 @@ html[data-theme="dark"] .pikapp-page .identity-board .system-icons svg{stroke:cu
 .pikapp-page .chapter{padding:56px 0}
 
 .pikapp-page .chapter-head{margin-bottom:32px}
-
-.pikapp-page .chapter-head h2{font-size:48px}
+.pikapp-page .chapter-head h2{font-size:clamp(38px,10vw,44px)}
 
 .pikapp-page .chapter-copy__body p{font-size:17px}
 
@@ -832,30 +832,6 @@ html[data-theme="dark"] .pikapp-page .member-card__stage{color:#adc5fa}
 
 .pikapp-page .app-experience--final .phone-device{width:min(340px,72vw)}
 
-.pikapp-page .v2-history{max-width:1100px;margin:clamp(52px,8vw,96px) auto 0;padding-top:clamp(34px,5vw,54px);border-top:1px solid var(--line)}
-
-.pikapp-page .v2-history__head{max-width:720px;margin-bottom:clamp(30px,5vw,52px)}
-
-.pikapp-page .v2-history__head h3{margin:10px 0 18px;font:clamp(36px,4.2vw,58px)/1 var(--serif);letter-spacing:-.035em}
-
-.pikapp-page .v2-history__head>p:not(.eyebrow){margin:0;color:var(--muted);font-size:17px;line-height:1.65}
-
-.pikapp-page .v2-history__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.5vw,30px);align-items:start;max-width:1100px;margin-inline:auto}
-
-.pikapp-page .v2-history__screen{width:min(100%,280px);margin:0;min-width:0;justify-self:center}
-
-.pikapp-page .v2-history__step{display:block;margin-bottom:12px;color:var(--blue-2);font:700 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
-
-html[data-theme="dark"] .pikapp-page .v2-history__step{color:#adc5fa}
-
-.pikapp-page .v2-history__frame{border:1px solid rgba(18,38,91,.18);border-radius:24px;background:#071020;overflow:hidden}
-
-.pikapp-page .v2-history__frame img{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain}
-
-.pikapp-page .v2-history__screen figcaption{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.5}
-
-.pikapp-page .v2-history__boundary{max-width:900px;margin:26px auto 0;color:var(--muted);font-size:13px;font-style:italic}
-
 @media (max-width: 800px){
 .pikapp-page .expansion-evidence{grid-template-columns:1fr;gap:28px}
 
@@ -897,19 +873,6 @@ html[data-theme="dark"] .pikapp-page .v2-history__step{color:#adc5fa}
 
 .pikapp-page .app-experience--final .phone-device{width:min(250px,100%)}
 
-.pikapp-page .v2-history{margin-top:42px}
-
-.pikapp-page .v2-history__head h3{font-size:clamp(32px,10vw,42px)}
-
-.pikapp-page .v2-history__head>p:not(.eyebrow){font-size:16px;line-height:1.5}
-
-.pikapp-page .v2-history__grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(78vw,310px);gap:18px;max-width:none;margin-inline:0;padding:0 2px 14px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:inline mandatory;scrollbar-width:thin}
-
-.pikapp-page .v2-history__screen{width:auto;margin:0;scroll-snap-align:start}
-
-.pikapp-page .v2-history__grid:focus-visible{outline:3px solid var(--blue-2);outline-offset:6px}
-
-html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-color:#adc5fa}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -945,15 +908,27 @@ html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-col
 
 .pikapp-page .coda__lead{max-width:830px;margin:0;color:var(--muted);font:clamp(19px,2.1vw,25px)/1.5 var(--serif)}
 
+.pikapp-page .coda__system-note{max-width:700px;margin:20px 0 0;color:var(--muted);font-size:15px;line-height:1.55}
+
 .pikapp-page .coda__boundary{max-width:830px;margin:24px 0 0;padding:0;border:0;background:transparent;color:var(--muted);font-size:13px;line-height:1.55;font-style:italic}
 
-.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.5vw,30px);align-items:start;max-width:1100px;margin-inline:auto;scroll-margin-top:88px}
+.pikapp-page .v2-change-ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.2vw,28px);margin:clamp(36px,5vw,58px) 0 clamp(44px,6vw,72px);padding-block:clamp(26px,3vw,38px);border-block:1px solid var(--line)}
+
+.pikapp-page .v2-change-ledger__item{min-width:0}
+
+.pikapp-page .v2-change-ledger__item>span{display:block;margin-bottom:16px;color:var(--blue-2);font:700 11px/1 var(--mono);letter-spacing:.1em}
+
+.pikapp-page .v2-change-ledger__item h3{margin:0 0 10px;font:clamp(24px,2.4vw,34px)/1 var(--serif);letter-spacing:-.025em}
+
+.pikapp-page .v2-change-ledger__item p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+
+.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,34px);align-items:start;max-width:none;margin-inline:auto;scroll-margin-top:88px}
 
 .pikapp-page .coda__screen{display:grid;margin:0;min-width:0}
 
-.pikapp-page .coda__frame{display:grid;place-items:center;overflow:hidden;border-radius:24px;background:#071020}
+.pikapp-page .coda__frame{display:grid;place-items:center;overflow:visible;border-radius:0;background:transparent}
 
-.pikapp-page .coda__image{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain;max-width:390px;border-radius:0;box-shadow:none}
+.pikapp-page .coda__image{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:contain;max-width:none;border-radius:0;box-shadow:none}
 
 .pikapp-page .coda__screen figcaption{display:grid;padding-top:16px;color:var(--muted);font-size:14px;line-height:1.5}
 
@@ -967,13 +942,19 @@ html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-col
 }
 
 @media (max-width: 700px){
-.pikapp-page .coda__triptych{grid-template-columns:1fr;gap:38px}
+.pikapp-page .v2-change-ledger{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}
 
-.pikapp-page .coda__screen{width:100%;max-width:390px;margin-inline:auto}
+.pikapp-page .coda__triptych{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;grid-auto-columns:auto;gap:20px 14px;max-width:none;margin-inline:0;padding:0;overflow:visible;overscroll-behavior-inline:auto;scroll-snap-type:none;scrollbar-width:auto}
+
+.pikapp-page .coda__screen{width:auto;max-width:none;margin:0;scroll-snap-align:none}
+
+.pikapp-page .coda__triptych:focus-visible{outline:3px solid var(--gold);outline-offset:6px}
 }
 
 @media (max-width: 430px){
 .pikapp-page .coda{padding:58px 0}
+
+.pikapp-page .v2-change-ledger{grid-template-columns:1fr}
 
 .pikapp-page .coda h2{font-size:48px}
 

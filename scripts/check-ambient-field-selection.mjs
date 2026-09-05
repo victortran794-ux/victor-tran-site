@@ -50,7 +50,7 @@ if (config) {
   const rings = config.circles.filter(circle => circle.kind === 'ring');
   const small = config.circles.filter(circle => circle.kind === 'small');
   const blobs = config.blobs || [];
-  expect(digest === '2e8c7c446dd6fcb3cd9cb81152b5ec802f06ce4f376b3592526b7e22105a6902',
+  expect(digest === '9ea5b2fc0a9ffbb9c8424ce339fea6b975565d9222544f926cfd7dc38b1afcc9',
     `submitted configuration differs from Victor's exact JSON (${digest})`);
   expect(config.version === 1 && config.globals.motionScale === 0.35
     && config.globals.cursorScale === 0.9 && config.globals.paused === false,
@@ -66,6 +66,15 @@ if (config) {
     'submitted blob scale, palette, and pointer values must remain exact');
   expect(rings.find(circle => circle.id === 'ring-b')?.opacity === 0.35,
     'submitted ring-b opacity must remain 0.35');
+  const ringC = rings.find(circle => circle.id === 'ring-c');
+  expect(ringC?.size === 154 && ringC?.anchorX === 88.45360824742268
+    && ringC?.anchorY === 8.461538461538462,
+    'latest submitted ring-c size and anchor must remain exact');
+  const smallC = small.find(circle => circle.id === 'small-c');
+  expect(smallC?.linkedRingId === 'ring-c'
+    && smallC?.offsetX === -49.39639880068722 && smallC?.offsetY === 70.79281960447742
+    && smallC?.anchorX === -49.39639880068722 && smallC?.anchorY === 70.79281960447742,
+    'ring-c companion relationship and submitted offset must remain exact');
 }
 
 if (failures.length) {

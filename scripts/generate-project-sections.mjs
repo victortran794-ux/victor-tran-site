@@ -37,7 +37,10 @@ function imageMarkup(project, indent) {
     const classAttr = image.class ? ` class="${escapeHtml(image.class)}"` : '';
     const srcsetAttr = image.srcset ? `\n${attrIndent}srcset="${escapeHtml(image.srcset)}"` : '';
     const sizesAttr = image.sizes ? `\n${attrIndent}sizes="${escapeHtml(image.sizes)}"` : '';
-    return `${imageIndent}<img loading="lazy" decoding="async"${classAttr}\n${attrIndent}src="${escapeHtml(image.src)}"${srcsetAttr}${sizesAttr} width="${image.width}" height="${image.height}"\n${attrIndent}alt="${escapeHtml(image.alt)}"\n${imageIndent}>`;
+    const themeAttrs = image.themeDarkSrc
+      ? ` data-home-theme-image data-theme-light-src="${escapeHtml(image.src)}" data-theme-dark-src="${escapeHtml(image.themeDarkSrc)}"`
+      : '';
+    return `${imageIndent}<img loading="lazy" decoding="async"${classAttr}${themeAttrs}\n${attrIndent}src="${escapeHtml(image.src)}"${srcsetAttr}${sizesAttr} width="${image.width}" height="${image.height}"\n${attrIndent}alt="${escapeHtml(image.alt)}"\n${imageIndent}>`;
   }).join('\n');
 }
 
@@ -50,7 +53,15 @@ function cardMarkup(project, indent = '        ') {
   const lock = project.homepageLock
     ? ' <span class="featured-item-lock" role="img" aria-label="Password required"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>'
     : '';
-  return `${indent}<a href="${escapeHtml(projectHref(project))}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${labelMarkup}${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>\n${indent}  </div>\n${indent}</a>`;
+  const practiceMarkup = project.homepagePractice
+    ? `${indent}    <p class="featured-practice"><span>Current practice</span><strong>${escapeHtml(project.homepagePractice.role)}</strong><span>${escapeHtml(project.homepagePractice.focus)}</span><span>${escapeHtml(project.homepagePractice.location)}</span></p>\n`
+    : '';
+  const viewLink = `<span class="view-link">${escapeHtml(project.cta ?? 'View Project')}</span>`;
+  const bonusMarkup = project.homepageBonus
+    ? `<span class="featured-item-bonus"><span aria-hidden="true">↳</span><em>${escapeHtml(project.homepageBonus)}</em></span>`
+    : '';
+  const cardBody = `${indent}  <div class="featured-item-img">\n${imageMarkup(project, indent)}\n${indent}  </div>\n${indent}  <div class="featured-item-content">\n${labelMarkup}${indent}    <h2 class="featured-item-title">${escapeHtml(project.title)}${lock}</h2>\n${practiceMarkup}${indent}    <p class="featured-item-desc">${escapeHtml(project.description)}</p>\n${indent}    <div class="featured-card-actions">${viewLink}${bonusMarkup}</div>\n${indent}  </div>`;
+  return `${indent}<a href="${escapeHtml(projectHref(project))}" class="${projectClass(project)}" data-chapter="${escapeHtml(project.chapter)}" data-chapter-title="${escapeHtml(project.chapterTitle)}">\n${cardBody}\n${indent}</a>`;
 }
 
 function generatedBlock(name, body, indent = '') {

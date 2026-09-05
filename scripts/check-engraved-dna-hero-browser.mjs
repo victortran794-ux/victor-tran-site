@@ -16,12 +16,21 @@ if (!chrome) throw new Error('Chrome binary not found; set CHROME_BIN');
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
+async function waitForViewport(cdp, width, height) {
+  let actual = null;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    actual = await cdp.evaluate(`({inner:[innerWidth,innerHeight],visual:[visualViewport?.width,visualViewport?.height,visualViewport?.scale],client:[document.documentElement.clientWidth,document.documentElement.clientHeight],screen:[screen.width,screen.height]})`);
+    if ((actual.inner[0] === width && actual.inner[1] === height) || (actual.client[0] === width && actual.client[1] === height)) return;
+    await delay(50);
+  }
+  throw new Error(`viewport did not settle at ${width}x${height}: ${JSON.stringify(actual)}`);
+}
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'dna-hero-pilot-'));
-const cdpPort = 10040 + (process.pid % 70);
+const portFile = path.join(profile, 'DevToolsActivePort');
 let chromeLog = '';
 const browser = spawn(chrome, [
   '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
-  '--remote-allow-origins=*', `--remote-debugging-port=${cdpPort}`,
+  '--remote-allow-origins=*', '--remote-debugging-port=0',
   `--user-data-dir=${profile}`, '--window-size=1440,900', 'about:blank',
 ], { stdio: ['ignore', 'ignore', 'pipe'] });
 browser.stderr.on('data', chunk => { chromeLog += chunk.toString(); });
@@ -131,6 +140,17 @@ try {
   const siteResponse = await fetch(`${baseUrl}/index.html`);
   assert(siteResponse.ok, `pilot server returned ${siteResponse.status}`);
 
+  let cdpPort;
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    if (fs.existsSync(portFile)) {
+      cdpPort = Number(fs.readFileSync(portFile, 'utf8').split(/\r?\n/, 1)[0]);
+      if (Number.isInteger(cdpPort) && cdpPort > 0) break;
+    }
+    if (browser.exitCode !== null) throw new Error(`Chrome exited ${browser.exitCode}: ${chromeLog}`);
+    await delay(100);
+  }
+  assert(cdpPort, 'Chrome DevTools port did not become ready');
+
   let page;
   for (let attempt = 0; attempt < 100; attempt += 1) {
     try {
@@ -185,6 +205,14 @@ try {
     await cdp.navigate(`${baseUrl}/index.html?state=${item.label}`);
     await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(item.theme)})`);
     await cdp.navigate(`${baseUrl}/index.html?state=${item.label}&fresh=1`);
+    await cdp.call('Emulation.setDeviceMetricsOverride', { width: item.width, height: item.height, screenWidth: item.width, screenHeight: item.height, positionX: 0, positionY: 0, deviceScaleFactor: 1, scale: 1, mobile: false, dontSetVisibleSize: false });
+    await waitForViewport(cdp, item.width, item.height);
+    await cdp.evaluate(`(async () => {
+      if (document.fonts?.ready) await document.fonts.ready;
+      const image = document.querySelector('[data-home-theme-image]');
+      if (image && !image.complete) await new Promise((resolve) => image.addEventListener('load', resolve, { once: true }));
+      if (image) { try { await image.decode(); } catch {} }
+    })()`);
 
     const dormant = await cdp.evaluate(`(() => {
       const hero = document.querySelector('.hero');
@@ -266,9 +294,15 @@ try {
           shiftY: parseFloat(style.getPropertyValue('--companion-shift-y')) || 0,
         };
       });
+      const workPrimary = document.querySelector('.featured-item[href="wxo-canvas.html"]');
+      const workRelated = workPrimary?.querySelector('.featured-item-bonus');
+      const workBonusText = workRelated?.querySelector('em');
+      const workImage = workPrimary?.querySelector('[data-home-theme-image]');
+      const relatedStyle = workBonusText ? getComputedStyle(workBonusText) : null;
+      const relatedRect = workRelated?.getBoundingClientRect();
       return {
-        viewport: [innerWidth, innerHeight],
-        overflow: document.documentElement.scrollWidth - innerWidth,
+        viewport: [Math.max(innerWidth, document.documentElement.clientWidth), innerHeight],
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         theme: document.documentElement.getAttribute('data-theme') || 'light',
         frame: [frame.width, frame.height],
         frameEdges: [frame.top, frame.bottom],
@@ -312,6 +346,20 @@ try {
         orbCount: orbs.length,
         orbs,
         companions,
+        workCard: {
+          hasPrimary: !!workPrimary,
+          hasRelated: !!workRelated,
+          relatedLabel: (workRelated?.textContent || '').replace('↳', '').trim(),
+          relatedNested: !!workPrimary?.contains(workRelated),
+          relatedHref: workRelated?.closest('a')?.getAttribute('href') || '',
+          relatedHeight: relatedRect?.height || 0,
+          relatedTextTransform: relatedStyle?.textTransform || '',
+          relatedDecoration: relatedStyle?.textDecorationLine || '',
+          source: workImage?.getAttribute('src') || '',
+          lightSource: workImage?.dataset.themeLightSrc || '',
+          darkSource: workImage?.dataset.themeDarkSrc || '',
+          decoded: !!workImage?.complete && (workImage?.naturalWidth || 0) > 0,
+        },
         hasAmbientTunerSurface: '__ambientFieldTunerApi' in window,
         hasCursorGlow: !!document.querySelector('.hero-cursor-wash'),
         dnaHidden: document.getElementById('heroDnaPanel').hidden,
@@ -327,6 +375,16 @@ try {
     assert(dormant.viewport[0] === item.width && dormant.viewport[1] === item.height, `${item.label}: viewport mismatch`);
     assert(dormant.overflow <= 0, `${item.label}: horizontal overflow ${dormant.overflow}`);
     assert(dormant.theme === item.theme, `${item.label}: theme mismatch ${dormant.theme}`);
+    assert(dormant.workCard.hasPrimary && dormant.workCard.hasRelated,
+      `${item.label}: wxO card must expose one primary action with its subtle bonus note ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.relatedNested && dormant.workCard.relatedHref === 'wxo-canvas.html'
+      && dormant.workCard.relatedLabel === 'Includes Document Processing',
+      `${item.label}: bonus note must remain inside the singular wxO case-study link ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.relatedTextTransform === 'none' && dormant.workCard.relatedDecoration === 'none'
+      && dormant.workCard.relatedHeight > 0,
+      `${item.label}: bonus note must retain its subdued inline treatment ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.decoded && dormant.workCard.source === dormant.workCard[`${item.theme}Source`],
+      `${item.label}: wxO thumbnail must decode from the selected theme source ${JSON.stringify(dormant.workCard)}`);
     assert(Math.abs(dormant.frame[0] - dormant.frame[1]) < 1, `${item.label}: portrait frame must stay square ${dormant.frame}`);
     assert(Math.abs(dormant.frameEdges[0] - dormant.copyEdges[0]) < 2 && Math.abs(dormant.frameEdges[1] - dormant.copyEdges[1]) < 2,
       `${item.label}: portrait must span I design through See the work ${JSON.stringify({ frame: dormant.frameEdges, copy: dormant.copyEdges, copyBox: dormant.copyBox, children: dormant.copyChildren })}`);
@@ -353,7 +411,7 @@ try {
     if (item.width >= 1200) assert(dormant.name.overhang >= 60 && dormant.name.overhang <= 84,
       `${item.label}: VictorTran must overhang the content by about 72px ${dormant.name.overhang}`);
     const expectedNameColors = item.theme === 'light'
-      ? ['rgb(85, 162, 247)', 'rgb(26, 26, 26)', 'rgb(85, 162, 247)', 'rgb(26, 26, 26)']
+      ? ['rgb(85, 162, 247)', 'rgb(26, 26, 26)', 'rgb(22, 103, 185)', 'rgb(26, 26, 26)']
       : ['rgb(234, 59, 153)', 'rgb(247, 246, 243)', 'rgb(234, 59, 153)', 'rgb(247, 246, 243)'];
     assert(dormant.name.colors.every((color, index) => color === expectedNameColors[index]), `${item.label}: name palette mismatch ${dormant.name.colors}`);
     const expectedNameTransition = item.reduced ? '1e-05s' : '0.4s';
@@ -529,6 +587,20 @@ try {
         faceNames: [...panel.querySelectorAll('.hero-dna-type-row b')].map(face => face.textContent.trim()),
         typeSampleSize: parseFloat(getComputedStyle(panel.querySelector('.hero-dna-type-sample')).fontSize),
         editableSample: panel.querySelector('.hero-dna-play-text')?.getAttribute('contenteditable'),
+        typographyControls: (() => {
+          const fontGroup = panel.querySelector('.hero-dna-font-group');
+          const modifierGroup = panel.querySelector('.hero-dna-modifier-group');
+          const italic = panel.querySelector('[data-dna-italic]');
+          return {
+            fontRole: fontGroup?.getAttribute('role'),
+            fontLabel: fontGroup?.getAttribute('aria-label'),
+            modifierRole: modifierGroup?.getAttribute('role'),
+            modifierLabel: modifierGroup?.getAttribute('aria-label'),
+            modifierText: panel.querySelector('.hero-dna-modifier-label')?.textContent.trim(),
+            italicPressed: italic?.getAttribute('aria-pressed'),
+            italicState: italic?.querySelector('[data-dna-italic-state]')?.textContent.trim(),
+          };
+        })(),
         sharedStructure: panel.textContent.includes('Shared structure'),
         layout: (() => {
           const box = selector => {
@@ -560,6 +632,11 @@ try {
     assert(active.faceNames.join('|') === 'DM Serif Display|Barlow|Source Code Pro'
       && active.editableSample === 'true' && !active.sharedStructure,
       `${item.label}: restored DNA typography or section boundary failed ${JSON.stringify(active)}`);
+    assert(active.typographyControls.fontRole === 'group' && active.typographyControls.fontLabel === 'Typeface'
+      && active.typographyControls.modifierRole === 'group' && active.typographyControls.modifierLabel === 'Typeface modifier'
+      && active.typographyControls.modifierText === 'Modifier' && active.typographyControls.italicPressed === 'false'
+      && active.typographyControls.italicState === 'Off',
+    `${item.label}: Italic must be a distinct off-state modifier, not a fourth typeface ${JSON.stringify(active.typographyControls)}`);
     if (item.width > 760) assert(active.labelFontSize >= 9.9 && active.swatchWidth >= 32 && active.typeSampleSize >= 54,
       `${item.label}: desktop DNA content was not enlarged ${JSON.stringify({ labelFontSize: active.labelFontSize, swatchWidth: active.swatchWidth, typeSampleSize: active.typeSampleSize })}`);
     if (item.width > 760) assert(Math.abs(active.layout.spacing[0] - active.layout.shape[0]) <= 1
@@ -572,7 +649,16 @@ try {
     if (item.width <= 760) assert(active.gridColumns === 2 && active.panel[0] <= active.hero[0] + 25 && active.panel[2] >= active.hero[2] - 25,
       `${item.label}: mobile DNA layout parity failed ${JSON.stringify(active)}`);
     await cdp.clickCenter('.hero-dna-swatch[data-dna-token="--pink"]', item.mobile);
-    await delay(item.reduced ? 30 : 420);
+    await cdp.evaluate(`new Promise((resolve) => {
+      const startedAt = performance.now();
+      const waitForTint = () => {
+        const tint = document.querySelector('.hero-dna-tint');
+        const ready = tint.classList.contains('is-active') && parseFloat(getComputedStyle(tint).opacity) >= 0.2;
+        if (ready || performance.now() - startedAt >= 2000) return resolve();
+        requestAnimationFrame(waitForTint);
+      };
+      waitForTint();
+    })`);
     const tintState = await cdp.evaluate(`(() => {
       const tint = document.querySelector('.hero-dna-tint');
       const swatch = document.querySelector('.hero-dna-swatch[data-dna-token="--pink"]');
@@ -604,10 +690,30 @@ try {
       await cdp.screenshot('desktop-light-dna-lower.png');
     }
 
-    if (item.label === 'mobile-light') {
+    if (item.label === 'desktop-dark') {
+      let focusedItalic = false;
+      for (let tab = 0; tab < 20; tab += 1) {
+        await cdp.key('Tab', 'Tab', 9);
+        focusedItalic = await cdp.evaluate(`document.activeElement === document.querySelector('[data-dna-italic]')`);
+        if (focusedItalic) break;
+      }
+      assert(focusedItalic, 'desktop-dark: trusted Tab traversal did not reach the Italic modifier');
+      await cdp.key(' ', 'Space', 32, ' ');
+      const keyboardItalic = await cdp.evaluate(`(() => {
+        const italic = document.querySelector('[data-dna-italic]');
+        const sample = document.querySelector('.hero-dna-play-text');
+        return { pressed: italic.getAttribute('aria-pressed'), state: italic.querySelector('[data-dna-italic-state]').textContent.trim(), style: getComputedStyle(sample).fontStyle };
+      })()`);
+      assert(keyboardItalic.pressed === 'true' && keyboardItalic.state === 'On' && keyboardItalic.style === 'italic',
+        `desktop-dark: keyboard Italic modifier state failed ${JSON.stringify(keyboardItalic)}`);
+    }
+
+    if (item.mobile) {
       await cdp.evaluate(`document.querySelector('[data-dna-close]').scrollIntoView({ block: 'center', behavior: 'instant' })`);
       await delay(350);
-      await cdp.screenshot('mobile-light-dna-lower.png');
+      await cdp.screenshot(`${item.label}-dna-lower.png`);
+    }
+    if (item.label === 'mobile-light') {
       await cdp.clickCenter('[data-dna-close]', true);
     } else {
       await cdp.key('Escape', 'Escape', 27);
@@ -624,6 +730,21 @@ try {
       await cdp.evaluate(`document.querySelector('.featured-heading').scrollIntoView({ block: 'center', behavior: 'instant' })`);
       await delay(80);
       await cdp.screenshot(`${item.label}-work-heading.png`);
+    }
+    if (['desktop-light', 'desktop-dark'].includes(item.label)) {
+      await cdp.evaluate(`document.querySelector('.featured-item--surface-ibm-inverse .featured-item-content').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await delay(900);
+      await cdp.screenshot(`${item.label}-ibm-cloud-card.png`);
+      await cdp.evaluate(`document.getElementById('galleries').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await cdp.evaluate(`Promise.all([...document.querySelectorAll('#galleries img')].map(async (image) => { try { await image.decode(); } catch {} }))`);
+      await delay(900);
+      await cdp.screenshot(`${item.label}-equal-galleries.png`);
+    }
+    if (item.label === 'mobile-light') {
+      await cdp.evaluate(`document.querySelector('#galleries .featured-item--gallery').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+      await cdp.evaluate(`Promise.all([...document.querySelectorAll('#galleries img')].map(async (image) => { try { await image.decode(); } catch {} }))`);
+      await delay(900);
+      await cdp.screenshot('mobile-light-equal-galleries.png');
     }
     states.push({ label: item.label, dormant, pointerProof, active, closed });
   }
@@ -651,5 +772,5 @@ try {
   try { cdp?.socket?.close(); } catch {}
   browser.kill('SIGTERM');
   await delay(120);
-  fs.rmSync(profile, { recursive: true, force: true });
+  try { fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch {}
 }

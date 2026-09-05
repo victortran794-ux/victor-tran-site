@@ -1,0 +1,146 @@
+[
+  {
+    "id": "HOME-C01",
+    "file": "index.html",
+    "old": "Visual designer building clear, expressive systems across enterprise products, brands, and stories.",
+    "new": "I\u2019m a visual designer working across enterprise products, brand identity, editorial design, and illustration."
+  },
+  {
+    "id": "HOME-C02",
+    "file": "index.html",
+    "old": "Other cool things to check out",
+    "new": "Selected work"
+  },
+  {
+    "id": "HOME-C03",
+    "file": "index.html",
+    "old": "There\u2019s a bonus one here",
+    "new": "Includes Document Processing"
+  },
+  {
+    "id": "HOME-C05",
+    "file": "index.html",
+    "old": "Modernizing a century-old publication through five years of layout and art direction for Pi Kappa Phi.",
+    "new": "Five years of editorial design and art direction for Pi Kappa Phi\u2019s century-old magazine."
+  },
+  {
+    "id": "ABT-C01",
+    "file": "about.html",
+    "old": "Hi! I\u2019m Victor, or Vic. I\u2019m a visual designer at IBM working on IBM watsonx Orchestrate. I design interface hierarchy, visual patterns, reusable components, and guidance for enterprise AI and automation workflows. I work closely with UX, product, and development partners through implementation.",
+    "new": "Hi! I\u2019m Victor, or Vic. I\u2019m a visual designer working on IBM watsonx Orchestrate. I work on interface hierarchy and reusable components for AI and automation workflows, alongside UX, product, and development partners."
+  },
+  {
+    "id": "ABT-C02",
+    "file": "about.html",
+    "old": "Before IBM watsonx Orchestrate, I designed and evaluated IBM Cloud Observability workflows from 2021 through 2023. My broader background spans design systems, brand systems, responsive web, editorial design, and illustration. Earlier, I grew from graphic designer into communications leadership at Pi Kappa Phi and The Ability Experience.",
+    "new": "From 2021 to 2023, I designed and evaluated IBM Cloud Observability workflows. Before IBM, I moved from graphic design into communications leadership at Pi Kappa Phi and The Ability Experience. My work has included brand systems, responsive websites, editorial design, and illustration."
+  },
+  {
+    "id": "ABT-C03",
+    "file": "about.html",
+    "old": "Also: open to voice over work.",
+    "new": "I\u2019m also open to voice-over work."
+  },
+  {
+    "id": "ABT-C04",
+    "file": "about.html",
+    "old": "I'm around, let's chat! You can reach me at",
+    "new": "I\u2019m around. Let\u2019s chat! You can reach me at"
+  },
+  {
+    "id": "ABT-C05",
+    "file": "about.html",
+    "old": "A diet coke on the beach",
+    "new": "A Diet Coke on the beach"
+  },
+  {
+    "id": "ABT-C05",
+    "file": "about.html",
+    "old": ">Chinese buffet down the street<",
+    "new": ">The Chinese buffet down the street<"
+  },
+  {
+    "id": "ABT-C05",
+    "file": "about.html",
+    "old": "<a href=\"#about-current\">Now</a>",
+    "new": "<a href=\"#about-current\">Current work</a>"
+  },
+  {
+    "id": "ABT-C05",
+    "file": "about.html",
+    "old": "<a href=\"#about-now\">Right now</a>",
+    "new": "<a href=\"#about-now\">Outside work</a>"
+  },
+  {
+    "id": "ABT-C06",
+    "file": "about.html",
+    "old": "While you\u2019re here, enjoy some Tetris because I like Tetris. Click in to play. Arrow keys move, \u2191 rotates, Space hard-drops, C holds, and P pauses.",
+    "new": "While you\u2019re here, have some Tetris. I like Tetris. A keyboard is required. Select Start to play. Use the left and right arrow keys to move, Up to rotate, Down to soft-drop, Space to hard-drop, C to hold, and P to pause."
+  },
+  {
+    "id": "ABT-C06",
+    "file": "about.html",
+    "old": "Playable neumorphic Tetris. Click or focus, then use arrow keys to play.",
+    "new": "Playable Tetris. Keyboard required. Select Start, then use the arrow keys to play."
+  },
+  {
+    "id": "ABT-C06",
+    "file": "about.html",
+    "old": "<p>Click to start</p>",
+    "new": "<p>Select Start. Keyboard required.</p>"
+  },
+  {
+    "id": "ABT-C07",
+    "file": "about.html",
+    "old": "A few songs from various phases of listening. Enjoy the eclectic mix.",
+    "new": "A few songs from over the years. It\u2019s a bit of a mix."
+  },
+  {
+    "id": "VIS-08",
+    "file": "about.html",
+    "old": "<a href=\"mailto:victortran794@gmail.com\">victortran794@gmail.com</a>.</p>",
+    "new": "<a href=\"mailto:victortran794@gmail.com\">victortran794@gmail.com</a>.</p>\n        <p><a href=\"documents/Victor-Tran-Resume.pdf\" target=\"_blank\" rel=\"noopener\">R\u00e9sum\u00e9</a></p>"
+  },
+  {
+    "id": "UI-C01",
+    "file": "uigallery.html",
+    "old": "A few interface studies and small experiments I liked enough to keep around.",
+    "new": "Interface studies exploring campaign layouts, dashboards, and the details between states."
+  },
+  {
+    "id": "UI-C02",
+    "file": "uigallery.html",
+    "old": "A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.",
+    "new": "A refined version of a client landing page concept from 2018. It wasn\u2019t shipped; registration and booking are illustrative."
+  },
+  {
+    "id": "UI-C04",
+    "file": "uigallery.html",
+    "old": "A dark interface system explored through dashboards, components, and interaction patterns. Interface details use fictional sample data and are shown as design examples rather than production data.",
+    "new": "A dark interface study for tracking work, with dashboards, components, and interaction states. All data shown is fictional."
+  },
+  {
+    "id": "UI-C05",
+    "file": "uigallery.html",
+    "old": "A work-continuity dashboard organized around status, attention, and history.",
+    "new": "A dashboard for tracking work in progress, items that need attention, and completed work."
+  },
+  {
+    "id": "UI-C06",
+    "file": "uigallery.html",
+    "old": "Command-palette and confirmation-dialog studies for consequential controls.",
+    "new": "A command palette and a confirmation dialog for pausing agents."
+  },
+  {
+    "id": "UI-C07",
+    "file": "uigallery.html",
+    "old": "Buttons, fields, status badges, task states, and activity treatments.",
+    "new": "Buttons, fields, status badges, task states, and activity logs."
+  },
+  {
+    "id": "UI-C08",
+    "file": "uigallery.html",
+    "old": "Default, selected, focus, and muted treatments across the architecture.",
+    "new": "Default, selected, focused, and muted states for architecture nodes."
+  }
+]

@@ -37,6 +37,12 @@ if (textBlueMatch) {
   expect(contrast(textBlueMatch[1], '#ffffff') >= 4.5,
     `--blue-text ${textBlueMatch[1]} must reach 4.5:1 on white.`);
 }
+const navVictorMatch = css.match(/\.nav-logo-victor\s*\{[^}]*color:\s*(#[0-9a-f]{6})/i);
+expect(navVictorMatch, 'Define a six-digit accessible light-theme Victor wordmark color.');
+if (navVictorMatch) {
+  expect(contrast(navVictorMatch[1], '#ffffff') >= 4.5,
+    `.nav-logo-victor ${navVictorMatch[1]} must reach 4.5:1 on the scrolled white navigation surface.`);
+}
 for (const selector of ['.label-default', '.about-now-label', '.footer-cta']) {
   const escaped = selector.replace('.', '\\.');
   const rule = css.match(new RegExp(`${escaped}[^\\{]*\\{[^}]*\\}`, 's'))?.[0] ?? '';
@@ -47,13 +53,10 @@ for (const file of activePages) {
   const html = read(file);
   expect(/<a\s+href="index\.html"\s+class="nav-logo"\s+aria-label="Victor Tran home">/.test(html),
     `${file}: navigation logo link must retain an accessible name when its visible text is hidden.`);
-  if (file === 'index.html') {
-    expect(/class="nav-logo-victor">Victor<\/span>\s*<span class="nav-logo-tran">Tran<\/span>/.test(html),
-      'index.html: canonical joined wordmark must remain visible inside the named home link.');
-  } else {
-    expect(/<img\s+src="images\/nav-logo\.webp"\s+alt=""/.test(html),
-      `${file}: navigation avatar must be decorative with alt="".`);
-  }
+  expect(/class="nav-logo-victor">Victor<\/span>\s*<span class="nav-logo-tran">Tran<\/span>/.test(html),
+    `${file}: canonical joined wordmark must remain visible inside the named home link.`);
+  expect(!/<img\s+src="images\/nav-logo\.webp"/.test(html),
+    `${file}: retired navigation avatar must not replace the canonical wordmark.`);
 }
 
 const homepage = read('index.html');

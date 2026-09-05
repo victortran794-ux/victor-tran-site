@@ -38,8 +38,8 @@ expect(packageJson.scripts?.['check:engraved-dna-hero'] === 'node scripts/check-
   'package scripts must expose the canonical Engraved DNA, ambient-baseline, and browser contracts');
 expect(preflight.includes('run_required "Engraved Design DNA hero contract" npm run check:engraved-dna-hero')
   && preflight.includes('run_required "Selected ambient field baseline contract" npm run check:ambient-field-selection')
-  && preflight.includes('run_required "Engraved Design DNA hero browser contract" npm run check:engraved-dna-hero-browser'),
-  'preflight must run the canonical Engraved DNA, ambient-baseline, and browser contracts');
+  && preflight.includes('SITE_URL="$site_url" DNA_HERO_EVIDENCE_DIR="$(mktemp -d)" npm run check:engraved-dna-hero-browser'),
+  'preflight must run the canonical Engraved DNA and ambient-baseline contracts, then run the browser contract against its owned server');
 expect(workflow.includes('npm run check:engraved-dna-hero')
   && workflow.includes('npm run check:ambient-field-selection')
   && workflow.includes('npm run check:engraved-dna-hero-browser'),
@@ -127,6 +127,16 @@ expect(/DM Serif Display/.test(html) && /Barlow/.test(html) && /Source Code Pro/
   && /class="hero-dna-type-playground"/.test(html)
   && /contenteditable="true"/.test(html),
   'inline Typography must restore real face labels and the editable larger specimen');
+expect(/class="hero-dna-font-group"[^>]*role="group"[^>]*aria-label="Typeface"[\s\S]*data-dna-font="'DM Serif Display', serif"[\s\S]*data-dna-font="'Barlow', sans-serif"[\s\S]*data-dna-font="'Source Code Pro', monospace"/i.test(html)
+  && /class="hero-dna-modifier-group"[^>]*role="group"[^>]*aria-label="Typeface modifier"[\s\S]*class="hero-dna-modifier-label"[^>]*>Modifier<\/[\s\S]*?data-dna-italic[^>]*aria-pressed="false"[\s\S]*data-dna-italic-state[^>]*>Off<\//i.test(html),
+  'Typography must keep typeface choices distinct from an explicit Italic modifier group with visible Off state and aria-pressed');
+expect(/\.hero-dna-modifier-group\s*\{[^}]*border-inline-start/i.test(css)
+  && /\.hero-dna-italic-state/i.test(css)
+  && /\.hero-dna-chip--italic\.is-active[\s\S]*\.hero-dna-italic-state::before[\s\S]*content:\s*['"]On['"]/i.test(css),
+  'Italic must receive its own visually separated modifier treatment with an explicit On state');
+expect(/const\s+italicState\s*=\s*panel\.querySelector\(['"][^)]*data-dna-italic-state/.test(js)
+  && /italicState\.textContent\s*=\s*active\s*\?\s*['"]On['"]\s*:\s*['"]Off['"]/.test(js),
+  'Italic interaction must synchronize the visible On or Off state with aria-pressed');
 expect(/class="hero-dna-space-token"/.test(html) && /class="hero-dna-space-value"/.test(html)
   && /class="hero-dna-radius-token"/.test(html) && /class="hero-dna-radius-value"/.test(html),
   'Spacing and Shape must restore their token names and values');
@@ -152,9 +162,10 @@ expect(/--name-overhang:\s*72px/i.test(css),
   'desktop VictorTran lockup must target a 72px overhang beyond the content row');
 expect(/\.home-page--engraved-dna\s+\.hero-bigtype\s*\{[^}]*font-style:\s*italic/i.test(css),
   'both hero name parts must be italic');
-expect(/\.home-page--engraved-dna\s+\.nav-logo-victor\s*\{[^}]*font-style:\s*italic[^}]*color:\s*#55a2f7/i.test(css)
-  && /\.home-page--engraved-dna\s+\.nav-logo-tran\s*\{[^}]*font-family:\s*['"]DM Serif Display['"][^}]*font-style:\s*italic[^}]*color:\s*#1a1a1a/i.test(css),
-  'Light header wordmark must mirror the italic blue Victor and black Tran hero');
+expect(/\.nav-logo-victor,\s*\.nav-logo-tran\s*\{[^}]*font-family:\s*['"]DM Serif Display['"][^}]*font-style:\s*italic/i.test(css)
+  && /\.nav-logo-victor\s*\{\s*color:\s*#1667b9/i.test(css)
+  && /\.home-page--engraved-dna\s+\.nav-logo-tran\s*\{[^}]*color:\s*#1a1a1a/i.test(css),
+  'Light header wordmark must preserve italic Victor and black Tran while using an accessible blue on white');
 expect(/html\[data-theme="dark"\][^}]*\.hero-bigtype--victor\s*\{[^}]*color:\s*#ea3b99/i.test(css)
   && /html\[data-theme="dark"\][^}]*\.hero-bigtype--tran\s*\{[^}]*color:\s*#f7f6f3/i.test(css),
   'Dark hero name must use pink Victor and white Tran');
@@ -165,7 +176,7 @@ expect(/\.home-page--engraved-dna\s+\.hero-copy\s*\{[^}]*height:\s*var\(--portra
   'portrait and responsive copy must share one deterministic square span');
 expect(/\.home-page--engraved-dna\s+\.hero-dna-panel\.is-active\s+\.hero-dna-group\s*\{[^}]*opacity:\s*1/i.test(css),
   'expanded DNA content must render at normal opacity');
-expect(/@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-label\s*\{[^}]*font-size:\s*0\.62rem/i.test(css)
+expect(/@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-label\s*\{[^}]*font-size:\s*0\.72rem/i.test(css)
   && /@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-swatch-dot\s*\{[^}]*width:\s*32px[^}]*height:\s*32px/i.test(css)
   && /@media\s*\(min-width:\s*761px\)[\s\S]*?\.home-page--engraved-dna\s+\.hero-dna-type-sample\s*\{[^}]*font-size:\s*3\.4rem/i.test(css),
   'desktop DNA specimens and labels must be enlarged for easier reading');

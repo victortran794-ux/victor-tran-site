@@ -1,5 +1,10 @@
 # Portfolio Agent Workflows
 
+## Current branch visibility override
+
+In the approved local candidate, Document Processing is public. `/document-processing` is a public direct route, indexable and included in the sitemap, with `manifest nav=false/homepage=false`, and linked from wxO as its feature deep dive. Document Processing is a public chapter inside wxO, not a separate Home card. Only its eight audited current owner exports are promoted; historical `/protected/wxo/` resources remain guarded. This supersedes protected-Doc instructions below for candidate source only. Commit, Preview push, merge, and production remain separate gates; this paragraph does not claim the latest local change is deployed.
+
+
 Created: 2026-06-02
 Status: Active workflow reference for Hermes, Claude Code, Codex, and future Figma MCP work
 
@@ -114,9 +119,9 @@ The package manifest should make redesign handoff easy. At minimum it should tra
 - redesign notes: what must survive, what can be rethought, component needs, and future layout ideas;
 - agent boundaries: what agents may do and what requires Victor approval.
 
-Document Processing is a normal live project package with protected visitor access. `data/projects.json` records `manifest nav=false/homepage=false`, so it is omitted from Work and homepage and is reached through the protected wxO umbrella/chapter. `/document-processing` intentionally permanently redirects to `/wxo-canvas#document-processing`; raw `.html` remains an implementation artifact. It is listed in guardrails only because protected media, claims, and visibility are easy for agents to accidentally change. A2UI is different: it is currently a dormant/future-track package, not an active case study or implementation priority.
+Document Processing is a live protected chapter inside wxO. `data/projects.json` records `manifest nav=false/homepage=false`. `/document-processing` is a protected direct route, omitted from public navigation, homepage cards, and the sitemap, and linked from wxO as its feature deep dive. It is listed in guardrails because protected media, claims, and visibility are easy for agents to accidentally change. A2UI is different: it is currently a dormant/future-track package, not an active case study or implementation priority.
 
-The static client-side password gate is visitor deterrence and discovery reduction, not server-side access control. Served HTML can contain the page source. No material requiring true confidentiality may be added until a separately approved server-side protection or private-hosting architecture exists.
+The current request boundary denies unauthenticated protected HTML and media delivery. Preserve the server-side access checks, origin validation, `noindex` policy, and sanitized-source requirement; do not add material outside the approved protection and provenance boundaries.
 
 ## Default portfolio workflow
 

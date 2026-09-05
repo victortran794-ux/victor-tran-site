@@ -20,23 +20,23 @@ Freelance publication and environmental design extending PCI's existing brand in
 
 ## Page Intro
 
-Freelance publication and environmental design for a top national specialty contractor, extending PCI's existing brand across an employee handbook and a set of recruitment concepts.
+Freelance publication and environmental design for PCI, applying its existing brand to an employee handbook and recruitment concepts.
 
 ## Metadata
 
 - Category: Publication & Environmental Design
-- Role: Freelance Publication & Environmental Design
+- Role: Freelance designer
 - Year: 2026
-- Type: Brand extension, not logo authorship
+- Type: Publication & environmental design
 
 ## Section Headings
 
 - Dense material, given room to move.
-- A publication system for consequential information.
+- A handbook for hourly employees.
 - Pacing first. Detail where it matters.
 - The hexagon becomes geography.
 - From page rhythm to environmental scale.
-- One implemented publication. One exploratory extension.
+- A distributed handbook and recruitment concepts.
 
 ## Body Copy
 
@@ -46,27 +46,25 @@ The handbook pairs long-form policy with a clear editorial rhythm. The same geom
 
 Principles of Business Conduct
 
-The 42-page handbook organizes leadership context, workplace policy, and ethical standards for hourly employees. As a freelance designer, I created the layout, typography, illustration, and production design while working within PCI's existing brand.
+The 42-page handbook covers leadership context, workplace policies, and ethical standards. I handled the layout, typography, illustration, and production design within PCI’s existing brand.
 
 Publication System in Use
 
-Chapter openings establish rhythm before the system shifts into statements, principles, diagrams, and editorial features. Small internal copy remains neutralized in these approved presentation boards.
+Chapter openings set the pace for statements, principles, diagrams, and editorial features. Internal text is obscured in these approved portfolio images.
 
-These are four coordinated artifacts presented individually, not one page or a shared paper format.
+Four examples: statement hierarchy, icon-supported principles, a pillar diagram, and a feature with photography.
 
 Closing the publication
 
-The map turns the recurring shape into a clear closing device. It stands alone here, without the red back-cover page competing with the red hero.
+The recurring hexagon organizes PCI’s locations into the map that closes the handbook.
 
 Recruitment concepts
 
-Typography, color, pattern, and image treatments were explored across standing banners, table displays, and related event materials. These directions remained concepts, not a documented rollout.
+These studies explore typography, color, pattern, and image treatments for standing banners, table displays, and event materials. They remained concepts.
 
 What reached people
 
-The 2026 handbook was distributed to hourly employees company-wide. The banner and table-display directions remained concepts for PCI's teams. Together, they show how an existing brand language can stretch across information density and physical scale without becoming a corporate rebrand.
-
-Artifact formats are preserved by source: landscape US Letter, landscape Tabloid, portrait, and mixed-format compositions are not normalized into a single crop. Protected internal copy remains neutralized in the approved presentation assets.
+The 2026 handbook was distributed to hourly employees company-wide. The banner and table-display designs remained concepts for PCI’s teams.
 
 ## Images
 

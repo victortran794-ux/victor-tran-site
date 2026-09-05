@@ -29,6 +29,7 @@ body.ui-gallery-page .cursor-ring--hover{border-color:var(--ui-accent);opacity:.
 .ui-gallery-hero {
   min-height: min(72vh, 760px);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: end;
   padding: clamp(150px, 20vh, 230px) var(--page-x) clamp(64px, 8vw, 112px);
   border-bottom: 1px solid var(--ui-line);
@@ -234,7 +235,7 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
   }
 
   .ui-gallery-hero h1 {
-    font-size: clamp(3.7rem, 17vw, 5.9rem);
+    font-size: clamp(2.75rem, 14vw, 5.9rem);
   }
 
   .ui-gallery-intro {
@@ -270,3 +271,10 @@ html[data-theme="dark"] .ui-scroll-screen:focus-visible {
     transition: none;
   }
 }
+
+/* Ekos is one paired study: two complete, independently scrollable views. */
+.ui-study-grid--ekos-paired{grid-template-columns:minmax(0,1.65fr) minmax(220px,.75fr);gap:clamp(18px,3vw,36px);padding:clamp(12px,1.8vw,22px);border-radius:18px;background:color-mix(in srgb,var(--ui-ink) 6%,transparent)}
+.ui-study-grid--ekos-paired > .ui-study-view{border-radius:10px;overflow:hidden;background:#101820}
+.ui-study-grid--ekos-paired .ui-study-view--ekos-desktop{grid-column:auto}
+.ui-study-grid--ekos-paired .ui-study-view--ekos-mobile{grid-column:auto}
+@media (max-width:760px){.ui-study-grid--ekos-paired{grid-template-columns:1fr;padding:12px}.ui-study-grid--ekos-paired > .ui-study-view{grid-column:1}.ui-study-grid--ekos-paired .ui-scroll-screen--desktop{aspect-ratio:4/5}}

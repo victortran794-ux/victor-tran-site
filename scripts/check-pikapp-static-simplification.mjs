@@ -11,6 +11,7 @@ const count = (value, needle) => value.split(needle).length - 1;
 
 const html = text('pikappapp.html');
 const css = text('css/pikappapp.css');
+const sharedCss = text('css/style.css');
 const js = text('js/pikappapp.js');
 const packageJson = JSON.parse(text('package.json'));
 const packageLock = JSON.parse(text('package-lock.json'));
@@ -24,28 +25,45 @@ const globalThemeContract = text('scripts/check-global-theme-control.mjs');
 const vercelIgnore = text('.vercelignore');
 const vercel = JSON.parse(text('vercel.json'));
 
-const staticStates = [
-  ['v2-today-light-clean.png', '01 Orientation', 'What needs attention'],
-  ['v2-responsibility-detail-dark-clean.png', '02 Responsibility detail', 'What to do next'],
-  ['v2-all-caught-up-light-clean.png', '03 Completion', 'Nothing needs your attention right now'],
+const retiredStaticStates = [
+  'v2-today-light-clean.png',
+  'v2-responsibility-detail-dark-clean.png',
+  'v2-all-caught-up-light-clean.png',
+];
+const v1States = [
+  'v1-original-loading.png',
+  'v1-original-welcome.png',
+  'v1-original-member.png',
+  'v1-original-task-expand.png',
+  'v1-original-milestones.png',
+  'v1-original-chapter.png',
+];
+const finalStates = [
+  'v2-final-loading.png',
+  'v2-final-login.png',
+  'v2-final-member-dashboard.png',
+  'v2-final-responsibility-detail-dark.png',
+  'v2-final-task-expand.png',
+  'v2-final-milestones-detail.png',
 ];
 
-expect(html.includes('<span>04</span>V1 + static V2'), 'Chapter index must label V2 as static rather than runnable.');
-expect(html.includes('Earlier static V2 states'), 'Chapter 04 must identify the V2 evidence as static historical states.');
-expect(count(html, '<p class="v2-history__boundary">Illustrative concept screens.</p>') === 1, 'V2 history must carry one concise viewer-facing boundary.');
-expect(count(html, '<p class="coda__boundary">Illustrative concept screens.</p>') === 1, 'Final remaster must carry one concise viewer-facing boundary.');
+expect(html.includes('<span>03</span>Original V1'), 'Chapter index must identify Chapter 03 as the original V1.');
+expect(html.includes('<span class="chapter-kicker">Original V1</span>'), 'Chapter 03 must identify its authentic original export sequence.');
+expect(count(html, '<p class="coda__boundary">Illustrative concept screens. Names, dates, rankings, and activity are fictional.</p>') === 1,
+  'Final remaster must carry one concise viewer-facing fictional-data boundary.');
 expect(!html.includes('concept-history'), 'Redundant supporting-chronology callout must remain removed.');
 expect(!html.includes('coda__meta'), 'Redundant final-remaster metadata kicker must remain removed.');
-expect(html.includes('The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.'), 'Chapter 04 must keep the concise V2 transition.');
-expect(html.includes('Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.'), 'V2 history must keep its concise evidence summary.');
+expect(html.includes('These original V1 exports preserve the first member flow as it was presented in 2020.'), 'Chapter 03 must state the original V1 evidence boundary.');
 expect(!html.includes('V1 established the member flow.'), 'Chapter 04 must not repeat the V1-established claim from its heading.');
 expect(!html.toLowerCase().includes('supporting chronology'), 'Viewer-facing copy must not restore internal chronology language.');
-expect(count(html, 'class="v2-history__screen"') === 3, 'Chapter 04 must contain exactly three static V2 history screens.');
-expect(html.includes('aria-label="Earlier V2 orientation, responsibility-detail, and completion states" tabindex="0"'), 'Static V2 history must expose a keyboard-scrollable labeled sequence.');
-for (const [filename, step, visibleText] of staticStates) {
-  expect(html.includes(`images/pikapp-case-study/${filename}`), `Chapter 04 must render ${filename}.`);
-  expect(html.includes(`class="v2-history__step">${step}</strong>`), `Chapter 04 must label ${step}.`);
-  expect(html.includes(visibleText), `Chapter 04 must describe the visible ${step} state.`);
+expect(!html.includes('class="v2-history'), 'Earlier static V2 states must be removed from Chapter 03.');
+expect(count(html, 'class="coda__screen"') === 6, 'Final remaster must contain exactly six dark/cyan screens.');
+expect(count(html, 'class="coda__step"') === 6, 'Final remaster must expose a six-step sequence.');
+expect(!html.includes('v2-final-chapter.png'), 'Retired final Chapter screen must not return to the active remaster.');
+expect(html.includes('aria-label="Six-screen source-faithful final Pi Kapp App concept sequence"'), 'Final remaster must identify its six-screen set.');
+for (const filename of retiredStaticStates) expect(!html.includes(`images/pikapp-case-study/${filename}`), `Chapter 03 must retire earlier static V2 state ${filename}.`);
+for (const filename of ['v2-final-today-light.png', 'v2-final-all-caught-up-light.png']) {
+  expect(!html.includes(`images/pikapp-case-study/${filename}`), `Final remaster must remove light outlier ${filename}.`);
 }
 for (const forbidden of [
   'pikappapp/demo',
@@ -57,18 +75,25 @@ for (const forbidden of [
   'Open V2 prototype',
 ]) expect(!html.includes(forbidden), `Public Pi Kapp page must remove runtime marker: ${forbidden}`);
 
-for (const required of [
-  '.pikapp-page .v2-history',
-  '.pikapp-page .v2-history__grid',
-  '.pikapp-page .v2-history__screen',
-  '.pikapp-page .v2-history__frame',
-  'grid-template-columns:repeat(3,minmax(0,1fr))',
-  'grid-auto-columns:min(78vw,310px)',
-  'scroll-snap-type:inline mandatory',
-  'html[data-theme="dark"] .pikapp-page .v2-history__step{color:#adc5fa}',
-  'html[data-theme="dark"] .pikapp-page .v2-history__grid:focus-visible{outline-color:#adc5fa}',
-  '@media (max-width: 700px)',
-]) expect(css.includes(required), `Pi Kapp CSS must include static-history contract: ${required}`);
+expect(!css.includes('.pikapp-page .v2-history'), 'Pi Kapp CSS must retire static-history styling.');
+expect(!html.includes('class="identity-board'), 'The oversized source board must be removed from the final-remaster story.');
+expect(count(html, 'class="v2-change-ledger__item"') === 4, 'V2 alterations must be consolidated into four concise notes beside the final screens.');
+expect(css.includes('.pikapp-page .v2-change-ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))'), 'V2 change notes must use a compact four-column desktop composition.');
+expect(css.includes('.pikapp-page .coda__triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'), 'Pi Kapp final remaster must use three desktop columns for two balanced rows.');
+expect(!html.includes('<section class="gallery-handoff"'), 'Pi Kapp must not duplicate the gallery handoff above project navigation.');
+const projectNav = html.match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)?.[1] ?? '';
+expect(projectNav.includes('class="project-nav-gallery-panel"'), 'Pi Kapp must consolidate the gallery sequence into its Next panel.');
+for (const [href, label] of [
+  ['artillustration.html', 'Art &amp; Illustration'],
+  ['graphicgallery.html', 'Graphic Design'],
+  ['uigallery.html', 'Interface Studies'],
+]) {
+  expect(projectNav.includes(`href="${href}"`) && projectNav.includes(label),
+    `Consolidated gallery panel must include ${label}.`);
+}
+expect(count(projectNav, 'class="project-nav-gallery-primary"') === 1 && count(projectNav, 'class="project-nav-gallery-link"') === 2, 'Consolidated Next panel must make Art the primary link without duplicating it.');
+expect(!/<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/.test(projectNav), 'Consolidated gallery links must not be nested.');
+expect(sharedCss.includes('.project-nav-gallery-links {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));'), 'Consolidated gallery panel must balance the two secondary links below the primary Art link.');
 for (const forbidden of ['.prototype-embed', '.prototype-dialog']) {
   expect(!css.includes(forbidden), `Pi Kapp CSS must remove runtime selector: ${forbidden}`);
   expect(!js.includes(forbidden), `Pi Kapp JavaScript must remove runtime selector: ${forbidden}`);
@@ -125,29 +150,37 @@ for (const [source, destination] of [
 }
 
 for (const preserved of [
-  'images/pikapp-case-study/login-screen.png',
-  'images/pikapp-case-study/member.png',
-  'images/pikapp-case-study/task-expand.png',
-  'images/pikapp-case-study/remaster-login.png',
-  'images/pikapp-case-study/remaster-dashboard.png',
-  'images/pikapp-case-study/remaster-milestones.png',
+  ...v1States.map((filename) => `images/pikapp-case-study/${filename}`),
+  ...finalStates.map((filename) => `images/pikapp-case-study/${filename}`),
   'data-archive-master="cover"',
   'data-archive-master="context"',
 ]) expect(html.includes(preserved), `Stable Pi Kapp evidence must remain: ${preserved}`);
+for (const retired of [...retiredStaticStates, 'v2-final-today-light.png', 'v2-final-all-caught-up-light.png']) {
+  expect(!html.includes(`images/pikapp-case-study/${retired}`), `Retired Pi Kapp evidence must stay inactive: ${retired}`);
+}
 
 const piKappIndex = siteIndex.find((entry) => entry.source === 'pikappapp.html');
 const indexedImages = new Set((piKappIndex?.images || []).map((image) => image.src));
-for (const preserved of [
-  ...staticStates.map(([filename]) => `images/pikapp-case-study/${filename}`),
-  'images/pikapp-case-study/remaster-login.png',
-  'images/pikapp-case-study/remaster-dashboard.png',
-  'images/pikapp-case-study/remaster-milestones.png',
-  'images/pikapp-case-study/expansion-cover-detail.jpg',
-]) expect(indexedImages.has(preserved), `Pi Kapp site-index metadata must preserve evidence: ${preserved}`);
+const expectedIndexedImages = [
+  'images/pikapp-case-study/belltower-expansion.jpg',
+  'images/pikapp-case-study/expansion-cover-preview.jpg',
+  'images/pikapp-case-study/wireframes.png',
+  'images/pikapp-case-study/sitemap.png',
+  ...v1States.map((filename) => `images/pikapp-case-study/${filename}`),
+  ...finalStates.slice(0, 5).map((filename) => `images/pikapp-case-study/${filename}`),
+];
+expect(indexedImages.size === 15, 'Pi Kapp site-index summary must retain its intentional 15-image cap.');
+for (const expected of expectedIndexedImages) {
+  expect(indexedImages.has(expected), `Pi Kapp site-index summary must preserve representative evidence: ${expected}`);
+}
+for (const deferred of [...finalStates.slice(5), 'app-star-shield.svg', 'expansion-cover-detail.jpg']) {
+  expect(!indexedImages.has(`images/pikapp-case-study/${deferred}`),
+    `Pi Kapp site-index summary must not pull deferred/detail evidence past its cap: ${deferred}`);
+}
 
 if (failures.length) {
   console.error(`PI KAPP STATIC SIMPLIFICATION: FAIL (${failures.length})`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
-console.log('PI KAPP STATIC SIMPLIFICATION: PASS states=3 runtime=removed redirects=2 stable-evidence=preserved');
+console.log('PI KAPP STATIC SIMPLIFICATION: PASS history=removed v1=6 final=6 runtime=removed redirects=2 stable-evidence=preserved');

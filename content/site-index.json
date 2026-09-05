@@ -7,7 +7,7 @@
     "description": "Victor Tran. Visual designer at IBM. I design cool things with sincerity.",
     "contentFile": "content/index.md",
     "headings": [
-      "Other cool things to check out",
+      "Selected work",
       "IBM watsonx Orchestrate",
       "IBM Cloud Observability",
       "IBM Patterns: Contact Us",
@@ -143,9 +143,9 @@
     "contentFile": "content/about.md",
     "headings": [
       "What I’m doing now",
-      "Visual Designer, IBM watsonx Orchestrate | AI & Automation",
+      "Visual Designer, IBM watsonx Orchestrate",
       "Previously at IBM",
-      "Visual Designer, IBM Cloud | Observability",
+      "Visual Designer, IBM Cloud",
       "What I design",
       "How I work",
       "Past work",
@@ -159,6 +159,120 @@
       {
         "src": "images/about-vic-japan.jpg",
         "alt": "Victor Tran smiling in front of a shrine in Japan"
+      }
+    ],
+    "projects": []
+  },
+  {
+    "title": "Make the trust loop visible.",
+    "source": "document-processing.html",
+    "url": "/document-processing",
+    "category": "",
+    "description": "A product-design study of classification, extraction, human review, and evaluation in Watson Orchestrate Document Processing.",
+    "contentFile": "content/document-processing.md",
+    "headings": [
+      "The work started with the platform, not the dashboard.",
+      "Trust comes from a workflow people can inspect."
+    ],
+    "images": [
+      {
+        "src": "images/document-processing/public/classify-setup.png",
+        "alt": "Document classifier setup with two fictional sample classes"
+      },
+      {
+        "src": "images/document-processing/public/extract-field.png",
+        "alt": "Document extractor field editor using a fictional purchase order"
+      },
+      {
+        "src": "images/document-processing/public/review-table.png",
+        "alt": "Document review table with editable fictional extracted values"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-results.png",
+        "alt": "Evaluation screen with fictional field-level comparison"
+      },
+      {
+        "src": "images/document-processing/public/review-verified.png",
+        "alt": "Document review screen showing verified fictional output"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-test-set.png",
+        "alt": "Evaluation screen showing a fictional uploaded test set"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-rerun.png",
+        "alt": "Evaluation screen prompting a rerun after extractor changes"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-indicators.png",
+        "alt": "Evaluation screen with extraction indicators on a fictional source document"
+      }
+    ],
+    "projects": []
+  },
+  {
+    "title": "A shared visual language for agentic workflows.",
+    "source": "wxo-canvas.html",
+    "url": "/wxo-canvas",
+    "category": "",
+    "description": "A case study of a shared visual language for agentic workflows, human tasks, and document processing.",
+    "contentFile": "content/wxo-canvas.md",
+    "headings": [
+      "Make complex workflows easier to read.",
+      "Node states and sizes",
+      "User activities stay connected to the canvas.",
+      "A closer look at Document Processing",
+      "A visual system that kept expanding.",
+      "One system for automation, specialized work, and human judgment."
+    ],
+    "images": [
+      {
+        "src": "images/wxo-canvas/public/current-workflow-light.png",
+        "alt": "Historical workflow canvas with connected tasks, controls, and a node palette"
+      },
+      {
+        "src": "images/wxo-canvas/public/15-node-key-states-light.png",
+        "alt": "Node key states in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/16-node-size-variants-light.png",
+        "alt": "Node size variants in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-workflow-light.png",
+        "alt": "Workflow canvas with a newly added User Activity"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-configuration-light.png",
+        "alt": "User Activity configuration options within a workflow"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-summary-light.png",
+        "alt": "Completed User Activity connected back to the workflow"
+      },
+      {
+        "src": "images/wxo-canvas/public/current-workflow-light.png",
+        "alt": "Current agentic workflow builder"
+      },
+      {
+        "src": "images/wxo-canvas/public/v2-workflow-light.png",
+        "alt": "V2 agentic workflow builder"
+      },
+      {
+        "src": "images/wxo-canvas/public/v2-agent-flow-light.png",
+        "alt": "V2 agent hierarchy and flow"
+      },
+      {
+        "src": "images/wxo-canvas/public/17-flow-control-elements-light.png",
+        "alt": "Flow-control elements in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/18-flow-control-containers-light.png",
+        "alt": "Flow-control containers in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/19-application-example-light.png",
+        "alt": "Workflow application example in the selected theme"
       }
     ],
     "projects": []
@@ -263,10 +377,6 @@
         "alt": "Mid-fidelity Contact IBM exploration showing a grid of support destinations and direct contact routes"
       },
       {
-        "src": "images/ibm-patterns-case-study/midfi-human-fallback.png",
-        "alt": "Mid-fidelity Contact IBM exploration with an expanded in-page human contact form"
-      },
-      {
         "src": "images/ibm-patterns-case-study/hero-study-collaboration.webp",
         "alt": "XD prototype hero showing two people working together at a laptop beside the words Contact IBM, We're here to help"
       },
@@ -303,9 +413,8 @@
     "headings": [
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
-      "It still needed to look like Pi Kappa Phi.",
-      "V1 established the structure. V2 clarified the loop.",
-      "The final remaster brings the app back to its source.",
+      "The first app established the member flow.",
+      "V2 carries the original app forward.",
       "A formative project that changed how I approached product design.",
       "Expansion Portfolio"
     ],
@@ -327,48 +436,48 @@
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-case-study/app-star-shield.svg",
-        "alt": "Original vector Pi Kapp App Star Shield"
+        "src": "images/pikapp-case-study/v1-original-loading.png",
+        "alt": "Original 2020 Pi Kapp App loading screen export"
       },
       {
-        "src": "images/pikapp-case-study/login-screen.png",
-        "alt": "Original Pi Kapp App login screen, cropped to remove the captured phone hardware"
+        "src": "images/pikapp-case-study/v1-original-welcome.png",
+        "alt": "Original 2020 Pi Kapp App welcome screen export"
       },
       {
-        "src": "images/pikapp-case-study/member.png",
-        "alt": "Original Pi Kapp App member dashboard screen"
+        "src": "images/pikapp-case-study/v1-original-member.png",
+        "alt": "Original 2020 Pi Kapp App member dashboard export"
       },
       {
-        "src": "images/pikapp-case-study/task-expand.png",
-        "alt": "Original Pi Kapp App expanded milestone screen"
+        "src": "images/pikapp-case-study/v1-original-task-expand.png",
+        "alt": "Original 2020 Pi Kapp App expanded task export"
       },
       {
-        "src": "images/pikapp-case-study/v2-today-light-clean.png",
-        "alt": "Earlier V2 Today screen showing what needs attention"
+        "src": "images/pikapp-case-study/v1-original-milestones.png",
+        "alt": "Original 2020 Pi Kapp App milestones export"
       },
       {
-        "src": "images/pikapp-case-study/v2-responsibility-detail-dark-clean.png",
-        "alt": "Earlier V2 responsibility detail screen showing what to do next"
+        "src": "images/pikapp-case-study/v1-original-chapter.png",
+        "alt": "Original 2020 Pi Kapp App chapter view export"
       },
       {
-        "src": "images/pikapp-case-study/v2-all-caught-up-light-clean.png",
-        "alt": "Earlier V2 completion screen stating that nothing needs attention"
+        "src": "images/pikapp-case-study/v2-final-loading.png",
+        "alt": "Owner-exported final Pi Kapp App launch screen with the star-and-swords mark"
       },
       {
-        "src": "images/pikapp-case-study/remaster-login.png",
-        "alt": "Source-faithful Pi Kapp login remaster with cyan hex field and original star-and-swords mark"
+        "src": "images/pikapp-case-study/v2-final-login.png",
+        "alt": "Owner-exported final Pi Kapp App login screen"
       },
       {
-        "src": "images/pikapp-case-study/remaster-dashboard.png",
-        "alt": "Source-faithful Pi Kapp member dashboard remaster with progress, bulletin, and milestone sections"
+        "src": "images/pikapp-case-study/v2-final-member-dashboard.png",
+        "alt": "Owner-exported final Pi Kapp App member dashboard"
       },
       {
-        "src": "images/pikapp-case-study/remaster-milestones.png",
-        "alt": "Source-faithful Pi Kapp milestone-detail remaster with expanded task states"
+        "src": "images/pikapp-case-study/v2-final-responsibility-detail-dark.png",
+        "alt": "Owner-exported final Pi Kapp App responsibility detail screen in Dark mode"
       },
       {
-        "src": "images/pikapp-case-study/expansion-cover-detail.jpg",
-        "alt": "Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University"
+        "src": "images/pikapp-case-study/v2-final-task-expand.png",
+        "alt": "Owner-exported final Pi Kapp App expanded task screen"
       }
     ],
     "projects": []
@@ -382,11 +491,11 @@
     "contentFile": "content/pci.md",
     "headings": [
       "Dense material, given room to move.",
-      "A publication system for consequential information.",
+      "A handbook for hourly employees.",
       "Pacing first. Detail where it matters.",
       "The hexagon becomes geography.",
       "From page rhythm to environmental scale.",
-      "One implemented publication. One exploratory extension."
+      "A distributed handbook and recruitment concepts."
     ],
     "images": [
       {
@@ -491,7 +600,7 @@
       },
       {
         "src": "images/abex-kits-2.jpg",
-        "alt": "Ability Experience cycling kit back"
+        "alt": "Ability Experience cycling kit front"
       },
       {
         "src": "images/abex-map.jpg",
@@ -508,10 +617,10 @@
     "description": "Five years of layout and art direction for Pi Kappa Phi’s official magazine.",
     "contentFile": "content/salmagazine.md",
     "headings": [
-      "From brochure to publication.",
+      "From layout to creative direction.",
       "One publication, many reading modes.",
       "Range inside the system.",
-      "The work stays available in full."
+      "Read the issues."
     ],
     "images": [
       {

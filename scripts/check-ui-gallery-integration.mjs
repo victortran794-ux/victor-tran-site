@@ -42,11 +42,11 @@ for (const token of [
   '<meta name="twitter:title" content="Interface Studies · Victor Tran Design">',
   '<p class="ui-gallery-kicker">Interface Studies</p>',
   '<h1>Interfaces, in view.</h1>',
-  'A few interface studies and small experiments I liked enough to keep around.',
+  'Interface studies exploring campaign layouts, dashboards, and the details between states.',
   '<section class="ui-study ui-study--ekos archive-primary" aria-labelledby="ekos-study-title">',
   '<h2 id="ekos-study-title">Ekos Con</h2>',
-  "A high-fidelity refinement of an original client landing-page concept from 2018.",
-  'The concept was not shipped; registration and booking are illustrative.',
+  "A refined version of a client landing page concept from 2018.",
+  'It wasn’t shipped; registration and booking are illustrative.',
   'data-ui-study-view="ekos-desktop"',
   'data-ui-study-view="ekos-mobile"',
   'data-ui-scroll-screen="desktop"',
@@ -54,22 +54,22 @@ for (const token of [
   'tabindex="0"',
   '<section class="ui-study ui-study--magi" aria-labelledby="magi-study-title">',
   '<h2 id="magi-study-title">Magi interface studies</h2>',
-  'A dark interface system explored through dashboards, components, and interaction patterns.',
-  'Interface details use fictional sample data and are shown as design examples rather than production data.',
+  'A dark interface study for tracking work, with dashboards, components, and interaction states.',
+  'All data shown is fictional.',
   'data-ui-study-view="magi-overview"',
   '<strong>Dashboard overview</strong>',
-  'A work-continuity dashboard organized around status, attention, and history.',
+  'A dashboard for tracking work in progress, items that need attention, and completed work.',
 
   'data-ui-study-view="magi-overlays"',
   '<strong>Overlay patterns</strong>',
-  'Command-palette and confirmation-dialog studies for consequential controls.',
+  'A command palette and a confirmation dialog for pausing agents.',
 
   'data-ui-study-view="magi-components"',
   '<strong>Component studies</strong>',
-  'Buttons, fields, status badges, task states, and activity treatments.',
+  'Buttons, fields, status badges, task states, and activity logs.',
   'data-ui-study-view="magi-node-states"',
   '<strong>Node states</strong>',
-  'Default, selected, focus, and muted treatments across the architecture.',
+  'Default, selected, focused, and muted states for architecture nodes.',
   '<div class="cursor-dot" aria-hidden="true"></div>',
   '<div class="cursor-ring" aria-hidden="true"></div>',
   '<script src="js/main.js"></script>',
@@ -90,6 +90,11 @@ forbid(css, /(?<!data-theme="dark"\][^{]*)\.ui-study-grid--magi \.ui-study-view 
   'Magi screen edge must remain dark-theme-only.');
 
 need(count(html, /data-ui-study-view=/g) === 6, 'UI Gallery must contain two complete Ekos frames and four retained Magi study views.');
+needText(html, 'ui-study-grid--ekos-paired', 'Ekos desktop and mobile must share the paired-study container.');
+need(/\.ui-study-grid--ekos-paired\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.65fr\)\s+minmax\(220px,\s*\.75fr\)/s.test(css),
+  'Ekos paired study must place desktop and mobile side by side on desktop.');
+need(/\.ui-study-grid--ekos-paired\s*>\s*\.ui-study-view\s*\{[^}]*border-radius:[^;}]+;[^}]*overflow:hidden/s.test(css),
+  'Ekos paired views must use one neutral rounded contained treatment.');
 need(count(html, /<img\b[^>]*data-ui-study-image/g) === 6, 'Each retained UI Gallery view must use an authored static image.');
 need(count(html, /<figcaption class="ui-study-caption">/g) === 4,
   'All four retained Magi studies must have concise visible captions.');
@@ -100,7 +105,7 @@ const magiOrder = [
   'magi-node-states',
 ];
 needText(html,
-  "A high-fidelity refinement of an original client landing-page concept from 2018. The concept was not shipped; registration and booking are illustrative.",
+  "A refined version of a client landing page concept from 2018. It wasn’t shipped; registration and booking are illustrative.",
   'Ekos summary must preserve the historical concept, later study, and non-shipment boundary.');
 for (let index = 1; index < magiOrder.length; index += 1) {
   need(html.indexOf(`data-ui-study-view="${magiOrder[index - 1]}"`) < html.indexOf(`data-ui-study-view="${magiOrder[index]}"`),
@@ -144,8 +149,9 @@ forbid(html, /revisited|returns to/i,
   'UI Gallery copy must not use generic revision narration beyond the exact Ekos provenance sentence.');
 forbid(html, /<iframe|<form|<input|<video|data-dashboard|sessionStorage|password-gate/i,
   'UI Gallery must remain a public static-study route without embedded applications, forms, media players, or private-route logic.');
-// Direct re-review confirmed the current six-board Magi edit remains sufficient;
-// Inspector & Metrics repeats overview evidence and retains a large empty canvas.
+// Direct re-review confirmed the current four-study Magi edit remains sufficient;
+// The two cropped studies are owner-rejected; Inspector & Metrics repeats overview
+// evidence and retains a large empty canvas.
 forbid(html, /Inspector and metrics|sample dates|last checkpoint/i,
   'UI Gallery must omit the visually redundant Inspector board and stale internal review language.');
 forbid(html, /static and sanitized|sanitized dark|sanitized read-only|private dashboard experiment/i,
@@ -160,7 +166,7 @@ for (const token of [
   '.ui-gallery-page',
   '.ui-gallery-hero h1 {',
   'font-weight: 600;',
-  'font-size: clamp(3.7rem, 17vw, 5.9rem);',
+  'font-size: clamp(2.75rem, 14vw, 5.9rem);',
   '.ui-study-grid',
   '.ui-study--magi',
   '.ui-study-grid--magi',

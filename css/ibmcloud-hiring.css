@@ -237,6 +237,18 @@
   background: var(--border);
 }
 
+[data-project="ibm-cloud"] .ibm-theme-pair-label {
+  grid-column: 1 / -1;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-2);
+  color: var(--blue-text);
+  font-family: 'Source Code Pro', monospace;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 [data-project="ibm-cloud"] .ibm-theme-pair img {
   display: block;
   width: 100%;
@@ -255,6 +267,10 @@
   [data-project="ibm-cloud"] .ibm-proof-lede,
   [data-project="ibm-cloud"] .ibm-proof-status {
     grid-column: 1;
+  }
+
+  [data-project="ibm-cloud"] .ibm-theme-pair {
+    grid-template-columns: 1fr;
   }
 }
 

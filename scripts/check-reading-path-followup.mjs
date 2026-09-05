@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read = p => fs.readFileSync(new URL('../'+p, import.meta.url),'utf8');
+const pi=read('pikappapp.html');
+assert.ok(!pi.includes('<section class="gallery-handoff"'), 'Pi Kapp must not duplicate the gallery handoff above Next');
+const nav=pi.match(/<!-- generated:project-nav:start -->([\s\S]*?)<!-- generated:project-nav:end -->/)[1];
+assert.ok(nav.includes('class="project-nav-gallery-panel"'), 'Gallery experience belongs in the Next panel');
+assert.deepEqual([...nav.matchAll(/href="([^"]+)"/g)].map(x=>x[1]),['salmagazine.html','artillustration.html','graphicgallery.html','uigallery.html']);
+assert.ok(!/<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/.test(nav),'Links must not be nested');
+const ui=read('uigallery.html').match(/<!-- generated:gallery-project-nav:start -->([\s\S]*?)<!-- generated:gallery-project-nav:end -->/)[1];
+assert.deepEqual([...ui.matchAll(/href="([^"]+)"/g)].map(x=>x[1]),['graphicgallery.html','about.html'],'Interface Studies must finish at About');
+assert.ok(ui.includes('Next: About'),'About destination needs an accurate accessible name');
+console.log('READING PATH FOLLOWUP: PASS consolidated Pi Kapp panel; Interface Studies ends at About');

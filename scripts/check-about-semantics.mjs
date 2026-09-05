@@ -38,8 +38,13 @@ expect(/<h2\b[^>]*id="about-current-title"[^>]*>\s*What I’m doing now\s*<\/h2>
   'The current-practice section must use the approved direct heading “What I’m doing now”.');
 expect(html.includes('Visual Designer, IBM watsonx Orchestrate'),
   'About must preserve Victor’s current IBM watsonx Orchestrate role.');
-expect(html.includes('Visual Designer, IBM Cloud | Observability'),
+expect(html.includes('Visual Designer, IBM Cloud'),
   'About must preserve Victor’s IBM Cloud role history.');
+const roleTitles = [...html.matchAll(/<h3>([\s\S]*?)<\/h3>/gi)]
+  .map((match) => normalize(match[1]))
+  .filter((title) => title.startsWith('Visual Designer, IBM'));
+expect(roleTitles.length === 2 && roleTitles.every((title) => !title.includes('|')),
+  'IBM role titles must not use pipe separators.');
 expect(html.includes('January 2024 to present'),
   'About must identify January 2024 as the start of Victor’s IBM watsonx Orchestrate work.');
 expect(html.includes('January 2021 to December 2023'),
@@ -52,13 +57,13 @@ const currentPractice = html.match(/<section\b[^>]*class="[^"]*\babout-current\b
 const roleHistory = html.match(/<section\b[^>]*class="[^"]*\babout-role-history\b[^"]*"[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
 expect(currentPractice.includes('Visual Designer, IBM watsonx Orchestrate') && !currentPractice.includes('Visual Designer, IBM Cloud'),
   'The current-practice section must contain only Victor’s current IBM watsonx Orchestrate role.');
-expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual Designer, IBM Cloud | Observability'),
+expect(roleHistory.includes('Previously at IBM') && roleHistory.includes('Visual Designer, IBM Cloud'),
   'IBM Cloud must be labeled and contained as previous role history.');
 expect(/class="about-current"[\s\S]*class="about-role-history"[\s\S]*class="about-skills"[\s\S]*class="about-work"/i.test(html),
   'Current work and IBM role history must precede skills and past work in the About narrative.');
-expect(html.includes('While you’re here, enjoy some Tetris because I like Tetris.'),
+expect(html.includes('While you’re here, have some Tetris. I like Tetris.'),
   'About must use Victor’s approved direct Tetris invitation.');
-expect(html.includes('A few songs from various phases of listening. Enjoy the eclectic mix.'),
+expect(html.includes('A few songs from over the years. It’s a bit of a mix.'),
   'About must use Victor’s approved music line.');
 expect(!html.includes('Tetris, but soft'),
   'The superseded “Tetris, but soft” heading must be removed.');
@@ -68,6 +73,11 @@ const tagRule = css.match(/\.tag\s*\{[^}]*\}/s)?.[0] ?? '';
 expect(tagRule.length > 0, 'The About tag treatment must remain defined.');
 expect(!/border-radius:\s*var\(--radius-pill\)/.test(tagRule),
   'About tags must no longer use the generic pill treatment.');
+expect(/\.about-divider\s*\{[^}]*display:\s*none/s.test(css),
+  'About must remove the redundant divider between the jump navigation and current-practice hierarchy.');
+expect(/\.about-current-roles\s*\{[^}]*border-top:\s*0/s.test(css)
+  && /\.about-role\s*\{[^}]*border-bottom:\s*0/s.test(css),
+  'About role hierarchy must not repeat separator rules around each single role.');
 
 const aboutMarkdown = fs.readFileSync(path.join(root, 'content/about.md'), 'utf8');
 expect((aboutMarkdown.match(/^title:\s*"About Victor Tran"$/gm) || []).length === 1,
@@ -76,7 +86,7 @@ expect((aboutMarkdown.match(/^# About Victor Tran$/gm) || []).length === 1,
   'content/about.md must contain one About Victor Tran Markdown h1.');
 for (const requiredRole of [
   'Visual Designer, IBM watsonx Orchestrate',
-  'Visual Designer, IBM Cloud | Observability',
+  'Visual Designer, IBM Cloud',
   'January 2024 to present',
   'January 2021 to December 2023',
 ]) {

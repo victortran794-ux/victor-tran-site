@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import {
   COOKIE_NAME,
@@ -13,13 +14,6 @@ import { handleProtectedRequest } from '../lib/protected-middleware.mjs';
 import { createPasswordVerifier, verifyPassword } from '../lib/password-verifier.mjs';
 
 for (const path of [
-  '/wxo-canvas',
-  '/wxo-canvas.html',
-  '/document-processing',
-  '/document-processing.html',
-  '/wxo-canvas/',
-  '/wxo-canvas%2ehtml',
-  '/wxo-canvas%252ehtml',
   '/protected/wxo/current/example.png',
   '/protected/wxo%2fcurrent/example.png',
   '/protected/wxo%252fcurrent/example.png',
@@ -35,7 +29,16 @@ for (const path of [
   '/',
   '/about',
   '/ibmcloud',
+  '/wxo-canvas',
+  '/wxo-canvas.html',
+  '/wxo-canvas/',
+  '/wxo-canvas%2ehtml',
+  '/wxo-canvas%252ehtml',
+  '/document-processing',
+  '/document-processing.html',
+  '/images/document-processing/public/classify-setup.png',
   '/images/wxo-canvas/wxo-home-thumbnail.png',
+  '/images/wxo-canvas/public/current-workflow-light.png',
   '/wxo-access',
   '/api/wxo-access',
 ]) {
@@ -46,10 +49,6 @@ const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
 for (const source of [
   '/wxo-access',
   '/wxo-access.html',
-  '/wxo-canvas',
-  '/wxo-canvas.html',
-  '/document-processing',
-  '/document-processing.html',
   '/protected/wxo/:path*',
 ]) {
   const rule = vercelConfig.headers?.find((entry) => entry.source === source);
@@ -58,6 +57,9 @@ for (const source of [
   assert.match(headers['cache-control'] || '', /private,\s*no-store/iu, `${source} must be private and no-store`);
   assert.match(headers['cdn-cache-control'] || '', /no-store/iu, `${source} must disable CDN caching`);
   assert.match(headers['vercel-cdn-cache-control'] || '', /no-store/iu, `${source} must disable Vercel CDN caching`);
+}
+for (const source of ['/wxo-canvas', '/wxo-canvas.html', '/document-processing', '/document-processing.html']) {
+  assert.equal(vercelConfig.headers?.some((entry) => entry.source === source), false, `${source} must not retain private no-store route headers after public authorization`);
 }
 
 const now = Date.UTC(2026, 7, 21, 12, 0, 0);
@@ -267,20 +269,14 @@ const anonymousPageResponse = await handleProtectedRequest(
   new Request('https://portfolio.test/wxo-canvas?lock=1'),
   { sessionSecret: secret, now, ...helpers },
 );
-assert.equal(anonymousPageResponse.headers.get('x-test-decision'), 'rewrite');
-assert.equal(anonymousPageResponse.headers.get('x-test-destination'), '/wxo-access?next=%2Fwxo-canvas');
-assert.equal(anonymousPageResponse.headers.get('cache-control'), 'private, no-store');
-assert.equal(helperCalls.rewrite.at(-1)?.init?.headers?.['cache-control'], 'private, no-store', 'gate rewrite must pass browser cache policy through Vercel helper options');
-assert.equal(helperCalls.rewrite.at(-1)?.init?.headers?.['cdn-cache-control'], 'no-store', 'gate rewrite must disable downstream CDN caching');
-assert.equal(helperCalls.rewrite.at(-1)?.init?.headers?.['vercel-cdn-cache-control'], 'no-store', 'gate rewrite must disable Vercel CDN caching');
-assert.equal(await anonymousPageResponse.text(), 'public gate only');
+assert.equal(anonymousPageResponse.headers.get('x-test-decision'), 'next');
+assert.equal(await anonymousPageResponse.text(), 'continued');
 
 const anonymousDocumentResponse = await handleProtectedRequest(
   new Request('https://portfolio.test/document-processing.html'),
   { sessionSecret: secret, now, ...helpers },
 );
-assert.equal(anonymousDocumentResponse.headers.get('x-test-decision'), 'rewrite');
-assert.equal(anonymousDocumentResponse.headers.get('x-test-destination'), '/wxo-access?next=%2Fdocument-processing');
+assert.equal(anonymousDocumentResponse.headers.get('x-test-decision'), 'next');
 
 const anonymousMediaResponse = await handleProtectedRequest(
   new Request('https://portfolio.test/protected/wxo/current/example.png'),
@@ -323,7 +319,7 @@ const authorizedDocumentResponse = await handleProtectedRequest(
   { sessionSecret: secret, now: now + 30_000, ...helpers },
 );
 assert.equal(authorizedDocumentResponse.headers.get('x-test-decision'), 'next', 'authorized Document Processing route must reach the standalone file');
-assert.equal(authorizedDocumentResponse.headers.get('cache-control'), 'private, no-store', 'authorized Document Processing responses must not be cached');
+assert.equal(authorizedDocumentResponse.headers.has('cache-control'), false, 'public Document Processing responses must not inherit protected cache headers');
 
 const forcedGateResponse = await handleProtectedRequest(
   new Request(`https://portfolio.test/wxo-canvas?lock=1`, {
@@ -331,7 +327,7 @@ const forcedGateResponse = await handleProtectedRequest(
   }),
   { sessionSecret: secret, now: now + 30_000, ...helpers },
 );
-assert.equal(forcedGateResponse.headers.get('x-test-decision'), 'rewrite', 'lock=1 must force a fresh gate');
+assert.equal(forcedGateResponse.headers.get('x-test-decision'), 'next', 'legacy lock=1 must not re-protect the public wxO route');
 
 const publicResponse = await handleProtectedRequest(
   new Request('https://portfolio.test/about'),
@@ -366,19 +362,29 @@ assert.equal(wxoHtml.includes('sessionStorage.getItem(\'vtd-unlock\')'), false, 
 assert.equal(fs.existsSync('js/password-gate.js'), false, 'client-side hash gate must be retired');
 assert.equal(fs.existsSync('assets/wxo-canvas-v2'), false, 'protected V2 media must leave its public path');
 
-const protectedRouteHtml = `${wxoHtml}\n${documentProcessingHtml}`;
+const protectedRouteHtml = documentProcessingHtml;
+assert.equal(/(?:src|href|poster|data-theme-(?:light|dark)-src)="protected\/wxo\//u.test(wxoHtml), false, 'public wxO route must not reference guarded media');
 const legacyProtectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(?:images\/wxo-canvas\/(?:current|v2)|assets\/(?:wxo-canvas-v2|document-processing))\//gu)];
 assert.equal(legacyProtectedRefs.length, 0, 'case-study media must not remain on public asset paths');
-const candidatePattern = /(?:src|href|poster)="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu;
+const candidatePattern = /(?:^|\s)(?:src|href|poster)="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu;
 const wxoCandidateRefs = [...wxoHtml.matchAll(candidatePattern)].map((match) => match[1]);
 const documentCandidateRefs = [...documentProcessingHtml.matchAll(candidatePattern)].map((match) => match[1]);
-const candidateRefs = [...wxoCandidateRefs, ...documentCandidateRefs];
-assert.equal(wxoCandidateRefs.length, 11, 'protected wxO umbrella must use ten guarded carousel sources plus one guarded Document Processing handoff thumbnail');
-assert.equal((wxoHtml.match(/protected\/wxo\/images\/current\/01-skill-studio-main\.png/gu) ?? []).length, 1, 'protected wxO umbrella must use exactly one guarded opening illustration');
-assert.equal(documentCandidateRefs.length, 4, 'protected Document Processing route must use exactly four guarded feature-arc sources');
-assert.equal(new Set(candidateRefs).size, 14, 'the route-aware candidate package must expose fourteen unique guarded sources');
-const protectedRefs = [...protectedRouteHtml.matchAll(/(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
-for (const asset of new Set(protectedRefs)) {
+const candidateThemeRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/public-candidate\/[^"]+)"/gu)].map((match) => match[1]);
+const candidateRefs = [...wxoCandidateRefs, ...candidateThemeRefs, ...documentCandidateRefs];
+const themeSequenceRefs = [...wxoHtml.matchAll(/data-theme-(?:light|dark)-src="(protected\/wxo\/assets\/theme-sequences\/[^"]+)"/gu)].map((match) => match[1]);
+const currentDocumentPattern = /(?:^|\s)(?:src|href|poster)="(images\/document-processing\/public\/[^"]+)"/gu;
+const wxoCurrentDocumentRefs = [...wxoHtml.matchAll(currentDocumentPattern)].map((match) => match[1]);
+const documentCurrentRefs = [...documentProcessingHtml.matchAll(currentDocumentPattern)].map((match) => match[1]);
+assert.equal(wxoCandidateRefs.length, 0, 'public wxO route must not initially load guarded public-candidate media.');
+assert.equal(candidateThemeRefs.length, 0, 'public wxO route must not declare guarded public-candidate theme media.');
+assert.equal(themeSequenceRefs.length, 0, 'public wxO route must not declare guarded theme-sequence media.');
+assert.equal(documentCandidateRefs.length, 0, 'public Document Processing route must not render retired guarded public-candidate feature-arc derivatives');
+assert.equal(new Set(candidateRefs).size, 0, 'public wxO route must expose no guarded public-candidate sources.');
+assert.deepEqual(wxoCurrentDocumentRefs, [], 'public wxO bridge must not expose the protected Classify owner export.');
+assert.equal(documentCurrentRefs.length, 12, 'Document Processing must use public owner exports for four feature-arc and eight detailed references.');
+assert.equal(new Set(documentCurrentRefs).size, 8, 'Document Processing must render only the eight declared public owner exports.');
+const protectedRefs = [...protectedRouteHtml.matchAll(/(?:^|\s)(?:src|href|poster)="(protected\/wxo\/[^"]+)"/gu)].map((match) => match[1]);
+for (const asset of new Set([...protectedRefs, ...candidateThemeRefs, ...themeSequenceRefs])) {
   assert.equal(fs.existsSync(asset), true, `guarded media is missing: ${asset}`);
 }
 
@@ -386,6 +392,43 @@ const publicWxoFiles = fs.readdirSync('images/wxo-canvas', { recursive: true, wi
   .filter((entry) => entry.isFile())
   .map((entry) => entry.name)
   .sort();
-assert.deepEqual(publicWxoFiles, ['wxo-home-thumbnail.png'], 'only the public homepage thumbnail may remain outside the guard');
+assert.deepEqual(publicWxoFiles, [
+  '15-node-key-states-dark.png', '15-node-key-states-light.png',
+  '16-node-size-variants-dark.png', '16-node-size-variants-light.png',
+  '17-flow-control-elements-dark.png', '17-flow-control-elements-light.png',
+  '18-flow-control-containers-dark.png', '18-flow-control-containers-light.png',
+  '19-application-example-dark.png', '19-application-example-light.png',
+  '21-workflow-anchors-dark.png', '21-workflow-anchors-light.png',
+  'closing-illustration-dark.png', 'closing-illustration-light.png',
+  'current-workflow-dark.png', 'current-workflow-light.png',
+  'form-configuration-dark.png', 'form-configuration-light.png',
+  'form-summary-dark.png', 'form-summary-light.png',
+  'form-workflow-dark.png', 'form-workflow-light.png',
+  'v2-agent-flow-dark.png', 'v2-agent-flow-light.png',
+  'v2-workflow-dark.png', 'v2-workflow-light.png',
+  'wxo-home-thumbnail-dark.png', 'wxo-home-thumbnail.png',
+].sort(), 'only the two Home thumbnails and audited public wxO narrative exports may remain outside the guard');
+
+assert.deepEqual(protectedRefs, [], 'public Document Processing markup must not reference guarded media');
+const projectManifest = JSON.parse(fs.readFileSync('data/projects.json', 'utf8'));
+const documentProject = projectManifest.projects.find((project) => project.slug === 'document-processing');
+assert.deepEqual(
+  { protected: documentProject.protected, noindex: documentProject.noindex, sitemap: documentProject.sitemap, nav: documentProject.nav, homepage: documentProject.homepage },
+  { protected: false, noindex: false, sitemap: true, nav: false, homepage: false },
+  'Document Processing public discovery metadata must preserve its subordinate navigation and homepage placement',
+);
+assert.match(documentProcessingHtml, /<meta name="robots" content="index,follow">/u, 'public Document Processing must be indexable');
+assert.equal(documentProcessingHtml.includes('site-route-status'), false, 'public Document Processing must not display a private-route status');
+const exportPolicy = JSON.parse(fs.readFileSync('data/content-export-policy.json', 'utf8'));
+assert.equal(exportPolicy.protectedPages.some((entry) => entry.source === 'document-processing.html'), false, 'public Document Processing must not use a protected content-export policy');
+const provenance = JSON.parse(fs.readFileSync('data/document-processing-current-provenance.json', 'utf8'));
+const publicDocumentFiles = fs.readdirSync('images/document-processing/public').sort();
+const provenanceFiles = provenance.assets.map((asset) => asset.file.replace('images/document-processing/public/', '')).sort();
+assert.deepEqual(publicDocumentFiles, provenanceFiles, 'public Document Processing namespace must contain exactly the eight approved owner exports');
+assert.deepEqual([...new Set(documentCurrentRefs)].sort(), provenance.assets.map((asset) => asset.file).sort(), 'public Document Processing markup must use exactly the approved public exports');
+for (const asset of provenance.assets) {
+  const bytes = fs.readFileSync(asset.file);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.outputSha256, `${asset.file} must remain byte-identical to its approved owner export`);
+}
 
 console.log('Protected delivery unit and deployable-boundary contracts passed.');

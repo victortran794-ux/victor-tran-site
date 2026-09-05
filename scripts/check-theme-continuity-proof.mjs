@@ -33,11 +33,11 @@ for (const page of pages) {
 }
 
 const home = read('index.html');
-if (!/<aside\b[^>]*class="home-practice-proof"[^>]*aria-label="Current practice"/.test(home)) {
-  throw new Error('Home is missing the current-practice proof line');
+if (!/<p\b[^>]*class="featured-practice"[^>]*>[\s\S]*?<span>Current practice<\/span>[\s\S]*?<strong>Visual Designer<\/strong>/.test(home)) {
+  throw new Error('Home wxO card is missing the compact current-practice line');
 }
-if (!home.includes('Visual Designer at IBM watsonx Orchestrate')) {
-  throw new Error('Home current-practice line must use the verified current role');
+if (!home.includes('IBM watsonx Orchestrate') || !home.includes('Enterprise AI · Product systems · Visual craft')) {
+  throw new Error('Home wxO card must retain the verified current role context');
 }
 
 const ibmCloud = read('ibmcloud.html');
@@ -59,7 +59,6 @@ for (const id of ['about-current', 'about-practice', 'about-now', 'about-play'])
 }
 
 for (const selector of [
-  'html[data-finish-proof] .home-practice-proof',
   'html[data-finish-proof] .page-context',
   'html[data-finish-proof] .about-jump-nav',
 ]) {
@@ -86,8 +85,8 @@ if (!interactions.includes('stabilizeFinishProofHashTarget') ||
     !interactions.includes("window.addEventListener('load', stabilizeFinishProofHashTarget")) {
   throw new Error('Fresh finish-proof hash URLs are not stabilized after page load');
 }
-if (!/@media\s*\(max-width:\s*600px\)[\s\S]*?html\[data-finish-proof\] \.home-practice-proof/.test(css)) {
-  throw new Error('Home current-practice proof does not define a mobile treatment');
+if (!/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-practice/.test(css)) {
+  throw new Error('Home card current-practice line does not define a mobile treatment');
 }
 if (!/@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.lens-switcher-btn/.test(css)) {
   throw new Error('Shared theme controls do not define reduced-motion behavior');

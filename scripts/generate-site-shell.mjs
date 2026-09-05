@@ -78,9 +78,7 @@ function buildHeader({ config, projects, currentPage, protectedPage }) {
   const aboutAttributes = ['href="about.html"'];
   if (isAbout) aboutAttributes.push('class="active"', 'aria-current="page"');
   const workClass = isHome || isProject ? 'nav-dropdown is-active' : 'nav-dropdown';
-  const logoMarkup = isHome
-    ? `        <span class="nav-logo-victor">Victor</span>\n        <span class="nav-logo-tran">Tran</span>`
-    : `        <img src="images/nav-logo.webp" alt="" width="34" height="34">\n        <span class="nav-logo-name">Victor Tran</span>`;
+  const logoMarkup = `        <span class="nav-logo-victor">Victor</span>\n        <span class="nav-logo-tran">Tran</span>`;
   const status = protectedPage
     ? `\n  <p class="site-route-status"><span>${escapeHtml(config.protectedLabel)}</span><small>${escapeHtml(config.protectedDetail)}</small></p>`
     : '';
@@ -140,16 +138,29 @@ function buildProjectNav(projects, currentPage) {
     fail(`${current.slug} projectNavNext does not resolve to a navigable project: ${current.projectNavNext}`);
   }
   const next = configuredNext || primary[(currentIndex + 1) % primary.length];
+  const gallerySequence = next.type === 'gallery'
+    ? projects.filter((project) => project.nav && project.type === 'gallery')
+    : [];
+  const galleryDescription = (gallery) => gallery.projectNavDescription || gallery.description || '';
+  const nextMarkup = gallerySequence.length
+    ? `    <section class="project-nav-gallery-panel" aria-label="Next galleries">
+      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
+      <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-gallery-primary" aria-label="Next gallery: ${escapeHtml(next.title)}"><span class="project-nav-title">${escapeHtml(next.title)}</span><small>${escapeHtml(galleryDescription(next))}</small></a>
+      <div class="project-nav-gallery-links" aria-label="Gallery destinations">
+${gallerySequence.filter((gallery) => gallery.slug !== next.slug).map((gallery, index) => `        <a href="${escapeHtml(gallery.entryUrl || gallery.url)}" class="project-nav-gallery-link" aria-label="Gallery ${index + 2}: ${escapeHtml(gallery.title)}"><span>${String(index + 2).padStart(2, '0')}</span><strong>${escapeHtml(gallery.title)}</strong><small>${escapeHtml(galleryDescription(gallery))}</small></a>`).join('\n')}
+      </div>
+    </section>`
+    : `    <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
+      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
+      <span class="project-nav-title">${escapeHtml(next.title)}</span>
+    </a>`;
   return `  <!-- generated:project-nav:start -->
   <nav class="project-nav" aria-label="Project navigation">
     <a href="${escapeHtml(previous.entryUrl || previous.url)}" class="project-nav-item project-nav-item--prev" aria-label="Previous project: ${escapeHtml(previous.title)}">
       <span class="project-nav-label"><span aria-hidden="true">&#x2190;</span> Previous</span>
       <span class="project-nav-title">${escapeHtml(previous.title)}</span>
     </a>
-    <a href="${escapeHtml(next.entryUrl || next.url)}" class="project-nav-item project-nav-item--next" aria-label="Next project: ${escapeHtml(next.title)}">
-      <span class="project-nav-label">Next <span aria-hidden="true">&#x2192;</span></span>
-      <span class="project-nav-title">${escapeHtml(next.title)}</span>
-    </a>
+${nextMarkup}
   </nav>
   <!-- generated:project-nav:end -->`;
 }
@@ -169,6 +180,7 @@ function buildFooter(config, currentPage) {
         <nav class="footer-social" aria-label="Contact options">
           <ul>
             <li><a href="mailto:${escapeHtml(config.contactEmail)}" class="footer-email" aria-label="Email Victor Tran at ${escapeHtml(config.contactEmail)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>Email</span></a></li>
+            <li><a href="${escapeHtml(config.resumeUrl)}" target="_blank" rel="noopener">Résumé</a></li>
             <li><a href="${escapeHtml(config.linkedInUrl)}" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </nav>

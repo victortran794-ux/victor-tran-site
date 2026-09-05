@@ -77,7 +77,7 @@ for (const required of [
   'Five-person team',
   'six-week concept',
   'Visual Designer',
-  'did not become the production page',
+  'The useful idea was simple:',
   'Influence and concept boundary',
   'Similarity in later versions does not prove exact lineage, sole authorship, or direct implementation.',
   '<script src="js/ibm-patterns.js"></script>',
@@ -89,10 +89,12 @@ if (html.includes('This is not a designed, tested, or implemented AI system.')) 
 }
 if (count(html, '<main') !== 1) fail('ibm-patterns.html must contain exactly one main');
 if (count(html, '<h1') !== 1) fail('ibm-patterns.html must contain exactly one h1');
-if (count(html, 'class="patterns-process-item') !== 4) fail('IBM Patterns must retain exactly four mid-fi process artifacts');
+if (!html.includes('mid- and high-fidelity artifacts') || html.includes('mid- and high-fidelity UX')) fail('IBM Patterns contribution copy must describe the broader mid- and high-fidelity artifacts');
+if (html.includes('midfi-human-fallback.png')) fail('IBM Patterns must retire the source-baked overlapping mid-fi fallback frame from active presentation');
+if (count(html, 'class="patterns-process-item') !== 3) fail('IBM Patterns must retain exactly three clean mid-fi process artifacts');
 if (count(html, 'class="patterns-hero-study') !== 2) fail('IBM Patterns must retain exactly two humanization hero studies');
 if (count(html, 'class="patterns-atlas-item') !== 3) fail('IBM Patterns must retain exactly three final interface atlas views');
-if (count(html, 'images/ibm-patterns-case-study/') !== 12) fail('IBM Patterns must reference exactly twelve approved evidence images');
+if (count(html, 'images/ibm-patterns-case-study/') !== 11) fail('IBM Patterns must reference exactly eleven approved evidence images');
 if (!html.includes('loading="lazy" decoding="async"')) fail('IBM Patterns evidence media must use lazy asynchronous decoding');
 
 for (const removed of [
@@ -112,6 +114,7 @@ for (const required of [
   'For someone without an established IBM relationship, the page could become a dead end.',
   'I am still especially proud of the final playback and the way our team made the concept understandable beyond the sprint.',
   'I later recognized parts of its direction in the page.',
+  'The useful idea was simple:',
 ]) {
   if (!html.includes(required)) fail(`ibm-patterns.html missing approved copy polish: ${required}`);
 }
@@ -120,6 +123,8 @@ for (const removed of [
   'very, very well received',
   'sharing glowing comments afterward',
   'I remember the work being well received and later recognizing parts of its direction in the page.',
+  'The IBM Patterns prototype did not become the production page.',
+  'What I remember carrying forward',
 ]) {
   if (html.includes(removed)) fail(`ibm-patterns.html retained superseded copy: ${removed}`);
 }
@@ -191,4 +196,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`IBM PATTERNS INTEGRATION CONTRACT: PASS assets=${Object.keys(assetHashes).length} process=4 heroes=2 atlas=3`);
+console.log(`IBM PATTERNS INTEGRATION CONTRACT: PASS assets=${Object.keys(assetHashes).length} process=3 heroes=2 atlas=3`);

@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A protected product-design study of classification, extraction, human review, and evaluation in Watson Orchestrate Document Processing.">
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
-  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="A product-design study of classification, extraction, human review, and evaluation in Watson Orchestrate Document Processing.">
+  <meta name="robots" content="index,follow">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="canonical" href="https://www.victortrandesign.com/document-processing">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.victortrandesign.com/document-processing">
-  <meta property="og:title" content="Document Processing · Protected Case Study">
+  <meta property="og:title" content="Document Processing · Case Study">
   <meta property="og:description" content="Making classification, extraction, review, and evaluation one visible trust loop.">
   <meta property="og:image" content="https://www.victortrandesign.com/images/hero-vic.jpg">
   <title>Document Processing · Victor Tran Design</title>
@@ -29,15 +28,15 @@
   <nav class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Victor Tran home">
-        <img src="images/nav-logo.webp" alt="" width="34" height="34">
-        <span class="nav-logo-name">Victor Tran</span>
+        <span class="nav-logo-victor">Victor</span>
+        <span class="nav-logo-tran">Tran</span>
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
           <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="work-menu">Work</button>
           <ul id="work-menu" class="nav-dropdown-menu">
             <!-- generated:projects-nav:start -->
-            <li><a href="wxo-canvas.html?lock=1">IBM watsonx Orchestrate</a></li>
+            <li><a href="wxo-canvas.html">IBM watsonx Orchestrate</a></li>
             <li><a href="ibmcloud.html">IBM Cloud Observability</a></li>
             <li><a href="ibm-patterns.html">IBM Patterns: Contact Us</a></li>
             <li><a href="pci.html">Performance Contracting, Inc.</a></li>
@@ -74,21 +73,20 @@
       </div>
     </div>
   </nav>
-  <p class="site-route-status"><span>Private case study</span><small>Access required</small></p>
   <!-- generated:site-shell-header:end -->
 
   <main class="page-content" id="main-content" tabindex="-1">
     <header class="page-header">
-      <p class="workflow-label">Document Processing / Watson Orchestrate</p>
+      <p class="workflow-label">Document Processing / IBM watsonx Orchestrate</p>
       <h1 class="page-header-title">Make the trust loop visible.</h1>
-      <p class="page-header-desc">Document automation does not stop at extracting a value. Builders need to know what the system recognized, where it is uncertain, how a person can correct it, and whether a change improved the result. I worked across Watson Orchestrate's Document Processing experience to help connect those moments into one platform workflow.</p>
+      <p class="page-header-desc">Builders need to see what a document extractor found, check uncertain results against the source, and see whether their changes improved the output. I worked on Classifier and Extractor specifications and led the design of Accuracy Evaluation in IBM watsonx Orchestrate.</p>
       <p class="workflow-companion-link"><a href="wxo-canvas.html">Return to the broader IBM watsonx Orchestrate canvas story <span aria-hidden="true">→</span></a></p>
       <dl class="case-study-meta">
         <div class="case-study-meta-item"><dt>Role</dt><dd>Contributor across Classifier and Extractor; lead designer for Accuracy Evaluation</dd></div>
-        <div class="case-study-meta-item"><dt>Period</dt><dd>Product design · 2025–2026</dd></div>
-        <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier + Extractor specifications</dd></div>
-        <div class="case-study-meta-item"><dt>Throughline</dt><dd>Human-in-the-loop shared patterns</dd></div>
-        <div class="case-study-meta-item"><dt>Release</dt><dd>Evaluation direction · released July 2026</dd></div>
+        <div class="case-study-meta-item"><dt>Period</dt><dd>2025–2026</dd></div>
+        <div class="case-study-meta-item"><dt>Scope</dt><dd>Classifier and Extractor specifications; Accuracy Evaluation design</dd></div>
+        <div class="case-study-meta-item"><dt>Throughline</dt><dd>Shared patterns for human review</dd></div>
+        <div class="case-study-meta-item"><dt>Release</dt><dd>Document Extractor and Accuracy Evaluation · July 2026</dd></div>
       </dl>
     </header>
 
@@ -98,75 +96,67 @@
           <span class="workflow-label">01 / Platform context</span>
           <div>
             <h2 id="doc-platform-title">The work started with the platform, not the dashboard.</h2>
-            <p class="workflow-chapter-lead">A document first had to be identified, matched to a schema, read for fields and tables, reviewed where confidence was low, and evaluated against a known reference.</p>
+            <p class="workflow-chapter-lead">The workflow identifies the document type, extracts its fields and tables, supports human review, and compares the results with a reference.</p>
           </div>
         </div>
-        <p>I joined the work in 2025 and ramped up alongside the existing designer, Cate. Together, we made up the design team. I helped translate earlier product concepts into the newer agent model, delivered specifications and interaction designs for Document Classifier and Extractor, and contributed shared patterns across the canvas and component library.</p>
-        <p>I also worked with adjacent Chat, Carbon, and Tools teams where document review crossed product boundaries. The role was collaborative: connecting states and patterns rather than claiming the platform as a solo design.</p>
+        <p>I joined Cate on the design team in 2025. I helped adapt earlier concepts to the newer agent model, delivered interaction designs and specifications for Document Classifier and Extractor, and contributed shared canvas and component patterns.</p>
+        <p>I also worked with adjacent teams on shared document-review patterns.</p>
         <div class="doc-feature-arc-intro">
           <p class="workflow-label">Parallel feature arc</p>
           <h3>Classify, extract, review, then evaluate.</h3>
-          <p>Developed in parallel with the broader canvas work, the feature moved from document setup into human review. Accuracy Evaluation came later, extending that trust loop into field-level quality inspection.</p>
+          <p>I worked on document setup and human review alongside the broader canvas work. Accuracy Evaluation came later, adding a way to compare extracted fields with reference values.</p>
         </div>
         <div class="pilot-epic-container pilot-doc-epic">
           <p class="pilot-epic-label">Document Processing feature arc</p>
           <ol class="pilot-flow-sequence pilot-flow-sequence--four">
             <li class="pilot-flow-step">
-              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Classify" data-caption="Set the document type and inspect suggested classes."><img src="protected/wxo/assets/public-candidate/09-document-classify.png" width="1024" height="664" alt="Document classifier screen with suggested classes" loading="lazy" decoding="async"></button></figure>
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Classify" data-caption="Set the document type and inspect suggested classes."><img src="images/document-processing/public/classify-setup.png" width="2624" height="1692" alt="Document classifier setup with two fictional sample classes" loading="lazy" decoding="async"></button></figure>
               <div class="pilot-flow-note"><span>01 · Classify</span><h3>Establish the document type</h3><p>Suggested classes make the system recommendation visible before the workflow moves forward.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
             </li>
             <li class="pilot-flow-step">
-              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Extract" data-caption="Shape fields and source context for extraction."><img src="protected/wxo/assets/public-candidate/10-document-extract.png" width="1024" height="780" alt="Document extractor screen with field setup" loading="lazy" decoding="async"></button></figure>
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Extract" data-caption="Shape fields and source context for extraction."><img src="images/document-processing/public/extract-field.png" width="1376" height="1048" alt="Document extractor field editor using a fictional purchase order" loading="lazy" decoding="async"></button></figure>
               <div class="pilot-flow-note"><span>02 · Extract</span><h3>Shape the information model</h3><p>Field setup connects the source document to the structure the workflow needs.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
             </li>
             <li class="pilot-flow-step">
-              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Review" data-caption="Correct uncertain output with the source visible."><img src="protected/wxo/assets/public-candidate/11-document-review.png" width="1024" height="674" alt="Document review screen with uncertain output" loading="lazy" decoding="async"></button></figure>
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Review" data-caption="Correct uncertain output with the source visible."><img src="images/document-processing/public/review-table.png" width="1584" height="1042" alt="Document review table with editable fictional extracted values" loading="lazy" decoding="async"></button></figure>
               <div class="pilot-flow-note"><span>03 · Review</span><h3>Put uncertainty in context</h3><p>Review keeps uncertain output and its source close enough for a person to resolve the difference.</p></div><span class="pilot-step-arrow" aria-hidden="true"></span>
             </li>
             <li class="pilot-flow-step pilot-flow-step--late">
-              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Accuracy Evaluation" data-caption="Inspect field-level quality in the later evaluation direction."><img src="protected/wxo/assets/public-candidate/12-document-evaluate.png" width="1024" height="674" alt="Document evaluation screen with field-level quality detail" loading="lazy" decoding="async"></button></figure>
-              <div class="pilot-flow-note"><span>Later phase · Evaluate</span><h3>Make quality inspectable</h3><p>The Accuracy Evaluator direction brought field-level quality into view near the end of the feature arc.</p></div>
+              <figure class="pilot-evidence pilot-doc-frame"><button class="pilot-image-button" type="button" data-wxo-evidence data-title="Accuracy Evaluation" data-caption="Inspect field-level quality in the later evaluation direction."><img src="images/document-processing/public/evaluate-results.png" width="1584" height="1042" alt="Evaluation screen with fictional field-level comparison" loading="lazy" decoding="async"></button></figure>
+              <div class="pilot-flow-note"><span>Later phase · Evaluate</span><h3>Make quality inspectable</h3><p>Accuracy Evaluation compares extracted and reference values field by field.</p></div>
             </li>
           </ol>
         </div>
-        <figure class="doc-motion-frame">
-          <figcaption class="doc-motion-bar"><strong>Accuracy Evaluation journey</strong><button type="button" class="doc-motion-toggle" data-doc-motion-toggle aria-controls="document-processing-motion" aria-pressed="false">Pause animation</button></figcaption>
-          <video autoplay muted loop playsinline id="document-processing-motion" preload="metadata" poster="protected/wxo/assets/document-processing/media/doc-pro-poster-sanitized.png" aria-label="Document Processing evaluation journey">
-            <source src="protected/wxo/assets/document-processing/media/doc-pro-evaluation-loop-sanitized.webm" type="video/webm">
-            <source src="protected/wxo/assets/document-processing/media/doc-pro-evaluation-loop-sanitized.mp4" type="video/mp4">
-          </video>
-        </figure>
         <div class="doc-current-story" aria-label="Current Document Processing screens from classify through evaluate">
           <section class="doc-current-stage" aria-labelledby="doc-classify-title">
             <header class="doc-current-stage-head"><span>01</span><h3 id="doc-classify-title">Classify</h3></header>
             <div class="doc-current-solo">
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/classify-suggested-sanitized.png" width="1024" height="664" loading="lazy" decoding="async" alt="Current classifier screen with suggested document classes"><figcaption>Suggested classes</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/classify-setup.png" width="2624" height="1692" loading="lazy" decoding="async" alt="Document classifier setup with two fictional sample classes"><figcaption>Class setup</figcaption></figure>
             </div>
           </section>
           <section class="doc-current-stage" aria-labelledby="doc-extract-title">
             <header class="doc-current-stage-head"><span>02</span><h3 id="doc-extract-title">Extract</h3></header>
-            <div class="doc-current-pair">
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/extract-field-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen for adding a field"><figcaption>Field setup</figcaption></figure>
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/extract-error-sanitized.png" width="1024" height="780" loading="lazy" decoding="async" alt="Current extractor screen with a document-level error"><figcaption>Extraction error</figcaption></figure>
+            <div class="doc-current-solo">
+              <figure class="doc-current-frame"><img src="images/document-processing/public/extract-field.png" width="1376" height="1048" loading="lazy" decoding="async" alt="Document extractor field editor using a fictional purchase order"><figcaption>Field setup</figcaption></figure>
             </div>
           </section>
           <section class="doc-current-stage" aria-labelledby="doc-review-title">
             <header class="doc-current-stage-head"><span>03</span><h3 id="doc-review-title">Review</h3></header>
             <div class="doc-current-pair">
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/review-table-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen with editable table output"><figcaption>Table correction</figcaption></figure>
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/review-verified-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current review screen showing verified output"><figcaption>Verified output</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/review-table.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Document review table with editable fictional extracted values"><figcaption>Table correction</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/review-verified.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Document review screen showing verified fictional output"><figcaption>Verified output</figcaption></figure>
             </div>
           </section>
           <section class="doc-current-stage" aria-labelledby="doc-evaluate-title">
             <header class="doc-current-stage-head"><span>04</span><h3 id="doc-evaluate-title">Evaluate</h3></header>
             <div class="doc-current-evaluator-grid">
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/evaluate-test-set-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen showing the uploaded test set"><figcaption>Test set</figcaption></figure>
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/evaluate-rerun-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen prompting a rerun after extractor changes"><figcaption>Rerun and inspect</figcaption></figure>
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/evaluate-results-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with field-level comparison"><figcaption>Evaluation results</figcaption></figure>
-              <figure class="doc-current-frame"><img src="protected/wxo/assets/document-processing/current/evaluate-indicators-sanitized.png" width="1024" height="674" loading="lazy" decoding="async" alt="Current evaluation screen with extraction indicators on the source document"><figcaption>Field indicators</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/evaluate-test-set.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Evaluation screen showing a fictional uploaded test set"><figcaption>Test set</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/evaluate-rerun.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Evaluation screen prompting a rerun after extractor changes"><figcaption>Rerun and inspect</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/evaluate-results.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Evaluation screen with fictional field-level comparison"><figcaption>Evaluation results</figcaption></figure>
+              <figure class="doc-current-frame"><img src="images/document-processing/public/evaluate-indicators.png" width="1584" height="1042" loading="lazy" decoding="async" alt="Evaluation screen with extraction indicators on a fictional source document"><figcaption>Field indicators</figcaption></figure>
             </div>
           </section>
-          <p class="doc-current-note">Interface details use fictional sample data and are shown as design examples, not measured outcomes.</p>
+          <p class="doc-current-note">The screens use fictional sample data. The values shown are examples, not measured product results.</p>
         </div>
       </section>
 
@@ -174,8 +164,8 @@
         <div class="workflow-close-grid">
           <h2 id="doc-close-title">Trust comes from a workflow people can inspect.</h2>
           <div>
-            <p>Document Extractor and Evaluation released in July 2026, connecting extraction with a quality-review workflow people could inspect.</p>
-            <a class="workflow-return-link" href="wxo-canvas.html">Return to the Canvas work <span aria-hidden="true">→</span></a>
+            <p>Document Extractor and Accuracy Evaluation were released in July 2026.</p>
+            <a class="workflow-return-link workflow-return-link--prominent" href="wxo-canvas.html">Return to the Canvas work <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -183,7 +173,7 @@
   </main>
 
   <dialog class="pilot-gallery-dialog" data-wxo-gallery aria-labelledby="pilot-gallery-title">
-    <div class="pilot-gallery-topbar"><p>Document Processing study</p><button type="button" class="pilot-gallery-close" aria-label="Close image viewer"><span aria-hidden="true">×</span></button></div>
+    <div class="pilot-gallery-topbar"><p>Document Processing study</p><div class="pilot-gallery-topbar-controls"><button type="button" class="pilot-gallery-fullscreen" data-wxo-gallery-fullscreen aria-pressed="false">Full size</button><button type="button" class="pilot-gallery-close" aria-label="Close image viewer"><span aria-hidden="true">×</span></button></div></div>
     <div class="pilot-gallery-layout">
       <div class="pilot-gallery-stage"><img data-wxo-gallery-image src="" alt=""></div>
       <div class="pilot-gallery-details">
@@ -206,6 +196,7 @@
         <nav class="footer-social" aria-label="Contact options">
           <ul>
             <li><a href="mailto:victortran794@gmail.com" class="footer-email" aria-label="Email Victor Tran at victortran794@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3z"></path><path d="m3 6 9 7 9-7"></path></svg><span>Email</span></a></li>
+            <li><a href="documents/Victor-Tran-Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
             <li><a href="https://www.linkedin.com/in/victortrandesign/" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </nav>
