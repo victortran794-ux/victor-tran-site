@@ -79,7 +79,7 @@ try {
   await cdp.open();
   await cdp.call('Page.enable'); await cdp.call('Runtime.enable'); await cdp.call('Network.enable');
 
-  // The public gate remains the entry point only for the protected Document Processing route.
+  // Preserve accessibility of the legacy gate for guarded historical resources.
   let gateChecks = 0;
   for (const viewport of [{ width: 390, height: 844, mobile: true }, { width: 1280, height: 720, mobile: false }]) {
     await cdp.call('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1 });
@@ -104,7 +104,7 @@ try {
   let states = 0;
   for (const spec of [
     { name: 'wxo', file: 'wxo-canvas.html', body: 'wxo-page', robots: 'index,follow', images: 14, evidence: 13 },
-    { name: 'doc', file: 'document-processing.html', body: 'doc-processing-page', robots: 'noindex,nofollow,noarchive,nosnippet,noimageindex', images: 12, evidence: 4 },
+    { name: 'doc', file: 'document-processing.html', body: 'doc-processing-page', robots: 'index,follow', images: 12, evidence: 4 },
   ]) {
     for (const viewport of [{ width: 390, height: 844, mobile: true }, { width: 1280, height: 720, mobile: false }]) {
       await cdp.call('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1 });
@@ -112,12 +112,20 @@ try {
         await cdp.navigate(`${baseUrl}/${spec.file}`);
         await cdp.evaluate(`localStorage.setItem('lens', ${JSON.stringify(theme)})`);
         await cdp.navigate(`${baseUrl}/${spec.file}`);
-        const state = await cdp.evaluate(`(async()=>{const main=document.querySelector('main');const images=[...main.querySelectorAll('img')];await Promise.all(images.map(async(image)=>{image.loading='eager';try{await image.decode()}catch{}}));const triggers=[...document.querySelectorAll('[data-wxo-evidence]')];return {body:document.body.className,theme:document.documentElement.dataset.theme||'light',robots:document.querySelector('meta[name="robots"]')?.content,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<1).map((image)=>image.src),evidence:triggers.length,triggerSources:triggers.map((trigger)=>trigger.querySelector('img')?.getAttribute('src')),protectedRefs:[...main.querySelectorAll('[src],[href]')].map((node)=>node.getAttribute('src')||node.getAttribute('href')).filter((value)=>value?.includes('protected/wxo/')),bridge:document.querySelector('.pilot-side-quest-bridge')?{images:document.querySelectorAll('.pilot-side-quest-bridge img').length,href:document.querySelector('.pilot-side-quest-bridge a')?.getAttribute('href')}:null,status:Boolean(document.querySelector('.site-route-status')),gate:Boolean(document.getElementById('vtd-gate')),currentScreens:new Set([...main.querySelectorAll('img[src*="document-processing/current/"]')].map((image)=>image.getAttribute('src'))).size,gallery:document.querySelector('[data-wxo-gallery]')?.tagName}})()`);
+        const state = await cdp.evaluate(`(async()=>{const main=document.querySelector('main');const images=[...main.querySelectorAll('img')];await Promise.all(images.map(async(image)=>{image.loading='eager';try{await image.decode()}catch{}}));const triggers=[...document.querySelectorAll('[data-wxo-evidence]')];return {body:document.body.className,theme:document.documentElement.dataset.theme||'light',robots:document.querySelector('meta[name="robots"]')?.content,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,images:images.length,failed:images.filter((image)=>!image.complete||image.naturalWidth<1).map((image)=>image.src),evidence:triggers.length,triggerSources:triggers.map((trigger)=>trigger.querySelector('img')?.getAttribute('src')),protectedRefs:[...main.querySelectorAll('[src],[href]')].map((node)=>node.getAttribute('src')||node.getAttribute('href')).filter((value)=>value?.includes('protected/wxo/')),bridge:document.querySelector('.pilot-side-quest-bridge')?{images:document.querySelectorAll('.pilot-side-quest-bridge img').length,href:document.querySelector('.pilot-side-quest-bridge a')?.getAttribute('href')}:null,status:Boolean(document.querySelector('.site-route-status')),gate:Boolean(document.getElementById('vtd-gate')),currentScreens:new Set([...main.querySelectorAll('img[src*="images/document-processing/public/"]')].map((image)=>image.getAttribute('src'))).size,gallery:document.querySelector('[data-wxo-gallery]')?.tagName}})()`);
         assert(state.body.includes(spec.body) && state.theme === theme && state.robots === spec.robots && state.overflow === 0 && state.images === spec.images && !state.failed.length && state.evidence === spec.evidence && state.gallery === 'DIALOG' && !state.gate, `${spec.file}: public/protected presentation state failed ${JSON.stringify(state)}`);
         if (spec.name === 'wxo') {
-          assert(!state.status && state.protectedRefs.length === 0 && state.triggerSources.every((source) => source?.startsWith('images/wxo-canvas/public/')) && state.bridge?.images === 0 && state.bridge?.href === 'document-processing.html?lock=1', `wxo-canvas.html: public asset boundary or textual protected handoff failed ${JSON.stringify(state)}`);
+          assert(!state.status && state.protectedRefs.length === 0 && state.triggerSources.every((source) => source?.startsWith('images/wxo-canvas/public/')) && state.bridge?.images === 0 && state.bridge?.href === 'document-processing.html', `wxo-canvas.html: public asset boundary or textual public handoff failed ${JSON.stringify(state)}`);
         } else {
-          assert(state.status && state.currentScreens === 8 && state.triggerSources.every((source) => source?.startsWith('protected/wxo/assets/document-processing/current/')), `document-processing.html: protected evidence state failed ${JSON.stringify(state)}`);
+          assert(!state.status && state.protectedRefs.length === 0 && state.currentScreens === 8 && state.triggerSources.every((source) => source?.startsWith('images/document-processing/public/')), `document-processing.html: public evidence state failed ${JSON.stringify(state)}`);
+        }
+        if (spec.name === 'wxo') {
+          const close = await cdp.evaluate(`(async()=>{const image=document.querySelector('.pilot-close-media img');image.scrollIntoView({block:'center',behavior:'instant'});await image.decode();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));const r=image.getBoundingClientRect();return {src:image.getAttribute('src'),expected:image.dataset[document.documentElement.dataset.theme==='dark'?'themeDarkSrc':'themeLightSrc'],width:r.width,height:r.height,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,left:r.left,right:r.right,top:r.top,bottom:r.bottom}})()`);
+          assert(close.top >= 0 && close.bottom <= viewport.height && close.src === close.expected && !close.src.includes('current-workflow') && close.width <= close.naturalWidth && close.left >= -1 && close.right <= viewport.width + 1 && Math.abs(close.width / close.height - close.naturalWidth / close.naturalHeight) < 0.01, `Closing illustration theme or containment failed ${JSON.stringify(close)}`);
+          await cdp.screenshot(`wxo-closing-illustration-${viewport.width}-${theme}.png`);
+        } else {
+          await cdp.evaluate(`document.querySelector('.pilot-doc-epic, main').scrollIntoView({block:'start'})`);
+          await cdp.screenshot(`document-processing-public-${viewport.width}-${theme}.png`);
         }
         states += 1;
       }
@@ -135,7 +143,7 @@ try {
   const lightTheme = await cdp.evaluate(`({theme:document.documentElement.dataset.theme || 'light',focused:document.activeElement?.outerHTML, mismatches:[...document.querySelectorAll('[data-wxo-theme-image]')].filter((image)=>image.getAttribute('src')!==image.dataset.themeLightSrc).map((image)=>({id:image.dataset.wxoThemeImage,src:image.getAttribute('src'),expected:image.dataset.themeLightSrc}))})`);
   assert(lightTheme.theme === 'light' && lightTheme.mismatches.length === 0, `Public wxO visible theme toggle did not restore Light sources: ${JSON.stringify(lightTheme)}`);
 
-  // Keyboard gallery behavior is shared by the public wxO narrative and protected Doc study.
+  // Keyboard gallery behavior is shared by the public wxO narrative and public Doc study.
   let galleries = 0;
   for (const spec of [
     { file: 'wxo-canvas.html', count: '01 / 13', next: '02 / 13', title: 'Historical Canvas', nextTitle: 'Node key states' },

@@ -99,7 +99,7 @@ need("min-width: 44px" in css and "min-height: 44px" in css,
 # Canonical project facts and protection flags.
 expected = {
     "wxo-canvas": ("IBM watsonx Orchestrate", "wxo-canvas.html", "An agentic workflow canvas for building, inspecting, and improving AI workflows."),
-    "document-processing": ("Document Processing", "document-processing.html", "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
+    "document-processing": ("Document Processing", "document-processing.html", "A platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow."),
     "ibmcloud": ("IBM Cloud Observability", "ibmcloud.html", "Research, product workflows, and reusable visual methods for IBM Cloud Observability."),
     "ibm-patterns": ("IBM Patterns: Contact Us", "ibm-patterns.html", "A six-week IBM Patterns incubator project exploring how IBM.com could guide people toward a useful route before a general contact form."),
     "pci": ("Performance Contracting, Inc.", "pci.html", "Freelance publication and environmental design extending PCI's existing brand into a 42-page employee handbook and recruitment banner concepts."),
@@ -124,10 +124,10 @@ for slug, (title, url, description) in expected.items():
     else:
         need(f'href="{url}" class="featured-item' not in index, f"hidden homepage entry leaked: {slug}")
 
-protected = by_slug.get("document-processing", {})
-need(protected.get("protected") is True, "Document Processing must remain protected")
-need(protected.get("noindex") is True, "Document Processing must remain noindex")
-need(protected.get("sitemap") is False, "Document Processing must remain excluded from the sitemap")
+document = by_slug.get("document-processing", {})
+need(document.get("protected") is False, "Document Processing must be public")
+need(document.get("noindex") is False, "Document Processing must be indexable")
+need(document.get("sitemap") is True, "Document Processing must appear in the sitemap")
 need("IBM watsonx Orchestrate" in index and "A2UI" not in index, "homepage needs IBM watsonx Orchestrate without A2UI claims")
 for private_rationale in ("Shared anatomy", "Project color is bounded", "Current behavior remains intact"):
     need(private_rationale not in index, f"private comparison rationale leaked into public copy: {private_rationale}")

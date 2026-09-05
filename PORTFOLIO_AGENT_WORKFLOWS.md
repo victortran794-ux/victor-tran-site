@@ -1,5 +1,10 @@
 # Portfolio Agent Workflows
 
+## Current branch visibility override
+
+In the approved local candidate, Document Processing is public. `/document-processing` is a public direct route, indexable and included in the sitemap, with `manifest nav=false/homepage=false`, and linked from wxO as its feature deep dive. Document Processing is a public chapter inside wxO, not a separate Home card. Only its eight audited current owner exports are promoted; historical `/protected/wxo/` resources remain guarded. This supersedes protected-Doc instructions below for candidate source only. Commit, Preview push, merge, and production remain separate gates; this paragraph does not claim the latest local change is deployed.
+
+
 Created: 2026-06-02
 Status: Active workflow reference for Hermes, Claude Code, Codex, and future Figma MCP work
 

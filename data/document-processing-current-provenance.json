@@ -1,11 +1,12 @@
 {
   "source": "Owner-supplied exports from iCloud Design Work/IBM/_wxO/Document Processing",
-  "classification": "unaltered owner exports with fictional prototype data",
+  "classification": "publication-approved, unaltered owner exports with fictional prototype data",
+  "publication": "Victor explicitly approved the active eight-image Document Processing route and its screenshots for public delivery. Only images/document-processing/public/ is public; all historical protected/wxo assets remain guarded.",
   "dataStatus": "Victor confirmed the visible names, profile markers, document records, workflow names, values, metrics, and model labels are fictional sample content.",
   "sanitation": "None on the active eight-image set. Active route assets are byte-identical owner exports. Previously neutralized derivatives are retained only as protected source history and are not rendered.",
   "assets": [
     {
-      "file": "protected/wxo/assets/document-processing/current/classify-setup.png",
+      "file": "images/document-processing/public/classify-setup.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/UAB Classifier Class added.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "c04f64dcc9f1cdaef88f63418ecce74474ece789d7856294ad18ec0e451611aa",
@@ -22,7 +23,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/extract-field.png",
+      "file": "images/document-processing/public/extract-field.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Edit field 4.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "c3316636665ae2fd842fafa0a30c73fe558aedf728b7ce0e5ab8e354dd9c0adb",
@@ -39,7 +40,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/review-table.png",
+      "file": "images/document-processing/public/review-table.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Table editing.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "6c8aaecb2c99e62365f369ee3202849658f11be871c93fb1342b357ff28f93e1",
@@ -56,7 +57,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/review-verified.png",
+      "file": "images/document-processing/public/review-verified.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Verified.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "31424dcd26a0557aaba70c6b9ada575fdffb93d0e463391ad54fb4ffbe094827",
@@ -73,7 +74,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/evaluate-test-set.png",
+      "file": "images/document-processing/public/evaluate-test-set.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Test uploaded.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "104988f7a0d5b29733564fbe51ae9b28d2625fa6ec522dd3b41a498b20c53384",
@@ -90,7 +91,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/evaluate-rerun.png",
+      "file": "images/document-processing/public/evaluate-rerun.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Eval 9.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "7ea69cc5082841f07541e68f99912fa78f295602877e06ebfe6df5c6257291ac",
@@ -107,7 +108,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/evaluate-results.png",
+      "file": "images/document-processing/public/evaluate-results.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Eval 11.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "51c06c4e4411ae699d0430432c0804dc02e29121114c949dceeab6e4ae9fb826",
@@ -124,7 +125,7 @@
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {
-      "file": "protected/wxo/assets/document-processing/current/evaluate-indicators.png",
+      "file": "images/document-processing/public/evaluate-indicators.png",
       "source": "owner-source/iCloud Design Work/IBM/_wxO/Document Processing/Extration view with indicators.png",
       "sourceRecordType": "owner-supplied-export-filename-and-sha256",
       "sourceSha256": "860889f1c73187cd407b9083eac9ceaeebbca4b13972a0b37abb1876fa23b6da",

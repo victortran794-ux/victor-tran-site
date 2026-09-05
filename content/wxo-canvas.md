@@ -116,4 +116,4 @@ Canvas visual study
 - Flow-control containers in the selected theme: images/wxo-canvas/public/18-flow-control-containers-light.png
 - Workflow application example in the selected theme: images/wxo-canvas/public/19-application-example-light.png
 - Workflow anchors in the selected theme: images/wxo-canvas/public/21-workflow-anchors-light.png
-- Historical workflow canvas connecting tasks, controls, and human decision points: images/wxo-canvas/public/current-workflow-light.png
+- Illustration of a person and workflow elements connected across a shared canvas: images/wxo-canvas/public/closing-illustration-light.png

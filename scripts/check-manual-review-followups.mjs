@@ -45,14 +45,17 @@ for (const marker of ['pilot-canvas-media-stack', 'pilot-history-canvas', 'pilot
 if (wxo.includes('pilot-main-illustration') || wxo.includes('pilot-vignettes') || wxoCss.includes('.pilot-flow-evidence li:nth-child(even)')) {
   fail('wxO must retain the cleaned public composition.');
 }
-if (!wxo.includes('data-wxo-theme-image="close-workflow"') || !wxoJs.includes('[data-wxo-theme-image]')) fail('wxO must retain its theme-aware public evidence behavior.');
+if (!wxo.includes('data-wxo-theme-image="closing-illustration"') || !wxoJs.includes('[data-wxo-theme-image]')) fail('wxO must retain its theme-aware closing illustration behavior.');
 if (/protected\/wxo\//.test(wxo)) fail('Public wxO must not embed protected images or guarded route resources.');
-if (!wxo.includes('href="document-processing.html?lock=1"') || /pilot-bridge-thumbnail|document-processing\/current/.test(wxo)) {
-  fail('Public wxO must use a textual locked Document Processing handoff only.');
+if (!wxo.includes('href="document-processing.html"') || /document-processing\.html\?lock=1|pilot-bridge-thumbnail|document-processing\/current/.test(wxo)) {
+  fail('Public wxO must use a textual public Document Processing handoff only.');
 }
 
 const publicAssets = (wxoLedger.assets || []).filter((item) => item.route === 'wxo-canvas.html');
-if (publicAssets.length !== 24) fail(`wxO provenance must contain 24 public-route exports, found ${publicAssets.length}`);
+if (publicAssets.length !== 26) fail(`wxO provenance must contain 26 public-route exports, found ${publicAssets.length}`);
+if (JSON.stringify(publicAssets.filter((item) => /^closing-illustration-(?:light|dark)\.png$/.test(item.file)).map((item) => item.file).sort()) !== JSON.stringify(['closing-illustration-dark.png', 'closing-illustration-light.png'])) {
+  fail('wxO provenance must include exactly the approved closing-illustration light/dark pair.');
+}
 for (const item of publicAssets) {
   const assetPath = `images/wxo-canvas/public/${item.file}`;
   if (!fs.existsSync(path.join(root, assetPath)) || item.sha256 !== sha256(assetPath) || !wxo.includes(assetPath)) {
@@ -61,18 +64,24 @@ for (const item of publicAssets) {
 }
 if ((wxoLedger.assets || []).filter((item) => item.route === 'source-only').length !== 18) fail('wxO must retain eighteen source-only historical derivatives.');
 if ((policy.protectedPages || []).some((entry) => entry.source === 'wxo-canvas.html')) fail('Public wxO must be removed from the protected export policy.');
-if (!(policy.protectedPages || []).some((entry) => entry.source === 'document-processing.html')) fail('Document Processing must remain in the protected export policy.');
+if ((policy.protectedPages || []).some((entry) => entry.source === 'document-processing.html')) fail('Public Document Processing must not remain in the protected export policy.');
 
-const currentDocImages = [...new Set([...doc.matchAll(/<img\b[^>]*src="(protected\/wxo\/assets\/document-processing\/current\/[^"]+)"/g)].map((match) => match[1]))];
-const expectedDocImages = (docLedger.assets || []).map((item) => item.file).sort();
-if (currentDocImages.length !== 8 || JSON.stringify(currentDocImages.slice().sort()) !== JSON.stringify(expectedDocImages)) {
-  fail(`Document Processing must render exactly the eight declared owner-export screens, found ${currentDocImages.length}`);
+const expectedDocImages = [
+  'classify-setup.png', 'extract-field.png', 'review-table.png', 'review-verified.png',
+  'evaluate-test-set.png', 'evaluate-rerun.png', 'evaluate-results.png', 'evaluate-indicators.png',
+].map((file) => `images/document-processing/public/${file}`).sort();
+const currentDocImages = [...new Set([...doc.matchAll(/<img\b[^>]*src="(images\/document-processing\/public\/[^"]+)"/g)].map((match) => match[1]))];
+if (JSON.stringify(currentDocImages.slice().sort()) !== JSON.stringify(expectedDocImages)) {
+  fail(`Document Processing must render exactly the eight approved public owner-export screens, found ${currentDocImages.length}`);
+}
+if (JSON.stringify((docLedger.assets || []).map((item) => item.file).sort()) !== JSON.stringify(expectedDocImages)) {
+  fail('Document Processing provenance must allowlist exactly the eight approved public owner exports.');
 }
 for (const item of docLedger.assets || []) {
   if (item.route !== 'document-processing.html' || item.sourceSha256 !== item.outputSha256 ||
       !item.operations?.includes('None; repository asset is byte-identical to the owner export') ||
       !fs.existsSync(path.join(root, item.file)) || item.outputSha256 !== sha256(item.file)) {
-    fail(`Document Processing provenance must bind a byte-identical protected owner export: ${item.file}`);
+    fail(`Document Processing provenance must bind a byte-identical public owner export: ${item.file}`);
   }
 }
 const classify = (docLedger.assets || []).find((item) => item.file.endsWith('/classify-setup.png'));
@@ -83,4 +92,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`MANUAL REVIEW FOLLOW-UPS: PASS publicAssets=${publicAssets.length} docScreens=${currentDocImages.length} protectedRoutes=1`);
+console.log(`MANUAL REVIEW FOLLOW-UPS: PASS publicAssets=${publicAssets.length} docScreens=${currentDocImages.length} publicDocumentRoutes=2 guardedNamespaces=1`);

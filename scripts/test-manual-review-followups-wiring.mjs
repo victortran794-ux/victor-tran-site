@@ -30,6 +30,13 @@ if (workflowWiringAt < 0 || workflowCheckAt < 0 || workflowWiringAt > workflowCh
 const reviewCondition = "needs.changes.outputs.home == 'true' || needs.changes.outputs.about == 'true' || needs.changes.outputs.ibm == 'true' || needs.changes.outputs.pikapp == 'true' || needs.changes.outputs.gallery == 'true' || needs.changes.outputs.pci == 'true' || needs.changes.outputs.wxo == 'true'";
 if (!workflow.includes(reviewCondition)) fail('manual-review CI step must retain all changed-route scopes');
 
+const wxoCandidateCommand = 'node scripts/check-wxo-public-candidate.mjs';
+for (const [label, source] of [['preflight', preflight], ['CI', workflow]]) {
+  if (!source.includes(wxoCandidateCommand) || source.indexOf(wxoCandidateCommand) > source.indexOf('node scripts/check-wxo-route-split.mjs')) {
+    fail(`${label} must run the wxO public-candidate contract before route-split verification`);
+  }
+}
+
 if (failures.length) {
   console.error('MANUAL REVIEW WIRING: FAIL');
   for (const failure of failures) console.error(`- ${failure}`);

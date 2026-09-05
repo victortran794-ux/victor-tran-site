@@ -19,23 +19,6 @@
         { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
       ]
     },
-
-    {
-      "source": "/document-processing",
-      "headers": [
-        { "key": "Cache-Control", "value": "private, no-store, max-age=0" },
-        { "key": "CDN-Cache-Control", "value": "no-store" },
-        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
-      ]
-    },
-    {
-      "source": "/document-processing.html",
-      "headers": [
-        { "key": "Cache-Control", "value": "private, no-store, max-age=0" },
-        { "key": "CDN-Cache-Control", "value": "no-store" },
-        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
-      ]
-    },
     {
       "source": "/protected/wxo/:path*",
       "headers": [
@@ -46,7 +29,6 @@
     }
   ],
   "redirects": [
-
     {
       "source": "/pikappapp/demo",
       "destination": "/pikappapp#chapter-4",

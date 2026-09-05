@@ -45,9 +45,8 @@ for (const [name, jobId] of [['desktop', 'lighthouse'], ['mobile', 'lighthouse-m
     continue;
   }
   requireText(block, 'temporaryPublicStorage: false', `${name} Lighthouse must disable temporary public storage`);
-  for (const route of ['wxo-canvas', 'document-processing']) {
-    forbid(block, new RegExp(`\\$\\{\\{ steps\\.url\\.outputs\\.base \\}\\}/${route}(?:\\s|$)`), `${name} Lighthouse must not audit protected /${route}`);
-  }
+  // Public visibility does not require adding every route to both sampled audits.
+  forbid(block, /\/protected\/wxo\//, `${name} Lighthouse must not audit guarded historical resources`);
 }
 
 for (const phrase of [
@@ -112,11 +111,13 @@ requireText(scopeFixture, 'docsOnly', 'scope fixture must protect documentation-
 requireText(scopeFixture, 'unknown public HTML must fail safely to shared coverage', 'scope fixture must protect unknown deployable fallback');
 requireText(scopeFixture, 'must fail safely to full coverage', 'scope fixture must protect unknown tooling and configuration fallback');
 
-const protectedPages = ['document-processing.html'];
-for (const page of protectedPages) {
-  const html = read(page);
-  requireText(html, '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">', `${page} must use the full protected robots policy`);
-  requireText(html, '<meta name="referrer" content="no-referrer">', `${page} must set no-referrer metadata`);
+const documentProcessing = read('document-processing.html');
+requireText(documentProcessing, '<meta name="robots" content="index,follow">', 'document-processing.html must use the public index,follow robots policy');
+forbid(documentProcessing, /noindex,nofollow,noarchive,nosnippet,noimageindex|site-route-status|wxo-access\.html|protected\/wxo\//i,
+  'document-processing.html must not retain protected-route metadata, status, gate references, or guarded media paths');
+const documentProject = JSON.parse(read('data/projects.json')).projects.find((project) => project.slug === 'document-processing');
+if (!documentProject || documentProject.protected || documentProject.noindex || !documentProject.sitemap || documentProject.nav || documentProject.homepage) {
+  fail('Document Processing must be public and sitemap-visible while retaining nav=false and homepage=false');
 }
 const publicWxo = read('wxo-canvas.html');
 requireText(publicWxo, '<meta name="robots" content="index,follow">', 'wxo-canvas.html must use the public index,follow robots policy');
@@ -129,8 +130,7 @@ requireText(preflight, 'check:final-site-reconciliation', 'preflight must run th
 requireText(preflight, 'test:health-check-scope', 'preflight must run the scope fixture');
 
 for (const [name, text] of Object.entries(docs)) {
-  requirePhrase(text, 'current request boundary denies unauthenticated protected HTML and media delivery', `${name} must state the current protected-delivery boundary`);
-  requirePhrase(text, 'Preserve the server-side access checks', `${name} must preserve server-side access checks`);
+  requirePhrase(text, 'Document Processing is public', `${name} must state that Document Processing is public`);
   requirePhrase(text, 'do not add material outside the approved protection and provenance boundaries', `${name} must preserve approved protection and provenance boundaries`);
 }
 
@@ -139,7 +139,7 @@ for (const [name, text] of Object.entries({ system: docs.system, workflows: docs
 }
 for (const [name, text] of Object.entries({ system: docs.system, workflows: docs.workflows, dashboard: docs.dashboard })) {
   requirePhrase(text, 'manifest nav=false/homepage=false', `${name} must document Document Processing manifest visibility`);
-  requirePhrase(text, '`/document-processing` is a protected direct route', `${name} must document the protected direct Document Processing route`);
+  requirePhrase(text, '`/document-processing` is a public direct route', `${name} must document the public direct Document Processing route`);
   requirePhrase(text, 'linked from wxO as its feature deep dive', `${name} must document the wxO parent relationship`);
 }
 
@@ -160,8 +160,8 @@ for (const phrase of [
   'route-specific Theme Continuity content remains scoped to Home, IBM Cloud, and About',
   'The optional PCI orientation proof was evaluated and discarded',
   'final whole-site reconciliation is closed',
-  'wxO remains password-gated, `noindex`, and omitted from the sitemap',
-  'Document Processing remains a protected chapter inside wxO',
+  'wxO is public, indexable, and included in the sitemap',
+  'Document Processing is a public chapter inside wxO',
   'Getting In is retired from the public portfolio',
   'Pi Kapp and Heart of the Frozen Void are public and closed',
   'production-verified through PR #168',

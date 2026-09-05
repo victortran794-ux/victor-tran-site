@@ -17,6 +17,7 @@ const jsPath = 'js/wxo-public-candidate.js';
 const provenancePath = 'data/wxo-canvas-public-provenance.json';
 const publicDirectory = 'images/wxo-canvas/public';
 const publicAssets = [
+  'closing-illustration-light.png', 'closing-illustration-dark.png',
   'current-workflow-light.png', 'current-workflow-dark.png',
   'v2-workflow-light.png', 'v2-workflow-dark.png',
   'v2-agent-flow-light.png', 'v2-agent-flow-dark.png',
@@ -60,7 +61,12 @@ if (JSON.stringify(publicEntries.map(entry => entry.file).sort()) !== JSON.strin
 }
 for (const entry of publicEntries) {
   const file = publicAsset(entry.file);
-  if (!entry.source?.startsWith('owner-handoff/')) fail(`WXO provenance must retain an owner-handoff source for ${entry.file}.`);
+  const closingSources = {
+    'closing-illustration-light.png': ['images/wxo-canvas/wxo-home-thumbnail.png', '690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee'],
+    'closing-illustration-dark.png': ['images/wxo-canvas/wxo-home-thumbnail-dark.png', 'e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac'],
+  };
+  const closing = closingSources[entry.file];
+  if (closing ? entry.source !== closing[0] || entry.sha256 !== closing[1] || entry.sourceSha256 !== closing[1] : !entry.source?.startsWith('owner-handoff/')) fail(`WXO provenance must retain its exact approved source for ${entry.file}.`);
   if (!entry.sourceFilename) fail(`WXO provenance must retain a source filename for ${entry.file}.`);
   if (!/^[a-f0-9]{64}$/i.test(entry.sha256 || '') || !/^[a-f0-9]{64}$/i.test(entry.sourceSha256 || '')) {
     fail(`WXO provenance must retain SHA-256 provenance for ${entry.file}.`);
@@ -85,7 +91,7 @@ const expectedPairs = [
   ['flow-control-containers', '18-flow-control-containers-light.png', '18-flow-control-containers-dark.png'],
   ['application-example', '19-application-example-light.png', '19-application-example-dark.png'],
   ['workflow-anchors', '21-workflow-anchors-light.png', '21-workflow-anchors-dark.png'],
-  ['close-workflow', 'current-workflow-light.png', 'current-workflow-dark.png'],
+  ['closing-illustration', 'closing-illustration-light.png', 'closing-illustration-dark.png'],
 ];
 for (const [name, lightFile, darkFile] of expectedPairs) {
   const tag = main.match(new RegExp(`<img\\b[^>]*data-wxo-theme-image=["']${name}["'][^>]*>`, 'i'))?.[0] ?? '';
@@ -95,7 +101,7 @@ for (const [name, lightFile, darkFile] of expectedPairs) {
 }
 if (count(main, /data-wxo-theme-image=/g) !== expectedPairs.length) fail(`wxO must expose exactly ${expectedPairs.length} theme-aware public images.`);
 if (/protected\/wxo|illustration-vignettes|wxo-home-thumbnail/i.test(main)) fail('Public wxO must not embed protected media, retired vignettes, or the Home thumbnail.');
-requireText(main, 'href="document-processing.html"', 'Public wxO must retain the text-only locked Document Processing link.');
+requireText(main, 'href="document-processing.html"', 'Public wxO must retain the text-only public Document Processing link.');
 if (/<(?:img|picture)\b[^>]*document-processing/i.test(main)) fail('Public wxO must not embed a protected Document Processing thumbnail.');
 requireText(main, 'id="canvas-evolution"', 'Canvas evolution must be an addressable semantic section.');
 requireText(main, 'Canvas evolution', 'Canvas evolution must retain its approved narrative marker.');

@@ -155,8 +155,8 @@ if (wxoProject) {
 const documentProject = bySlug.get('document-processing');
 requireCondition(documentProject?.homepage === false && documentProject?.nav === false,
   'Document Processing must be hidden from homepage and primary navigation.');
-requireCondition(documentProject?.protected === true && documentProject?.noindex === true && documentProject?.sitemap === false,
-  'Document Processing privacy flags must remain protected.');
+requireCondition(documentProject?.protected === false && documentProject?.noindex === false && documentProject?.sitemap === true,
+ 'Document Processing must be public and indexable without a competing Home card.');
 requireCondition((index.match(/class="[^"]*featured-item-shell[^"]*"/g) ?? []).length === 0,
   'Homepage must not retain the retired wxO overlay shell.');
 requireCondition((index.match(/<a href="wxo-canvas\.html" class="[^"]*featured-item--lead[^"]*"/g) ?? []).length === 1,

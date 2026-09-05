@@ -775,6 +775,44 @@
       "namespace": "public-route"
     },
     {
+      "file": "closing-illustration-light.png",
+      "namespace": "public-route",
+      "role": "Canvas closing illustration, Light theme",
+      "source": "images/wxo-canvas/wxo-home-thumbnail.png",
+      "sourceFilename": "wxo-home-thumbnail.png",
+      "ownerExportContext": "The existing public Home Light thumbnail is the historical 01-skill-studio main illustration; it is copied byte-for-byte into the wxO public route for the approved closing placement.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1024,
+        686
+      ],
+      "sourceSha256": "690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee",
+      "sha256": "690c128b97bb004151c496025857ceaa7d88a50fdd81aeae37125689d05502ee",
+      "treatment": "Existing authentic Light illustration copied byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
+      "file": "closing-illustration-dark.png",
+      "namespace": "public-route",
+      "role": "Canvas closing illustration, Dark theme",
+      "source": "images/wxo-canvas/wxo-home-thumbnail-dark.png",
+      "sourceFilename": "wxo-home-thumbnail-dark.png",
+      "ownerExportContext": "The existing public Home Dark thumbnail is the owner-supplied authentic Dark counterpart to the historical Light illustration; it is copied byte-for-byte into the wxO public route for the approved closing placement.",
+      "sourceRecordType": "owner-supplied-export-filename-and-sha256",
+      "dimensions": [
+        1079,
+        722
+      ],
+      "sourceSha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "sha256": "e546a2650d0b9a44f7595fc363d3555fb3943ddeca36a0ff56101400a92774ac",
+      "treatment": "Existing authentic Dark illustration copied byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
+      "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
+      "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
+      "route": "wxo-canvas.html"
+    },
+    {
       "file": "wxo-home-thumbnail-dark.png",
       "namespace": "public-images",
       "role": "Canvas opening illustration, Dark theme",

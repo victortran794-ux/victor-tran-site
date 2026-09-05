@@ -50,19 +50,19 @@
       "surface": "",
       "chapter": "01",
       "chapterTitle": "Systems at scale",
-      "description": "A protected platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
+      "description": "A platform story connecting classification, extraction, human review, and quality evaluation into one inspectable workflow.",
       "cta": "View Project",
       "images": [
         {
-          "src": "images/document-processing-evaluation-results-placeholder.png",
-          "width": 2400,
-          "height": 1428,
+          "src": "images/document-processing/public/evaluate-results.png",
+          "width": 1584,
+          "height": 1042,
           "alt": "Document Processing evaluation results dashboard"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "lead"
     },
     {

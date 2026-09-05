@@ -114,11 +114,9 @@ const policyEntries = policy.protectedPages || [];
 const activeProtected = new Set(
   policyEntries.filter((entry) => !entry.provisional).map((entry) => entry.source),
 );
-const expectedProtected = new Set([
-  'document-processing.html',
-]);
+const expectedProtected = new Set();
 if (JSON.stringify([...activeProtected].sort()) !== JSON.stringify([...expectedProtected].sort())) {
-  fail('active protected shell policy drifted from the approved Document Processing route');
+  fail('active protected shell policy must not retain the public Document Processing route');
 }
 
 const expectedConfig = {
@@ -262,6 +260,12 @@ for (const page of expectedPages) {
 const mainJs = fs.readFileSync(path.join(root, 'js', 'main.js'), 'utf8');
 for (const marker of ['ArrowDown', 'ArrowUp', "case 'Home'", "case 'End'"]) {
   if (!mainJs.includes(marker)) fail(`Work disclosure keyboard behavior missing marker: ${marker}`);
+}
+
+const documentProcessing = fs.readFileSync(path.join(root, 'document-processing.html'), 'utf8');
+if (!documentProcessing.includes('<meta name="robots" content="index,follow">') ||
+    /noindex,nofollow,noarchive,nosnippet,noimageindex|site-route-status|wxo-access\.html|protected\/wxo\//i.test(documentProcessing)) {
+  fail('document-processing.html must be an indexable public route without protected-route or guarded-media references');
 }
 
 if (failures.length) {

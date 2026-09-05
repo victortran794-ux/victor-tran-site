@@ -277,12 +277,12 @@ try {
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     main: document.querySelector('main#main-content')?.getAttribute('tabindex')
   })`);
-  assert(protectedState.cue === 'Private case studyAccess required' || protectedState.cue === 'Private case study Access required', 'protected route cue drifted');
-  assert(protectedState.robots?.startsWith('noindex,nofollow'), 'protected route lost noindex,nofollow');
+  assert(!protectedState.cue, 'public Document Processing must not retain the private route cue');
+  assert(protectedState.robots === 'index,follow', 'public Document Processing must be indexable');
   assert(!protectedState.gate, 'protected route loaded the retired client-side password-gate script');
   assert(protectedState.overflow === 0, `protected route has ${protectedState.overflow}px root overflow at 390px`);
   assert(protectedState.main === '-1', 'protected route main target lost tabindex=-1');
-  await cdp.screenshot('document-processing-390-locked.png');
+  await cdp.screenshot('document-processing-390-public.png');
 
   await cdp.call('Emulation.setDeviceMetricsOverride', {
     width: 1280, height: 720, deviceScaleFactor: 1, mobile: false,

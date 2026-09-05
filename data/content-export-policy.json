@@ -1,9 +1,4 @@
 {
   "version": 1,
-  "protectedPages": [
-    {
-      "source": "document-processing.html",
-      "slug": "document-processing"
-    }
-  ]
+  "protectedPages": []
 }

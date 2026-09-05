@@ -76,6 +76,7 @@ run_required "IBM Patterns approved page integration contract" npm run check:ibm
 run_required "Gallery motion system contract" npm run check:gallery-motion-system
 run_required "Server-side protected delivery contract" npm run check:protected-delivery
 run_required "wxO Canvas and Document Processing integration contract" npm run check:wxo-document-processing
+run_required "wxO public candidate contract" node scripts/check-wxo-public-candidate.mjs
 run_required "wxO and Document Processing route-split contract" node scripts/check-wxo-route-split.mjs
 run_required "wxO theme-sequence source contract" npm run test:wxo-theme-sequences
 run_required "Route 02 homepage integration contract" npm run check:route02-homepage

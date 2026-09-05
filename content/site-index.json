@@ -164,6 +164,53 @@
     "projects": []
   },
   {
+    "title": "Make the trust loop visible.",
+    "source": "document-processing.html",
+    "url": "/document-processing",
+    "category": "",
+    "description": "A product-design study of classification, extraction, human review, and evaluation in Watson Orchestrate Document Processing.",
+    "contentFile": "content/document-processing.md",
+    "headings": [
+      "The work started with the platform, not the dashboard.",
+      "Trust comes from a workflow people can inspect."
+    ],
+    "images": [
+      {
+        "src": "images/document-processing/public/classify-setup.png",
+        "alt": "Document classifier setup with two fictional sample classes"
+      },
+      {
+        "src": "images/document-processing/public/extract-field.png",
+        "alt": "Document extractor field editor using a fictional purchase order"
+      },
+      {
+        "src": "images/document-processing/public/review-table.png",
+        "alt": "Document review table with editable fictional extracted values"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-results.png",
+        "alt": "Evaluation screen with fictional field-level comparison"
+      },
+      {
+        "src": "images/document-processing/public/review-verified.png",
+        "alt": "Document review screen showing verified fictional output"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-test-set.png",
+        "alt": "Evaluation screen showing a fictional uploaded test set"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-rerun.png",
+        "alt": "Evaluation screen prompting a rerun after extractor changes"
+      },
+      {
+        "src": "images/document-processing/public/evaluate-indicators.png",
+        "alt": "Evaluation screen with extraction indicators on a fictional source document"
+      }
+    ],
+    "projects": []
+  },
+  {
     "title": "A shared visual language for agentic workflows.",
     "source": "wxo-canvas.html",
     "url": "/wxo-canvas",
