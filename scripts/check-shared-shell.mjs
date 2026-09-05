@@ -26,7 +26,7 @@ const projectNavigationSnapshot = {
   'wxo-canvas.html': ['pikappapp.html', 'ibmcloud.html'],
   'abilityexperience.html': ['pci.html', 'salmagazine.html'],
   'ibm-patterns.html': ['ibmcloud.html', 'pci.html'],
-  'ibmcloud.html': ['wxo-canvas.html?lock=1', 'ibm-patterns.html'],
+  'ibmcloud.html': ['wxo-canvas.html', 'ibm-patterns.html'],
   'pci.html': ['ibm-patterns.html', 'abilityexperience.html'],
   'pikappapp.html': ['salmagazine.html', 'artillustration.html'],
   'salmagazine.html': ['abilityexperience.html', 'pikappapp.html'],
@@ -116,10 +116,9 @@ const activeProtected = new Set(
 );
 const expectedProtected = new Set([
   'document-processing.html',
-  'wxo-canvas.html',
 ]);
 if (JSON.stringify([...activeProtected].sort()) !== JSON.stringify([...expectedProtected].sort())) {
-  fail('active protected shell policy drifted from the two approved routes');
+  fail('active protected shell policy drifted from the approved Document Processing route');
 }
 
 const expectedConfig = {

@@ -323,10 +323,12 @@ expect(art.includes('.art-opening-stack .is-large { grid-column: span 6; }') &&
 const diamondStack = art.match(/<div class="art-diamonds">([\s\S]*?)<\/div>/i)?.[1] ?? '';
 expect(Boolean(diamondStack), 'artillustration.html: preserve the Suit of Diamonds stack.');
 expect(!/<figcaption\b/i.test(diamondStack), 'artillustration.html: Diamond cards must not show individual labels.');
-expect(art.includes('width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);') && art.includes('margin: 0 auto;'),
-  'artillustration.html: Daysigns must retain intentional side padding rather than touching the viewport edges.');
-expect(art.includes('.art-restored-wall figure:first-child { grid-column: span 2; grid-row: span 2; }'),
-  'artillustration.html: Traditional work must lead with a larger first artwork.');
+expect(/\.art-daysigns-grid\s*\{[^}]*width:\s*100%;[^}]*margin:\s*0;/s.test(art),
+  'artillustration.html: Daysigns must align to the surrounding text and divider rail.');
+expect(art.includes('.art-restored-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }') &&
+  art.includes('.art-restored-wall figure:first-child { grid-column: span 6; grid-row: span 2; }') &&
+  art.includes('.art-restored-wall figure:not(:first-child) { grid-column: span 3; }'),
+  'artillustration.html: Traditional work must use one enlarged lead with a balanced two-by-two supporting matrix.');
 }
 
 const sharedMain = read('js/main.js');

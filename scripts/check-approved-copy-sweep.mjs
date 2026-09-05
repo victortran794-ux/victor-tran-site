@@ -156,7 +156,7 @@ const copy = {
   salNote: 'Five years of issues, art direction, and editorial design.',
   salProgression: 'The work grew from hands-on layout design into creative direction, while I kept designing each issue.',
   salContext: 'First published in fall 1909, Star & Lamp is Pi Kappa Phi’s official magazine. Across five years of issues, the publication developed a more flexible editorial system.',
-  piKappRemaster: 'The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.',
+  piKappRemaster: 'The later V2 direction keeps the original cyan field and member flow recognizable while tightening type, spacing, controls, contrast, and accessibility.',
   piKappBoundary: 'Illustrative concept screens.',
   artIntro: 'Digital and traditional work spanning character illustration, paintings, and personal series.',
   graphicIntro: 'Identity, print, presentation, illustration, and event work from side projects, explorations, and collaborations.',

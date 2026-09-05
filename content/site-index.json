@@ -164,6 +164,73 @@
     "projects": []
   },
   {
+    "title": "A shared visual language for agentic workflows.",
+    "source": "wxo-canvas.html",
+    "url": "/wxo-canvas",
+    "category": "",
+    "description": "A case study of a shared visual language for agentic workflows, human tasks, and document processing.",
+    "contentFile": "content/wxo-canvas.md",
+    "headings": [
+      "Make complex workflows easier to read.",
+      "A stable grammar, inspected in both themes.",
+      "User activities stay connected to the canvas.",
+      "Document Processing needed its own trust loop.",
+      "A visual system that kept expanding.",
+      "One system for automation, specialized work, and human judgment."
+    ],
+    "images": [
+      {
+        "src": "images/wxo-canvas/public/current-workflow-light.png",
+        "alt": "Historical workflow canvas with connected tasks, controls, and a node palette"
+      },
+      {
+        "src": "images/wxo-canvas/public/15-node-key-states-light.png",
+        "alt": "Node key states in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/16-node-size-variants-light.png",
+        "alt": "Node size variants in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-workflow-light.png",
+        "alt": "Workflow canvas with a newly added User Activity"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-configuration-light.png",
+        "alt": "User Activity configuration options within a workflow"
+      },
+      {
+        "src": "images/wxo-canvas/public/form-summary-light.png",
+        "alt": "Completed User Activity connected back to the workflow"
+      },
+      {
+        "src": "images/wxo-canvas/public/current-workflow-light.png",
+        "alt": "Current agentic workflow builder"
+      },
+      {
+        "src": "images/wxo-canvas/public/v2-workflow-light.png",
+        "alt": "V2 agentic workflow builder"
+      },
+      {
+        "src": "images/wxo-canvas/public/v2-agent-flow-light.png",
+        "alt": "V2 agent hierarchy and flow"
+      },
+      {
+        "src": "images/wxo-canvas/public/17-flow-control-elements-light.png",
+        "alt": "Flow-control elements in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/18-flow-control-containers-light.png",
+        "alt": "Flow-control containers in the selected theme"
+      },
+      {
+        "src": "images/wxo-canvas/public/19-application-example-light.png",
+        "alt": "Workflow application example in the selected theme"
+      }
+    ],
+    "projects": []
+  },
+  {
     "title": "IBM Cloud",
     "source": "ibmcloud.html",
     "url": "/ibmcloud",
@@ -263,10 +330,6 @@
         "alt": "Mid-fidelity Contact IBM exploration showing a grid of support destinations and direct contact routes"
       },
       {
-        "src": "images/ibm-patterns-case-study/midfi-human-fallback.png",
-        "alt": "Mid-fidelity Contact IBM exploration with an expanded in-page human contact form"
-      },
-      {
         "src": "images/ibm-patterns-case-study/hero-study-collaboration.webp",
         "alt": "XD prototype hero showing two people working together at a laptop beside the words Contact IBM, We're here to help"
       },
@@ -303,10 +366,11 @@
     "headings": [
       "Every year looked a little different. The same stuff still had to get done.",
       "There was already a system. It was just spread everywhere.",
-      "V1 established the structure. V2 clarified the loop.",
-      "The final remaster brings the app back to its source.",
+      "The first app established the member flow.",
+      "V2 carries the original app forward.",
       "A formative project that changed how I approached product design.",
-      "Expansion Portfolio"
+      "Expansion Portfolio",
+      "Keep looking through the galleries."
     ],
     "images": [
       {
@@ -326,40 +390,28 @@
         "alt": "Label-free crop of the original Pi Kapp App sitemap"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-login.png",
-        "alt": "Clean owner export of the original Pi Kapp App login concept"
+        "src": "images/pikapp-case-study/v1-original-loading.png",
+        "alt": "Original 2020 Pi Kapp App loading screen export"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-loading.png",
-        "alt": "Clean owner export of the original Pi Kapp App loading state"
+        "src": "images/pikapp-case-study/v1-original-welcome.png",
+        "alt": "Original 2020 Pi Kapp App welcome screen export"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-member-dashboard.png",
-        "alt": "Clean owner export of the original Pi Kapp App member dashboard"
+        "src": "images/pikapp-case-study/v1-original-member.png",
+        "alt": "Original 2020 Pi Kapp App member dashboard export"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-task-expand.png",
-        "alt": "Clean owner export of the original Pi Kapp App expanded milestone state"
+        "src": "images/pikapp-case-study/v1-original-task-expand.png",
+        "alt": "Original 2020 Pi Kapp App expanded task export"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-milestones.png",
-        "alt": "Clean owner export of the original Pi Kapp App milestones view"
+        "src": "images/pikapp-case-study/v1-original-milestones.png",
+        "alt": "Original 2020 Pi Kapp App milestones export"
       },
       {
-        "src": "images/pikapp-case-study/v1-clean-chapter.png",
-        "alt": "Clean owner export of the original Pi Kapp App chapter view"
-      },
-      {
-        "src": "images/pikapp-case-study/v2-today-light-clean.png",
-        "alt": "Earlier V2 Today screen showing what needs attention"
-      },
-      {
-        "src": "images/pikapp-case-study/v2-responsibility-detail-dark-clean.png",
-        "alt": "Earlier V2 responsibility detail screen showing what to do next"
-      },
-      {
-        "src": "images/pikapp-case-study/v2-all-caught-up-light-clean.png",
-        "alt": "Earlier V2 completion screen stating that nothing needs attention"
+        "src": "images/pikapp-case-study/v1-original-chapter.png",
+        "alt": "Original 2020 Pi Kapp App chapter view export"
       },
       {
         "src": "images/pikapp-case-study/v2-final-loading.png",
@@ -368,6 +420,18 @@
       {
         "src": "images/pikapp-case-study/v2-final-login.png",
         "alt": "Owner-exported final Pi Kapp App login screen"
+      },
+      {
+        "src": "images/pikapp-case-study/v2-final-member-dashboard.png",
+        "alt": "Owner-exported final Pi Kapp App member dashboard"
+      },
+      {
+        "src": "images/pikapp-case-study/v2-final-responsibility-detail-dark.png",
+        "alt": "Owner-exported final Pi Kapp App responsibility detail screen in Dark mode"
+      },
+      {
+        "src": "images/pikapp-case-study/v2-final-task-expand.png",
+        "alt": "Owner-exported final Pi Kapp App expanded task screen"
       }
     ],
     "projects": []

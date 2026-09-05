@@ -26,14 +26,14 @@ const need = (condition, message) => { if (!condition) failures.push(message); }
 const has = (source, token, message = token) => need(source.includes(token), message);
 const lacks = (source, token, message = token) => need(!source.includes(token), message);
 
-// Home: varied gallery color, legible DNA, elastic work arrival, and two-link wxO card.
+// Home: varied gallery color, legible DNA, elastic arrival, and one public wxO link.
 const bySlug = new Map(projects.projects.map((project) => [project.slug, project]));
 need(bySlug.get('artillustration')?.surface === 'orange', 'Art gallery card must keep orange surface.');
 need(bySlug.get('graphicgallery')?.surface === 'purple', 'Graphic gallery card must keep purple surface.');
 need(bySlug.get('uigallery')?.surface === 'teal', 'Interface Studies gallery card must use teal surface.');
-need(bySlug.get('wxo-canvas')?.homepageRelated?.url === 'document-processing.html?lock=1', 'wxO manifest must expose protected Case Study 2 link.');
-has(generator, 'homepageRelated', 'Homepage generator must own optional related case-study links.');
-has(html.home, 'class="featured-item-related" href="document-processing.html?lock=1"', 'Generated wxO card must expose Case Study 2.');
+need(bySlug.get('wxo-canvas')?.homepageBonus === 'There’s a bonus one here', 'wxO manifest must own the non-link bonus note.');
+has(generator, 'homepageBonus', 'Homepage generator must own optional bonus notes.');
+has(html.home, 'class="featured-item-bonus"', 'Generated wxO card must expose the non-link bonus note.');
 has(main, 'initWorkArrival', 'Home runtime must own a bounded work-arrival interaction.');
 has(css.shared, '@keyframes work-arrival-bounce', 'Home work target must have a spring arrival keyframe.');
 has(css.shared, '.featured.is-work-arriving', 'Home work section must expose the arrival state.');
@@ -50,12 +50,13 @@ for (const file of [
   '17-flow-control-elements-dark.png',
   '18-flow-control-containers-dark.png',
   '19-application-example-dark.png',
-  '20-illustration-vignettes-dark.png',
   '21-workflow-anchors-dark.png',
 ]) {
   has(html.wxo, file, `wxO must render ${file}.`);
 }
-has(html.wxo, 'wxo-home-thumbnail-dark.png', 'wxO main illustration must expose the supplied dark-theme counterpart.');
+lacks(html.wxo, 'pilot-main-illustration', 'wxO must not repeat the Home illustration.');
+lacks(html.wxo, 'pilot-vignettes', 'wxO must retire illustrative vignettes.');
+has(html.home, 'wxo-home-thumbnail-dark.png', 'Home must retain the authored Dark thumbnail.');
 has(html.wxo, 'pilot-exploration-grid pilot-exploration-grid--node', 'wxO node library must use the paired exploration-panel grid.');
 has(html.wxo, '15-node-key-states-light.png', 'wxO node library must retain the owner-supplied Light exploration.');
 has(html.wxo, '15-node-key-states-dark.png', 'wxO node library must pair the owner-supplied Dark exploration.');
@@ -82,8 +83,9 @@ lacks(html.pikapp, 'id="chapter-5"', 'Pi Kapp must not retain a fifth chapter.')
 lacks(html.pikapp, 'Mark &amp; pattern', 'Pi Kapp must remove the Mark & pattern section.');
 lacks(html.pikapp, 'identity-board__card--pattern', 'Pi Kapp must remove the Mark & pattern card.');
 has(html.pikapp, 'id="chapter-4" data-chapter aria-labelledby="coda-title"', 'Final remaster must become chapter 04.');
-need(html.pikapp.indexOf('identity-board') > html.pikapp.indexOf('id="chapter-4"'), 'Useful identity foundations must move inside the final remaster chapter.');
-need(/\.pikapp-page \.coda__triptych\s*\{[^}]*grid-template-columns:\s*repeat\(4,/is.test(css.pikapp), 'Final remaster desktop must use a four-up row.');
+lacks(html.pikapp, 'identity-board', 'Retired identity board must not return.');
+has(html.pikapp, 'class="v2-change-ledger"', 'V2 must retain concise alterations beside its screens.');
+need(/\.pikapp-page \.coda__triptych\s*\{[^}]*grid-template-columns:\s*repeat\(3,/is.test(css.pikapp), 'Final remaster desktop must use two three-up rows.');
 need(/\.pikapp-page \.coda__frame\s*\{[^}]*overflow:\s*visible[^}]*border-radius:\s*0/is.test(css.pikapp), 'Final remaster must remove the extra rounded crop shell.');
 need(/\.pikapp-page \.coda__image\s*\{[^}]*object-fit:\s*contain[^}]*border-radius:\s*0/is.test(css.pikapp), 'Final remaster screens must remain complete and uncropped.');
 
@@ -94,12 +96,12 @@ has(css.shared, '.lens-switcher-btn:hover', 'Header theme controls must retain a
 has(html.about, 'class="about-bio-lead"', 'About opening paragraph must have a distinct intermediate lead role.');
 need(/\.about-bio-lead\s*\{[^}]*font-size:\s*clamp\(1\.35rem,/is.test(css.shared), 'About opening must use an intermediate header scale.');
 has(css.shared, '--shape-cue-size:', 'Shared shell must define one outline-shape cue token.');
-has(css.shared, '.shape-cue', 'Shared outline-shape cue family must exist.');
-need(/\.shape-cue[^}]*border:[^}]*transform:\s*rotate\(45deg\)/is.test(css.shared), 'Shared cue must be an outlined diamond.');
-need(/:is\(:hover,\s*:focus-visible\)[^{]*\.shape-cue/is.test(css.shared), 'Shared cue must fill on hover/focus.');
-
-need(/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-item-shell\s*\{\s*grid-column:\s*1\s*\/\s*-1;/i.test(css.shared), 'Home related-case-study shell must collapse to the single mobile grid track.');
-need(/\.featured-item-shell\s*\{[^}]*min-width:\s*0;[^}]*width:\s*100%;/is.test(css.shared), 'Home related-case-study shell must not expand its mobile grid track from intrinsic media width.');
+lacks(html.home, 'shape-cue', 'Home must not restore the rejected diamond.');
+lacks(generator, 'shape-cue', 'Home generator must not regenerate the rejected diamond.');
+lacks(html.home, 'featured-item-shell', 'Home must not restore the competing related-link shell.');
+lacks(html.home, 'featured-item-related', 'Home must retain one wxO action, not a second Document Processing link.');
+has(html.home, 'featured-practice', 'Current practice must remain integrated into the wxO card.');
+has(html.home, '<em>There’s a bonus one here</em>', 'The bonus note must remain subdued supporting copy.');
 need(/@media\s*\(max-width:\s*720px\)[\s\S]*?\.featured-list,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\);/i.test(css.shared), 'Home mobile project grid must use a zero-minimum single track.');
 
 // Interface Studies: Ekos desktop/mobile share one contained pair.

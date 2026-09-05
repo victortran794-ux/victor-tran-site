@@ -5,7 +5,6 @@
       "slug": "wxo-canvas",
       "title": "IBM watsonx Orchestrate",
       "url": "wxo-canvas.html",
-      "entryUrl": "wxo-canvas.html?lock=1",
       "category": "Product Systems",
       "labelClass": "label-default",
       "type": "primary",
@@ -26,16 +25,17 @@
           "alt": "Abstract illustration of an agentic workflow canvas connecting a person, interface elements, and workflow controls"
         }
       ],
-      "protected": true,
-      "noindex": true,
-      "sitemap": false,
+      "protected": false,
+      "noindex": false,
+      "sitemap": true,
       "homepageVariant": "lead",
       "homepageOverlay": true,
-      "homepageLock": true,
-      "homepageRelated": {
-        "url": "document-processing.html?lock=1",
-        "label": "Document Processing"
-      }
+      "homepagePractice": {
+        "role": "Visual Designer",
+        "focus": "Enterprise AI · Product systems · Visual craft",
+        "location": "Austin, Texas"
+      },
+      "homepageBonus": "There’s a bonus one here"
     },
     {
       "slug": "document-processing",

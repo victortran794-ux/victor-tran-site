@@ -1,13 +1,13 @@
 {
-  "status": "protected-preview-candidate",
-  "publicationApproved": false,
+  "status": "public-route-authorized-candidate",
+  "publicationApproved": true,
   "commitApproved": true,
   "branchPushApproved": true,
   "protectedPreviewApproved": true,
   "sourceFigmaFile": "PKr7T6508DtrWg9FhTTc75",
   "sourcePage": "0:1",
   "reviewRequestedByVictor": "2026-09-03",
-  "approvalScope": "Branch commit, branch push, and protected Preview are approved for PR #184 review. Public publication, merge, and production release remain separate approval gates.",
+  "approvalScope": "Victor explicitly authorized making the wxO route public in this batch on 2026-09-04. The public-ready source and media namespace may be committed and reviewed on PR #184; merge and production release remain separate approval gates.",
   "sourceVerification": {
     "method": "Owner-supplied external exports matched by exact filename and SHA-256 during local intake; repository derivatives preserve those bytes exactly.",
     "verifiedOn": "2026-09-04",
@@ -107,7 +107,8 @@
       "sha256": "3e63b436201982327bc246ecc8f386b53ecd6410e545ab55a0a20141b34820b9",
       "treatment": "Pixel content preserved exactly; PNG metadata stripped in the local derivative.",
       "contentDisposition": "Victor confirmed all visible UI content is fictional placeholder content and approved the export as supplied on 2026-08-28.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved owner export retained for provenance and rollback after Victor requested removal from the active wxO presentation on 2026-09-04."
     },
     {
       "file": "09-document-classify.png",
@@ -287,7 +288,7 @@
     },
     {
       "file": "current-workflow-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Current builder, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/v1 agentic workflow@2x.png",
       "sourceFilename": "v1 agentic workflow@2x.png",
@@ -306,7 +307,7 @@
     },
     {
       "file": "current-workflow-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Current builder, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/v1 agentic workflowDark@2x.png",
       "sourceFilename": "v1 agentic workflowDark@2x.png",
@@ -325,7 +326,7 @@
     },
     {
       "file": "v2-workflow-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "V2 workflow evolution, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/v2 agentic workflow@2x.png",
       "sourceFilename": "v2 agentic workflow@2x.png",
@@ -340,12 +341,11 @@
       "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "source-only",
-      "retainedReason": "Preserved guarded theme-sequence derivative retained for provenance and deterministic asset-integrity verification; it is intentionally not rendered in the revised narrative."
+      "route": "wxo-canvas.html"
     },
     {
       "file": "v2-workflow-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "V2 workflow evolution, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/v2 agentic workflowDark@2x.png",
       "sourceFilename": "v2 agentic workflowDark@2x.png",
@@ -360,12 +360,11 @@
       "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "source-only",
-      "retainedReason": "Preserved guarded theme-sequence derivative retained for provenance and deterministic asset-integrity verification; it is intentionally not rendered in the revised narrative."
+      "route": "wxo-canvas.html"
     },
     {
       "file": "v2-agent-flow-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "V2 agent hierarchy, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/v2 agent flow@2x.png",
       "sourceFilename": "v2 agent flow@2x.png",
@@ -380,12 +379,11 @@
       "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "source-only",
-      "retainedReason": "Preserved guarded theme-sequence derivative retained for provenance and deterministic asset-integrity verification; it is intentionally not rendered in the revised narrative."
+      "route": "wxo-canvas.html"
     },
     {
       "file": "v2-agent-flow-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "V2 agent hierarchy, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/v2 agent flowDark@2x.png",
       "sourceFilename": "v2 agent flowDark@2x.png",
@@ -400,12 +398,11 @@
       "treatment": "Owner export preserved byte-for-byte as the protected theme-sequence derivative; no crop, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "source-only",
-      "retainedReason": "Preserved guarded theme-sequence derivative retained for provenance and deterministic asset-integrity verification; it is intentionally not rendered in the revised narrative."
+      "route": "wxo-canvas.html"
     },
     {
       "file": "form-workflow-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Place, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/1 — Workflow Canvas@2x-1.png",
       "sourceFilename": "1 — Workflow Canvas@2x-1.png",
@@ -424,7 +421,7 @@
     },
     {
       "file": "form-workflow-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Place, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/1 — Workflow Canvas@2x.png",
       "sourceFilename": "1 — Workflow Canvas@2x.png",
@@ -443,7 +440,7 @@
     },
     {
       "file": "form-configuration-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Configure, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/2 — Form Configuration@2x-1.png",
       "sourceFilename": "2 — Form Configuration@2x-1.png",
@@ -462,7 +459,7 @@
     },
     {
       "file": "form-configuration-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Configure, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/2 — Form Configuration@2x.png",
       "sourceFilename": "2 — Form Configuration@2x.png",
@@ -481,7 +478,7 @@
     },
     {
       "file": "form-summary-light.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Resolve, Light theme",
       "source": "owner-handoff/wxo-theme-sequences/3 — Form Summary@2x-1.png",
       "sourceFilename": "3 — Form Summary@2x-1.png",
@@ -500,7 +497,7 @@
     },
     {
       "file": "form-summary-dark.png",
-      "namespace": "theme-sequences",
+      "namespace": "public-route",
       "role": "Form sequence: Resolve, Dark theme",
       "source": "owner-handoff/wxo-theme-sequences/3 — Form Summary@2x.png",
       "sourceFilename": "3 — Form Summary@2x.png",
@@ -534,7 +531,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "15-node-key-states-dark.png",
@@ -553,7 +551,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "16-node-size-variants-light.png",
@@ -572,7 +571,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "16-node-size-variants-dark.png",
@@ -591,7 +591,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "17-flow-control-elements-light.png",
@@ -610,7 +611,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "17-flow-control-elements-dark.png",
@@ -629,7 +631,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "18-flow-control-containers-light.png",
@@ -648,7 +651,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "18-flow-control-containers-dark.png",
@@ -667,7 +671,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "19-application-example-light.png",
@@ -686,7 +691,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "19-application-example-dark.png",
@@ -705,7 +711,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "20-illustration-vignettes-dark.png",
@@ -724,7 +731,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "source-only",
+      "retainedReason": "Preserved owner export retained for provenance and rollback after Victor requested removal from the active wxO presentation on 2026-09-04."
     },
     {
       "file": "21-workflow-anchors-light.png",
@@ -743,7 +751,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "21-workflow-anchors-dark.png",
@@ -762,7 +771,8 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "wxo-canvas.html",
+      "namespace": "public-route"
     },
     {
       "file": "wxo-home-thumbnail-dark.png",
@@ -782,12 +792,12 @@
       "treatment": "Owner-supplied 1x PNG export preserved byte-for-byte; no crop, recolor, reconstruction, or metadata rewrite.",
       "prototypeDataClassification": "fictional prototype data; authored visual-system design example, not implementation, shipment, runtime, performance, adoption, or measured-outcome evidence.",
       "contentDisposition": "Victor confirmed visible interface names, values, records, metrics, statuses, and model labels are fictional prototype content for this protected design example.",
-      "route": "wxo-canvas.html"
+      "route": "index.html"
     }
   ],
   "canonicalIntegrationStatus": "local-review-complete",
   "canonicalIntegrationCompletedOn": "2026-09-04",
-  "deliveryStatus": "protected-preview-candidate",
+  "deliveryStatus": "public-route-authorized-candidate",
   "guardedNamespace": "protected/wxo/assets/public-candidate/",
   "futurePublicNamespace": "images/wxo-canvas/public/",
   "productionApproved": false

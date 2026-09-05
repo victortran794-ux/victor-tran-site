@@ -26,10 +26,11 @@ A mobile application concept for undergraduate fraternity members to track miles
 
 - Every year looked a little different. The same stuff still had to get done.
 - There was already a system. It was just spread everywhere.
-- V1 established the structure. V2 clarified the loop.
-- The final remaster brings the app back to its source.
+- The first app established the member flow.
+- V2 carries the original app forward.
 - A formative project that changed how I approached product design.
 - Expansion Portfolio
+- Keep looking through the galleries.
 
 ## Body Copy
 
@@ -63,59 +64,25 @@ The member view held personal progress and chapter updates. The other tabs kept 
 
 About the integrations: I planned around tools Pi Kapp already used, including iMIS and OmegaFi. I did not build or test those connections.
 
-The later V2 explored how attention, responsibility detail, and completion could work before the final remaster.
+These original V1 exports preserve the first member flow as it was presented in 2020.
 
-Earlier concept sequence
+Original concept sequence
 
-The sequence shows how the original identity, member dashboard, and milestone detail were explored before the current remaster.
-
-Earlier static V2 states
-
-Three states preserve the earlier direction: orientation, responsibility detail, and a clear ending state.
-
-Illustrative concept screens.
+The launch state introduced the star-and-swords mark on the original cyan field.
 
 Chapter 04
 
-The final direction returns to the original cyan field, Star Shield, hex texture, and member flow, then rebuilds the interface for current screens. It keeps the authored identity recognizable while tightening type, spacing, controls, contrast, and accessibility.
+The later V2 direction keeps the original cyan field and member flow recognizable while tightening type, spacing, controls, contrast, and accessibility.
 
-The final remaster draws from the original app files and archived Pi Kappa Phi identity. This chapter shows the pieces used across the final concept sequence.
+Four focused alterations connect the source to the final concept screens.
 
-Pi Kapp App
+Tighter type and spacing make responsibilities easier to scan.
 
-Brand foundation and interface layers
+Member, chapter, national, and settings destinations remain visible and consistent.
 
-Brand blue: Identity and recognition
+Status, source, and next actions are separated more clearly.
 
-Brand gold: Actions and progress
-
-App cyan: Entry and member view
-
-App navy: Structure and detail
-
-White: Fields and reading
-
-Brand, interface, and status roles
-
-Web-safe brand voice
-
-Interface hierarchy
-
-Short labels keep the next action clear. Supporting text explains only what the member needs in that moment.
-
-Only the pieces used by the final remaster
-
-Form controls
-
-Member progress card
-
-Bulletin row
-
-Illustrative information appears here with a clear source and next step.
-
-Milestone states
-
-Bottom navigation
+The original cyan field and identity cues still anchor the experience.
 
 Illustrative concept screens. Names, dates, rankings, and activity are fictional.
 
@@ -131,28 +98,27 @@ Views
 
 Cover view selected.
 
+More visual work
+
+Art, graphic design, and interface studies continue as one connected set.
+
 ## Images
 
 - Illuminated bell tower against a dark blue night sky: images/pikapp-case-study/belltower-expansion.jpg
 - Cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-preview.jpg
 - Label-free crop of the original Pi Kapp App hand-drawn wireframe sheet: images/pikapp-case-study/wireframes.png
 - Label-free crop of the original Pi Kapp App sitemap: images/pikapp-case-study/sitemap.png
-- Clean owner export of the original Pi Kapp App login concept: images/pikapp-case-study/v1-clean-login.png
-- Clean owner export of the original Pi Kapp App loading state: images/pikapp-case-study/v1-clean-loading.png
-- Clean owner export of the original Pi Kapp App member dashboard: images/pikapp-case-study/v1-clean-member-dashboard.png
-- Clean owner export of the original Pi Kapp App expanded milestone state: images/pikapp-case-study/v1-clean-task-expand.png
-- Clean owner export of the original Pi Kapp App milestones view: images/pikapp-case-study/v1-clean-milestones.png
-- Clean owner export of the original Pi Kapp App chapter view: images/pikapp-case-study/v1-clean-chapter.png
-- Earlier V2 Today screen showing what needs attention: images/pikapp-case-study/v2-today-light-clean.png
-- Earlier V2 responsibility detail screen showing what to do next: images/pikapp-case-study/v2-responsibility-detail-dark-clean.png
-- Earlier V2 completion screen stating that nothing needs attention: images/pikapp-case-study/v2-all-caught-up-light-clean.png
+- Original 2020 Pi Kapp App loading screen export: images/pikapp-case-study/v1-original-loading.png
+- Original 2020 Pi Kapp App welcome screen export: images/pikapp-case-study/v1-original-welcome.png
+- Original 2020 Pi Kapp App member dashboard export: images/pikapp-case-study/v1-original-member.png
+- Original 2020 Pi Kapp App expanded task export: images/pikapp-case-study/v1-original-task-expand.png
+- Original 2020 Pi Kapp App milestones export: images/pikapp-case-study/v1-original-milestones.png
+- Original 2020 Pi Kapp App chapter view export: images/pikapp-case-study/v1-original-chapter.png
 - Owner-exported final Pi Kapp App launch screen with the star-and-swords mark: images/pikapp-case-study/v2-final-loading.png
 - Owner-exported final Pi Kapp App login screen: images/pikapp-case-study/v2-final-login.png
 - Owner-exported final Pi Kapp App member dashboard: images/pikapp-case-study/v2-final-member-dashboard.png
-- Owner-exported final Pi Kapp App Today screen: images/pikapp-case-study/v2-final-today-light.png
 - Owner-exported final Pi Kapp App responsibility detail screen in Dark mode: images/pikapp-case-study/v2-final-responsibility-detail-dark.png
 - Owner-exported final Pi Kapp App expanded task screen: images/pikapp-case-study/v2-final-task-expand.png
-- Owner-exported final Pi Kapp App all-caught-up state: images/pikapp-case-study/v2-final-all-caught-up-light.png
 - Owner-exported final Pi Kapp App milestones detail screen: images/pikapp-case-study/v2-final-milestones-detail.png
 - Original cover of the Pi Kappa Phi Expansion Portfolio for Creighton University: images/pikapp-case-study/expansion-cover-detail.jpg
 - Complete Creighton University opener from the Expansion Portfolio: images/pikapp-case-study/expansion-creighton-opener.webp

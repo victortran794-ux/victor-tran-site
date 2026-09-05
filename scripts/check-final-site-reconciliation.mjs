@@ -112,12 +112,16 @@ requireText(scopeFixture, 'docsOnly', 'scope fixture must protect documentation-
 requireText(scopeFixture, 'unknown public HTML must fail safely to shared coverage', 'scope fixture must protect unknown deployable fallback');
 requireText(scopeFixture, 'must fail safely to full coverage', 'scope fixture must protect unknown tooling and configuration fallback');
 
-const protectedPages = ['wxo-canvas.html', 'document-processing.html'];
+const protectedPages = ['document-processing.html'];
 for (const page of protectedPages) {
   const html = read(page);
   requireText(html, '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">', `${page} must use the full protected robots policy`);
   requireText(html, '<meta name="referrer" content="no-referrer">', `${page} must set no-referrer metadata`);
 }
+const publicWxo = read('wxo-canvas.html');
+requireText(publicWxo, '<meta name="robots" content="index,follow">', 'wxo-canvas.html must use the public index,follow robots policy');
+forbid(publicWxo, /noindex,nofollow,noarchive,nosnippet,noimageindex|site-route-status|wxo-access\.html/i,
+  'wxo-canvas.html must not retain protected-route metadata, status, or gate references');
 
 requireText(packageJson.scripts?.['check:final-site-reconciliation'] ?? '', 'scripts/check-final-site-reconciliation.mjs', 'package.json must register the reconciliation contract');
 requireText(packageJson.scripts?.['test:health-check-scope'] ?? '', 'scripts/test-classify-health-check-scope.mjs', 'package.json must register the scope fixture');

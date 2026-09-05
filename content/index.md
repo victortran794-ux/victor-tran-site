@@ -69,6 +69,8 @@ Shape
 
 Victor Tran ® · Visual Designer
 
+Current practiceVisual DesignerEnterprise AI · Product systems · Visual craftAustin, Texas
+
 An agentic workflow canvas for building, inspecting, and improving AI workflows.
 
 Research, product workflows, and reusable visual methods for IBM Cloud Observability.

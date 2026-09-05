@@ -9,7 +9,7 @@
   if (/^\/wxo-canvas(?:\.html)?(?:[?#][^\r\n]*)?$/u.test(requestedNext)) {
     nextInput.value = requestedNext;
   } else if (/^\/document-processing(?:\.html)?(?:[?#][^\r\n]*)?$/u.test(requestedNext)) {
-    nextInput.value = '/wxo-canvas#document-processing';
+    nextInput.value = requestedNext;
   }
 
   if (params.get('error') === '1') error.hidden = false;

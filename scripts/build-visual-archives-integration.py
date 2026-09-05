@@ -84,17 +84,18 @@ ART_CSS = r'''
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0;
-      width: min(calc(100% - clamp(4rem, 10vw, 12rem)), 1500px);
-      margin: 0 auto;
+      width: 100%;
+      margin: 0;
     }
     .art-archive-v2 .art-daysigns-grid figure { margin: 0; padding: 0; min-width: 0; }
     .art-archive-v2 .art-daysigns-grid img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
     .art-archive-v2 .art-sc56,
     .art-archive-v2 .art-restored-wall { align-items: start; gap: clamp(.8rem, 2vw, 1.5rem); }
     .art-archive-v2 .art-sc56 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .art-archive-v2 .art-restored-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
     .art-archive-v2 .art-restored-wall figure { margin: 0; }
-    .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 2; grid-row: span 2; }
+    .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 6; grid-row: span 2; }
+    .art-archive-v2 .art-restored-wall figure:not(:first-child) { grid-column: span 3; }
     .art-archive-v2 .art-restored-wall img { width: 100%; height: auto; }
     .art-archive-v2 .art-sc56 img,
     .art-archive-v2 .art-restored-wall img { width: 100%; }
@@ -116,9 +117,10 @@ ART_CSS = r'''
       .art-archive-v2 .art-live-wall { grid-template-columns: 1fr; }
       .art-archive-v2 .art-live-wall .is-wide,
       .art-archive-v2 .art-live-wall .is-third { grid-column: 1; }
-      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100% - 2rem); }
+      .art-archive-v2 .art-daysigns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
       .art-archive-v2 .art-restored-wall { grid-template-columns: 1fr 1fr; }
       .art-archive-v2 .art-restored-wall figure:first-child { grid-column: span 2; grid-row: auto; }
+      .art-archive-v2 .art-restored-wall figure:not(:first-child) { grid-column: auto; }
       .art-archive-v2 .art-sc56 { grid-template-columns: 1fr; }
       .art-archive-v2 .art-diamonds { grid-template-columns: 1fr 1fr; }
       .art-archive-v2 .art-diamonds figure,

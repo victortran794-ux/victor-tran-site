@@ -38,7 +38,7 @@ Chapter 01 | An incubator brief
 
 I chose the IBM.com Contact Us experience from the incubator assignments and joined four other designers to propose what its future state could be.
 
-My official role was Visual Designer, but the work crossed disciplines. I conducted several early sponsor-user interviews, helped guide team decisions, and took a larger hand in the mid- and high-fidelity UX as the concept became tangible.
+My official role was Visual Designer, but the work crossed disciplines. I conducted several early sponsor-user interviews, helped guide team decisions, and took a larger hand in the mid- and high-fidelity artifacts as the concept became tangible.
 
 Five-person team · 2021 · six-week concept. This was collaborative work. I helped connect research, interaction decisions, visual direction, prototype, and final story.
 
@@ -107,7 +107,6 @@ Influence and concept boundaryThis is a bounded first-person recollection. Simil
 - Mid-fidelity Contact IBM exploration organizing support, sales, academic services, careers, directories, and MyIBM as explicit routes: images/ibm-patterns-case-study/midfi-route-directory.png
 - Mid-fidelity Contact IBM exploration combining topic cards with a general contact form: images/ibm-patterns-case-study/midfi-topic-cards-form.png
 - Mid-fidelity Contact IBM exploration showing a grid of support destinations and direct contact routes: images/ibm-patterns-case-study/midfi-routing-grid.png
-- Mid-fidelity Contact IBM exploration with an expanded in-page human contact form: images/ibm-patterns-case-study/midfi-human-fallback.png
 - XD prototype hero showing two people working together at a laptop beside the words Contact IBM, We're here to help: images/ibm-patterns-case-study/hero-study-collaboration.webp
 - Preserved future-state hero showing a smiling person beside the words Contact IBM, We're here for you: images/ibm-patterns-case-study/hero-study-welcome.webp
 - Close-up of the 2021 future-state Sales routes arranged as six destination cards: images/ibm-patterns-case-study/sales-routes.webp

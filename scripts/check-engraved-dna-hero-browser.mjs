@@ -294,11 +294,11 @@ try {
           shiftY: parseFloat(style.getPropertyValue('--companion-shift-y')) || 0,
         };
       });
-      const workPrimary = document.querySelector('.featured-item-primary[href="wxo-canvas.html?lock=1"]');
-      const workShell = workPrimary?.closest('.featured-item-shell');
-      const workRelated = workShell?.querySelector('.featured-item-related[href="document-processing.html?lock=1"]');
+      const workPrimary = document.querySelector('.featured-item[href="wxo-canvas.html"]');
+      const workRelated = workPrimary?.querySelector('.featured-item-bonus');
+      const workBonusText = workRelated?.querySelector('em');
       const workImage = workPrimary?.querySelector('[data-home-theme-image]');
-      const relatedStyle = workRelated ? getComputedStyle(workRelated) : null;
+      const relatedStyle = workBonusText ? getComputedStyle(workBonusText) : null;
       const relatedRect = workRelated?.getBoundingClientRect();
       return {
         viewport: [Math.max(innerWidth, document.documentElement.clientWidth), innerHeight],
@@ -351,6 +351,7 @@ try {
           hasRelated: !!workRelated,
           relatedLabel: (workRelated?.textContent || '').replace('↳', '').trim(),
           relatedNested: !!workPrimary?.contains(workRelated),
+          relatedHref: workRelated?.closest('a')?.getAttribute('href') || '',
           relatedHeight: relatedRect?.height || 0,
           relatedTextTransform: relatedStyle?.textTransform || '',
           relatedDecoration: relatedStyle?.textDecorationLine || '',
@@ -375,11 +376,13 @@ try {
     assert(dormant.overflow <= 0, `${item.label}: horizontal overflow ${dormant.overflow}`);
     assert(dormant.theme === item.theme, `${item.label}: theme mismatch ${dormant.theme}`);
     assert(dormant.workCard.hasPrimary && dormant.workCard.hasRelated,
-      `${item.label}: wxO card must expose primary and subtle Document Processing actions ${JSON.stringify(dormant.workCard)}`);
-    assert(!dormant.workCard.relatedNested && dormant.workCard.relatedLabel === 'Document Processing' && dormant.workCard.relatedHeight >= 44,
-      `${item.label}: secondary action must remain a sibling, named, keyboard-sized link ${JSON.stringify(dormant.workCard)}`);
-    assert(dormant.workCard.relatedTextTransform === 'none' && dormant.workCard.relatedDecoration.includes('underline'),
-      `${item.label}: secondary action must retain quieter text-link treatment ${JSON.stringify(dormant.workCard)}`);
+      `${item.label}: wxO card must expose one primary action with its subtle bonus note ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.relatedNested && dormant.workCard.relatedHref === 'wxo-canvas.html'
+      && dormant.workCard.relatedLabel === 'There’s a bonus one here',
+      `${item.label}: bonus note must remain inside the singular wxO case-study link ${JSON.stringify(dormant.workCard)}`);
+    assert(dormant.workCard.relatedTextTransform === 'none' && dormant.workCard.relatedDecoration === 'none'
+      && dormant.workCard.relatedHeight > 0,
+      `${item.label}: bonus note must retain its subdued inline treatment ${JSON.stringify(dormant.workCard)}`);
     assert(dormant.workCard.decoded && dormant.workCard.source === dormant.workCard[`${item.theme}Source`],
       `${item.label}: wxO thumbnail must decode from the selected theme source ${JSON.stringify(dormant.workCard)}`);
     assert(Math.abs(dormant.frame[0] - dormant.frame[1]) < 1, `${item.label}: portrait frame must stay square ${dormant.frame}`);

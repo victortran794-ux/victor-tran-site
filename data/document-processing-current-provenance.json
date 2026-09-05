@@ -19,9 +19,6 @@
       ],
       "stage": "Classify",
       "route": "document-processing.html",
-      "additionalRoutes": [
-        "wxo-canvas.html"
-      ],
       "prototypeDataClassification": "Victor confirmed all visible names, profile markers, records, values, and metrics are fictional sample data."
     },
     {

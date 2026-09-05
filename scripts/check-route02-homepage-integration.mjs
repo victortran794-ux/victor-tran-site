@@ -19,7 +19,7 @@ const bySlug = new Map(projects.map(project => [project.slug, project]));
 
 const homepageProjects = projects.filter(project => project.homepage);
 requireCondition(homepageProjects[0]?.slug === 'wxo-canvas',
-  'IBM watsonx Orchestrate must remain the first homepage project while it stays protected.');
+  'IBM watsonx Orchestrate must remain the first public homepage project.');
 const approvedRecruiterCopy = new Map([
   ['ibmcloud', 'Research, product workflows, and reusable visual methods for IBM Cloud Observability.'],
   ['abilityexperience', 'A brand identity and practical toolkit for a Pi Kappa Phi initiative supporting people with disabilities.'],
@@ -99,10 +99,9 @@ forbid(index, /class="featured-galleries-intro"/,
   'Final gallery pair must not repeat Art and Graphic Design in a visible subgroup header and intro.');
 forbid(css, /\.featured-galleries-intro/,
   'Removed gallery intro markup must not leave stale responsive CSS behind.');
-requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 1,
-  'Homepage needs exactly one lock on the IBM watsonx Orchestrate card.');
-requireText(index, 'aria-label="Password required"', 'Homepage lock needs an accessible password-required label.');
-requireText(css, '.featured-item-lock {', 'Homepage lock styling is missing.');
+requireCondition((index.match(/class="featured-item-lock"/g) ?? []).length === 0,
+  'Public wxO homepage card must not retain a lock treatment.');
+forbid(index, /aria-label="Password required"/, 'Public wxO homepage card must not retain a password-required label.');
 forbid(index, /Visual archive/, 'Visual archive framing must be replaced.');
 forbid(index, />Creative work<\/p>/i, 'Gallery pair must not carry a redundant eyebrow label.');
 requireText(css, '.featured-galleries .featured-item--gallery {', 'Final gallery links need a distinct cover treatment.');
@@ -129,26 +128,26 @@ requireText(css, '.featured-item--span-7 { grid-column: span 7; }',
 requireText(css, '.featured-item--span-5 { grid-column: span 5; }',
   'Live span-5 card variant must remain.');
 
-// Add exactly one overlay variant, owned by wxO Canvas.
+// wxO remains the single lead card, with integrated practice and bonus copy.
 const wxoProject = bySlug.get('wxo-canvas');
 requireCondition(Boolean(wxoProject), 'wxO Canvas must exist in the project manifest.');
 if (wxoProject) {
   for (const [key, value] of Object.entries({
     title: 'IBM watsonx Orchestrate',
     url: 'wxo-canvas.html',
-    entryUrl: 'wxo-canvas.html?lock=1',
     category: 'Product Systems',
     cta: 'View Case Study',
     nav: true,
     homepage: true,
     wide: true,
-    protected: true,
-    noindex: true,
-    sitemap: false,
+    protected: false,
+    noindex: false,
+    sitemap: true,
     homepageVariant: 'lead',
     homepageOverlay: true,
-    homepageLock: true,
   })) requireCondition(wxoProject[key] === value, `wxO Canvas manifest ${key} must equal ${String(value)}.`);
+  requireCondition(wxoProject.entryUrl === undefined, 'Public wxO manifest must not retain a lock entry URL.');
+  requireCondition(wxoProject.homepageLock === undefined, 'Public wxO manifest must not retain a homepage lock flag.');
   requireCondition(wxoProject.images?.length === 1, 'wxO homepage entry must use one thumbnail asset.');
   requireCondition(wxoProject.images?.[0]?.src === 'images/wxo-canvas/wxo-home-thumbnail.png',
     'IBM watsonx Orchestrate must use the approved Agentic workflow canvas thumbnail.');
@@ -158,12 +157,13 @@ requireCondition(documentProject?.homepage === false && documentProject?.nav ===
   'Document Processing must be hidden from homepage and primary navigation.');
 requireCondition(documentProject?.protected === true && documentProject?.noindex === true && documentProject?.sitemap === false,
   'Document Processing privacy flags must remain protected.');
-requireCondition((index.match(/<div class="[^"]*featured-item-shell[^"]*featured-item--overlay[^"]*"/g) ?? []).length === 1,
-  'Homepage must contain exactly one overlaid card shell.');
-requireCondition((index.match(/<a href="wxo-canvas\.html\?lock=1" class="[^"]*featured-item--overlay[^"]*featured-item-primary[^"]*"/g) ?? []).length === 1,
-  'Homepage must contain exactly one overlaid primary card owned by wxO.');
-requireCondition(/wxo-canvas\.html\?lock=1" class="[^"]*featured-item--lead[^"]*featured-item--overlay/.test(index),
-  'wxO must own the full-width overlay card.');
+requireCondition((index.match(/class="[^"]*featured-item-shell[^"]*"/g) ?? []).length === 0,
+  'Homepage must not retain the retired wxO overlay shell.');
+requireCondition((index.match(/<a href="wxo-canvas\.html" class="[^"]*featured-item--lead[^"]*"/g) ?? []).length === 1,
+  'Homepage must contain one public wxO lead-card link.');
+requireText(index, '<p class="featured-practice"><span>Current practice</span><strong>Visual Designer</strong><span>Enterprise AI · Product systems · Visual craft</span><span>Austin, Texas</span></p>',
+  'Public wxO lead card must integrate the approved current-practice detail.');
+requireText(index, '<em>There’s a bonus one here</em>', 'Public wxO lead card must retain the approved italic bonus.');
 requireText(generator, "if (project.homepageOverlay) classes.push('featured-item--overlay');",
   'Manifest generator must reproduce the wxO overlay class.');
 requireCondition(!generator.includes('chapterMarkerMarkup'),
@@ -194,11 +194,13 @@ for (const card of index.matchAll(/<a\s+([^>]*)>([\s\S]*?)<\/a>/g)) {
 forbid(index, /document-processing-(storyboard|review|evaluation)|future-(inventory|builder|debug)/i,
   'Homepage must not expose Document Processing or future-state wxO media.');
 
-// The protected wxO umbrella keeps the primary canvas story and links to the standalone deep dive.
-requireText(wxo, 'class="pilot-chapter-index"', 'Protected wxO page needs a visible story index.');
-requireText(wxo, 'href="#canvas-system"', 'Protected wxO page needs a Canvas-system chapter link.');
-requireText(wxo, 'href="document-processing.html"', 'Protected wxO page needs a visible standalone Document Processing link.');
-requireText(wxo, 'id="canvas-system"', 'Canvas system must remain the primary protected story.');
+// The public wxO route keeps the primary canvas story and links to the locked deep dive.
+requireText(wxo, '<meta name="robots" content="index,follow">', 'Public wxO must use index,follow metadata.');
+forbid(wxo, /site-route-status|wxo-access\.html|password-gate/i, 'Public wxO must not retain protected route shell or gate markup.');
+requireText(wxo, 'class="pilot-chapter-index"', 'Public wxO page needs a visible story index.');
+requireText(wxo, 'href="#canvas-system"', 'Public wxO page needs a Canvas-system chapter link.');
+requireText(wxo, 'href="document-processing.html"', 'Public wxO page needs a visible standalone Document Processing link.');
+requireText(wxo, 'id="canvas-system"', 'Canvas system must remain the primary public story.');
 requireText(wxo, 'class="pilot-side-quest-bridge"', 'Document Processing must remain discoverable as a feature deep-dive bridge.');
 forbid(wxo, /class="pilot-section pilot-side-quest"|id="document-processing"|data-wxo-chapter-panel/i,
   'The wxO umbrella must not embed or hide the retired inline Document Processing chapter.');
@@ -212,5 +214,5 @@ if (failures.length) {
 }
 
 console.log('ROUTE 02 HOMEPAGE INTEGRATION CONTRACT: PASS');
-console.log('- live staggered cards preserved; wxO owns the single overlay variant');
-console.log('- homepage controls removed; protected wxO owns chapter navigation');
+console.log('- live staggered cards preserved; wxO owns the single public lead link');
+console.log('- homepage controls removed; public wxO owns chapter navigation');

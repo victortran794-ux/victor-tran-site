@@ -681,8 +681,12 @@ try {
             artDaysigns: document.querySelectorAll('[data-daysigns-item] img').length,
             artDaysignsLayout: (() => {
               const grid = document.querySelector('.art-daysigns-grid');
-              if (!grid) return null;
+              const title = document.querySelector('#art-daysigns-title');
+              const divider = title?.closest('.archive-chapter')?.querySelector('.archive-chapter-head');
+              if (!grid || !title || !divider) return null;
               const rect = grid.getBoundingClientRect();
+              const titleRect = title.getBoundingClientRect();
+              const dividerRect = divider.getBoundingClientRect();
               const items = [...grid.querySelectorAll('[data-daysigns-item]')].map((item) => {
                 const itemRect = item.getBoundingClientRect();
                 const image = item.querySelector('img');
@@ -692,7 +696,22 @@ try {
                   naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
                 };
               });
-              return { left: rect.left, right: rect.right, width: rect.width, columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length, rowGap: getComputedStyle(grid).rowGap, columnGap: getComputedStyle(grid).columnGap, items };
+              return {
+                left: rect.left, right: rect.right, width: rect.width,
+                titleLeft: titleRect.left, dividerLeft: dividerRect.left, dividerRight: dividerRect.right,
+                columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+                rowGap: getComputedStyle(grid).rowGap, columnGap: getComputedStyle(grid).columnGap, items,
+              };
+            })(),
+            artTraditionalLayout: (() => {
+              const wall = document.querySelector('.art-restored-wall');
+              if (!wall) return null;
+              const wallRect = wall.getBoundingClientRect();
+              const items = [...wall.querySelectorAll('figure')].map((item) => {
+                const rect = item.getBoundingClientRect();
+                return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height };
+              });
+              return { left: wallRect.left, right: wallRect.right, width: wallRect.width, items };
             })(),
             artHorned: document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img').length,
             artHornedKeyboardTriggers: [...document.querySelectorAll('[data-horned-slideshow] .series-slideshow-img')]
@@ -787,8 +806,30 @@ try {
             `artillustration.html: expected ${expectedDaysignsColumns} Daysigns columns; found ${state.artDaysignsLayout?.columns}`);
           assert(state.artDaysignsLayout?.rowGap === '0px' && state.artDaysignsLayout?.columnGap === '0px',
             `artillustration.html: Daysigns grid must have zero gaps; found ${JSON.stringify(state.artDaysignsLayout)}`);
-          assert(state.artDaysignsLayout?.left >= 32 && state.artDaysignsLayout?.right <= state.clientWidth - 32 && Math.abs(state.artDaysignsLayout.left - (state.clientWidth - state.artDaysignsLayout.right)) <= 2,
-            `artillustration.html: Daysigns grid must use an intentional symmetric inset of at least 32px; found ${JSON.stringify({ left: state.artDaysignsLayout?.left, right: state.artDaysignsLayout?.right, clientWidth: state.clientWidth })}`);
+          const daysigns = state.artDaysignsLayout;
+          assert(Math.abs(daysigns?.left - daysigns?.titleLeft) <= 1 &&
+            Math.abs(daysigns?.left - daysigns?.dividerLeft) <= 1 &&
+            Math.abs(daysigns?.right - daysigns?.dividerRight) <= 1,
+          `artillustration.html: Daysigns grid, heading text, and divider must share one rail; found ${JSON.stringify(daysigns && { grid: [daysigns.left, daysigns.right], titleLeft: daysigns.titleLeft, divider: [daysigns.dividerLeft, daysigns.dividerRight] })}`);
+          if (!viewport.mobile) {
+            const [lead, upperLeft, upperRight, lowerLeft, lowerRight] = state.artTraditionalLayout?.items ?? [];
+            const tolerance = 2;
+            assert(lead && upperLeft && upperRight && lowerLeft && lowerRight &&
+              Math.abs(lead.left - state.artTraditionalLayout.left) <= tolerance &&
+              Math.abs(lowerRight.right - state.artTraditionalLayout.right) <= tolerance &&
+              Math.abs(lead.width - (upperLeft.width + upperRight.width + upperRight.left - upperLeft.right)) <= tolerance &&
+              Math.abs(upperLeft.width - upperRight.width) <= tolerance &&
+              Math.abs(upperLeft.width - lowerLeft.width) <= tolerance &&
+              Math.abs(upperRight.width - lowerRight.width) <= tolerance &&
+              Math.abs(upperLeft.left - lowerLeft.left) <= tolerance &&
+              Math.abs(upperRight.left - lowerRight.left) <= tolerance &&
+              Math.abs(upperLeft.top - upperRight.top) <= tolerance &&
+              Math.abs(lowerLeft.top - lowerRight.top) <= tolerance &&
+              lowerLeft.top > upperLeft.top &&
+              lead.width > upperLeft.width && lead.height > upperLeft.height && lead.height > upperRight.height &&
+              lead.height > lowerLeft.height && lead.height > lowerRight.height,
+            `artillustration.html: Traditional work must retain one enlarged lead beside a balanced two-column support matrix; found ${JSON.stringify(state.artTraditionalLayout)}`);
+          }
           assert(state.artDaysignsLayout?.items.every((item) => Math.abs(item.width - item.height) <= 1 && item.naturalWidth > 0 && item.naturalHeight > 0),
             `artillustration.html: Daysigns tiles must be square with decoded media; found ${JSON.stringify(state.artDaysignsLayout?.items)}`);
           assert(state.artHorned === 7, `artillustration.html: expected 7 Horned Woman versions; found ${state.artHorned}`);
@@ -796,7 +837,7 @@ try {
             `artillustration.html: exactly one visible Horned Woman image must be keyboard-operable; found ${state.artHornedKeyboardTriggers}`);
           if (theme === 'light' && (viewport.mobile || viewport.width === 1440)) {
             if (viewport.mobile) await cdp.evaluate(`document.querySelector('.nav-dropdown-toggle[aria-expanded="true"]')?.click()`);
-            await cdp.evaluate(`document.querySelector('.art-daysigns-grid').scrollIntoView({block:'center'}); window.scrollBy(0,-40)`);
+            await cdp.evaluate(`document.querySelector('#art-daysigns-title').scrollIntoView({block:'start'}); window.scrollBy(0,-80)`);
             await delay(160);
             await cdp.screenshot(`art-daysigns-${viewport.label}-${theme}.png`);
           }

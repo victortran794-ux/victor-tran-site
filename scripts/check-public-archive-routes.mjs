@@ -28,6 +28,7 @@ const publicProjects = [
   { slug: 'ibmcloud', source: 'ibmcloud.html', canonical: 'https://www.victortrandesign.com/ibmcloud' },
   { slug: 'ibm-patterns', source: 'ibm-patterns.html', canonical: 'https://www.victortrandesign.com/ibm-patterns' },
   { slug: 'pci', source: 'pci.html', canonical: 'https://www.victortrandesign.com/pci' },
+  { slug: 'wxo-canvas', source: 'wxo-canvas.html', canonical: 'https://www.victortrandesign.com/wxo-canvas' },
 ];
 
 for (const expected of publicProjects) {
@@ -43,7 +44,6 @@ for (const expected of publicProjects) {
   const html = read(expected.source);
   for (const forbidden of [
     '<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">',
-    '<meta name="referrer" content="no-referrer">',
     "sessionStorage.getItem('vtd-unlock')",
     'css/password-gate.css',
     'js/password-gate.js',
@@ -64,7 +64,7 @@ for (const expected of publicProjects) {
 }
 
 requireText(middleware, "matcher: ['/:path*']", 'protected archive routes must remain covered by catch-all Vercel Routing Middleware');
-for (const protectedPage of ['wxo-canvas.html', 'document-processing.html']) {
+for (const protectedPage of ['document-processing.html']) {
   const html = read(protectedPage);
   forbidText(html, "sessionStorage.getItem('vtd-unlock')", `${protectedPage} must not authorize through browser storage`);
   forbidText(html, 'js/password-gate.js', `${protectedPage} must not load the retired browser password gate`);
@@ -87,4 +87,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PUBLIC ARCHIVE ROUTES CONTRACT: PASS routes=ibmcloud,ibm-patterns,pci protected=wxo-canvas,document-processing');
+console.log('PUBLIC ARCHIVE ROUTES CONTRACT: PASS routes=ibmcloud,ibm-patterns,pci,wxo-canvas protected=document-processing');

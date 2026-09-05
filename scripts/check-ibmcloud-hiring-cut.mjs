@@ -32,7 +32,7 @@ for (const phrase of [
   'class="lens-switcher"',
   'class="footer"',
   'class="project-nav"',
-  'href="wxo-canvas.html?lock=1"',
+  'href="wxo-canvas.html"',
   'href="ibm-patterns.html"',
   'I used product design and reusable visual systems to make complex cloud work easier to understand and extend.',
   '2021–2023',

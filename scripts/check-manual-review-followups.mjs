@@ -25,135 +25,62 @@ const docLedger = readJson('data/document-processing-current-provenance.json');
 const policy = readJson('data/content-export-policy.json');
 
 const wxoProject = manifest.projects.find((project) => project.slug === 'wxo-canvas');
-if (!wxoProject) fail('projects manifest lost wxO');
-if (wxoProject?.homepageRelated?.label !== 'Document Processing') {
-  fail('Home secondary link must use the quieter Document Processing label');
+if (!wxoProject || wxoProject.protected || wxoProject.noindex || wxoProject.sitemap !== true || wxoProject.url !== 'wxo-canvas.html') {
+  fail('wxO manifest must describe the approved public route.');
 }
-if (wxoProject?.images?.[0]?.themeDarkSrc !== 'images/wxo-canvas/wxo-home-thumbnail-dark.png') {
-  fail('wxO Home thumbnail needs the approved Dark-theme source in the manifest');
+if (wxoProject?.homepageRelated) fail('Home wxO card must not expose a separate Document Processing link');
+if (wxoProject?.homepageBonus !== 'There’s a bonus one here') fail('Home wxO card must carry the approved non-link bonus note');
+for (const marker of ['featured-card-actions', 'featured-practice', 'featured-item-bonus']) {
+  if (!homeGenerator.includes(marker) || !home.includes(marker)) fail(`Home missing approved wxO action marker: ${marker}`);
 }
-for (const marker of ['featured-card-actions', 'featured-item-main-link', 'featured-item-related']) {
-  if (!homeGenerator.includes(marker)) fail(`Home generator missing accessible in-card action marker: ${marker}`);
-  if (!home.includes(marker)) fail(`generated Home missing in-card action marker: ${marker}`);
+if (home.includes('home-practice-proof') || home.includes('featured-item-related') || homeGenerator.includes('shape-cue')) {
+  fail('Home must retain the approved single public wxO action treatment.');
 }
-const homePrimaryBody = home.match(/<a\b[^>]*class="[^"]*featured-item-main-link[^"]*"[^>]*>([\s\S]*?)<\/a>/i)?.[1] || '';
-if (/<a\b/i.test(homePrimaryBody)) {
-  fail('Home wxO actions must not nest the secondary anchor inside the primary anchor');
-}
-if (!sharedJs.includes('[data-home-theme-image]') || !sharedJs.includes('themeDarkSrc') || !sharedJs.includes('themeLightSrc')) {
-  fail('shared runtime must synchronize the wxO Home thumbnail with the selected theme');
-}
-if (!sharedCss.includes('.featured-card-actions') || !sharedCss.includes('.featured-item-related')) {
-  fail('Home actions need a shared visual hierarchy contract');
-}
+if (!/href="wxo-canvas\.html"/.test(home) || /wxo-canvas\.html\?lock=1/.test(home)) fail('Home must link directly to public wxO without a lock query.');
+if (!sharedJs.includes('[data-home-theme-image]') || !sharedCss.includes('.featured-item-bonus')) fail('Home wxO theme and bonus treatment must remain wired.');
 
-for (const marker of ['pilot-canvas-media-stack', 'pilot-history-canvas', 'pilot-section-heading--stacked', 'pilot-exploration-grid']) {
+for (const marker of ['pilot-canvas-media-stack', 'pilot-history-canvas', 'pilot-section-heading--stacked', 'pilot-exploration-grid--clean', 'pilot-close-media']) {
   if (!wxo.includes(marker)) fail(`wxO composition missing ${marker}`);
 }
-for (const source of [
-  'protected/wxo/assets/theme-sequences/current-workflow-light.png',
-  'protected/wxo/assets/theme-sequences/current-workflow-dark.png',
-]) {
-  if (!wxo.includes(source)) fail(`Historical Canvas missing theme source ${source}`);
+if (wxo.includes('pilot-main-illustration') || wxo.includes('pilot-vignettes') || wxoCss.includes('.pilot-flow-evidence li:nth-child(even)')) {
+  fail('wxO must retain the cleaned public composition.');
 }
-if (wxo.includes('protected/wxo/assets/public-candidate/02-component-showcase.png')) {
-  fail('retired enterprise component showcase must not remain in active wxO markup');
+if (!wxo.includes('data-wxo-theme-image="close-workflow"') || !wxoJs.includes('[data-wxo-theme-image]')) fail('wxO must retain its theme-aware public evidence behavior.');
+if (/protected\/wxo\//.test(wxo)) fail('Public wxO must not embed protected images or guarded route resources.');
+if (!wxo.includes('href="document-processing.html?lock=1"') || /pilot-bridge-thumbnail|document-processing\/current/.test(wxo)) {
+  fail('Public wxO must use a textual locked Document Processing handoff only.');
 }
 
-const explorationPairs = [
-  ['15-node-key-states-light.png', '15-node-key-states-dark.png'],
-  ['16-node-size-variants-light.png', '16-node-size-variants-dark.png'],
-  ['17-flow-control-elements-light.png', '17-flow-control-elements-dark.png'],
-  ['18-flow-control-containers-light.png', '18-flow-control-containers-dark.png'],
-  ['19-application-example-light.png', '19-application-example-dark.png'],
-  ['21-workflow-anchors-light.png', '21-workflow-anchors-dark.png'],
-];
-if (count(wxo, 'data-wxo-exploration-panel') !== explorationPairs.length) {
-  fail(`wxO must render ${explorationPairs.length} newer exploration panels`);
-}
-for (const [light, dark] of explorationPairs) {
-  const lightPath = `protected/wxo/assets/public-candidate/${light}`;
-  const darkPath = `protected/wxo/assets/public-candidate/${dark}`;
-  if (!fs.existsSync(path.join(root, lightPath))) fail(`missing controlled Light exploration export ${lightPath}`);
-  if (!fs.existsSync(path.join(root, darkPath))) fail(`missing controlled Dark exploration export ${darkPath}`);
-  if (!wxo.includes(lightPath) || !wxo.includes(darkPath)) fail(`wxO missing Light/Dark pair ${light} / ${dark}`);
-}
-for (const cssMarker of [
-  '.pilot-canvas-media-stack',
-  '.pilot-section-heading--stacked',
-  '.pilot-exploration-grid',
-  'padding-inline: clamp(',
-]) {
-  if (!wxoCss.includes(cssMarker)) fail(`wxO CSS missing layout marker ${cssMarker}`);
-}
-if (!wxoJs.includes('[data-wxo-theme-image]')) fail('wxO theme-image runtime was removed');
-
-const ledgerAssets = wxoLedger.assets || [];
-for (const [light, dark] of explorationPairs) {
-  for (const file of [light, dark]) {
-    const record = ledgerAssets.find((item) => item.file === file && (item.namespace || 'public-candidate') === 'public-candidate');
-    if (!record) {
-      fail(`wxO provenance missing ${file}`);
-      continue;
-    }
-    const assetPath = `protected/wxo/assets/public-candidate/${file}`;
-    if (fs.existsSync(path.join(root, assetPath)) && record.sha256 !== sha256(assetPath)) {
-      fail(`wxO provenance hash mismatch for ${file}`);
-    }
-    if (record.route !== 'wxo-canvas.html') fail(`active exploration record ${file} needs wxo-canvas.html route`);
+const publicAssets = (wxoLedger.assets || []).filter((item) => item.route === 'wxo-canvas.html');
+if (publicAssets.length !== 24) fail(`wxO provenance must contain 24 public-route exports, found ${publicAssets.length}`);
+for (const item of publicAssets) {
+  const assetPath = `images/wxo-canvas/public/${item.file}`;
+  if (!fs.existsSync(path.join(root, assetPath)) || item.sha256 !== sha256(assetPath) || !wxo.includes(assetPath)) {
+    fail(`Public wxO asset/provenance mismatch for ${item.file}`);
   }
 }
-for (const file of ['current-workflow-light.png', 'current-workflow-dark.png']) {
-  const record = ledgerAssets.find((item) => item.file === file && item.namespace === 'theme-sequences');
-  if (!record || record.route !== 'wxo-canvas.html') fail(`Historical Canvas theme record ${file} must be active on wxo-canvas.html`);
-}
-const retiredHistory = ledgerAssets.find((item) => item.file === '01-released-canvas.png');
-if (!retiredHistory || retiredHistory.route !== 'source-only') fail('retired one-theme Historical Canvas derivative must be source-only');
+if ((wxoLedger.assets || []).filter((item) => item.route === 'source-only').length !== 18) fail('wxO must retain eighteen source-only historical derivatives.');
+if ((policy.protectedPages || []).some((entry) => entry.source === 'wxo-canvas.html')) fail('Public wxO must be removed from the protected export policy.');
+if (!(policy.protectedPages || []).some((entry) => entry.source === 'document-processing.html')) fail('Document Processing must remain in the protected export policy.');
 
-const activeProtected = new Set((policy.protectedPages || []).filter((entry) => !entry.provisional).map((entry) => entry.source));
-for (const page of ['wxo-canvas.html', 'document-processing.html']) {
-  if (!activeProtected.has(page)) fail(`${page} must remain in the active protected-route policy`);
-}
-const currentDocReferences = [...doc.matchAll(/<img\b[^>]*src="(protected\/wxo\/assets\/document-processing\/current\/[^"]+)"/g)].map((match) => match[1]);
-const currentDocImages = [...new Set(currentDocReferences)];
-const expectedCurrentDocImages = (docLedger.assets || []).map((item) => item.file);
-if (currentDocImages.length !== 8 || JSON.stringify(currentDocImages.slice().sort()) !== JSON.stringify(expectedCurrentDocImages.slice().sort())) {
-  fail(`Document Processing must render only the eight declared owner-export evidence screens, found ${currentDocImages.length}`);
-}
-if (currentDocImages.some((source) => source.includes('-sanitized'))) {
-  fail('Document Processing current screens still reference identity-neutralized derivatives');
-}
-for (const legacy of ['09-document-classify.png', '10-document-extract.png', '11-document-review.png', '12-document-evaluate.png']) {
-  if (doc.includes(`protected/wxo/assets/public-candidate/${legacy}`)) fail(`Document Processing still renders retired legacy derivative ${legacy}`);
-}
-if (wxo.includes('protected/wxo/assets/public-candidate/09-document-classify.png')) {
-  fail('wxO bridge still renders the retired legacy Classify derivative');
-}
-if (!wxo.includes('protected/wxo/assets/document-processing/current/classify-setup.png')) {
-  fail('wxO bridge must use the authentic current Classify owner export');
-}
-if (!/^None on the active eight-image set\./.test(docLedger.sanitation || '')) {
-  fail('Document Processing provenance must state that active evidence has no identity hiding');
+const currentDocImages = [...new Set([...doc.matchAll(/<img\b[^>]*src="(protected\/wxo\/assets\/document-processing\/current\/[^"]+)"/g)].map((match) => match[1]))];
+const expectedDocImages = (docLedger.assets || []).map((item) => item.file).sort();
+if (currentDocImages.length !== 8 || JSON.stringify(currentDocImages.slice().sort()) !== JSON.stringify(expectedDocImages)) {
+  fail(`Document Processing must render exactly the eight declared owner-export screens, found ${currentDocImages.length}`);
 }
 for (const item of docLedger.assets || []) {
-  if ((item.operations || []).some((operation) => /neutraliz|obscur|blur|redact|saniti/i.test(operation))) {
-    fail(`Document Processing provenance still records identity hiding for ${item.file}`);
+  if (item.route !== 'document-processing.html' || item.sourceSha256 !== item.outputSha256 ||
+      !item.operations?.includes('None; repository asset is byte-identical to the owner export') ||
+      !fs.existsSync(path.join(root, item.file)) || item.outputSha256 !== sha256(item.file)) {
+    fail(`Document Processing provenance must bind a byte-identical protected owner export: ${item.file}`);
   }
-  if (item.route !== 'document-processing.html' || item.sourceSha256 !== item.outputSha256 || item.outputSha256 !== sha256(item.file)) {
-    fail(`Document Processing active provenance must bind a byte-identical owner export to the protected route: ${item.file}`);
-  }
 }
-const classifyRecord = (docLedger.assets || []).find((item) => item.file.endsWith('/classify-setup.png'));
-if (!classifyRecord?.additionalRoutes?.includes('wxo-canvas.html')) {
-  fail('Classify owner-export provenance must declare its additional wxO bridge route');
-}
-if (/doc-motion-section|doc-pro-(?:poster|evaluation-loop)-sanitized/.test(doc)) {
-  fail('Document Processing must not render the retired identity-neutralized motion derivative');
-}
+const classify = (docLedger.assets || []).find((item) => item.file.endsWith('/classify-setup.png'));
+if (classify?.additionalRoutes) fail('Classify provenance must not allow the obsolete public wxO image bridge.');
 
 if (failures.length) {
   console.error('MANUAL REVIEW FOLLOW-UPS: FAIL');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`MANUAL REVIEW FOLLOW-UPS: PASS explorationPairs=${explorationPairs.length} docScreens=${currentDocImages.length} protectedRoutes=2`);
+console.log(`MANUAL REVIEW FOLLOW-UPS: PASS publicAssets=${publicAssets.length} docScreens=${currentDocImages.length} protectedRoutes=1`);

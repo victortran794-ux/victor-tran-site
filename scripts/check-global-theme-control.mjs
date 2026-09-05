@@ -83,7 +83,6 @@ for (const forbidden of [
 }
 
 for (const scopedContentSelector of [
-  'html[data-finish-proof] .home-practice-proof',
   'html[data-finish-proof] .page-context',
   'html[data-finish-proof] .about-jump-nav',
 ]) {
