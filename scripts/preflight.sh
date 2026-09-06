@@ -129,6 +129,7 @@ fi
 
 run_required "Home/global completion contract" npm run check:home-global-completion
 run_required "Design DNA and live-component system contract" npm run check:design-dna-system
+run_required "Homepage system alignment contract" python3 scripts/check-homepage-system-alignment.py
 run_required "Engraved Design DNA hero contract" npm run check:engraved-dna-hero
 run_required "Selected ambient field baseline contract" npm run check:ambient-field-selection
 run_required "Home maintenance wiring" npm run test:home-maintenance-wiring

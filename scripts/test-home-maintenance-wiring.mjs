@@ -18,6 +18,8 @@ for (const [name, command] of Object.entries({
   check(preflight.includes(`npm run ${name}`), `preflight entry missing: ${name}`);
   check(ci.includes(`npm run ${name}`), `CI entry missing: ${name}`);
 }
+check(/run_required "Homepage system alignment contract" python3 scripts\/check-homepage-system-alignment\.py/.test(preflight),
+  'preflight must run the exact homepage system alignment checker');
 const regeneration = ci.slice(ci.indexOf('- name: Regenerate responsive images reproducibly'), ci.indexOf('- name: Responsive image regression check'));
 check(regeneration.includes('python scripts/generate-home-portrait-derivatives.py'), 'CI must regenerate Home portrait derivatives with its pinned Pillow environment');
 check(regeneration.includes('images/hero/responsive'), 'CI must reject Home portrait derivative drift');
