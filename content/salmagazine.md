@@ -91,7 +91,7 @@ Verified recognition
 
 2019 · 3rd Place Overall Magazine Excellence
 
-2018 · 3rd Place Overall Magazine Excellence
+2018 · Third Place · Fred F. Yoder Award for Overall Excellence · Pi Kappa Phi, for Star & Lamp
 
 Complete archive
 
@@ -103,10 +103,10 @@ Complete archive
 - Fall 2020 Virtually Impossible spread: images/sal-f2020-virtually.jpg
 - Fall 2020 COVID Heroes chapter stories spread: images/sal-f2020-covid-heroes.jpg
 - Test on 10th feature: images/sal-test-on-10th.jpg
-- Summer 2017 spread: images/sal-sum2017-1.jpg
-- Summer 2017 spread: images/sal-sum2017-2.jpg
-- Summer 2017 spread: images/sal-sum2017-3.jpg
-- Summer 2017 spread: images/sal-sum2017-4.jpg
+- Summer 2017 Our Chapters group photo and chapter scorecards: images/sal-sum2017-1.jpg
+- Summer 2017 At 40 anniversary illustration: images/sal-sum2017-2.jpg
+- Summer 2017 Chapter Snapshot and Pi Kappa Phi Journey infographics: images/sal-sum2017-3.jpg
+- Summer 2017 2016 Financials tables and charts: images/sal-sum2017-4.jpg
 - A Common Bond feature opener: images/sal-common-bond-1.jpg
 - A Common Bond interior spread: images/sal-common-bond-2.jpg
 - A Common Bond closing spread: images/sal-common-bond-3.jpg

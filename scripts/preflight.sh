@@ -131,6 +131,8 @@ run_required "Home/global completion contract" npm run check:home-global-complet
 run_required "Design DNA and live-component system contract" npm run check:design-dna-system
 run_required "Engraved Design DNA hero contract" npm run check:engraved-dna-hero
 run_required "Selected ambient field baseline contract" npm run check:ambient-field-selection
+run_required "Home maintenance wiring" npm run test:home-maintenance-wiring
+run_required "Home mobile maintenance contract" npm run check:home-mobile-maintenance
 run_required "Theme Continuity proof contract" npm run check:theme-continuity-proof
 run_required "Global theme-control contract" npm run check:global-theme-control
 run_required "Shared site shell contract" node scripts/check-shared-shell.mjs
@@ -160,6 +162,7 @@ run_visual_archives_browser_contract() {
 
   if [ "$ready" -eq 1 ]; then
     SITE_URL="$site_url" DNA_HERO_EVIDENCE_DIR="$(mktemp -d)" npm run check:engraved-dna-hero-browser || status=$?
+    SITE_URL="$site_url" HOME_MAINTENANCE_EVIDENCE_DIR="$(mktemp -d)" npm run check:home-mobile-maintenance-browser || status=$?
     SITE_URL="$site_url" VISUAL_ARCHIVES_EVIDENCE_DIR="$(mktemp -d)" npm run check:visual-archives-lightbox-browser || status=$?
     SITE_URL="$site_url" npm run check:graphic-heading-browser || status=$?
   else
