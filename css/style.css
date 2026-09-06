@@ -4987,8 +4987,8 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-dna-tint { mix-blend-mode
 
 .home-page--engraved-dna .hero-ambient-blob {
   position: absolute;
-  left: var(--blob-x, 34%);
-  top: var(--blob-y, 44%);
+  left: var(--blob-anchor-x);
+  top: var(--blob-anchor-y);
   z-index: 1;
   --blob-size: clamp(560px, 66vw, 980px);
   --blob-size-scale: 1;
@@ -5000,22 +5000,23 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-dna-tint { mix-blend-mode
   opacity: 0.26;
   filter: blur(var(--blob-blur)) saturate(1.28) opacity(var(--blob-visibility));
   mix-blend-mode: var(--hero-blend);
-  transform: translate(-50%, -50%) scale(1);
-  will-change: left, top, transform, border-radius;
+  transform: translate(-50%, -50%) translate3d(var(--blob-shift-x, 0px), var(--blob-shift-y, 0px), 0) scale(1);
+  will-change: transform, border-radius;
   animation: heroBlobLava 10s ease-in-out infinite;
   transition: background-color 400ms ease, opacity 300ms ease;
 }
 
 .home-page--engraved-dna .hero-ambient-blob--a {
-  --blob-x: 34%;
-  --blob-y: 43%;
+  --blob-size-scale: 0.81;
+  --blob-anchor-x: 17.678227360308284%;
+  --blob-anchor-y: 23.300970873786408%;
   background: radial-gradient(circle at 58% 42%, #ff6847 0 18%, var(--hero-blob-a) 42%, transparent 74%);
 }
 
 .home-page--engraved-dna .hero-ambient-blob--b {
-  --blob-x: 69%;
-  --blob-y: 58%;
-  --blob-size-scale: 0.72;
+  --blob-size-scale: 0.5;
+  --blob-anchor-x: 45.13487475915222%;
+  --blob-anchor-y: 79.87643424536628%;
   background: radial-gradient(circle at 42% 58%, #7928d2 0 20%, var(--hero-blob-b) 46%, #55a2f7 62%, transparent 76%);
   animation-duration: 13s;
   animation-delay: -5s;
@@ -5028,17 +5029,17 @@ html[data-theme="dark"] .home-page--engraved-dna .hero-dna-tint { mix-blend-mode
   0%, 100% {
     border-radius: 44% 56% 61% 39% / 53% 42% 58% 47%;
     opacity: 0.22;
-    transform: translate(-50%, -50%) scale(0.84) rotate(0deg);
+    transform: translate(-50%, -50%) translate3d(var(--blob-shift-x, 0px), var(--blob-shift-y, 0px), 0) scale(0.84) rotate(0deg);
   }
   33% {
     border-radius: 62% 38% 45% 55% / 42% 63% 37% 58%;
     opacity: 0.38;
-    transform: translate(-50%, -50%) scale(1.2) rotate(15deg);
+    transform: translate(-50%, -50%) translate3d(var(--blob-shift-x, 0px), var(--blob-shift-y, 0px), 0) scale(1.2) rotate(15deg);
   }
   66% {
     border-radius: 38% 62% 57% 43% / 61% 39% 54% 46%;
     opacity: 0.3;
-    transform: translate(-50%, -50%) scale(1.04) rotate(-13deg);
+    transform: translate(-50%, -50%) translate3d(var(--blob-shift-x, 0px), var(--blob-shift-y, 0px), 0) scale(1.04) rotate(-13deg);
   }
 }
 

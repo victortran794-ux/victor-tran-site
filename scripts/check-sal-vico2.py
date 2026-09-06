@@ -117,11 +117,42 @@ def main() -> int:
     ]:
         need(retired_copy not in html, f"retired ownership framing returned: {retired_copy[:72]}")
 
-    for award in [
-        "2019 · 3rd Place Overall Magazine Excellence",
-        "2018 · 3rd Place Overall Magazine Excellence",
-    ]:
-        need(award in html, f"missing verified award: {award}")
+    # Source-backed recognition: the unchanged 2019 line remains held, while
+    # the 2018 FCA result names the official category and recipient.
+    # Primary records: https://fraternitycommunications.com/2018-fca-award-winners
+    # and https://issuu.com/pikappaphi/docs/s_l_spr2018 (published Summer 2018).
+    need(
+        "2019 · 3rd Place Overall Magazine Excellence" in html,
+        "2019 recognition must remain unchanged pending its primary record",
+    )
+    award_2018 = "2018 · Third Place · Fred F. Yoder Award for Overall Excellence · Pi Kappa Phi, for Star &amp; Lamp"
+    need(award_2018 in html, f"missing source-backed 2018 recognition: {award_2018}")
+    need(
+        "2018 · 3rd Place Overall Magazine Excellence" not in html,
+        "superseded generic 2018 recognition must not remain",
+    )
+
+    # Each Summer 2017 image is a distinct spread and needs its own concise,
+    # image-backed alternative text.
+    summer_2017_alts = {
+        "sal-sum2017-1.jpg": "Summer 2017 Our Chapters group photo and chapter scorecards",
+        "sal-sum2017-2.jpg": "Summer 2017 At 40 anniversary illustration",
+        "sal-sum2017-3.jpg": "Summer 2017 Chapter Snapshot and Pi Kappa Phi Journey infographics",
+        "sal-sum2017-4.jpg": "Summer 2017 2016 Financials tables and charts",
+    }
+    for source, alt in summer_2017_alts.items():
+        need(
+            bool(re.search(rf'<img[^>]*src="images/{re.escape(source)}"[^>]*alt="{re.escape(alt)}"', html)),
+            f"Summer 2017 spread needs its source-backed alt text: {source}",
+        )
+    need(
+        html.count('alt="Summer 2017 spread"') == 0,
+        "generic duplicate Summer 2017 alternatives must not remain",
+    )
+
+    common_bond_caption = "Summer 2018 · Cover Feature"
+    need(common_bond_caption in html, "A Common Bond caption must use the Summer 2018 issue label")
+    need("Spring 2018 · Cover Feature" not in html, "A Common Bond caption must not use the Issuu slug season")
 
     # August 7 bounded revision: distinct opener, aligned metadata,
     # direct archive action, and third-person homepage voice.

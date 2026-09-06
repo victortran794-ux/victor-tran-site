@@ -1,0 +1,49 @@
+{
+  "encoder": {
+    "format": "WEBP",
+    "method": 6,
+    "quality": 82
+  },
+  "generator": "scripts/generate-home-portrait-derivatives.py",
+  "outputs": {
+    "images/hero/responsive/figure19-320.webp": {
+      "bytes": 16852,
+      "height": 470,
+      "sha256": "c3fb126aae7f65f8b0ffe0e71bdc5635b0766c63d1f1a4b2916de8fbfea0f311",
+      "width": 320
+    },
+    "images/hero/responsive/figure19-640.webp": {
+      "bytes": 40822,
+      "height": 940,
+      "sha256": "b0a0d0271b638afdd8a5a2fbc4d3631432763f4d8a09a50c046f522730219960",
+      "width": 640
+    },
+    "images/hero/responsive/figure20-320.webp": {
+      "bytes": 18678,
+      "height": 461,
+      "sha256": "1610e4eb25789e64db7ef3038e085558cdf4a9e046046e5e3fd2b53c9a0d6b02",
+      "width": 320
+    },
+    "images/hero/responsive/figure20-640.webp": {
+      "bytes": 52178,
+      "height": 922,
+      "sha256": "f396e5301e8e98a45afa21be232e0cfc7cb322acc492ab687614e08e29db0218",
+      "width": 640
+    }
+  },
+  "pillowVersion": "12.3.0",
+  "runtime": {
+    "python": "3.14",
+    "webp": "1.6.0"
+  },
+  "sources": {
+    "images/hero/figure19.webp": {
+      "bytes": 92318,
+      "sha256": "9aab8905eda63e703ce6af6b0639a86ae4e7022b69bb593b08482a7011cc36de"
+    },
+    "images/hero/figure20.webp": {
+      "bytes": 151480,
+      "sha256": "af0f6af4f57994047b157ebc5b2f1a7ff8b7212627bfcb54a0338da43eb9258c"
+    }
+  }
+}

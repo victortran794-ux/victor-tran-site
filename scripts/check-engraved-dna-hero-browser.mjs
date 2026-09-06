@@ -265,6 +265,8 @@ try {
         id: element.dataset.ambientId,
         left: getComputedStyle(element).left,
         top: getComputedStyle(element).top,
+        shiftX: parseFloat(getComputedStyle(element).getPropertyValue('--blob-shift-x')) || 0,
+        shiftY: parseFloat(getComputedStyle(element).getPropertyValue('--blob-shift-y')) || 0,
         width: parseFloat(getComputedStyle(element).width),
         animation: getComputedStyle(element).animationName,
       }));
@@ -446,19 +448,19 @@ try {
 
     const activePortrait = dormant.portraits.find(portrait => portrait.opacity > 0.95);
     assert(activePortrait?.theme === item.theme, `${item.label}: wrong active portrait ${JSON.stringify(dormant.portraits)}`);
-    assert(activePortrait.src.endsWith(item.theme === 'light' ? 'figure20.webp' : 'figure19.webp'), `${item.label}: wrong portrait source ${activePortrait.src}`);
+    assert(activePortrait.src.endsWith(item.theme === 'light' ? 'images/hero/responsive/figure20-320.webp' : 'images/hero/responsive/figure19-320.webp'), `${item.label}: wrong portrait source ${activePortrait.src}`);
     if (item.reduced) assert(dormant.blobs.every(blob => blob.animation === 'none'), `${item.label}: blobs animate under reduced motion`);
 
     await cdp.screenshot(`${item.label}-dormant.png`);
 
     let pointerProof = null;
     if (item.label === 'desktop-light' || item.label === 'desktop-dark') {
-      const before = dormant.blobs.map(blob => [parseFloat(blob.left), parseFloat(blob.top)]);
+      const before = dormant.blobs.map(blob => [blob.shiftX, blob.shiftY]);
       const orbBefore = dormant.orbs.map(orb => [orb.left, orb.top]);
       await cdp.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: item.width * 0.22, y: item.height * 0.72 });
       await delay(900);
       const first = await cdp.evaluate(`(() => ({
-        blobs: [...document.querySelectorAll('.hero-ambient-blob')].map(element => [parseFloat(getComputedStyle(element).left), parseFloat(getComputedStyle(element).top)]),
+        blobs: [...document.querySelectorAll('.hero-ambient-blob')].map(element => [parseFloat(getComputedStyle(element).getPropertyValue('--blob-shift-x')) || 0, parseFloat(getComputedStyle(element).getPropertyValue('--blob-shift-y')) || 0]),
         orbs: [...document.querySelectorAll('.hero-ambient-orb')].map(element => [parseFloat(getComputedStyle(element).left), parseFloat(getComputedStyle(element).top)]),
         companions: [...document.querySelectorAll('.hero-ambient-companion')].map(element => {
           const style = getComputedStyle(element);

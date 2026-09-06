@@ -83,14 +83,15 @@ expect((html.match(/class="hero-ambient-companion\s+hero-ambient-companion--/g) 
 expect(!/\.hero-ambient-orb::before/.test(css) && /\.hero-ambient-orb--node::after/.test(css),
   'each satellite must be one circle, with orbit nodes only on selected rings');
 
-expect(/data-theme-portrait="light"[^>]*>[\s\S]*?figure20\.webp/.test(html),
+expect(/data-theme-portrait="light"[^>]*>[\s\S]*?images\/hero\/responsive\/figure20-320\.webp/.test(html),
   'Light theme must use authentic figure20 portrait');
-expect(/data-theme-portrait="dark"[^>]*>[\s\S]*?figure19\.webp/.test(html),
+expect(/data-theme-portrait="dark"[^>]*>[\s\S]*?images\/hero\/responsive\/figure19-320\.webp/.test(html),
   'Dark theme must use authentic clear-glasses figure19 portrait');
 expect((html.match(/class="hero-ambient-blob/g) || []).length === 2,
   'hero must contain exactly two ambient blob elements');
-expect(/\.home-page--engraved-dna\s+\.hero-ambient-blob--b\s*\{[^}]*--blob-size-scale:\s*0\.72/i.test(css),
-  'one of the two large background orbs must be reduced by 28 percent');
+expect(/\.home-page--engraved-dna\s+\.hero-ambient-blob--a\s*\{[^}]*--blob-size-scale:\s*0\.81;/i.test(css)
+  && /\.home-page--engraved-dna\s+\.hero-ambient-blob--b\s*\{[^}]*--blob-size-scale:\s*0\.5;/i.test(css),
+  'initial background-blob sizes must match the approved 81/50 ambient preset');
 expect(!/class="hero-cycle"/.test(html),
   'independent four-color hero cycle must be removed');
 expect(!/data-color="\d"/.test(html),

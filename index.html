@@ -29,8 +29,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;600;700&family=Source+Code+Pro:wght@400;500&display=swap"></noscript>
-  <link rel="preload" as="image" href="images/hero/figure20.webp" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="image" href="images/hero/figure19.webp" type="image/webp">
+  <script>
+    (function () {
+      let lens = 'light';
+      try { lens = localStorage.getItem('lens') || 'light'; } catch (_) {}
+      const portrait = lens === 'dark' ? 'figure19' : 'figure20';
+      if (lens === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      const preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'image';
+      preload.href = `images/hero/responsive/${portrait}-320.webp`;
+      preload.imageSrcset = `images/hero/responsive/${portrait}-320.webp 320w, images/hero/responsive/${portrait}-640.webp 640w`;
+      preload.imageSizes = '112px';
+      preload.type = 'image/webp';
+      preload.fetchPriority = 'high';
+      document.head.appendChild(preload);
+    })();
+  </script>
   <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -118,10 +133,11 @@
             <button class="hero-dna-trigger" type="button" aria-expanded="false" aria-controls="heroDnaPanel" aria-label="Reveal Victor Tran's Design DNA">
               <span class="hero-portrait-frame" aria-hidden="true">
                 <span class="hero-portrait" data-theme-portrait="light">
-                  <img class="hero-portrait-cutout" src="images/hero/figure20.webp" alt="" width="1200" height="1800" fetchpriority="high" decoding="async">
+                  <img class="hero-portrait-cutout" data-hero-portrait-src="images/hero/responsive/figure20-320.webp" data-hero-portrait-srcset="images/hero/responsive/figure20-320.webp 320w, images/hero/responsive/figure20-640.webp 640w" data-hero-portrait-sizes="112px" alt="" width="320" height="461" fetchpriority="high" decoding="async">
+                  <noscript><img class="hero-portrait-cutout" src="images/hero/responsive/figure20-320.webp" srcset="images/hero/responsive/figure20-320.webp 320w, images/hero/responsive/figure20-640.webp 640w" sizes="112px" alt="" width="320" height="461" fetchpriority="high" decoding="async"></noscript>
                 </span>
                 <span class="hero-portrait" data-theme-portrait="dark">
-                  <img class="hero-portrait-cutout" src="images/hero/figure19.webp" alt="" width="1226" height="1800" decoding="async">
+                  <img class="hero-portrait-cutout" data-hero-portrait-src="images/hero/responsive/figure19-320.webp" data-hero-portrait-srcset="images/hero/responsive/figure19-320.webp 320w, images/hero/responsive/figure19-640.webp 640w" data-hero-portrait-sizes="112px" alt="" width="320" height="470" decoding="async">
                 </span>
               </span>
             </button>

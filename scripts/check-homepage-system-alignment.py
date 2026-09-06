@@ -64,9 +64,12 @@ for authored_copy in (
 ):
     need(authored_copy in index, f"signature hero copy must remain: {authored_copy}")
 
-need(index.count('images/hero/figure20.webp') >= 2 and
-     index.count('images/hero/figure19.webp') >= 2,
-     "Light and Dark must each retain one authentic theme portrait plus preload")
+need(re.search(r'data-theme-portrait="light"[^>]*>[\s\S]*?data-hero-portrait-src="images/hero/responsive/figure20-320\.webp"[^>]*data-hero-portrait-srcset="images/hero/responsive/figure20-320\.webp 320w, images/hero/responsive/figure20-640\.webp 640w"', index) and
+     re.search(r'data-theme-portrait="dark"[^>]*>[\s\S]*?data-hero-portrait-src="images/hero/responsive/figure19-320\.webp"[^>]*data-hero-portrait-srcset="images/hero/responsive/figure19-320\.webp 320w, images/hero/responsive/figure19-640\.webp 640w"', index) and
+     "const portrait = lens === 'dark' ? 'figure19' : 'figure20';" in index and
+     "preload.href = `images/hero/responsive/${portrait}-320.webp`;" in index and
+     "preload.imageSrcset = `images/hero/responsive/${portrait}-320.webp 320w, images/hero/responsive/${portrait}-640.webp 640w`;" in index,
+     "Light and Dark must retain authentic responsive portrait mappings and active-theme preload")
 need('data-theme-portrait="light"' in index and 'data-theme-portrait="dark"' in index,
      "theme portraits must remain explicitly mapped")
 need('aria-expanded="false"' in index and 'aria-controls="heroDnaPanel"' in index and

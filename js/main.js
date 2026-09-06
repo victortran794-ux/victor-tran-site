@@ -278,6 +278,14 @@ if (!prefersReducedMotion) {
     });
   }
 
+  function syncHeroPortraits(lens) {
+    const portrait = document.querySelector(`.hero-portrait[data-theme-portrait="${lens}"] .hero-portrait-cutout`);
+    if (!portrait?.dataset.heroPortraitSrc || portrait.getAttribute('src')) return;
+    portrait.sizes = portrait.dataset.heroPortraitSizes;
+    portrait.srcset = portrait.dataset.heroPortraitSrcset;
+    portrait.src = portrait.dataset.heroPortraitSrc;
+  }
+
   function applyLens(lens) {
     if (lens === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -285,6 +293,7 @@ if (!prefersReducedMotion) {
       document.documentElement.removeAttribute('data-theme');
     }
     syncHomeThemeImages(lens);
+    syncHeroPortraits(lens);
     lensBtns.forEach(btn => {
       const active = btn.dataset.lens === lens && lens !== 'dna';
       btn.classList.toggle('is-active', active);
@@ -422,6 +431,15 @@ document.querySelectorAll('.marquee-track').forEach(track => {
   let pointer = null;
   let frame = 0;
   let previous = 0;
+  const ambient = hero.querySelector('.hero-ambient');
+  let heroSize = { width: ambient.clientWidth, height: ambient.clientHeight };
+
+  const syncBlobTransforms = () => {
+    blobs.forEach((blob, index) => {
+      blob.style.setProperty('--blob-shift-x', `${((current[index].x - centers[index].x) * heroSize.width).toFixed(2)}px`);
+      blob.style.setProperty('--blob-shift-y', `${((current[index].y - centers[index].y) * heroSize.height).toFixed(2)}px`);
+    });
+  };
 
   const render = (time) => {
     if (document.hidden || reducedMotion.matches) {
@@ -451,9 +469,8 @@ document.querySelectorAll('.marquee-track').forEach(track => {
         }
         current[index].x += (targetX - current[index].x) * 0.1;
         current[index].y += (targetY - current[index].y) * 0.1;
-        blobs[index].style.setProperty('--blob-x', `${(current[index].x * 100).toFixed(2)}%`);
-        blobs[index].style.setProperty('--blob-y', `${(current[index].y * 100).toFixed(2)}%`);
       });
+      syncBlobTransforms();
       satellitePaths.forEach((path, index) => {
         if (satellites[index].classList.contains('hero-ambient-orb--node')) return;
         let targetX = path.x + Math.sin(time * path.speed * motionScale + path.phase) * path.radiusX * motionScale;
@@ -520,7 +537,6 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     size: [12, 20, 32][index], opacity: 1, stroke: 1, layer: 3,
     color: 'background', offsetX: [37, -63, 109][index], offsetY: [-12, 21, -56][index], hidden: false,
   }));
-  const ambient = hero.querySelector('.hero-ambient');
   let generatedId = 0;
   const number = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
   const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value));
@@ -717,6 +733,11 @@ document.querySelectorAll('.marquee-track').forEach(track => {
     return true;
   };
   if (window.__ambientFieldBaseline) applyConfig(window.__ambientFieldBaseline);
+  syncBlobTransforms();
+  new ResizeObserver(() => {
+    heroSize = { width: ambient.clientWidth, height: ambient.clientHeight };
+    syncBlobTransforms();
+  }).observe(ambient);
 
   hero.addEventListener('pointermove', (event) => {
     if (event.pointerType !== 'mouse' || reducedMotion.matches) return;
